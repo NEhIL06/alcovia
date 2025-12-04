@@ -23,28 +23,47 @@ export default function PartnersSection() {
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
         <motion.svg
           className="h-[400px] w-full md:h-[500px] lg:h-[600px]"
-          viewBox="0 0 800 300"
+          viewBox="0 0 900 300"
           preserveAspectRatio="xMidYMid meet"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1 }}
         >
-          <motion.path
-            d="M50,150 Q80,80 120,100 Q160,120 150,160 Q140,200 100,200 Q60,200 50,150 
-               M180,180 Q200,100 240,120 Q280,140 260,180 Q240,220 200,200
-               M300,100 L300,220 M300,100 Q340,100 360,140 Q380,180 340,200 Q300,220 300,180
-               M400,100 L400,220 M400,100 Q440,100 460,140 Q480,180 440,200 Q400,220 400,180
-               M520,150 Q560,80 600,120 Q640,160 600,200 Q560,240 520,200 Q480,160 520,150
-               M660,180 Q680,100 720,120 Q760,140 740,180 Q720,220 680,200"
-            fill="none"
-            stroke="#CEFF2B"
-            strokeWidth="45"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            initial={{ pathLength: 0 }}
-            animate={isInView ? { pathLength: 1 } : {}}
-            transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
-          />
+          <defs>
+            <linearGradient id="premiumFill" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stopColor="#CEFF2B" stopOpacity="0.1" />
+              <stop offset="50%" stopColor="#CEFF2B" stopOpacity="0.3" />
+              <stop offset="100%" stopColor="#CEFF2B" stopOpacity="0.1" />
+            </linearGradient>
+            <linearGradient id="premiumStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#CEFF2B" stopOpacity="0.4" />
+              <stop offset="50%" stopColor="#CEFF2B" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#CEFF2B" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+
+          {/* Main filled premium text with stroke definition */}
+          <motion.text
+            x="50%"
+            y="55%"
+            textAnchor="middle"
+            dominantBaseline="middle"
+            fill="url(#premiumFill)"
+            stroke="url(#premiumStroke)"
+            strokeWidth="1.5"
+            fontSize="200"
+            fontWeight="900"
+            letterSpacing="0.02em"
+            style={{
+              fontFamily: "var(--font-geist-sans), system-ui, sans-serif",
+              textShadow: "0 0 30px rgba(206,255,43,0.3)"
+            }}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={isInView ? { opacity: 1, scale: 1, y: 0 } : {}}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            ALCOVIA
+          </motion.text>
         </motion.svg>
       </div>
 
