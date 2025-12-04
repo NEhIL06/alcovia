@@ -30,7 +30,7 @@ export default function PremiumNavbar() {
       // Section detection logic
       const hero = document.getElementById("hero")
       const manifesto = document.querySelector('[data-theme="graded"]') as HTMLElement
-      
+
       if (!navRef.current) return
 
       const navRect = navRef.current.getBoundingClientRect()
@@ -81,17 +81,16 @@ export default function PremiumNavbar() {
     <>
       <motion.nav
         ref={navRef}
-        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-          scrolled ? "backdrop-blur-xl" : "backdrop-blur-md"
-        }`}
+        className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${scrolled ? "backdrop-blur-xl" : "backdrop-blur-md"
+          }`}
         style={{
           backgroundColor: scrolled
             ? navMode === "dark"
               ? "rgba(247,247,243,0.8)"
               : "rgba(11,11,11,0.8)"
             : navMode === "dark"
-            ? "rgba(247,247,243,0.6)"
-            : "rgba(11,11,11,0.6)",
+              ? "rgba(247,247,243,0.6)"
+              : "rgba(11,11,11,0.6)",
         }}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -101,9 +100,8 @@ export default function PremiumNavbar() {
           {/* Logo - Left */}
           <Link
             href="/"
-            className={`text-2xl font-black uppercase tracking-wider transition-colors duration-300 md:text-3xl ${
-              navMode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]"
-            }`}
+            className={`text-2xl font-black uppercase tracking-wider transition-colors duration-300 md:text-3xl ${navMode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]"
+              }`}
             style={{ letterSpacing: "0.1em" }}
           >
             ALCOVIA
@@ -121,11 +119,10 @@ export default function PremiumNavbar() {
           {/* Right - Apply Now Button */}
           <div className="flex items-center gap-4">
             <motion.button
-              className={`hidden rounded-full border-2 px-6 py-2.5 text-sm font-semibold uppercase tracking-wider transition-all duration-300 md:block ${
-                navMode === "dark"
+              className={`hidden rounded-full border-2 px-6 py-2.5 text-sm font-semibold uppercase tracking-wider transition-all duration-300 md:block ${navMode === "dark"
                   ? "border-[#CEFF2B] bg-[#CEFF2B] text-[#0B0B0B] hover:bg-[#CEFF2B]/90"
                   : "border-[#CEFF2B] bg-transparent text-[#CEFF2B] hover:bg-[#CEFF2B] hover:text-[#0B0B0B]"
-              }`}
+                }`}
               style={{ letterSpacing: "0.1em" }}
               whileHover={{ scale: 1.03, y: -2 }}
               whileTap={{ scale: 0.98 }}
@@ -141,9 +138,8 @@ export default function PremiumNavbar() {
             {/* Mobile Hamburger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`relative h-10 w-10 lg:hidden ${
-                navMode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]"
-              }`}
+              className={`relative h-10 w-10 lg:hidden ${navMode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]"
+                }`}
               aria-label="Toggle menu"
             >
               <motion.div
@@ -320,9 +316,8 @@ function NavLink({
         onMouseLeave={() => setIsHovered(false)}
       >
         <motion.span
-          className={`relative transition-all duration-300 ${
-            mode === "dark" ? "text-[#0B0B0B]/70" : "text-[#F7F7F3]/70"
-          } ${isHovered ? (mode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]") : ""}`}
+          className={`relative transition-all duration-300 ${mode === "dark" ? "text-[#0B0B0B]/70" : "text-[#F7F7F3]/70"
+            } ${isHovered ? (mode === "dark" ? "text-[#0B0B0B]" : "text-[#F7F7F3]") : ""}`}
           animate={{ y: isHovered ? -2 : 0 }}
           transition={{ duration: 0.2 }}
         >

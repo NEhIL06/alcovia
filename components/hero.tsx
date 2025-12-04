@@ -207,7 +207,7 @@ export default function Hero() {
                 transition={{ delay: 0.9, duration: 1.1, ease: [0.76, 0, 0.24, 1] }}
               />
               <h1 className="reveal-text text-5xl font-black uppercase tracking-tighter text-[#0C0C0C] md:text-7xl lg:text-8xl">
-                ALCOVIA
+                alcovia
               </h1>
             </div>
             <div className="reveal-line relative overflow-hidden">
@@ -295,7 +295,7 @@ export default function Hero() {
           >
             {/* New student image */}
             <Image
-              src="/images/image-from-rawpixel-id-13286427-png.png"
+              src="/images/hero-girl.png"
               alt="Young Indian student ready to take flight with Alcovia"
               fill
               className="object-contain object-center"
