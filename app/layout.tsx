@@ -9,7 +9,7 @@ const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "ALCOVIA | Empowering Indian Teens to Fly Higher",
+  title: "Alcovia Reimagined",
   description:
     "Join Alcovia's journey to become a future leader shaping the world of tomorrow. Premium mentorship, career discovery, and community for Indian teens.",
   keywords: ["Indian teens", "mentorship", "education", "career discovery", "leadership", "student development"],

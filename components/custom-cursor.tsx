@@ -150,7 +150,7 @@ export default function CustomCursor() {
       target.closest(".hero-center") !== null ||
       target.closest('[id="hero"]')?.contains(target.closest(".hero-center") || null)
 
-    setIsOverHero(isHeroPortrait)
+    setIsOverHero(isHeroPortrait!)
 
     // Determine cursor state
     const cursorAttr = target.getAttribute("data-cursor")
