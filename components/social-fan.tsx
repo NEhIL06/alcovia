@@ -9,37 +9,25 @@ const socials = [
   {
     platform: "Twitter",
     handle: "@alcovia",
-    followers: "8K",
+    followers: "",
     image: "/placeholder.svg?height=500&width=340",
   },
   {
     platform: "Instagram",
     handle: "@alcovia.in",
-    followers: "25K",
+    followers: "639",
     image: "/placeholder.svg?height=500&width=340",
   },
   {
     platform: "LinkedIn",
     handle: "Alcovia",
-    followers: "15K",
+    followers: "1,190",
     image: "/placeholder.svg?height=500&width=340",
   },
   {
     platform: "YouTube",
     handle: "Alcovia",
     followers: "10K",
-    image: "/placeholder.svg?height=500&width=340",
-  },
-  {
-    platform: "Discord",
-    handle: "Alcovia Community",
-    followers: "5K",
-    image: "/placeholder.svg?height=500&width=340",
-  },
-  {
-    platform: "TikTok",
-    handle: "@alcovia.in",
-    followers: "12K",
     image: "/placeholder.svg?height=500&width=340",
   },
   {
@@ -65,16 +53,17 @@ export default function SocialFan() {
   const getRotation = (index: number) => {
     const center = (socials.length - 1) / 2
     const offset = index - center
-    return offset * 12
+    // More dramatic rotation for outer cards (18° per position)
+    return offset * 18
   }
 
   const getScale = (index: number) => {
     const center = Math.floor(socials.length / 2)
     const distance = Math.abs(index - center)
-    if (distance === 0) return 1.15
-    if (distance === 1) return 1.05
-    if (distance === 2) return 0.95
-    return 0.85
+    // Center card is largest, outer cards progressively smaller
+    if (distance === 0) return 1.12
+    if (distance === 1) return 1.0
+    return 0.9
   }
 
   const getZIndex = (index: number) => {
@@ -84,7 +73,15 @@ export default function SocialFan() {
 
   const getXOffset = (index: number) => {
     const center = (socials.length - 1) / 2
-    return (index - center) * 60
+    // Wider horizontal spread (100px per card position)
+    return (index - center) * 100
+  }
+
+  // Y offset to create arc effect - outer cards sit lower
+  const getYOffset = (index: number) => {
+    const center = Math.floor(socials.length / 2)
+    const distance = Math.abs(index - center)
+    return distance * 25
   }
 
   return (
@@ -132,7 +129,7 @@ export default function SocialFan() {
         <div className="mb-16 text-center md:mb-24">
           <TextReveal delay={0}>
             <h2 className="text-5xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-6xl lg:text-8xl">
-              WHAT&apos;S UP
+              VIEW US
             </h2>
           </TextReveal>
           <TextReveal delay={0.2}>
@@ -160,7 +157,7 @@ export default function SocialFan() {
                 isInView
                   ? {
                     opacity: 1,
-                    y: 0,
+                    y: isMobile ? 0 : getYOffset(index),
                     x: isMobile ? 0 : getXOffset(index),
                     rotate: isMobile ? (index % 2 === 0 ? -3 : 3) : getRotation(index),
                     scale: isMobile ? 1 : getScale(index),

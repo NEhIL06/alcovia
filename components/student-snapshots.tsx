@@ -7,32 +7,32 @@ import TextReveal from "./text-reveal"
 
 const snapshots = [
   {
-    image: "/placeholder.svg?height=400&width=300",
+    image: "/images/firstinternship.jpeg",
     caption: "Celebrating first internship",
     rotate: -3,
   },
   {
-    image: "/placeholder.svg?height=300&width=400",
+    image: "/images/annualsummit.jpg?height=200&width=200",
     caption: "Annual Alcovia Summit",
     rotate: 2,
   },
   {
-    image: "/placeholder.svg?height=350&width=350",
+    image: "/images/tedx.jpg",
     caption: "TEDx presentation",
     rotate: -2,
   },
   {
-    image: "/placeholder.svg?height=400&width=300",
+    image: "/images/dreamuni.jpeg",
     caption: "Dream university admission",
     rotate: 4,
   },
   {
-    image: "/placeholder.svg?height=300&width=350",
+    image: "/images/nationalhackathon.jpeg",
     caption: "National Hackathon winners",
     rotate: -1,
   },
   {
-    image: "/placeholder.svg?height=350&width=400",
+    image: "/images/mentorshipmoments.jpeg",
     caption: "Mentorship moments",
     rotate: 3,
   },
