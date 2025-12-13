@@ -1,5 +1,3 @@
-// Animation presets for consistent Framer Motion animations across the app
-
 export const springTransition = {
   type: "spring" as const,
   stiffness: 280,

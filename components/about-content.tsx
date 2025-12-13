@@ -3,7 +3,6 @@
 import { useRef, useState } from "react"
 import { motion, useInView } from "framer-motion"
 
-// Three pillars data
 const pillars = [
     {
         title: "Champions",
@@ -34,7 +33,6 @@ const pillars = [
     },
 ]
 
-// Logo meanings
 const logoMeanings = [
     {
         title: "Excellence",
@@ -81,7 +79,6 @@ function PillarCard({
                 whileHover={{ y: -8 }}
             >
                 <div className="relative z-10">
-                    {/* Icon */}
                     <motion.div
                         className="mb-6 text-5xl"
                         animate={{ scale: isHovered ? 1.15 : 1, rotate: isHovered ? [0, -5, 5, 0] : 0 }}
@@ -90,7 +87,6 @@ function PillarCard({
                         {pillar.icon}
                     </motion.div>
 
-                    {/* Title */}
                     <h3 className="text-3xl font-bold text-[#0B0B0B] mb-2">
                         {pillar.title}
                     </h3>
@@ -99,12 +95,10 @@ function PillarCard({
                         {pillar.subtitle}
                     </p>
 
-                    {/* Description */}
                     <p className="text-[#0B0B0B]/70 leading-relaxed">
                         {pillar.description}
                     </p>
 
-                    {/* Bottom accent line */}
                     <motion.div
                         className="absolute bottom-0 left-0 h-1 bg-[#CCFF00] rounded-full"
                         initial={{ width: 0 }}
@@ -133,11 +127,8 @@ export default function AboutContent() {
 
     return (
         <div ref={containerRef} className="bg-[#F5F5EF] text-[#0B0B0B] overflow-hidden">
-            {/* Hero Section */}
             <section ref={heroRef} className="relative min-h-[80vh] flex items-center justify-center px-6 py-24 md:px-12">
-                {/* Animated background elements */}
                 <div className="absolute inset-0 overflow-hidden">
-                    {/* Subtle gradient orbs */}
                     <motion.div
                         className="absolute left-[5%] top-[15%] h-[600px] w-[600px] rounded-full opacity-40 blur-[150px]"
                         style={{ background: "radial-gradient(circle, #CCFF00 0%, transparent 70%)" }}
@@ -151,7 +142,6 @@ export default function AboutContent() {
                         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
                     />
 
-                    {/* Topographic lines */}
                     <svg className="absolute inset-0 h-full w-full opacity-[0.04]" preserveAspectRatio="none">
                         {[...Array(20)].map((_, i) => (
                             <motion.path
@@ -167,7 +157,6 @@ export default function AboutContent() {
                         ))}
                     </svg>
 
-                    {/* Floating circles */}
                     {[...Array(6)].map((_, i) => (
                         <motion.div
                             key={i}
@@ -248,7 +237,6 @@ export default function AboutContent() {
                 </div>
             </section>
 
-            {/* About Us Section */}
             <section ref={aboutRef} className="relative px-6 py-32 md:px-12 bg-white">
                 <div className="mx-auto max-w-5xl">
                     <motion.div
@@ -279,11 +267,9 @@ export default function AboutContent() {
                 </div>
             </section>
 
-            {/* Vision & Mission Section */}
             <section ref={visionRef} className="relative px-6 py-24 md:px-12 bg-[#F5F5EF]">
                 <div className="mx-auto max-w-6xl">
                     <div className="grid gap-8 md:grid-cols-2">
-                        {/* Vision */}
                         <motion.div
                             className="relative overflow-hidden rounded-3xl bg-white border border-[#0B0B0B]/10 p-10 shadow-lg"
                             initial={{ opacity: 0, x: -50 }}
@@ -309,7 +295,6 @@ export default function AboutContent() {
                             </div>
                         </motion.div>
 
-                        {/* Mission */}
                         <motion.div
                             className="relative overflow-hidden rounded-3xl bg-[#0B0B0B] p-10"
                             initial={{ opacity: 0, x: 50 }}
@@ -340,7 +325,6 @@ export default function AboutContent() {
                 </div>
             </section>
 
-            {/* Three Pillars Section */}
             <section ref={pillarsRef} className="relative px-6 py-32 md:px-12 bg-white">
                 <div className="mx-auto max-w-6xl">
                     <motion.div
@@ -369,7 +353,6 @@ export default function AboutContent() {
                 </div>
             </section>
 
-            {/* Logo Representation Section */}
             <section ref={logoRef} className="relative px-6 py-32 md:px-12 bg-[#0B0B0B]">
                 <div className="mx-auto max-w-6xl">
                     <motion.div
@@ -420,7 +403,6 @@ export default function AboutContent() {
                 </div>
             </section>
 
-            {/* CTA Section */}
             <section className="relative px-6 py-24 md:px-12 bg-[#F5F5EF]">
                 <div className="mx-auto max-w-4xl text-center">
                     <motion.div

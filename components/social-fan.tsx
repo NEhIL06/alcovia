@@ -44,14 +44,12 @@ export default function SocialFan() {
   const getRotation = (index: number) => {
     const center = (socials.length - 1) / 2
     const offset = index - center
-    // Increased rotation for wider spread (25° per position)
     return offset * 25
   }
 
   const getScale = (index: number) => {
     const center = Math.floor(socials.length / 2)
     const distance = Math.abs(index - center)
-    // More consistent sizing
     if (distance === 0) return 1.1
     if (distance === 1) return 0.95
     return 0.85
@@ -64,55 +62,46 @@ export default function SocialFan() {
 
   const getXOffset = (index: number) => {
     const center = (socials.length - 1) / 2
-    // Much wider horizontal spread (160px per card position)
     return (index - center) * 160
   }
 
-  // Increased Y offset to create deeper arc effect
   const getYOffset = (index: number) => {
     const center = Math.floor(socials.length / 2)
     const distance = Math.abs(index - center)
-    // Exponential curve for more pronounced arc
     return Math.pow(distance, 1.8) * 45
   }
 
-  // Calculate rotation and offset when hovering - like holding a deck of cards
   const getCardDeckEffect = (currentIndex: number, hoveredIdx: number | null) => {
     if (hoveredIdx === null) return { x: 0, y: 0, rotate: 0, scale: 1 }
-    
+
     if (hoveredIdx === currentIndex) {
-      // Hovered card: lift up significantly and rotate to face forward
       return { x: 0, y: -50, rotate: 0, scale: 1.08 }
     }
-    
+
     const distance = currentIndex - hoveredIdx
     const absDistance = Math.abs(distance)
-    
-    // Cards on the left of hovered card - spread out more dramatically
+
     if (distance < 0) {
       return {
-        x: distance * -80, // Spread much further left
-        y: absDistance * 25, // Sink down more
-        rotate: distance * -8, // More dramatic rotation
-        scale: 0.92 // Slightly smaller
+        x: distance * -80,
+        y: absDistance * 25,
+        rotate: distance * -8,
+        scale: 0.92
       }
-    } 
-    // Cards on the right of hovered card - spread out more dramatically
+    }
     else {
       return {
-        x: distance * 80, // Spread much further right
-        y: absDistance * 25, // Sink down more
-        rotate: distance * 8, // More dramatic rotation
-        scale: 0.92 // Slightly smaller
+        x: distance * 80,
+        y: absDistance * 25,
+        rotate: distance * 8,
+        scale: 0.92
       }
     }
   }
 
   return (
     <section ref={containerRef} className="relative overflow-hidden bg-[#F5F5EF] px-6 py-24 md:px-12">
-      {/* Animated background with floating elements */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Main gradient blobs - enhanced */}
         <motion.div
           className="absolute -left-48 top-1/3 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-[#CEFF2B]/8 to-transparent blur-3xl"
           animate={{
@@ -131,8 +120,7 @@ export default function SocialFan() {
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
-        
-        {/* Additional morphing blobs */}
+
         <motion.div
           className="absolute left-[30%] top-[10%] h-[300px] w-[300px] rounded-full bg-gradient-to-br from-[#CEFF2B]/5 to-transparent blur-2xl"
           animate={{
@@ -154,7 +142,6 @@ export default function SocialFan() {
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 3 }}
         />
 
-        {/* Floating circular elements - left side - enhanced */}
         <motion.div
           className="absolute left-[5%] top-[20%] h-24 w-24 rounded-full border-2 border-[#CEFF2B]/20"
           animate={{
@@ -193,7 +180,6 @@ export default function SocialFan() {
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut", delay: 2 }}
         />
 
-        {/* Floating circular elements - right side - enhanced */}
         <motion.div
           className="absolute right-[8%] top-[30%] h-20 w-20 rounded-full border-2 border-[#CEFF2B]/15"
           animate={{
@@ -232,7 +218,6 @@ export default function SocialFan() {
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay: 4 }}
         />
 
-        {/* Animated connecting lines */}
         <svg className="absolute inset-0 h-full w-full opacity-[0.06]" preserveAspectRatio="none">
           {[...Array(6)].map((_, i) => (
             <motion.line
@@ -245,13 +230,13 @@ export default function SocialFan() {
               strokeWidth="1"
               strokeDasharray="5,10"
               initial={{ pathLength: 0 }}
-              animate={{ 
+              animate={{
                 pathLength: [0, 1, 0],
                 opacity: [0.1, 0.3, 0.1]
               }}
-              transition={{ 
-                duration: 8, 
-                repeat: Infinity, 
+              transition={{
+                duration: 8,
+                repeat: Infinity,
                 ease: "easeInOut",
                 delay: i * 1.2
               }}
@@ -259,7 +244,6 @@ export default function SocialFan() {
           ))}
         </svg>
 
-        {/* Smooth wavy lines */}
         <svg className="absolute inset-0 h-full w-full opacity-[0.04]" preserveAspectRatio="none">
           {[...Array(12)].map((_, i) => (
             <motion.path
@@ -276,7 +260,6 @@ export default function SocialFan() {
           ))}
         </svg>
 
-        {/* Subtle animated dots */}
         {[...Array(8)].map((_, i) => (
           <motion.div
             key={`dot-${i}`}
@@ -300,8 +283,7 @@ export default function SocialFan() {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Title */}
-        <motion.div 
+        <motion.div
           className="mb-16 text-center md:mb-24"
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -315,11 +297,10 @@ export default function SocialFan() {
           </h2>
         </motion.div>
 
-        {/* Fan of cards with increased spread and arc */}
         <div className="relative flex h-auto flex-col items-center gap-6 md:h-[750px] lg:h-[850px] lg:flex-row lg:justify-center">
           {socials.map((social, index) => {
             const deckEffect = getCardDeckEffect(index, hoveredIndex)
-            
+
             return (
               <motion.a
                 key={social.platform}

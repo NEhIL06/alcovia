@@ -16,7 +16,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
     const [isHydrated, setIsHydrated] = useState(false)
 
     useEffect(() => {
-        // Check sessionStorage on mount
         const stored = sessionStorage.getItem(SESSION_STORAGE_KEY)
         if (stored === "true") {
             setHasShownLoader(true)
@@ -29,7 +28,6 @@ export function SessionProvider({ children }: { children: ReactNode }) {
         sessionStorage.setItem(SESSION_STORAGE_KEY, "true")
     }
 
-    // Don't render children until hydrated to prevent flash
     if (!isHydrated) {
         return null
     }

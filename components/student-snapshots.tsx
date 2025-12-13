@@ -67,15 +67,13 @@ export default function StudentSnapshots() {
           </TextReveal>
         </div>
 
-        {/* Irregular mosaic grid with parallax */}
         <div className="grid auto-rows-[200px] grid-cols-2 gap-4 md:auto-rows-[250px] md:grid-cols-4 lg:auto-rows-[280px]">
           {snapshots.map((snapshot, index) => (
             <motion.div
               key={index}
               data-card
-              className={`group relative overflow-hidden rounded-2xl ${
-                index === 0 || index === 3 ? "col-span-1 row-span-2" : index === 1 ? "col-span-2 row-span-1" : ""
-              }`}
+              className={`group relative overflow-hidden rounded-2xl ${index === 0 || index === 3 ? "col-span-1 row-span-2" : index === 1 ? "col-span-2 row-span-1" : ""
+                }`}
               initial={{
                 opacity: 0,
                 y: 50,
@@ -84,10 +82,10 @@ export default function StudentSnapshots() {
               animate={
                 isInView
                   ? {
-                      opacity: 1,
-                      y: 0,
-                      rotate: snapshot.rotate,
-                    }
+                    opacity: 1,
+                    y: 0,
+                    rotate: snapshot.rotate,
+                  }
                   : {}
               }
               transition={{

@@ -3,9 +3,7 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Updated color grading system with --bg-light, --bg-dark, --accent tokens */
 :root {
-  /* Core color grading palette */
   --bg-light: #f7f7f3;
   --bg-dark: #0b0d0c;
   --accent: #ceff2b;
@@ -46,7 +44,6 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  /* Custom ALCOVIA tokens */
   --neon: oklch(0.88 0.22 118);
   --dark: oklch(0.1 0 0);
   --cream: oklch(0.97 0.003 90);
@@ -127,7 +124,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* Custom ALCOVIA color tokens */
   --color-neon: var(--neon);
   --color-dark: var(--dark);
   --color-cream: var(--cream);
@@ -145,17 +141,14 @@
   }
 }
 
-/* Color grading toggle for QA */
 [data-theme="graded"] img {
   filter: contrast(1.05) saturate(0.95) brightness(0.98);
 }
 
-/* Layered ambient shadows for premium look */
 .shadow-ambient {
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-/* Hide default cursor when custom cursor is active */
 @media (hover: hover) and (pointer: fine) {
   body {
     cursor: none;
@@ -165,18 +158,15 @@
   }
 }
 
-/* Smooth section transitions */
 section {
   transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Consistent easing for all animations */
 :root {
   --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-power3-out: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
-/* Reduced motion fallbacks */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -190,7 +180,6 @@ section {
     scroll-behavior: auto;
   }
 
-  /* Simple fade fallback for reveal animations */
   .reveal-mask {
     display: none !important;
   }
@@ -201,9 +190,7 @@ section {
   }
 }
 
-/* Touch device fallbacks */
 @media (hover: none) {
-  /* Disable letter spacing animations on touch */
   a,
   [data-cursor] {
     letter-spacing: inherit !important;
@@ -211,19 +198,15 @@ section {
   }
 }
 
-/* Mobile Responsiveness */
 @media (max-width: 768px) {
-  /* Prevent horizontal scroll */
   body {
     overflow-x: hidden;
   }
 
-  /* Optimize shadows for performance */
   .shadow-ambient {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
 
-  /* Touch-optimized interactions */
   button,
   a[role="button"],
   [data-button] {
@@ -231,13 +214,11 @@ section {
     min-width: 48px;
   }
 
-  /* Reduce motion on mobile */
   * {
     animation-duration: calc(var(--duration, 1s) * 0.5) !important;
   }
 }
 
-/* Universal Microinteractions */
 .neon-underline {
   position: relative;
 }
@@ -257,7 +238,6 @@ section {
   width: 100%;
 }
 
-/* Hover glow */
 .hover-glow {
   transition: filter 0.3s, transform 0.3s;
 }
@@ -266,12 +246,10 @@ section {
   filter: drop-shadow(0 0 20px rgba(206, 255, 43, 0.4));
 }
 
-/* Magnetic pull (applied via JS) */
 .magnetic {
   transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Micro bounce on click */
 @keyframes micro-bounce {
   0%,
   100% {

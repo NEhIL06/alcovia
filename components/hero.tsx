@@ -634,19 +634,7 @@ export default function Hero() {
             Start Your Journey
           </motion.button>
 
-          {/* <motion.div
-            className="mt-8 flex flex-col items-center gap-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8 }}
-          >
-            <span className="text-xs uppercase tracking-[0.2em] text-[#0C0C0C]/50">Scroll</span>
-            <motion.div
-              className="h-14 w-0.5 rounded-full bg-[#0C0C0C]/20"
-              animate={{ scaleY: [1, 0.5, 1] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-            />
-          </motion.div> */}
+
         </div>
       </div>
     </motion.section>

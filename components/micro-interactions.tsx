@@ -7,13 +7,11 @@ import gsap from "gsap"
 
 export function useMicroInteractions() {
   useEffect(() => {
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     const isTouchDevice = window.matchMedia("(hover: none)").matches
 
     if (prefersReducedMotion || isTouchDevice) return
 
-    // Letter spread animation for links and inline labels
     const linkElements = document.querySelectorAll<HTMLElement>('a:not([data-no-micro]), [data-cursor="hover-link"]')
 
     linkElements.forEach((el) => {
@@ -33,11 +31,9 @@ export function useMicroInteractions() {
       })
     })
 
-    // Toggle labels underline slide animation
     const toggleLabels = document.querySelectorAll<HTMLElement>("[data-toggle-label]")
 
     toggleLabels.forEach((el) => {
-      // Create underline pseudo element
       const underline = document.createElement("span")
       underline.className = "toggle-underline"
       underline.style.cssText = `
@@ -65,7 +61,6 @@ export function useMicroInteractions() {
       })
     })
 
-    // Prestige labels neon pulse (Harvard, IIT, Cambridge, UCL)
     const prestigeLabels = document.querySelectorAll<HTMLElement>("[data-prestige-label]")
 
     prestigeLabels.forEach((el) => {
@@ -82,11 +77,9 @@ export function useMicroInteractions() {
       })
     })
 
-    // Button fill animation
     const buttons = document.querySelectorAll<HTMLElement>("button:not([data-no-micro])")
 
     buttons.forEach((btn) => {
-      // Create fill overlay
       const fillOverlay = document.createElement("span")
       fillOverlay.style.cssText = `
         position: absolute;
@@ -114,7 +107,6 @@ export function useMicroInteractions() {
         btn.style.boxShadow = ""
       })
 
-      // Active state bounce
       btn.addEventListener("mousedown", () => {
         gsap.to(btn, { scale: 0.98, duration: 0.1 })
       })
@@ -124,7 +116,6 @@ export function useMicroInteractions() {
       })
     })
 
-    // Cards lift + rotate micro-interaction
     const cards = document.querySelectorAll<HTMLElement>("[data-card], .group")
 
     cards.forEach((card) => {
@@ -139,7 +130,6 @@ export function useMicroInteractions() {
       })
     })
 
-    // Cleanup
     return () => {
       linkElements.forEach((el) => {
         el.removeAttribute("style")

@@ -19,9 +19,7 @@ export default function MeetTheTeamPage() {
     <>
       <CustomCursor />
       <main className="bg-[#F5F5EF]">
-        {/* Floating navbar with light glassmorphism */}
         <nav className="fixed left-0 right-0 top-0 z-50 flex items-center justify-between px-6 py-5 md:px-12">
-          {/* Glassmorphism background */}
           <div className="absolute inset-0 bg-[#F5F5EF]/90 backdrop-blur-md border-b border-[#0B0B0B]/5" />
 
           <Link

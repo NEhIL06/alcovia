@@ -24,7 +24,6 @@ export default function Home() {
 
   useEffect(() => {
     setIsMounted(true)
-    // If loader was already shown, mark as loaded
     if (hasShownLoader) {
       setIsLoaded(true)
     }
@@ -35,7 +34,6 @@ export default function Home() {
     setLoaderShown()
   }
 
-  // Prevent SSR rendering
   if (!isMounted) {
     return null
   }

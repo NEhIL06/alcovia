@@ -64,11 +64,9 @@ export default function Manifesto() {
     if (isInView && !hasAnimated) {
       setHasAnimated(true)
 
-      // Check for reduced motion
       const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
       if (prefersReducedMotion) {
-        // Simple fade for reduced motion
         linesRef.current.forEach((line) => {
           if (line) {
             const text = line.querySelector(".reveal-text")
@@ -80,7 +78,6 @@ export default function Manifesto() {
         return
       }
 
-      // GSAP timeline for mask reveal
       linesRef.current.forEach((line, i) => {
         if (!line) return
 
@@ -119,7 +116,6 @@ export default function Manifesto() {
       className="relative min-h-screen overflow-hidden bg-[#3d4a2a] px-6 py-24 md:px-12 lg:px-20"
       data-theme="graded"
     >
-      {/* Background contour pattern */}
       <div className="absolute inset-0 opacity-[0.06]">
         <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
           {[...Array(20)].map((_, i) => (
@@ -134,7 +130,6 @@ export default function Manifesto() {
         </svg>
       </div>
 
-      {/* Badge at top */}
       <motion.div
         className="relative z-10 mb-12 flex justify-center"
         initial={{ opacity: 0, y: -20 }}
@@ -153,7 +148,6 @@ export default function Manifesto() {
         </div>
       </motion.div>
 
-      {/* Main text with GSAP mask reveal */}
       <div className="relative z-10 mx-auto max-w-6xl">
         {manifestoLines.map((line, lineIndex) => (
           <div
@@ -163,10 +157,8 @@ export default function Manifesto() {
             }}
             className="reveal-line relative mb-1 overflow-hidden md:mb-2"
           >
-            {/* Neon mask that slides right */}
             <div className="reveal-mask absolute inset-0 z-20 bg-[#CEFF2B]" style={{ transform: "translateX(0%)" }} />
 
-            {/* Text content */}
             <div
               className="reveal-text flex flex-wrap text-2xl font-bold italic leading-[0.95] tracking-tight sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
               style={{ opacity: 0, transform: "translateY(20px)" }}
@@ -181,7 +173,6 @@ export default function Manifesto() {
         ))}
       </div>
 
-      {/* Bottom neon accent blocks */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 flex"
         initial={{ opacity: 0 }}

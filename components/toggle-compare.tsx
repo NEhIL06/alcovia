@@ -63,7 +63,6 @@ export default function PremiumToggleCompare() {
       ref={containerRef}
       className="relative min-h-screen overflow-hidden bg-black px-6 py-24 md:px-12"
     >
-      {/* Animated gradient background */}
       <motion.div
         className="absolute inset-0 opacity-30"
         style={{
@@ -71,7 +70,6 @@ export default function PremiumToggleCompare() {
         }}
       />
 
-      {/* Grid pattern overlay */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div
           className="h-full w-full"
@@ -85,7 +83,6 @@ export default function PremiumToggleCompare() {
         />
       </div>
 
-      {/* Floating particles */}
       {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
@@ -108,7 +105,6 @@ export default function PremiumToggleCompare() {
       ))}
 
       <div className="relative z-10 mx-auto max-w-7xl">
-        {/* Header section */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -127,9 +123,7 @@ export default function PremiumToggleCompare() {
           </h1>
         </motion.div>
 
-        {/* Main toggle interface */}
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          {/* Left: Toggle buttons */}
           <div className="flex flex-col justify-center space-y-8">
             <AnimatePresence mode="wait">
               <motion.div
@@ -149,7 +143,6 @@ export default function PremiumToggleCompare() {
               </motion.div>
             </AnimatePresence>
 
-            {/* Toggle buttons */}
             <div className="space-y-6">
               {[
                 { key: "school", data: atSchool },
@@ -165,7 +158,6 @@ export default function PremiumToggleCompare() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition-all duration-500 hover:border-white/30">
-                    {/* Active indicator */}
                     <AnimatePresence>
                       {activeTab === key && (
                         <motion.div
@@ -208,7 +200,6 @@ export default function PremiumToggleCompare() {
                       </motion.div>
                     </div>
 
-                    {/* Hover effect line */}
                     <motion.div
                       className="absolute bottom-0 left-0 h-[2px]"
                       style={{ backgroundColor: data.color }}
@@ -221,7 +212,6 @@ export default function PremiumToggleCompare() {
               ))}
             </div>
 
-            {/* Description */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={`desc-${activeTab}`}
@@ -235,7 +225,6 @@ export default function PremiumToggleCompare() {
                   {currentData.description}
                 </p>
 
-                {/* Stats */}
                 <div className="grid grid-cols-3 gap-6">
                   {currentData.stats.map((stat, index) => (
                     <motion.div
@@ -256,7 +245,6 @@ export default function PremiumToggleCompare() {
                   ))}
                 </div>
 
-                {/* CTA */}
                 <motion.button
                   className="group relative overflow-hidden rounded-full border border-white/20 px-8 py-4 text-sm font-medium text-white transition-all hover:border-white/40"
                   whileHover={{ scale: 1.02 }}
@@ -280,7 +268,6 @@ export default function PremiumToggleCompare() {
             </AnimatePresence>
           </div>
 
-          {/* Right: Image showcase */}
           <div className="relative flex items-center justify-center">
             <AnimatePresence mode="wait">
               <motion.div
@@ -291,7 +278,6 @@ export default function PremiumToggleCompare() {
                 exit={{ opacity: 0, scale: 0.9, rotateY: 15 }}
                 transition={{ duration: 0.7, type: "spring", stiffness: 100 }}
               >
-                {/* Glow effect */}
                 <motion.div
                   className="absolute -inset-4 rounded-3xl opacity-50 blur-3xl"
                   style={{ backgroundColor: currentData.color }}
@@ -306,7 +292,6 @@ export default function PremiumToggleCompare() {
                   }}
                 />
 
-                {/* Image container */}
                 <motion.div
                   className="relative h-[500px] w-[350px] overflow-hidden rounded-3xl border border-white/20 md:h-[600px] md:w-[450px]"
                   whileHover={{ scale: 1.02 }}
@@ -319,7 +304,6 @@ export default function PremiumToggleCompare() {
                     className="object-cover"
                     priority
                   />
-                  {/* Placeholder gradient */}
                   <div
                     className="absolute inset-0"
                     style={{
@@ -327,7 +311,6 @@ export default function PremiumToggleCompare() {
                     }}
                   />
 
-                  {/* Scan line effect */}
                   <motion.div
                     className="absolute inset-x-0 h-40 bg-gradient-to-b from-transparent via-white/10 to-transparent"
                     animate={{
@@ -340,7 +323,6 @@ export default function PremiumToggleCompare() {
                     }}
                   />
 
-                  {/* Image overlay text */}
                   <div className="absolute inset-0 flex items-center justify-center">
                     <motion.div
                       initial={{ opacity: 0, scale: 0.8 }}
@@ -358,7 +340,6 @@ export default function PremiumToggleCompare() {
                   </div>
                 </motion.div>
 
-                {/* Corner accents */}
                 {[
                   { top: -2, left: -2, rotate: 0 },
                   { top: -2, right: -2, rotate: 90 },
@@ -389,7 +370,6 @@ export default function PremiumToggleCompare() {
           </div>
         </div>
 
-        {/* Bottom progress indicator */}
         <motion.div
           className="mt-20 flex justify-center gap-4"
           initial={{ opacity: 0 }}

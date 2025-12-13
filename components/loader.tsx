@@ -61,8 +61,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
     }
   }, [isLoading])
 
-  // Removed auto-trigger - user must click
-
   return (
     <AnimatePresence>
       {isLoading && (
@@ -74,9 +72,9 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
           exit={{ opacity: 0, scale: 1.1 }}
           transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Animated gradient mesh background */}
+
           <div className="absolute inset-0 overflow-hidden">
-            {/* Main gradient orbs */}
+
             <motion.div
               className="absolute left-[20%] top-[20%] h-[600px] w-[600px] rounded-full opacity-30 blur-[120px]"
               style={{
@@ -128,7 +126,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
               }}
             />
 
-            {/* Floating grid lines */}
             <svg className="absolute inset-0 h-full w-full opacity-10">
               {[...Array(20)].map((_, i) => (
                 <motion.line
@@ -176,7 +173,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
               ))}
             </svg>
 
-            {/* Floating particles */}
             {[...Array(30)].map((_, i) => (
               <motion.div
                 key={`particle-${i}`}
@@ -199,7 +195,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
               />
             ))}
 
-            {/* Rotating rings */}
             <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
               <motion.div
                 className="h-[400px] w-[400px] rounded-full border border-white/5"
@@ -219,9 +214,7 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
             </div>
           </div>
 
-          {/* Main content */}
           <div className="relative z-10 flex flex-col items-center gap-8 px-6">
-            {/* Hero text */}
             <motion.div
               className="relative"
               initial={{ opacity: 0, y: 30 }}
@@ -249,7 +242,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
                 ALCOVIA
               </motion.h1>
 
-              {/* Underline effect */}
               <motion.div
                 className="mx-auto mt-4 h-1 bg-gradient-to-r from-transparent via-[#CCFF00] to-transparent"
                 initial={{ width: 0 }}
@@ -321,7 +313,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
                     transition={{ duration: 0.3 }}
                   />
 
-                  {/* Shimmer effect on progress bar */}
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                     animate={{
@@ -342,7 +333,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
             )}
           </div>
 
-          {/* Custom cursor */}
           <motion.div
             ref={cursorRef}
             className="pointer-events-none fixed left-0 top-0 z-[200] h-5 w-5 rounded-full border-2 border-[#CCFF00] mix-blend-difference"
@@ -351,7 +341,6 @@ export default function Loader({ onLoadingComplete }: LoaderProps) {
             transition={{ duration: 0.3 }}
           />
 
-          {/* Cursor glow */}
           <motion.div
             className="pointer-events-none fixed left-0 top-0 z-[199] h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#CCFF00]/20 blur-xl"
             animate={{

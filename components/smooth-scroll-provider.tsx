@@ -43,7 +43,6 @@ export default function SmoothScrollProvider({
 
     requestAnimationFrame(raf)
 
-    // Handle reduced motion preference
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
     if (mediaQuery.matches) {
       lenis.destroy()
@@ -54,7 +53,6 @@ export default function SmoothScrollProvider({
     }
   }, [])
 
-  // Scroll to top on route change for smooth page transitions
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true })

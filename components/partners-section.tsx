@@ -42,7 +42,6 @@ export default function PartnersSection() {
             </linearGradient>
           </defs>
 
-          {/* Main filled premium text with stroke definition */}
           <motion.text
             x="50%"
             y="55%"
@@ -68,7 +67,6 @@ export default function PartnersSection() {
       </div>
 
       <div className="relative mx-auto max-w-7xl">
-        {/* Title with text reveal */}
         <div className="mb-16 grid gap-8 md:grid-cols-2 md:gap-16">
           <div>
             <TextReveal delay={0}>
@@ -94,7 +92,6 @@ export default function PartnersSection() {
           </motion.p>
         </div>
 
-        {/* Partner logos */}
         <motion.div
           className="flex flex-wrap items-center justify-center gap-8 md:gap-12 lg:gap-16"
           initial={{ opacity: 0, y: 40 }}

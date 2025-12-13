@@ -13,7 +13,6 @@ export default function Footer() {
     offset: ["start end", "end end"],
   })
 
-  // Micro parallax for ALCOVIA text
   const textY = useTransform(scrollYProgress, [0, 1], [30, 0])
 
   return (
@@ -21,9 +20,7 @@ export default function Footer() {
       ref={containerRef}
       className="relative overflow-hidden bg-[#000000] px-4 pb-0 pt-16 sm:px-6 md:px-12"
     >
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden">
-        {/* Slow-moving contour lines */}
         <svg className="absolute inset-0 h-full w-full opacity-[0.04]" preserveAspectRatio="none">
           {[...Array(15)].map((_, i) => (
             <motion.path
@@ -39,7 +36,6 @@ export default function Footer() {
           ))}
         </svg>
 
-        {/* Floating radial blobs */}
         <motion.div
           className="absolute left-1/4 top-1/4 h-[400px] w-[400px] rounded-full bg-[#CEFF2B]/5 blur-[100px]"
           animate={{
@@ -61,9 +57,7 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col">
-        {/* Main content grid */}
         <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-12 md:grid-cols-2 lg:grid-cols-4">
-          {/* Contact Information */}
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -93,7 +87,6 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* Quick Links */}
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -117,7 +110,6 @@ export default function Footer() {
             </nav>
           </motion.div>
 
-          {/* Legal */}
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -144,7 +136,6 @@ export default function Footer() {
             </nav>
           </motion.div>
 
-          {/* Social / CTA */}
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0, y: 20 }}
@@ -179,7 +170,6 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* Bottom bar */}
         <motion.div
           className="flex flex-col items-center justify-between gap-4 py-6 text-center md:flex-row md:text-left"
           initial={{ opacity: 0 }}
@@ -194,13 +184,11 @@ export default function Footer() {
           </p>
         </motion.div>
 
-        {/* Giant ALCOVIA text at bottom - RESPONSIVE */}
         <motion.div
           className="relative -mx-4 mt-8 overflow-hidden sm:-mx-6 md:-mx-12"
           style={{ y: textY }}
         >
           <div className="relative overflow-hidden px-2">
-            {/* Mask that wipes away */}
             <motion.div
               className="absolute inset-0 z-20 bg-[#000000]"
               initial={{ x: "0%" }}
@@ -208,7 +196,6 @@ export default function Footer() {
               transition={{ delay: 0.3, duration: 1.4, ease: [0.76, 0, 0.24, 1] }}
             />
 
-            {/* ALCOVIA text - FULLY RESPONSIVE */}
             <motion.h2
               className="select-none text-center font-black uppercase leading-[0.85] tracking-tighter"
               style={{

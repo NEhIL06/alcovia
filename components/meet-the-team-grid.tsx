@@ -5,7 +5,6 @@ import { useRef, useState } from "react"
 import { motion, useInView, useMotionValue, useSpring, useTransform } from "framer-motion"
 import Image from "next/image"
 
-// Team members data
 const teamMembers = [
   {
     name: "Sahil Puri",
@@ -105,7 +104,6 @@ function TeamCard({
         className="relative overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-500 hover:shadow-2xl"
         whileHover={{ y: -10 }}
       >
-        {/* Image container */}
         <div className="relative h-80 overflow-hidden md:h-[420px]">
           <Image
             src={member.image || "/placeholder.svg"}
@@ -114,10 +112,8 @@ function TeamCard({
             className="object-cover transition-all duration-700 group-hover:scale-105"
           />
 
-          {/* Overlay gradient */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
 
-          {/* Content overlay */}
           <div className="absolute bottom-0 left-0 right-0 p-6">
             <motion.div
               className={`h-1 bg-gradient-to-r ${member.gradient} mb-4 rounded-full`}
@@ -133,7 +129,6 @@ function TeamCard({
           </div>
         </div>
 
-        {/* Neon border on hover */}
         <motion.div
           className="absolute inset-0 rounded-3xl pointer-events-none"
           style={{
@@ -156,11 +151,8 @@ export default function MeetTheTeamGrid() {
 
   return (
     <div ref={containerRef} className="bg-[#F5F5EF] text-[#0B0B0B] overflow-hidden">
-      {/* Hero Section */}
       <section ref={heroRef} className="relative min-h-[70vh] flex items-center justify-center px-6 py-24 md:px-12">
-        {/* Animated background elements */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Subtle gradient orbs */}
           <motion.div
             className="absolute left-[5%] top-[15%] h-[500px] w-[500px] rounded-full opacity-30 blur-[150px]"
             style={{ background: "radial-gradient(circle, #CCFF00 0%, transparent 70%)" }}
@@ -174,7 +166,6 @@ export default function MeetTheTeamGrid() {
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           />
 
-          {/* Decorative circles */}
           {[...Array(4)].map((_, i) => (
             <motion.div
               key={i}
@@ -237,7 +228,6 @@ export default function MeetTheTeamGrid() {
         </div>
       </section>
 
-      {/* Team Section */}
       <section ref={teamRef} className="relative px-6 py-20 md:px-12 bg-[#F5F5EF]">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">

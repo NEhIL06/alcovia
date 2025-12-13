@@ -25,7 +25,6 @@ export default function TextReveal({
 
   return (
     <div ref={ref} className={`relative overflow-hidden ${className}`}>
-      {/* Text content */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -38,7 +37,6 @@ export default function TextReveal({
         {children}
       </motion.div>
 
-      {/* Sliding neon block */}
       <motion.div
         className="absolute inset-0 z-10"
         style={{ backgroundColor: highlightColor }}
@@ -54,7 +52,6 @@ export default function TextReveal({
   )
 }
 
-// Multi-line text reveal with stagger
 interface MultiLineRevealProps {
   lines: Array<{ text: string; isAccent?: boolean }>
   className?: string

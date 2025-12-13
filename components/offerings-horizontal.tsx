@@ -84,7 +84,6 @@ export default function OfferingsHorizontal() {
     <section ref={containerRef} className="relative h-[300vh] bg-[#0C0C0C]">
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div className="flex gap-6 pl-8 md:gap-8 md:pl-16" style={{ x }}>
-          {/* Section title with text reveal */}
           <div ref={titleRef} className="flex h-[70vh] w-[300px] shrink-0 flex-col justify-center md:w-[400px]">
             <TextReveal delay={0.2}>
               <h2 className="text-4xl font-black uppercase tracking-tight text-white md:text-6xl lg:text-7xl">Our</h2>
@@ -104,19 +103,18 @@ export default function OfferingsHorizontal() {
             </motion.p>
           </div>
 
-          {/* Grid of offerings with lift-on-hover */}
           <div className="grid h-[70vh] auto-cols-[280px] grid-flow-col grid-rows-3 gap-4 md:auto-cols-[320px] md:gap-6">
             {offerings.map((offering, index) => (
               <motion.div
                 key={offering.title}
                 data-card
                 className={`group relative overflow-hidden rounded-2xl ${offering.size === "large"
+                  ? "row-span-2"
+                  : offering.size === "tall"
                     ? "row-span-2"
-                    : offering.size === "tall"
-                      ? "row-span-2"
-                      : offering.size === "wide"
-                        ? "col-span-1"
-                        : ""
+                    : offering.size === "wide"
+                      ? "col-span-1"
+                      : ""
                   }`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
