@@ -129,7 +129,6 @@ export function useMicroInteractions() {
 
     cards.forEach((card) => {
       card.style.transition = "transform 300ms cubic-bezier(.22,1,.36,1)"
-      card.style.willChange = "transform, opacity"
 
       card.addEventListener("mouseenter", () => {
         card.style.transform = "translateY(-8px) scale(1.02) rotateZ(-0.6deg)"

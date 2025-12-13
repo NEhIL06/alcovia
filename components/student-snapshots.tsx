@@ -7,28 +7,28 @@ import TextReveal from "./text-reveal"
 
 const snapshots = [
   {
-    image: "/images/firstinternship.jpeg",
-    caption: "Celebrating first internship",
+    image: "/images/annualsummit.jpg",
+    caption: "Annual Alcovia Summit",
     rotate: -3,
   },
   {
-    image: "/images/annualsummit.jpg?height=200&width=200",
-    caption: "Annual Alcovia Summit",
+    image: "/images/winning.jpg",
+    caption: "Celebrating Winnings",
     rotate: 2,
   },
   {
-    image: "/images/tedx.jpg",
-    caption: "TEDx presentation",
+    image: "/images/podcast.jpg",
+    caption: "Podcasts",
     rotate: -2,
   },
   {
-    image: "/images/dreamuni.jpeg",
-    caption: "Dream university admission",
+    image: "/images/something.jpg",
+    caption: "",
     rotate: 4,
   },
   {
-    image: "/images/nationalhackathon.jpeg",
-    caption: "National Hackathon winners",
+    image: "/images/part2.jpg",
+    caption: "Winnings moments",
     rotate: -1,
   },
   {
@@ -115,7 +115,7 @@ export default function StudentSnapshots() {
                   style={{ filter: "contrast(1.05) saturate(0.9)" }}
                 />
               </motion.div>
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/70 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#0B0B0B]/70 via-transparent to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
               <motion.p className="absolute bottom-4 left-4 right-4 text-sm font-medium text-white opacity-0 transition-opacity group-hover:opacity-100 md:text-base">
                 {snapshot.caption}
               </motion.p>

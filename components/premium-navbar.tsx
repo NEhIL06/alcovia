@@ -37,7 +37,7 @@ const navLinks: NavItem[] = [
   },
   {
     label: "TEAM",
-    href: "/team",
+    href: "/meet-the-team",
     hasDropdown: false
   },
   {
@@ -142,9 +142,28 @@ export default function PremiumNavbar() {
               : "rgba(247, 247, 243, 0.35)",
           backdropFilter: scrolled ? "blur(16px)" : "blur(12px)",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "blur(12px)",
-          borderBottom: navMode === "light"
-            ? "1px solid rgba(255, 255, 255, 0.08)"
-            : "1px solid rgba(0, 0, 0, 0.08)",
+          borderBottom: scrolled
+            ? navMode === "light"
+              ? "1px solid rgba(255, 255, 255, 0.12)"
+              : "1px solid rgba(0, 0, 0, 0.12)"
+            : navMode === "light"
+              ? "1px solid rgba(255, 255, 255, 0.06)"
+              : "1px solid rgba(0, 0, 0, 0.06)",
+          borderTop: scrolled
+            ? navMode === "light"
+              ? "1px solid rgba(255, 255, 255, 0.12)"
+              : "1px solid rgba(0, 0, 0, 0.12)"
+            : "1px solid rgba(0, 0, 0, 0)",
+          borderLeft: scrolled
+            ? navMode === "light"
+              ? "1px solid rgba(255, 255, 255, 0.12)"
+              : "1px solid rgba(0, 0, 0, 0.12)"
+            : "1px solid rgba(0, 0, 0, 0)",
+          borderRight: scrolled
+            ? navMode === "light"
+              ? "1px solid rgba(255, 255, 255, 0.12)"
+              : "1px solid rgba(0, 0, 0, 0.12)"
+            : "1px solid rgba(0, 0, 0, 0)",
           boxShadow: scrolled
             ? "0 4px 14px rgba(0, 0, 0, 0.2)"
             : "0 2px 8px rgba(0, 0, 0, 0.1)",
@@ -567,7 +586,7 @@ function NavLink({
         )}
 
         <motion.span
-          className="absolute bottom-0 left-1/2 h-[2px] -translate-x-1/2 bg-[#CEFF2B]"
+          className="absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 bg-[#CEFF2B]"
           initial={{ width: 0 }}
           animate={{ width: isHovered || isDropdownOpen ? "80%" : 0 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -681,7 +700,8 @@ function DropdownItem({
       <motion.div
         className="absolute inset-0 rounded-xl"
         style={{
-          background: "linear-gradient(90deg, rgba(206, 255, 43, 0.1) 0%, rgba(206, 255, 43, 0.05) 50%, transparent 100%)",
+          background:
+            "linear-gradient(90deg, rgba(206, 255, 43, 0.1) 0%, rgba(206, 255, 43, 0.05) 50%, rgba(206, 255, 43, 0) 100%)",
         }}
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -20 }}

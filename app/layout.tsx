@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
+import { SessionProvider } from "@/context/session-context"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     title: "ALCOVIA | Ready to Fly?",
     description: "Empowering Indian teens to become tomorrow's leaders",
   },
-    generator: 'v0.app'
+  generator: 'v0.app'
 }
 
 export const viewport: Viewport = {
@@ -44,7 +45,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="cursor-none font-sans antialiased">
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        <SessionProvider>
+          <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        </SessionProvider>
         <Analytics />
       </body>
     </html>

@@ -325,7 +325,6 @@ export default function Hero() {
         className="pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-0"
         style={{
           background: "radial-gradient(circle, rgba(206,255,43,0.08) 0%, transparent 60%)",
-          willChange: "transform, opacity",
         }}
       />
 
@@ -336,7 +335,7 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-8 px-6 lg:grid-cols-1">
         <motion.div
-          className="absolute left-6 top-8 z-30 hidden md:block lg:left-12 lg:top-12"
+          className="absolute left-6 top-24 z-30 hidden md:block lg:left-12 lg:top-32"
           initial={{ opacity: 0, x: -50, rotate: -45 }}
           animate={isRevealed ? { opacity: 1, x: 0, rotate: 0 } : {}}
           transition={{ delay: 1.4, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
@@ -404,7 +403,6 @@ export default function Hero() {
                 top: "50%",
                 marginLeft: "-280px",
                 marginTop: "-200px",
-                willChange: "transform, opacity",
               }}
             >
               <Image
@@ -430,7 +428,6 @@ export default function Hero() {
                 top: "50%",
                 marginRight: "-280px",
                 marginTop: "-200px",
-                willChange: "transform, opacity",
               }}
             >
               <Image
@@ -452,7 +449,6 @@ export default function Hero() {
             style={{
               perspective: 1000,
               transformStyle: "preserve-3d",
-              willChange: "transform",
             }}
             initial={{ clipPath: "circle(0% at 50% 50%)" }}
             animate={isRevealed ? { clipPath: "circle(100% at 50% 50%)" } : {}}
@@ -483,7 +479,7 @@ export default function Hero() {
             <motion.div
               className="pointer-events-none absolute inset-0 rounded-3xl border-2 border-transparent"
               animate={{
-                borderColor: isHovering ? "rgba(206,255,43,0.15)" : "transparent",
+                borderColor: isHovering ? "rgba(206,255,43,0.15)" : "rgba(206,255,43,0)",
                 boxShadow: isHovering
                   ? "inset 0 0 20px rgba(206,255,43,0.1)"
                   : "none",
@@ -587,7 +583,7 @@ export default function Hero() {
             />
             <h2
               ref={headlineRef}
-              className="reveal-text text-5xl font-black uppercase tracking-tighter text-[#0C0C0C] md:text-6xl lg:text-7xl"
+              className="reveal-text text-6xl font-black uppercase tracking-tighter text-[#0C0C0C] md:text-6xl lg:text-[7rem] lg:leading-[0.9]"
             >
               ALCOVIA
             </h2>
@@ -612,7 +608,7 @@ export default function Hero() {
           <motion.button
             ref={ctaRef}
             className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#CEFF2B] focus:outline-none focus:ring-2 focus:ring-[#CEFF2B] focus:ring-offset-2 md:px-8 md:py-4"
-            style={{ opacity: 0, willChange: "transform" }}
+            style={{ opacity: 0 }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onMouseEnter={handleCTAMouseEnter}
@@ -638,7 +634,7 @@ export default function Hero() {
             Start Your Journey
           </motion.button>
 
-          <motion.div
+          {/* <motion.div
             className="mt-8 flex flex-col items-center gap-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -650,7 +646,7 @@ export default function Hero() {
               animate={{ scaleY: [1, 0.5, 1] }}
               transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
             />
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </motion.section>

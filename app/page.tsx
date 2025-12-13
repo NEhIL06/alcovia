@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useSession } from "@/context/session-context"
 import CustomCursor from "@/components/custom-cursor"
 import Loader from "@/components/loader"
 import ScrollProgress from "@/components/scroll-progress"
@@ -17,12 +18,22 @@ import Footer from "@/components/footer"
 import MicroInteractions from "@/components/micro-interactions"
 
 export default function Home() {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const { hasShownLoader, setLoaderShown } = useSession()
+  const [isLoaded, setIsLoaded] = useState(hasShownLoader)
   const [isMounted, setIsMounted] = useState(false)
 
   useEffect(() => {
     setIsMounted(true)
-  }, [])
+    // If loader was already shown, mark as loaded
+    if (hasShownLoader) {
+      setIsLoaded(true)
+    }
+  }, [hasShownLoader])
+
+  const handleLoadingComplete = () => {
+    setIsLoaded(true)
+    setLoaderShown()
+  }
 
   // Prevent SSR rendering
   if (!isMounted) {
@@ -32,7 +43,7 @@ export default function Home() {
   return (
     <>
       <CustomCursor />
-      <Loader onLoadingComplete={() => setIsLoaded(true)} />
+      {!hasShownLoader && <Loader onLoadingComplete={handleLoadingComplete} />}
 
       <AnimatePresence>
         {isLoaded && (

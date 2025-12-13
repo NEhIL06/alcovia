@@ -19,8 +19,8 @@ const offerings = [
     size: "wide",
   },
   {
-    title: "1:1 Mentorship",
-    description: "Personalized guidance",
+    title: "Hyper Personalized Guidance",
+    description: "1:1 guidance",
     image: "/images/oneonone.jpeg",
     size: "medium",
   },
@@ -28,18 +28,12 @@ const offerings = [
     title: "Academic Excellence",
     description: "Performance improvement",
     image: "/images/academic.jpeg",
-    size: "medium",
+    size: "tall",
   },
   {
     title: "Forge Bonds",
     description: "Connect with driven peers",
     image: "/images/forgebonds.jpg",
-    size: "medium",
-  },
-  {
-    title: "Harvard/UCL Mentorship",
-    description: "Weekly guidance sessions",
-    image: "/images/ucmentorship.jpg",
     size: "tall",
   },
   {
@@ -49,15 +43,27 @@ const offerings = [
     size: "medium",
   },
   {
-    title: "Build Resilience",
-    description: "Mental strength training",
-    image: "/images/resilience.jpg",
+    title: "Access to Top Industry Professionals",
+    description: "firsthand insights and mentorship",
+    image: "/images/accessToindustry.jpg",
     size: "tall",
   },
   {
-    title: "Build Empathy",
-    description: "Emotional intelligence",
-    image: "/images/empathy.jpg",
+    title: "The Alcovia App",
+    description: "Direct access to your child's performance",
+    image: "/images/resilience.jpg",
+    size: "small",
+  },
+  {
+    title: "Workshops and Simulations",
+    description: "Real Life Scenarios to train students how to navigate through challenges",
+    image: "/images/workshops.jpg",
+    size: "tall",
+  },
+  {
+    title: "Peer to Peer Learning",
+    description: "Collaborative learning through group projects,sessions,scenrios",
+    image: "/images/peertopeer.jpg",
     size: "medium",
   },
 ]
@@ -79,7 +85,7 @@ export default function OfferingsHorizontal() {
       <div className="sticky top-0 flex h-screen items-center overflow-hidden">
         <motion.div className="flex gap-6 pl-8 md:gap-8 md:pl-16" style={{ x }}>
           {/* Section title with text reveal */}
-          <div ref={titleRef} className="flex h-[70vh] w-[300px] flex-shrink-0 flex-col justify-center md:w-[400px]">
+          <div ref={titleRef} className="flex h-[70vh] w-[300px] shrink-0 flex-col justify-center md:w-[400px]">
             <TextReveal delay={0.2}>
               <h2 className="text-4xl font-black uppercase tracking-tight text-white md:text-6xl lg:text-7xl">Our</h2>
             </TextReveal>
@@ -128,7 +134,7 @@ export default function OfferingsHorizontal() {
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                   style={{ filter: "contrast(1.05) saturate(0.9)" }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0C0C0C]/90 via-[#0C0C0C]/40 to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-t from-[#0C0C0C]/90 via-[#0C0C0C]/40 to-transparent" />
                 <div className="absolute bottom-0 left-0 p-4 md:p-6">
                   <h3 className="text-lg font-bold text-white md:text-xl">{offering.title}</h3>
                   <p className="mt-1 text-sm text-white/70">{offering.description}</p>

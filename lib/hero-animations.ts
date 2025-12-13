@@ -652,16 +652,16 @@ export function createFloatingDoodles(options: DoodleOptions) {
     const doodles: HTMLElement[] = []
 
     const starPositions = [
-        { left: "10%", top: "20%" },
-        { left: "85%", top: "15%" },
-        { left: "75%", top: "70%" },
+        { right: "5%", top: "20%" },
+        { right: "15%", top: "15%" },
+        { right: "8%", top: "60%" },
     ]
 
     starPositions.forEach((pos, i) => {
         const star = document.createElement("div")
         star.className = "absolute pointer-events-none text-[#CEFF2B]/20"
         star.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L9 9H2l6 5-2.5 8L12 17l6.5 5L16 14l6-5h-7L12 2z"/></svg>`
-        star.style.left = pos.left
+        if (pos.right) star.style.right = pos.right
         star.style.top = pos.top
         container.appendChild(star)
         doodles.push(star)
@@ -688,7 +688,7 @@ export function createFloatingDoodles(options: DoodleOptions) {
     let quoteIndex = 0
     const quoteEl = document.createElement("div")
     quoteEl.className =
-        "absolute left-1/2 top-[15%] -translate-x-1/2 pointer-events-none px-4 py-2 rounded-full bg-[#0B0B0B]/5 backdrop-blur-sm text-xs uppercase tracking-widest text-[#0B0B0B]/30"
+        "absolute right-6 md:right-12 top-[25%] pointer-events-none px-4 py-2 rounded-full bg-[#0B0B0B]/5 backdrop-blur-sm text-xs uppercase tracking-widest text-[#0B0B0B]/40 font-medium"
     quoteEl.textContent = quotes[0]
     container.appendChild(quoteEl)
     doodles.push(quoteEl)

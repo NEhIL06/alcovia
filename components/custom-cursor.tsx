@@ -236,11 +236,11 @@ export default function CustomCursor() {
 
   return (
     <>
-      <div ref={sparkContainerRef} className="pointer-events-none fixed inset-0 z-[9995]" />
+      <div ref={sparkContainerRef} className="pointer-events-none fixed inset-0 z-9995" />
 
       <div
         ref={glowRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9996] h-24 w-24 rounded-full"
+        className="pointer-events-none fixed left-0 top-0 z-9996 h-24 w-24 rounded-full"
         style={{
           transform: "translate(-50%, -50%)",
           background: "radial-gradient(circle, rgba(206,255,43,0.25) 0%, transparent 70%)",
@@ -252,7 +252,7 @@ export default function CustomCursor() {
 
       <svg
         ref={planeRef}
-        className="pointer-events-none fixed left-0 top-0 z-[10000]"
+        className="pointer-events-none fixed left-0 top-0 z-10000"
         width="32"
         height="32"
         viewBox="0 0 32 32"
@@ -276,7 +276,7 @@ export default function CustomCursor() {
 
       <div
         ref={innerRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9999] rounded-full mix-blend-difference"
+        className="pointer-events-none fixed left-0 top-0 z-9999 rounded-full mix-blend-difference"
         style={{
           transform: "translate(-50%, -50%)",
           width: cursorState === "hover-button" ? 10 : cursorState === "hover-hero" ? 6 : 8,
@@ -289,7 +289,7 @@ export default function CustomCursor() {
 
       <div
         ref={outerRef}
-        className="pointer-events-none fixed left-0 top-0 z-[9998] flex items-center justify-center rounded-full"
+        className="pointer-events-none fixed left-0 top-0 z-9998 flex items-center justify-center rounded-full"
         style={{
           transform: "translate(-50%, -50%)",
           width: getOuterSize(),
