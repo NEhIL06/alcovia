@@ -290,10 +290,10 @@ export default function SocialFan() {
           transition={{ duration: 0.8 }}
         >
           <h2 className="text-5xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-6xl lg:text-8xl">
-            VIEW US
+            FOLLOW ALCOVIA
           </h2>
           <h2 className="text-5xl font-black uppercase tracking-tight text-[#0B0B0B]/50 md:text-6xl lg:text-8xl">
-            ON SOCIALS
+            ON SOCIAL MEDIA
           </h2>
         </motion.div>
 
