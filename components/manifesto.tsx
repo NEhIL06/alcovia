@@ -4,54 +4,80 @@ import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "framer-motion"
 import gsap from "gsap"
 
-interface TextLine {
-  words: Array<{ text: string; isAccent: boolean }>
+interface TextWord {
+  text: string
+  isAccent: boolean
 }
 
-const manifestoLines: TextLine[] = [
-  {
-    words: [
-      { text: "UNPRECEDENTED", isAccent: true },
-      { text: " LEARNINGS,", isAccent: false },
-    ],
-  },
-  {
-    words: [
-      { text: "FAILING ", isAccent: false },
-      { text: "REGULARLY", isAccent: true },
-      { text: ",", isAccent: false },
-    ],
-  },
-  {
-    words: [{ text: "BUILDING WITH FRIENDS,", isAccent: false }],
-  },
-  {
-    words: [
-      { text: "WHILE BEING ON A ", isAccent: false },
-      { text: "JOURNEY", isAccent: true },
-    ],
-  },
-  {
-    words: [{ text: "OF SELF DISCOVERY.", isAccent: false }],
-  },
-  {
-    words: [
-      { text: "GET ON A ", isAccent: false },
-      { text: "LEGACY", isAccent: true },
-    ],
-  },
-  {
-    words: [{ text: "BUILDING JOURNEY TODAY,", isAccent: false }],
-  },
-  {
-    words: [
-      { text: "TO BUILD THE ", isAccent: false },
-      { text: "FUTURE", isAccent: true },
-    ],
-  },
-  {
-    words: [{ text: "OF TOMORROW.", isAccent: false }],
-  },
+const manifestoWords: TextWord[] = [
+  { text: "ALCOVIA", isAccent: false },
+  { text: "IS", isAccent: false },
+  { text: "A", isAccent: false },
+  { text: "COMMUNITY", isAccent: false },
+  { text: "OF", isAccent: false },
+  { text: "TOP 1%", isAccent: true },
+  { text: "TEENAGERS", isAccent: false },
+  { text: "BETWEEN", isAccent: false },
+  { text: "THE", isAccent: false },
+  { text: "AGE", isAccent: false },
+  { text: "OF", isAccent: false },
+  { text: "11-16", isAccent: true },
+  { text: "YEARS.", isAccent: false },
+  { text: "WITH", isAccent: false },
+  { text: "3%", isAccent: true },
+  { text: "SELECTION", isAccent: false },
+  { text: "RATE,", isAccent: false },
+  { text: "THE", isAccent: false },
+  { text: "BAR", isAccent: false },
+  { text: "FOR", isAccent: false },
+  { text: "WHO", isAccent: false },
+  { text: "MAKES", isAccent: false },
+  { text: "IT", isAccent: false },
+  { text: "TO", isAccent: false },
+  { text: "OUR", isAccent: false },
+  { text: "PROGRAM", isAccent: false },
+  { text: "IS", isAccent: false },
+  { text: "HIGH.", isAccent: false },
+  { text: "FOR", isAccent: false },
+  { text: "THOSE", isAccent: false },
+  { text: "WHO", isAccent: false },
+  { text: "MAKE", isAccent: false },
+  { text: "IT—", isAccent: false },
+  { text: "A GLIMPSE", isAccent: true },
+  { text: "OF", isAccent: false },
+  { text: "YOUR", isAccent: false },
+  { text: "YEAR:", isAccent: false },
+  { text: "UNPRECEDENTED", isAccent: true },
+  { text: "LEARNINGS,", isAccent: false },
+  { text: "FAILING", isAccent: false },
+  { text: "REGULARLY,", isAccent: true },
+  { text: "BUILDING", isAccent: false },
+  { text: "WITH", isAccent: false },
+  { text: "FRIENDS,", isAccent: false },
+  { text: "WHILE", isAccent: false },
+  { text: "BEING", isAccent: false },
+  { text: "ON", isAccent: false },
+  { text: "A", isAccent: false },
+  { text: "JOURNEY", isAccent: true },
+  { text: "OF", isAccent: false },
+  { text: "SELF", isAccent: false },
+  { text: "DISCOVERY.", isAccent: false },
+  { text: "AT", isAccent: false },
+  { text: "ALCOVIA,", isAccent: false },
+  { text: "TEENS", isAccent: false },
+  { text: "GET", isAccent: false },
+  { text: "ON", isAccent: false },
+  { text: "A", isAccent: false },
+  { text: "LEGACY", isAccent: true },
+  { text: "BUILDING", isAccent: false },
+  { text: "JOURNEY", isAccent: false },
+  { text: "TODAY,", isAccent: false },
+  { text: "TO", isAccent: false },
+  { text: "BUILD", isAccent: false },
+  { text: "THE", isAccent: false },
+  { text: "FUTURE", isAccent: true },
+  { text: "OF", isAccent: false },
+  { text: "TOMORROW.", isAccent: false },
 ]
 
 export default function Manifesto() {
@@ -148,32 +174,29 @@ export default function Manifesto() {
         </div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto max-w-6xl">
-        {manifestoLines.map((line, lineIndex) => (
-          <div
-            key={lineIndex}
-            ref={(el) => {
-              linesRef.current[lineIndex] = el
-            }}
-            className="reveal-line relative mb-1 overflow-hidden md:mb-2"
-          >
-            <div className="reveal-mask absolute inset-0 z-20 bg-[#CEFF2B]" style={{ transform: "translateX(0%)" }} />
+      <div className="relative z-10 mx-auto max-w-6xl text-center">
+        <div
+          ref={(el) => {
+            linesRef.current[0] = el
+          }}
+          className="reveal-line relative overflow-hidden"
+        >
+          <div className="reveal-mask absolute inset-0 z-20 bg-[#CEFF2B]" style={{ transform: "translateX(0%)" }} />
 
-            <div
-              className="reveal-text flex flex-wrap text-2xl font-bold italic leading-[0.95] tracking-tight sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
-              style={{ opacity: 0, transform: "translateY(20px)" }}
-            >
-              {line.words.map((word, wordIndex) => (
-                <span key={wordIndex} className={word.isAccent ? "text-[#CEFF2B]" : "text-[#F7F7F3]"}>
-                  {word.text}
-                </span>
-              ))}
-            </div>
-          </div>
-        ))}
+          <p
+            className="reveal-text font-[family-name:var(--font-playfair)] text-2xl font-bold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
+            style={{ opacity: 0, transform: "translateY(20px)" }}
+          >
+            {manifestoWords.map((word, index) => (
+              <span key={index} className={word.isAccent ? "text-[#CEFF2B]" : "text-[#F7F7F3]"}>
+                {word.text}{" "}
+              </span>
+            ))}
+          </p>
+        </div>
       </div>
 
-      <motion.div
+      {/* <motion.div
         className="absolute bottom-0 left-0 right-0 flex"
         initial={{ opacity: 0 }}
         animate={hasAnimated ? { opacity: 1 } : {}}
@@ -191,7 +214,7 @@ export default function Manifesto() {
           animate={hasAnimated ? { width: "28%" } : {}}
           transition={{ delay: 2.3, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
         />
-      </motion.div>
+      </motion.div> */}
     </section>
   )
 }
