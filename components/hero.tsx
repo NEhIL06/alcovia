@@ -5,6 +5,7 @@ import { useRef, useEffect, useState, useCallback } from "react"
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import Image from "next/image"
 import gsap from "gsap"
+import { useHeroAnimation } from "@/context/hero-animation-context"
 
 import {
   checkReducedMotion,
@@ -17,9 +18,7 @@ import {
   createCTAMagneticPull,
   createCTANeonSweep,
   createCTAClickRipple,
-  createPaperPlaneTrail,
   createAmbientParticles,
-  createSparkBurst,
   createPlaneTakeoff,
   createFloatingDoodles,
   COLORS,
@@ -40,6 +39,7 @@ export default function Hero() {
   const parallaxLayer3Ref = useRef<HTMLDivElement>(null)
   const doodlesContainerRef = useRef<HTMLDivElement>(null)
 
+  const { setHeroAnimationComplete } = useHeroAnimation()
   const [isRevealed, setIsRevealed] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
@@ -49,7 +49,6 @@ export default function Hero() {
   const wingFoldTlRef = useRef<gsap.core.Tween | null>(null)
   const leftWingAnimRef = useRef<ReturnType<typeof createWingHoverAnimation> | null>(null)
   const rightWingAnimRef = useRef<ReturnType<typeof createWingHoverAnimation> | null>(null)
-  const paperPlaneTrailRef = useRef<ReturnType<typeof createPaperPlaneTrail> | null>(null)
   const particlesRef = useRef<ReturnType<typeof createAmbientParticles> | null>(null)
   const doodlesRef = useRef<ReturnType<typeof createFloatingDoodles> | null>(null)
   const ctaSweepRef = useRef<ReturnType<typeof createCTANeonSweep> | null>(null)
@@ -118,13 +117,6 @@ export default function Hero() {
         })
       }
 
-      if (containerRef.current && !reducedMotion && !isMobile()) {
-        paperPlaneTrailRef.current = createPaperPlaneTrail({
-          container: containerRef.current,
-          fadeDelay: 700,
-        })
-      }
-
       if (containerRef.current) {
         particlesRef.current = createAmbientParticles({
           container: containerRef.current,
@@ -138,13 +130,22 @@ export default function Hero() {
           quotes: ["Dream big ✨", "Take flight 🚀", "Believe in yourself 💫", "Future leader 🌟"],
         })
       }
+
+      // Mark hero animation complete after girl image animation finishes
+      // clipPath animation: 0.4s delay + 1.2s duration = 1.6s
+      const animationCompleteTimer = setTimeout(() => {
+        setHeroAnimationComplete(true)
+      }, 1700) // 1.7s to be safe
+
+      return () => {
+        clearTimeout(animationCompleteTimer)
+      }
     }, 100)
 
     return () => {
       clearTimeout(timer)
       particlesRef.current?.destroy()
       doodlesRef.current?.destroy()
-      paperPlaneTrailRef.current?.destroy()
       if (ctaMagneticCleanupRef.current) ctaMagneticCleanupRef.current()
     }
   }, [])
@@ -166,19 +167,6 @@ export default function Hero() {
     if (prefersReducedMotion) return
 
     wingRevealTlRef.current?.play()
-
-    paperPlaneTrailRef.current?.start()
-
-    if (portraitRef.current && containerRef.current) {
-      const rect = portraitRef.current.getBoundingClientRect()
-      const containerRect = containerRef.current.getBoundingClientRect()
-      createSparkBurst(
-        rect.left + rect.width / 2 - containerRect.left,
-        rect.top + rect.height / 2 - containerRect.top,
-        containerRef.current,
-        4
-      )
-    }
   }, [prefersReducedMotion])
 
   const handlePortraitMouseLeave = useCallback(() => {
@@ -186,8 +174,6 @@ export default function Hero() {
     if (prefersReducedMotion) return
 
     wingRevealTlRef.current?.reverse()
-
-    paperPlaneTrailRef.current?.stop()
   }, [prefersReducedMotion])
 
   const handlePortraitMouseMove = useCallback(
@@ -209,8 +195,6 @@ export default function Hero() {
         leftWingAnimRef.current?.follow(normalizedX, normalizedY)
         rightWingAnimRef.current?.follow(normalizedX, normalizedY)
       }
-
-      paperPlaneTrailRef.current?.addPoint(e.clientX, e.clientY)
     },
     [prefersReducedMotion, isHovering]
   )

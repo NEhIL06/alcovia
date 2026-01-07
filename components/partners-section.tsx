@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView } from "framer-motion"
 import TextReveal from "./text-reveal"
+import FlipLink from "@/components/flip-link"
 
 const partners = [
   { name: "Harvard University", logo: "HARVARD" },
@@ -101,15 +102,20 @@ export default function PartnersSection() {
           {partners.map((partner, index) => (
             <motion.div
               key={partner.name}
-              className="group flex flex-col items-center"
+              className="group flex flex-col items-center cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
               whileHover={{ scale: 1.05, y: -4 }}
             >
-              <span className="text-xl font-bold tracking-wider text-[#0B0B0B] transition-colors group-hover:text-[#CEFF2B] md:text-2xl">
+              <FlipLink
+                href="#"
+                className="text-xl font-bold tracking-wider md:text-2xl"
+                baseColor="#0B0B0B"
+                hoverColor="#CEFF2B"
+              >
                 {partner.logo}
-              </span>
+              </FlipLink>
             </motion.div>
           ))}
         </motion.div>

@@ -78,7 +78,8 @@ const manifestoWords: TextWord[] = [
   { text: "FUTURE", isAccent: true },
   { text: "OF", isAccent: false },
   { text: "TOMORROW.", isAccent: false },
-]
+];
+
 
 export default function Manifesto() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -136,25 +137,61 @@ export default function Manifesto() {
     }
   }, [isInView, hasAnimated])
 
+  //   useEffect(() => {
+  //   if (!isInView || hasAnimated) return;
+
+  //   setHasAnimated(true);
+
+  //   const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  //   if (prefersReducedMotion) {
+  //     linesRef.current.forEach((line) => {
+  //       if (!line) return;
+
+  //       const text = line.querySelector(".reveal-text");
+  //       const mask = line.querySelector(".reveal-mask");
+
+  //       if (text) gsap.set(text, { opacity: 1, y: 0 });
+  //       if (mask) gsap.set(mask, { xPercent: 105 });
+  //     });
+  //     return;
+  //   }
+
+  //   // Batch DOM queries for better performance
+  //   const elements = linesRef.current
+  //     .map((line) => {
+  //       if (!line) return null;
+  //       return {
+  //         mask: line.querySelector(".reveal-mask"),
+  //         text: line.querySelector(".reveal-text"),
+  //       };
+  //     })
+  //     .filter((el) => el?.mask && el?.text);
+
+  //   // Create animations
+  //   elements.forEach(({ mask, text }, i) => {
+  //     const stagger = i * 0.15;
+  //     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  //     tl.set(text, { opacity: 0, y: 20 })
+  //       .to(mask, { 
+  //         xPercent: 105, 
+  //         duration: 1.1 
+  //       }, stagger)
+  //       .to(text, { 
+  //         opacity: 1, 
+  //         y: 0, 
+  //         duration: 1.05 
+  //       }, stagger + 0.06);
+  //   });
+  // }, [isInView, hasAnimated]);
+
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden bg-[#3d4a2a] px-6 py-24 md:px-12 lg:px-20"
+      className="relative min-h-screen overflow-hidden bg-transparent px-6 py-24 md:px-12 lg:px-20"
       data-theme="graded"
     >
-      <div className="absolute inset-0 opacity-[0.06]">
-        <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {[...Array(20)].map((_, i) => (
-            <path
-              key={i}
-              d={`M0,${20 + i * 3} Q25,${15 + i * 3 + Math.sin(i) * 3} 50,${20 + i * 3} T100,${20 + i * 3}`}
-              fill="none"
-              stroke="#F7F7F3"
-              strokeWidth="0.1"
-            />
-          ))}
-        </svg>
-      </div>
 
       <motion.div
         className="relative z-10 mb-12 flex justify-center"
@@ -184,11 +221,15 @@ export default function Manifesto() {
           <div className="reveal-mask absolute inset-0 z-20 bg-[#CEFF2B]" style={{ transform: "translateX(0%)" }} />
 
           <p
-            className="reveal-text font-[family-name:var(--font-playfair)] text-2xl font-bold leading-[1.15] tracking-tight sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
+            className="reveal-text font-[family-name:var(--font-playfair)] text-2xl font-normal leading-[1.15] tracking-tight sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl"
             style={{ opacity: 0, transform: "translateY(20px)" }}
           >
             {manifestoWords.map((word, index) => (
-              <span key={index} className={word.isAccent ? "text-[#CEFF2B]" : "text-[#F7F7F3]"}>
+              <span
+                key={index}
+                className={word.isAccent ? "text-[#CEFF2B]" : "text-[#F7F7F3]"}
+                style={{ marginLeft: word.text.includes("Unprecedented") ? "0.3em" : undefined }}
+              >
                 {word.text}{" "}
               </span>
             ))}
@@ -196,25 +237,6 @@ export default function Manifesto() {
         </div>
       </div>
 
-      {/* <motion.div
-        className="absolute bottom-0 left-0 right-0 flex"
-        initial={{ opacity: 0 }}
-        animate={hasAnimated ? { opacity: 1 } : {}}
-        transition={{ delay: 2, duration: 0.8 }}
-      >
-        <motion.div
-          className="h-20 bg-[#CEFF2B] md:h-28 lg:h-36"
-          initial={{ width: 0 }}
-          animate={hasAnimated ? { width: "42%" } : {}}
-          transition={{ delay: 2.1, duration: 0.9, ease: [0.25, 0.1, 0.25, 1] }}
-        />
-        <motion.div
-          className="ml-auto h-14 self-end bg-[#CEFF2B] md:h-20 lg:h-24"
-          initial={{ width: 0 }}
-          animate={hasAnimated ? { width: "28%" } : {}}
-          transition={{ delay: 2.3, duration: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
-        />
-      </motion.div> */}
     </section>
   )
 }

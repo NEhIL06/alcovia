@@ -3,16 +3,18 @@
 import { useEffect, useRef, useState, useCallback } from "react"
 import gsap from "gsap"
 import { checkReducedMotion, isMobile, COLORS } from "@/lib/hero-animations"
+import { useHeroAnimation } from "@/context/hero-animation-context"
 
 type CursorState = "default" | "hover-link" | "hover-button" | "drag" | "hover-hero"
 
 export default function CustomCursor() {
+  const { isHeroAnimationComplete } = useHeroAnimation()
   const [cursorState, setCursorState] = useState<CursorState>("default")
   const [isVisible, setIsVisible] = useState(false)
   const [isHoveringNeon, setIsHoveringNeon] = useState(false)
   const [isOverHero, setIsOverHero] = useState(false)
 
-  const innerRef = useRef<HTMLDivElement>(null)
+  const innerRef = useRef<HTMLImageElement>(null)
   const outerRef = useRef<HTMLDivElement>(null)
   const glowRef = useRef<HTMLDivElement>(null)
   const planeRef = useRef<SVGSVGElement>(null)
@@ -250,7 +252,7 @@ export default function CustomCursor() {
         }}
       />
 
-      <svg
+      {/* <svg
         ref={planeRef}
         className="pointer-events-none fixed left-0 top-0 z-10000"
         width="32"
@@ -258,7 +260,7 @@ export default function CustomCursor() {
         viewBox="0 0 32 32"
         style={{
           transform: "translate(-50%, -50%) rotate(-15deg)",
-          opacity: isVisible && isOverHero ? 1 : 0,
+          opacity: isVisible && isOverHero && isHeroAnimationComplete ? 1 : 0,
           transition: "opacity 200ms",
           filter: "drop-shadow(0 2px 6px rgba(0,0,0,0.3))",
         }}
@@ -272,22 +274,23 @@ export default function CustomCursor() {
         <path d="M8 20C10 16 14 12 20 8" stroke="#0B0B0B" strokeWidth="0.3" fill="none" opacity="0.5" />
         <path d="M10 18C12 14 16 10 22 6" stroke="#0B0B0B" strokeWidth="0.3" fill="none" opacity="0.5" />
         <path d="M12 16C14 12 18 8 24 4" stroke="#0B0B0B" strokeWidth="0.3" fill="none" opacity="0.3" />
-      </svg>
+      </svg> */}
 
-      <div
+      <img
         ref={innerRef}
-        className="pointer-events-none fixed left-0 top-0 z-9999 rounded-full mix-blend-difference"
+        src='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="%23FFF" stroke="%23000" stroke-width="0.5" d="M4.5.79v22.42l6.56-6.57h9.29L4.5.79z"></path></svg>'
+        alt="cursor"
+        className="pointer-events-none fixed left-0 top-0 z-9999"
         style={{
-          transform: "translate(-50%, -50%)",
-          width: cursorState === "hover-button" ? 10 : cursorState === "hover-hero" ? 6 : 8,
-          height: cursorState === "hover-button" ? 10 : cursorState === "hover-hero" ? 6 : 8,
-          backgroundColor: cursorState === "hover-button" ? "#0B0B0B" : "#fff",
-          opacity: isVisible && !isOverHero ? 1 : 0,
-          transition: "width 200ms, height 200ms, background-color 200ms, opacity 200ms",
+          transform: "translate(-5px, -1px)", // Align tip to mouse
+          width: 24,
+          height: 24,
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 200ms",
         }}
       />
 
-      <div
+      {/* <div
         ref={outerRef}
         className="pointer-events-none fixed left-0 top-0 z-9998 flex items-center justify-center rounded-full"
         style={{
@@ -322,7 +325,7 @@ export default function CustomCursor() {
             />
           </svg>
         )}
-      </div>
+      </div> */}
     </>
   )
 }

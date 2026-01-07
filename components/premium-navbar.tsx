@@ -1,9 +1,10 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
+import NavMenu from "@/components/nav-menu"
 
 type NavMode = "light" | "dark"
 
@@ -23,28 +24,9 @@ interface NavItem {
 }
 
 const navLinks: NavItem[] = [
-  {
-    label: "PROGRAMS",
-    href: "/programs",
-    hasDropdown: true,
-    dropdownItems: []
-  },
-  {
-    label: "ABOUT",
-    href: "/about",
-    hasDropdown: true,
-    dropdownItems: []
-  },
-  {
-    label: "TEAM",
-    href: "/meet-the-team",
-    hasDropdown: false
-  },
-  {
-    label: "CONTACT",
-    href: "/contact",
-    hasDropdown: false
-  },
+  { label: "PROGRAMS", href: "/programs", hasDropdown: false },
+  { label: "ABOUT", href: "/about", hasDropdown: false },
+  { label: "TEAM", href: "/meet-the-team", hasDropdown: false },
 ]
 
 export default function PremiumNavbar() {
@@ -52,7 +34,6 @@ export default function PremiumNavbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
-  const [mobileAccordion, setMobileAccordion] = useState<string | null>(null)
 
   const navRef = useRef<HTMLElement>(null)
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null)
@@ -134,39 +115,14 @@ export default function PremiumNavbar() {
         className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${navHeight}`}
         style={{
           background: navMode === "light"
-            ? scrolled
-              ? "rgba(10, 10, 10, 0.55)"
-              : "rgba(10, 10, 10, 0.35)"
-            : scrolled
-              ? "rgba(247, 247, 243, 0.55)"
-              : "rgba(247, 247, 243, 0.35)",
+            ? scrolled ? "rgba(10, 10, 10, 0.55)" : "rgba(10, 10, 10, 0.35)"
+            : scrolled ? "rgba(247, 247, 243, 0.55)" : "rgba(247, 247, 243, 0.35)",
           backdropFilter: scrolled ? "blur(16px)" : "blur(12px)",
           WebkitBackdropFilter: scrolled ? "blur(16px)" : "blur(12px)",
           borderBottom: scrolled
-            ? navMode === "light"
-              ? "1px solid rgba(255, 255, 255, 0.12)"
-              : "1px solid rgba(0, 0, 0, 0.12)"
-            : navMode === "light"
-              ? "1px solid rgba(255, 255, 255, 0.06)"
-              : "1px solid rgba(0, 0, 0, 0.06)",
-          borderTop: scrolled
-            ? navMode === "light"
-              ? "1px solid rgba(255, 255, 255, 0.12)"
-              : "1px solid rgba(0, 0, 0, 0.12)"
-            : "1px solid rgba(0, 0, 0, 0)",
-          borderLeft: scrolled
-            ? navMode === "light"
-              ? "1px solid rgba(255, 255, 255, 0.12)"
-              : "1px solid rgba(0, 0, 0, 0.12)"
-            : "1px solid rgba(0, 0, 0, 0)",
-          borderRight: scrolled
-            ? navMode === "light"
-              ? "1px solid rgba(255, 255, 255, 0.12)"
-              : "1px solid rgba(0, 0, 0, 0.12)"
-            : "1px solid rgba(0, 0, 0, 0)",
-          boxShadow: scrolled
-            ? "0 4px 14px rgba(0, 0, 0, 0.2)"
-            : "0 2px 8px rgba(0, 0, 0, 0.1)",
+            ? navMode === "light" ? "1px solid rgba(255, 255, 255, 0.12)" : "1px solid rgba(0, 0, 0, 0.12)"
+            : navMode === "light" ? "1px solid rgba(255, 255, 255, 0.06)" : "1px solid rgba(0, 0, 0, 0.06)",
+          boxShadow: scrolled ? "0 4px 14px rgba(0, 0, 0, 0.2)" : "0 2px 8px rgba(0, 0, 0, 0.1)",
         }}
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -186,9 +142,7 @@ export default function PremiumNavbar() {
                 height={100}
                 className={`h-[150px] transition-all duration-300 ${scrolled ? "w-[220px]" : "w-[220px]"}`}
                 style={{
-                  filter: navMode === "light"
-                    ? "brightness(1.2) invert(0)"
-                    : "brightness(1) invert(0)"
+                  filter: navMode === "light" ? "brightness(1.2) invert(0)" : "brightness(1) invert(0)"
                 }}
                 priority
               />
@@ -203,19 +157,14 @@ export default function PremiumNavbar() {
                 onMouseEnter={() => link.hasDropdown && handleDropdownEnter(link.label)}
                 onMouseLeave={handleDropdownLeave}
               >
-                <NavLink
-                  href={link.href}
-                  mode={navMode}
-                  hasDropdown={link.hasDropdown}
-                  isDropdownOpen={activeDropdown === link.label}
-                >
+                <NavLink href={link.href} mode={navMode}>
                   {link.label}
                 </NavLink>
 
                 <AnimatePresence>
-                  {link.hasDropdown && activeDropdown === link.label && (
+                  {link.hasDropdown && activeDropdown === link.label && link.dropdownItems && (
                     <DropdownMenu
-                      items={link.dropdownItems || []}
+                      items={link.dropdownItems}
                       onMouseEnter={() => handleDropdownEnter(link.label)}
                       onMouseLeave={handleDropdownLeave}
                     />
@@ -226,261 +175,25 @@ export default function PremiumNavbar() {
           </nav>
 
           <div className="flex items-center gap-4">
-            <Link
-              href="/signin"
-              className={`hidden text-sm font-medium uppercase tracking-wider transition-all duration-300 hover:opacity-100 md:block ${navMode === "light"
-                ? "text-white/70 hover:text-white"
-                : "text-[#0B0B0B]/70 hover:text-[#0B0B0B]"
-                }`}
-              style={{ letterSpacing: "0.75px" }}
-            >
-              Sign In
-            </Link>
-
-            <motion.button
-              className={`hidden rounded-full px-6 py-2.5 text-sm font-bold uppercase tracking-wider transition-all duration-300 md:block ${navMode === "light"
-                ? "bg-white text-[#0B0B0B] hover:bg-[#CEFF2B]"
-                : "bg-[#0B0B0B] text-white hover:bg-[#CEFF2B] hover:text-[#0B0B0B]"
-                }`}
-              style={{
-                letterSpacing: "0.1em",
-                boxShadow: navMode === "light"
-                  ? "0 4px 20px rgba(255, 255, 255, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2)"
-                  : "0 4px 20px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1)"
-              }}
-              whileHover={{
-                scale: 1.03,
-                y: -2,
-                boxShadow: "0 6px 30px rgba(206, 255, 43, 0.4), 0 4px 12px rgba(0, 0, 0, 0.15)"
-              }}
-              whileTap={{ scale: 0.97 }}
-              transition={{ duration: 0.2 }}
-            >
-              APPLY NOW
-            </motion.button>
-
             <motion.button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`relative flex h-10 w-10 items-center justify-center rounded-lg lg:hidden ${navMode === "light"
-                ? "hover:bg-white/10"
-                : "hover:bg-black/10"
+              className={`flex h-12 w-12 items-center justify-center rounded-xl border transition-all duration-300 ${navMode === "light"
+                ? "border-white/20 bg-white/5 hover:bg-white/10 text-white"
+                : "border-black/10 bg-black/5 hover:bg-black/10 text-[#0B0B0B]"
                 }`}
-              aria-label="Toggle menu"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="relative h-5 w-6">
-                <motion.span
-                  className="absolute left-0 h-0.5 w-6 rounded-full"
-                  style={{
-                    backgroundColor: navMode === "light" ? "#CEFF2B" : "#0B0B0B",
-                    top: "0px",
-                  }}
-                  animate={{
-                    rotate: mobileMenuOpen ? 45 : 0,
-                    y: mobileMenuOpen ? 9 : 0,
-                  }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                />
-                <motion.span
-                  className="absolute left-0 top-[9px] h-0.5 w-6 rounded-full"
-                  style={{
-                    backgroundColor: navMode === "light" ? "#CEFF2B" : "#0B0B0B",
-                  }}
-                  animate={{
-                    opacity: mobileMenuOpen ? 0 : 1,
-                    scaleX: mobileMenuOpen ? 0 : 1,
-                  }}
-                  transition={{ duration: 0.2 }}
-                />
-                <motion.span
-                  className="absolute left-0 h-0.5 w-6 rounded-full"
-                  style={{
-                    backgroundColor: navMode === "light" ? "#CEFF2B" : "#0B0B0B",
-                    top: "18px",
-                  }}
-                  animate={{
-                    rotate: mobileMenuOpen ? -45 : 0,
-                    y: mobileMenuOpen ? -9 : 0,
-                  }}
-                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                />
+              <div className="flex flex-col gap-1.5">
+                <span className={`h-0.5 w-5 rounded-full ${navMode === "light" ? "bg-white" : "bg-[#0B0B0B]"}`} />
+                <span className={`h-0.5 w-5 rounded-full ${navMode === "light" ? "bg-white" : "bg-[#0B0B0B]"}`} />
               </div>
             </motion.button>
           </div>
         </div>
       </motion.nav>
 
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 z-40 lg:hidden"
-              style={{
-                background: "rgba(0, 0, 0, 0.6)",
-                backdropFilter: "blur(4px)",
-              }}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setMobileMenuOpen(false)}
-            />
-
-            <motion.div
-              className="fixed right-0 top-0 z-50 h-full w-[85%] max-w-[400px] lg:hidden"
-              style={{
-                background: "rgba(11, 11, 11, 0.95)",
-                backdropFilter: "blur(20px)",
-                boxShadow: "-10px 0 40px rgba(0, 0, 0, 0.5)",
-              }}
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-            >
-              <div className="flex h-full flex-col p-8">
-                <motion.button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="group mb-12 flex h-12 w-12 items-center justify-center self-end rounded-full border border-[#CEFF2B]/30 transition-all hover:border-[#CEFF2B] hover:bg-[#CEFF2B]/10"
-                  aria-label="Close menu"
-                  whileHover={{ scale: 1.1, rotate: 90 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#CEFF2B"
-                    strokeWidth="2"
-                    className="transition-transform"
-                  >
-                    <path d="M18 6L6 18M6 6l12 12" />
-                  </svg>
-                </motion.button>
-
-                <nav className="flex flex-col gap-2">
-                  {navLinks.map((link, index) => (
-                    <motion.div
-                      key={link.label}
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.08 + 0.1 }}
-                    >
-                      {link.hasDropdown ? (
-                        <div>
-                          <button
-                            onClick={() => setMobileAccordion(
-                              mobileAccordion === link.label ? null : link.label
-                            )}
-                            className="flex w-full items-center justify-between py-4 text-left text-xl font-bold uppercase tracking-wider text-[#F7F7F3] transition-colors hover:text-[#CEFF2B]"
-                            style={{ letterSpacing: "0.1em", minHeight: "56px" }}
-                          >
-                            {link.label}
-                            <motion.svg
-                              width="20"
-                              height="20"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                              animate={{ rotate: mobileAccordion === link.label ? 180 : 0 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <path d="M6 9l6 6 6-6" />
-                            </motion.svg>
-                          </button>
-
-                          <AnimatePresence>
-                            {mobileAccordion === link.label && (
-                              <motion.div
-                                initial={{ height: 0, opacity: 0 }}
-                                animate={{ height: "auto", opacity: 1 }}
-                                exit={{ height: 0, opacity: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="overflow-hidden"
-                              >
-                                <div className="border-l-2 border-[#CEFF2B]/30 py-2 pl-4">
-                                  {link.dropdownItems && link.dropdownItems.length > 0 ? (
-                                    link.dropdownItems.map((section, sIdx) => (
-                                      <div key={sIdx} className="mb-4">
-                                        {section.section && (
-                                          <span className="mb-2 block text-xs uppercase tracking-wider text-[#F7F7F3]/40">
-                                            {section.section}
-                                          </span>
-                                        )}
-                                        {section.items.map((item, iIdx) => (
-                                          <Link
-                                            key={iIdx}
-                                            href={item.href}
-                                            className="block py-2 text-sm text-[#F7F7F3]/70 transition-colors hover:text-[#CEFF2B]"
-                                            onClick={() => setMobileMenuOpen(false)}
-                                          >
-                                            {item.label}
-                                          </Link>
-                                        ))}
-                                      </div>
-                                    ))
-                                  ) : (
-                                    <span className="block py-2 text-sm italic text-[#F7F7F3]/40">
-                                      Coming soon...
-                                    </span>
-                                  )}
-                                </div>
-                              </motion.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      ) : (
-                        <Link
-                          href={link.href}
-                          className="block py-4 text-xl font-bold uppercase tracking-wider text-[#F7F7F3] transition-colors hover:text-[#CEFF2B]"
-                          onClick={() => setMobileMenuOpen(false)}
-                          style={{ letterSpacing: "0.1em", minHeight: "56px" }}
-                        >
-                          {link.label}
-                        </Link>
-                      )}
-                    </motion.div>
-                  ))}
-                </nav>
-
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="mt-8"
-                >
-                  <Link
-                    href="/signin"
-                    className="block py-3 text-sm uppercase tracking-wider text-[#F7F7F3]/60 transition-colors hover:text-[#CEFF2B]"
-                    onClick={() => setMobileMenuOpen(false)}
-                    style={{ letterSpacing: "0.1em" }}
-                  >
-                    Sign In
-                  </Link>
-                </motion.div>
-
-                <motion.button
-                  className="mt-auto w-full rounded-full border-2 border-[#CEFF2B] bg-[#CEFF2B] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0B0B0B] transition-all"
-                  style={{
-                    letterSpacing: "0.1em",
-                    boxShadow: "0 0 30px rgba(206, 255, 43, 0.3)"
-                  }}
-                  whileHover={{ scale: 1.02, boxShadow: "0 0 40px rgba(206, 255, 43, 0.5)" }}
-                  whileTap={{ scale: 0.97 }}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 }}
-                >
-                  APPLY NOW
-                </motion.button>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <NavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
     </>
   )
 }
@@ -489,128 +202,25 @@ function NavLink({
   href,
   children,
   mode,
-  hasDropdown,
-  isDropdownOpen,
 }: {
   href: string
   children: React.ReactNode
   mode: NavMode
-  hasDropdown?: boolean
-  isDropdownOpen?: boolean
 }) {
-  const linkRef = useRef<HTMLAnchorElement>(null)
-  const [isHovered, setIsHovered] = useState(false)
-  const [isPressed, setIsPressed] = useState(false)
-
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-  const springX = useSpring(x, { stiffness: 200, damping: 20 })
-  const springY = useSpring(y, { stiffness: 200, damping: 20 })
-
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    if (!linkRef.current) return
-
-    const rect = linkRef.current.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    const distance = Math.sqrt(
-      Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
-    )
-
-    if (distance < 60) {
-      x.set((e.clientX - centerX) * 0.12)
-      y.set((e.clientY - centerY) * 0.12)
-    } else {
-      x.set(0)
-      y.set(0)
-    }
-  }, [x, y])
-
-  useEffect(() => {
-    if (isHovered) {
-      window.addEventListener("mousemove", handleMouseMove)
-      return () => window.removeEventListener("mousemove", handleMouseMove)
-    } else {
-      x.set(0)
-      y.set(0)
-    }
-  }, [isHovered, handleMouseMove, x, y])
-
   return (
-    <motion.div
-      style={{ x: springX, y: springY }}
-      animate={{ scale: isPressed ? 0.97 : 1 }}
-      transition={{ duration: 0.1 }}
+    <Link
+      href={href}
+      className="group relative flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase transition-all duration-300"
+      style={{ letterSpacing: "0.75px" }}
     >
-      <Link
-        ref={linkRef}
-        href={href}
-        className="group relative flex items-center gap-1 px-4 py-2 text-sm font-medium uppercase transition-all duration-300"
-        style={{ letterSpacing: "0.75px" }}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-        onMouseDown={() => setIsPressed(true)}
-        onMouseUp={() => setIsPressed(false)}
+      <span
+        className={`relative z-10 transition-colors duration-300 ${mode === "light" ? "text-white/70 group-hover:text-white" : "text-[#0B0B0B]/70 group-hover:text-[#0B0B0B]"
+          }`}
       >
-        <motion.span
-          className={`relative transition-all duration-300 ${mode === "light"
-            ? "text-white/70 group-hover:text-white"
-            : "text-[#0B0B0B]/70 group-hover:text-[#0B0B0B]"
-            }`}
-          animate={{ y: isHovered ? -2 : 0 }}
-          transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {children}
-        </motion.span>
-
-        {hasDropdown && (
-          <motion.svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            className={`transition-colors duration-300 ${mode === "light"
-              ? "text-white/50 group-hover:text-white"
-              : "text-[#0B0B0B]/50 group-hover:text-[#0B0B0B]"
-              }`}
-            animate={{
-              rotate: isDropdownOpen ? 180 : 0,
-              y: isHovered ? -2 : 0
-            }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <path d="M6 9l6 6 6-6" />
-          </motion.svg>
-        )}
-
-        <motion.span
-          className="absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 bg-[#CEFF2B]"
-          initial={{ width: 0 }}
-          animate={{ width: isHovered || isDropdownOpen ? "80%" : 0 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          style={{
-            boxShadow: isHovered || isDropdownOpen ? "0 0 12px rgba(206, 255, 43, 0.6)" : "none",
-          }}
-        />
-
-        <AnimatePresence>
-          {isHovered && (
-            <motion.div
-              className="pointer-events-none absolute inset-0 -z-10 rounded-lg"
-              style={{
-                background: "radial-gradient(circle, rgba(206, 255, 43, 0.15) 0%, transparent 70%)",
-              }}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.8 }}
-              transition={{ duration: 0.2 }}
-            />
-          )}
-        </AnimatePresence>
-      </Link>
-    </motion.div>
+        {children}
+      </span>
+      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-[#CEFF2B] transition-all duration-300 group-hover:w-4/5" />
+    </Link>
   )
 }
 
@@ -662,7 +272,15 @@ function DropdownMenu({
                 )}
                 <div className="space-y-1">
                   {section.items.map((item, iIdx) => (
-                    <DropdownItem key={iIdx} item={item} />
+                    <Link
+                      key={iIdx}
+                      href={item.href}
+                      className="group block rounded-xl px-4 py-3 text-sm font-medium transition-colors hover:bg-white/5"
+                    >
+                      <span className="text-white/90 transition-colors group-hover:text-[#CEFF2B]">
+                        {item.label}
+                      </span>
+                    </Link>
                   ))}
                 </div>
               </div>
@@ -675,54 +293,5 @@ function DropdownMenu({
         </div>
       </div>
     </motion.div>
-  )
-}
-
-function DropdownItem({
-  item,
-}: {
-  item: {
-    label: string
-    href: string
-    icon?: string
-    description?: string
-  }
-}) {
-  const [isHovered, setIsHovered] = useState(false)
-
-  return (
-    <Link
-      href={item.href}
-      className="group relative block rounded-xl px-4 py-3 transition-all duration-200"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <motion.div
-        className="absolute inset-0 rounded-xl"
-        style={{
-          background:
-            "linear-gradient(90deg, rgba(206, 255, 43, 0.1) 0%, rgba(206, 255, 43, 0.05) 50%, rgba(206, 255, 43, 0) 100%)",
-        }}
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: isHovered ? 1 : 0, x: isHovered ? 0 : -20 }}
-        transition={{ duration: 0.3 }}
-      />
-
-      <div className="relative z-10 flex items-center gap-3">
-        {item.icon && (
-          <span className="text-lg">{item.icon}</span>
-        )}
-        <div>
-          <span className="block text-sm font-medium text-white/90 transition-colors group-hover:text-[#CEFF2B]">
-            {item.label}
-          </span>
-          {item.description && (
-            <span className="mt-0.5 block text-xs text-white/40">
-              {item.description}
-            </span>
-          )}
-        </div>
-      </div>
-    </Link>
   )
 }

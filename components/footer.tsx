@@ -3,6 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
+import FlipLink from "@/components/flip-link"
 
 export default function Footer() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -12,13 +13,13 @@ export default function Footer() {
     target: containerRef,
     offset: ["start end", "end end"],
   })
-  
+
   const footerLinks = [
-    {name: "About", href: "/about"}, 
-    {name: "Programs", href: "/programs"},
-    {name: "Meet The Team", href: "/meet-the-team"}, 
-    {name: "Contact", href: "/contact"}
-  ]  
+    { name: "About", href: "/about" },
+    { name: "Programs", href: "/programs" },
+    { name: "Meet The Team", href: "/meet-the-team" },
+    { name: "Contact", href: "/contact" }
+  ]
 
 
   const textY = useTransform(scrollYProgress, [0, 1], [30, 0])
@@ -76,8 +77,8 @@ export default function Footer() {
               Contact Us
             </h3>
             <div className="space-y-3 text-sm text-white/60">
-              <a 
-                href="https://www.google.com/maps/place/WeWork+Two+Horizon+Centre+-+Coworking+%26+Office+Space+in+Golf+Course+Road,+Gurugram/@28.4511202,77.0965147,17z/data=!3m2!4b1!5s0x390d18e94e3f0557:0x15caf654c98d779a!4m6!3m5!1s0x390d196a9219452f:0x2b7db4e11e0c29d1!8m2!3d28.4511202!4d77.0965147!16s%2Fg%2F11ffw7b31g?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D" 
+              <a
+                href="https://www.google.com/maps/place/WeWork+Two+Horizon+Centre+-+Coworking+%26+Office+Space+in+Golf+Course+Road,+Gurugram/@28.4511202,77.0965147,17z/data=!3m2!4b1!5s0x390d18e94e3f0557:0x15caf654c98d779a!4m6!3m5!1s0x390d196a9219452f:0x2b7db4e11e0c29d1!8m2!3d28.4511202!4d77.0965147!16s%2Fg%2F11ffw7b31g?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D"
                 className="block transition-colors hover:text-[#CEFF2B]"
               >
                 WeWork, Two Horizon Centre,<br />
@@ -109,14 +110,15 @@ export default function Footer() {
             </h3>
             <nav className="flex flex-col space-y-2">
               {footerLinks.map((link) => (
-                <Link
+                <FlipLink
                   key={link.name}
                   href={link.href}
-                  className="group relative w-fit text-sm text-white/60 transition-colors hover:text-white"
+                  className="w-fit text-sm"
+                  baseColor="rgba(255,255,255,0.6)"
+                  hoverColor="#CEFF2B"
                 >
                   {link.name}
-                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#CEFF2B] transition-all duration-300 group-hover:w-full" />
-                </Link>
+                </FlipLink>
               ))}
             </nav>
           </motion.div>
@@ -132,17 +134,18 @@ export default function Footer() {
             </h3>
             <nav className="flex flex-col space-y-2">
               {[
-                { name: "Terms & Conditions", href: "/terms" },
-                { name: "Privacy Policy", href: "/privacy" }
+                { name: "Terms & Conditions", href: "/Legal/terms-and-conditions" },
+                { name: "Privacy Policy", href: "/Legal/Privacy-policy" }
               ].map((link) => (
-                <Link
+                <FlipLink
                   key={link.name}
                   href={link.href}
-                  className="group relative w-fit text-sm text-white/60 transition-colors hover:text-white"
+                  className="w-fit text-sm"
+                  baseColor="rgba(255,255,255,0.6)"
+                  hoverColor="#CEFF2B"
                 >
                   {link.name}
-                  <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-[#CEFF2B] transition-all duration-300 group-hover:w-full" />
-                </Link>
+                </FlipLink>
               ))}
             </nav>
           </motion.div>
