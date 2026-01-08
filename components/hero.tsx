@@ -483,14 +483,7 @@ export default function Hero() {
             Hover to reveal wings
           </motion.p>
 
-          <motion.p
-            className="absolute -bottom-8 left-1/2 block -translate-x-1/2 whitespace-nowrap text-xs uppercase tracking-widest text-[#0C0C0C]/40 md:hidden"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: isHovering ? 0 : 1 }}
-            transition={{ delay: 2, duration: 0.5 }}
-          >
-            Tap to reveal wings
-          </motion.p>
+
         </div>
 
         <motion.div
