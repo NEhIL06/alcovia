@@ -5,6 +5,7 @@ import { useRef, useEffect, useState, useCallback } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import Image from "next/image"
 import gsap from "gsap"
+import anime from "animejs"
 import { useHeroAnimation } from "@/context/hero-animation-context"
 import InteractiveBackground from "./InteractiveBackground"
 import { useGSAP } from "@gsap/react"
@@ -35,6 +36,13 @@ export default function Hero() {
   const spotlightRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLButtonElement>(null)
 
+  // --- CANVAS REVEAL REFS ---
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const revealImageRef = useRef<HTMLImageElement | null>(null)
+  const trailRef = useRef<{ x: number; y: number; age: number; force: number }[]>([])
+  const lastMousePos = useRef({ x: 0, y: 0 })
+  const rafRef = useRef<number | null>(null)
+
   const { setHeroAnimationComplete } = useHeroAnimation()
   const [isRevealed, setIsRevealed] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
@@ -56,6 +64,123 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 0.6], [1, 0.78])
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0])
   const y = useTransform(scrollYProgress, [0, 0.6], [0, -120])
+
+  // --- PRELOAD REVEAL IMAGE ---
+  useEffect(() => {
+    const img = new window.Image()
+    img.src = "/images/hero-girl-reveal.png"
+    img.onload = () => {
+      revealImageRef.current = img
+    }
+  }, [])
+
+  // --- CANVAS LOOP ---
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext("2d", { willReadFrequently: true })
+    if (!ctx) return
+
+    const render = () => {
+      // 1. Fade out existing trail
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+
+      // 2. Update Trail
+      // Age points first
+      trailRef.current.forEach((p) => {
+        p.age -= 0.02 // Decay rate
+      })
+
+      // Remove old points
+      trailRef.current = trailRef.current.filter((p) => p.age > 0)
+
+      // 3. Draw Trail (The Mask)
+      if (trailRef.current.length > 0) {
+        ctx.lineCap = "round"
+        ctx.lineJoin = "round"
+
+        ctx.save()
+        // Create the "Mask" shape (White)
+        trailRef.current.forEach((p) => {
+          // Safety check: Ensure size is never negative
+          const size = Math.max(0, 80 * p.age)
+          const alpha = Math.max(0, p.age)
+
+          ctx.beginPath()
+          ctx.arc(p.x, p.y, size, 0, Math.PI * 2)
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`
+
+          // Soft edges
+          ctx.shadowColor = "white"
+          ctx.shadowBlur = 30
+
+          ctx.fill()
+        })
+        ctx.restore()
+
+        // 4. Composite the Reveal Image
+        // 'source-in' keeps the source (image) only where the destination (trail) is opaque.
+        if (revealImageRef.current) {
+          ctx.globalCompositeOperation = "source-in"
+
+          // Calculate dimensions to match 'object-contain object-bottom'
+          const img = revealImageRef.current
+          const canvasAspect = canvas.width / canvas.height
+          const imgAspect = img.width / img.height
+
+          let drawWidth, drawHeight, offsetX, offsetY
+
+          if (canvasAspect > imgAspect) {
+            // Canvas is wider than image -> Fit to height
+            drawHeight = canvas.height
+            drawWidth = canvas.height * imgAspect
+            offsetX = (canvas.width - drawWidth) / 2
+            offsetY = 0
+          } else {
+            // Canvas is taller than image -> Fit to width
+            drawWidth = canvas.width
+            drawHeight = canvas.width / imgAspect
+            offsetX = 0
+            offsetY = canvas.height - drawHeight // Align bottom
+          }
+
+          ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+
+          // Reset composite
+          ctx.globalCompositeOperation = "source-over"
+        }
+      }
+
+      rafRef.current = requestAnimationFrame(render)
+    }
+
+    render()
+
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current)
+    }
+  }, [])
+
+  // --- RESIZE OBSERVER FOR CANVAS ---
+  useEffect(() => {
+    if (!portraitRef.current || !canvasRef.current) return
+
+    const updateSize = () => {
+      if (!portraitRef.current || !canvasRef.current) return
+      const rect = portraitRef.current.getBoundingClientRect()
+      // Set actual canvas size to match display size for sharpness
+      canvasRef.current.width = rect.width
+      canvasRef.current.height = rect.height
+    }
+
+    const observer = new ResizeObserver(updateSize)
+    observer.observe(portraitRef.current)
+    updateSize() // Initial size
+
+    return () => observer.disconnect()
+  }, [])
+
 
   useEffect(() => {
     const reducedMotion = checkReducedMotion()
@@ -155,13 +280,17 @@ export default function Hero() {
       const normalizedX = (e.clientX - rect.left) / rect.width - 0.5
       const normalizedY = (e.clientY - rect.top) / rect.height - 0.5
 
-      // Calculate pixel coordinates for mask
+      // Calculate pixel coordinates for mask/trail
       const x = e.clientX - rect.left
       const y = e.clientY - rect.top
 
-      // Update CSS variables for mask position
-      portraitRef.current.style.setProperty('--mask-x', `${x}px`)
-      portraitRef.current.style.setProperty('--mask-y', `${y}px`)
+      // --- ADD TO TRAIL ---
+      // Interpolate points if moving fast for smoother trail
+      const dist = Math.hypot(x - lastMousePos.current.x, y - lastMousePos.current.y)
+      if (dist > 5) {
+        trailRef.current.push({ x, y, age: 1.0, force: 1.0 })
+        lastMousePos.current = { x, y }
+      }
 
       if (prefersReducedMotion) return
 
@@ -216,22 +345,27 @@ export default function Hero() {
     const iconRef = useRef<HTMLDivElement>(null)
 
     useGSAP(() => {
+      // No-op for now as we switched to anime.js, but keeping useGSAP if needed for other parts
+      // or we can just use useEffect
+    }, { scope: iconRef })
+
+    useEffect(() => {
       if (!iconRef.current) return
 
-      // Set initial tilt (40 degrees to the right)
-      gsap.set(iconRef.current, {
+      // Set initial tilt
+      anime.set(iconRef.current, {
         rotateX: 45
       })
 
-      // Continuous 3D Spin with tilted axis
-      gsap.to(iconRef.current, {
-        rotationY: 360,
-        duration: 8,
-        repeat: -1,
-        ease: "none",
-        transformOrigin: "center center"
+      // Continuous 3D Spin
+      anime({
+        targets: iconRef.current,
+        rotateY: 360,
+        duration: 8000,
+        loop: true,
+        easing: 'linear'
       })
-    }, { scope: iconRef })
+    }, [])
 
     return (
       <div
@@ -445,7 +579,7 @@ export default function Hero() {
           {/* Girl Image - 25% larger, anchored to bottom */}
           <motion.div
             ref={portraitRef}
-            className="relative z-20 h-[525px] w-[375px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[688px] md:w-[475px] lg:h-[650px] lg:w-[550px]"
+            className="relative z-20 h-[525px] w-[375px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[688px] md:w-[475px] xl:h-[750px] xl:w-[550px]"
             style={{
               perspective: 1000,
               transformStyle: "preserve-3d",
@@ -456,6 +590,7 @@ export default function Hero() {
             onMouseEnter={handlePortraitMouseEnter}
             onMouseMove={handlePortraitMouseMove}
             onMouseLeave={handlePortraitMouseLeaveReset}
+            onClick={handleMobileTap}
           >
             {/* Base Image */}
             <Image
@@ -468,7 +603,7 @@ export default function Hero() {
             />
 
             {/* Reveal Layer (Masked) with Water Distortion */}
-            <div
+            {/* <div
               className="absolute inset-0 z-10"
               style={{
                 maskImage: "radial-gradient(circle 280px at var(--mask-x, 50%) var(--mask-y, 50%), black 50%, transparent 100%)",
@@ -476,7 +611,7 @@ export default function Hero() {
               }}
             >
               {/* SVG Filter for Water Distortion */}
-              {/* <svg className="absolute w-0 h-0">
+            {/* <svg className="absolute w-0 h-0">
                 <defs>
                   <filter id="waterDistortion" x="-20%" y="-20%" width="140%" height="140%">
                     <feTurbulence
@@ -503,7 +638,7 @@ export default function Hero() {
                     <feGaussianBlur stdDeviation="0.5" />
                   </filter>
                 </defs>
-              </svg> */}
+              </svg> 
 
               <Image
                 src="/images/hero-girl-reveal.png"
@@ -513,7 +648,12 @@ export default function Hero() {
                 style={{ filter: "url(#waterDistortion)" }}
                 priority
               />
-            </div>
+            </div> */}
+            {/* CANVAS REVEAL LAYER */}
+            <canvas
+              ref={canvasRef}
+              className="absolute inset-0 z-10 pointer-events-none"
+            />
 
             <motion.div
               className="pointer-events-none absolute inset-0 rounded-t-3xl"
@@ -566,7 +706,7 @@ export default function Hero() {
 
         {/* Upcoming Workshops Widget - Left Side, Desktop Only */}
         <motion.div
-          className="absolute bottom-32 left-6 z-30 hidden lg:block xl:bottom-12 xl:left-12"
+          className="absolute bottom-32 left-6 z-30 hidden xl:block xl:bottom-[clamp(100px,12vh,200px)] xl:left-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -627,7 +767,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Desktop CTA - Bottom Right */}
-        <div className="absolute bottom-8 right-6 z-30 hidden flex-col items-center gap-6 md:flex lg:bottom-12 lg:right-12 lg:items-end">
+        <div className="absolute bottom-8 right-6 z-30 hidden flex-col items-center gap-6 md:flex xl:bottom-[clamp(100px,12vh,200px)] xl:right-12 xl:items-end">
           <motion.button
             ref={ctaRef}
             className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#EABF36] focus:outline-none focus:ring-2 focus:ring-[#EABF36] focus:ring-offset-2 md:px-8 md:py-4"

@@ -47,11 +47,12 @@ export default function ToggleCompare() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen overflow-hidden py-20 md:py-32"
+      className="relative overflow-hidden pt-20 pb-0 md:min-h-screen md:py-32 sticky top-0 z-0"
     >
+      {/* --- DESKTOP IMAGES (xl+) --- */}
       {/* LEFT IMAGE */}
       <motion.div
-        className="absolute bottom-0 left-0 top-0 hidden w-[28%] lg:block"
+        className="absolute bottom-0 left-0 top-0 hidden xl:block xl:w-[28%]"
         style={{ x: leftImageX, opacity: leftOpacity }}
       >
         <div className="relative h-full w-full">
@@ -59,15 +60,14 @@ export default function ToggleCompare() {
             src={sections[0].image}
             alt="At School"
             fill
-            className="object-cover object-right"
+            className="object-cover object-right-top"
           />
-
         </div>
       </motion.div>
 
       {/* RIGHT IMAGE */}
       <motion.div
-        className="absolute bottom-0 right-0 top-0 hidden w-[28%] lg:block"
+        className="absolute bottom-0 right-0 top-0 hidden xl:block xl:w-[28%]"
         style={{ x: rightImageX, opacity: rightOpacity }}
       >
         <div className="relative h-full w-full">
@@ -75,9 +75,39 @@ export default function ToggleCompare() {
             src={sections[1].image}
             alt="Outside School"
             fill
-            className="object-cover object-left"
+            className="object-cover object-left-top"
           />
+        </div>
+      </motion.div>
 
+      {/* --- TABLET IMAGES (md to xl) --- */}
+      {/* LEFT IMAGE */}
+      <motion.div
+        className="absolute bottom-0 left-0 top-0 hidden md:block xl:hidden md:w-[60%]"
+        style={{ x: leftImageX, opacity: leftOpacity }}
+      >
+        <div className="relative h-full w-full">
+          <Image
+            src={sections[0].image}
+            alt="At School"
+            fill
+            className="object-cover object-right-top"
+          />
+        </div>
+      </motion.div>
+
+      {/* RIGHT IMAGE */}
+      <motion.div
+        className="absolute bottom-0 right-0 top-0 hidden md:block xl:hidden md:w-[50%]"
+        style={{ x: rightImageX, opacity: rightOpacity }}
+      >
+        <div className="relative h-full w-full">
+          <Image
+            src={sections[1].image}
+            alt="Outside School"
+            fill
+            className="object-cover object-left-top"
+          />
         </div>
       </motion.div>
 
@@ -89,25 +119,25 @@ export default function ToggleCompare() {
           style={{ y: headerY, opacity: headerOpacity }}
         >
           <TextReveal delay={0} highlightColor="#EABF36">
-            <h2 className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl lg:text-7xl">
+            <h2 className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
               Our <span className="text-[#EABF36]">Impact</span>
             </h2>
           </TextReveal>
         </motion.div>
 
         {/* 🔥 MOBILE: SIDE BY SIDE | DESKTOP: ROW */}
-        <div className="grid grid-cols-2 gap-4 md:flex md:items-start md:justify-center md:gap-12 lg:gap-16">
+        <div className="grid grid-cols-2 gap-4 md:flex md:items-start md:justify-center md:gap-12 xl:gap-16">
           {/* AT SCHOOL */}
           <motion.div
             className="cursor-pointer text-right"
             style={{ x: leftTextX, opacity: leftOpacity }}
           >
             <div className="relative mb-4">
-              <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl lg:text-7xl">
+              <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
                 {sections[0].topText}
               </span>
               <div className="-mt-1">
-                <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl lg:text-7xl">
+                <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl xl:text-7xl">
                   {sections[0].bottomText}
                 </span>
               </div>
@@ -132,11 +162,11 @@ export default function ToggleCompare() {
             style={{ x: rightTextX, opacity: rightOpacity }}
           >
             <div className="relative mb-4">
-              <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl lg:text-7xl">
+              <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
                 {sections[1].topText}
               </span>
               <div className="-mt-1">
-                <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl lg:text-7xl">
+                <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl xl:text-7xl">
                   {sections[1].bottomText}
                 </span>
               </div>
@@ -158,16 +188,21 @@ export default function ToggleCompare() {
       </div>
 
       {/* MOBILE IMAGES */}
-      <div className="mt-16 flex gap-4 px-6 lg:hidden">
+      <div className="mt-8 flex gap-2 px-0 md:hidden">
         {sections.map((section, index) => (
           <motion.div
             key={section.id}
-            className="relative aspect-[3/4] flex-1 overflow-hidden rounded-2xl"
+            className="relative aspect-[9/16] flex-1 overflow-hidden rounded-t-2xl"
             initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Image src={section.image} alt="" fill className="object-cover" />
+            <Image
+              src={section.image}
+              alt=""
+              fill
+              className="object-cover object-top"
+            />
           </motion.div>
         ))}
       </div>

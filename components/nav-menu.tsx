@@ -2,9 +2,8 @@
 
 import { useEffect } from "react"
 import Image from "next/image"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
 import FlipLink from "@/components/flip-link"
-import CustomCursor from "@/components/custom-cursor"
 import TextReveal from "@/components/text-reveal"
 
 interface NavMenuProps {
@@ -17,6 +16,7 @@ const menuItems = [
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
     { label: "TEAM", href: "/meet-the-team" },
+    { label: "EVENTS", href: "/events", mobileOnly: true },
 ]
 
 const socialLinks = [
@@ -75,6 +75,31 @@ const imageGridVariants = {
 }
 
 export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
+    // --- PARALLAX SETUP ---
+    const mouseY = useMotionValue(0);
+
+    // Smooth springs for fluid movement
+    const springConfig = { damping: 25, stiffness: 150 };
+    const springY = useSpring(mouseY, springConfig);
+
+    // Transform values for different layers (Depth Effect)
+    // Left Column (Slower)
+    const yLeft = useTransform(springY, [-0.5, 0.5], [-15, 15]);
+
+    // Right Column (Faster & Opposite Y)
+    const yRight = useTransform(springY, [-0.5, 0.5], [30, -30]);
+
+    const handleMouseMove = (e: React.MouseEvent) => {
+        const { clientX, clientY } = e;
+        const { innerWidth, innerHeight } = window;
+
+        // Normalize coordinates to -0.5 to 0.5
+        const x = (clientX / innerWidth) - 0.5;
+        const y = (clientY / innerHeight) - 0.5;
+
+        mouseY.set(y);
+    };
+
     // Prevent body scroll when menu is open
     useEffect(() => {
         if (isOpen) {
@@ -100,7 +125,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    data-show-cursor
+                    onMouseMove={handleMouseMove} // Track mouse movement
                 >
                     {/* Close Button */}
                     <motion.button
@@ -127,24 +152,30 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                         </svg>
                     </motion.button>
 
-                    {/* Left Column - Image Grid (Hidden on Mobile) */}
+                    {/* Left Column - Image Grid (Hidden on Mobile/Tablet) */}
                     <motion.div
-                        className="hidden h-full w-[40%] p-8 lg:block"
+                        className="hidden h-full w-[40%] p-8 xl:block"
                         variants={imageGridVariants}
                     >
-                        <div className="flex h-full w-full gap-4">
-                            {/* Left tall image */}
-                            <div className="relative h-full w-1/2 overflow-hidden rounded-2xl bg-white/5">
+                        <div className="flex h-full w-full gap-4 perspective-[1000px]">
+                            {/* Left tall image - Layer 1 */}
+                            <motion.div
+                                className="relative h-full w-1/2 overflow-hidden rounded-2xl bg-white/5"
+                                style={{ y: yLeft }}
+                            >
                                 <Image
                                     src="/images/carrerDiscovery.png"
                                     alt="Career Discovery"
                                     fill
                                     className="object-cover opacity-80 grayscale transition-all duration-700 hover:scale-105 hover:opacity-100 hover:grayscale-0"
                                 />
-                            </div>
+                            </motion.div>
 
-                            {/* Right column with 2 stacked images */}
-                            <div className="flex h-full w-1/2 flex-col gap-4">
+                            {/* Right column with 2 stacked images - Layer 2 */}
+                            <motion.div
+                                className="flex h-full w-1/2 flex-col gap-4"
+                                style={{ y: yRight }}
+                            >
                                 <div className="relative h-1/2 w-full overflow-hidden rounded-2xl bg-white/5">
                                     <Image
                                         src="/images/oneonone.jpeg"
@@ -161,23 +192,23 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                         className="object-cover opacity-80 grayscale transition-all duration-700 hover:scale-105 hover:opacity-100 hover:grayscale-0"
                                     />
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
                     </motion.div>
 
                     {/* Right Column - Navigation */}
-                    <div className="flex h-full w-full flex-col justify-center px-8 lg:w-[60%] lg:items-center lg:px-24">
+                    <div className="flex h-full w-full flex-col justify-center px-8 xl:w-[60%] xl:items-center xl:px-24">
                         <nav className="flex flex-col items-center space-y-3">
                             {menuItems.map((item) => (
                                 <motion.div
                                     key={item.label}
                                     variants={itemVariants}
-                                    className="overflow-hidden"
+                                    className={`overflow-hidden ${item.mobileOnly ? "xl:hidden" : ""}`}
                                 >
                                     <FlipLink
                                         href={item.href}
                                         onClick={onClose}
-                                        className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
+                                        className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-7xl"
                                         baseColor="#F7F7F3"
                                         hoverColor="#EABF36"
                                     >
@@ -190,7 +221,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                         {/* Footer / Utility Links */}
                         <motion.div
                             variants={itemVariants}
-                            className="mt-16 flex w-full flex-col gap-8 border-t border-white/10 pt-8 lg:flex-row lg:justify-center lg:gap-16"
+                            className="mt-16 flex w-full flex-col gap-8 border-t border-white/10 pt-8 xl:flex-row xl:justify-center xl:gap-16"
                         >
 
                             <div className="flex flex-col gap-10 text-center">

@@ -6,7 +6,6 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Quote, Sparkles } from "lucide-react";
-// Make sure this path points to the file created in the previous step
 import TextReveal, { MultiLineReveal } from "./text-reveal";
 
 if (typeof window !== "undefined") {
@@ -89,7 +88,7 @@ export default function OfferingsHorizontal() {
     const mm = gsap.matchMedia();
 
     // --- DESKTOP LOGIC (Horizontal Scroll + Parallax) ---
-    mm.add("(min-width: 1024px)", () => {
+    mm.add("(min-width: 1280px)", () => {
       // 1. The Horizontal Scroll Movement
       const scrollTween = gsap.to(scrollContainer.current, {
         x: () => {
@@ -146,7 +145,7 @@ export default function OfferingsHorizontal() {
       className="relative min-h-screen text-[#0D3B2E] overflow-hidden font-sans"
     >
       {/* --- DESKTOP HORIZONTAL TRACK --- */}
-      <div className="hidden lg:flex h-screen items-center pl-12 relative z-10" ref={scrollContainer}>
+      <div className="hidden xl:flex h-screen items-center pl-12 relative z-10" ref={scrollContainer}>
         <div className="flex items-center gap-[clamp(2rem,3vw,4rem)] pr-32">
 
           {/* 1. SECTION HEADER (Fixed MultiLineReveal) */}
@@ -196,7 +195,7 @@ export default function OfferingsHorizontal() {
 
                   {/* Image Area */}
                   <div className="relative w-full h-[clamp(150px,16vw,280px)] overflow-hidden mb-6 bg-black/50">
-                    <div className="parallax-image-inner absolute inset-[-10%] w-[120%] h-[120%]">
+                    <div className="parallax-image-inner absolute inset-[-10%] w-[110%] h-[110%]">
                       <Image
                         src={item.image}
                         alt={item.title}
@@ -216,9 +215,9 @@ export default function OfferingsHorizontal() {
 
                   {/* Description using TextReveal (Single Block) */}
                   <div className="border-l border-white/10 pl-4 mt-2">
-                      <p className="text-[clamp(0.75rem,1vw,0.875rem)] font-light text-[#F7F7F3]/80 leading-relaxed">
-                        {item.description}
-                      </p>
+                    <p className="text-[clamp(0.75rem,1vw,0.875rem)] font-light text-[#F7F7F3]/80 leading-relaxed">
+                      {item.description}
+                    </p>
                   </div>
 
                 </div>
@@ -243,8 +242,8 @@ export default function OfferingsHorizontal() {
         </div>
       </div>
 
-      {/* --- MOBILE VERTICAL LAYOUT (Unchanged structure, updated Animations) --- */}
-      <div className="lg:hidden px-6 py-20 relative z-10">
+      {/* --- MOBILE VERTICAL LAYOUT (< 768px) --- */}
+      <div className="md:hidden px-6 py-20 relative z-10">
         <div className="mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-3">Your Year at Alcovia</p>
           <MultiLineReveal
@@ -277,18 +276,63 @@ export default function OfferingsHorizontal() {
 
               {/* Mobile Text Reveals */}
               <div className="mb-3">
-                <MultiLineReveal
-                  lines={getTitleLines(item.title)}
-                  className="font-serif text-2xl text-[#D4AF37] leading-tight"
-                />
+                <div className="font-serif text-2xl text-[#D4AF37] leading-tight">
+                  {item.title}
+                </div>
               </div>
 
               <div className="pl-4 border-l border-white/20">
-                <TextReveal delay={0.1} highlightColor="#FFFFFF">
-                  <p className="text-sm text-[#F7F7F3]/80 leading-relaxed">
-                    {item.description}
-                  </p>
-                </TextReveal>
+                <p className="text-sm text-[#F7F7F3]/80 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* --- TABLET VERTICAL LAYOUT (768px - 1280px) --- */}
+      <div className="hidden md:block xl:hidden px-12 py-24 relative z-10">
+        <div className="mb-20 text-center">
+          <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Your Year at Alcovia</p>
+          <MultiLineReveal
+            lines={[
+              { text: "Everything you need" },
+              { text: "to take flight.", isAccent: true }
+            ]}
+            className="font-serif text-5xl italic text-[#F7F7F3] leading-tight justify-center"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-x-8 gap-y-24">
+          {OFFERINGS.map((item) => (
+            <div key={item.id} className="tablet-card group">
+              <div className="relative aspect-[3/4] w-full mb-8 overflow-hidden rounded-sm border-l-2 border-[#D4AF37] shadow-2xl">
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B2E] via-transparent to-transparent opacity-80" />
+                <div className="absolute top-4 right-4">
+                  <span className="inline-block text-[10px] bg-[#D4AF37] text-[#0D3B2E] px-3 py-1 font-bold uppercase tracking-widest">
+                    {item.label}
+                  </span>
+                </div>
+              </div>
+
+              {/* Tablet Text Reveals */}
+              <div className="mb-4 pr-4">
+                <div className="font-serif text-3xl text-[#D4AF37] leading-tight mb-2">
+                  {item.title}
+                </div>
+              </div>
+
+              <div className="pl-4 border-l border-white/20">
+                <p className="text-base text-[#F7F7F3]/80 leading-relaxed">
+                  {item.description}
+                </p>
               </div>
             </div>
           ))}

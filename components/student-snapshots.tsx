@@ -8,7 +8,7 @@ export default function StudentSnapshots() {
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
   return (
-    <section ref={containerRef} className="relative w-full">
+    <section ref={containerRef} className="relative z-10 w-full bg-[#08261e]">
       {/* Full-width Video Container */}
       <motion.div
         className="relative w-full aspect-video"
@@ -26,7 +26,7 @@ export default function StudentSnapshots() {
           poster="/images/video-poster.jpg"
         >
           {/* Add your video source here */}
-          <source src="/videos/student-snapshots.mp4" type="video/mp4" />
+          <source src="/videos/download.MP4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 

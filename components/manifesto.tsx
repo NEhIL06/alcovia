@@ -29,13 +29,11 @@ const manifestoLines: TextWord[][] = [
     { text: "A", isAccent: false },
     { text: "STRICT", isAccent: false },
     { text: "3%", isAccent: true },
-  ],
-  [
     { text: "SELECTION", isAccent: false },
     { text: "RATE,", isAccent: false },
-    { text: "ENTRY", isAccent: false },
   ],
   [
+    { text: "ENTRY", isAccent: false },
     { text: "IS", isAccent: false },
     { text: "EARNED,", isAccent: true },
     { text: "NOT", isAccent: false },
@@ -46,19 +44,18 @@ const manifestoLines: TextWord[][] = [
     { text: "THE", isAccent: false },
     { text: "FEW", isAccent: false },
     { text: "WHO", isAccent: false },
+    { text: "ENTER,", isAccent: false },
   ],
   [
-    { text: "ENTER,", isAccent: false },
     { text: "PREPARE", isAccent: false },
     { text: "FOR", isAccent: false },
-  ],
-  [
     { text: "A", isAccent: false },
     { text: "YEAR", isAccent: false },
     { text: "OF", isAccent: false },
-    { text: "RADICAL", isAccent: true },
+    
   ],
   [
+    { text: "RADICAL", isAccent: true },
     { text: "GROWTH.", isAccent: false },
     { text: "FAILING", isAccent: true },
     { text: "OFTEN,", isAccent: false },
@@ -89,11 +86,13 @@ const manifestoLines: TextWord[][] = [
   [
     { text: "TO", isAccent: false },
     { text: "SHAPE", isAccent: false },
+  ],
+  [
     { text: "THE", isAccent: false },
     { text: "FUTURE", isAccent: true },
     { text: "OF", isAccent: false },
     { text: "TOMORROW.", isAccent: false },
-  ],
+  ]
 ]
 
 export default function Manifesto() {

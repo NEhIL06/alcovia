@@ -181,7 +181,7 @@ export default function Footer() {
         >
           <div className="relative overflow-hidden px-2">
             <h2
-              className="select-none text-center font-black uppercase leading-[0.75] tracking-tighter opacity-90"
+              className="select-none text-center font-black uppercase leading-[0.80] tracking-tighter opacity-80"
               style={{
                 WebkitTextStroke: "clamp(1px, 0.15vw, 4px) #EABF36",
                 WebkitTextFillColor: "transparent",
