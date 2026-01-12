@@ -10,7 +10,7 @@ interface TextWord {
   isAccent: boolean
 }
 
-// DATA STRUCTURE: Grouped into lines for the "Stacked Bar" look
+// DATA STRUCTURE: Grouped into 14 lines
 const manifestoLines: TextWord[][] = [
   [
     { text: "ALCOVIA", isAccent: false },
@@ -34,9 +34,9 @@ const manifestoLines: TextWord[][] = [
     { text: "SELECTION", isAccent: false },
     { text: "RATE,", isAccent: false },
     { text: "ENTRY", isAccent: false },
-    { text: "IS", isAccent: false },
   ],
   [
+    { text: "IS", isAccent: false },
     { text: "EARNED,", isAccent: true },
     { text: "NOT", isAccent: false },
     { text: "GIVEN.", isAccent: false },
@@ -91,8 +91,6 @@ const manifestoLines: TextWord[][] = [
     { text: "SHAPE", isAccent: false },
     { text: "THE", isAccent: false },
     { text: "FUTURE", isAccent: true },
-  ],
-  [
     { text: "OF", isAccent: false },
     { text: "TOMORROW.", isAccent: false },
   ],
@@ -120,7 +118,6 @@ export default function Manifesto() {
         return
       }
 
-      // THE REAL "LANDO" LOGIC: SCALE 0 -> 1 -> 0
       linesRef.current.forEach((line, i) => {
         if (!line) return
 
@@ -133,27 +130,17 @@ export default function Manifesto() {
           defaults: { ease: "power3.inOut" }
         })
 
-        // 1. INITIAL STATE:
-        // Mask is collapsed at the left (ScaleX: 0)
-        // Text is completely invisible
         gsap.set(mask, { scaleX: 0, transformOrigin: "left" })
         gsap.set(text, { opacity: 0 })
 
-        // 2. ANIMATION SEQUENCE
         tl.to(mask, {
-          scaleX: 1, // Grow to cover the text (Left -> Right)
+          scaleX: 1,
           duration: 0.4,
-        }, i * 0.1) // Stagger
+        }, i * 0.1)
 
-        // At this exact moment, the bar covers the space.
-        // We switch the pivot point to the RIGHT side.
         tl.set(mask, { transformOrigin: "right" }, ">")
-
-        // We turn the text ON instantly (it's hidden behind the bar)
         tl.set(text, { opacity: 1 }, ">")
 
-        // We shrink the bar (ScaleX 1 -> 0)
-        // Since origin is now "right", it shrinks away to the right, revealing text.
         tl.to(mask, {
           scaleX: 0,
           duration: 0.4,
@@ -162,7 +149,6 @@ export default function Manifesto() {
     }
   }, [isInView, hasAnimated])
 
-  const className = "w-16 h-16"
   return (
     <section
       ref={containerRef}
@@ -196,21 +182,12 @@ export default function Manifesto() {
           <div
             key={i}
             ref={(el) => { linesRef.current[i] = el }}
-            // w-fit is CRITICAL for the mask to match text width
             className="reveal-line relative overflow-hidden w-fit my-[-0.1em]"
           >
-            {/* THE CURTAIN: 
-                Changed to 'inset-0' and removed transform.
-                GSAP handles the scale.
-             */}
             <div
               className="reveal-mask absolute inset-0 z-20 bg-[#D4AF37]"
             />
 
-            {/* THE TEXT: 
-                Added 'opacity-0' class here to prevent the "Wipe Out" effect. 
-                It starts invisible, then GSAP reveals it. 
-            */}
             <p
               className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[22px] font-normal leading-[1.15] tracking-tight sm:text-[28px] md:text-[34px] lg:text-[58px] xl:text-[70px] whitespace-nowrap px-1"
             >

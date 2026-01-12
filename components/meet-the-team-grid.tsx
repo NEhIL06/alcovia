@@ -44,7 +44,7 @@ export default function MeetTheTeamGrid() {
                 className="text-3xl md:text-5xl lg:text-6xl leading-[1.15] text-[#F2F2F2] mb-8"
                 style={{ fontFamily: 'var(--font-playfair), Playfair Display, serif' }}
               >
-                We are redefining education in India—by bringing the industry stand next to school students.
+                We are redefining education in India by bringing the industry stand next to school students.
                 We believe in making alcovians learn by actually doing, learn from each other & learn from the mentors they win for life.
               </h1>
             </TextReveal>

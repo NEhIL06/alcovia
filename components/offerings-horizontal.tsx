@@ -192,7 +192,6 @@ export default function OfferingsHorizontal() {
                     <span className="text-[10px] uppercase tracking-[0.2em] text-[#D4AF37] border border-[#D4AF37] px-3 py-1 rounded-full">
                       {item.label}
                     </span>
-                    <ArrowRight className={`w-5 h-5 text-[#D4AF37] transition-transform duration-300 ${activeCard === index ? '-rotate-45' : ''}`} />
                   </div>
 
                   {/* Image Area */}
@@ -210,20 +209,16 @@ export default function OfferingsHorizontal() {
                   {/* TYPOGRAPHY WITH LANDO REVEALS */}
                   <div className="mb-3">
                     {/* Title using MultiLineReveal for the "Stacked Bar" look */}
-                    <MultiLineReveal
-                      lines={titleLines}
-                      className="font-serif text-[clamp(1.25rem,2vw,1.875rem)] text-[#D4AF37] leading-tight"
-                      staggerDelay={0.1}
-                    />
+                    <div className="font-serif text-[clamp(1.25rem,2vw,1.875rem)] text-[#D4AF37] leading-tight">
+                      {item.title}
+                    </div>
                   </div>
 
                   {/* Description using TextReveal (Single Block) */}
                   <div className="border-l border-white/10 pl-4 mt-2">
-                    <TextReveal delay={0.2} highlightColor="#F7F7F3">
                       <p className="text-[clamp(0.75rem,1vw,0.875rem)] font-light text-[#F7F7F3]/80 leading-relaxed">
                         {item.description}
                       </p>
-                    </TextReveal>
                   </div>
 
                 </div>

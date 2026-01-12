@@ -6,7 +6,7 @@ import Image from "next/image"
 import TextReveal from "./text-reveal"
 
 const socials = [
-  
+
   {
     platform: "LinkedIn",
     handle: "Alcovia",
@@ -19,14 +19,14 @@ const socials = [
     handle: "@alcovia.in",
     followers: "639",
     image: "/images/insta.jpg",
-    url: "https://instagram.com/alcovia.in",
+    url: "https://www.instagram.com/alcovia.life/",
   },
   {
     platform: "YouTube",
     handle: "Alcovia",
     followers: "100",
     image: "/images/youtube.jpg",
-    url: "https://youtube.com/@alcovia",
+    url: "https://www.youtube.com/@Alcovialife",
   }
 ]
 

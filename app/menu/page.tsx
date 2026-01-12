@@ -16,7 +16,7 @@ const menuItems = [
 
 const socialLinks = [
     { label: "INSTAGRAM", href: "https://www.instagram.com/alcovia.life/" },
-    { label: "YOUTUBE", href: "https://www.youtube.com/@alcovia.life" },
+    { label: "YOUTUBE", href: "https://www.youtube.com/@Alcovialife" },
     { label: "LINKEDIN", href: "https://www.linkedin.com/company/alcovia-life/" },
 ]
 
@@ -53,7 +53,7 @@ export default function MenuPage() {
 
     return (
         <>
-            
+
 
             <main
                 ref={containerRef}
@@ -157,38 +157,38 @@ export default function MenuPage() {
 
                             <div className="flex flex-col gap-10 text-center">
                                 <div className="flex flex-col gap-2 text-center">
-                                <span className="text-xs font-bold uppercase tracking-widest text-[#F7F7F3]/50">
-                                    Business Enquiries
-                                </span>
-                                <a
-                                    href="mailto:info@alcovia.life"
-                                    className="text-sm font-medium text-[#F7F7F3] transition-colors hover:text-[#EABF36]"
-                                >
-                                    info@alcovia.life
-                                </a>
+                                    <span className="text-xs font-bold uppercase tracking-widest text-[#F7F7F3]/50">
+                                        Business Enquiries
+                                    </span>
+                                    <a
+                                        href="mailto:info@alcovia.life"
+                                        className="text-sm font-medium text-[#F7F7F3] transition-colors hover:text-[#EABF36]"
+                                    >
+                                        info@alcovia.life
+                                    </a>
+                                </div>
+
+                                <div className="flex gap-8 justify-center">
+                                    {socialLinks.map((social, index) => (
+                                        <motion.div
+                                            key={social.label}
+                                            initial={{ opacity: 0, y: 20 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.4, delay: 0.8 + (index * 0.1) }}
+                                        >
+                                            <FlipLink
+                                                href={social.href}
+                                                className="text-xs font-bold uppercase tracking-widest"
+                                                baseColor="#F7F7F3"
+                                                hoverColor="#EABF36"
+                                            >
+                                                {social.label}
+                                            </FlipLink>
+                                        </motion.div>
+                                    ))}
+                                </div>
                             </div>
 
-                            <div className="flex gap-8 justify-center">
-                                {socialLinks.map((social, index) => (
-                                    <motion.div
-                                        key={social.label}
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.4, delay: 0.8 + (index * 0.1) }}
-                                    >
-                                        <FlipLink
-                                            href={social.href}
-                                            className="text-xs font-bold uppercase tracking-widest"
-                                            baseColor="#F7F7F3"
-                                            hoverColor="#EABF36"
-                                        >
-                                            {social.label}
-                                        </FlipLink>
-                                    </motion.div>
-                                ))}
-                            </div>
-                            </div>
-                            
                         </motion.div>
                     </div>
                 </div>

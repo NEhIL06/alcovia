@@ -20,7 +20,7 @@ const quarters = [
     {
         id: "Q1",
         title: "5% INCREMENT",
-        body: "Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. 102 meetings with academic advisors across the year help alcovians ace acads",
+        body: "5% increment in academic performance : Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. 102 meetings with academic advisors across the year help alcovians ace acads",
         stat: "5%",
         bgColor: COLORS.blue,
         textColor: COLORS.beige,

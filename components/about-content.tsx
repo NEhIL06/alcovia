@@ -321,7 +321,7 @@ export default function AboutContent() {
                                 <h3 className="text-3xl font-bold text-white mb-4">Our Mission</h3>
                                 <p className="text-xl text-white/80 leading-relaxed">
                                     We want to build a community of top 1% performing students who are Champions,
-                                    Ambitious, and Rising Stars — creating an environment where exceptional students
+                                    Ambitious, and Rising Stars creating an environment where exceptional students
                                     thrive together, inspire each other to grow, innovate, and lead.
                                 </p>
                             </div>

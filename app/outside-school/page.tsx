@@ -25,27 +25,35 @@ const quarters = [
         id: "Q1",
         label: "FOUNDATION",
         title: "Hyper-Personalised",
+        summary: "Tailored roadmaps for every student.",
         color: "#D4AF37",
     },
     {
         id: "Q2",
         label: "VISIBILITY",
         title: "Loud & Known",
+        summary: "Building confidence and public presence.",
         color: "#E1C250",
     },
     {
         id: "Q3",
         label: "TRANSFORMATION",
         title: "The Crucible",
+        summary: "Real-world challenges and startup creation.",
         color: "#ff4d4d",
     },
     {
         id: "Q4",
         label: "CULMINATION",
         title: "The Ascent",
+        summary: "Growth, maturity, and future readiness.",
         color: "#D4AF37",
     },
 ];
+
+// ... (rest of the file until the rendering part)
+
+
 
 export default function OutsideSchoolPage() {
     const container = useRef<HTMLDivElement>(null);
@@ -264,7 +272,7 @@ export default function OutsideSchoolPage() {
                 </div>
 
                 {/* --- QUARTERLY JOURNEY GRAPH --- */}
-                <section className="py-20 lg:py-32 px-8 lg:px-24 bg-[#0B0C15]">
+                <section className="min-h-screen py-20 lg:py-32 px-8 lg:px-24 bg-[#0B0C15] flex flex-col justify-center">
                     <div className="max-w-6xl mx-auto">
                         <motion.h2
                             initial={{ opacity: 0, y: 30 }}
@@ -299,7 +307,7 @@ export default function OutsideSchoolPage() {
 
                                         {/* Card */}
                                         <div
-                                            className="p-6 rounded-lg border text-center"
+                                            className="p-6 rounded-lg border text-center h-full flex flex-col justify-center"
                                             style={{ borderColor: `${q.color}30`, backgroundColor: `${q.color}10` }}
                                         >
                                             <span
@@ -309,11 +317,14 @@ export default function OutsideSchoolPage() {
                                                 {q.label}
                                             </span>
                                             <h3
-                                                className="text-xl lg:text-2xl font-serif italic"
+                                                className="text-xl lg:text-2xl font-serif italic mb-2"
                                                 style={{ color: q.color }}
                                             >
                                                 {q.title}
                                             </h3>
+                                            <p className="text-sm opacity-70 font-light" style={{ color: q.color }}>
+                                                {q.summary}
+                                            </p>
                                         </div>
                                     </motion.div>
                                 ))}
@@ -323,26 +334,61 @@ export default function OutsideSchoolPage() {
                 </section>
 
                 {/* --- CTA SECTION --- */}
-                <section className="min-h-[60vh] flex flex-col items-center justify-center px-8 text-center bg-gradient-to-b from-[#D4AF37] to-[#0D3B2E]">
+                <section className="min-h-screen flex flex-col items-center justify-center px-8 text-center relative overflow-hidden bg-[#0B0C15]">
+                    {/* Animated gradient orb background */}
+                    <div className="absolute inset-0 z-0">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vh] bg-[radial-gradient(ellipse_at_center,#D4AF3720_0%,transparent_60%)]" />
+                    </div>
+                    {/* Noise Texture */}
+                    <div className="absolute inset-0 z-0 opacity-30 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+
+                    {/* Decorative lines */}
+                    <div className="absolute top-20 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+                    <div className="absolute bottom-20 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#D4AF37]/30 to-transparent" />
+
+                    <motion.span
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        transition={{ duration: 1 }}
+                        className="font-mono text-[10px] uppercase tracking-[0.3em] text-[#D4AF37]/60 mb-8"
+                    >
+                        Your Journey Awaits
+                    </motion.span>
+
                     <motion.h2
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="mb-12 font-serif text-4xl md:text-6xl lg:text-7xl font-bold italic leading-none text-[#0B0C15]"
+                        className="mb-6 font-serif text-5xl md:text-7xl lg:text-8xl font-bold italic leading-[0.9] text-[#F2F2F2] z-10"
                     >
-                        Ready to<br />transform?
+                        Ready to<br />
+                        <span className="text-[#D4AF37]">transform?</span>
                     </motion.h2>
+
+                    <motion.p
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.15 }}
+                        className="max-w-xl text-lg text-[#F2F2F2]/60 mb-12 z-10"
+                    >
+                        Join hundreds of alcovians who have transformed their lives through our program.
+                    </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.2 }}
+                        transition={{ duration: 0.8, delay: 0.3 }}
+                        className="z-10"
                     >
                         <Link
                             href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform?embedded=true"
-                            className="inline-block rounded-full px-12 py-6 font-sans text-xl font-bold uppercase tracking-wider bg-[#0B0C15] text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0B0C15] transition-all duration-500 hover:scale-105"
+                            className="group relative inline-flex items-center gap-3 rounded-full px-10 py-5 font-sans text-lg font-bold uppercase tracking-wider bg-[#D4AF37] text-[#0B0C15] overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:scale-105"
                         >
-                            Begin Your Journey
+                            <span className="relative z-10">Begin Your Journey</span>
+                            <svg className="w-5 h-5 relative z-10 duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                            <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
                         </Link>
                     </motion.div>
                 </section>

@@ -21,7 +21,7 @@ const menuItems = [
 
 const socialLinks = [
     { label: "INSTAGRAM", href: "https://www.instagram.com/alcovia.life/" },
-    { label: "YOUTUBE", href: "https://www.youtube.com/@alcovia.life" },
+    { label: "YOUTUBE", href: "https://www.youtube.com/@Alcovialife" },
     { label: "LINKEDIN", href: "https://www.linkedin.com/company/alcovia-life/" },
 ]
 
