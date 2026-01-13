@@ -142,6 +142,11 @@ export default function InfiniteScrollMentors() {
         .animate-infinite-scroll {
           animation: infinite-scroll 40s linear infinite;
         }
+        @media (max-width: 768px) {
+          .animate-infinite-scroll {
+            animation-duration: 120s !important;
+          }
+        }
       `}</style>
         </div>
     )
