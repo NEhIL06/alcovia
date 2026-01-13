@@ -10,7 +10,7 @@ interface TextWord {
   isAccent: boolean
 }
 
-// DATA STRUCTURE: Grouped into 14 lines
+// DATA STRUCTURE: Grouped into lines matching user's text
 const manifestoLines: TextWord[][] = [
   [
     { text: "ALCOVIA", isAccent: false },
@@ -35,24 +35,31 @@ const manifestoLines: TextWord[][] = [
   [
     { text: "ENTRY", isAccent: false },
     { text: "IS", isAccent: false },
-    { text: "EARNED,", isAccent: true },
-    { text: "NOT", isAccent: false },
-    { text: "GIVEN.", isAccent: false },
+    { text: "EARNED.", isAccent: true },
   ],
   [
     { text: "FOR", isAccent: false },
     { text: "THE", isAccent: false },
     { text: "FEW", isAccent: false },
+    // { text: "WHO", isAccent: false },
+    // { text: "ARE", isAccent: false },
+    // { text: "INVITED", isAccent: true },
+    // { text: "TO", isAccent: false },
+    // { text: "JOIN,", isAccent: false },
+  ],
+  [
     { text: "WHO", isAccent: false },
-    { text: "ENTER,", isAccent: false },
+    { text: "ARE", isAccent: false },
+    { text: "INVITED", isAccent: true },
+    { text: "TO", isAccent: false },
+    { text: "JOIN,", isAccent: false },
   ],
   [
     { text: "PREPARE", isAccent: false },
     { text: "FOR", isAccent: false },
     { text: "A", isAccent: false },
     { text: "YEAR", isAccent: false },
-    { text: "OF", isAccent: false },
-    
+    { text: "OF:", isAccent: false },
   ],
   [
     { text: "RADICAL", isAccent: true },
@@ -66,33 +73,29 @@ const manifestoLines: TextWord[][] = [
     { text: "AND", isAccent: false },
   ],
   [
-    { text: "DISCOVERING", isAccent: false },
-    { text: "WHO", isAccent: false },
-    { text: "YOU", isAccent: false },
-    { text: "ARE.", isAccent: true },
+    { text: "SELF", isAccent: false },
+    { text: "DISCOVERY.", isAccent: true },
   ],
   [
     { text: "AT", isAccent: false },
     { text: "ALCOVIA,", isAccent: false },
+  ],
+  [
+    // { text: "AT", isAccent: false },
+    // { text: "ALCOVIA,", isAccent: false },
     { text: "WE", isAccent: false },
-    { text: "START", isAccent: false },
-  ],
-  [
-    { text: "OUR", isAccent: false },
-    { text: "LEGACY", isAccent: true },
-    { text: "JOURNEY", isAccent: false },
-    { text: "TODAY,", isAccent: false },
-  ],
-  [
+    { text: "ENABLE", isAccent: false },
+    { text: "TEENS", isAccent: false },
     { text: "TO", isAccent: false },
-    { text: "SHAPE", isAccent: false },
+    { text: "START", isAccent: false },
+    { text: "THEIR", isAccent: false },
   ],
   [
-    { text: "THE", isAccent: false },
-    { text: "FUTURE", isAccent: true },
-    { text: "OF", isAccent: false },
-    { text: "TOMORROW.", isAccent: false },
-  ]
+    { text: "LEGACY", isAccent: true },
+    { text: "BUILDING", isAccent: false },
+    { text: "JOURNEY", isAccent: false },
+    { text: "TODAY.", isAccent: true },
+  ],
 ]
 
 export default function Manifesto() {

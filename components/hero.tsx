@@ -36,6 +36,13 @@ export default function Hero() {
   const spotlightRef = useRef<HTMLDivElement>(null)
   const ctaRef = useRef<HTMLButtonElement>(null)
 
+  // --- MOBILE TAGLINE REFS ---
+  const taglineLinesRef = useRef<(HTMLDivElement | null)[]>([])
+  const heroTaglineLines = [
+    "World's first Ambition",
+    "building program for Teenagers."
+  ]
+
   // --- CANVAS REVEAL REFS ---
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const revealImageRef = useRef<HTMLImageElement | null>(null)
@@ -245,6 +252,45 @@ export default function Hero() {
       if (ctaMagneticCleanupRef.current) ctaMagneticCleanupRef.current()
     }
   }, [])
+
+  // --- TAGLINE ANIMATION (Separate useEffect for timing) ---
+  useEffect(() => {
+    if (!isRevealed) return
+
+    // Small delay to ensure refs are populated
+    const timer = setTimeout(() => {
+      taglineLinesRef.current.forEach((line, i) => {
+        if (!line) return
+
+        const mask = line.querySelector(".tagline-mask")
+        const text = line.querySelector(".tagline-text")
+
+        if (!mask || !text) return
+
+        const tl = gsap.timeline({
+          defaults: { ease: "power3.inOut" }
+        })
+
+        gsap.set(mask, { scaleX: 0, transformOrigin: "left" })
+        gsap.set(text, { opacity: 0 })
+
+        tl.to(mask, {
+          scaleX: 1,
+          duration: 0.4,
+        }, i * 0.15)
+
+        tl.set(mask, { transformOrigin: "right" }, ">")
+        tl.set(text, { opacity: 1 }, ">")
+
+        tl.to(mask, {
+          scaleX: 0,
+          duration: 0.4,
+        }, ">")
+      })
+    }, 200)
+
+    return () => clearTimeout(timer)
+  }, [isRevealed])
 
   useEffect(() => {
     const unsubscribe = scrollYProgress.on("change", (value) => {
@@ -517,6 +563,25 @@ export default function Hero() {
       />
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6">
+        {/* Mobile/Tablet Tagline - Hidden on Desktop */}
+        <div className="xl:hidden mb-6 mt-20 flex flex-col items-center text-center">
+          {heroTaglineLines.map((line, i) => (
+            <div
+              key={i}
+              ref={(el) => { taglineLinesRef.current[i] = el }}
+              className="relative overflow-hidden w-fit my-[-0.05em]"
+            >
+              <div
+                className="tagline-mask absolute inset-0 z-20 bg-[#EABF36]"
+              />
+              <p
+                className="tagline-text opacity-0 font-[family-name:var(--font-milan)] text-[27px] font-normal leading-[1.2] tracking-tight text-[#0C0C0C] sm:text-[42px] md:text-[42px] whitespace-nowrap px-1"
+              >
+                {line}
+              </p>
+            </div>
+          ))}
+        </div>
         <div
           className="hero-center relative flex items-end justify-center"
           onClick={handleMobileTap}
@@ -580,7 +645,7 @@ export default function Hero() {
           {/* Girl Image - 25% larger, anchored to bottom */}
           <motion.div
             ref={portraitRef}
-            className="relative z-20 h-[525px] w-[375px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[688px] md:w-[475px] xl:h-[750px] xl:w-[550px]"
+            className="relative z-20 h-[525px] w-[375px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[750px] md:w-[525px] xl:h-[750px] xl:w-[550px]"
             style={{
               perspective: 1000,
               transformStyle: "preserve-3d",
@@ -707,7 +772,7 @@ export default function Hero() {
 
         {/* Upcoming Workshops Widget - Left Side, Desktop Only */}
         <motion.div
-          className="absolute bottom-32 left-6 z-30 hidden xl:block xl:bottom-[clamp(100px,12vh,200px)] xl:left-12"
+          className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-6 xl:bottom-[clamp(100px,12vh,200px)] xl:left-12"
           initial={{ opacity: 0, y: 20 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -768,7 +833,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Desktop CTA - Bottom Right */}
-        <div className="absolute bottom-8 right-6 z-30 hidden flex-col items-center gap-6 md:flex xl:bottom-[clamp(100px,12vh,200px)] xl:right-12 xl:items-end">
+        <div className="absolute bottom-8 right-6 z-30 hidden flex-col items-center gap-6 md:flex md:bottom-8 md:right-6 xl:bottom-[clamp(100px,12vh,200px)] xl:right-12 xl:items-end">
           <motion.button
             ref={ctaRef}
             className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#EABF36] focus:outline-none focus:ring-2 focus:ring-[#EABF36] focus:ring-offset-2 md:px-8 md:py-4"

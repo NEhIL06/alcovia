@@ -181,6 +181,34 @@ export default function PremiumNavbar() {
               )}
             </AnimatePresence>
 
+            {/* Mobile Apply Button - Appears on scroll */}
+            <AnimatePresence>
+              {scrolled && (
+                <motion.a
+                  href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, scale: 0.8, x: 20 }}
+                  animate={{ opacity: 1, scale: 1, x: 0 }}
+                  exit={{ opacity: 0, scale: 0.8, x: 20 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex md:hidden items-center rounded-xl px-3 py-2 text-xs font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105"
+                  style={{
+                    backgroundColor: '#EABF36',
+                    color: '#002C45',
+                    boxShadow: '0 4px 15px rgba(234, 191, 54, 0.3)',
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    boxShadow: '0 6px 20px rgba(234, 191, 54, 0.4)',
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <span>Apply</span>
+                </motion.a>
+              )}
+            </AnimatePresence>
+
             {/* Menu Button - Opens overlay */}
             <motion.button
               onClick={() => setMobileMenuOpen(true)}
