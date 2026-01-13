@@ -772,7 +772,7 @@ export default function Hero() {
 
         {/* Upcoming Workshops Widget - Left Side, Desktop Only */}
         <motion.div
-          className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-6 xl:bottom-[clamp(100px,12vh,200px)] xl:left-12"
+          className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-1 xl:bottom-[clamp(100px,12vh,200px)] xl:left-0"
           initial={{ opacity: 0, y: 20 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -810,7 +810,7 @@ export default function Hero() {
                       WORKSHOP
                     </span>
                     <h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">
-                      CAREER<br />DISCOVERY
+                      INDUSTRY<br />DISCOVERY
                     </h4>
                   </div>
 

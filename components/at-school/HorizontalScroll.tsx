@@ -20,7 +20,8 @@ const quarters = [
     {
         id: "Q1",
         title: "5% INCREMENT",
-        body: "5% increment in academic performance : Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. 102 meetings with academic advisors across the year help alcovians ace acads",
+        subtitle: "Minimum 5% increment in academic performance",
+        body: "Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. 102 meetings with academic advisors across the year enable alcovians ace acads.",
         stat: "5%",
         bgColor: COLORS.blue,
         textColor: COLORS.beige,
@@ -29,7 +30,14 @@ const quarters = [
     {
         id: "Q2",
         title: "WORKSHOPS MAGIC",
-        body: "Workshops are doing their magic! All alcovians within the first 6 months are now moving with incrementally better confidence, showcase leadership skills, and are better at people management. Thoughts are more coherent, well structured & are now not only participating in school competitions, but are winning them too. ",
+        subtitle: "Workshops are doing its magic! All alcovians within the first 6 months are now moving with incrementally better:",
+        bullets: [
+            "Confidence",
+            "Showcase leadership skills",
+            "Better at people management",
+            "Thoughts are more coherent, well structured",
+            "Alcovians are now not only participating in school competitions, but are winning them too"
+        ],
         stat: "VOICE",
         bgColor: COLORS.green,
         textColor: COLORS.beige,
@@ -38,7 +46,8 @@ const quarters = [
     {
         id: "Q3",
         title: "SYSTEM NOTICE",
-        body: "Teachers, counsellors & staff see the alcovians change the way they move. More competition wins, big stake competitions are coming the school's way. While scores are getting better, so are the class level inputs for any discussions being done in classes. Teachers will ask parents in PTMs on what has changed.",
+        subtitle: "The System takes notice",
+        body: "Teachers, school counsellors & staff see the alcovians change the way they move. More competition wins, big stake competitions are coming as easy wins to school- courtesy Alcovians. While scores are getting better, so are the class level inputs for any discussions being done in classes. Teachers will ask parents in PTMs on what has changed. Awe is now a norm.",
         stat: "EYES",
         bgColor: COLORS.burgundy,
         textColor: '#FFFFFF',
@@ -47,7 +56,8 @@ const quarters = [
     {
         id: "Q4",
         title: "TOP OF CLASS",
-        body: " Top at class, great at extracurriculars are the bare minimum inputs from all alcovians by the end of 9 months of the program. Exam stresses are a thing of the past,alcovians move with a better sense of purpose, anxiety about the future subsides.",
+        subtitle: "Top at class, great at extracurriculars",
+        body: "Top at class, great at extracurriculars are the bare minimum inputs from all alcovians by the end of 9 months of the program. Exam stresses are a thing of the past, alcovians move with a better sense of purpose, anxiety about the future subsides.",
         stat: "WIN",
         bgColor: COLORS.mustard,
         textColor: COLORS.blue,
@@ -78,6 +88,64 @@ export default function HorizontalScroll() {
 
     }, { scope: container });
 
+    // Render content based on whether it has bullets or body
+    const renderContent = (q: typeof quarters[0]) => {
+        if ('bullets' in q && q.bullets) {
+            return (
+                <ul className="space-y-3 max-w-2xl">
+                    {q.bullets.map((bullet, i) => (
+                        <li key={i} className="flex items-start gap-4">
+                            <span
+                                className="mt-2 w-2 h-2 rounded-full flex-shrink-0"
+                                style={{ backgroundColor: q.accentColor }}
+                            />
+                            <span
+                                className="font-body text-lg md:text-xl leading-relaxed"
+                                style={{ color: q.textColor }}
+                            >
+                                {bullet}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+        return (
+            <p className="max-w-2xl font-body text-lg leading-relaxed md:text-2xl" style={{ color: q.textColor }}>
+                {q.body}
+            </p>
+        );
+    };
+
+    // Render mobile content
+    const renderMobileContent = (q: typeof quarters[0]) => {
+        if ('bullets' in q && q.bullets) {
+            return (
+                <ul className="space-y-2 max-w-md">
+                    {q.bullets.map((bullet, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                            <span
+                                className="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0"
+                                style={{ backgroundColor: q.accentColor }}
+                            />
+                            <span
+                                className="font-body text-base leading-relaxed"
+                                style={{ color: q.textColor }}
+                            >
+                                {bullet}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            );
+        }
+        return (
+            <p className="max-w-md font-body text-lg leading-relaxed" style={{ color: q.textColor }}>
+                {q.body}
+            </p>
+        );
+    };
+
     return (
         <>
             {/* Mobile Layout (Vertical Stack) */}
@@ -88,12 +156,13 @@ export default function HorizontalScroll() {
                             <h3 className="mb-4 text-xl font-bold tracking-widest" style={{ color: q.accentColor }}>
                                 {q.id}
                             </h3>
-                            <h2 className="mb-6 font-display text-5xl font-bold uppercase leading-[0.9]" style={{ color: q.textColor }}>
+                            <h2 className="mb-3 font-display text-4xl font-bold uppercase leading-[0.9]" style={{ color: q.textColor }}>
                                 {q.title}
                             </h2>
-                            <p className="max-w-md font-body text-lg leading-relaxed" style={{ color: q.textColor }}>
-                                {q.body}
+                            <p className="mb-6 text-sm font-medium uppercase tracking-wider opacity-80" style={{ color: q.accentColor }}>
+                                {q.subtitle}
                             </p>
+                            {renderMobileContent(q)}
                         </div>
                         <span className="mt-8 block font-display text-8xl font-bold opacity-10" style={{ color: q.textColor }}>
                             {q.stat}
@@ -124,12 +193,13 @@ export default function HorizontalScroll() {
                                 <h3 className="mb-4 text-xl font-bold tracking-widest md:text-3xl" style={{ color: q.accentColor }}>
                                     {q.id}
                                 </h3>
-                                <h2 className="mb-8 font-display text-5xl font-bold uppercase leading-[0.9] md:text-8xl" style={{ color: q.textColor }}>
+                                <h2 className="mb-4 font-display text-5xl font-bold uppercase leading-[0.9] md:text-8xl" style={{ color: q.textColor }}>
                                     {q.title}
                                 </h2>
-                                <p className="max-w-2xl font-body text-lg leading-relaxed md:text-2xl" style={{ color: q.textColor }}>
-                                    {q.body}
+                                <p className="mb-8 text-lg font-medium uppercase tracking-wider opacity-80" style={{ color: q.accentColor }}>
+                                    {q.subtitle}
                                 </p>
+                                {renderContent(q)}
                             </div>
                         </div>
                     ))}
@@ -138,4 +208,3 @@ export default function HorizontalScroll() {
         </>
     );
 }
-

@@ -72,19 +72,19 @@ export default function PartnersSection() {
           <div>
             <TextReveal delay={0}>
               <h2 className="text-4xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-5xl lg:text-6xl">
-                PARTNERS
+                PROUD TO CALL
               </h2>
             </TextReveal>
             <TextReveal delay={0.2}>
               <h3 className="text-4xl font-black uppercase tracking-tight text-[#0B0B0B]/60 md:text-5xl lg:text-6xl">
-                &CAMPAIGNS
+                OUR MENTORS
               </h3>
             </TextReveal>
           </div>
 
           <TextReveal delay={0.4} highlightColor="#EABF36">
             <p className="max-w-md self-end text-base text-[#0B0B0B]/70 md:text-lg">
-              Alcovia is proud to collaborate with a range of partners, who share our passion for empowering students
+              Alcovia is proud to collaborate with a range of mentors, who share our passion for empowering students
               across India.
             </p>
           </TextReveal>
