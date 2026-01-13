@@ -74,7 +74,8 @@ export default function PartnersSection() {
 
           <TextReveal delay={0.4} highlightColor="#EABF36">
             <p className="max-w-md self-end text-base text-[#0B0B0B]/70 md:text-lg">
-              Learning from the best in the industry. Our mentors guide you through your journey.
+              Alcovia is proud to collaborate with a range of mentors, who share our passion for empowering students
+              across India.
             </p>
           </TextReveal>
         </div>
