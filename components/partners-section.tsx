@@ -35,7 +35,7 @@ export default function PartnersSection() {
 
           <motion.text
             x="50%"
-            y="38%"
+            y="50%"
             textAnchor="middle"
             dominantBaseline="middle"
             fill="url(#premiumFill)"
@@ -61,12 +61,12 @@ export default function PartnersSection() {
         <div className="mb-16 grid gap-8 md:grid-cols-2 md:gap-16">
           <div>
             <TextReveal delay={0}>
-              <h2 className="text-4xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-5xl lg:text-6xl">
+              <h2 className="text-xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-6xl lg:text-7xl">
                 PROUD TO CALL
               </h2>
             </TextReveal>
             <TextReveal delay={0.2}>
-              <h3 className="text-4xl font-black uppercase tracking-tight text-[#0B0B0B]/60 md:text-5xl lg:text-6xl">
+              <h3 className="text-5xl font-black uppercase tracking-tight text-[#0B0B0B]/60 md:text-6xl lg:text-7xl">
                 OUR MENTORS
               </h3>
             </TextReveal>
