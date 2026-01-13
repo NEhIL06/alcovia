@@ -742,6 +742,24 @@ export default function Hero() {
               transition={{ duration: 0.3 }}
             />
           </motion.div>
+
+          {/* Desktop-only Tagline - Side of Hero Image */}
+          <motion.div
+            className="hidden xl:flex absolute right-[-320px] top-1/2 -translate-y-1/2 flex-col items-start z-30"
+            initial={{ opacity: 0, x: -30 }}
+            animate={isRevealed ? { opacity: 1, x: 0 } : {}}
+            transition={{ delay: 1.4, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+          >
+            <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">
+              World's first
+            </p>
+            <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[250px]">
+              Ambition Building
+            </p>
+            <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">
+              Program for Teenagers
+            </p>
+          </motion.div>
         </div>
 
         {/* Mobile CTA */}
