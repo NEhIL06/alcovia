@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import gsap from 'gsap';
@@ -48,6 +48,12 @@ export default function MeetTheTeamGrid() {
     const containerRef = useRef<HTMLDivElement>(null);
 
     const [marqueeDuration, setMarqueeDuration] = useState("30s");
+    const [autoScrollSpeed, setAutoScrollSpeed] = useState(0.8);
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const scrollPosRef = useRef(0);
+    const [isPaused, setIsPaused] = useState(false);
+    const animationFrameRef = useRef<number | null>(null);
+    const resumeTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     // Check for mobile/tablet and set marquee speed
     useEffect(() => {
@@ -57,9 +63,11 @@ export default function MeetTheTeamGrid() {
 
             // Configure speeds: Mobile (Very Slow), Tablet/Desktop (Fast)
             if (width < 768) {
-                setMarqueeDuration("150s"); // Mobile: Very slow
+                setMarqueeDuration("150s");
+                setAutoScrollSpeed(0.3); // Slower for mobile
             } else {
-                setMarqueeDuration("20s"); // Tablet/Desktop: Fast (Original speed)
+                setMarqueeDuration("20s");
+                setAutoScrollSpeed(0.8); // Standard speed
             }
         };
 
@@ -67,6 +75,64 @@ export default function MeetTheTeamGrid() {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
+
+    // Auto-scroll animation logic
+    useEffect(() => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+
+        const oneThird = container.scrollWidth / 3;
+
+        // Initialize scroll position if needed
+        if (container.scrollLeft === 0) {
+            container.scrollLeft = oneThird;
+            scrollPosRef.current = oneThird;
+        } else {
+            // Sync ref with current scroll position on mount/resume
+            scrollPosRef.current = container.scrollLeft;
+        }
+
+        const animate = () => {
+            if (!isPaused && container) {
+                // Use ref for fractional accumulation
+                scrollPosRef.current += autoScrollSpeed;
+
+                if (scrollPosRef.current >= oneThird * 2) {
+                    scrollPosRef.current = oneThird;
+                    container.scrollLeft = oneThird;
+                } else {
+                    container.scrollLeft = scrollPosRef.current;
+                }
+            }
+            animationFrameRef.current = requestAnimationFrame(animate);
+        };
+
+        animationFrameRef.current = requestAnimationFrame(animate);
+        return () => {
+            if (animationFrameRef.current) cancelAnimationFrame(animationFrameRef.current);
+        };
+    }, [isPaused, autoScrollSpeed]);
+
+    const pauseAndResume = useCallback(() => {
+        setIsPaused(true);
+        if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+        resumeTimeoutRef.current = setTimeout(() => setIsPaused(false), 3000);
+    }, []);
+
+    const handleInteraction = {
+        onMouseEnter: () => setIsPaused(true),
+        onMouseLeave: () => {
+            if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
+            resumeTimeoutRef.current = setTimeout(() => setIsPaused(false), 1000);
+        },
+        onTouchStart: () => setIsPaused(true),
+        onTouchEnd: pauseAndResume,
+        onWheel: (e: React.WheelEvent) => {
+            if (scrollContainerRef.current && e.deltaX !== 0) pauseAndResume();
+        }
+    };
+
+
 
     // Track mouse position globally
     useEffect(() => {
@@ -453,16 +519,17 @@ export default function MeetTheTeamGrid() {
                     </p>
                 </div>
 
-                <div className="relative flex overflow-hidden">
-                    {/* First set of logos */}
-                    <motion.div
-                        key={`marquee-1-${marqueeDuration}`}
-                        className="flex gap-12 items-center whitespace-nowrap"
+                <div className="relative w-full overflow-hidden">
+                    <div
+                        ref={scrollContainerRef}
+                        className="flex gap-12 items-center overflow-x-auto scrollbar-hide cursor-grab active:cursor-grabbing px-6"
                         style={{
-                            animation: `marquee ${marqueeDuration} linear infinite`,
+                            msOverflowStyle: 'none',
+                            scrollbarWidth: 'none',
                         }}
+                        {...handleInteraction}
                     >
-                        {[...companyLogos, ...companyLogos].map((logo, i) => (
+                        {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, i) => (
                             <div
                                 key={`${logo.name}-${i}`}
                                 className="flex-shrink-0 px-6 py-4 opacity-50 hover:opacity-100 transition-opacity duration-300"
@@ -476,36 +543,14 @@ export default function MeetTheTeamGrid() {
                                 />
                             </div>
                         ))}
-                    </motion.div>
-
-                    {/* Duplicate for seamless loop */}
-                    <motion.div
-                        key={`marquee-2-${marqueeDuration}`}
-                        className="flex gap-12 items-center whitespace-nowrap"
-                        style={{
-                            animation: `marquee ${marqueeDuration} linear infinite`,
-                        }}
-                    >
-                        {[...companyLogos, ...companyLogos].map((logo, i) => (
-                            <div
-                                key={`${logo.name}-dup-${i}`}
-                                className="flex-shrink-0 px-6 py-4 opacity-50 hover:opacity-100 transition-opacity duration-300"
-                            >
-                                <Image
-                                    src={logo.src}
-                                    alt={logo.name}
-                                    width={logo.width * 0.5}
-                                    height={logo.height * 0.5}
-                                    className="object-contain filter brightness-0 invert h-16 w-auto"
-                                />
-                            </div>
-                        ))}
-                    </motion.div>
-
-                    <style jsx>{`
-                        @keyframes marquee {
-                            0% { transform: translateX(0); }
-                            100% { transform: translateX(-100%); }
+                    </div>
+                    <style jsx global>{`
+                        .scrollbar-hide::-webkit-scrollbar {
+                            display: none;
+                        }
+                        .scrollbar-hide {
+                            -ms-overflow-style: none;
+                            scrollbar-width: none;
                         }
                     `}</style>
                 </div>
