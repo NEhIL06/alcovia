@@ -141,7 +141,7 @@ export default function PremiumNavbar() {
                   alt="ALCOVIA"
                   width={scrolled ? 220 : 150}
                   height={scrolled ? 220 : 150}
-                  className={`transition-all duration-300 h-[200px] w-[120px] -mt-6 object-contain object-bottom pt-6`}
+                  className={`transition-all duration-0 h-[200px] w-[120px] -mt-7 -ml-1 md:ml-0 object-contain object-bottom pt-6`}
                   style={{
                     filter: navMode === "light" ? "brightness(1.2) invert(0)" : "brightness(1) invert(0)"
                   }}
@@ -155,7 +155,7 @@ export default function PremiumNavbar() {
             layout
             className={`flex items-center gap-3 order-3 pt-6`}
           >
-            {/* Apply for Cohort 2026 Button - Appears on scroll */}
+            {/* Apply for Cohort 2026 Button - Appears on scroll (Desktop) */}
             <AnimatePresence>
               {scrolled && (
                 <motion.a
@@ -183,7 +183,7 @@ export default function PremiumNavbar() {
               )}
             </AnimatePresence>
 
-            {/* Mobile Apply Button - Appears on scroll */}
+            {/* Mobile Apply Button - Smaller size */}
             <AnimatePresence>
               {scrolled && (
                 <motion.a
@@ -194,15 +194,15 @@ export default function PremiumNavbar() {
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex md:hidden items-center rounded-xl px-3 py-2 text-xs font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105"
+                  className="flex md:hidden items-center rounded-lg px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105"
                   style={{
                     backgroundColor: '#EABF36',
                     color: '#002C45',
-                    boxShadow: '0 4px 15px rgba(234, 191, 54, 0.3)',
+                    boxShadow: '0 2px 10px rgba(234, 191, 54, 0.3)',
                   }}
                   whileHover={{
                     scale: 1.05,
-                    boxShadow: '0 6px 20px rgba(234, 191, 54, 0.4)',
+                    boxShadow: '0 4px 15px rgba(234, 191, 54, 0.4)',
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
