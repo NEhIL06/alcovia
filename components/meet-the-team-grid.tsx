@@ -515,7 +515,7 @@ export default function MeetTheTeamGrid() {
             <section className="py-16 overflow-hidden" style={{ backgroundColor: COLORS.background }}>
                 <div className="mb-8 text-center">
                     <p className="text-sm uppercase tracking-[0.3em]" style={{ color: `${COLORS.cream}69` }}>
-                        Experienced Folks Who Have Worked In All logos
+                        Experienced Folks Who Have Worked In 
                     </p>
                 </div>
 
