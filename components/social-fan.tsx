@@ -32,9 +32,9 @@ const socials = [
 
 // Card positions - subtle fan layout
 const cardPositions = [
-  { x: -160, y: 25, rotate: -12, scale: 0.95 },  // Left card
+  { x: -120, y: 20, rotate: -12, scale: 0.95 },  // Left card (Reduced spread)
   { x: 0, y: 0, rotate: 0, scale: 1 },            // Center card
-  { x: 160, y: 25, rotate: 12, scale: 0.95 },     // Right card
+  { x: 120, y: 20, rotate: 12, scale: 0.95 },     // Right card (Reduced spread)
 ]
 
 // Desktop positions (wider spread)
@@ -132,7 +132,7 @@ export default function SocialFan() {
 
 
         {/* Card Container */}
-        <div className="relative flex h-[450px] items-center justify-center md:h-[650px] lg:h-[750px]">
+        <div className="relative flex h-[350px] items-center justify-center md:h-[650px] lg:h-[750px]">
           {socials.map((social, index) => {
             const transform = getCardTransform(index)
 
@@ -169,7 +169,7 @@ export default function SocialFan() {
                 onTouchStart={() => setHoveredIndex(index)}
                 onTouchEnd={() => setHoveredIndex(null)}
               >
-                <div className="relative h-[320px] w-[200px] overflow-hidden rounded-2xl shadow-2xl md:h-[500px] md:w-[320px] lg:h-[560px] lg:w-[360px]">
+                <div className="relative h-[240px] w-[160px] overflow-hidden rounded-2xl shadow-2xl md:h-[500px] md:w-[320px] lg:h-[560px] lg:w-[360px]">
                   <Image
                     src={social.image}
                     alt={social.platform}
