@@ -118,13 +118,13 @@ export default function PremiumNavbar() {
           borderBottom: "none",
           boxShadow: "none",
         }}
-        initial={{ y: -100, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={false}
+        animate={false}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <motion.div
           layout
-          className={`mx-auto flex h-full items-center justify-between px-6 transition-all duration-500 ease-in-out ${scrolled ? "max-w-full" : "max-w-7xl"}`}
+          className={`mx-auto flex h-full items-center justify-between px-6 ${scrolled ? "max-w-full" : "max-w-7xl"}`}
         >
           <motion.div
             layout

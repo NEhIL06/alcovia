@@ -28,13 +28,15 @@ const team = [
     { id: "09", name: "Madhav", role: "GTM", img: "/images/team/madhav.png" },
 ];
 
-// Company logos with images
+// Company logos with images (1.5x size)
 const companyLogos = [
-    { name: "Masters Union", src: "/images/logos/masters-union.png", width: 160, height: 60 },
-    { name: "Noise", src: "/images/logos/noise.png", width: 140, height: 50 },
-    { name: "Panasonic", src: "/images/logos/panasonic.png", width: 120, height: 40 },
-    { name: "McKinsey", src: "/images/logos/mckinsey.png", width: 130, height: 50 },
-    { name: "Nothing", src: "/images/logos/nothing.png", width: 120, height: 40 },
+    { name: "Masters Union", src: "/images/logos/master-union.png", width: 360, height: 135 },
+    { name: "Noise", src: "/images/logos/noise.png", width: 315, height: 112 },
+    { name: "Panasonic", src: "/images/logos/panasonic.png", width: 270, height: 90 },
+    { name: "McKinsey", src: "/images/logos/mckinsy.png", width: 293, height: 112 },
+    { name: "Nothing", src: "/images/logos/nothing.png", width: 360, height: 135 },
+    { name: "Bain", src: "/images/logos/bain.png", width: 270, height: 112 },
+    { name: "Flipkart", src: "/images/logos/flipkart.png", width: 315, height: 112 },
 ];
 
 export default function MeetTheTeamGrid() {
@@ -45,12 +47,25 @@ export default function MeetTheTeamGrid() {
     const imageRef = useRef<HTMLDivElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Check for mobile/tablet
+    const [marqueeDuration, setMarqueeDuration] = useState("30s");
+
+    // Check for mobile/tablet and set marquee speed
     useEffect(() => {
-        const checkMobile = () => setIsMobile(window.innerWidth < 1024);
-        checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        const handleResize = () => {
+            const width = window.innerWidth;
+            setIsMobile(width < 1024);
+
+            // Configure speeds: Mobile (Very Slow), Tablet/Desktop (Fast)
+            if (width < 768) {
+                setMarqueeDuration("150s"); // Mobile: Very slow
+            } else {
+                setMarqueeDuration("20s"); // Tablet/Desktop: Fast (Original speed)
+            }
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     // Track mouse position globally
@@ -226,39 +241,35 @@ export default function MeetTheTeamGrid() {
                             </div>
                         </motion.div>
 
-                        {/* Floating Logos */}
+                        {/* Floating Logos - Grid Layout */}
                         <motion.div
-                            className="relative h-[400px] hidden lg:block"
+                            className="grid grid-cols-2 gap-8 hidden lg:grid"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.3 }}
                         >
-                            {companyLogos.map((logo, i) => (
+                            {companyLogos.slice(0, 6).map((logo, i) => (
                                 <motion.div
                                     key={logo.name}
-                                    className="absolute opacity-60 hover:opacity-100 transition-opacity duration-300"
-                                    style={{
-                                        top: `${20 + (i % 3) * 30}%`,
-                                        left: `${10 + (i % 2) * 40}%`,
-                                    }}
+                                    className="opacity-60 hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4"
                                     animate={{
-                                        y: [0, -10, 0],
-                                        rotate: [0, i % 2 === 0 ? 2 : -2, 0],
+                                        y: [0, -8, 0],
                                     }}
                                     transition={{
-                                        duration: 4 + i * 0.5,
+                                        duration: 3 + i * 0.3,
                                         repeat: Infinity,
                                         ease: "easeInOut",
+                                        delay: i * 0.2,
                                     }}
                                     whileHover={{ scale: 1.1 }}
                                 >
                                     <Image
                                         src={logo.src}
                                         alt={logo.name}
-                                        width={logo.width}
-                                        height={logo.height}
-                                        className="object-contain filter brightness-0 invert"
+                                        width={logo.width * 0.5}
+                                        height={logo.height * 0.5}
+                                        className="object-contain filter brightness-0 invert max-h-16"
                                     />
                                 </motion.div>
                             ))}
@@ -429,7 +440,7 @@ export default function MeetTheTeamGrid() {
                         viewport={{ once: true }}
                         transition={{ delay: 0.2 }}
                     >
-                        Harvard • Cambridge • IIM Indore • SRCC • NSUT • SSCBS
+                        Harvard • Cambridge • IIM Indore • SRCC • DTU • SSCBS
                     </motion.h2>
                 </div>
             </section>
@@ -437,40 +448,66 @@ export default function MeetTheTeamGrid() {
             {/* --- SECTION 6: FLOATING LOGO MARQUEE --- */}
             <section className="py-16 overflow-hidden" style={{ backgroundColor: COLORS.background }}>
                 <div className="mb-8 text-center">
-                    <p className="text-xs uppercase tracking-[0.3em]" style={{ color: `${COLORS.cream}66` }}>
-                        Experienced Folks Who Have Worked In
+                    <p className="text-sm uppercase tracking-[0.3em]" style={{ color: `${COLORS.cream}69` }}>
+                        Experienced Folks Who Have Worked In All logos
                     </p>
                 </div>
 
                 <div className="relative flex overflow-hidden">
+                    {/* First set of logos */}
                     <motion.div
-                        className="flex gap-16 items-center whitespace-nowrap"
-                        animate={{ x: [0, -1200] }}
-                        transition={{
-                            x: {
-                                repeat: Infinity,
-                                repeatType: "loop",
-                                duration: 25,
-                                ease: "linear",
-                            },
+                        key={`marquee-1-${marqueeDuration}`}
+                        className="flex gap-12 items-center whitespace-nowrap"
+                        style={{
+                            animation: `marquee ${marqueeDuration} linear infinite`,
                         }}
                     >
-                        {[...companyLogos, ...companyLogos, ...companyLogos].map((logo, i) => (
-                            <motion.div
+                        {[...companyLogos, ...companyLogos].map((logo, i) => (
+                            <div
                                 key={`${logo.name}-${i}`}
-                                className="flex-shrink-0 px-8 py-4 opacity-40 hover:opacity-100 transition-opacity duration-300"
-                                whileHover={{ scale: 1.1 }}
+                                className="flex-shrink-0 px-6 py-4 opacity-50 hover:opacity-100 transition-opacity duration-300"
                             >
                                 <Image
                                     src={logo.src}
                                     alt={logo.name}
-                                    width={logo.width}
-                                    height={logo.height}
-                                    className="object-contain filter brightness-0 invert h-12 w-auto"
+                                    width={logo.width * 0.5}
+                                    height={logo.height * 0.5}
+                                    className="object-contain filter brightness-0 invert h-16 w-auto"
                                 />
-                            </motion.div>
+                            </div>
                         ))}
                     </motion.div>
+
+                    {/* Duplicate for seamless loop */}
+                    <motion.div
+                        key={`marquee-2-${marqueeDuration}`}
+                        className="flex gap-12 items-center whitespace-nowrap"
+                        style={{
+                            animation: `marquee ${marqueeDuration} linear infinite`,
+                        }}
+                    >
+                        {[...companyLogos, ...companyLogos].map((logo, i) => (
+                            <div
+                                key={`${logo.name}-dup-${i}`}
+                                className="flex-shrink-0 px-6 py-4 opacity-50 hover:opacity-100 transition-opacity duration-300"
+                            >
+                                <Image
+                                    src={logo.src}
+                                    alt={logo.name}
+                                    width={logo.width * 0.5}
+                                    height={logo.height * 0.5}
+                                    className="object-contain filter brightness-0 invert h-16 w-auto"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
+
+                    <style jsx>{`
+                        @keyframes marquee {
+                            0% { transform: translateX(0); }
+                            100% { transform: translateX(-100%); }
+                        }
+                    `}</style>
                 </div>
             </section>
 
