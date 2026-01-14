@@ -9,7 +9,7 @@ import anime from "animejs"
 import { useHeroAnimation } from "@/context/hero-animation-context"
 import InteractiveBackground from "./InteractiveBackground"
 import { useGSAP } from "@gsap/react"
-import { ArrowUpRight } from "lucide-react"
+import { ArrowUpRight, Lock, Unlock, MousePointerClick } from "lucide-react"
 
 import {
   checkReducedMotion,
@@ -46,6 +46,7 @@ export default function Hero() {
   // --- CANVAS REVEAL REFS ---
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const revealImageRef = useRef<HTMLImageElement | null>(null)
+  const baseImageDimsRef = useRef<{ width: number; height: number } | null>(null)
   const trailRef = useRef<{ x: number; y: number; age: number; force: number }[]>([])
   const lastMousePos = useRef({ x: 0, y: 0 })
   const rafRef = useRef<number | null>(null)
@@ -54,6 +55,7 @@ export default function Hero() {
   const [isRevealed, setIsRevealed] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  const [isScrollLocked, setIsScrollLocked] = useState(false)
 
   const wingRevealTlRef = useRef<gsap.core.Timeline | null>(null)
   const wingFoldTlRef = useRef<gsap.core.Tween | null>(null)
@@ -133,8 +135,14 @@ export default function Hero() {
 
           // Calculate dimensions to match 'object-contain object-bottom'
           const img = revealImageRef.current
+          
+          // Use Base Image aspect ratio if available to ensure perfect alignment
+          // otherwise fall back to reveal image aspect ratio
+          const imgAspect = baseImageDimsRef.current 
+            ? baseImageDimsRef.current.width / baseImageDimsRef.current.height
+            : img.width / img.height
+
           const canvasAspect = canvas.width / canvas.height
-          const imgAspect = img.width / img.height
 
           let drawWidth, drawHeight, offsetX, offsetY
 
@@ -303,6 +311,18 @@ export default function Hero() {
 
     return () => unsubscribe()
   }, [scrollYProgress, isHovering])
+
+  // --- SCROLL LOCK EFFECT ---
+  useEffect(() => {
+    if (isScrollLocked) {
+      document.body.style.overflow = "hidden"
+    } else {
+      document.body.style.overflow = ""
+    }
+    return () => {
+      document.body.style.overflow = ""
+    }
+  }, [isScrollLocked])
 
   const handlePortraitMouseEnter = useCallback(() => {
     setIsHovering(true)
@@ -589,7 +609,7 @@ export default function Hero() {
         >
           <div
             ref={wingsContainerRef}
-            className="pointer-events-none absolute inset-0 z-10 hidden md:block"
+            className="pointer-events-none absolute inset-0 z-10 block"
             role="img"
             aria-label="Wings symbolising growth and potential"
           >
@@ -667,6 +687,10 @@ export default function Hero() {
               className="object-contain object-bottom"
               style={{ filter: "contrast(1.05) saturate(0.95) brightness(0.98)" }}
               priority
+              onLoad={(e) => {
+                const img = e.target as HTMLImageElement
+                baseImageDimsRef.current = { width: img.naturalWidth, height: img.naturalHeight }
+              }}
             />
 
             {/* Reveal Layer (Masked) with Water Distortion */}
@@ -859,6 +883,28 @@ export default function Hero() {
           }
         }
       `}</style>
+      {/* Scroll Lock Button - Mobile Only */}
+      <motion.button
+        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-xl bg-[#EABF36] shadow-lg md:hidden"
+        onClick={(e) => {
+          e.stopPropagation()
+          setIsScrollLocked(!isScrollLocked)
+        }}
+        whileTap={{ scale: 0.9 }}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 1.5 }}
+      >
+        {isScrollLocked ? (
+          <Lock className="h-6 w-6 text-[#0C0C0C]" />
+        ) : (
+          <div className="flex flex-col items-center justify-center">
+            <MousePointerClick className="h-6 w-6 text-[#0C0C0C]" />
+            <span className="text-[8px] font-bold leading-none text-[#0C0C0C] mt-0.5">LOCK</span>
+          </div>
+        )}
+      </motion.button>
+
     </motion.section >
   )
 }
