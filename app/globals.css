@@ -47,6 +47,8 @@
   --neon: oklch(0.88 0.22 118);
   --dark: oklch(0.1 0 0);
   --cream: oklch(0.97 0.003 90);
+  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-power3-out: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .dark {
@@ -151,29 +153,8 @@
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
-@media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
-  }
-
-  body * {
-    cursor: none !important;
-  }
-
-  /* Exception for menu page */
-  [data-show-cursor],
-  [data-show-cursor] * {
-    cursor: auto !important;
-  }
-}
-
 section {
   transition: background-color 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-:root {
-  --ease-out-expo: cubic-bezier(0.22, 1, 0.36, 1);
-  --ease-power3-out: cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -291,7 +272,6 @@ section {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 1;
-  /* Sits on top of color */
 }
 
 /* 2. The "Blueprint" Grid Pattern */
@@ -304,6 +284,5 @@ section {
 /* 3. Text Stroke Utility (The Hollow Text) */
 .stroke-text-mustard {
   -webkit-text-stroke: 2px #EABF36;
-  /* Mustard */
   color: transparent;
 }

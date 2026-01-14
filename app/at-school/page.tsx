@@ -1,6 +1,6 @@
 "use client"
 
-import CustomCursor from "@/components/custom-cursor"
+
 import MicroInteractions from "@/components/micro-interactions"
 import Hero from "@/components/at-school/Hero"
 import Philosophy from "@/components/at-school/Philosophy"
@@ -11,7 +11,7 @@ import Footer from "@/components/footer"
 export default function AtSchoolPage() {
     return (
         <>
-            <CustomCursor />
+
             <MicroInteractions>
                 <main className="min-h-screen" style={{ backgroundColor: '#234944' }}>
                     <Hero />

@@ -1,5 +1,5 @@
 import type { Metadata } from "next"
-import CustomCursor from "@/components/custom-cursor"
+
 import MeetTheTeamGrid from "@/components/meet-the-team-grid"
 import Footer from "@/components/footer"
 
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 export default function MeetTheTeamPage() {
   return (
     <>
-      <CustomCursor />
+
       <main>
         <MeetTheTeamGrid />
         <Footer />

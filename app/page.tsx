@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { HeroAnimationProvider } from "@/context/hero-animation-context"
-import CustomCursor from "@/components/custom-cursor"
+
 import ScrollProgress from "@/components/scroll-progress"
 import Hero from "@/components/hero"
 import Manifesto from "@/components/manifesto"
@@ -17,7 +17,6 @@ import MicroInteractions from "@/components/micro-interactions"
 export default function Home() {
   return (
     <HeroAnimationProvider>
-      <CustomCursor />
 
       <AnimatePresence>
         <MicroInteractions>

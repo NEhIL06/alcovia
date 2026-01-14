@@ -8,7 +8,7 @@ import { useGSAP } from "@gsap/react";
 import { ReactLenis } from "lenis/react";
 import { Playfair_Display, Inter, JetBrains_Mono } from 'next/font/google';
 import { motion } from "framer-motion";
-import CustomCursor from "@/components/custom-cursor";
+
 import Footer from "@/components/footer";
 import TextReveal from "@/components/text-reveal";
 
@@ -133,7 +133,6 @@ export default function OutsideSchoolPage() {
                 ref={container}
                 className={`${sans.variable} ${serif.variable} ${mono.variable} font-sans bg-[#0B0C15] text-[#F2F2F2] min-h-screen overflow-x-hidden selection:bg-[#D4AF37] selection:text-black`}
             >
-                <CustomCursor />
 
                 {/* --- HERO --- */}
                 <section className="h-[80vh] xl:h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
