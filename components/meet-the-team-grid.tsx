@@ -469,7 +469,7 @@ export default function MeetTheTeamGrid() {
                                                         className="object-cover"
                                                     />
                                                 </div>
-                                                <div>
+                                                <div className="flex flex-row items-center gap-2">
                                                     <p className="text-sm uppercase tracking-widest mb-2" style={{ color: COLORS.amber }}>
                                                         {member.role}
                                                     </p>
