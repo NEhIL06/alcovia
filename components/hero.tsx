@@ -564,7 +564,8 @@ export default function Hero() {
 
       <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6">
         {/* Mobile/Tablet Tagline - Hidden on Desktop */}
-        <div className="xl:hidden mb-6 mt-20 flex flex-col items-center text-center">
+        {/* Mobile/Tablet Tagline - Hidden on Desktop */}
+        <div className="xl:hidden mb-4 mt-32 flex flex-col items-center text-center">
           {heroTaglineLines.map((line, i) => (
             <div
               key={i}
@@ -645,7 +646,7 @@ export default function Hero() {
           {/* Girl Image - 25% larger, anchored to bottom */}
           <motion.div
             ref={portraitRef}
-            className="relative z-20 h-[525px] w-[375px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[750px] md:w-[525px] xl:h-[750px] xl:w-[550px]"
+            className="relative z-20 h-[575px] w-[450px] -mt-8 cursor-pointer overflow-hidden rounded-t-3xl bg-transparent md:h-[750px] md:w-[525px] xl:h-[750px] xl:w-[550px]"
             style={{
               perspective: 1000,
               transformStyle: "preserve-3d",
@@ -764,7 +765,8 @@ export default function Hero() {
 
         {/* Mobile CTA */}
         <motion.div
-          className="relative z-30 mt-6 flex flex-col items-center text-center md:hidden"
+
+          className="relative z-30 -mt-4 flex flex-col items-center text-center md:hidden"
           initial={{ opacity: 0, y: 40 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.2, duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
