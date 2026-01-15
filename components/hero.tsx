@@ -9,7 +9,7 @@ import anime from "animejs"
 import { useHeroAnimation } from "@/context/hero-animation-context"
 import InteractiveBackground from "./InteractiveBackground"
 import { useGSAP } from "@gsap/react"
-import { ArrowUpRight, Lock, Unlock, MousePointerClick } from "lucide-react"
+import { ArrowUpRight } from "lucide-react"
 
 import {
   checkReducedMotion,
@@ -55,7 +55,7 @@ export default function Hero() {
   const [isRevealed, setIsRevealed] = useState(false)
   const [isHovering, setIsHovering] = useState(false)
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
-  const [isScrollLocked, setIsScrollLocked] = useState(false)
+
 
   const wingRevealTlRef = useRef<gsap.core.Timeline | null>(null)
   const wingFoldTlRef = useRef<gsap.core.Tween | null>(null)
@@ -135,10 +135,10 @@ export default function Hero() {
 
           // Calculate dimensions to match 'object-contain object-bottom'
           const img = revealImageRef.current
-          
+
           // Use Base Image aspect ratio if available to ensure perfect alignment
           // otherwise fall back to reveal image aspect ratio
-          const imgAspect = baseImageDimsRef.current 
+          const imgAspect = baseImageDimsRef.current
             ? baseImageDimsRef.current.width / baseImageDimsRef.current.height
             : img.width / img.height
 
@@ -312,17 +312,7 @@ export default function Hero() {
     return () => unsubscribe()
   }, [scrollYProgress, isHovering])
 
-  // --- SCROLL LOCK EFFECT ---
-  useEffect(() => {
-    if (isScrollLocked) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = ""
-    }
-    return () => {
-      document.body.style.overflow = ""
-    }
-  }, [isScrollLocked])
+
 
   const handlePortraitMouseEnter = useCallback(() => {
     setIsHovering(true)
@@ -791,7 +781,7 @@ export default function Hero() {
 
         {/* Upcoming Workshops Widget - Left Side, Desktop Only */}
         <motion.div
-          className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-1 xl:bottom-[clamp(100px,12vh,200px)] xl:left-0"
+          className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-1 xl:bottom-[clamp(100px,12vh,200px)] xl:left-2"
           initial={{ opacity: 0, y: 20 }}
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -883,27 +873,7 @@ export default function Hero() {
           }
         }
       `}</style>
-      {/* Scroll Lock Button - Mobile Only */}
-      <motion.button
-        className="fixed bottom-6 right-6 z-50 flex h-12 w-12 items-center justify-center rounded-xl bg-[#EABF36] shadow-lg md:hidden"
-        onClick={(e) => {
-          e.stopPropagation()
-          setIsScrollLocked(!isScrollLocked)
-        }}
-        whileTap={{ scale: 0.9 }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 1.5 }}
-      >
-        {isScrollLocked ? (
-          <Lock className="h-6 w-6 text-[#0C0C0C]" />
-        ) : (
-          <div className="flex flex-col items-center justify-center">
-            <MousePointerClick className="h-6 w-6 text-[#0C0C0C]" />
-            <span className="text-[8px] font-bold leading-none text-[#0C0C0C] mt-0.5">LOCK</span>
-          </div>
-        )}
-      </motion.button>
+
 
     </motion.section >
   )
