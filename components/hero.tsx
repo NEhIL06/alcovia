@@ -786,7 +786,7 @@ export default function Hero() {
           animate={isRevealed ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 1.5, duration: 0.8 }}
         >
-          <a href="/events" className="group block">
+          <a href="https://forms.gle/TJZ2FfN4KvtrKyPL7" target="_blank" rel="noopener noreferrer" className="group block">
             {/* McLaren-Style Card Layout 
            - Fixed width/height
            - Distinct border

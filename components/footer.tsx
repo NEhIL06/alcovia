@@ -96,12 +96,12 @@ export default function Footer() {
             <h3 className="text-sm font-semibold uppercase tracking-wider text-[#EABF36]">
               Quick Links
             </h3>
-            <nav className="flex flex-col space-y-2 items-center md:items-start">
+            <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {footerLinks.map((link) => (
                 <FlipLink
                   key={link.name}
                   href={link.href}
-                  className="w-fit text-sm"
+                  className="w-fit text-lg lg:text-sm"
                   baseColor="rgba(255,255,255,0.6)"
                   hoverColor="#EABF36"
                 >
@@ -117,15 +117,15 @@ export default function Footer() {
               Upcoming
             </h3>
 
-            <nav className="flex flex-col space-y-2 items-center md:items-start">
+            <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
                 { name: "Cohort 2026", href: "https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform" },
-                { name: "Workshop", href: "/outside-school" }
+                { name: "Workshop", href: "https://forms.gle/TJZ2FfN4KvtrKyPL7" }
               ].map((link) => (
                 <FlipLink
                   key={link.name}
                   href={link.href}
-                  className="w-fit text-sm"
+                  className="w-fit text-lg lg:text-sm"
                   baseColor="rgba(255,255,255,0.6)"
                   hoverColor="#EABF36"
                 >

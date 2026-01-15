@@ -16,7 +16,7 @@ const menuItems = [
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
     { label: "TEAM", href: "/meet-the-team" },
-    { label: "EVENTS", href: "/events", mobileOnly: true },
+    { label: "EVENTS", href: "https://forms.gle/TJZ2FfN4KvtrKyPL7", mobileOnly: true },
 ]
 
 const socialLinks = [

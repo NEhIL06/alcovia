@@ -204,7 +204,7 @@ export default function SocialFan() {
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.5, duration: 0.6 }}
         >
-          <h3 className="text-2xl font-bold uppercase tracking-widest text-[#0B0B0B] md:text-3xl lg:text-4xl">
+          <h3 className="text-2xl font-bold uppercase tracking-widest text-[#0B0B0B] text-center md:text-3xl lg:text-4xl">
             Follow Us Everywhere
           </h3>
         </motion.div>
