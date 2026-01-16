@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import TextReveal from "@/components/text-reveal";
+import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
     return (
@@ -48,7 +49,24 @@ export default function Hero() {
                     </motion.p>
                 </TextReveal>
             </div>
+
+            {/* Initiate Scroll Indicator */}
+            <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.2, duration: 0.8 }}
+                className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            >
+                <span className="text-xs font-medium uppercase tracking-[0.2em]" style={{ color: '#E5D1BE', opacity: 0.6 }}>
+                    Initiate Scroll
+                </span>
+                <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <ChevronDown className="h-5 w-5" style={{ color: '#E5D1BE', opacity: 0.6 }} />
+                </motion.div>
+            </motion.div>
         </section>
     );
 }
-

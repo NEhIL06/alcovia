@@ -21,7 +21,11 @@ const quarters = [
         id: "Q1",
         title: "5% INCREMENT",
         subtitle: "Minimum 5% increment in academic performance",
-        body: "Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. 102 meetings with academic advisors across the year enable alcovians ace acads.",
+        body: (
+            <>
+                Our proprietary structures enable daily rigour in terms of academic improvement, combined with inputs from academic advisors, academic is the ground work that we begin with first. <span className="underline font-bold decoration-2 underline-offset-4">102 meetings</span> with academic advisors across the year enable alcovians ace acads.
+            </>
+        ),
         stat: "5%",
         bgColor: COLORS.blue,
         textColor: COLORS.beige,
@@ -30,9 +34,8 @@ const quarters = [
     {
         id: "Q2",
         title: "WORKSHOPS MAGIC",
-        subtitle: "Workshops are doing its magic! All alcovians within the first 6 months are now moving with incrementally better:",
+        subtitle: "All alcovians within the first 6 months are now moving with incrementally better Confidence",
         bullets: [
-            "Confidence",
             "Showcase leadership skills",
             "Better at people management",
             "Thoughts are more coherent, well structured",
@@ -45,7 +48,7 @@ const quarters = [
     },
     {
         id: "Q3",
-        title: "SYSTEM NOTICE",
+        title: "SYSTEM NOTICES",
         subtitle: "The System takes notice",
         body: "Teachers, school counsellors & staff see the alcovians change the way they move. More competition wins, big stake competitions are coming as easy wins to school- courtesy Alcovians. While scores are getting better, so are the class level inputs for any discussions being done in classes. Teachers will ask parents in PTMs on what has changed. Awe is now a norm.",
         stat: "EYES",
@@ -56,8 +59,8 @@ const quarters = [
     {
         id: "Q4",
         title: "TOP OF CLASS",
-        subtitle: "Top at class, great at extracurriculars",
-        body: "Top at class, great at extracurriculars are the bare minimum inputs from all alcovians by the end of 9 months of the program. Exam stresses are a thing of the past, alcovians move with a better sense of purpose, anxiety about the future subsides.",
+        subtitle: "Great at extracurriculars",
+        body: "Great at extracurriculars are the bare minimum inputs from all alcovians by the end of 9 months of the program. Exam stresses are a thing of the past, alcovians move with a better sense of purpose, anxiety about the future subsides.",
         stat: "WIN",
         bgColor: COLORS.mustard,
         textColor: COLORS.blue,

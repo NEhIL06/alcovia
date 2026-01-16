@@ -89,6 +89,12 @@ const MENTORS = [
         college: "Carleton University",
         imageSrc: "/assets/mentors/rohit-gandhi-1.jpg.jpg",
     },
+    {
+        name: "Satish Reddy Eadala",
+        title: "EA Sports",
+        college: "Indian School of Business",
+        imageSrc: "/assets/mentors/satishreddy.png",
+    },
 ]
 
 export default function InfiniteScrollMentors() {

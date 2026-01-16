@@ -32,7 +32,7 @@ const OFFERINGS = [
     id: "03",
     label: "1:1 MENTORSHIP",
     title: "1:1 Mentorship with Top Professionals",
-    description: "Once a month, a call with a professional that aLcovian is curious about. Enable building conviction of which industry is the teen is curious to solve problems in the long run.",
+    description: "Once a month, a call with a professional that alcovian is curious about. Enable building conviction of which industry the teen is curious to solve problems in the long run.",
     image: "/images/oneonone.jpeg",
   },
   {
@@ -58,9 +58,9 @@ const OFFERINGS = [
   },
   {
     id: "07",
-    label: "MONTHLY COUNSELLING",
-    title: "Monthly Meet Career Counsellor",
-    description: "Our career counsellors ask each alcovians the right set of questions- to enable them to introspect which stream of subjects makes the most sense to them. While being the best is the standard, understanding which sphere to be best at is equally, if not more important. The approach is nurture and eliminate for teens till 8th, and build more depth of understanding for students above 8th.",
+    label: "MONTHLY GUIDANCE",
+    title: "Get mentored Fortnightly by Guidance Coach",
+    description: " Our guidance coach ask each alcovians the right set of questions- to enable them to introspect which stream of subjects makes the most sense to them in the long run. While being the best is the standard, understanding which sphere to be best at is equally, if not more important.",
     image: "/images/counselerMeeting.jpg",
   },
   {

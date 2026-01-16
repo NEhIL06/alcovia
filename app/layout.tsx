@@ -38,7 +38,7 @@ const milan = localFont({
 export const metadata: Metadata = {
   title: "Alcovia life",
   description:
-    "Join Alcovia's journey to become a future leader shaping the world of tomorrow. Premium mentorship, career discovery, and community for Indian teens.",
+    "Mentoring future builders of tomorrow, today",
   keywords: ["Indian teens", "mentorship", "education", "career discovery", "leadership", "student development"],
   authors: [{ name: "Alcovia" }],
   icons: {
@@ -47,16 +47,16 @@ export const metadata: Metadata = {
     apple: "/images/alcovia-logo-navbar.png",
   },
   openGraph: {
-    title: "ALCOVIA | Ready to Fly?",
-    description: "Empowering Indian teens to become tomorrow's leaders",
+    title: "Alcovia | Ready to Fly?",
+    description: "Mentoring future builders of tomorrow, today",
     type: "website",
     locale: "en_IN",
     images: ["/images/alcovia-logo-navbar.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "ALCOVIA | Ready to Fly?",
-    description: "Empowering Indian teens to become tomorrow's leaders",
+    title: "Alcovia | Ready to Fly?",
+    description: "Mentoring future builders of tomorrow, today",
     images: ["/images/alcovia-logo-navbar.png"],
   },
   generator: 'v0.app'

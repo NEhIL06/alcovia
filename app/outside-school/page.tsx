@@ -171,7 +171,7 @@ export default function OutsideSchoolPage() {
                                     We are hyper-personalised, and we don't just say it. We create individual roadmaps for each alcovian, built post understanding of current likes, dislikes, future aspirations, current areas of interest.
                                 </p>
                                 <div className="p-6 bg-white/5 border border-white/10 rounded-lg backdrop-blur-sm">
-                                    <p className="font-mono text-sm text-[#D4AF37] mb-2">&gt; SYSTEM CHECK</p>
+                                    <p className="font-mono text-sm text-[#D4AF37] mb-2">&gt; Personalized annual goals</p>
                                     <p>These are broken down at a quarter level, with monthly milestones that are <span className="text-green-400 font-bold">binary</span> in nature- they are either <span className="text-green-400 font-bold">DONE</span>, or <span className="text-red-400 font-bold">NOT</span>.</p>
                                 </div>
                                 <p className="text-sm uppercase tracking-widest opacity-50 pt-4">Alcovians dont hide behind excuses, we are go-getters from day 1!</p>
@@ -198,7 +198,7 @@ export default function OutsideSchoolPage() {
                                 LOUD<br />& KNOWN
                             </h2>
                             <p className="text-xl xl:text-3xl font-bold leading-tight max-w-3xl border-l-4 border-black pl-6">
-                                Alcovian is now becoming a bit known : fortnightly linkedin posts about workshop learnings, sharing a full blown shot podcast, reels that are potentially viral- our alcovians are learning from industry makers and shakers.
+                                Alcovian is now becoming a bit known : fortnightly linkedin posts about workshop learnings, sharing a full blown podcast, reels that are potentially viral- our alcovians are learning from industry makers and shakers.
                             </p>
                             <p className="mt-6 text-lg font-medium italic opacity-80">
                                 They also start off working on their social work project from this quarter.
@@ -217,20 +217,20 @@ export default function OutsideSchoolPage() {
                         </div>
 
                         <div className="relative z-10 max-w-5xl w-full text-center xl:text-left">
-                            <h2 className="text-6xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text bg-gradient-to-r from-[#ff4d4d] to-[#4A0404] xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none">
+                            <h2 className="text-6xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text bg-gradient-to-l from-[#ff4d4d] to-[#4A0404] xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none">
                                 TRANSFORM
                             </h2>
-                            <h2 className="text-5xl xl:text-8xl font-serif italic mb-12 relative z-20">
+                            {/* <h2 className="text-5xl xl:text-8xl font-serif italic mb-12 relative z-20">
                                 The Crucible
-                            </h2>
+                            </h2> */}
                             <div className="grid xl:grid-cols-2 gap-12">
                                 <p className="text-lg xl:text-2xl leading-relaxed">
-                                    Alcovian now has a phonebook on mentors to reach out to, courtesy fortnightly sessions with career counsellor, has solid clarity on what they definitely dont want to do, and some lucky ones already know where their life is headed.
+                                    Alcovian now has a phonebook of mentors to reach out to, courtesy fortnightly sessions with career counsellor, has solid clarity on what they definitely dont want to do, and some lucky ones already know where their life is headed.
                                 </p>
                                 <div className="border-t border-red-500/50 pt-6">
                                     <p className="font-mono text-red-200 text-sm mb-4">/// THE CHALLENGE</p>
                                     <p className="text-xl xl:text-2xl font-medium">
-                                        A transformative quarter for all alcovians- they build their own startups which they have to own- the goods and the bads- <span className="text-white border-b-2 border-white">alone.</span>
+                                        A transformative quarter for all alcovians- they build their own startups which they have to own- the goods and the bads- <span className="text-white italic border-b-2 border-white">alone.</span>
                                     </p>
                                 </div>
                             </div>
@@ -360,14 +360,7 @@ export default function OutsideSchoolPage() {
                         <span className="text-[#D4AF37]">transform?</span>
                     </motion.h2>
 
-                    <motion.p
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8, delay: 0.15 }}
-                        className="max-w-xl text-lg text-[#F2F2F2]/60 mb-12 z-10"
-                    >
-                        Join hundreds of alcovians who have transformed their lives through our program.
-                    </motion.p>
+                
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
