@@ -8,39 +8,39 @@ const timelineData = [
         id: "Q1",
         title: "5% INCREMENT",
         description: "Securing a minimum 5% rise in academic performance",
-        color: "#234944", // Green
+        color: "#002C45", // Dark Blue
         textColor: "#E5D1BE"
     },
     {
         id: "Q2",
         title: "WORKSHOPS MAGIC",
         description: "Building confidence, leadership, and coherence",
-        color: "#912F3C", // Burgundy
+        color: "#002C45", // Dark Blue
         textColor: "#E5D1BE"
     },
     {
         id: "Q3",
         title: "SYSTEM NOTICES",
         description: "Gaining recognition from teachers and staff",
-        color: "#EABF36", // Mustard
-        textColor: "#002C45"
+        color: "#002C45", // Dark Blue
+        textColor: "#E5D1BE"
     },
     {
         id: "Q4",
         title: "TOP OF CLASS",
         description: "Topping the class and acing extracurriculars",
-        color: "#E5D1BE", // Beige
-        textColor: "#002C45"
+        color: "#002C45", // Dark Blue
+        textColor: "#E5D1BE"
     }
 ];
 
 export default function TimelineGraph() {
     return (
-        <section className="flex min-h-screen flex-col justify-center py-20 lg:py-32" style={{ backgroundColor: '#002C45' }}>
+        <section className="flex min-h-screen flex-col justify-center py-20 lg:py-32" style={{ backgroundColor: '#EABF36' }} data-theme="yellow">
             <div className="container mx-auto px-6">
                 <div className="mb-20 text-center">
-                    <TextReveal delay={0} highlightColor="#EABF36">
-                        <h2 className="font-display text-4xl font-bold uppercase leading-none text-[#E5D1BE] lg:text-6xl">
+                    <TextReveal delay={0} highlightColor="#002C45">
+                        <h2 className="font-display text-4xl font-bold uppercase leading-none text-[#002C45] lg:text-6xl">
                             The Year Ahead
                         </h2>
                     </TextReveal>
@@ -53,11 +53,11 @@ export default function TimelineGraph() {
                             <motion.path
                                 d="M0,80 C300,80 300,20 600,50 C900,80 1200,20 1600,50"
                                 fill="none"
-                                stroke="#EABF36"
-                                strokeWidth="3"
-                                strokeDasharray="10 10"
+                                stroke="#002C45"
+                                strokeWidth="2"
+                                strokeDasharray="8 8"
                                 initial={{ pathLength: 0, opacity: 0 }}
-                                whileInView={{ pathLength: 1, opacity: 0.4 }}
+                                whileInView={{ pathLength: 1, opacity: 0.2 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 2, ease: "easeInOut" }}
                             />
@@ -65,13 +65,13 @@ export default function TimelineGraph() {
                     </div>
 
                     {/* Vertical Line (Mobile) */}
-                    <div className="absolute left-8 top-0 block h-full w-0.5 -translate-x-1/2 bg-[#E5D1BE]/20 lg:hidden">
+                    <div className="absolute left-8 top-0 block h-full w-0.5 -translate-x-1/2 bg-[#002C45]/10 lg:hidden">
                         <motion.div
                             initial={{ scaleY: 0 }}
                             whileInView={{ scaleY: 1 }}
                             viewport={{ once: true }}
                             transition={{ duration: 1.5, ease: "easeInOut" }}
-                            className="h-full w-full origin-top bg-[#EABF36]"
+                            className="h-full w-full origin-top bg-[#002C45]"
                         />
                     </div>
 
@@ -83,9 +83,9 @@ export default function TimelineGraph() {
                                     initial={{ scale: 0, opacity: 0 }}
                                     whileInView={{ scale: 1, opacity: 1 }}
                                     viewport={{ once: true }}
-                                    whileHover={{ scale: 1.1 }}
+                                    whileHover={{ scale: 1.1, backgroundColor: "#912F3C" }}
                                     transition={{ duration: 0.5, delay: index * 0.2 }}
-                                    className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full shadow-xl lg:h-24 lg:w-24 lg:mt-4"
+                                    className="relative z-10 flex h-16 w-16 shrink-0 items-center justify-center rounded-full shadow-2xl transition-colors duration-300 lg:h-24 lg:w-24 lg:mt-4"
                                     style={{ backgroundColor: item.color }}
                                 >
                                     <span
@@ -104,10 +104,10 @@ export default function TimelineGraph() {
                                     transition={{ duration: 0.5, delay: index * 0.2 + 0.2 }}
                                     className="flex flex-col pt-2 lg:items-center"
                                 >
-                                    <h3 className="mb-2 font-display text-xl font-bold uppercase text-[#E5D1BE] lg:text-2xl">
+                                    <h3 className="mb-2 font-display text-xl font-bold uppercase text-[#002C45] lg:text-2xl">
                                         {item.title}
                                     </h3>
-                                    <p className="font-body text-sm font-medium text-[#E5D1BE]/70 lg:text-base lg:max-w-[200px]">
+                                    <p className="font-body text-sm font-medium text-[#002C45]/80 lg:text-base lg:max-w-[200px]">
                                         {item.description}
                                     </p>
                                 </motion.div>

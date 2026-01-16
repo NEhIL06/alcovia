@@ -157,7 +157,7 @@ export default function Manifesto() {
       className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 pb-20 pt-4 md:min-h-screen md:px-12 md:py-24 lg:px-20"
       data-theme="graded"
     >
-      {/* Icon Header */}
+      {/* Icon Header
       <motion.div
         className="relative z-10 mb-12 flex justify-center"
         initial={{ opacity: 0, y: -20 }}
@@ -176,7 +176,7 @@ export default function Manifesto() {
             MENTORSHIP SINCE 2024
           </span>
         </div>
-      </motion.div>
+      </motion.div> */}
 
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-6xl flex flex-col items-center text-center">

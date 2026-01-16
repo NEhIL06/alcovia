@@ -28,13 +28,10 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 50 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="group relative cursor-default font-display text-[15vw] font-bold leading-none tracking-tighter text-transparent"
+                    className="relative cursor-default font-display text-[15vw] font-bold leading-none tracking-tighter text-transparent"
                     style={{ WebkitTextStroke: "2px #E5D1BE" }}
                 >
                     AT SCHOOL
-                    <span className="absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100" style={{ WebkitTextStroke: "0px", color: '#EABF36' }}>
-                        AT SCHOOL
-                    </span>
                 </motion.h1>
 
                 <TextReveal delay={0.6} highlightColor="#EABF36">

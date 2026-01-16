@@ -49,8 +49,8 @@ const MENTORS = [
     },
     {
         name: "Devansh Jain",
-        title: "Executive Director, INOXGFL Group",
-        college: "Carnegie Mellon University",
+        title: "Founder & CEO, Culture Circle",
+        college: "IIM Ahmedabad",
         imageSrc: "/assets/mentors/Devansh-Jain-2.png",
     },
     {
