@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion"
 import gsap from "gsap"
 
 // Words to highlight in gold (#EABF36)
-const accentWords = ["1%", "11-16.", "3%", "EARNED.", "FEW", "INVITED", "TEENS", "LEGACY"]
+const accentWords = ["1%", "11-16.", "3%", "EARNED.", "FEW", "INVITED", "TEENS", "LEGACY", "GROWTH","FAILING","TOGETHER"]
 
 // Helper function to render text with highlighted accent words
 function renderLineWithAccents(text: string) {
@@ -43,10 +43,10 @@ const manifestoLines = [
   { text: "PREPARE FOR A YEAR OF:", isSpacerAfter: true },
 
   // Block 4 - List items
-  { text: "RADICAL GROWTH.", isSpacerAfter: false },
-  { text: "FAILING OFTEN,", isSpacerAfter: false },
-  { text: "BUILDING TOGETHER,AND", isSpacerAfter: false },
-  { text: "SELF DISCOVERY.", isSpacerAfter: true },
+  { text: "1. RADICAL GROWTH.", isSpacerAfter: false },
+  { text: "2. FAILING OFTEN,", isSpacerAfter: false },
+  { text: "3. BUILDING TOGETHER, AND", isSpacerAfter: false },
+  { text: "4. SELF DISCOVERY.", isSpacerAfter: true },
 
   // Block 5
   { text: "AT ALCOVIA,", isSpacerAfter: false },
@@ -126,7 +126,7 @@ export default function Manifesto() {
               />
 
               <p
-                className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[18px] font-normal leading-[1.3] tracking-tight sm:text-[28px] md:text-[38px] lg:text-[48px] xl:text-[70px] whitespace-nowrap px-1"
+                className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[18px] font-bold leading-[1.3] tracking-tight sm:text-[28px] md:text-[38px] lg:text-[48px] xl:text-[70px] whitespace-nowrap px-1"
               >
                 {renderLineWithAccents(line.text)}
               </p>
