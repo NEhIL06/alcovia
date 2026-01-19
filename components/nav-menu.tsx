@@ -278,7 +278,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                         <FlipLink
                                             href={item.href}
                                             onClick={onClose}
-                                            className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-7xl"
+                                            className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-8xl"
                                             baseColor="#F7F7F3"
                                             hoverColor="#EABF36"
                                         >

@@ -78,7 +78,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} font-sans antialiased overflow-x-hidden`}>
+      <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
         <SessionProvider>
           <SmoothScrollProvider>
             <PremiumNavbar />
