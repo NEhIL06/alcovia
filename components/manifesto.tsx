@@ -2,100 +2,56 @@
 
 import { useRef, useEffect, useState } from "react"
 import { motion, useInView } from "framer-motion"
-import Image from "next/image"
 import gsap from "gsap"
 
-interface TextWord {
-  text: string
-  isAccent: boolean
+// Words to highlight in gold (#EABF36)
+const accentWords = ["1%", "11-16.", "3%", "EARNED.", "FEW", "INVITED", "TEENS", "LEGACY"]
+
+// Helper function to render text with highlighted accent words
+function renderLineWithAccents(text: string) {
+  // Split text into words while preserving spaces
+  const words = text.split(" ")
+
+  return words.map((word, idx) => {
+    // Check if this word (or its base form without punctuation) should be highlighted
+    const isAccent = accentWords.some(accent => word.includes(accent) || word === accent)
+
+    return (
+      <span key={idx}>
+        <span className={isAccent ? "text-[#EABF36]" : "text-[#F7F7F3]"}>
+          {word}
+        </span>
+        {idx < words.length - 1 ? " " : ""}
+      </span>
+    )
+  })
 }
 
-// DATA STRUCTURE: Grouped into lines matching user's text
-const manifestoLines: TextWord[][] = [
-  [
-    { text: "ALCOVIA", isAccent: false },
-    { text: "UNITES", isAccent: false },
-    { text: "THE", isAccent: false },
-    { text: "TOP 1%", isAccent: true },
-  ],
-  [
-    { text: "OF", isAccent: false },
-    { text: "TEENAGERS", isAccent: false },
-    { text: "AGED", isAccent: false },
-    { text: "11-16.", isAccent: true },
-  ],
-  [
-    { text: "WITH", isAccent: false },
-    { text: "A", isAccent: false },
-    { text: "STRICT", isAccent: false },
-    { text: "3%", isAccent: true },
-    { text: "SELECTION", isAccent: false },
-    { text: "RATE,", isAccent: false },
-  ],
-  [
-    { text: "ENTRY", isAccent: false },
-    { text: "IS", isAccent: false },
-    { text: "EARNED.", isAccent: true },
-  ],
-  [
-    { text: "FOR", isAccent: false },
-    { text: "THE", isAccent: false },
-    { text: "FEW", isAccent: false },
-    // { text: "WHO", isAccent: false },
-    // { text: "ARE", isAccent: false },
-    // { text: "INVITED", isAccent: true },
-    // { text: "TO", isAccent: false },
-    // { text: "JOIN,", isAccent: false },
-  ],
-  [
-    { text: "WHO", isAccent: false },
-    { text: "ARE", isAccent: false },
-    { text: "INVITED", isAccent: true },
-    { text: "TO", isAccent: false },
-    { text: "JOIN,", isAccent: false },
-  ],
-  [
-    { text: "PREPARE", isAccent: false },
-    { text: "FOR", isAccent: false },
-    { text: "A", isAccent: false },
-    { text: "YEAR", isAccent: false },
-    { text: "OF:", isAccent: false },
-  ],
-  [
-    { text: "RADICAL", isAccent: true },
-    { text: "GROWTH.", isAccent: false },
-    { text: "FAILING", isAccent: true },
-    { text: "OFTEN,", isAccent: false },
-  ],
-  [
-    { text: "BUILDING", isAccent: false },
-    { text: "TOGETHER,", isAccent: false },
-    { text: "AND", isAccent: false },
-  ],
-  [
-    { text: "SELF", isAccent: false },
-    { text: "DISCOVERY.", isAccent: true },
-  ],
-  [
-    { text: "AT", isAccent: false },
-    { text: "ALCOVIA,", isAccent: false },
-  ],
-  [
-    // { text: "AT", isAccent: false },
-    // { text: "ALCOVIA,", isAccent: false },
-    { text: "WE", isAccent: false },
-    { text: "ENABLE", isAccent: false },
-    { text: "TEENS", isAccent: false },
-    { text: "TO", isAccent: false },
-    { text: "START", isAccent: false },
-    { text: "THEIR", isAccent: false },
-  ],
-  [
-    { text: "LEGACY", isAccent: true },
-    { text: "BUILDING", isAccent: false },
-    { text: "JOURNEY", isAccent: false },
-    { text: "TODAY.", isAccent: true },
-  ],
+// DATA STRUCTURE: Grouped into lines matching user's exact text format
+const manifestoLines = [
+  // Block 1
+  { text: "ALCOVIA UNITES THE TOP 1%", isSpacerAfter: false },
+  { text: "OF TEENAGERS AGED 11-16.", isSpacerAfter: true },
+
+  // Block 2
+  { text: "WITH A STRICT 3% SELECTION RATE,", isSpacerAfter: false },
+  { text: "ENTRY IS EARNED.", isSpacerAfter: true },
+
+  // Block 3
+  { text: "FOR THE FEW", isSpacerAfter: false },
+  { text: "WHO ARE INVITED TO JOIN,", isSpacerAfter: false },
+  { text: "PREPARE FOR A YEAR OF:", isSpacerAfter: true },
+
+  // Block 4 - List items
+  { text: "RADICAL GROWTH.", isSpacerAfter: false },
+  { text: "FAILING OFTEN,", isSpacerAfter: false },
+  { text: "BUILDING TOGETHER,AND", isSpacerAfter: false },
+  { text: "SELF DISCOVERY.", isSpacerAfter: true },
+
+  // Block 5
+  { text: "AT ALCOVIA,", isSpacerAfter: false },
+  { text: "WE ENABLE TEENS TO START THEIR", isSpacerAfter: false },
+  { text: "LEGACY BUILDING JOURNEY TODAY.", isSpacerAfter: false },
 ]
 
 export default function Manifesto() {
@@ -137,7 +93,7 @@ export default function Manifesto() {
 
         tl.to(mask, {
           scaleX: 1,
-          duration: 0.4,
+          duration: 0.6,
         }, i * 0.1)
 
         tl.set(mask, { transformOrigin: "right" }, ">")
@@ -145,7 +101,7 @@ export default function Manifesto() {
 
         tl.to(mask, {
           scaleX: 0,
-          duration: 0.4,
+          duration: 0.6,
         }, ">")
       })
     }
@@ -154,57 +110,32 @@ export default function Manifesto() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 pb-20 pt-4 md:min-h-screen md:px-12 md:py-24 lg:px-20"
+      className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 pb-20 pt-8 md:min-h-screen md:px-12 md:py-24 lg:px-20"
       data-theme="graded"
     >
-      {/* Icon Header
-      <motion.div
-        className="relative z-10 mb-12 flex justify-center"
-        initial={{ opacity: 0, y: -20 }}
-        animate={hasAnimated ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="flex flex-col items-center">
-          <Image
-            src="/images/alcovia-logo-navbar.png"
-            alt="Alcovia Logo"
-            width={64}
-            height={64}
-            className="w-16 h-16 object-contain"
-          />
-          <span className="mt-2 text-xs uppercase tracking-[0.3em] text-[#F7F7F3]/50">
-            MENTORSHIP SINCE 2024
-          </span>
-        </div>
-      </motion.div> */}
-
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-6xl flex flex-col items-center text-center">
         {manifestoLines.map((line, i) => (
-          <div
-            key={i}
-            ref={(el) => { linesRef.current[i] = el }}
-            className="reveal-line relative overflow-hidden w-fit my-[-0.1em]"
-          >
+          <div key={i}>
             <div
-              className="reveal-mask absolute inset-0 z-20 bg-[#D4AF37]"
-            />
-
-            <p
-              className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[22px] font-normal leading-[1.15] tracking-tight sm:text-[28px] md:text-[34px] lg:text-[58px] xl:text-[70px] whitespace-nowrap px-1"
+              ref={(el) => { linesRef.current[i] = el }}
+              className="reveal-line relative overflow-hidden w-fit my-[-0.05em]"
             >
-              {line.map((word, wordIndex) => (
-                <span
-                  key={wordIndex}
-                  className={`${word.isAccent
-                    ? "text-[#EABF36] tracking-wide font-semibold"
-                    : "text-[#F7F7F3]"
-                    } mx-[0.15em]`}
-                >
-                  {word.text}
-                </span>
-              ))}
-            </p>
+              <div
+                className="reveal-mask absolute inset-0 z-20 bg-[#D4AF37]"
+              />
+
+              <p
+                className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[18px] font-normal leading-[1.3] tracking-tight sm:text-[28px] md:text-[38px] lg:text-[48px] xl:text-[70px] whitespace-nowrap px-1"
+              >
+                {renderLineWithAccents(line.text)}
+              </p>
+            </div>
+
+            {/* Spacer after specific lines */}
+            {line.isSpacerAfter && (
+              <div className="h-4 md:h-8 lg:h-10" />
+            )}
           </div>
         ))}
       </div>

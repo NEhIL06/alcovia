@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
 import PremiumNavbar from "@/components/premium-navbar"
+import PageTransition from "@/components/PageTransition"
 import "./globals.css"
 
 import localFont from "next/font/local"
@@ -81,7 +82,9 @@ export default function RootLayout({
         <SessionProvider>
           <SmoothScrollProvider>
             <PremiumNavbar />
-            {children}
+            <PageTransition>
+              {children}
+            </PageTransition>
           </SmoothScrollProvider>
         </SessionProvider>
         <Analytics />

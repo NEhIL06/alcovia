@@ -1,24 +1,41 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
-import TextReveal from "./text-reveal"
+import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import InfiniteScrollMentors from "@/components/infinite-scroll-mentors"
+import TextReveal from "./text-reveal"
 
 export default function PartnersSection() {
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
+  // Parallax scroll setup
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  // Parallax transforms - different speeds for depth effect
+  const alcoviaY = useTransform(scrollYProgress, [0, 1], [100, -100])
+  const headlineY = useTransform(scrollYProgress, [0, 1], [50, -50])
+  const subheadY = useTransform(scrollYProgress, [0, 1], [80, -80])
+  const paragraphY = useTransform(scrollYProgress, [0, 1], [30, -30])
+
   return (
-    <section ref={containerRef} className="relative w-full overflow-hidden bg-[#F5F5EF] py-24 md:py-32">
-      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pointer-events-none">
+    <motion.section
+      ref={containerRef}
+      className="relative w-full overflow-hidden py-24 md:py-32 bg-[#F5F5EF]"
+    >
+      {/* ALCOVIA SVG Background - with extra top spacing */}
+      <div className="absolute inset-0 flex items-start justify-center overflow-hidden pointer-events-none pt-16 md:pt-24">
         <motion.svg
-          className="absolute top-0 w-full h-[500px]"
+          className="absolute top-10 w-full h-[500px]"
           viewBox="0 0 900 300"
           preserveAspectRatio="xMidYMid meet"
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : {}}
           transition={{ duration: 1 }}
+          style={{ y: alcoviaY }}
         >
           <defs>
             <linearGradient id="premiumFill" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -57,33 +74,51 @@ export default function PartnersSection() {
         </motion.svg>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 md:px-12">
-        <div className="mb-16 grid gap-8 md:grid-cols-2 md:gap-16">
-          <div>
-            <TextReveal delay={0}>
-              <h2 className="text-xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-6xl lg:text-7xl">
-                PROUD TO CALL
-              </h2>
-            </TextReveal>
-            <TextReveal delay={0.2}>
-              <h3 className="text-5xl font-black uppercase tracking-tight text-[#0B0B0B]/60 md:text-6xl lg:text-7xl">
-                OUR MENTORS
-              </h3>
-            </TextReveal>
-          </div>
+      <div className="relative mx-auto max-w-7xl px-6 md:px-12 pt-12 md:pt-16">
+        <div className="mb-16 flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-16">
+          {/* Left Column - Headlines with Parallax */}
+          <motion.div style={{ y: headlineY }}>
+            <motion.h2
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              PROUD TO CALL
+            </motion.h2>
+            <motion.h3
+              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]/60 mt-1"
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              OUR MENTORS
+            </motion.h3>
+          </motion.div>
 
-          <TextReveal delay={0.4} highlightColor="#EABF36">
-            <p className="max-w-md self-end text-base text-[#0B0B0B]/70 md:text-lg">
-              Alcovia is proud to collaborate with a range of mentors, who share our passion for empowering students
-              across India.
-            </p>
-          </TextReveal>
+          {/* Right Column - Paragraph with Parallax */}
+          <motion.div
+            className="self-end mt-4 md:mt-0"
+            style={{ y: paragraphY }}
+          >
+            <motion.p
+              className="text-sm sm:text-base md:text-base text-[#0B0B0B]/70 font-bold leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              <TextReveal duration={0.6}>Alcovia is proud to collaborate with a range of mentors, who share</TextReveal>
+              <br className="hidden sm:block" />
+              <TextReveal duration={0.4} delay={0.6}> our passion for empowering students across India.</TextReveal>
+            </motion.p>
+          </motion.div>
         </div>
       </div>
 
-      <div className="relative w-full overflow-hidden">
+      {/* Mentors Text */}
+      <div className="relative w-full overflow-hidden mt-25 md:mt-45">
         <InfiniteScrollMentors />
       </div>
-    </section>
+    </motion.section>
   )
 }

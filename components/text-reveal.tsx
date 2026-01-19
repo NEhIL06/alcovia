@@ -51,9 +51,9 @@ export default function TextReveal({
         animate={
           isInView
             ? {
-                scaleX: [0, 1, 1, 0], // Grow, Hold, Hold, Shrink
-                originX: [0, 0, 1, 1], // Left, Left, Right, Right (The Switch)
-              }
+              scaleX: [0, 1, 1, 0], // Grow, Hold, Hold, Shrink
+              originX: [0, 0, 1, 1], // Left, Left, Right, Right (The Switch)
+            }
             : { scaleX: 0 }
         }
         transition={{
@@ -68,7 +68,7 @@ export default function TextReveal({
 }
 
 interface MultiLineRevealProps {
-  lines: Array<{ text: string; isAccent?: boolean }>
+  lines: Array<{ text?: string; content?: React.ReactNode; isAccent?: boolean }>
   className?: string
   lineClassName?: string
   baseDelay?: number
@@ -89,7 +89,7 @@ export function MultiLineReveal({
     <div ref={ref} className={className}>
       {lines.map((line, index) => (
         <div key={index} className={`relative inline-block ${lineClassName}`}>
-          
+
           {/* 1. THE TEXT */}
           <motion.span
             className="relative z-10 block px-1" // Added padding to prevent font clipping
@@ -106,22 +106,22 @@ export function MultiLineReveal({
               ease: "linear",
             }}
           >
-            {line.text}
+            {line.content || line.text}
           </motion.span>
 
           {/* 2. THE CURTAIN */}
           <motion.span
             className="absolute inset-0 z-20"
-            style={{ 
+            style={{
               backgroundColor: line.isAccent ? "#EABF36" : "#EABF36" // Or use different colors if needed
             }}
             initial={{ scaleX: 0, originX: 0 }}
             animate={
               isInView
                 ? {
-                    scaleX: [0, 1, 1, 0],
-                    originX: [0, 0, 1, 1],
-                  }
+                  scaleX: [0, 1, 1, 0],
+                  originX: [0, 0, 1, 1],
+                }
                 : { scaleX: 0 }
             }
             transition={{

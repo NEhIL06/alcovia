@@ -11,6 +11,9 @@ import { motion } from "framer-motion";
 
 import Footer from "@/components/footer";
 import TextReveal from "@/components/text-reveal";
+import type { Metadata } from "next"
+
+
 
 // --- 1. PREMIUM TYPOGRAPHY SETUP ---
 const serif = Playfair_Display({ subsets: ["latin"], variable: "--font-serif" });
@@ -217,7 +220,7 @@ export default function OutsideSchoolPage() {
                         </div>
 
                         <div className="relative z-10 max-w-5xl w-full text-center xl:text-left">
-                            <h2 className="text-6xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text bg-gradient-to-l from-[#ff4d4d] to-[#4A0404] xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none">
+                            <h2 className="text-5xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text bg-gradient-to-l from-[#ff4d4d] to-[#4A0404] relative xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none text-center xl:text-left w-full xl:w-auto">
                                 TRANSFORM
                             </h2>
                             {/* <h2 className="text-5xl xl:text-8xl font-serif italic mb-12 relative z-20">
@@ -360,7 +363,7 @@ export default function OutsideSchoolPage() {
                         <span className="text-[#D4AF37]">transform?</span>
                     </motion.h2>
 
-                
+
 
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}

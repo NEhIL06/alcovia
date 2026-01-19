@@ -4,23 +4,29 @@ import { useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import TextReveal from "./text-reveal"
+import TextReveal, { MultiLineReveal } from "./text-reveal"
 
 const sections = [
   {
     id: "at-school",
     topText: "AT",
     bottomText: "SCHOOL",
-    description:
-      "Empowering academic excellence through innovative learning methodologies.",
+    descriptionLines: [
+      { text: "Empowering academic excellence" },
+      { text: "through innovative learning" },
+      { text: "methodologies." }
+    ],
     image: "/images/atschool.png",
   },
   {
     id: "outside-school",
     topText: "OUTSIDE",
     bottomText: "SCHOOL",
-    description:
-      "Building differentiation through real-world experiences and leadership development.",
+    descriptionLines: [
+      { text: "Building differentiation through" },
+      { text: "real-world experiences and" },
+      { text: "leadership development." }
+    ],
     image: "/images/outsideschool.png",
   },
 ]
@@ -143,16 +149,25 @@ export default function ToggleCompare() {
               </div>
             </div>
 
-            <p className="ml-auto max-w-[160px] text-xs leading-relaxed text-[#F7F7F3]/60 md:max-w-[200px] md:text-sm">
-              {sections[0].description}
-            </p>
+            <div className="ml-auto max-w-[160px] md:max-w-[200px]">
+              <MultiLineReveal
+                lines={sections[0].descriptionLines}
+                className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-right"
+                lineClassName="justify-end"
+                staggerDelay={0.1}
+              />
+            </div>
 
             <Link href="/at-school">
-              <button
-                className="ml-auto mt-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] hover:scale-110 transition-transform"
+              <motion.button
+                className="ml-auto mt-5 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold hover:scale-110 transition-transform"
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
               >
                 →
-              </button>
+              </motion.button>
             </Link>
           </motion.div>
 
@@ -172,16 +187,24 @@ export default function ToggleCompare() {
               </div>
             </div>
 
-            <p className="mr-auto max-w-[160px] text-xs leading-relaxed text-[#F7F7F3]/60 md:max-w-[200px] md:text-sm">
-              {sections[1].description}
-            </p>
+            <div className="mr-auto max-w-[160px] md:max-w-[200px]">
+              <MultiLineReveal
+                lines={sections[1].descriptionLines}
+                className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-left"
+                staggerDelay={0.1}
+              />
+            </div>
 
             <Link href="/outside-school">
-              <button
-                className="mr-auto mt-5 flex h-11 w-11 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] hover:scale-110 transition-transform"
+              <motion.button
+                className="mr-auto mt-5 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold hover:scale-110 transition-transform"
+                initial={{ opacity: 0, scale: 0.5 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
               >
                 ←
-              </button>
+              </motion.button>
             </Link>
           </motion.div>
         </div>

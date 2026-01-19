@@ -6,6 +6,8 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import FlipLink from "@/components/flip-link"
 import PremiumNavbar from "@/components/premium-navbar"
+import type { Metadata } from "next"
+
 
 const menuItems = [
     { label: "HOME", href: "/" },

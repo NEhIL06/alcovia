@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import TextReveal from "@/components/text-reveal";
+import TextReveal, { MultiLineReveal } from "@/components/text-reveal";
 
 export default function Philosophy() {
     return (
@@ -15,11 +15,17 @@ export default function Philosophy() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <TextReveal delay={0} highlightColor="#EABF36">
-                            <p className="font-display text-2xl leading-tight lg:text-4xl" style={{ color: '#E5D1BE' }}>
-                                Alcovia program is hyperpersonalised- ensuring different outcomes for each alcovian. We work in the area that shows maximum impact. Either an area of big improvement or honing a skill that is already at a mastery level.
-                            </p>
-                        </TextReveal>
+                        <MultiLineReveal
+                            lines={[
+                                { text: "Alcovia program is hyperpersonalised-" },
+                                { text: "ensuring different outcomes for each alcovian." },
+                                { text: "We work in the area that shows maximum impact." },
+                                { text: "Either an area of big improvement or honing" },
+                                { text: "a skill that is already at a mastery level." }
+                            ]}
+                            className="font-display text-2xl leading-tight lg:text-4xl text-[#E5D1BE]"
+                            staggerDelay={0.1}
+                        />
                     </motion.div>
                 </div>
 
@@ -51,11 +57,20 @@ export default function Philosophy() {
                             viewport={{ once: true }}
                             transition={{ duration: 0.8, delay: 0.5 }}
                         >
-                            <TextReveal delay={0.2} highlightColor="#EABF36">
-                                <p className="font-display text-4xl font-bold leading-none lg:text-6xl" style={{ color: '#EABF36' }}>
-                                    Nobody is <span style={{ color: '#e5c1beff', fontWeight: 'bold', fontStyle: 'italic' }}>perfect</span>, and we love that.
-                                </p>
-                            </TextReveal>
+                            <MultiLineReveal
+                                lines={[
+                                    {
+                                        content: (
+                                            <>
+                                                Nobody is <span style={{ color: '#e5c1beff', fontWeight: 'bold', fontStyle: 'italic' }}>perfect</span>,
+                                            </>
+                                        )
+                                    },
+                                    { text: "and we love that." }
+                                ]}
+                                className="font-display text-4xl font-bold leading-none lg:text-6xl text-[#EABF36]"
+                                staggerDelay={0.1}
+                            />
                         </motion.div>
                     </div>
                 </div>

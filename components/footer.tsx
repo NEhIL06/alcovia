@@ -135,8 +135,8 @@ export default function Footer() {
             </nav>
           </div>
 
-          <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#EABF36]">
+          <div className="space-y-4 flex flex-col items-center md:items-start">
+            <h3 className="text-sm font-semibold px-7 uppercase tracking-wider text-[#EABF36] text-center md:text-left">
               Follow Us
             </h3>
             <div className="flex gap-3 justify-center md:justify-start">

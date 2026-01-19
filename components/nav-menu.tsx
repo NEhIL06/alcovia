@@ -46,6 +46,33 @@ const containerVariants = {
     },
 }
 
+// Shutter bar animation for each menu item
+const shutterItemVariants = {
+    hidden: {
+        scaleY: 0,
+        opacity: 0,
+        transformOrigin: "top",
+    },
+    visible: {
+        scaleY: 1,
+        opacity: 1,
+        transformOrigin: "top",
+        transition: {
+            duration: 0.4,
+            ease: [0.22, 1, 0.36, 1] as const
+        },
+    },
+    exit: {
+        scaleY: 0,
+        opacity: 0,
+        transformOrigin: "bottom",
+        transition: {
+            duration: 0.25,
+            ease: [0.22, 1, 0.36, 1] as const
+        },
+    },
+}
+
 const itemVariants = {
     hidden: { y: 40, opacity: 0 },
     visible: {
@@ -76,10 +103,12 @@ const imageGridVariants = {
 
 export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
     // --- PARALLAX SETUP ---
+    const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
     // Smooth springs for fluid movement
     const springConfig = { damping: 25, stiffness: 150 };
+    const springX = useSpring(mouseX, springConfig);
     const springY = useSpring(mouseY, springConfig);
 
     // Transform values for different layers (Depth Effect)
@@ -89,6 +118,10 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
     // Right Column (Faster & Opposite Y)
     const yRight = useTransform(springY, [-0.5, 0.5], [30, -30]);
 
+    // BACKGROUND PARALLAX - Very subtle movement (max 10px)
+    const bgX = useTransform(springX, [-0.5, 0.5], [8, -8]);
+    const bgY = useTransform(springY, [-0.5, 0.5], [8, -8]);
+
     const handleMouseMove = (e: React.MouseEvent) => {
         const { clientX, clientY } = e;
         const { innerWidth, innerHeight } = window;
@@ -97,6 +130,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
         const x = (clientX / innerWidth) - 0.5;
         const y = (clientY / innerHeight) - 0.5;
 
+        mouseX.set(x);
         mouseY.set(y);
     };
 
@@ -120,13 +154,41 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
         <AnimatePresence mode="wait">
             {isOpen && (
                 <motion.div
-                    className="fixed inset-0 z-[100] flex h-screen w-full bg-[#0b0d0c] text-[#F7F7F3]"
+                    className="fixed inset-0 z-[100] flex h-screen w-full text-[#F7F7F3] overflow-hidden"
+                    style={{ backgroundColor: "#08261e" }}
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                     exit="exit"
-                    onMouseMove={handleMouseMove} // Track mouse movement
+                    onMouseMove={handleMouseMove}
                 >
+                    {/* PARALLAX BACKGROUND LAYER - Moves subtly with cursor */}
+                    <motion.div
+                        className="absolute inset-[-20px] z-0 pointer-events-none opacity-30"
+                        style={{
+                            backgroundImage: "url('/images/nav-menu.png')",
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                            backgroundRepeat: "no-repeat",
+                            x: bgX,
+                            y: bgY,
+                        }}
+                    />
+
+                    {/* Apply for Cohort 2026 Button - Top Left */}
+                    <motion.a
+                        href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform?embedded=true"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-full bg-[#EABF36] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 hover:bg-[#F5D042] active:scale-95"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3, delay: 0.15 }}
+                    >
+                        Apply for Cohort 2026
+                    </motion.a>
+
                     {/* Close Button */}
                     <motion.button
                         onClick={onClose}
@@ -198,22 +260,31 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
 
                     {/* Right Column - Navigation */}
                     <div className="flex h-full w-full flex-col justify-center px-8 xl:w-[60%] xl:items-center xl:px-24">
-                        <nav className="flex flex-col items-center space-y-3">
-                            {menuItems.map((item) => (
+                        <nav className="flex flex-col items-center w-full">
+                            {menuItems.map((item, index) => (
                                 <motion.div
                                     key={item.label}
-                                    variants={itemVariants}
-                                    className={`overflow-hidden ${item.mobileOnly ? "xl:hidden" : ""}`}
+                                    variants={shutterItemVariants}
+                                    className={`relative overflow-hidden w-full max-w-2xl ${item.mobileOnly ? "xl:hidden" : ""}`}
                                 >
-                                    <FlipLink
-                                        href={item.href}
-                                        onClick={onClose}
-                                        className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-7xl"
-                                        baseColor="#F7F7F3"
-                                        hoverColor="#EABF36"
-                                    >
-                                        {item.label}
-                                    </FlipLink>
+                                    {/* Shutter Bar Background */}
+                                    <motion.div
+                                        className="absolute inset-0"
+                                        initial={{ scaleY: 0, originY: 0 }}
+                                        animate={{ scaleY: 1 }}
+                                        transition={{ delay: index * 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                                    />
+                                    <div className="relative py-4 flex justify-center">
+                                        <FlipLink
+                                            href={item.href}
+                                            onClick={onClose}
+                                            className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-7xl"
+                                            baseColor="#F7F7F3"
+                                            hoverColor="#EABF36"
+                                        >
+                                            {item.label}
+                                        </FlipLink>
+                                    </div>
                                 </motion.div>
                             ))}
                         </nav>
