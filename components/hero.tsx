@@ -3,23 +3,18 @@
 import type React from "react"
 import { useRef, useEffect, useState, useCallback } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
-import Image from "next/image"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import anime from "animejs"
 import { useHeroAnimation } from "@/context/hero-animation-context"
-import InteractiveBackground from "./InteractiveBackground"
 import { ArrowUpRight } from "lucide-react"
-import { useCanvasLiquidReveal } from "@/hooks/useCanvasLiquidReveal"
+import CursorLens from "./cursor-lens"
 
 import {
     checkReducedMotion,
     isMobile,
     initPageLoadTimeline,
     initSpotlightBreathing,
-    createWingRevealTimeline,
-    createWingHoverAnimation,
-    createWingFoldAnimation,
     createCTAMagneticPull,
     createCTANeonSweep,
     createCTAClickRipple,
@@ -58,7 +53,7 @@ const MobileTagline = ({ isRevealed, scrollProgress }: { isRevealed: boolean, sc
 
     return (
         <motion.div
-            className="xl:hidden mb-6 mt-4 flex flex-col items-center text-center"
+            className="xl:hidden flex flex-col items-center text-center"
             animate={{
                 opacity: scrollProgress > 0.05 ? 0 : 1,
                 pointerEvents: scrollProgress > 0.05 ? "none" : "auto"
@@ -76,19 +71,6 @@ const MobileTagline = ({ isRevealed, scrollProgress }: { isRevealed: boolean, sc
         </motion.div>
     )
 }
-
-const DesktopTagline = ({ isRevealed, scrollProgress }: { isRevealed: boolean, scrollProgress: number }) => (
-    <motion.div
-        className="hidden xl:flex absolute right-[-350px] top-1/2 -translate-y-1/2 flex-col items-start z-30"
-        initial={{ opacity: 0, x: -30 }}
-        animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, x: scrollProgress < 0.05 ? 0 : -30, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
-    >
-        <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">World's first</p>
-        <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[250px]">Ambition Building</p>
-        <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">Program for Teenagers</p>
-    </motion.div>
-)
 
 const RotatingEventIcon = () => {
     const iconRef = useRef<HTMLDivElement>(null)
@@ -131,7 +113,7 @@ const RotatingEventIcon = () => {
 }
 
 const WorkshopWidget = ({ isRevealed }: { isRevealed: boolean }) => (
-    <motion.div className="absolute bottom-32 left-6 z-30 hidden md:block md:bottom-8 md:left-1 xl:bottom-[clamp(100px,12vh,200px)] xl:left-2" initial={{ opacity: 0, y: 20 }} animate={isRevealed ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.5, duration: 0.8 }}>
+    <motion.div className="absolute bottom-8 left-4 z-40 hidden md:block xl:bottom-12 xl:left-8" initial={{ opacity: 0, y: 20 }} animate={isRevealed ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.5, duration: 0.8 }}>
         <a href="https://forms.gle/TJZ2FfN4KvtrKyPL7" target="_blank" rel="noopener noreferrer" className="group block">
             <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#EABF36]">
                 <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]"><span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span></div>
@@ -146,8 +128,8 @@ const WorkshopWidget = ({ isRevealed }: { isRevealed: boolean }) => (
 )
 
 const CTAButton = ({ isRevealed, scrollProgress, ctaRef, handleCTAMouseEnter, handleCTAClick }: any) => (
-    <motion.div className="absolute bottom-8 right-6 z-30 hidden flex-col items-center gap-6 md:flex md:bottom-8 md:right-6 xl:bottom-[clamp(100px,12vh,200px)] xl:right-12 xl:items-end" initial={{ opacity: 0 }} animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }} transition={{ duration: 0.4, ease: "easeOut" }}>
-        <motion.button ref={ctaRef} className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#EABF36] focus:outline-none focus:ring-2 focus:ring-[#EABF36] focus:ring-offset-2" style={{ opacity: 0 }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onMouseEnter={handleCTAMouseEnter} onClick={handleCTAClick}>
+    <motion.div className="absolute bottom-8 right-4 z-40 hidden flex-col items-end md:flex xl:bottom-12 xl:right-8" initial={{ opacity: 0 }} animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }} transition={{ duration: 0.4, ease: "easeOut" }}>
+        <motion.button ref={ctaRef} className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#EABF36] focus:outline-none focus:ring-2 focus:ring-[#EABF36] focus:ring-offset-2 bg-white/80 backdrop-blur-sm" style={{ opacity: 0 }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onMouseEnter={handleCTAMouseEnter} onClick={handleCTAClick}>
             <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Start Your Journey</span>
             <motion.div className="absolute inset-0 -z-0 bg-[#EABF36]" initial={{ x: "-100%" }} whileHover={{ x: 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} />
         </motion.button>
@@ -172,7 +154,7 @@ const RollingBannerDesktop = ({ scrollProgress }: { scrollProgress: number }) =>
             const oneHalf2 = container2.scrollWidth / 2
 
             heroScrollPosRef1.current += heroMarqueeSpeed
-            heroScrollPosRef2.current += heroMarqueeSpeed * 0.8 // Slightly different speed for visual interest
+            heroScrollPosRef2.current += heroMarqueeSpeed * 0.8
 
             if (heroScrollPosRef1.current >= oneHalf1) heroScrollPosRef1.current = 0
             if (heroScrollPosRef2.current >= oneHalf2) heroScrollPosRef2.current = 0
@@ -194,20 +176,17 @@ const RollingBannerDesktop = ({ scrollProgress }: { scrollProgress: number }) =>
             transition={{ duration: 0.6 }}
         >
             <div className="absolute inset-0 flex flex-col items-center justify-center">
-                {/* First Banner */}
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden w-full" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
                         <span key={i} className="font-[family-name:var(--font-milan)] text-[2vw] font-bold uppercase tracking-tight text-[#EABF36] mx-8 flex-shrink-0">
-                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
+                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
                 </div>
-
-                {/* Second Banner */}
                 <div ref={heroMarqueeRef2} className="flex whitespace-nowrap overflow-hidden w-full" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
                         <span key={i} className="font-[family-name:var(--font-milan)] text-[5vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-8 flex-shrink-0">
-                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
+                            PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS •
                         </span>
                     ))}
                 </div>
@@ -233,7 +212,7 @@ const RollingBannerMobile = ({ scrollProgress }: { scrollProgress: number }) => 
             const oneHalf2 = container2.scrollWidth / 2
 
             heroScrollPosRef1.current += 0.3
-            heroScrollPosRef2.current += 0.25 // Slightly different speed
+            heroScrollPosRef2.current += 0.25
 
             if (heroScrollPosRef1.current >= oneHalf1) heroScrollPosRef1.current = 0
             if (heroScrollPosRef2.current >= oneHalf2) heroScrollPosRef2.current = 0
@@ -255,20 +234,17 @@ const RollingBannerMobile = ({ scrollProgress }: { scrollProgress: number }) => 
             transition={{ duration: 0.6 }}
         >
             <div className="flex flex-col gap-0">
-                {/* First Banner */}
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
                         <span key={i} className="font-[family-name:var(--font-milan)] text-[4vw] font-bold uppercase tracking-tight text-[#EABF36] mx-4 flex-shrink-0">
-                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
+                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
                 </div>
-
-                {/* Second Banner */}
                 <div ref={heroMarqueeRef2} className="flex whitespace-nowrap overflow-hidden" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
                         <span key={i} className="font-[family-name:var(--font-milan)] text-[8vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-4 flex-shrink-0">
-                            UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
+                            PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS •
                         </span>
                     ))}
                 </div>
@@ -284,7 +260,6 @@ const OnePercentSVG = ({ scrollProgress }: { scrollProgress: number }) => (
         animate={{ opacity: scrollProgress > 0.1 ? 1 : 0 }}
         transition={{ duration: 0.6 }}
     >
-        {/* Text - Moved significantly higher */}
         <motion.p
             className="absolute top-[15vh] left-0 right-0 z-100 text-lg font-[family-name:var(--font-milan)] sm:text-xl md:text-2xl lg:text-3xl font-bold text-[#EABF36] text-center px-8 sm:px-8"
             style={{
@@ -292,10 +267,9 @@ const OnePercentSVG = ({ scrollProgress }: { scrollProgress: number }) => (
                 transform: `translateY(${scrollProgress > 0.7 ? 0 : 20}px)`
             }}
         >
-            Join the top 1%.
+            Join the top
         </motion.p>
 
-        {/* SVG Drawing */}
         <div className="relative z-50 w-[80vw] h-[80vw] md:w-[50vw] md:h-[50vw] lg:w-[40vw] lg:h-[40vw]">
             <svg viewBox="0 0 200 150" className="w-full h-full overflow-visible drop-shadow-[0_0_30px_rgba(234,191,54,0.4)]">
                 <path d="M30,20 L50,20 L50,130 M30,130 L70,130" fill="none" stroke="#EABF36" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 250, strokeDashoffset: 250 - (Math.max(0, Math.min((scrollProgress - 0.3) * 2.5, 1)) * 250), transition: "stroke-dashoffset 0.1s ease-out" }} />
@@ -313,30 +287,16 @@ const OnePercentSVG = ({ scrollProgress }: { scrollProgress: number }) => (
 
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null)
-    const portraitRef = useRef<HTMLDivElement>(null)
-    const leftWingRef = useRef<HTMLDivElement>(null)
-    const rightWingRef = useRef<HTMLDivElement>(null)
-    const wingsContainerRef = useRef<HTMLDivElement>(null)
     const spotlightRef = useRef<HTMLDivElement>(null)
     const ctaRef = useRef<HTMLButtonElement>(null)
     const scrollyContainerRef = useRef<HTMLDivElement>(null)
     const clipMaskRef = useRef<HTMLDivElement>(null)
-    const canvasRef = useRef<HTMLCanvasElement>(null)
-    const revealImageRef = useRef<HTMLImageElement | null>(null)
-    const baseImageDimsRef = useRef<{ width: number; height: number } | null>(null)
-    const trailRef = useRef<{ x: number; y: number; age: number; force: number }[]>([])
-    const lastMousePos = useRef({ x: 0, y: 0 })
 
     const { setHeroAnimationComplete } = useHeroAnimation()
     const [isRevealed, setIsRevealed] = useState(false)
-    const [isHovering, setIsHovering] = useState(false)
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
     const [scrollProgress, setScrollProgress] = useState(0)
 
-    const wingRevealTlRef = useRef<gsap.core.Timeline | null>(null)
-    const wingFoldTlRef = useRef<gsap.core.Tween | null>(null)
-    const leftWingAnimRef = useRef<ReturnType<typeof createWingHoverAnimation> | null>(null)
-    const rightWingAnimRef = useRef<ReturnType<typeof createWingHoverAnimation> | null>(null)
     const particlesRef = useRef<ReturnType<typeof createAmbientParticles> | null>(null)
     const ctaSweepRef = useRef<ReturnType<typeof createCTANeonSweep> | null>(null)
     const ctaMagneticCleanupRef = useRef<(() => void) | null>(null)
@@ -347,40 +307,13 @@ export default function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], [0, 0])
 
     useEffect(() => {
-        const img = new window.Image()
-        img.src = "/images/hero-girl-reveal.png"
-        img.onload = () => { revealImageRef.current = img }
-    }, [])
-
-    useCanvasLiquidReveal({ canvasRef, revealImageRef, baseImageDimsRef, trailRef })
-
-    useEffect(() => {
-        if (!portraitRef.current || !canvasRef.current) return
-        const updateSize = () => {
-            if (!portraitRef.current || !canvasRef.current) return
-            const rect = portraitRef.current.getBoundingClientRect()
-            canvasRef.current.width = rect.width
-            canvasRef.current.height = rect.height
-        }
-        const observer = new ResizeObserver(updateSize)
-        observer.observe(portraitRef.current)
-        updateSize()
-        return () => observer.disconnect()
-    }, [])
-
-    useEffect(() => {
         const reducedMotion = checkReducedMotion()
         setPrefersReducedMotion(reducedMotion)
         const timer = setTimeout(() => {
             setIsRevealed(true)
-            initPageLoadTimeline({ spotlight: spotlightRef.current || undefined, student: portraitRef.current || undefined, cta: ctaRef.current || undefined })
+            initPageLoadTimeline({ spotlight: spotlightRef.current || undefined, cta: ctaRef.current || undefined })
             if (spotlightRef.current) initSpotlightBreathing(spotlightRef.current)
-            if (leftWingRef.current && rightWingRef.current) {
-                wingRevealTlRef.current = createWingRevealTimeline({ leftWing: leftWingRef.current, rightWing: rightWingRef.current, wingsContainer: wingsContainerRef.current || undefined })
-                leftWingAnimRef.current = createWingHoverAnimation(leftWingRef.current, true)
-                rightWingAnimRef.current = createWingHoverAnimation(rightWingRef.current, false)
-                wingFoldTlRef.current = createWingFoldAnimation(leftWingRef.current, rightWingRef.current)
-            }
+
             if (ctaRef.current) {
                 ctaSweepRef.current = createCTANeonSweep(ctaRef.current)
                 ctaMagneticCleanupRef.current = createCTAMagneticPull({ button: ctaRef.current, magnetRadius: 80 })
@@ -397,7 +330,6 @@ export default function Hero() {
         gsap.registerPlugin(ScrollTrigger)
         const isMobileDevice = window.innerWidth < 640
         const isTablet = window.innerWidth >= 640 && window.innerWidth < 1024
-        const isDesktop = window.innerWidth >= 1024
 
         const tl = gsap.timeline({
             scrollTrigger: {
@@ -409,56 +341,15 @@ export default function Hero() {
             }
         })
 
-        // Consistent clip-path end state across all devices
-        // Mobile: Square/Portrait frame
-        // Tablet: Slightly wider
-        // Desktop: More horizontal rectangle
         const clipInset = isMobileDevice
-            ? "30% 20% 30% 20%"  // Mobile: Square frame (more vertical = square on portrait)
+            ? "25% 10% 25% 10%"
             : isTablet
-                ? "20% 28% 20% 28%"  // Tablet: Smaller rectangle
-                : "30% 30% 30% 30%"  // Desktop: Smaller rectangle (more horizontal inset) // Desktop: Smaller, balanced frame
+                ? "22% 20% 22% 20%"
+                : "25% 25% 25% 25%"
 
         tl.to(clipMaskRef.current, { clipPath: `inset(${clipInset})`, ease: "none" }, 0)
         return () => { ScrollTrigger.getAll().forEach(st => st.kill()) }
     }, [isRevealed, prefersReducedMotion])
-
-    useEffect(() => {
-        const unsubscribe = scrollYProgress.on("change", (value) => {
-            if (value > 0.3 && wingFoldTlRef.current && !isHovering) wingFoldTlRef.current.play()
-            else if (value <= 0.3 && wingFoldTlRef.current) wingFoldTlRef.current.reverse()
-        })
-        return () => unsubscribe()
-    }, [scrollYProgress, isHovering])
-
-    const handlePortraitMouseEnter = useCallback(() => {
-        setIsHovering(true)
-        if (prefersReducedMotion) return
-        wingRevealTlRef.current?.play()
-    }, [prefersReducedMotion])
-
-    const handlePortraitMouseLeave = useCallback(() => {
-        setIsHovering(false)
-        if (prefersReducedMotion) return
-        wingRevealTlRef.current?.reverse()
-    }, [prefersReducedMotion])
-
-    const handlePortraitMouseMove = useCallback((e: React.MouseEvent) => {
-        if (!portraitRef.current) return
-        const rect = portraitRef.current.getBoundingClientRect()
-        const x = e.clientX - rect.left
-        const y = e.clientY - rect.top
-        const dist = Math.hypot(x - lastMousePos.current.x, y - lastMousePos.current.y)
-        if (dist > 5) {
-            trailRef.current.push({ x, y, age: 1.0, force: 1.0 })
-            lastMousePos.current = { x, y }
-        }
-        // No parallax/3D effects applied
-    }, [])
-
-    const handlePortraitMouseLeaveReset = useCallback(() => {
-        handlePortraitMouseLeave()
-    }, [handlePortraitMouseLeave])
 
     const handleCTAClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         if (!ctaRef.current || !containerRef.current) return
@@ -474,57 +365,56 @@ export default function Hero() {
         ctaSweepRef.current?.play()
     }, [])
 
-    const handleMobileTap = useCallback(() => {
-        if (!isMobile()) return
-        setIsHovering((prev) => !prev)
-        if (!isHovering) wingRevealTlRef.current?.play()
-        else wingRevealTlRef.current?.reverse()
-    }, [isHovering])
-
     return (
         <>
             <div ref={scrollyContainerRef} className="relative h-[200vh] sm:h-[250vh] lg:h-[300vh] mb-12 md:mb-40">
                 <div className="sticky top-0 h-screen overflow-hidden">
                     <div ref={clipMaskRef} className="absolute inset-0 will-change-[clip-path]" style={{ clipPath: "inset(0% 0% 0% 0%)" }}>
-                        <motion.section id="hero" ref={containerRef} className="hero-viewport relative flex h-full min-h-screen items-end justify-center overflow-hidden bg-white pb-0" style={{ scale, opacity, y }} role="region" aria-label="Hero section - Take flight with Alcovia">
-                            <InteractiveBackground />
+                        <motion.section id="hero" ref={containerRef} className="hero-viewport relative flex h-full min-h-screen items-center justify-center overflow-hidden bg-white" style={{ scale, opacity, y }} role="region" aria-label="Hero section - Take flight with Alcovia">
 
-                            <div ref={spotlightRef} className="pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-0" style={{ background: "radial-gradient(circle, rgba(206,255,43,0.08) 0%, transparent 60%)" }} />
-
-                            <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-4 sm:px-6 lg:px-8">
-                                <MobileTagline isRevealed={isRevealed} scrollProgress={scrollProgress} />
-
-                                <div className="hero-center relative flex items-end justify-center mt-[4vh] sm:mt-[15vh] lg:mt-[25vh]" onClick={handleMobileTap}>
-                                    <div ref={wingsContainerRef} className="pointer-events-none absolute inset-0 z-10 block" role="img" aria-label="Wings symbolising growth and potential">
-                                        <div ref={leftWingRef} className="absolute" style={{ opacity: 0, transform: "scale(0.8)", left: "50%", top: "50%", marginLeft: "-350px", marginTop: "-250px" }}>
-                                            <Image src="/images/element-download-1764790639.png" alt="" width={438} height={438} className="object-contain" style={{ filter: "drop-shadow(0 10px 40px rgba(206,255,43,0.3))", transform: "scaleX(-1)" }} />
-                                        </div>
-                                        <div ref={rightWingRef} className="absolute" style={{ opacity: 0, transform: "scale(0.8)", right: "50%", top: "50%", marginRight: "-350px", marginTop: "-250px" }}>
-                                            <Image src="/images/element-download-1764790639.png" alt="" width={438} height={438} className="object-contain" style={{ filter: "drop-shadow(0 10px 40px rgba(206,255,43,0.3))" }} />
-                                        </div>
-                                    </div>
-
-                                    <motion.div ref={portraitRef} className="relative z-20 h-[500px] w-[350px] cursor-pointer overflow-hidden rounded-t-3xl bg-transparent sm:h-[550px] sm:w-[380px] md:h-[600px] md:w-[420px] lg:h-[650px] lg:w-[480px] xl:h-[650px] xl:w-[500px]" initial={{ clipPath: "circle(0% at 50% 100%)" }} animate={isRevealed ? { clipPath: "circle(150% at 50% 100%)" } : {}} transition={{ duration: 1.2, ease: [0.25, 0.1, 0.25, 1], delay: 0.4 }} onMouseEnter={handlePortraitMouseEnter} onMouseMove={handlePortraitMouseMove} onMouseLeave={handlePortraitMouseLeaveReset} onClick={handleMobileTap}>
-                                        <Image src="/images/hero-girl.png" alt="Young Indian student ready to take flight with Alcovia - representing ambition and growth" fill className="object-contain object-bottom" style={{ filter: "contrast(1.05) saturate(0.95) brightness(0.98)" }} priority onLoad={(e) => {
-                                            const img = e.target as HTMLImageElement
-                                            baseImageDimsRef.current = { width: img.naturalWidth, height: img.naturalHeight }
-                                        }} />
-                                        <canvas ref={canvasRef} className="absolute inset-0 z-10 pointer-events-none" />
-                                        <motion.div className="pointer-events-none absolute inset-0 rounded-t-3xl" animate={{ boxShadow: isHovering ? "0 0 80px 30px rgba(206,255,43,0.25), inset 0 0 60px rgba(206,255,43,0.08)" : "0 0 0px 0px rgba(206,255,43,0)" }} transition={{ duration: 0.4 }} />
-                                        <motion.div className="pointer-events-none absolute inset-0 rounded-t-3xl border-2 border-transparent" animate={{ borderColor: isHovering ? "rgba(206,255,43,0.15)" : "rgba(206,255,43,0)", boxShadow: isHovering ? "inset 0 0 20px rgba(206,255,43,0.1)" : "none" }} transition={{ duration: 0.3 }} />
-                                        {/* Grey Overlay on Scroll */}
-                                        <motion.div
-                                            className="absolute inset-0 z-30 bg-black/40 pointer-events-none rounded-t-3xl"
-                                            style={{ opacity: scrollProgress > 0.2 ? Math.min((scrollProgress - 0.2) * 2, 0.5) : 0 }}
-                                        />
-                                    </motion.div>
-
-                                    <DesktopTagline isRevealed={isRevealed} scrollProgress={scrollProgress} />
-                                </div>
-
-                                <WorkshopWidget isRevealed={isRevealed} />
-                                <CTAButton isRevealed={isRevealed} scrollProgress={scrollProgress} ctaRef={ctaRef} handleCTAMouseEnter={handleCTAMouseEnter} handleCTAClick={handleCTAClick} />
+                            {/* Full-Screen CursorLens with Background Blobs */}
+                            <div className="absolute inset-0 z-0">
+                                <CursorLens
+                                    baseImage="/images/hero-base.png"
+                                    revealImage="/images/hero-reveal.png"
+                                    objectFit="cover"
+                                    backgroundColor="#f8f8f5"
+                                    showBackground={true}
+                                    blobSize={200}
+                                    bgBlobCount={10}
+                                    bgBlobSize={120}
+                                    bgBlobComplexity={100}
+                                    blobOutlineColor="#2a2a2a"
+                                    parallaxStrength={8}
+                                    showHint={true}
+                                />
                             </div>
+
+                            {/* Spotlight Effect */}
+                            <div ref={spotlightRef} className="pointer-events-none absolute left-1/2 top-1/2 h-[800px] w-[800px] -translate-x-1/2 -translate-y-1/2 opacity-0 z-5" style={{ background: "radial-gradient(circle, rgba(206,255,43,0.08) 0%, transparent 60%)" }} />
+
+                            {/* Mobile Tagline - Top Center */}
+                            <div className="absolute top-24 left-0 right-0 z-40 px-4">
+                                <MobileTagline isRevealed={isRevealed} scrollProgress={scrollProgress} />
+                            </div>
+
+                            {/* Desktop Tagline - Right Side */}
+                            <motion.div
+                                className="hidden xl:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col items-start z-40"
+                                initial={{ opacity: 0, x: 30 }}
+                                animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, x: scrollProgress < 0.05 ? 0 : 30, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }}
+                                transition={{ duration: 0.4, ease: "easeOut" }}
+                            >
+                                <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">World&apos;s first</p>
+                                <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[250px]">Ambition Building</p>
+                                <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">Program for Teenagers</p>
+                            </motion.div>
+
+                            {/* Workshop Widget - Bottom Left */}
+                            <WorkshopWidget isRevealed={isRevealed} />
+
+                            {/* CTA Button - Bottom Right */}
+                            <CTAButton isRevealed={isRevealed} scrollProgress={scrollProgress} ctaRef={ctaRef} handleCTAMouseEnter={handleCTAMouseEnter} handleCTAClick={handleCTAClick} />
                         </motion.section>
                     </div>
 

@@ -43,7 +43,7 @@
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.5.0",
     "@types/three": "^0.182.0",
-    "@vercel/analytics": "latest",
+    "@vercel/analytics": "^1.6.1",
     "animejs": "^3.2.2",
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",

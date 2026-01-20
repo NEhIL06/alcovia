@@ -6,6 +6,7 @@ import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
 import PremiumNavbar from "@/components/premium-navbar"
 import PageTransition from "@/components/PageTransition"
+
 import "./globals.css"
 
 import localFont from "next/font/local"
@@ -79,6 +80,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
+        <Analytics />
         <SessionProvider>
           <SmoothScrollProvider>
             <PremiumNavbar />
@@ -87,7 +89,7 @@ export default function RootLayout({
             </PageTransition>
           </SmoothScrollProvider>
         </SessionProvider>
-        <Analytics />
+        
       </body>
     </html>
   )

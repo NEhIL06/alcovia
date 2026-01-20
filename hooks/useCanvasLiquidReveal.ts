@@ -86,16 +86,9 @@ export function useCanvasLiquidReveal({
                     offY = canvas.height - drawH
                 }
 
-                // --- PARALLAX CALCULATION ---
-                const currentMouse = trailRef.current[trailRef.current.length - 1]
-                let parallaxX = 0, parallaxY = 0
-
-                if (currentMouse) {
-                    parallaxX = (currentMouse.x - canvas.width / 2) * 0.05
-                    parallaxY = (currentMouse.y - canvas.height / 2) * 0.05
-                }
-
-                ctx.drawImage(img, offX - parallaxX, offY - parallaxY, drawW, drawH)
+                // --- PARALLAX REMOVED ---
+                // Image stays static relative to the container
+                ctx.drawImage(img, offX, offY, drawW, drawH)
                 ctx.globalCompositeOperation = "source-over"
             }
 

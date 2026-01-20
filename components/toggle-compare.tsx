@@ -49,6 +49,7 @@ export default function ToggleCompare() {
 
   const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.25], [0, 1])
+  const mobileImageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"])
 
   return (
     <section
@@ -220,12 +221,14 @@ export default function ToggleCompare() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            <Image
-              src={section.image}
-              alt=""
-              fill
-              className="object-cover object-top"
-            />
+            <motion.div className="relative h-[120%] w-full -top-[10%]" style={{ y: mobileImageY }}>
+              <Image
+                src={section.image}
+                alt=""
+                fill
+                className="object-cover object-top"
+              />
+            </motion.div>
           </motion.div>
         ))}
       </div>

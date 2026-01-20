@@ -274,11 +274,11 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                         animate={{ scaleY: 1 }}
                                         transition={{ delay: index * 0.08, duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                                     />
-                                    <div className="relative py-4 flex justify-center">
+                                    <div className="relative py-2 xs:py-5 flex justify-center">
                                         <FlipLink
                                             href={item.href}
                                             onClick={onClose}
-                                            className="font-[family-name:var(--font-playfair)] text-4xl font-normal uppercase leading-none tracking-tight sm:text-5xl md:text-6xl xl:text-8xl"
+                                            className="font-[family-name:var(--font-playfair)] text-3xl font-normal uppercase leading-none tracking-tight sm:text-4xl md:text-6xl xl:text-7xl"
                                             baseColor="#F7F7F3"
                                             hoverColor="#EABF36"
                                         >
