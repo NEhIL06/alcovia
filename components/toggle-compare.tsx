@@ -49,7 +49,9 @@ export default function ToggleCompare() {
 
   const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.25], [0, 1])
-  const mobileImageY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"])
+  const mobileImageY = useTransform(scrollYProgress, [0.3, 0.8], ["-10%", "10%"])
+  const mobileImageOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
+  const mobileImageScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1])
 
   return (
     <section
@@ -213,22 +215,20 @@ export default function ToggleCompare() {
 
       {/* MOBILE IMAGES */}
       <div className="mt-8 flex gap-2 px-0 md:hidden">
-        {sections.map((section, index) => (
+        {sections.map((section) => (
           <motion.div
             key={section.id}
-            className="relative aspect-[9/16] flex-1 overflow-hidden rounded-t-2xl"
-            initial={{ opacity: 0, x: index === 0 ? -50 : 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            className="relative aspect-[3/4] flex-1 overflow-hidden rounded-t-2xl"
+            style={{ opacity: mobileImageOpacity, scale: mobileImageScale }}
           >
-            <motion.div className="relative h-[120%] w-full -top-[10%]" style={{ y: mobileImageY }}>
+            <div className="relative h-full w-full">
               <Image
                 src={section.image}
                 alt=""
                 fill
                 className="object-cover object-top"
               />
-            </motion.div>
+            </div>
           </motion.div>
         ))}
       </div>

@@ -109,7 +109,7 @@ export default function PartnersSection() {
             >
               <TextReveal duration={0.6}>Alcovia is proud to collaborate with a range of mentors, who share</TextReveal>
               <br className="hidden sm:block" />
-              <TextReveal duration={0.4} delay={0.6}> our passion for empowering students across India.</TextReveal>
+              <TextReveal delay={0.6}> our passion for empowering students across India.</TextReveal>
             </motion.p>
           </motion.div>
         </div>

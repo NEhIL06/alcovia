@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, memo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
 import { Rock_Salt } from 'next/font/google';
@@ -50,7 +50,49 @@ const DnaItem = ({ num, title, desc }: { num: string, title: string, desc: strin
             <p className="text-lg leading-relaxed font-mono opacity-80">{desc}</p>
         </motion.div>
     );
+
 };
+
+const TeamListItem = memo(({ member, setActiveMember }: { member: any, setActiveMember: (m: any) => void }) => (
+    <motion.div
+        onMouseEnter={() => setActiveMember(member)}
+        onMouseLeave={() => setActiveMember(null)}
+        className="group relative w-full flex items-center justify-between py-12 px-[5vw] border-b border-white/10 cursor-pointer transition-colors duration-300 hover:bg-white/5"
+    >
+        {/* Left: Role */}
+        <div className="w-1/3 flex items-center gap-4">
+            <span className="text-sm font-mono opacity-30 group-hover:text-[#EABF36] transition-colors duration-300 w-8">
+                {member.id}
+            </span>
+            <span className="text-sm md:text-base font-mono uppercase opacity-70 group-hover:opacity-100 group-hover:text-white transition-colors duration-300">
+                {member.role}
+            </span>
+        </div>
+
+        {/* Center: Spacer for Image */}
+        <div className="w-1/3" />
+
+        {/* Right: Name */}
+        <div className="w-1/3 text-right">
+            <h3 className="text-[clamp(2rem,4vw,4.5rem)] font-black uppercase tracking-tight text-white group-hover:text-[#EABF36] transition-colors duration-300 leading-none">
+                {member.name}
+            </h3>
+        </div>
+    </motion.div>
+));
+
+const MobileTeamListItem = memo(({ member, setMobileSelectedMember }: { member: any, setMobileSelectedMember: (m: any) => void }) => (
+    <div
+        onClick={() => setMobileSelectedMember(member)}
+        className="w-full flex items-center justify-between py-6 px-6 border-b border-white/10 active:bg-white/5 transition-colors min-h-[80px]"
+    >
+        <div className="flex flex-col gap-1">
+            <span className="font-mono text-xs text-[#EABF36] opacity-80">{member.id}</span>
+            <span className="font-mono text-xs uppercase opacity-50 tracking-wider">{member.role}</span>
+        </div>
+        <h3 className="text-3xl font-black uppercase text-white">{member.name}</h3>
+    </div>
+));
 
 export default function MeetTheTeamGrid() {
     const [activeMember, setActiveMember] = useState<typeof team[0] | null>(null);
@@ -367,7 +409,7 @@ export default function MeetTheTeamGrid() {
                                 className="relative w-[24vw] aspect-[3/4] shadow-2xl mr-20"
                             >
                                 <div className="relative w-full h-full overflow-hidden rounded-3xl bg-[#111]">
-                                    <Image src={activeMember.img} alt={activeMember.name} fill className="object-cover" />
+                                    <Image src={activeMember.img} alt={activeMember.name} fill className="object-cover" priority />
                                 </div>
                             </motion.div>
                         )}
@@ -377,32 +419,7 @@ export default function MeetTheTeamGrid() {
                 {/* THE LIST (Scrollable) */}
                 <div className="relative z-10 w-full pb-40">
                     {team.map((member) => (
-                        <motion.div
-                            key={member.id}
-                            onMouseEnter={() => setActiveMember(member)}
-                            onMouseLeave={() => setActiveMember(null)}
-                            className="group relative w-full flex items-center justify-between py-12 px-[5vw] border-b border-white/10 cursor-pointer transition-colors duration-300 hover:bg-white/5"
-                        >
-                            {/* Left: Role */}
-                            <div className="w-1/3 flex items-center gap-4">
-                                <span className="text-sm font-mono opacity-30 group-hover:text-[#EABF36] transition-colors duration-300 w-8">
-                                    {member.id}
-                                </span>
-                                <span className="text-sm md:text-base font-mono uppercase opacity-70 group-hover:opacity-100 group-hover:text-white transition-colors duration-300">
-                                    {member.role}
-                                </span>
-                            </div>
-
-                            {/* Center: Spacer for Image */}
-                            <div className="w-1/3" />
-
-                            {/* Right: Name */}
-                            <div className="w-1/3 text-right">
-                                <h3 className="text-[clamp(2rem,4vw,4.5rem)] font-black uppercase tracking-tight text-white group-hover:text-[#EABF36] transition-colors duration-300 leading-none">
-                                    {member.name}
-                                </h3>
-                            </div>
-                        </motion.div>
+                        <TeamListItem key={member.id} member={member} setActiveMember={setActiveMember} />
                     ))}
                 </div>
             </section>
@@ -414,17 +431,7 @@ export default function MeetTheTeamGrid() {
                 <p className="font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 ml-6 mt-10">The Team</p>
                 <div className="flex flex-col w-full">
                     {team.map((member) => (
-                        <div
-                            key={member.id}
-                            onClick={() => setMobileSelectedMember(member)}
-                            className="w-full flex items-center justify-between py-6 px-6 border-b border-white/10 active:bg-white/5 transition-colors min-h-[80px]"
-                        >
-                            <div className="flex flex-col gap-1">
-                                <span className="font-mono text-xs text-[#EABF36] opacity-80">{member.id}</span>
-                                <span className="font-mono text-xs uppercase opacity-50 tracking-wider">{member.role}</span>
-                            </div>
-                            <h3 className="text-3xl font-black uppercase text-white">{member.name}</h3>
-                        </div>
+                        <MobileTeamListItem key={member.id} member={member} setMobileSelectedMember={setMobileSelectedMember} />
                     ))}
                 </div>
             </section>

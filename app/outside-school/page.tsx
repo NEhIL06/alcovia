@@ -228,7 +228,7 @@ export default function OutsideSchoolPage() {
                             </h2> */}
                             <div className="grid xl:grid-cols-2 gap-12">
                                 <p className="text-lg xl:text-2xl leading-relaxed">
-                                    Alcovian now has a phonebook of mentors to reach out to, courtesy fortnightly sessions with career counsellor, has solid clarity on what they definitely dont want to do, and some lucky ones already know where their life is headed.
+                                    Alcovian now has a phonebook of mentors to reach out to, courtesy fortnightly sessions with career counsellor, has solid clarity on what they definitely don't want to do, and some lucky ones already know where their life is headed.
                                 </p>
                                 <div className="border-t border-red-500/50 pt-6">
                                     <p className="font-mono text-red-200 text-sm mb-4">/// THE CHALLENGE</p>

@@ -128,7 +128,7 @@ export default function Manifesto() {
               />
 
               <p
-                className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[18px] font-normal leading-[1.3] tracking-tight sm:text-[28px] md:text-[38px] lg:text-[48px] xl:text-[80px] whitespace-nowrap px-1"
+                className="reveal-text opacity-0 font-[family-name:var(--font-milan)] text-[18px] font-normal leading-[1.3] tracking-tight sm:text-[34px] md:text-[38px] lg:text-[48px] xl:text-[70px] whitespace-nowrap px-1"
               >
                 {renderLineWithAccents(line.text)}
               </p>

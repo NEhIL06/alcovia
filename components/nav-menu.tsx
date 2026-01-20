@@ -180,7 +180,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                         href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform?embedded=true"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-full bg-[#EABF36] px-5 py-3 text-sm font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 hover:bg-[#F5D042] active:scale-95"
+                        className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-lg bg-[#EABF36] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 hover:bg-[#F5D042] active:scale-95"
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}

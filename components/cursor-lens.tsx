@@ -54,7 +54,16 @@ export default function CursorLens({
 
     const [isHovering, setIsHovering] = React.useState(false)
     const [hasInteracted, setHasInteracted] = React.useState(false)
+    const [isMobileDevice, setIsMobileDevice] = React.useState(false)
     const isActive = isHovering || previewCursor
+
+    // Detect mobile on mount
+    React.useEffect(() => {
+        const checkMobile = () => setIsMobileDevice(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
     // Reference to the container for coordinate math
     const containerRef = React.useRef<HTMLDivElement>(null)
@@ -63,7 +72,8 @@ export default function CursorLens({
     const random = (min: number, max: number) => Math.random() * (max - min) + min
 
     const backgroundBlobs = React.useMemo(() => {
-        return [...Array(bgBlobCount)].map(() => ({
+        const count = isMobileDevice ? Math.min(bgBlobCount, 2) : bgBlobCount
+        return [...Array(count)].map(() => ({
             x: [
                 random(-20, 110) + "%",
                 random(-20, 110) + "%",
@@ -77,7 +87,7 @@ export default function CursorLens({
             sizeFactor: random(0.5, 1.5),
             duration: random(25, 50) / bgBlobSpeed,
         }))
-    }, [bgBlobCount, bgBlobSpeed])
+    }, [bgBlobCount, bgBlobSpeed, isMobileDevice])
 
     const bgFilterId = React.useId()
 
@@ -199,26 +209,29 @@ export default function CursorLens({
         <div
             ref={containerRef}
             style={{ ...containerStyle, backgroundColor: backgroundColor }}
-            className="cursor-none" // Hide default cursor
         >
             {showBackground && (
                 <>
                     <svg width="0" height="0" style={{ position: "absolute" }}>
                         <defs>
                             <filter id={bgFilterId}>
-                                <feTurbulence
-                                    type="fractalNoise"
-                                    baseFrequency="0.008"
-                                    numOctaves="3"
-                                    result="noise"
-                                />
-                                <feDisplacementMap
-                                    in="SourceGraphic"
-                                    in2="noise"
-                                    scale={bgBlobComplexity}
-                                    xChannelSelector="R"
-                                    yChannelSelector="G"
-                                />
+                                {!isMobileDevice && (
+                                    <>
+                                        <feTurbulence
+                                            type="fractalNoise"
+                                            baseFrequency="0.008"
+                                            numOctaves="3"
+                                            result="noise"
+                                        />
+                                        <feDisplacementMap
+                                            in="SourceGraphic"
+                                            in2="noise"
+                                            scale={bgBlobComplexity}
+                                            xChannelSelector="R"
+                                            yChannelSelector="G"
+                                        />
+                                    </>
+                                )}
                             </filter>
                         </defs>
                     </svg>
@@ -232,7 +245,7 @@ export default function CursorLens({
                             overflow: "visible",
                         }}
                     >
-                        <g filter={`url(#${bgFilterId})`}>
+                        <g filter={isMobileDevice ? undefined : `url(#${bgFilterId})`}>
                             {backgroundBlobs.map((blob, i) => (
                                 <motion.circle
                                     key={i}
@@ -259,22 +272,26 @@ export default function CursorLens({
             <svg width="0" height="0" style={{ position: "absolute" }}>
                 <defs>
                     <filter id={cursorFilterId}>
-                        <feTurbulence
-                            type="fractalNoise"
-                            baseFrequency="0.015"
-                            numOctaves="2"
-                            result="noise"
-                        />
-                        <feDisplacementMap
-                            in="SourceGraphic"
-                            in2="noise"
-                            scale={roughness}
-                            xChannelSelector="R"
-                            yChannelSelector="G"
-                            result="distorted"
-                        />
+                        {!isMobileDevice && (
+                            <>
+                                <feTurbulence
+                                    type="fractalNoise"
+                                    baseFrequency="0.015"
+                                    numOctaves="2"
+                                    result="noise"
+                                />
+                                <feDisplacementMap
+                                    in="SourceGraphic"
+                                    in2="noise"
+                                    scale={roughness}
+                                    xChannelSelector="R"
+                                    yChannelSelector="G"
+                                    result="distorted"
+                                />
+                            </>
+                        )}
                         <feGaussianBlur
-                            in="distorted"
+                            in={isMobileDevice ? "SourceGraphic" : "distorted"}
                             stdDeviation="12"
                             result="blur"
                         />
