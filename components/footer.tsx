@@ -120,7 +120,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
                 { name: "Cohort 2026", href: "https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform" },
-                { name: "Workshop", href: "https://forms.gle/TJZ2FfN4KvtrKyPL7" }
+                { name: "Workshop", href: "https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" }
               ].map((link) => (
                 <FlipLink
                   key={link.name}

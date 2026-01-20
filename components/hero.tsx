@@ -97,20 +97,31 @@ const IndustryDiscoveryIcon = () => {
     )
 }
 
-const WorkshopWidget = ({ isRevealed }: { isRevealed: boolean }) => (
-    <motion.div className="absolute bottom-8 left-4 z-40 hidden md:block xl:bottom-12 xl:left-8" initial={{ opacity: 0, y: 20 }} animate={isRevealed ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.5, duration: 0.8 }}>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" target="_blank" rel="noopener noreferrer" className="group block">
-            <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#EABF36]">
-                <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]"><span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span></div>
-                <div className="flex-1 flex items-center justify-center py-2 bg-white relative overflow-hidden"><div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "10px 10px" }} /><IndustryDiscoveryIcon /></div>
-                <div className="border-t-2 border-[#0C0C0C] p-4 bg-white rounded-b-[9px]">
-                    <div className="flex justify-between items-end"><div><span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span><h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">CONSULTING<br />WORKSHOP</h4></div><div className="flex flex-col items-end"><span className="text-xl font-black text-[#0C0C0C] leading-none">31</span><span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">JAN</span></div></div>
-                    <div className="mt-3 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] opacity-0 transition-opacity group-hover:opacity-100"><span>Register Now</span><ArrowUpRight className="w-3 h-3" /></div>
+const WorkshopWidget = ({ isRevealed }: { isRevealed: boolean }) => {
+    const [isWidgetActive, setIsWidgetActive] = useState(false)
+
+    return (
+        <motion.div className="absolute bottom-8 left-4 z-40 hidden md:block xl:bottom-12 xl:left-8" initial={{ opacity: 0, y: 20 }} animate={isRevealed ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.5, duration: 0.8 }}>
+            <div
+                className="group block cursor-pointer"
+                onClick={() => setIsWidgetActive(!isWidgetActive)}
+            >
+                <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#EABF36]">
+                    <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]"><span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span></div>
+                    <div className="flex-1 flex items-center justify-center py-2 bg-white relative overflow-hidden"><div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "10px 10px" }} /><IndustryDiscoveryIcon /></div>
+                    <div className="border-t-2 border-[#0C0C0C] p-4 bg-white rounded-b-[9px]">
+                        <div className="flex justify-between items-end"><div><span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span><h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">CONSULTING<br />WORKSHOP</h4></div><div className="flex flex-col items-end"><span className="text-xl font-black text-[#0C0C0C] leading-none">31</span><span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">JAN</span></div></div>
+                        <div className={`mt-3 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity ${isWidgetActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                                <span>Register Now</span><ArrowUpRight className="w-3 h-3" />
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </a>
-    </motion.div>
-)
+        </motion.div>
+    )
+}
 
 const CTAButton = ({ isRevealed, scrollProgress, ctaRef, handleCTAMouseEnter, handleCTAClick }: any) => (
     <motion.div className="absolute bottom-8 right-4 z-40 hidden flex-col items-end md:flex xl:bottom-12 xl:right-8" initial={{ opacity: 0 }} animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }} transition={{ duration: 0.4, ease: "easeOut" }}>
@@ -163,7 +174,7 @@ const RollingBannerDesktop = memo(({ scrollProgress }: { scrollProgress: number 
             <div className="absolute inset-0 flex flex-col items-center justify-center">
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden w-full" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
-                        <span key={i} className="font-[family-name:var(--font-milan)] text-[2vw] font-bold uppercase tracking-tight text-[#EABF36] mx-8 flex-shrink-0">
+                        <span key={i} className="font-[family-name:var(--font-milan)] text-[5vw] font-bold uppercase tracking-tight text-[#EABF36] mx-8 flex-shrink-0">
                             UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
@@ -221,7 +232,7 @@ const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }
             <div className="flex flex-col gap-0">
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
-                        <span key={i} className="font-[family-name:var(--font-milan)] text-[4vw] font-bold uppercase tracking-tight text-[#EABF36] mx-4 flex-shrink-0">
+                        <span key={i} className="font-[family-name:var(--font-milan)] text-[8vw] font-bold uppercase tracking-tight text-[#EABF36] mx-4 flex-shrink-0">
                             UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
@@ -287,6 +298,7 @@ export default function Hero() {
     const ctaMagneticCleanupRef = useRef<(() => void) | null>(null)
 
     const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] })
+    const baseImageScale = useTransform(scrollYProgress, [0, 1], [1, 0.5])
 
 
     useEffect(() => {
@@ -325,10 +337,10 @@ export default function Hero() {
         })
 
         const clipInset = isMobileDevice
-            ? "35% 12% 35% 12%"
+            ? "35% 20% 35% 20%"
             : isTablet
                 ? "22% 20% 22% 20%"
-                : "25% 28% 25% 28%"
+                : "28% 25% 25% 28%"
 
         tl.to(clipMaskRef.current, { clipPath: `inset(${clipInset})`, ease: "none" }, 0)
         return () => { ScrollTrigger.getAll().forEach(st => st.kill()) }
@@ -356,7 +368,7 @@ export default function Hero() {
                         <section id="hero" ref={containerRef} className="hero-viewport relative flex h-full min-h-screen items-center justify-center overflow-hidden bg-white" role="region" aria-label="Hero section - Take flight with Alcovia">
 
                             {/* Full-Screen CursorLens with Background Blobs */}
-                            <div className="absolute inset-0 z-0">
+                            <motion.div className="absolute inset-0 z-0" style={{ scale: baseImageScale }}>
                                 <CursorLens
                                     baseImage="/images/hero-base.webp"
                                     revealImage="/images/hero-reveal.webp"
@@ -371,7 +383,7 @@ export default function Hero() {
                                     parallaxStrength={8}
                                     showHint={true}
                                 />
-                            </div>
+                            </motion.div>
 
                             {/* Scroll-sensitive Grey Overlay */}
                             <div

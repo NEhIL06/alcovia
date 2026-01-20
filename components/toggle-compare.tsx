@@ -56,7 +56,7 @@ export default function ToggleCompare() {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden pt-20 pb-0 md:min-h-screen md:py-32 sticky top-0 z-0"
+      className="relative overflow-hidden pt-20  md:min-h-screen md:py-32 md:sticky md:top-0 z-0"
     >
       {/* --- DESKTOP IMAGES (xl+) --- */}
       {/* LEFT IMAGE */}
@@ -135,7 +135,7 @@ export default function ToggleCompare() {
         </motion.div>
 
         {/* 🔥 MOBILE: SIDE BY SIDE | DESKTOP: ROW */}
-        <div className="grid grid-cols-2 gap-4 md:flex md:items-start md:justify-center md:gap-12 xl:gap-16">
+        <div className="grid grid-cols-2 gap-4 md:flex md:items-start md:justify-center md:gap-10 xl:gap-7">
           {/* AT SCHOOL */}
           <motion.div
             className="cursor-pointer text-right"
@@ -215,22 +215,35 @@ export default function ToggleCompare() {
 
       {/* MOBILE IMAGES */}
       <div className="mt-8 flex gap-2 px-0 md:hidden">
-        {sections.map((section) => (
-          <motion.div
-            key={section.id}
-            className="relative aspect-[3/4] flex-1 overflow-hidden rounded-t-2xl"
-            style={{ opacity: mobileImageOpacity, scale: mobileImageScale }}
-          >
-            <div className="relative h-full w-full">
-              <Image
-                src={section.image}
-                alt=""
-                fill
-                className="object-cover object-top"
-              />
-            </div>
-          </motion.div>
-        ))}
+        {/* Left Image - Matches Left Text Behavior */}
+        <motion.div
+          className="relative aspect-[2/3] flex-1 overflow-hidden rounded-t-2xl"
+          style={{ x: leftTextX, opacity: leftOpacity }}
+        >
+          <div className="relative h-full w-full">
+            <Image
+              src={sections[0].image}
+              alt=""
+              fill
+              className="object-cover object-top"
+            />
+          </div>
+        </motion.div>
+
+        {/* Right Image - Matches Right Text Behavior */}
+        <motion.div
+          className="relative aspect-[1/2] flex-1 overflow-hidden rounded-t-2xl"
+          style={{ x: rightTextX, opacity: rightOpacity }}
+        >
+          <div className="relative h-full w-full">
+            <Image
+              src={sections[1].image}
+              alt=""
+              fill
+              className="object-cover object-top"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   )

@@ -16,7 +16,7 @@ const menuItems = [
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
     { label: "TEAM", href: "/meet-the-team" },
-    { label: "EVENTS", href: "https://forms.gle/TJZ2FfN4KvtrKyPL7", mobileOnly: true },
+    { label: "EVENTS", href: "https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform", mobileOnly: true },
 ]
 
 const socialLinks = [
@@ -155,7 +155,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
             {isOpen && (
                 <motion.div
                     className="fixed inset-0 z-[100] flex h-screen w-full text-[#F7F7F3] overflow-hidden"
-                    style={{ backgroundColor: "#08261e" }}
+                    style={{ backgroundColor: "#041611ff" }}
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"

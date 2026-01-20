@@ -149,7 +149,7 @@ export default function OfferingsHorizontal() {
         <div className="flex items-center gap-[clamp(2rem,3vw,4rem)] pr-32">
 
           {/* 1. SECTION HEADER (Fixed MultiLineReveal) */}
-          <div className="flex-shrink-0 w-[clamp(300px,30vw,500px)] self-center pr-12">
+          <div className="flex-shrink-0 w-[clamp(300px,30vw,500px)] self-center pr-12 pl-10">
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37]">
