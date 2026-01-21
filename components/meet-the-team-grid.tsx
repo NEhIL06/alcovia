@@ -18,7 +18,7 @@ const team = [
     { id: "07", name: "Nehil", role: "Full Stack Engineer", img: "/images/team/Nehil.png" },
     { id: "08", name: "Vansh", role: "Brand Experience Manager", img: "/images/team/vansh.png" },
     { id: "09", name: "Madhav", role: "GTM lead", img: "/images/team/madhav.png" },
-    { id: "10", name: "Manan", role: "GTM intern", img: "/images/team/manan.png" },
+    { id: "10", name: "Manan", role: "GTM", img: "/images/team/manan.png" },
 ];
 
 const experienceLogos = [

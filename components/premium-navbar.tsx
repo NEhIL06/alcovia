@@ -1,3 +1,4 @@
+
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
@@ -5,6 +6,70 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import NavMenu from "@/components/nav-menu"
+
+// FlipText Component - Inline text flip animation
+const FLIP_DURATION = 0.25
+const FLIP_STAGGER = 0.015
+
+function FlipText({
+  children,
+  baseColor = "inherit",
+  hoverColor = "#002C45"
+}: {
+  children: string
+  baseColor?: string
+  hoverColor?: string
+}) {
+  return (
+    <motion.span
+      initial="initial"
+      whileHover="hovered"
+      className="relative inline-block overflow-hidden whitespace-nowrap"
+      style={{ lineHeight: 1, height: "1em" }}
+    >
+      <span className="relative">
+        {children.split("").map((letter, i) => (
+          <motion.span
+            key={i}
+            variants={{
+              initial: { y: 0 },
+              hovered: { y: "-100%" },
+            }}
+            transition={{
+              duration: FLIP_DURATION,
+              ease: "easeInOut",
+              delay: FLIP_STAGGER * i,
+            }}
+            className="inline-block"
+            style={{ color: baseColor, verticalAlign: "top" }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </motion.span>
+        ))}
+      </span>
+      <span className="absolute inset-0">
+        {children.split("").map((letter, i) => (
+          <motion.span
+            key={i}
+            variants={{
+              initial: { y: "100%" },
+              hovered: { y: 0 },
+            }}
+            transition={{
+              duration: FLIP_DURATION,
+              ease: "easeInOut",
+              delay: FLIP_STAGGER * i,
+            }}
+            className="inline-block"
+            style={{ color: hoverColor, verticalAlign: "top" }}
+          >
+            {letter === " " ? "\u00A0" : letter}
+          </motion.span>
+        ))}
+      </span>
+    </motion.span>
+  )
+}
 
 type NavMode = "light" | "dark"
 
@@ -166,7 +231,7 @@ export default function PremiumNavbar() {
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="hidden md:flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105"
+                  className="hidden md:flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/100"
                   style={{
                     backgroundColor: '#EABF36',
                     color: '#002C45',
@@ -178,7 +243,8 @@ export default function PremiumNavbar() {
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span>Apply for Cohort 2026</span>
+
+                  <FlipText>Apply for Cohort 2026</FlipText>
                 </motion.a>
               )}
             </AnimatePresence>
@@ -194,7 +260,7 @@ export default function PremiumNavbar() {
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex md:hidden items-center rounded-lg px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105"
+                  className="flex md:hidden items-center rounded-lg px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/30"
                   style={{
                     backgroundColor: '#EABF36',
                     color: '#002C45',
@@ -206,7 +272,7 @@ export default function PremiumNavbar() {
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span>Apply for Cohort 2026</span>
+                  <FlipText>Apply for Cohort 2026</FlipText>
                 </motion.a>
               )}
             </AnimatePresence>

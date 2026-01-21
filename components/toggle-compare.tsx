@@ -1,10 +1,75 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import TextReveal, { MultiLineReveal } from "./text-reveal"
+
+// Flow Button with animated SVG border
+function FlowButton({ direction, href }: { direction: "left" | "right"; href: string }) {
+  const [isActive, setIsActive] = useState(false)
+
+  return (
+    <Link href={href}>
+      <motion.button
+        className={`${direction === "right" ? "ml-auto" : "mr-auto"} mt-5 relative flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold transition-transform group`}
+        initial={{ opacity: 0, scale: 0.5 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        onMouseEnter={() => setIsActive(true)}
+        onMouseLeave={() => setIsActive(false)}
+        onTouchStart={() => setIsActive(true)}
+        onTouchEnd={() => setIsActive(false)}
+      >
+        {/* SVG Border with Flow Animation */}
+        <svg
+          className="absolute inset-0 w-full h-full pointer-events-none"
+          viewBox="0 0 64 64"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <rect
+            x="2"
+            y="2"
+            width="60"
+            height="60"
+            rx="12"
+            stroke="#0C0C0C"
+            strokeWidth="2"
+            strokeDasharray="8 4"
+            strokeDashoffset="0"
+            className={`transition-all duration-300 ${isActive ? "animate-flow-border" : ""}`}
+            style={{
+              opacity: isActive ? 1 : 0.3,
+            }}
+          />
+        </svg>
+
+        {/* Arrow Icon */}
+        <span className="relative z-10">{direction === "right" ? "→" : "←"}</span>
+      </motion.button>
+
+      {/* CSS for animation */}
+      <style jsx>{`
+        @keyframes flowBorder {
+          from {
+            stroke-dashoffset: 24;
+          }
+          to {
+            stroke-dashoffset: 0;
+          }
+        }
+        :global(.animate-flow-border) {
+          animation: flowBorder 0.6s linear infinite;
+        }
+      `}</style>
+    </Link>
+  )
+}
 
 const sections = [
   {
@@ -56,7 +121,7 @@ export default function ToggleCompare() {
   return (
     <section
       ref={containerRef}
-      className="relative overflow-hidden pt-20  md:min-h-screen md:py-32 md:sticky md:top-0 z-0"
+      className="relative overflow-hidden pt-20 md:min-h-screen md:py-32 sticky top-0 z-0"
     >
       {/* --- DESKTOP IMAGES (xl+) --- */}
       {/* LEFT IMAGE */}
@@ -161,17 +226,7 @@ export default function ToggleCompare() {
               />
             </div>
 
-            <Link href="/at-school">
-              <motion.button
-                className="ml-auto mt-5 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold hover:scale-110 transition-transform"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-              >
-                →
-              </motion.button>
-            </Link>
+            <FlowButton direction="right" href="/at-school" />
           </motion.div>
 
           {/* OUTSIDE SCHOOL */}
@@ -198,17 +253,7 @@ export default function ToggleCompare() {
               />
             </div>
 
-            <Link href="/outside-school">
-              <motion.button
-                className="mr-auto mt-5 flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold hover:scale-110 transition-transform"
-                initial={{ opacity: 0, scale: 0.5 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
-              >
-                ←
-              </motion.button>
-            </Link>
+            <FlowButton direction="left" href="/outside-school" />
           </motion.div>
         </div>
       </div>
