@@ -9,21 +9,21 @@ const socials = [
     {
         platform: "LinkedIn",
         handle: "Alcovia",
-        followers: "1,190",
+        
         image: "/images/linkedin.jpg",
         url: "https://www.linkedin.com/company/alcovia-life/",
     },
     {
         platform: "Instagram",
         handle: "@alcovia.in",
-        followers: "639",
+        
         image: "/images/insta.jpg",
         url: "https://www.instagram.com/alcovia.life/",
     },
     {
         platform: "YouTube",
         handle: "Alcovia",
-        followers: "100",
+        
         image: "/images/youtube.jpg",
         url: "https://www.youtube.com/@Alcovialife",
     }
@@ -204,9 +204,7 @@ export default function SocialFan() {
                                         <h3 className="text-lg font-bold text-white md:text-xl">
                                             {social.handle}
                                         </h3>
-                                        <p className="text-sm font-medium text-white/60 md:text-base">
-                                            {social.followers} followers
-                                        </p>
+                                        
                                     </div>
                                 </div>
                             </motion.a>

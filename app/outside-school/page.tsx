@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useLayoutEffect } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -58,6 +58,11 @@ export default function OutsideSchoolPage() {
     const container = useRef<HTMLDivElement>(null);
     const scrollContainer = useRef<HTMLDivElement>(null);
     const [progress, setProgress] = useState(0);
+
+    // Force scroll to top on mount - fixes navigation scroll issues
+    useLayoutEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
 
     // --- 2. SENIOR DEV LOGIC: RESPONSIVE ANIMATION ---
     useGSAP(() => {

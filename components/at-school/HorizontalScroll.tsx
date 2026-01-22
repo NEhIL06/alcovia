@@ -85,9 +85,16 @@ export default function HorizontalScroll() {
                 trigger: container.current,
                 pin: true,
                 scrub: 1,
+                invalidateOnRefresh: true,
                 end: () => "+=" + container.current!.offsetWidth * (totalPanels - 1),
             },
         });
+
+        // Delayed refresh to handle hydration timing issues
+        const timer = setTimeout(() => {
+            ScrollTrigger.refresh()
+        }, 200)
+        return () => clearTimeout(timer)
 
     }, { scope: container });
 

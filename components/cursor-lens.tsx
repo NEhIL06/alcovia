@@ -55,7 +55,23 @@ export default function CursorLens({
     const [isHovering, setIsHovering] = React.useState(false)
     const [hasInteracted, setHasInteracted] = React.useState(false)
     const [isMobileDevice, setIsMobileDevice] = React.useState(false)
+    const [imagesLoaded, setImagesLoaded] = React.useState(false)
     const isActive = isHovering || previewCursor
+
+    // Preload images to prevent flicker
+    React.useEffect(() => {
+        const preloadImages = async () => {
+            const loadImage = (src: string) => new Promise<void>((resolve) => {
+                const img = new Image()
+                img.onload = () => resolve()
+                img.onerror = () => resolve() // Resolve even on error to not block
+                img.src = src
+            })
+            await Promise.all([loadImage(baseImage), loadImage(revealImage)])
+            setImagesLoaded(true)
+        }
+        preloadImages()
+    }, [baseImage, revealImage])
 
     // Detect mobile on mount
     React.useEffect(() => {
@@ -67,6 +83,7 @@ export default function CursorLens({
 
     // Reference to the container for coordinate math
     const containerRef = React.useRef<HTMLDivElement>(null)
+
 
     // --- 1. SETUP BACKGROUND BLOBS ---
     const random = (min: number, max: number) => Math.random() * (max - min) + min
