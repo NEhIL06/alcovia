@@ -7,6 +7,13 @@ import FlipLink from "@/components/flip-link"
 import TextReveal from "@/components/text-reveal"
 
 export default function Footer() {
+  const goldTextStyle = {
+    backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    color: 'transparent'
+  };
   const containerRef = useRef<HTMLDivElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
 
@@ -66,26 +73,26 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-12 text-center sm:grid-cols-2 md:text-left lg:grid-cols-4">
           <div className="space-y-4">
 
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#EABF36]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent" style={goldTextStyle}>
               Contact Us
             </h3>
             <div className="space-y-3 text-sm text-white/60">
               <a
                 href="https://www.google.com/maps/place/WeWork+Two+Horizon+Centre+-+Coworking+%26+Office+Space+in+Golf+Course+Road,+Gurugram/@28.4511202,77.0965147,17z/data=!3m2!4b1!5s0x390d18e94e3f0557:0x15caf654c98d779a!4m6!3m5!1s0x390d196a9219452f:0x2b7db4e11e0c29d1!8m2!3d28.4511202!4d77.0965147!16s%2Fg%2F11ffw7b31g?entry=ttu&g_ep=EgoyMDI1MTIwOS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D"
-                className="block transition-colors hover:text-[#EABF36]"
+                className="block transition-colors hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] hover:bg-clip-text hover:text-transparent"
               >
                 WeWork, Two Horizon Centre,<br />
                 DLF Phase 5, Gurugram
               </a>
               <a
                 href="tel:+919070606050"
-                className="block transition-colors hover:text-[#EABF36]"
+                className="block transition-colors hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] hover:bg-clip-text hover:text-transparent"
               >
                 +91 9070606050
               </a>
               <a
                 href="mailto:info@alcovia.life"
-                className="block transition-colors hover:text-[#EABF36]"
+                className="block transition-colors hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] hover:bg-clip-text hover:text-transparent"
               >
                 info@alcovia.life
               </a>
@@ -93,7 +100,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#EABF36]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent" style={goldTextStyle}>
               Quick Links
             </h3>
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
@@ -113,13 +120,13 @@ export default function Footer() {
 
           <div className="space-y-4">
 
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-[#EABF36]">
+            <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent" style={goldTextStyle}>
               Upcoming
             </h3>
 
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
-                { name: "Cohort 2026", href: "https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform" },
+                { name: "Cohort 2026", href: "https://forms.gle/xrPqKciXL6aKwUbw7" },
                 { name: "Workshop", href: "https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" }
               ].map((link) => (
                 <FlipLink
@@ -136,7 +143,7 @@ export default function Footer() {
           </div>
 
           <div className="space-y-4 flex flex-col items-center md:items-start">
-            <h3 className="text-sm font-semibold px-7 uppercase tracking-wider text-[#EABF36] text-center md:text-left">
+            <h3 className="text-sm font-semibold px-7 uppercase tracking-wider bg-clip-text text-transparent text-center md:text-left" style={goldTextStyle}>
               Follow Us
             </h3>
             <div className="flex gap-3 justify-center md:justify-start">

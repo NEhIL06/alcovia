@@ -177,10 +177,11 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
 
                     {/* Apply for Cohort 2026 Button - Top Left */}
                     <motion.a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform?embedded=true"
-                        target="_blank"
+                        href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                        target="_self"
                         rel="noopener noreferrer"
-                        className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-lg bg-[#EABF36] px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 hover:bg-[#F5D042] active:scale-95"
+                        className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 active:scale-95"
+                        style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
@@ -303,7 +304,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                     </span>
                                     <a
                                         href="tel:+919070606050"
-                                        className="text-sm font-medium text-[#F7F7F3] transition-colors hover:text-[#EABF36]"
+                                        className="text-sm font-medium text-[#F7F7F3] transition-colors hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] hover:bg-clip-text hover:text-transparent"
                                     >
                                         +91 9070606050
                                     </a>

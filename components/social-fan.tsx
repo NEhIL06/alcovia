@@ -3,19 +3,9 @@
 import { useRef, useState, useEffect } from "react"
 import { motion, useInView } from "framer-motion"
 import Image from "next/image"
-import TextReveal, { MultiLineReveal } from "./text-reveal"
-import Footer from "./footer"
-import gsap from "gsap"
-
-interface TextWord {
-    text: string
-    isAccent: boolean
-}
-
-
+import { ScrollReveal } from "./text-reveal"
 
 const socials = [
-
     {
         platform: "LinkedIn",
         handle: "Alcovia",
@@ -59,58 +49,12 @@ export default function SocialFan() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
     const [isDesktop, setIsDesktop] = useState(false)
 
-    // Refs for new text animation
-    const schoolLinesRef = useRef<(HTMLDivElement | null)[]>([])
-    const outsideLinesRef = useRef<(HTMLDivElement | null)[]>([])
-    const [hasAnimatedText, setHasAnimatedText] = useState(false)
-
     useEffect(() => {
         const checkDesktop = () => setIsDesktop(window.innerWidth >= 768)
         checkDesktop()
         window.addEventListener("resize", checkDesktop)
         return () => window.removeEventListener("resize", checkDesktop)
     }, [])
-
-    // Text Reveal Animation Effect
-    useEffect(() => {
-        if (isInView && !hasAnimatedText) {
-            setHasAnimatedText(true)
-
-            const animateLines = (refs: (HTMLDivElement | null)[], delayOffset: number) => {
-                refs.forEach((line, i) => {
-                    if (!line) return
-
-                    const mask = line.querySelector(".reveal-mask")
-                    const text = line.querySelector(".reveal-text")
-
-                    if (!mask || !text) return
-
-                    const tl = gsap.timeline({
-                        defaults: { ease: "power3.inOut" }
-                    })
-
-                    gsap.set(mask, { scaleX: 0, transformOrigin: "left" })
-                    gsap.set(text, { opacity: 0 })
-
-                    tl.to(mask, {
-                        scaleX: 1,
-                        duration: 0.6,
-                    }, delayOffset + (i * 0.1))
-
-                    tl.set(mask, { transformOrigin: "right" }, ">")
-                    tl.set(text, { opacity: 1 }, ">")
-
-                    tl.to(mask, {
-                        scaleX: 0,
-                        duration: 0.6,
-                    }, ">")
-                })
-            }
-
-            animateLines(schoolLinesRef.current, 0)
-            animateLines(outsideLinesRef.current, 0.4) // Slight delay for second column
-        }
-    }, [isInView, hasAnimatedText])
 
     // Get card transform based on hover state - SUBTLE movements only
     const getCardTransform = (index: number) => {
@@ -165,8 +109,6 @@ export default function SocialFan() {
 
             <div className="relative mx-auto max-w-7xl">
 
-
-
                 {/* Header */}
                 <motion.div
                     className="flex flex-col mb-12 text-center items-center"
@@ -174,105 +116,102 @@ export default function SocialFan() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
                 >
-                    <TextReveal delay={0} highlightColor="#EABF36">
+                    <ScrollReveal className="w-fit">
                         <h2 className="text-3xl font-black uppercase tracking-tight text-[#0B0B0B] md:text-5xl lg:text-6xl">
                             FOLLOW ALCOVIA
                         </h2>
-                    </TextReveal>
-                    <TextReveal delay={0.15} highlightColor="#EABF36">
+                    </ScrollReveal>
+                    <ScrollReveal className="w-fit">
                         <h2 className="text-3xl font-black uppercase tracking-tight text-[#0B0B0B]/50 md:text-5xl lg:text-6xl">
                             ON SOCIAL MEDIA
                         </h2>
-                    </TextReveal>
+                    </ScrollReveal>
                 </motion.div>
-
-                {/* Social Text Links with Hover Animation */}
-
 
                 {/* Card Container */}
                 <div className="relative flex h-[350px] items-center justify-center md:h-[650px] lg:h-[750px]">
                     {socials.map((social, index) => {
-  const transform = getCardTransform(index)
+                        const transform = getCardTransform(index)
 
-  return (
-    <motion.a
-      key={social.platform}
-      href={social.url}
-      target="_blank"
-      rel="noopener noreferrer"
-      // OPTIMIZATION: 'will-change-transform' forces the browser to promote this to a GPU layer
-      // creating buttery smooth 60fps animation on mobile.
-      className="absolute cursor-pointer will-change-transform"
-      
-      initial={{
-        opacity: 0,
-        x: 0, 
-        y: 150,       // Reduced slightly so the travel distance feels more controlled
-        rotate: 0,
-        scale: 0.9,   // Start closer to final size to reduce pixel-shimmering
-      }}
-      
-      animate={isInView ? {
-        opacity: 1,
-        x: transform.x,
-        y: transform.y,
-        rotate: transform.rotate,
-        scale: transform.scale,
-      } : {}}
-      
-      // PREMIUM PHYSICS:
-      // High Mass (1.2) + Lower Stiffness (120) = "Heavy" expensive feel.
-      // It won't snap cheaply; it will glide into place with authority.
-      transition={{
-        type: "spring",
-        stiffness: 120, 
-        damping: 18,    
-        mass: 1.2,      
-        delay: index * 0.12, // Slightly tighter timing
-      }}
-      
-      // Use style for zIndex to avoid layout thrashing
-      style={{ zIndex: transform.zIndex }}
-      onMouseEnter={() => setHoveredIndex(index)}
-      onMouseLeave={() => setHoveredIndex(null)}
-      onTouchStart={() => setHoveredIndex(index)}
-      onTouchEnd={() => setHoveredIndex(null)}
-    >
-      {/* VISUAL POLISH: 
-         1. Added 'ring-1 ring-white/10' for a subtle premium glass edge.
-         2. Changed shadow to 'shadow-2xl' but with a blacker hue for contrast.
-      */}
-      <div className="relative h-[240px] w-[160px] overflow-hidden rounded-2xl bg-[#0B0B0B] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:h-[500px] md:w-[320px] lg:h-[560px] lg:w-[360px]">
-        
-        <Image
-          src={social.image}
-          alt={social.platform}
-          fill
-          quality={90} // Ensure crisp avatars
-          // OPTIMIZATION: Crucial for Core Web Vitals.
-          // Tells browser to load smaller images on mobile, bigger on desktop.
-          sizes="(max-width: 768px) 160px, (max-width: 1200px) 320px, 360px"
-          className="object-cover transition-transform duration-700 ease-out hover:scale-105" // Subtle zoom on image itself
-        />
-        
-        {/* Gradient: Made slightly stronger at bottom for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/20 to-transparent opacity-90" />
+                        return (
+                            <motion.a
+                                key={social.platform}
+                                href={social.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                // OPTIMIZATION: 'will-change-transform' forces the browser to promote this to a GPU layer
+                                // creating buttery smooth 60fps animation on mobile.
+                                className="absolute cursor-pointer will-change-transform"
 
-        <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
-          <span className="mb-2 inline-block rounded-full bg-[#EABF36] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#0B0B0B] shadow-sm">
-            {social.platform}
-          </span>
-          <h3 className="text-lg font-bold text-white md:text-xl">
-            {social.handle}
-          </h3>
-          <p className="text-sm font-medium text-white/60 md:text-base">
-            {social.followers} followers
-          </p>
-        </div>
-      </div>
-    </motion.a>
-  )
-})}
+                                initial={{
+                                    opacity: 0,
+                                    x: 0,
+                                    y: 150,       // Reduced slightly so the travel distance feels more controlled
+                                    rotate: 0,
+                                    scale: 0.9,   // Start closer to final size to reduce pixel-shimmering
+                                }}
+
+                                animate={isInView ? {
+                                    opacity: 1,
+                                    x: transform.x,
+                                    y: transform.y,
+                                    rotate: transform.rotate,
+                                    scale: transform.scale,
+                                } : {}}
+
+                                // PREMIUM PHYSICS:
+                                // High Mass (1.2) + Lower Stiffness (120) = "Heavy" expensive feel.
+                                // It won't snap cheaply; it will glide into place with authority.
+                                transition={{
+                                    type: "spring",
+                                    stiffness: 120,
+                                    damping: 18,
+                                    mass: 1.2,
+                                    delay: index * 0.12, // Slightly tighter timing
+                                }}
+
+                                // Use style for zIndex to avoid layout thrashing
+                                style={{ zIndex: transform.zIndex }}
+                                onMouseEnter={() => setHoveredIndex(index)}
+                                onMouseLeave={() => setHoveredIndex(null)}
+                                onTouchStart={() => setHoveredIndex(index)}
+                                onTouchEnd={() => setHoveredIndex(null)}
+                            >
+                                {/* VISUAL POLISH: 
+                                   1. Added 'ring-1 ring-white/10' for a subtle premium glass edge.
+                                   2. Changed shadow to 'shadow-2xl' but with a blacker hue for contrast.
+                                */}
+                                <div className="relative h-[240px] w-[160px] overflow-hidden rounded-2xl bg-[#0B0B0B] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] md:h-[500px] md:w-[320px] lg:h-[560px] lg:w-[360px]">
+
+                                    <Image
+                                        src={social.image}
+                                        alt={social.platform}
+                                        fill
+                                        quality={90} // Ensure crisp avatars
+                                        // OPTIMIZATION: Crucial for Core Web Vitals.
+                                        // Tells browser to load smaller images on mobile, bigger on desktop.
+                                        sizes="(max-width: 768px) 160px, (max-width: 1200px) 320px, 360px"
+                                        className="object-cover transition-transform duration-700 ease-out hover:scale-105" // Subtle zoom on image itself
+                                    />
+
+                                    {/* Gradient: Made slightly stronger at bottom for text legibility */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B] via-[#0B0B0B]/20 to-transparent opacity-90" />
+
+                                    <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6">
+                                        <span className="mb-2 inline-block rounded-full bg-[#EABF36] px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-[#0B0B0B] shadow-sm">
+                                            {social.platform}
+                                        </span>
+                                        <h3 className="text-lg font-bold text-white md:text-xl">
+                                            {social.handle}
+                                        </h3>
+                                        <p className="text-sm font-medium text-white/60 md:text-base">
+                                            {social.followers} followers
+                                        </p>
+                                    </div>
+                                </div>
+                            </motion.a>
+                        )
+                    })}
                 </div>
 
                 {/* CTA Text */}
@@ -282,9 +221,11 @@ export default function SocialFan() {
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ delay: 0.5, duration: 0.6 }}
                 >
-                    <h3 className="text-2xl font-bold uppercase tracking-widest text-[#0B0B0B] text-center md:text-3xl lg:text-4xl">
-                        Follow Us Everywhere
-                    </h3>
+                    <ScrollReveal className="w-fit">
+                        <h3 className="text-2xl font-bold uppercase tracking-widest text-[#0B0B0B] text-center md:text-3xl lg:text-4xl">
+                            Follow Us Everywhere
+                        </h3>
+                    </ScrollReveal>
                 </motion.div>
 
                 {/* Social Text Links */}
@@ -331,8 +272,6 @@ export default function SocialFan() {
                         </a>
                     ))}
                 </motion.div>
-
-
 
             </div>
         </section>

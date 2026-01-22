@@ -224,8 +224,8 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform"
-                  target="_blank"
+                  href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                  target="_self"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -253,8 +253,8 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform"
-                  target="_blank"
+                  href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                  target="_self"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
@@ -319,7 +319,7 @@ function NavLink({
       >
         {children}
       </span>
-      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-[#EABF36] transition-all duration-300 group-hover:w-4/5" />
+      <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 transition-all duration-300 group-hover:w-4/5" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }} />
     </Link>
   )
 }

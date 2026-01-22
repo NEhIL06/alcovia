@@ -143,7 +143,7 @@ export default function OutsideSchoolPage() {
                     <div className="absolute inset-0 z-0 opacity-20 pointer-events-none bg-[url('https://grainy-gradients.vercel.app/noise.svg')] contrast-150 brightness-100"></div>
 
                     <div className="z-10 text-center">
-                        <h1 className="text-[12vw] xl:text-[15vw] leading-[0.8] font-bold tracking-tighter text-white opacity-80">
+                        <h1 className="text-[12vw] xl:text-[15vw] leading-[0.8] font-bold tracking-tighter bg-clip-text text-transparent opacity-80" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             OUTSIDE<br />SCHOOL
                         </h1>
                     </div>
@@ -168,7 +168,7 @@ export default function OutsideSchoolPage() {
                         </div>
 
                         <div className="max-w-2xl z-10 relative">
-                            <h2 className="text-5xl xl:text-7xl font-serif text-[#D4AF37] mb-8 italic">Hyper-Personalised</h2>
+                            <h2 className="text-5xl xl:text-7xl font-serif mb-8 italic bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>Hyper-Personalised</h2>
                             <div className="space-y-6 text-lg xl:text-xl font-light leading-relaxed opacity-90">
                                 <p>
                                     We are hyper-personalised, and we don't just say it. We create individual roadmaps for each alcovian, built post understanding of current likes, dislikes, future aspirations, current areas of interest.
@@ -220,7 +220,7 @@ export default function OutsideSchoolPage() {
                         </div>
 
                         <div className="relative z-10 max-w-5xl w-full text-center xl:text-left">
-                            <h2 className="text-5xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text bg-gradient-to-l from-[#ff4d4d] to-[#4A0404] relative xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none text-center xl:text-left w-full xl:w-auto">
+                            <h2 className="text-5xl xl:text-9xl font-serif italic mb-8 text-transparent bg-clip-text relative xl:absolute xl:-left-24 xl:-top-32 opacity-70 select-none text-center xl:text-left w-full xl:w-auto" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                                 TRANSFORM
                             </h2>
                             {/* <h2 className="text-5xl xl:text-8xl font-serif italic mb-12 relative z-20">
@@ -255,7 +255,7 @@ export default function OutsideSchoolPage() {
                         </div>
 
                         <div className="max-w-4xl text-center z-10">
-                            <h2 className="text-5xl xl:text-8xl font-serif text-[#D4AF37] mb-8 italic">The Ascent</h2>
+                            <h2 className="text-5xl xl:text-8xl font-serif mb-8 italic bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>The Ascent</h2>
                             <div className="space-y-6 text-lg xl:text-2xl font-light text-[#F2F2F2]/80">
 
                                 <p>This year brought in a lot of maturity, made each alcovian know that they are capable of 10x of their imagination.</p>
@@ -276,7 +276,8 @@ export default function OutsideSchoolPage() {
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8 }}
-                            className="text-4xl xl:text-6xl font-serif text-center text-[#D4AF37] mb-16 italic"
+                            className="text-4xl xl:text-6xl font-serif text-center mb-16 italic bg-clip-text text-transparent"
+                            style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
                         >
                             Your Quarterly Journey
                         </motion.h2>
@@ -360,7 +361,7 @@ export default function OutsideSchoolPage() {
                         className="mb-6 font-serif text-5xl md:text-7xl xl:text-8xl font-bold italic leading-[0.9] text-[#F2F2F2] z-10"
                     >
                         Ready to<br />
-                        <span className="text-[#D4AF37]">transform?</span>
+                        <span className="bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>transform?</span>
                     </motion.h2>
 
 
@@ -372,8 +373,10 @@ export default function OutsideSchoolPage() {
                         className="z-10"
                     >
                         <Link
-                            href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform?embedded=true"
-                            className="group relative inline-flex items-center gap-3 rounded-full px-10 py-5 font-sans text-lg font-bold uppercase tracking-wider bg-[#D4AF37] text-[#0B0C15] overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:scale-105"
+                            href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                            target="_self"
+                            className="group relative inline-flex items-center gap-3 rounded-full px-10 py-5 font-sans text-lg font-bold uppercase tracking-wider text-[#0B0C15] overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:scale-105"
+                            style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         >
                             <span className="relative z-10">Begin Your Journey</span>
                             <svg className="w-5 h-5 relative z-10 duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

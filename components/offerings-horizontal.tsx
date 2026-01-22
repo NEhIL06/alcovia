@@ -6,7 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ArrowRight, Quote, Sparkles } from "lucide-react";
-import TextReveal, { MultiLineReveal } from "./text-reveal";
+import TextReveal, { ScrollReveal } from "./text-reveal";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -157,15 +157,19 @@ export default function OfferingsHorizontal() {
               </p>
             </div>
 
-            {/* Using MultiLineReveal for the "Stacked" Lando Effect */}
-            <MultiLineReveal
-              className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3]"
-              lines={[
-                { text: "Everything you need" },
-                { text: "to take flight.", isAccent: true }
-              ]}
-              staggerDelay={0.2}
-            />
+            {/* Using ScrollReveal for the "Stacked" Lando Effect */}
+            <div className="flex flex-col gap-2">
+              <ScrollReveal className="w-fit">
+                <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3]">
+                  Everything you need
+                </span>
+              </ScrollReveal>
+              <ScrollReveal className="w-fit">
+                <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                  to take flight.
+                </span>
+              </ScrollReveal>
+            </div>
           </div>
 
           {/* 2. DYNAMIC CARDS */}
@@ -207,13 +211,13 @@ export default function OfferingsHorizontal() {
 
                   {/* TYPOGRAPHY WITH LANDO REVEALS */}
                   <div className="mb-3">
-                    {/* Title using MultiLineReveal for the "Stacked Bar" look */}
+                    {/* Title using ScrollReveal */}
                     <div className="font-serif text-[clamp(1.25rem,2vw,1.875rem)] text-[#D4AF37] leading-tight">
                       {item.title}
                     </div>
                   </div>
 
-                  {/* Description using TextReveal (Single Block) */}
+                  {/* Description using ScrollReveal */}
                   <div className="border-l border-white/10 pl-4 mt-2">
                     <p className="text-[clamp(0.75rem,1vw,0.875rem)] font-light text-[#F7F7F3]/80 leading-relaxed">
                       {item.description}
@@ -229,14 +233,23 @@ export default function OfferingsHorizontal() {
           <div className="w-[clamp(300px,40vw,600px)] flex-shrink-0 flex items-center justify-center p-12 self-center">
             <div className="text-center">
               <Quote className="w-16 h-16 text-[#D4AF37] mx-auto mb-8 opacity-50" />
-              <MultiLineReveal
-                className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]"
-                lines={[
-                  { text: "\"Building" },
-                  { text: "future leaders,", isAccent: true },
-                  { text: "one teen at a time.\"" }
-                ]}
-              />
+              <div className="flex flex-col items-center gap-2">
+                <ScrollReveal className="w-fit">
+                  <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
+                    "Building
+                  </span>
+                </ScrollReveal>
+                <ScrollReveal className="w-fit">
+                  <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                    future leaders,
+                  </span>
+                </ScrollReveal>
+                <ScrollReveal className="w-fit">
+                  <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
+                    one teen at a time."
+                  </span>
+                </ScrollReveal>
+              </div>
             </div>
           </div>
         </div>
@@ -246,14 +259,17 @@ export default function OfferingsHorizontal() {
       <div className="md:hidden px-6 py-20 relative z-10">
         <div className="mb-16">
           <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-3">Your Year at Alcovia</p>
-          <MultiLineReveal
-            lines={[
-              { text: "Everything you" },
-              { text: "need to" },
-              { text: "take flight.", isAccent: true }
-            ]}
-            className="font-serif text-4xl italic text-[#F7F7F3] leading-tight"
-          />
+          <div className="flex flex-col gap-1">
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">Everything you</span>
+            </ScrollReveal>
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">need to</span>
+            </ScrollReveal>
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>take flight.</span>
+            </ScrollReveal>
+          </div>
         </div>
 
         <div className="space-y-20">
@@ -295,13 +311,14 @@ export default function OfferingsHorizontal() {
       <div className="hidden md:block xl:hidden px-12 py-24 relative z-10">
         <div className="mb-20 text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Your Year at Alcovia</p>
-          <MultiLineReveal
-            lines={[
-              { text: "Everything you need" },
-              { text: "to take flight.", isAccent: true }
-            ]}
-            className="font-serif text-5xl italic text-[#F7F7F3] leading-tight justify-center"
-          />
+          <div className="flex flex-col items-center gap-1">
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight">Everything you need</span>
+            </ScrollReveal>
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>to take flight.</span>
+            </ScrollReveal>
+          </div>
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-24">

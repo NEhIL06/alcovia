@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import InfiniteScrollMentors from "@/components/infinite-scroll-mentors"
-import TextReveal from "./text-reveal"
+import { ScrollReveal } from "./text-reveal"
 
 export default function PartnersSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -78,22 +78,16 @@ export default function PartnersSection() {
         <div className="mb-16 flex flex-col gap-8 md:grid md:grid-cols-2 md:gap-16">
           {/* Left Column - Headlines with Parallax */}
           <motion.div style={{ y: headlineY }}>
-            <motion.h2
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.1 }}
-            >
-              PROUD TO CALL
-            </motion.h2>
-            <motion.h3
-              className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]/60 mt-1"
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              OUR MENTORS
-            </motion.h3>
+            <ScrollReveal className="w-fit">
+              <h2 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]">
+                PROUD TO CALL
+              </h2>
+            </ScrollReveal>
+            <ScrollReveal className="w-fit">
+              <h3 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black uppercase tracking-tight text-[#0B0B0B]/60 mt-1">
+                OUR MENTORS
+              </h3>
+            </ScrollReveal>
           </motion.div>
 
           {/* Right Column - Paragraph with Parallax */}
@@ -101,16 +95,15 @@ export default function PartnersSection() {
             className="self-end mt-4 md:mt-0"
             style={{ y: paragraphY }}
           >
-            <motion.p
-              className="text-sm sm:text-base md:text-base text-[#0B0B0B]/70 font-bold leading-relaxed"
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              <TextReveal duration={0.6}>Alcovia is proud to collaborate with a range of mentors, who share</TextReveal>
+            <div className="text-sm sm:text-base md:text-base text-[#0B0B0B]/70 font-bold leading-relaxed">
+              <ScrollReveal className="w-fit">
+                <span>Alcovia is proud to collaborate with a range of mentors, who share</span>
+              </ScrollReveal>
               <br className="hidden sm:block" />
-              <TextReveal delay={0.6}> our passion for empowering students across India.</TextReveal>
-            </motion.p>
+              <ScrollReveal className="w-fit">
+                <span>our passion for empowering students across India.</span>
+              </ScrollReveal>
+            </div>
           </motion.div>
         </div>
       </div>

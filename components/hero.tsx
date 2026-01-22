@@ -98,36 +98,36 @@ const IndustryDiscoveryIcon = () => {
 }
 
 const WorkshopWidget = ({ isRevealed }: { isRevealed: boolean }) => {
-    const [isWidgetActive, setIsWidgetActive] = useState(false)
-
     return (
         <motion.div className="absolute bottom-8 left-4 z-40 hidden md:block xl:bottom-12 xl:left-8" initial={{ opacity: 0, y: 20 }} animate={isRevealed ? { opacity: 1, y: 0 } : {}} transition={{ delay: 1.5, duration: 0.8 }}>
-            <div
+            <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform"
+                target="_self"
+                rel="noopener noreferrer"
                 className="group block cursor-pointer"
-                onClick={() => setIsWidgetActive(!isWidgetActive)}
             >
-                <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#EABF36]">
+                <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#BF953F]">
                     <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]"><span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span></div>
                     <div className="flex-1 flex items-center justify-center py-2 bg-white relative overflow-hidden"><div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "10px 10px" }} /><IndustryDiscoveryIcon /></div>
                     <div className="border-t-2 border-[#0C0C0C] p-4 bg-white rounded-b-[9px]">
-                        <div className="flex justify-between items-end"><div><span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span><h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">CONSULTING<br />WORKSHOP</h4></div><div className="flex flex-col items-end"><span className="text-xl font-black text-[#0C0C0C] leading-none">31</span><span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">JAN</span></div></div>
-                        <div className={`mt-3 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity ${isWidgetActive ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
+                        <div className="flex justify-between items-end"><div><span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span><h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">STRATEGY OF<br />SUCCESS</h4></div><div className="flex flex-col items-end"><span className="text-xl font-black text-[#0C0C0C] leading-none">31</span><span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">JAN</span></div></div>
+                        <div className="mt-3 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity opacity-0 group-hover:opacity-100">
+                            <div className="flex items-center gap-2">
                                 <span>Register Now</span><ArrowUpRight className="w-3 h-3" />
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </motion.div>
     )
 }
 
 const CTAButton = ({ isRevealed, scrollProgress, ctaRef, handleCTAMouseEnter, handleCTAClick }: any) => (
     <motion.div className="absolute bottom-8 right-4 z-40 hidden flex-col items-end md:flex xl:bottom-12 xl:right-8" initial={{ opacity: 0 }} animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }} transition={{ duration: 0.4, ease: "easeOut" }}>
-        <motion.button ref={ctaRef} className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#EABF36] focus:outline-none focus:ring-2 focus:ring-[#EABF36] focus:ring-offset-2 bg-white/80 backdrop-blur-sm" style={{ opacity: 0 }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onMouseEnter={handleCTAMouseEnter} onClick={handleCTAClick}>
+        <motion.button ref={ctaRef} className="group relative overflow-hidden rounded-full border-2 border-[#0C0C0C] px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:border-[#BF953F] focus:outline-none focus:ring-2 focus:ring-[#BF953F] focus:ring-offset-2 bg-white/80 backdrop-blur-sm" style={{ opacity: 0 }} whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} onMouseEnter={handleCTAMouseEnter} onClick={handleCTAClick}>
             <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Start Your Journey</span>
-            <motion.div className="absolute inset-0 -z-0 bg-[#EABF36]" initial={{ x: "-100%" }} whileHover={{ x: 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} />
+            <motion.div className="absolute inset-0 -z-0" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }} initial={{ x: "-100%" }} whileHover={{ x: 0 }} transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }} />
         </motion.button>
     </motion.div>
 )
@@ -166,22 +166,22 @@ const RollingBannerDesktop = memo(({ scrollProgress }: { scrollProgress: number 
 
     return (
         <motion.div
-            className="hidden md:block absolute inset-0 z-[-35] select-none overflow-hidden pointer-events-none"
+            className="hidden md:block absolute bottom-[3vh] left-0 right-0 z-40 select-none overflow-hidden pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: scrollProgress > 0.1 ? 0.9 : 0 }}
             transition={{ duration: 0.6 }}
         >
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden w-full" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
-                        <span key={i} className="font-[family-name:var(--font-milan)] text-[5vw] font-bold uppercase tracking-tight text-[#EABF36] mx-8 flex-shrink-0">
+                        <span key={i} className="font-[family-name:var(--font-milan)] text-[3vw] font-bold uppercase tracking-tight bg-clip-text text-transparent mx-8 flex-shrink-0" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
                 </div>
                 <div ref={heroMarqueeRef2} className="flex whitespace-nowrap overflow-hidden w-full" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
-                        <span key={i} className="font-[family-name:var(--font-milan)] text-[5vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-8 flex-shrink-0">
+                        <span key={i} className="font-[family-name:var(--font-milan)] text-[3vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-8 flex-shrink-0">
                             PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS •
                         </span>
                     ))}
@@ -224,7 +224,7 @@ const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }
 
     return (
         <motion.div
-            className="md:hidden absolute bottom-[12vh] left-0 right-0 z-[-35] py-6 select-none overflow-hidden pointer-events-none"
+            className="md:hidden absolute bottom-[12vh] left-0 right-0 z-[-35] py-18 select-none overflow-hidden pointer-events-none"
             initial={{ opacity: 0 }}
             animate={{ opacity: scrollProgress > 0.1 ? 0.9 : 0 }}
             transition={{ duration: 0.6 }}
@@ -232,7 +232,7 @@ const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }
             <div className="flex flex-col gap-0">
                 <div ref={heroMarqueeRef1} className="flex whitespace-nowrap overflow-hidden" style={{ msOverflowStyle: 'none', scrollbarWidth: 'none' }}>
                     {[...Array(2)].map((_, i) => (
-                        <span key={i} className="font-[family-name:var(--font-milan)] text-[8vw] font-bold uppercase tracking-tight text-[#EABF36] mx-4 flex-shrink-0">
+                        <span key={i} className="font-[family-name:var(--font-milan)] text-[8vw] font-bold uppercase tracking-tight bg-clip-text text-transparent mx-4 flex-shrink-0" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
                             UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW •
                         </span>
                     ))}
@@ -249,6 +249,92 @@ const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }
     )
 })
 
+// Wing Reveal Animation Component
+const WingsReveal = memo(({ isHovered, scrollProgress, isMobile }: { isHovered: boolean; scrollProgress: number; isMobile: boolean }) => {
+    const shouldShow = isHovered && scrollProgress < 0.15
+
+    if (isMobile) return null
+
+    return (
+        <>
+            {/* Left Wing - positioned behind the boy's back */}
+            <motion.div
+                className="absolute pointer-events-none
+                    w-[210px] h-[210px]
+                    sm:w-[260px] sm:h-[260px]
+                    md:w-[600px] md:h-[600px]
+                    lg:w-[700px] lg:h-[700px]
+                    xl:w-[490px] xl:h-[490px]
+                    2xl:w-[525px] 2xl:h-[525px]"
+                style={{
+                    top: '60%',
+                    right: '55%',
+                    marginRight: '-15px',
+                    transformOrigin: 'right center',
+                    zIndex: 5,
+                }}
+                initial={{ opacity: 0, x: 120, scale: 0.6, y: '-50%' }}
+                animate={{
+                    opacity: shouldShow ? 1 : 0,
+                    x: shouldShow ? 0 : 120,
+                    scale: shouldShow ? 1 : 0.6,
+                    rotate: shouldShow ? -20 : -10,
+                }}
+                transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0,
+                }}
+            >
+                <img
+                    src="/images/element-download-1764790639.png"
+                    alt=""
+                    className="w-full h-full object-contain"
+                    style={{ transform: 'scaleX(-1)' }}
+                    draggable={false}
+                />
+            </motion.div>
+
+            {/* Right Wing - positioned behind the boy's back */}
+            <motion.div
+                className="absolute pointer-events-none
+                    w-[210px] h-[210px]
+                    sm:w-[260px] sm:h-[260px]
+                    md:w-[600px] md:h-[600px]
+                    lg:w-[700px] lg:h-[700px]
+                    xl:w-[490px] xl:h-[490px]
+                    2xl:w-[525px] 2xl:h-[525px]"
+                style={{
+                    top: '60%',
+                    left: '57%',
+                    marginLeft: '-15px',
+                    transformOrigin: 'left center',
+                    zIndex: 5,
+                }}
+                initial={{ opacity: 0, x: -120, scale: 0.6, y: '-50%' }}
+                animate={{
+                    opacity: shouldShow ? 1 : 0,
+                    x: shouldShow ? 0 : -120,
+                    scale: shouldShow ? 1 : 0.6,
+                    rotate: shouldShow ? 20 : 10,
+                }}
+                transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.1,
+                }}
+            >
+                <img
+                    src="/images/element-download-1764790639.png"
+                    alt=""
+                    className="w-full h-full object-contain"
+                    draggable={false}
+                />
+            </motion.div>
+        </>
+    )
+})
+
 const OnePercentSVG = memo(({ scrollProgress }: { scrollProgress: number }) => (
     <motion.div
         className="absolute inset-0 z-50 flex flex-col items-center justify-center pointer-events-none"
@@ -257,8 +343,11 @@ const OnePercentSVG = memo(({ scrollProgress }: { scrollProgress: number }) => (
         transition={{ duration: 0.6 }}
     >
         <motion.p
-            className="absolute top-[28vh] md:top-[15vh] left-0 right-0 z-100 text-2xl font-[family-name:var(--font-milan)] sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#EABF36] text-center px-8 sm:px-8"
+            className="absolute top-[25vh] md:top-[20vh] left-0 right-0 z-100 text-5xl font-[family-name:var(--font-milan)] sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-semibold bg-clip-text text-transparent text-center px-8 sm:px-8"
             style={{
+                backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
                 opacity: scrollProgress > 0.7 ? Math.min((scrollProgress - 0.7) * 4, 1) : 0,
                 transform: `translateY(${scrollProgress > 0.7 ? 0 : 20}px)`
             }}
@@ -266,12 +355,21 @@ const OnePercentSVG = memo(({ scrollProgress }: { scrollProgress: number }) => (
             JOIN THE TOP
         </motion.p>
 
-        <div className="relative z-50 w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] lg:w-[40vw] lg:h-[40vw]">
+        <div className="relative z-50 w-[65vw] h-[65vw] md:w-[30vw] md:h-[30vw] lg:w-[20vw] lg:h-[20vw]">
             <svg viewBox="0 0 200 150" className="w-full h-full overflow-visible drop-shadow-[0_0_30px_rgba(234,191,54,0.4)]">
-                <path d="M30,20 L50,20 L50,130 M30,130 L70,130" fill="none" stroke="#EABF36" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 250, strokeDashoffset: 250 - (Math.max(0, Math.min((scrollProgress - 0.3) * 2.5, 1)) * 250), transition: "stroke-dashoffset 0.1s ease-out" }} />
-                <path d="M90,130 L170,20" fill="none" stroke="#EABF36" strokeWidth="10" strokeLinecap="round" style={{ strokeDasharray: 150, strokeDashoffset: 150 - (Math.max(0, Math.min((scrollProgress - 0.4) * 2.5, 1)) * 150), transition: "stroke-dashoffset 0.1s ease-out" }} />
-                <circle cx="110" cy="35" r="18" fill="none" stroke="#EABF36" strokeWidth="10" style={{ strokeDasharray: 115, strokeDashoffset: 115 - (Math.max(0, Math.min((scrollProgress - 0.45) * 3, 1)) * 115), transition: "stroke-dashoffset 0.1s ease-out" }} />
-                <circle cx="160" cy="115" r="18" fill="none" stroke="#EABF36" strokeWidth="10" style={{ strokeDasharray: 115, strokeDashoffset: 115 - (Math.max(0, Math.min((scrollProgress - 0.5) * 3, 1)) * 115), transition: "stroke-dashoffset 0.1s ease-out" }} />
+                <defs>
+                    <linearGradient id="heroGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#BF953F" />
+                        <stop offset="25%" stopColor="#FCF6BA" />
+                        <stop offset="50%" stopColor="#B38728" />
+                        <stop offset="75%" stopColor="#FBF5B7" />
+                        <stop offset="100%" stopColor="#AA771C" />
+                    </linearGradient>
+                </defs>
+                <path d="M30,20 L50,20 L50,130 M30,130 L70,130" fill="none" stroke="url(#heroGold)" strokeWidth="10" strokeLinecap="round" strokeLinejoin="round" style={{ strokeDasharray: 250, strokeDashoffset: 250 - (Math.max(0, Math.min((scrollProgress - 0.3) * 2.5, 1)) * 250), transition: "stroke-dashoffset 0.1s ease-out" }} />
+                <path d="M90,130 L170,20" fill="none" stroke="url(#heroGold)" strokeWidth="10" strokeLinecap="round" style={{ strokeDasharray: 150, strokeDashoffset: 150 - (Math.max(0, Math.min((scrollProgress - 0.4) * 2.5, 1)) * 150), transition: "stroke-dashoffset 0.1s ease-out" }} />
+                <circle cx="110" cy="35" r="18" fill="none" stroke="url(#heroGold)" strokeWidth="10" style={{ strokeDasharray: 115, strokeDashoffset: 115 - (Math.max(0, Math.min((scrollProgress - 0.45) * 3, 1)) * 115), transition: "stroke-dashoffset 0.1s ease-out" }} />
+                <circle cx="160" cy="115" r="18" fill="none" stroke="url(#heroGold)" strokeWidth="10" style={{ strokeDasharray: 115, strokeDashoffset: 115 - (Math.max(0, Math.min((scrollProgress - 0.5) * 3, 1)) * 115), transition: "stroke-dashoffset 0.1s ease-out" }} />
             </svg>
         </div>
     </motion.div>
@@ -292,6 +390,8 @@ export default function Hero() {
     const [isRevealed, setIsRevealed] = useState(false)
     const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
     const [scrollProgress, setScrollProgress] = useState(0)
+    const [isHeroHovered, setIsHeroHovered] = useState(false)
+    const [isMobileDevice, setIsMobileDevice] = useState(false)
 
     const particlesRef = useRef<ReturnType<typeof createAmbientParticles> | null>(null)
     const ctaSweepRef = useRef<ReturnType<typeof createCTANeonSweep> | null>(null)
@@ -299,6 +399,15 @@ export default function Hero() {
 
     const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] })
     const baseImageScale = useTransform(scrollYProgress, [0, 1], [1, 0.5])
+
+
+
+    useEffect(() => {
+        const checkMobile = () => setIsMobileDevice(window.innerWidth < 768)
+        checkMobile()
+        window.addEventListener('resize', checkMobile)
+        return () => window.removeEventListener('resize', checkMobile)
+    }, [])
 
 
     useEffect(() => {
@@ -337,10 +446,10 @@ export default function Hero() {
         })
 
         const clipInset = isMobileDevice
-            ? "35% 20% 35% 20%"
+            ? "50% 50% 50% 50%"
             : isTablet
-                ? "22% 20% 22% 20%"
-                : "28% 25% 25% 28%"
+                ? "50% 50% 50% 50%"
+                : "50% 50% 50% 50%"
 
         tl.to(clipMaskRef.current, { clipPath: `inset(${clipInset})`, ease: "none" }, 0)
         return () => { ScrollTrigger.getAll().forEach(st => st.kill()) }
@@ -352,7 +461,7 @@ export default function Hero() {
         const rect = ctaRef.current.getBoundingClientRect()
         createPlaneTakeoff(containerRef.current, rect.left + rect.width / 2, rect.top + rect.height / 2)
         setTimeout(() => {
-            window.open("https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform", "_blank")
+            window.open("https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform", "_self")
         }, 800)
     }, [])
 
@@ -365,10 +474,21 @@ export default function Hero() {
             <div ref={scrollyContainerRef} className="relative h-[200vh] sm:h-[250vh] lg:h-[300vh] mb-12 md:mb-40">
                 <div className="sticky top-0 h-screen overflow-hidden">
                     <div ref={clipMaskRef} className="absolute inset-0 will-change-[clip-path]" style={{ clipPath: "inset(0% 0% 0% 0%)" }}>
-                        <section id="hero" ref={containerRef} className="hero-viewport relative flex h-full min-h-screen items-center justify-center overflow-hidden bg-white" role="region" aria-label="Hero section - Take flight with Alcovia">
+                        <section
+                            id="hero"
+                            ref={containerRef}
+                            className="hero-viewport relative flex h-full min-h-screen items-center justify-center overflow-hidden bg-white"
+                            role="region"
+                            aria-label="Hero section - Take flight with Alcovia"
+                            onMouseEnter={() => !isMobileDevice && setIsHeroHovered(true)}
+                            onMouseLeave={() => !isMobileDevice && setIsHeroHovered(false)}
+                        >
 
                             {/* Full-Screen CursorLens with Background Blobs */}
                             <motion.div className="absolute inset-0 z-0" style={{ scale: baseImageScale }}>
+                                {/* Wings - z-5 puts them behind base image (z-10) but above background */}
+                                <WingsReveal isHovered={isHeroHovered} scrollProgress={scrollProgress} isMobile={isMobileDevice} />
+
                                 <CursorLens
                                     baseImage="/images/hero-base.webp"
                                     revealImage="/images/hero-reveal.webp"
@@ -401,7 +521,7 @@ export default function Hero() {
 
                             {/* Desktop Tagline - Right Side */}
                             <motion.div
-                                className="hidden xl:flex absolute right-12 top-1/2 -translate-y-1/2 flex-col items-start z-40"
+                                className="hidden xl:flex absolute right-12 top-[45%] -translate-y-1/2 flex-col items-start z-40"
                                 initial={{ opacity: 0, x: 30 }}
                                 animate={{ opacity: isRevealed && scrollProgress < 0.05 ? 1 : 0, x: scrollProgress < 0.05 ? 0 : 30, pointerEvents: scrollProgress < 0.05 ? "auto" : "none" }}
                                 transition={{ duration: 0.4, ease: "easeOut" }}

@@ -1,7 +1,7 @@
 "use client"
 import type React from "react"
 import { useRef } from "react"
-import { motion, useInView } from "framer-motion"
+import { motion, useInView, useScroll, useTransform, type MotionValue } from "framer-motion"
 
 interface TextRevealProps {
   children: React.ReactNode
@@ -73,6 +73,7 @@ interface MultiLineRevealProps {
   lineClassName?: string
   baseDelay?: number
   staggerDelay?: number
+  direction?: "left" | "right"
 }
 
 export function MultiLineReveal({
@@ -81,6 +82,7 @@ export function MultiLineReveal({
   lineClassName = "",
   baseDelay = 0,
   staggerDelay = 0.1, // Tighter stagger for a "cascade" feel
+  direction = "left",
 }: MultiLineRevealProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-10%" })
@@ -115,12 +117,12 @@ export function MultiLineReveal({
             style={{
               backgroundColor: line.isAccent ? "#EABF36" : "#EABF36" // Or use different colors if needed
             }}
-            initial={{ scaleX: 0, originX: 0 }}
+            initial={{ scaleX: 0, originX: direction === "left" ? 0 : 1 }}
             animate={
               isInView
                 ? {
                   scaleX: [0, 1, 1, 0],
-                  originX: [0, 0, 1, 1],
+                  originX: direction === "left" ? [0, 0, 1, 1] : [1, 1, 0, 0],
                 }
                 : { scaleX: 0 }
             }
@@ -133,6 +135,72 @@ export function MultiLineReveal({
           />
         </div>
       ))}
+    </div>
+  )
+}
+
+interface ScrollRevealProps {
+  children: React.ReactNode
+  className?: string
+  offset?: any // framer-motion offset type
+  direction?: "left" | "right"
+  progress?: MotionValue<number>
+}
+
+export function ScrollReveal({
+  children,
+  className = "",
+  offset = ["start 95%", "start 45%"], // Slower/Smoother default
+  direction = "left",
+  progress
+}: ScrollRevealProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress: defaultScrollProgress } = useScroll({
+    target: containerRef,
+    offset: offset
+  })
+
+  const activeProgress = progress || defaultScrollProgress
+
+  // 1. Mask Scale: Grows 0->1, stays 1, then shrinks 1->0
+  const maskScale = useTransform(activeProgress, [0, 0.4, 0.6, 1], [0, 1, 1, 0])
+
+  // 2. Mask Origin: Left for first half, Right for second half (if direction is left)
+  // If direction is right: Right for first half, Left for second half
+  const maskOrigin = useTransform(activeProgress, (v) => {
+    if (direction === "left") {
+      return v < 0.5 ? 0 : 1
+    } else {
+      return v < 0.5 ? 1 : 0
+    }
+  })
+
+  // 3. Text Opacity: Hidden until mask is full, then visible
+  // Smoother transition: [0.4, 0.6] instead of [0.45, 0.55]
+  const textOpacity = useTransform(activeProgress, [0.4, 0.6], [0, 1])
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative overflow-hidden w-fit ${className}`}
+    >
+      {/* The Mask */}
+      <motion.div
+        className="absolute inset-0 z-20"
+        style={{
+          backgroundColor: '#EABF36',
+          scaleX: maskScale,
+          originX: maskOrigin
+        }}
+      />
+
+      {/* The Text */}
+      <motion.div
+        style={{ opacity: textOpacity }}
+      >
+        {children}
+      </motion.div>
     </div>
   )
 }

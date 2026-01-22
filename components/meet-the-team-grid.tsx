@@ -7,6 +7,14 @@ import { Rock_Salt } from 'next/font/google';
 
 const rockSalt = Rock_Salt({ subsets: ['latin'], weight: '400' });
 
+const goldTextStyle = {
+    backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    color: 'transparent'
+};
+
 // --- DATA CONFIGURATION ---
 const team = [
     { id: "01", name: "Sahil Puri", role: "Founder", img: "/images/team/sahil.png" },
@@ -61,7 +69,7 @@ const TeamListItem = memo(({ member, setActiveMember }: { member: any, setActive
     >
         {/* Left: Role */}
         <div className="w-1/3 flex items-center gap-4">
-            <span className="text-sm font-mono opacity-30 group-hover:text-[#EABF36] transition-colors duration-300 w-8">
+            <span className="text-sm font-mono opacity-30 group-hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] group-hover:bg-clip-text group-hover:text-transparent transition-colors duration-300 w-8">
                 {member.id}
             </span>
             <span className="text-sm md:text-base font-mono uppercase opacity-70 group-hover:opacity-100 group-hover:text-white transition-colors duration-300">
@@ -74,7 +82,7 @@ const TeamListItem = memo(({ member, setActiveMember }: { member: any, setActive
 
         {/* Right: Name */}
         <div className="w-1/3 text-right">
-            <h3 className="text-[clamp(2rem,4vw,4.5rem)] font-black uppercase tracking-tight text-white group-hover:text-[#EABF36] transition-colors duration-300 leading-none">
+            <h3 className="text-[clamp(2rem,4vw,4.5rem)] font-black uppercase tracking-tight text-white group-hover:[background-image:linear-gradient(135deg,#BF953F_0%,#FCF6BA_25%,#B38728_50%,#FBF5B7_75%,#AA771C_100%)] group-hover:bg-clip-text group-hover:text-transparent transition-colors duration-300 leading-none">
                 {member.name}
             </h3>
         </div>
@@ -87,7 +95,7 @@ const MobileTeamListItem = memo(({ member, setMobileSelectedMember }: { member: 
         className="w-full flex items-center justify-between py-6 px-6 border-b border-white/10 active:bg-white/5 transition-colors min-h-[80px]"
     >
         <div className="flex flex-col gap-1">
-            <span className="font-mono text-xs text-[#EABF36] opacity-80">{member.id}</span>
+            <span className="font-mono text-xs bg-clip-text text-transparent opacity-80" style={goldTextStyle}>{member.id}</span>
             <span className="font-mono text-xs uppercase opacity-50 tracking-wider">{member.role}</span>
         </div>
         <h3 className="text-3xl font-black uppercase text-white">{member.name}</h3>
@@ -98,7 +106,7 @@ export default function MeetTheTeamGrid() {
     const [activeMember, setActiveMember] = useState<typeof team[0] | null>(null);
     const [mobileSelectedMember, setMobileSelectedMember] = useState<typeof team[0] | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
-
+    const [isTouched, setIsTouched] = useState(false);
     // AUTO-SCROLL STATE FOR LOGO MARQUEE
     const [autoScrollSpeed, setAutoScrollSpeed] = useState(0.8);
     const logoScrollRef = useRef<HTMLDivElement>(null);
@@ -195,18 +203,28 @@ export default function MeetTheTeamGrid() {
         offset: ["start start", "end end"]
     });
 
-    // 1. THE LAUNCHPAD TEXT (0% - 20%)
-    const titleOpacity = useTransform(heroProgress, [0, 0.1], [1, 0]);
-    const titleScale = useTransform(heroProgress, [0, 0.15], [1, 1.5]);
-    const titleY = useTransform(heroProgress, [0, 0.15], [0, -100]);
-    const titleBlur = useTransform(heroProgress, [0, 0.15], ["blur(0px)", "blur(20px)"]);
+    // 1. THE LAUNCHPAD TEXT (0% - 10%)
+    const titleOpacity = useTransform(heroProgress, [0, 0.08], [1, 0]);
+    const titleScale = useTransform(heroProgress, [0, 0.1], [1, 1.5]);
+    const titleY = useTransform(heroProgress, [0, 0.1], [0, -100]);
+    const titleBlur = useTransform(heroProgress, [0, 0.1], ["blur(0px)", "blur(20px)"]);
 
-    // 2. SPLIT GRID (20% - 80%)
-    // Shared Opacity: Fades in at 20%, stays visible, fades out at 85%
-    const gridOpacity = useTransform(heroProgress, [0.15, 0.25, 0.5, 0.8], [0, 1, 1, 0]);
+    // 1.5 THE 1% SVG ANIMATION (8% - 38%)
+    // Extended visibility range: [0.06, 0.12, 0.32, 0.38] (was [0.06, 0.12, 0.22, 0.28])
+    const onePercentOpacity = useTransform(heroProgress, [0.06, 0.12, 0.32, 0.38], [0, 1, 1, 0]);
+    const onePercentScale = useTransform(heroProgress, [0.08, 0.15], [0.8, 1]);
+    // Stroke progress for SVG drawing - slightly slower
+    const onePercentProgress = useTransform(heroProgress, [0.08, 0.25], [0, 1]);
+    // "for the top" text
+    const forTheTopOpacity = useTransform(heroProgress, [0.12, 0.18], [0, 1]);
+
+    // 2. SPLIT GRID (35% - 90%)
+    // Shared Opacity: Fades in later at 35% (was 25%) to give "For The Top" more time
+    const gridOpacity = useTransform(heroProgress, [0.35, 0.42, 0.6, 0.9], [0, 1, 1, 0]);
 
     // Right Column Scroll: Moves from slightly below to way up (simulating scroll)
-    const pillarsY = useTransform(heroProgress, [0.2, 0.8], ["20vh", "-120vh"]);
+    // Syncs with grid opacity start
+    const pillarsY = useTransform(heroProgress, [0.4, 0.9], ["20vh", "-120vh"]);
 
     // 3. "100x BIGGER" REVEAL (85% - 100%)
     const bigTextOpacity = useTransform(heroProgress, [0.85, 0.9], [0, 1]);
@@ -232,6 +250,19 @@ export default function MeetTheTeamGrid() {
     const footerScale = useTransform(footerProgress, [0, 1], [0.95, 1]);
     const footerRadius = useTransform(footerProgress, [0, 1], ["12px", "0px"]);
     const footerOnePercentColor = useTransform(footerProgress, [0.2, 1], ["#FFFFFF", "#EABF36"]);
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [isHovered, setIsHovered] = useState(false);
+
+    // Parallax effect on mouse move
+    const handleMouseMove = (e: any) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const x = (e.clientX - rect.left - rect.width / 2) / 50;
+        const y = (e.clientY - rect.top - rect.height / 2) / 50;
+        setMousePosition({ x, y });
+    };
+
+    // Gradient animation
+    const gradientRotation = useTransform(onePercentProgress, [0, 1], [0, 360]);
 
     return (
         <motion.div
@@ -255,13 +286,127 @@ export default function MeetTheTeamGrid() {
                             <h1 className="text-[clamp(4rem,16vw,20rem)] font-black leading-[0.8] tracking-tighter uppercase text-center whitespace-pre-line font-inter">
                                 THE<br />LAUNCHPAD
                             </h1>
-                            {/* The Signature Overlay */}
-                            <span
-                                className={`absolute top-[-5%] right-[-5%] text-[clamp(8rem,16vw,20rem)] text-[#CCFF00] -rotate-12 select-none pointer-events-none ${rockSalt.className}`}
-                            >
-                                1%
-                            </span>
+
                         </div>
+                    </motion.div>
+
+                    {/* STAGE 1.5: THE 1% SVG ANIMATION - Premium Clean Design */}
+                    <motion.div
+                        style={{ opacity: onePercentOpacity, scale: onePercentScale }}
+                        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none"
+                    >
+                        {/* Subtle ambient glow - very light */}
+                        <div
+                            className="absolute inset-0 pointer-events-none"
+                            style={{
+                                background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.06) 0%, transparent 60%)',
+                            }}
+                        />
+
+                        {/* "for the top" text - premium typography */}
+                        <motion.p
+                            style={{ opacity: forTheTopOpacity, ...goldTextStyle }}
+                            className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-extralight tracking-[0.4em] uppercase mb-6 md:mb-10 bg-clip-text text-transparent"
+                        >
+                            for the top
+                        </motion.p>
+
+                        {/* Premium 1% SVG - High Resolution */}
+                        <div className="relative w-[40vw] h-[30vw] md:w-[24vw] md:h-[18vw] lg:w-[20vw] lg:h-[15vw] max-w-[380px] max-h-[285px]">
+                            <svg
+                                viewBox="0 0 400 300"
+                                className="w-full h-full"
+                                preserveAspectRatio="xMidYMid meet"
+                            >
+                                <defs>
+                                    {/* Ultra-Premium Metallic Gold Gradient */}
+                                    <linearGradient id="premiumGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#BF953F" />
+                                        <stop offset="25%" stopColor="#FCF6BA" />
+                                        <stop offset="50%" stopColor="#B38728" />
+                                        <stop offset="75%" stopColor="#FBF5B7" />
+                                        <stop offset="100%" stopColor="#AA771C" />
+                                    </linearGradient>
+                                    {/* Subtle inner glow */}
+                                    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                        <feGaussianBlur stdDeviation="2" result="blur" />
+                                        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                    </filter>
+                                </defs>
+
+                                {/* The "1" - premium crisp strokes */}
+                                <motion.path
+                                    d="M60,30 L100,30 L100,270 M60,270 L140,270"
+                                    fill="none"
+                                    stroke="url(#premiumGold)"
+                                    strokeWidth="12"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    style={{
+                                        strokeDasharray: 520,
+                                        strokeDashoffset: useTransform(onePercentProgress, [0, 0.5], [520, 0]),
+                                    }}
+                                />
+
+                                {/* The "%" slash */}
+                                <motion.path
+                                    d="M180,270 L340,30"
+                                    fill="none"
+                                    stroke="url(#premiumGold)"
+                                    strokeWidth="12"
+                                    strokeLinecap="round"
+                                    style={{
+                                        strokeDasharray: 310,
+                                        strokeDashoffset: useTransform(onePercentProgress, [0.25, 0.65], [310, 0]),
+                                    }}
+                                />
+
+                                {/* Top circle of "%" */}
+                                <motion.circle
+                                    cx="220"
+                                    cy="70"
+                                    r="36"
+                                    fill="none"
+                                    stroke="url(#premiumGold)"
+                                    strokeWidth="12"
+                                    style={{
+                                        strokeDasharray: 226,
+                                        strokeDashoffset: useTransform(onePercentProgress, [0.35, 0.75], [226, 0]),
+                                    }}
+                                />
+
+                                {/* Bottom circle of "%" */}
+                                <motion.circle
+                                    cx="320"
+                                    cy="230"
+                                    r="36"
+                                    fill="none"
+                                    stroke="url(#premiumGold)"
+                                    strokeWidth="12"
+                                    style={{
+                                        strokeDasharray: 226,
+                                        strokeDashoffset: useTransform(onePercentProgress, [0.45, 0.85], [226, 0]),
+                                    }}
+                                />
+                            </svg>
+
+                            {/* CSS-based glow layer (much smoother than SVG filters) */}
+                            <div
+                                className="absolute inset-0 pointer-events-none opacity-40"
+                                style={{
+                                    background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.3) 0%, transparent 70%)',
+                                    filter: 'blur(20px)',
+                                }}
+                            />
+                        </div>
+
+                        {/* Minimal bottom text */}
+                        <motion.p
+                            className="mt-6 md:mt-10 text-[10px] md:text-xs font-mono uppercase tracking-[0.5em] text-white/25"
+                            style={{ opacity: useTransform(onePercentProgress, [0.7, 1], [0, 1]) }}
+                        >
+                            Elite Excellence
+                        </motion.p>
                     </motion.div>
 
                     {/* STAGE 2: THE SPLIT GRID (Manifesto + Pillars) */}
@@ -272,7 +417,7 @@ export default function MeetTheTeamGrid() {
                         {/* LEFT: Manifesto (Fixed Position via Sticky-like behavior) */}
                         <div className="w-full flex flex-col gap-10 md:sticky md:top-32">
                             <p className="text-3xl md:text-5xl font-medium leading-[1.15] tracking-tight">
-                                We are the launchpad for the <span className="text-[#EABF36]">top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
+                                We are the launchpad for the <span className="bg-clip-text text-transparent" style={goldTextStyle}>top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
                             </p>
                             <p className="text-xl md:text-2xl font-normal opacity-70 max-w-lg">
                                 At Alcovia, we’re committed to helping teens unlock their full potential through:
@@ -287,7 +432,7 @@ export default function MeetTheTeamGrid() {
                             {["Mentorship", "Peer Learning", "Hyper-personalized Guidance"].map((item, i) => (
                                 <div key={i} className="border-t border-white/50 py-8 first:border-t-2">
                                     <div className="flex flex-col gap-[10vh] pt-[5vh]">
-                                        <span className="font-mono text-[#EABF36] text-sm font-bold tracking-widest">
+                                        <span className="font-mono text-sm font-bold tracking-widest bg-clip-text text-transparent" style={goldTextStyle}>
                                             0{i + 1}
                                         </span>
                                         <h3 className="text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter">
@@ -310,7 +455,7 @@ export default function MeetTheTeamGrid() {
                     >
                         <div>
                             <p className="font-mono text-sm uppercase tracking-[0.5em] mb-8 opacity-60">To build a life which is</p>
-                            <h2 className="text-[clamp(4rem,12vw,14rem)] font-black uppercase leading-[0.8] text-[#EABF36] mb-8">
+                            <h2 className="text-[clamp(4rem,12vw,14rem)] font-black uppercase leading-[0.8] mb-8 bg-clip-text text-transparent" style={goldTextStyle}>
                                 100x BIGGER
                             </h2>
                             <p className="text-xl md:text-4xl font-light opacity-80">than whatever you imagine.</p>
@@ -326,21 +471,141 @@ export default function MeetTheTeamGrid() {
             ══════════════════════════════════════════════════════════════ */}
             <section className="md:hidden block w-full px-6 py-32 flex flex-col">
                 {/* Item 1: Title */}
-                <div className="mb-20 relative">
+                <div className="mb-12 relative">
                     <h1 className="text-6xl font-black leading-[0.85] tracking-tighter uppercase text-left font-inter">
                         THE<br />LAUNCHPAD
                     </h1>
-                    <span
-                        className={`absolute top-[-10%] right-[0%] text-6xl text-[#CCFF00] -rotate-12 select-none pointer-events-none ${rockSalt.className}`}
+                </div>
+
+                {/* Item 1.5: The 1% Animation - Premium Clean Version */}
+                <div className="mb-16 flex flex-col items-center justify-center relative">
+                    {/* Subtle ambient glow */}
+                    <div
+                        className="absolute inset-0 pointer-events-none"
+                        style={{
+                            background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.08) 0%, transparent 60%)',
+                        }}
+                    />
+
+                    {/* "for the top" text - clean typography */}
+                    <motion.p
+                        initial={{ opacity: 0, y: 15 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, ease: "easeOut" }}
+                        className="text-lg sm:text-xl font-extralight tracking-[0.35em] uppercase mb-6 z-10 bg-clip-text text-transparent"
+                        style={goldTextStyle}
                     >
-                        1%
-                    </span>
+                        for the top
+                    </motion.p>
+
+                    {/* Premium 1% SVG - High Resolution */}
+                    <motion.div
+                        className="relative w-[70vw] h-[52.5vw] max-w-[320px] max-h-[240px]"
+                        initial={{ scale: 0.9, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ delay: 0.2, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
+                        onTouchStart={() => setIsTouched(true)}
+                        onTouchEnd={() => setIsTouched(false)}
+                    >
+                        <motion.div
+                            animate={{ scale: isTouched ? 1.03 : 1 }}
+                            transition={{ duration: 0.2 }}
+                            className="w-full h-full"
+                        >
+                            <svg
+                                viewBox="0 0 400 300"
+                                className="w-full h-full"
+                                preserveAspectRatio="xMidYMid meet"
+                            >
+                                <defs>
+                                    {/* Ultra-Premium Metallic Gold Gradient */}
+                                    <linearGradient id="mobileGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#BF953F" />
+                                        <stop offset="25%" stopColor="#FCF6BA" />
+                                        <stop offset="50%" stopColor="#B38728" />
+                                        <stop offset="75%" stopColor="#FBF5B7" />
+                                        <stop offset="100%" stopColor="#AA771C" />
+                                    </linearGradient>
+                                </defs>
+
+                                {/* The "1" - crisp strokes */}
+                                <motion.path
+                                    d="M60,30 L100,30 L100,270 M60,270 L140,270"
+                                    fill="none"
+                                    stroke="url(#mobileGold)"
+                                    strokeWidth="12"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{ pathLength: 1, opacity: 1 }}
+                                    transition={{ duration: 1, ease: "easeOut" }}
+                                />
+
+                                {/* The "%" slash */}
+                                <motion.path
+                                    d="M180,270 L340,30"
+                                    fill="none"
+                                    stroke="url(#mobileGold)"
+                                    strokeWidth="12"
+                                    strokeLinecap="round"
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{ pathLength: 1, opacity: 1 }}
+                                    transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+                                />
+
+                                {/* Top circle of "%" */}
+                                <motion.circle
+                                    cx="220"
+                                    cy="70"
+                                    r="36"
+                                    fill="none"
+                                    stroke="url(#mobileGold)"
+                                    strokeWidth="12"
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{ pathLength: 1, opacity: 1 }}
+                                    transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+                                />
+
+                                {/* Bottom circle of "%" */}
+                                <motion.circle
+                                    cx="320"
+                                    cy="230"
+                                    r="36"
+                                    fill="none"
+                                    stroke="url(#mobileGold)"
+                                    strokeWidth="12"
+                                    initial={{ pathLength: 0, opacity: 0 }}
+                                    animate={{ pathLength: 1, opacity: 1 }}
+                                    transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
+                                />
+                            </svg>
+                        </motion.div>
+
+                        {/* CSS-based glow (smoother than SVG filters) */}
+                        <div
+                            className="absolute inset-0 pointer-events-none opacity-30 -z-10"
+                            style={{
+                                background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.4) 0%, transparent 70%)',
+                                filter: 'blur(15px)',
+                            }}
+                        />
+                    </motion.div>
+
+                    {/* Minimal bottom text */}
+                    <motion.p
+                        className="mt-6 text-[10px] font-mono uppercase tracking-[0.4em] text-white/20"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 1.2, duration: 0.6 }}
+                    >
+                        Elite Excellence
+                    </motion.p>
                 </div>
 
                 {/* Item 2: Manifesto */}
                 <div className="mb-20 flex flex-col gap-6">
                     <p className="text-2xl font-medium leading-tight tracking-tight">
-                        We are the launchpad for the <span className="text-[#EABF36]">top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
+                        We are the launchpad for the <span className="bg-clip-text text-transparent" style={goldTextStyle}>top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
                     </p>
                     <p className="text-lg font-normal opacity-70">
                         At Alcovia, we’re committed to helping teens unlock their full potential through:
@@ -351,7 +616,7 @@ export default function MeetTheTeamGrid() {
                 <div className="flex flex-col gap-10 mb-32">
                     {["Mentorship", "Peer Learning", "Hyper-personalized Guidance"].map((item, i) => (
                         <div key={i} className="border-t border-white/30 pt-4">
-                            <span className="font-mono text-[#EABF36] text-sm font-bold tracking-widest block mb-2">
+                            <span className="font-mono text-sm font-bold tracking-widest block mb-2 bg-clip-text text-transparent" style={goldTextStyle}>
                                 0{i + 1}
                             </span>
                             <h3 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter">
@@ -366,7 +631,7 @@ export default function MeetTheTeamGrid() {
                 {/* Item 4: The Closer */}
                 <div className="text-left">
                     <p className="font-mono text-xs uppercase tracking-[0.3em] mb-4 opacity-60">To build a life which is</p>
-                    <h2 className="text-7xl font-black uppercase leading-[0.8] text-[#EABF36] mb-6">
+                    <h2 className="text-7xl font-black uppercase leading-[0.8] mb-6 bg-clip-text text-transparent" style={goldTextStyle}>
                         100x<br />BIGGER
                     </h2>
                     <p className="text-lg font-light opacity-80">than whatever you imagine.</p>
@@ -381,7 +646,7 @@ export default function MeetTheTeamGrid() {
                     <h2 className="text-[clamp(2rem,6vw,6rem)] font-bold leading-none uppercase opacity-90 mb-8">
                         <span className="block">First Principle Thinkers,</span>
                         <span className="block">Industry Shakers,</span>
-                        <span className="block text-[#EABF36]">Lean & Mean.</span>
+                        <span className="block bg-clip-text text-transparent" style={goldTextStyle}>Lean & Mean.</span>
                     </h2>
                     <p className="font-mono opacity-50 text-sm tracking-widest uppercase">
                         <span className="block">A team that is obsessed</span>
@@ -470,7 +735,7 @@ export default function MeetTheTeamGrid() {
 
                             {/* Content */}
                             <div className="absolute bottom-0 left-0 w-full p-8">
-                                <p className="font-mono text-[#EABF36] text-sm uppercase mb-2 tracking-widest">
+                                <p className="font-mono text-sm uppercase mb-2 tracking-widest bg-clip-text text-transparent" style={goldTextStyle}>
                                     {mobileSelectedMember.role}
                                 </p>
                                 <h3 className="text-5xl font-black uppercase leading-[0.85] text-white">
@@ -619,7 +884,7 @@ export default function MeetTheTeamGrid() {
                             <h2 className="text-white text-[clamp(3rem,10vw,8rem)] font-black uppercase mb-10 leading-[0.9]">
                                 Ready to join<br />the top <motion.span style={{ color: footerOnePercentColor }}>1%</motion.span>?
                             </h2>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform" target="_blank" className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
+                            <a href="https://forms.gle/xrPqKciXL6aKwUbw7" target="_self" className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
                                 Apply for Cohort 2026
                             </a>
 

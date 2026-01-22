@@ -4,7 +4,7 @@ import { useRef, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import TextReveal, { MultiLineReveal } from "./text-reveal"
+import TextReveal, { MultiLineReveal, ScrollReveal } from "./text-reveal"
 
 // Flow Button with animated SVG border
 function FlowButton({ direction, href }: { direction: "left" | "right"; href: string }) {
@@ -77,9 +77,9 @@ const sections = [
     topText: "AT",
     bottomText: "SCHOOL",
     descriptionLines: [
-      { text: "Empowering academic excellence" },
-      { text: "through innovative learning" },
-      { text: "methodologies." }
+      { text: "Empowering academic " },
+      { text: "excellence through innovative" },
+      { text: "learning methodologies." }
     ],
     image: "/images/atschool.png",
   },
@@ -106,17 +106,23 @@ export default function ToggleCompare() {
 
   const leftImageX = useTransform(scrollYProgress, [0, 0.3, 0.5], [-200, -50, 0])
   const leftTextX = useTransform(scrollYProgress, [0, 0.3, 0.5], [-100, -25, 0])
-  const leftOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [0, 0.5, 1])
+  // Make opacity come in much earlier to fix "not visible" issue
+  const leftOpacity = useTransform(scrollYProgress, [0, 0.1, 0.3], [0, 1, 1])
 
   const rightImageX = useTransform(scrollYProgress, [0, 0.3, 0.5], [200, 50, 0])
   const rightTextX = useTransform(scrollYProgress, [0, 0.3, 0.5], [100, 25, 0])
-  const rightOpacity = useTransform(scrollYProgress, [0, 0.2, 0.4], [0, 0.5, 1])
+  const rightOpacity = useTransform(scrollYProgress, [0, 0.1, 0.3], [0, 1, 1])
 
   const headerY = useTransform(scrollYProgress, [0, 0.3], [50, 0])
   const headerOpacity = useTransform(scrollYProgress, [0, 0.25], [0, 1])
   const mobileImageY = useTransform(scrollYProgress, [0.3, 0.8], ["-10%", "10%"])
   const mobileImageOpacity = useTransform(scrollYProgress, [0.1, 0.35], [0, 1])
   const mobileImageScale = useTransform(scrollYProgress, [0.1, 0.4], [0.9, 1])
+
+  // Create a dedicated progress value for the text reveal
+  // It should complete (0->1) while the section is pinned and visible
+  // Extended range [0.1, 0.6] to ensure it finishes fully
+  const textRevealProgress = useTransform(scrollYProgress, [0.1, 0.6], [0, 1])
 
   return (
     <section
@@ -192,11 +198,9 @@ export default function ToggleCompare() {
           className="mb-12 text-center md:mb-24"
           style={{ y: headerY, opacity: headerOpacity }}
         >
-          <TextReveal delay={0} highlightColor="#EABF36">
-            <h2 className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
-              Our <span className="text-[#EABF36]">Impact</span>
-            </h2>
-          </TextReveal>
+          <h2 className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
+            Our <span className="text-[#EABF36]">Impact</span>
+          </h2>
         </motion.div>
 
         {/* 🔥 MOBILE: SIDE BY SIDE | DESKTOP: ROW */}
@@ -206,7 +210,7 @@ export default function ToggleCompare() {
             className="cursor-pointer text-right"
             style={{ x: leftTextX, opacity: leftOpacity }}
           >
-            <div className="relative mb-4">
+            <div className="relative mb-4 flex flex-col items-end">
               <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
                 {sections[0].topText}
               </span>
@@ -217,13 +221,12 @@ export default function ToggleCompare() {
               </div>
             </div>
 
-            <div className="ml-auto max-w-[160px] md:max-w-[200px]">
-              <MultiLineReveal
-                lines={sections[0].descriptionLines}
-                className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-right"
-                lineClassName="justify-end"
-                staggerDelay={0.1}
-              />
+            <div className="ml-auto max-w-[160px] md:max-w-[200px] flex flex-col items-end">
+              {sections[0].descriptionLines.map((line, i) => (
+                <p key={i} className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-right">
+                  {line.text}
+                </p>
+              ))}
             </div>
 
             <FlowButton direction="right" href="/at-school" />
@@ -234,7 +237,7 @@ export default function ToggleCompare() {
             className="cursor-pointer text-left"
             style={{ x: rightTextX, opacity: rightOpacity }}
           >
-            <div className="relative mb-4">
+            <div className="relative mb-4 flex flex-col items-start">
               <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
                 {sections[1].topText}
               </span>
@@ -245,12 +248,12 @@ export default function ToggleCompare() {
               </div>
             </div>
 
-            <div className="mr-auto max-w-[160px] md:max-w-[200px]">
-              <MultiLineReveal
-                lines={sections[1].descriptionLines}
-                className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-left"
-                staggerDelay={0.1}
-              />
+            <div className="mr-auto max-w-[160px] md:max-w-[200px] flex flex-col items-start">
+              {sections[1].descriptionLines.map((line, i) => (
+                <p key={i} className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-left">
+                  {line.text}
+                </p>
+              ))}
             </div>
 
             <FlowButton direction="left" href="/outside-school" />

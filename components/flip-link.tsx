@@ -18,7 +18,7 @@ export default function FlipLink({
     href = "#",
     className = "",
     baseColor = "inherit",
-    hoverColor = "#EABF36",
+    hoverColor = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
     onClick,
     ...props
 }: FlipLinkProps) {
@@ -75,7 +75,18 @@ export default function FlipLink({
                                 delay: STAGGER * i,
                             }}
                             className="inline-block"
-                            style={{ color: hoverColor, verticalAlign: "top" }}
+                            style={{
+                                verticalAlign: "top",
+                                ...(hoverColor.includes("gradient") ? {
+                                    backgroundImage: hoverColor,
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                    backgroundClip: "text",
+                                    color: "transparent"
+                                } : {
+                                    color: hoverColor
+                                })
+                            }}
                         >
                             {letter === " " ? "\u00A0" : letter}
                         </motion.span>
