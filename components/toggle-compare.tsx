@@ -11,7 +11,7 @@ function FlowButton({ direction, href }: { direction: "left" | "right"; href: st
   const [isActive, setIsActive] = useState(false)
 
   return (
-    <Link href={href} scroll={false}>
+    <Link href={href}>
       <motion.button
         className={`${direction === "right" ? "ml-auto" : "mr-auto"} mt-5 relative flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold transition-transform group`}
         whileHover={{ scale: 1.1 }}

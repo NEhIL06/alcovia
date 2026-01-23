@@ -58,6 +58,7 @@ export default function OutsideSchoolPage() {
     const container = useRef<HTMLDivElement>(null);
     const scrollContainer = useRef<HTMLDivElement>(null);
     const [progress, setProgress] = useState(0);
+    
 
     // --- 2. SENIOR DEV LOGIC: RESPONSIVE ANIMATION ---
     useGSAP(() => {
