@@ -14,10 +14,6 @@ function FlowButton({ direction, href }: { direction: "left" | "right"; href: st
     <Link href={href} scroll={false}>
       <motion.button
         className={`${direction === "right" ? "ml-auto" : "mr-auto"} mt-5 relative flex h-14 w-14 md:h-16 md:w-16 items-center justify-center rounded-xl bg-[#EABF36] text-[#0C0C0C] text-xl md:text-2xl font-bold transition-transform group`}
-        initial={{ opacity: 0, scale: 0.5 }}
-        whileInView={{ opacity: 1, scale: 1 }}
-        viewport={{ once: true, margin: "-50px" }}
-        transition={{ duration: 0.5, delay: 0.3, type: "spring" }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.95 }}
         onMouseEnter={() => setIsActive(true)}

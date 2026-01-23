@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ScrollReveal } from "@/components/text-reveal";
+
 
 export default function Philosophy() {
     return (
@@ -17,21 +17,11 @@ export default function Philosophy() {
                     >
 
                         <div className="font-display flex flex-col gap-1 text-3xl leading-relaxed lg:text-[33px] text-[#E5D1BE]">
-                            <ScrollReveal className="w-fit">
-                                <span>Alcovia program is <span className="font-bold">hyperpersonalised-</span></span>
-                            </ScrollReveal>
-                            <ScrollReveal className="w-fit">
-                                <span>ensuring different outcomes for each <span className="font-bold italic">alcovian.</span></span>
-                            </ScrollReveal>
-                            <ScrollReveal className="w-fit">
-                                <span>We work in the area that shows <span className="font-bold">maximum impact.</span></span>
-                            </ScrollReveal>
-                            <ScrollReveal className="w-fit">
-                                <span>Either an area of big improvement or</span>
-                            </ScrollReveal>
-                            <ScrollReveal className="w-fit">
-                                <span>honing a skill that is already at a <span className="font-bold">mastery level.</span></span>
-                            </ScrollReveal>
+                            <span>Alcovia program is <span className="font-bold">hyperpersonalised-</span></span>
+                            <span>ensuring different outcomes for each <span className="font-bold italic">alcovian.</span></span>
+                            <span>We work in the area that shows <span className="font-bold">maximum impact.</span></span>
+                            <span>Either an area of big improvement or</span>
+                            <span>honing a skill that is already at a <span className="font-bold">mastery level.</span></span>
                         </div>
                     </motion.div>
                 </div>
@@ -68,35 +58,23 @@ export default function Philosophy() {
 
                     {/* Quote Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center p-8 text-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.9 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.8, delay: 0.5 }}
-                            className="flex flex-col items-center"
-                        >
-                            <ScrollReveal className="w-fit">
-                                <span className="font-display text-4xl font-bold leading-none lg:text-6xl text-[#EABF36]">
-                                    Nobody is <span style={{ color: '#FFFFFF', fontWeight: 'bold', fontStyle: 'italic' }}>perfect</span>,
-                                </span>
-                            </ScrollReveal>
-                            <ScrollReveal className="w-fit">
-                                <span className="font-display text-4xl font-bold leading-none lg:text-6xl text-[#EABF36]">
-                                    and we love that.
-                                </span>
-                            </ScrollReveal>
-                        </motion.div>
+                        <div className="flex flex-col items-center">
+                            <span className="font-display text-4xl font-bold leading-none lg:text-6xl text-[#EABF36]">
+                                Nobody is <span style={{ color: '#FFFFFF', fontWeight: 'bold', fontStyle: 'italic' }}>perfect</span>,
+                            </span>
+                            <span className="font-display text-4xl font-bold leading-none lg:text-6xl text-[#EABF36]">
+                                and we love that.
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
 
             {/* Bottom Text */}
             <div className="flex w-full justify-center py-16 px-6 lg:px-0" style={{ backgroundColor: '#002C45' }}>
-                <ScrollReveal className="w-fit">
-                    <p className="font-display text-xl uppercase tracking-widest lg:text-2xl text-center" style={{ color: '#E5D1BE' }}>
-                        Understand how Alcovia program shows its progress:
-                    </p>
-                </ScrollReveal>
+                <p className="font-display text-xl uppercase tracking-widest lg:text-2xl text-center" style={{ color: '#E5D1BE' }}>
+                    Understand how Alcovia program shows its progress:
+                </p>
             </div>
         </section>
     );

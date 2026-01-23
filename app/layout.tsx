@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Geist, Geist_Mono, Playfair_Display, Oswald, Inter } from "next/font/google"
+import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
@@ -79,7 +80,28 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          id="gtm-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KK8D28BG');`,
+          }}
+        />
+      </head>
       <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KK8D28BG"
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
+          />
+        </noscript>
         <Analytics />
         <SessionProvider>
           <SmoothScrollProvider>
@@ -89,7 +111,7 @@ export default function RootLayout({
             </PageTransition>
           </SmoothScrollProvider>
         </SessionProvider>
-        
+
       </body>
     </html>
   )

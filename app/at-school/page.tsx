@@ -14,17 +14,39 @@ import gsap from "gsap"
 gsap.registerPlugin(ScrollTrigger)
 
 export default function AtSchoolPage() {
-    // Force scroll to top on mount - fixes navigation scroll issues
+    // Kill all ScrollTriggers and force scroll to top BEFORE paint
     useLayoutEffect(() => {
-        window.scrollTo(0, 0)
+        // Kill all existing ScrollTriggers from previous page
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+        ScrollTrigger.clearScrollMemory()
+
+        // Force scroll to top - multiple methods for reliability
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
+
+        // Also reset after a tick to handle any async scroll restoration
+        requestAnimationFrame(() => {
+            window.scrollTo(0, 0)
+        })
     }, [])
 
-    // Refresh ScrollTrigger after hydration to fix horizontal scroll skipping
+    // Refresh ScrollTrigger after hydration with longer delay
     useEffect(() => {
         const timer = setTimeout(() => {
-            ScrollTrigger.refresh()
-        }, 100)
-        return () => clearTimeout(timer)
+            ScrollTrigger.refresh(true)
+        }, 300)
+
+        // Also refresh when all images are loaded
+        const handleLoad = () => {
+            ScrollTrigger.refresh(true)
+        }
+        window.addEventListener('load', handleLoad)
+
+        return () => {
+            clearTimeout(timer)
+            window.removeEventListener('load', handleLoad)
+        }
     }, [])
 
     return (

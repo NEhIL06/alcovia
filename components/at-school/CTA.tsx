@@ -6,7 +6,7 @@ import TextReveal from "@/components/text-reveal";
 export default function CTA() {
     return (
         <section
-            className="relative flex min-h-[80vh] flex-col items-center justify-center px-6 text-center overflow-hidden"
+            className="relative flex h-screen flex-col items-center justify-center px-6 text-center overflow-hidden"
             style={{ backgroundColor: '#1d3a36ff' }}
         >
             {/* Ambient Background Glow */}

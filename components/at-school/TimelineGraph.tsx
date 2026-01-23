@@ -5,22 +5,22 @@ import TextReveal from "@/components/text-reveal";
 
 const timelineData = [
     {
-        id: "01",
+        id: "Q1",
         title: "5% INCREMENT",
         description: "Securing a minimum 5% rise in academic performance",
     },
     {
-        id: "02",
+        id: "Q2",
         title: "WORKSHOPS MAGIC",
         description: "Building confidence, leadership, and coherence",
     },
     {
-        id: "03",
+        id: "Q3",
         title: "SYSTEM NOTICES",
         description: "Gaining recognition from teachers and staff",
     },
     {
-        id: "04",
+        id: "Q4",
         title: "TOP OF CLASS",
         description: "Topping the class and acing extracurriculars",
     }
@@ -102,7 +102,7 @@ export default function TimelineGraph() {
                                         transition={{ duration: 0.6, ease: "easeOut" }}
                                         className="group relative"
                                     >
-                                        <span className="block font-display text-6xl lg:text-8xl font-bold text-[#E5D1BE]/5 mb-[-20px] lg:mb-[-30px] relative z-0 select-none transition-colors duration-500 group-hover:text-[#EABF36]/10">
+                                        <span className="block font-display text-6xl lg:text-8xl font-bold text-[#E5D1BE]/5 mb-[-10px] lg:mb-[-15px] relative z-2 select-none transition-colors duration-500 group-hover:text-[#EABF36]/10">
                                             {item.id}
                                         </span>
                                         <div className="relative z-10">

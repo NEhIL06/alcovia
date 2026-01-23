@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 
-gsap.registerPlugin(ScrollTrigger);
+if (typeof window !== "undefined") {
+    gsap.registerPlugin(ScrollTrigger);
+}
 
 // Color constants
 const COLORS = {
@@ -71,32 +72,56 @@ const quarters = [
 export default function HorizontalScroll() {
     const container = useRef<HTMLDivElement>(null);
     const panelsContainer = useRef<HTMLDivElement>(null);
+    const [isClient, setIsClient] = useState(false);
 
-    useGSAP(() => {
-        if (!container.current) return;
+    // Ensure we're on client
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
 
-        const panels = gsap.utils.toArray(".panel");
-        const totalPanels = panels.length;
+    // Set up horizontal scroll with useEffect (not useGSAP) for more control
+    useEffect(() => {
+        if (!isClient || !container.current) return;
 
-        gsap.to(panels, {
-            xPercent: -100 * (totalPanels - 1),
-            ease: "none",
-            scrollTrigger: {
-                trigger: container.current,
-                pin: true,
-                scrub: 1,
-                invalidateOnRefresh: true,
-                end: () => "+=" + container.current!.offsetWidth * (totalPanels - 1),
-            },
-        });
-
-        // Delayed refresh to handle hydration timing issues
+        // Wait for DOM to be fully ready
         const timer = setTimeout(() => {
-            ScrollTrigger.refresh()
-        }, 200)
-        return () => clearTimeout(timer)
+            const panels = gsap.utils.toArray<HTMLElement>(".panel");
+            const totalPanels = panels.length;
 
-    }, { scope: container });
+            if (totalPanels === 0) return;
+
+            const scrollTween = gsap.to(panels, {
+                xPercent: -100 * (totalPanels - 1),
+                ease: "none",
+                scrollTrigger: {
+                    trigger: container.current,
+                    pin: true,
+                    scrub: 1,
+                    invalidateOnRefresh: true,
+                    end: () => "+=" + (container.current?.offsetWidth || window.innerWidth) * (totalPanels - 1),
+                },
+            });
+
+            // Refresh after a bit more delay to ensure everything is rendered
+            setTimeout(() => {
+                ScrollTrigger.refresh(true);
+            }, 100);
+
+            return () => {
+                scrollTween.kill();
+            };
+        }, 500); // Wait 500ms for page to fully stabilize
+
+        return () => {
+            clearTimeout(timer);
+            // Clean up only this component's ScrollTriggers
+            ScrollTrigger.getAll().forEach(trigger => {
+                if (trigger.vars.trigger === container.current) {
+                    trigger.kill();
+                }
+            });
+        };
+    }, [isClient]);
 
     // Render content based on whether it has bullets or body
     const renderContent = (q: typeof quarters[0]) => {
@@ -163,7 +188,7 @@ export default function HorizontalScroll() {
                 {quarters.map((q) => (
                     <div key={q.id} className="flex min-h-[80vh] flex-col justify-center px-8 py-20" style={{ backgroundColor: q.bgColor }}>
                         <div className="relative z-10">
-                            <h3 className="mb-4 text-xl font-bold tracking-widest" style={{ color: q.accentColor }}>
+                            <h3 className="mb-4 text-xl font-bold tracking-widest leading-relaxed overflow-visible" style={{ color: q.accentColor }}>
                                 {q.id}
                             </h3>
                             <h2 className="mb-3 font-display text-4xl font-bold uppercase leading-[0.9]" style={{ color: q.textColor }}>

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ScrollReveal } from "@/components/text-reveal";
+
 import { ChevronDown } from "lucide-react";
 
 export default function Hero() {
@@ -34,14 +34,12 @@ export default function Hero() {
                     AT SCHOOL
                 </motion.h1>
 
-                <ScrollReveal className="w-fit mt-8">
-                    <p
-                        className="font-body text-sm font-bold uppercase tracking-[0.2em] md:text-base"
-                        style={{ color: '#E5D1BE', opacity: 0.8 }}
-                    >
-                        How Alcovia Helps Students Ace School
-                    </p>
-                </ScrollReveal>
+                <p
+                    className="font-body text-sm font-bold uppercase tracking-[0.2em] mt-8"
+                    style={{ color: '#E5D1BE', opacity: 0.8 }}
+                >
+                    How Alcovia Helps Students Ace School
+                </p>
             </div>
 
             {/* Initiate Scroll Indicator */}

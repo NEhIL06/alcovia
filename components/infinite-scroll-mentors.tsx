@@ -123,11 +123,11 @@ const MentorCard = ({ mentor }: { mentor: typeof MENTORS[0] }) => {
             {/* Hero Image Area */}
             <div className="relative h-48 sm:h-56 md:h-64 w-full overflow-hidden bg-[#0a0a0a] flex items-end justify-center pt-8">
                 {/* Yellow Abstract Blob */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 opacity-80 z-0">
+                {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 opacity-80 z-0">
                     <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" className="w-full h-full fill-[#FACC15]">
                         <path d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.3C93.5,8.6,82.2,21.4,70.6,31.4C59,41.4,47.1,48.6,35.5,54.6C23.9,60.6,12.6,65.4,-0.4,66.1C-13.4,66.8,-29.4,63.4,-42.6,55.5C-55.8,47.6,-66.2,35.2,-73.4,21.1C-80.6,7,-84.6,-8.8,-80.6,-23.1C-76.6,-37.4,-64.6,-50.2,-51.4,-57.8C-38.2,-65.4,-23.8,-67.8,-10.1,-69.2C3.6,-70.6,17.2,-71,30.5,-83.6L44.7,-76.4Z" transform="translate(100 100) scale(1.1)" />
                     </svg>
-                </div>
+                </div> */}
 
                 {/* Headshot */}
                 <div className="relative z-10 w-full h-full">
@@ -250,7 +250,7 @@ export default function InfiniteScrollMentors() {
             </div>
 
             {/* Page Dots */}
-            <div className="flex items-center justify-center gap-2 mt-8">
+            {/* <div className="flex items-center justify-center gap-2 mt-8">
                 {Array.from({ length: totalPages }).map((_, index) => (
                     <button
                         key={index}
@@ -261,7 +261,7 @@ export default function InfiniteScrollMentors() {
                             }`}
                     />
                 ))}
-            </div>
+            </div> */}
         </div>
     )
 }

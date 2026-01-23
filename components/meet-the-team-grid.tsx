@@ -121,8 +121,8 @@ export default function MeetTheTeamGrid() {
     useEffect(() => {
         const handleResize = () => {
             const width = window.innerWidth;
-            // Mobile: VERY slow (0.1), Desktop: normal speed (0.5)
-            setAutoScrollSpeed(width < 768 ? 0.1 : 0.5);
+            // Mobile: faster (0.3), Desktop: normal speed (0.5)
+            setAutoScrollSpeed(width < 768 ? 0.3 : 0.5);
         };
 
         handleResize();
@@ -218,18 +218,26 @@ export default function MeetTheTeamGrid() {
     // "for the top" text
     const forTheTopOpacity = useTransform(heroProgress, [0.12, 0.18], [0, 1]);
 
-    // 2. SPLIT GRID (35% - 90%)
-    // Shared Opacity: Fades in later at 35% (was 25%) to give "For The Top" more time
+    // 2. SPLIT GRID (35% - 90% desktop, 35% - 55% mobile)
+    // Desktop: Stays visible longer for parallax effect
     const gridOpacity = useTransform(heroProgress, [0.35, 0.42, 0.6, 0.9], [0, 1, 1, 0]);
+    // Mobile: Fades out earlier since there's no parallax, just static content
+    const gridOpacityMobile = useTransform(heroProgress, [0.35, 0.40, 0.48, 0.55], [0, 1, 1, 0]);
 
     // Right Column Scroll: Moves from slightly below to way up (simulating scroll)
     // Syncs with grid opacity start
     const pillarsY = useTransform(heroProgress, [0.4, 0.9], ["20vh", "-120vh"]);
 
-    // 3. "100x BIGGER" REVEAL (85% - 100%)
+    // 3. "100x BIGGER" REVEAL (85% - 100% desktop, 55% - 80% mobile)
+    // Desktop
     const bigTextOpacity = useTransform(heroProgress, [0.85, 0.9], [0, 1]);
     const bigTextScale = useTransform(heroProgress, [0.85, 1], [0.8, 1]);
     const bigTextY = useTransform(heroProgress, [0.85, 1], [100, 0]);
+
+    // Mobile - Appears much earlier to fill the gap left by the faster fade out
+    const bigTextOpacityMobile = useTransform(heroProgress, [0.55, 0.65], [0, 1]);
+    const bigTextScaleMobile = useTransform(heroProgress, [0.55, 0.8], [0.8, 1]);
+    const bigTextYMobile = useTransform(heroProgress, [0.55, 0.8], [50, 0]);
 
     // --- GLOBAL COLOR LOGIC ---
     const { scrollYProgress: colorProgress } = useScroll({
@@ -274,7 +282,7 @@ export default function MeetTheTeamGrid() {
                 SECTION 1: THE SCROLLYTELLING HERO (DESKTOP ONLY)
                 This section is 300vh tall to allow for the sequence.
             ══════════════════════════════════════════════════════════════ */}
-            <section ref={heroTrackRef} className="hidden md:block relative h-[300vh]">
+            <section ref={heroTrackRef} className="relative h-[300vh]">
                 <div className="sticky top-0 h-screen w-full overflow-hidden flex flex-col justify-center items-center px-4 md:px-[4vw]">
 
                     {/* STAGE 1: CENTERED TITLE */}
@@ -283,11 +291,53 @@ export default function MeetTheTeamGrid() {
                         className="absolute inset-0 flex items-center justify-center pointer-events-none"
                     >
                         <div className="relative inline-block">
-                            <h1 className="text-[clamp(4rem,16vw,20rem)] font-black leading-[0.8] tracking-tighter uppercase text-center whitespace-pre-line font-inter">
+                            <h1 className="text-[clamp(3rem,16vw,20rem)] font-black leading-[0.8] tracking-tighter uppercase text-center whitespace-pre-line font-inter">
                                 THE<br />LAUNCHPAD
                             </h1>
 
                         </div>
+                    </motion.div>
+
+                    {/* MOBILE/TABLET: Scroll Indicator - fades out on scroll */}
+                    <motion.div
+                        style={{ opacity: titleOpacity }}
+                        className="absolute bottom-8 md:bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 lg:hidden pointer-events-none z-30"
+                    >
+                        <span className="font-mono text-[10px] md:text-xs uppercase tracking-[0.3em] opacity-60">
+                            Scroll to explore
+                        </span>
+                        <motion.div
+                            animate={{ y: [0, 8, 0] }}
+                            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                            className="flex flex-col items-center gap-1"
+                        >
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-50"
+                            >
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                            <svg
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className="opacity-30 -mt-3"
+                            >
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </motion.div>
                     </motion.div>
 
                     {/* STAGE 1.5: THE 1% SVG ANIMATION - Premium Clean Design */}
@@ -312,7 +362,7 @@ export default function MeetTheTeamGrid() {
                         </motion.p>
 
                         {/* Premium 1% SVG - High Resolution */}
-                        <div className="relative w-[40vw] h-[30vw] md:w-[24vw] md:h-[18vw] lg:w-[20vw] lg:h-[15vw] max-w-[380px] max-h-[285px]">
+                        <div className="relative w-[70vw] h-[52.5vw] md:w-[24vw] md:h-[18vw] lg:w-[20vw] lg:h-[15vw] max-w-[380px] max-h-[285px]">
                             <svg
                                 viewBox="0 0 400 300"
                                 className="w-full h-full"
@@ -410,21 +460,58 @@ export default function MeetTheTeamGrid() {
                     </motion.div>
 
                     {/* STAGE 2: THE SPLIT GRID (Manifesto + Pillars) */}
+
+                    {/* MOBILE: Stack everything naturally - uses faster fade */}
                     <motion.div
-                        style={{ opacity: gridOpacity }}
-                        className="absolute w-full max-w-[90vw] grid grid-cols-1 md:grid-cols-2 gap-16 md:gap-32 items-start mt-20"
+                        style={{ opacity: gridOpacityMobile }}
+                        className="absolute w-full max-w-[90vw] mt-20 flex flex-col md:hidden gap-12"
                     >
-                        {/* LEFT: Manifesto (Fixed Position via Sticky-like behavior) */}
-                        <div className="w-full flex flex-col gap-10 md:sticky md:top-32">
-                            <p className="text-3xl md:text-5xl font-medium leading-[1.15] tracking-tight">
+                        {/* Manifesto */}
+                        <div className="w-full flex flex-col gap-6">
+                            <p className="text-3xl font-medium leading-[1.15] tracking-tight">
                                 We are the launchpad for the <span className="bg-clip-text text-transparent" style={goldTextStyle}>top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
                             </p>
-                            <p className="text-xl md:text-2xl font-normal opacity-70 max-w-lg">
-                                At Alcovia, we’re committed to helping teens unlock their full potential through:
+                            <p className="text-lg font-normal opacity-70">
+                                At Alcovia, we're committed to helping teens unlock their full potential through:
                             </p>
                         </div>
 
-                        {/* RIGHT: The 3 Pillars (Scrolling Up) */}
+                        {/* Pillars - Simple, clean stack */}
+                        <div className="w-full flex flex-col gap-8">
+                            {["Mentorship", "Peer Learning", "Hyper-personalized Guidance"].map((item, i) => (
+                                <div key={i} className="border-t border-white/30 pt-6 first:border-t-2">
+                                    <div className="flex items-end justify-between gap-4 mb-4">
+                                        <span className="font-mono text-xs font-bold tracking-widest bg-clip-text text-transparent opacity-60" style={goldTextStyle}>
+                                            0{i + 1}
+                                        </span>
+                                    </div>
+                                    <h3 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter">
+                                        {item.split(' ').map((word, idx) => (
+                                            <span key={idx} className="block">{word}</span>
+                                        ))}
+                                    </h3>
+                                </div>
+                            ))}
+                            <div className="border-t border-white/20 w-full" />
+                        </div>
+                    </motion.div>
+
+                    {/* DESKTOP: Original fancy parallax layout - uses longer fade */}
+                    <motion.div
+                        style={{ opacity: gridOpacity }}
+                        className="absolute w-full max-w-[90vw] mt-20 hidden md:grid grid-cols-2 gap-32 items-start"
+                    >
+                        {/* LEFT: Manifesto (Sticky) */}
+                        <div className="w-full flex flex-col gap-10 sticky top-32">
+                            <p className="text-5xl font-medium leading-[1.15] tracking-tight">
+                                We are the launchpad for the <span className="bg-clip-text text-transparent" style={goldTextStyle}>top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
+                            </p>
+                            <p className="text-2xl font-normal opacity-70 max-w-lg">
+                                At Alcovia, we're committed to helping teens unlock their full potential through:
+                            </p>
+                        </div>
+
+                        {/* RIGHT: The 3 Pillars (Parallax) */}
                         <motion.div
                             style={{ y: pillarsY }}
                             className="w-full flex flex-col gap-[5vh]"
@@ -435,7 +522,7 @@ export default function MeetTheTeamGrid() {
                                         <span className="font-mono text-sm font-bold tracking-widest bg-clip-text text-transparent" style={goldTextStyle}>
                                             0{i + 1}
                                         </span>
-                                        <h3 className="text-5xl md:text-7xl font-black uppercase leading-[0.85] tracking-tighter">
+                                        <h3 className="text-7xl font-black uppercase leading-[0.85] tracking-tighter">
                                             {item.split('-').map((word, idx) => (
                                                 <span key={idx} className="block">{word}</span>
                                             ))}
@@ -443,19 +530,34 @@ export default function MeetTheTeamGrid() {
                                     </div>
                                 </div>
                             ))}
-                            {/* Bottom border for the last item to match aesthetics */}
                             <div className="border-t border-white/20 w-full" />
                         </motion.div>
                     </motion.div>
 
                     {/* STAGE 3: "100x BIGGER" */}
+
+                    {/* MOBILE: Appears earlier */}
                     <motion.div
-                        style={{ opacity: bigTextOpacity, scale: bigTextScale, y: bigTextY }}
-                        className="absolute inset-0 flex items-center justify-center text-center px-4"
+                        style={{ opacity: bigTextOpacityMobile, scale: bigTextScaleMobile, y: bigTextYMobile }}
+                        className="absolute inset-0 flex items-center justify-center text-center px-4 md:hidden"
                     >
                         <div>
                             <p className="font-mono text-sm uppercase tracking-[0.5em] mb-8 opacity-60">To build a life which is</p>
-                            <h2 className="text-[clamp(4rem,12vw,14rem)] font-black uppercase leading-[0.8] mb-8 bg-clip-text text-transparent" style={goldTextStyle}>
+                            <h2 className="text-[clamp(3rem,12vw,14rem)] font-black uppercase leading-[0.8] mb-8 bg-clip-text text-transparent" style={goldTextStyle}>
+                                100x BIGGER
+                            </h2>
+                            <p className="text-xl md:text-4xl font-light opacity-80">than whatever you imagine.</p>
+                        </div>
+                    </motion.div>
+
+                    {/* DESKTOP: Original timing */}
+                    <motion.div
+                        style={{ opacity: bigTextOpacity, scale: bigTextScale, y: bigTextY }}
+                        className="absolute inset-0 hidden md:flex items-center justify-center text-center px-4"
+                    >
+                        <div>
+                            <p className="font-mono text-sm uppercase tracking-[0.5em] mb-8 opacity-60">To build a life which is</p>
+                            <h2 className="text-[clamp(3rem,12vw,14rem)] font-black uppercase leading-[0.8] mb-8 bg-clip-text text-transparent" style={goldTextStyle}>
                                 100x BIGGER
                             </h2>
                             <p className="text-xl md:text-4xl font-light opacity-80">than whatever you imagine.</p>
@@ -465,178 +567,7 @@ export default function MeetTheTeamGrid() {
                 </div>
             </section>
 
-            {/* ══════════════════════════════════════════════════════════════
-                SECTION 1 (MOBILE): LINEAR EDITORIAL STACK
-                No scroll jacking. Pure vertical flow.
-            ══════════════════════════════════════════════════════════════ */}
-            <section className="md:hidden block w-full px-6 py-32 flex flex-col">
-                {/* Item 1: Title */}
-                <div className="mb-12 relative">
-                    <h1 className="text-6xl font-black leading-[0.85] tracking-tighter uppercase text-left font-inter">
-                        THE<br />LAUNCHPAD
-                    </h1>
-                </div>
 
-                {/* Item 1.5: The 1% Animation - Premium Clean Version */}
-                <div className="mb-16 flex flex-col items-center justify-center relative">
-                    {/* Subtle ambient glow */}
-                    <div
-                        className="absolute inset-0 pointer-events-none"
-                        style={{
-                            background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.08) 0%, transparent 60%)',
-                        }}
-                    />
-
-                    {/* "for the top" text - clean typography */}
-                    <motion.p
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                        className="text-lg sm:text-xl font-extralight tracking-[0.35em] uppercase mb-6 z-10 bg-clip-text text-transparent"
-                        style={goldTextStyle}
-                    >
-                        for the top
-                    </motion.p>
-
-                    {/* Premium 1% SVG - High Resolution */}
-                    <motion.div
-                        className="relative w-[70vw] h-[52.5vw] max-w-[320px] max-h-[240px]"
-                        initial={{ scale: 0.9, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        transition={{ delay: 0.2, duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
-                        onTouchStart={() => setIsTouched(true)}
-                        onTouchEnd={() => setIsTouched(false)}
-                    >
-                        <motion.div
-                            animate={{ scale: isTouched ? 1.03 : 1 }}
-                            transition={{ duration: 0.2 }}
-                            className="w-full h-full"
-                        >
-                            <svg
-                                viewBox="0 0 400 300"
-                                className="w-full h-full"
-                                preserveAspectRatio="xMidYMid meet"
-                            >
-                                <defs>
-                                    {/* Ultra-Premium Metallic Gold Gradient */}
-                                    <linearGradient id="mobileGold" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stopColor="#BF953F" />
-                                        <stop offset="25%" stopColor="#FCF6BA" />
-                                        <stop offset="50%" stopColor="#B38728" />
-                                        <stop offset="75%" stopColor="#FBF5B7" />
-                                        <stop offset="100%" stopColor="#AA771C" />
-                                    </linearGradient>
-                                </defs>
-
-                                {/* The "1" - crisp strokes */}
-                                <motion.path
-                                    d="M60,30 L100,30 L100,270 M60,270 L140,270"
-                                    fill="none"
-                                    stroke="url(#mobileGold)"
-                                    strokeWidth="12"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    initial={{ pathLength: 0, opacity: 0 }}
-                                    animate={{ pathLength: 1, opacity: 1 }}
-                                    transition={{ duration: 1, ease: "easeOut" }}
-                                />
-
-                                {/* The "%" slash */}
-                                <motion.path
-                                    d="M180,270 L340,30"
-                                    fill="none"
-                                    stroke="url(#mobileGold)"
-                                    strokeWidth="12"
-                                    strokeLinecap="round"
-                                    initial={{ pathLength: 0, opacity: 0 }}
-                                    animate={{ pathLength: 1, opacity: 1 }}
-                                    transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
-                                />
-
-                                {/* Top circle of "%" */}
-                                <motion.circle
-                                    cx="220"
-                                    cy="70"
-                                    r="36"
-                                    fill="none"
-                                    stroke="url(#mobileGold)"
-                                    strokeWidth="12"
-                                    initial={{ pathLength: 0, opacity: 0 }}
-                                    animate={{ pathLength: 1, opacity: 1 }}
-                                    transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
-                                />
-
-                                {/* Bottom circle of "%" */}
-                                <motion.circle
-                                    cx="320"
-                                    cy="230"
-                                    r="36"
-                                    fill="none"
-                                    stroke="url(#mobileGold)"
-                                    strokeWidth="12"
-                                    initial={{ pathLength: 0, opacity: 0 }}
-                                    animate={{ pathLength: 1, opacity: 1 }}
-                                    transition={{ delay: 0.7, duration: 0.6, ease: "easeOut" }}
-                                />
-                            </svg>
-                        </motion.div>
-
-                        {/* CSS-based glow (smoother than SVG filters) */}
-                        <div
-                            className="absolute inset-0 pointer-events-none opacity-30 -z-10"
-                            style={{
-                                background: 'radial-gradient(ellipse at 50% 50%, rgba(234, 191, 54, 0.4) 0%, transparent 70%)',
-                                filter: 'blur(15px)',
-                            }}
-                        />
-                    </motion.div>
-
-                    {/* Minimal bottom text */}
-                    <motion.p
-                        className="mt-6 text-[10px] font-mono uppercase tracking-[0.4em] text-white/20"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 1.2, duration: 0.6 }}
-                    >
-                        Elite Excellence
-                    </motion.p>
-                </div>
-
-                {/* Item 2: Manifesto */}
-                <div className="mb-20 flex flex-col gap-6">
-                    <p className="text-2xl font-medium leading-tight tracking-tight">
-                        We are the launchpad for the <span className="bg-clip-text text-transparent" style={goldTextStyle}>top 1%</span> of those who dream bigger, push harder, and never stop reaching for more.
-                    </p>
-                    <p className="text-lg font-normal opacity-70">
-                        At Alcovia, we’re committed to helping teens unlock their full potential through:
-                    </p>
-                </div>
-
-                {/* Item 3: Pillars List */}
-                <div className="flex flex-col gap-10 mb-32">
-                    {["Mentorship", "Peer Learning", "Hyper-personalized Guidance"].map((item, i) => (
-                        <div key={i} className="border-t border-white/30 pt-4">
-                            <span className="font-mono text-sm font-bold tracking-widest block mb-2 bg-clip-text text-transparent" style={goldTextStyle}>
-                                0{i + 1}
-                            </span>
-                            <h3 className="text-4xl font-black uppercase leading-[0.9] tracking-tighter">
-                                {item.split('-').map((word, idx) => (
-                                    <span key={idx} className="block">{word}</span>
-                                ))}
-                            </h3>
-                        </div>
-                    ))}
-                </div>
-
-                {/* Item 4: The Closer */}
-                <div className="text-left">
-                    <p className="font-mono text-xs uppercase tracking-[0.3em] mb-4 opacity-60">To build a life which is</p>
-                    <h2 className="text-7xl font-black uppercase leading-[0.8] mb-6 bg-clip-text text-transparent" style={goldTextStyle}>
-                        100x<br />BIGGER
-                    </h2>
-                    <p className="text-lg font-light opacity-80">than whatever you imagine.</p>
-                </div>
-            </section>
 
             {/* ══════════════════════════════════════════════════════════════
                 SECTION 2: ETHOS (The Locking Section)
@@ -659,10 +590,10 @@ export default function MeetTheTeamGrid() {
                 SECTION 3: TEAM CENTER-STAGE LAYOUT (Desktop)
                 Role Left | Image Center (Fixed) | Name Right
             ══════════════════════════════════════════════════════════════ */}
-            <section className="relative z-10 w-full hidden md:block min-h-screen border-t border-white/20">
+            < section className="relative z-10 w-full hidden md:block min-h-screen border-t border-white/20" >
 
                 {/* THE STAGE (Fixed Center Image) */}
-                <div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center pointer-events-none z-20">
+                < div className="fixed top-0 left-0 w-full h-screen flex items-center justify-center pointer-events-none z-20" >
                     <AnimatePresence mode="wait">
                         {activeMember && (
                             <motion.div
@@ -679,84 +610,88 @@ export default function MeetTheTeamGrid() {
                             </motion.div>
                         )}
                     </AnimatePresence>
-                </div>
+                </div >
 
                 {/* THE LIST (Scrollable) */}
-                <div className="relative z-10 w-full pb-40">
-                    {team.map((member) => (
-                        <TeamListItem key={member.id} member={member} setActiveMember={setActiveMember} />
-                    ))}
-                </div>
-            </section>
+                < div className="relative z-10 w-full pb-40" >
+                    {
+                        team.map((member) => (
+                            <TeamListItem key={member.id} member={member} setActiveMember={setActiveMember} />
+                        ))
+                    }
+                </div >
+            </section >
 
             {/* ══════════════════════════════════════════════════════════════
                 SECTION 4: TEAM MOBILE (List + Modal)
             ══════════════════════════════════════════════════════════════ */}
-            <section className="md:hidden relative z-10 pb-32 w-full border-t border-white/20">
+            < section className="md:hidden relative z-10 pb-32 w-full border-t border-white/20" >
                 <p className="font-mono text-xs uppercase tracking-[0.3em] opacity-40 mb-8 ml-6 mt-10">The Team</p>
                 <div className="flex flex-col w-full">
                     {team.map((member) => (
                         <MobileTeamListItem key={member.id} member={member} setMobileSelectedMember={setMobileSelectedMember} />
                     ))}
                 </div>
-            </section>
+            </section >
 
             {/* MOBILE MODAL OVERLAY */}
             <AnimatePresence>
-                {mobileSelectedMember && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        className="fixed inset-0 z-50 flex items-center justify-center px-4"
-                    >
-                        {/* Backdrop */}
-                        <div
-                            className="absolute inset-0 bg-black/90 backdrop-blur-sm"
-                            onClick={() => setMobileSelectedMember(null)}
-                        />
-
-                        {/* Card */}
+                {
+                    mobileSelectedMember && (
                         <motion.div
-                            initial={{ scale: 0.9, y: 20, opacity: 0 }}
-                            animate={{ scale: 1, y: 0, opacity: 1 }}
-                            exit={{ scale: 0.9, y: 20, opacity: 0 }}
-                            transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                            className="relative w-full max-w-sm aspect-[3/4] bg-[#111] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-50 flex items-center justify-center px-4"
                         >
-                            <Image
-                                src={mobileSelectedMember.img}
-                                alt={mobileSelectedMember.name}
-                                fill
-                                className="object-cover"
-                            />
-                            {/* Gradient Overlay */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
-
-                            {/* Content */}
-                            <div className="absolute bottom-0 left-0 w-full p-8">
-                                <p className="font-mono text-sm uppercase mb-2 tracking-widest bg-clip-text text-transparent" style={goldTextStyle}>
-                                    {mobileSelectedMember.role}
-                                </p>
-                                <h3 className="text-5xl font-black uppercase leading-[0.85] text-white">
-                                    {mobileSelectedMember.name}
-                                </h3>
-                            </div>
-
-                            {/* Close Button */}
-                            <button
+                            {/* Backdrop */}
+                            <div
+                                className="absolute inset-0 bg-black/90 backdrop-blur-sm"
                                 onClick={() => setMobileSelectedMember(null)}
-                                className="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 text-white active:scale-90 transition-transform"
+                            />
+
+                            {/* Card */}
+                            <motion.div
+                                initial={{ scale: 0.9, y: 20, opacity: 0 }}
+                                animate={{ scale: 1, y: 0, opacity: 1 }}
+                                exit={{ scale: 0.9, y: 20, opacity: 0 }}
+                                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                                className="relative w-full max-w-sm aspect-[3/4] bg-[#111] rounded-2xl overflow-hidden shadow-2xl border border-white/10"
                             >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </button>
+                                <Image
+                                    src={mobileSelectedMember.img}
+                                    alt={mobileSelectedMember.name}
+                                    fill
+                                    className="object-cover"
+                                />
+                                {/* Gradient Overlay */}
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
+
+                                {/* Content */}
+                                <div className="absolute bottom-0 left-0 w-full p-8">
+                                    <p className="font-mono text-sm uppercase mb-2 tracking-widest bg-clip-text text-transparent" style={goldTextStyle}>
+                                        {mobileSelectedMember.role}
+                                    </p>
+                                    <h3 className="text-5xl font-black uppercase leading-[0.85] text-white">
+                                        {mobileSelectedMember.name}
+                                    </h3>
+                                </div>
+
+                                {/* Close Button */}
+                                <button
+                                    onClick={() => setMobileSelectedMember(null)}
+                                    className="absolute top-4 right-4 w-10 h-10 bg-black/50 backdrop-blur-md rounded-full flex items-center justify-center border border-white/20 text-white active:scale-90 transition-transform"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                    )
+                }
+            </AnimatePresence >
 
             {/* ══════════════════════════════════════════════════════════════
                 SECTION 5: DNA (Color Changing Trigger)
@@ -907,6 +842,6 @@ export default function MeetTheTeamGrid() {
                     .animate-marquee-reverse { animation: marquee-reverse 25s linear infinite; }
                 }
             `}</style>
-        </motion.div>
+        </motion.div >
     );
 }
