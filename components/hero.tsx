@@ -619,8 +619,8 @@ export default function Hero() {
                         <motion.div className="absolute inset-0 z-0" style={{ scale: baseImageScale }}>
                             <WingsReveal isHovered={isHeroHovered} scrollProgress={scrollProgress} isMobile={isMobileDevice} />
                             <CursorLens
-                                baseImage="/images/hero-base.webp"
-                                revealImage="/images/hero-reveal.webp"
+                                baseImage="https://res.cloudinary.com/ds1ka0bap/image/upload/v1769156300/hero-base_adraen.png"
+                                revealImage="https://res.cloudinary.com/ds1ka0bap/image/upload/v1769156301/hero-reveal_pso2uj.png"
                                 objectFit="cover"
                                 backgroundColor="#f8f8f5"
                                 showBackground={true}

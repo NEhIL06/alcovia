@@ -6,6 +6,14 @@ const nextConfig = {
   images: {
     // Disable image optimization to prevent glitching
     unoptimized: true,
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 
   // Optimize production builds
