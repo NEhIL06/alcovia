@@ -61,7 +61,7 @@ const OFFERINGS = [
     label: "FORTNIGHTLY GUIDANCE",
     title: "Get mentored Fortnightly by Guidance Coach",
     description: " Our guidance coach ask each alcovians the right set of questions- to enable them to introspect which stream of subjects makes the most sense to them in the long run. While being the best is the standard, understanding which sphere to be best at is equally, if not more important.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/peertopeer_pkenhd.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/counselerMeeting_few0qy.png",
   },
   {
     id: "08",

@@ -8,6 +8,9 @@ const config: Config = {
     ],
     theme: {
         extend: {
+            screens: {
+                'xs': '400px',
+            },
             colors: {
                 alcovia: {
                     green: '#234944',    // Primary: Deep Forest Green

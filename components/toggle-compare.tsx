@@ -200,7 +200,7 @@ export default function ToggleCompare() {
         </motion.div>
 
         {/* 🔥 MOBILE: SIDE BY SIDE | DESKTOP: ROW */}
-        <div className="grid grid-cols-2 gap-4 md:flex md:items-start md:justify-center md:gap-10 xl:gap-7">
+        <div className="grid grid-cols-2 gap-2 xs:gap-4 md:flex md:items-start md:justify-center md:gap-10 xl:gap-7">
           {/* AT SCHOOL */}
           <motion.div
             className="cursor-pointer text-right"
