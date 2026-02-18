@@ -70,7 +70,7 @@ export default function Footer() {
       </div>
 
       <div className="relative z-10 mx-auto flex max-w-7xl flex-col">
-        <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-12 text-center sm:grid-cols-2 md:text-left lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-8 border-b border-white/10 pb-12 text-center sm:grid-cols-2 md:text-left lg:grid-cols-5">
           <div className="space-y-4">
 
             <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent" style={goldTextStyle}>
@@ -128,6 +128,28 @@ export default function Footer() {
               {[
                 { name: "Cohort 2026", href: "https://forms.gle/xrPqKciXL6aKwUbw7" },
                 { name: "Workshop", href: "https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" }
+              ].map((link) => (
+                <FlipLink
+                  key={link.name}
+                  href={link.href}
+                  className="w-fit text-lg lg:text-sm"
+                  baseColor="rgba(255,255,255,0.6)"
+                  hoverColor="#EABF36"
+                >
+                  {link.name}
+                </FlipLink>
+              ))}
+            </nav>
+          </div>
+
+          <div className="space-y-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wider bg-clip-text text-transparent" style={goldTextStyle}>
+              Legal
+            </h3>
+            <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
+              {[
+                { name: "Terms & Conditions", href: "/terms" },
+                { name: "Privacy Policy", href: "/policy" },
               ].map((link) => (
                 <FlipLink
                   key={link.name}
