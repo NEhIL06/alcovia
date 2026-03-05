@@ -17,11 +17,11 @@ const goldTextStyle = {
 
 // --- DATA CONFIGURATION ---
 const team = [
-    { id: "01", name: "Sahil Puri", role: "Founder", img: "/images/team/sahil.png" },
-    { id: "02", name: "Neera Handa", role: "Lead Advisor", img: "/images/team/neera.png" },
-    { id: "03", name: "Sanam", role: "Academic Advisor", img: "/images/team/sanam.png" },
-    { id: "04", name: "Farah", role: "Strategy Head", img: "/images/team/farah.png" },
-    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png" },
+    { id: "01", name: "Sahil Puri", role: "Founder", img: "/images/team/sahil.png", experience: "Ex-Chief of Staff at Nothing || Ex-Category Head Meesho || Noise || Flipkart || Panasonic || MBA, IIM Indore" },
+    { id: "02", name: "Neera Handa", role: "Lead Advisor", img: "/images/team/neera.png", experience: "Careers and University Guidance Counsellor. 25 years of experience in Higher Education Counselling, Enrichment Programmes and a strong international network." },
+    { id: "03", name: "Sanam", role: "Academic Advisor", img: "/images/team/sanam.png", experience: "Early Childhood Education | Harvard || Ex-Curriculum Designer, Masters' Union" },
+    { id: "04", name: "Farah", role: "Strategy Head", img: "/images/team/farah.png", experience: "Ex-Senior Advisor at Keslio || Ex-McKinsey" },
+    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU’23" },
     { id: "06", name: "Hita", role: "Systems Designer", img: "/images/team/hita.png" },
     { id: "07", name: "Nehil", role: "Full Stack Engineer", img: "/images/team/Nehil.png" },
     { id: "08", name: "Vansh", role: "Brand Experience Manager", img: "/images/team/vansh.png" },
@@ -605,6 +605,17 @@ export default function MeetTheTeamGrid() {
                             >
                                 <div className="relative w-full h-full overflow-hidden rounded-3xl bg-[#111]">
                                     <Image src={activeMember.img} alt={activeMember.name} fill className="object-cover" priority />
+                                    {/* Gradient Overlay for Text Readability */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
+
+                                    {/* Experience Text Overlay */}
+                                    {(activeMember as any).experience && (
+                                        <div className="absolute bottom-6 left-6 right-6">
+                                            <p className="font-mono text-xs leading-relaxed text-white/90">
+                                                {(activeMember as any).experience}
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </motion.div>
                         )}
@@ -674,6 +685,11 @@ export default function MeetTheTeamGrid() {
                                     <h3 className="text-5xl font-black uppercase leading-[0.85] text-white">
                                         {mobileSelectedMember.name}
                                     </h3>
+                                    {(mobileSelectedMember as any).experience && (
+                                        <p className="font-mono text-xs leading-relaxed text-white/80 mt-4">
+                                            {(mobileSelectedMember as any).experience}
+                                        </p>
+                                    )}
                                 </div>
 
                                 {/* Close Button */}
