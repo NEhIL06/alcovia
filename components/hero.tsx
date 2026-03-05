@@ -86,17 +86,17 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
     )
 })
 
-const IndustryDiscoveryIcon = memo(() => (
-    <div className="w-20 h-20 text-[#0C0C0C] relative">
-        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
-            <circle cx="30" cy="75" r="12" />
-            <path d="M10 100 Q30 90 50 100" />
-            <circle cx="70" cy="75" r="12" />
-            <path d="M50 100 Q70 90 90 100" />
-            <path d="M65 60 L75 50 H90 A5 5 0 0 0 95 45 V15 A5 5 0 0 0 90 10 H30 A5 5 0 0 0 25 15 V45 A5 5 0 0 0 30 50 H65" />
-            <polyline points="35 40 50 25 60 35 80 15" />
-            <path d="M75 15 H80 V20" />
-        </svg>
+const F1RaceVideo = memo(() => (
+    <div className="w-full h-full relative overflow-hidden bg-black">
+        <video
+            autoPlay
+            loop
+            muted
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover"
+        >
+            <source src="/videos/f1-race.mp4" type="video/mp4" />
+        </video>
     </div>
 ))
 
@@ -108,31 +108,30 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
         transition={{ delay: 1.5, duration: 0.8 }}
     >
         <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform"
-            target="_self"
+            href="https://rzp.io/rzp/Alcoviaworkshopf1IPL"
+            target="_blank"
             rel="noopener noreferrer"
             className="group block cursor-pointer"
         >
-            <div className="relative flex h-[240px] w-[180px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#BF953F]">
+            <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#BF953F]">
                 <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]">
                     <span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span>
                 </div>
-                <div className="flex-1 flex items-center justify-center py-2 bg-white relative overflow-hidden">
-                    <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(#000 1px, transparent 1px)", backgroundSize: "10px 10px" }} />
-                    <IndustryDiscoveryIcon />
+                <div className="flex-1 relative overflow-hidden bg-black">
+                    <F1RaceVideo />
                 </div>
-                <div className="border-t-2 border-[#0C0C0C] p-4 bg-white rounded-b-[9px]">
-                    <div className="flex justify-between items-end">
-                        <div>
+                <div className="border-t-2 border-[#0C0C0C] p-3 bg-white rounded-b-[9px]">
+                    <div className="flex justify-between items-end gap-2">
+                        <div className="flex-1 min-w-0">
                             <span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span>
-                            <h4 className="text-sm font-black uppercase leading-none text-[#0C0C0C] mt-1">STRATEGY OF<br />SUCCESS</h4>
+                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE BILLION-DOLLAR PLAYBOOK: THE BUSINESS OF F1 & IPL</h4>
                         </div>
-                        <div className="flex flex-col items-end">
-                            <span className="text-xl font-black text-[#0C0C0C] leading-none">31</span>
-                            <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">JAN</span>
+                        <div className="flex flex-col items-end flex-shrink-0">
+                            <span className="text-xl font-black text-[#0C0C0C] leading-none">14</span>
+                            <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">MAR</span>
                         </div>
                     </div>
-                    <div className="mt-3 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity opacity-0 group-hover:opacity-100">
+                    <div className="mt-2 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity opacity-0 group-hover:opacity-100">
                         <span>Register Now</span>
                         <ArrowUpRight className="w-3 h-3" />
                     </div>
