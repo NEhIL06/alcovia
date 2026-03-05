@@ -136,8 +136,15 @@
     @apply border-border outline-ring/50;
   }
 
-  body {
+  body,
+  html {
     @apply bg-background text-foreground;
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+  }
+
+  *::-webkit-scrollbar {
+    display: none !important;
   }
 
   html {

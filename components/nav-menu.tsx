@@ -290,6 +290,26 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                             ))}
                         </nav>
 
+                        {/* Apply for Cohort 2026 - Desktop Only Big Button */}
+                        <motion.div
+                            variants={itemVariants}
+                            className="hidden lg:flex mt-10 w-full justify-center"
+                        >
+                            <motion.a
+                                href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                                target="_self"
+                                rel="noopener noreferrer"
+                                className="relative inline-flex items-center justify-center gap-3 rounded-2xl px-12 py-5 text-base font-bold uppercase tracking-widest text-[#0b0d0c] shadow-2xl transition-all duration-300"
+                                style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
+                                whileHover={{ scale: 1.06, boxShadow: "0 0 40px 8px rgba(191,149,63,0.35)" }}
+                                whileTap={{ scale: 0.97 }}
+                            >
+                                <span className="text-lg">✦</span>
+                                Apply for Cohort 2026
+                                <span className="text-lg">✦</span>
+                            </motion.a>
+                        </motion.div>
+
                         {/* Footer / Utility Links */}
                         <motion.div
                             variants={itemVariants}
