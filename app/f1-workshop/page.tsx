@@ -5,6 +5,7 @@ import WorkshopCardsSection from "@/components/f1-workshop/workshop-cards-sectio
 import EventDetailsSection from "@/components/f1-workshop/event-details-section";
 import SpeakerSection from "@/components/f1-workshop/speaker-section";
 import CtaFooterSection from "@/components/f1-workshop/cta-footer-section";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: "The Billion-Dollar Playbook: The Business of F1 & IPL | Alcovia",
@@ -27,6 +28,7 @@ export default function F1WorkshopPage() {
       <EventDetailsSection />
       <SpeakerSection />
       <CtaFooterSection />
+      <Footer />
     </main>
   );
 }
