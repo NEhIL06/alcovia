@@ -21,7 +21,7 @@ const team = [
     { id: "02", name: "Neera Handa", role: "Lead Advisor", img: "/images/team/neera.png", experience: "Careers and University Guidance Counsellor. 25 years of experience in Higher Education Counselling, Enrichment Programmes and a strong international network." },
     { id: "03", name: "Sanam", role: "Academic Advisor", img: "/images/team/sanam.png", experience: "Early Childhood Education | Harvard || Ex-Curriculum Designer, Masters' Union" },
     { id: "04", name: "Farah", role: "Strategy Head", img: "/images/team/farah.png", experience: "Ex-Senior Advisor at Keslio || Ex-McKinsey" },
-    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU’23" },
+    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU'23" },
     { id: "06", name: "Hita", role: "Systems Designer", img: "/images/team/hita.png" },
     { id: "07", name: "Nehil", role: "Full Stack Engineer", img: "/images/team/Nehil.png" },
     { id: "08", name: "Vansh", role: "Brand Experience Manager", img: "/images/team/vansh.png" },
