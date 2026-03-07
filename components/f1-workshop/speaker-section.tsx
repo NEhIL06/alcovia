@@ -51,6 +51,8 @@ export default function SpeakerSection() {
                   alt="Gaurav Jain"
                   fill
                   className="object-cover"
+                  priority
+                  loading="eager"
                 />
               </div>
 
