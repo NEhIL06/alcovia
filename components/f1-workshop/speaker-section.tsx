@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function SpeakerSection() {
   return (
@@ -45,20 +46,12 @@ export default function SpeakerSection() {
 
               {/* Inner placeholder */}
               <div className="absolute inset-3 rounded-xl bg-[#F7F7F3]/[0.03] border border-[#F7F7F3]/[0.06] flex flex-col items-center justify-center gap-4 overflow-hidden">
-                {/* Placeholder icon */}
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1}
-                  className="w-16 h-16 sm:w-20 sm:h-20 text-[#F7F7F3]/10"
-                >
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                <span className="text-xs text-[#F7F7F3]/20 font-[family-name:var(--font-satoshi)] tracking-wider uppercase">
-                  Speaker Photo
-                </span>
+                <Image
+                  src="/images/gaurav.jpg"
+                  alt="Gaurav Jain"
+                  fill
+                  className="object-cover"
+                />
               </div>
 
               {/* Corner accents */}
@@ -78,7 +71,7 @@ export default function SpeakerSection() {
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#EABF36]" />
               <span className="text-[10px] sm:text-xs text-[#EABF36] font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap">
-                RedBull Racing
+                Red Bull
               </span>
             </motion.div>
           </div>
@@ -92,32 +85,52 @@ export default function SpeakerSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              {/* Name placeholder */}
+              {/* Speaker Header */}
               <div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-[#F7F7F3] mb-2">
-                  {/* Replace with speaker name */}
-                  Speaker Name
+                  Gaurav Jain
                 </h3>
                 <p className="text-sm sm:text-base text-[#EABF36]/80 font-[family-name:var(--font-satoshi)]">
-                  {/* Replace with speaker title */}
-                  Title / Designation
+                  Head Of Content, India @ Red Bull
                 </p>
               </div>
 
               {/* Divider */}
               <div className="w-12 h-px bg-[#EABF36]/30 mx-auto lg:mx-0" />
 
-              {/* Bio placeholder */}
-              <p className="text-sm sm:text-base text-[#F7F7F3]/50 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-lg mx-auto lg:mx-0">
-                {/* Replace with speaker bio */}
-                Speaker bio goes here. A brief paragraph about the speaker&apos;s background,
-                experience, and what makes them uniquely qualified to lead this workshop
-                on the business of F1 and IPL.
-              </p>
+              {/* Bio Content */}
+              <div className="text-sm sm:text-base text-[#F7F7F3]/70 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-lg mx-auto lg:mx-0 mt-4 space-y-4 text-left">
+                <p>
+                  Gaurav Jain, based in Mumbai, is currently the Head Of Content, India at Red Bull. With a rich background spanning leadership roles at Disney+ Hotstar and Star TV, he brings unparalleled expertise in sports media, original content, and the business of entertainment.
+                </p>
+                <div className="space-y-3 mt-6 text-[#F7F7F3]/60 text-sm">
+                  <p className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EABF36] mt-2 flex-shrink-0" />
+                    <span>
+                      <strong className="text-[#EABF36] font-medium block">2019 - Present</strong>
+                      Head Of Content, India @ Red Bull
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EABF36] mt-2 flex-shrink-0" />
+                    <span>
+                      <strong className="text-[#EABF36] font-medium block">2017 - 2018</strong>
+                      Sr. Manager, Sports Originals & Branded Content @ Disney+ Hotstar
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EABF36] mt-2 flex-shrink-0" />
+                    <span>
+                      <strong className="text-[#EABF36] font-medium block">2015 - 2017</strong>
+                      Sr. Manager, Content Acquisition & Strategy @ Star TV
+                    </span>
+                  </p>
+                </div>
+              </div>
 
               {/* Credential tags */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3">
-                {["RedBull", "Motorsport", "Business Strategy"].map((tag) => (
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-8">
+                {["Red Bull", "Disney+ Hotstar", "Star TV", "Sports Media"].map((tag) => (
                   <span
                     key={tag}
                     className="text-[10px] sm:text-xs border border-[#F7F7F3]/10 rounded-full px-3 py-1.5 text-[#F7F7F3]/40 font-[family-name:var(--font-satoshi)] tracking-wider uppercase"
