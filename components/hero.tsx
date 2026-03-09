@@ -108,9 +108,7 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
         transition={{ delay: 1.5, duration: 0.8 }}
     >
         <a
-            href="https://rzp.io/rzp/Alcoviaworkshopf1IPL"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/f1-workshop"
             className="group block cursor-pointer"
         >
             <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#BF953F]">
