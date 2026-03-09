@@ -45,7 +45,7 @@ export default function SpeakerSection() {
               <div className="absolute inset-0 border border-[#EABF36]/15 rounded-2xl" />
 
               {/* Three equal images — gold seam between cells */}
-              <div className="grid grid-cols-3 gap-[2px] bg-[#EABF36]/[0.07] p-2 rounded-2xl overflow-hidden h-64 sm:h-80 lg:h-[35rem] xl:h-[30rem]">
+              <div className="grid grid-cols-3 gap-[2px] bg-[#EABF36]/[0.07] p-2 rounded-2xl overflow-hidden h-64 sm:h-80 lg:h-[25rem] xl:h-[30rem]">
 
                 {/* Image 1 — main headshot */}
                 <motion.div
