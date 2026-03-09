@@ -43,7 +43,7 @@ export default function Home() {
 
           {/* Parallax Background - Moves subtly with cursor */}
           <ParallaxBackground />
-          <main data-theme="graded">
+          <main>
             <Hero />
             <Manifesto />
             <OfferingsHorizontal />

@@ -381,6 +381,7 @@ const WingsReveal = memo(({
                 <img
                     src="/images/element-download-1764790639.png"
                     alt=""
+                    loading="lazy"
                     className="w-full h-full object-contain"
                     style={{ transform: 'scaleX(-1)' }}
                     draggable={false}
@@ -412,6 +413,7 @@ const WingsReveal = memo(({
                 <img
                     src="/images/element-download-1764790639.png"
                     alt=""
+                    loading="lazy"
                     className="w-full h-full object-contain"
                     draggable={false}
                 />
@@ -496,6 +498,24 @@ export default function Hero() {
 
     const { scrollYProgress } = useScroll({ target: containerRef, offset: ["start start", "end start"] })
     const baseImageScale = useTransform(scrollYProgress, [0, 1], [1, 0.5])
+
+    // Preload hero images as early as possible
+    useEffect(() => {
+        const urls = [
+            "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_1920/v1769156300/hero-base_adraen",
+            "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_1920/v1769156301/hero-reveal_pso2uj",
+        ]
+        urls.forEach((href) => {
+            const existing = document.querySelector(`link[href="${href}"]`)
+            if (existing) return
+            const link = document.createElement("link")
+            link.rel = "preload"
+            link.as = "image"
+            link.href = href
+            link.fetchPriority = "high"
+            document.head.appendChild(link)
+        })
+    }, [])
 
     // Check for mobile device
     useEffect(() => {
@@ -608,6 +628,7 @@ export default function Hero() {
                     <section
                         id="hero"
                         ref={containerRef}
+                        data-theme="light"
                         className="hero-viewport relative flex h-full min-h-screen items-center justify-center overflow-hidden bg-white"
                         role="region"
                         aria-label="Hero section - Take flight with Alcovia"
@@ -618,8 +639,8 @@ export default function Hero() {
                         <motion.div className="absolute inset-0 z-0" style={{ scale: baseImageScale }}>
                             <WingsReveal isHovered={isHeroHovered} scrollProgress={scrollProgress} isMobile={isMobileDevice} />
                             <CursorLens
-                                baseImage="https://res.cloudinary.com/ds1ka0bap/image/upload/v1769156300/hero-base_adraen.png"
-                                revealImage="https://res.cloudinary.com/ds1ka0bap/image/upload/v1769156301/hero-reveal_pso2uj.png"
+                                baseImage="https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_1920/v1769156300/hero-base_adraen"
+                                revealImage="https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_1920/v1769156301/hero-reveal_pso2uj"
                                 objectFit="cover"
                                 backgroundColor="#f8f8f5"
                                 showBackground={true}

@@ -19,63 +19,63 @@ const OFFERINGS = [
     label: "CAREER DISCOVERY",
     title: "Career Discovery Workshops",
     description: "Workshops are created to enable real life learnings- we get a new professional to come and in 30 minutes, highlight their journey, how a day in their life looks like, what is the future of the Industry. This is followed by a real life simulation of those problem statements for all Teens to solve in groups. This experiential way not only builds real world understanding, but also build key soft skills needed to work in the dynamic world of tomorrow.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/carrerDiscovery_tijhkf.png",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/carrerDiscovery_tijhkf",
   },
   {
     id: "02",
     label: "PODCAST SHOOTS",
     title: "Podcast Shoots with Industry Experts",
     description: "Alcovians, for the industries they are curious about, get to meet an industry veteran/ public personality and host a podcast and ask questions pertaining to their lives. Life lessons, trade secrets, cheat codes, all learnt- directly.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/podcast_ttfgpd.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/podcast_ttfgpd",
   },
   {
     id: "03",
     label: "1:1 MENTORSHIP",
     title: "1:1 Mentorship with Top Professionals",
     description: "Once a month, a call with a professional that alcovian is curious about. Enable building conviction of which industry the teen is curious to solve problems in the long run.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769158280/oneonone_mz0dio.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769158280/oneonone_mz0dio",
   },
   {
     id: "04",
     label: "FORGE BONDS",
     title: "Forge Bonds with Similarly Driven Teens",
     description: "Many studies have proven that a person is the summation of the next 5 people they hang out with. At alcovia, we enable teens to meet similarly ambitious teens. Rather than always competing, we create a safe space for all teens to discuss dreams, fears, ambitions & vulnerabilities with each other.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157740/forgebonds_bwekt3.png",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/forgebonds_bwekt3",
   },
   {
     id: "05",
     label: "WEEKLY MENTORSHIP",
     title: "Get Mentored Weekly by Education Professionals from Harvard/ UCL/ Cambridge",
     description: "Our academic advisors are the best in business- they lead each alcovian through the year, ensuring strong motivations throughout the year for everything life throws at our alcovians. Our alcovians see them as extended family.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157740/podcast_gm6zuj.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/podcast_gm6zuj",
   },
   {
     id: "06",
     label: "ACADEMIC EXCELLENCE",
     title: "Scientifically Build Academic Score",
     description: "With scientific inputs on academic progress in terms of self study & the rigour of study, each alcovian moves with purpose. With right tech in place, we are also able to now predict upcoming exam scores at a subject level. We act as consultants to aid stronger academic performance. Everything is the icing, the cake still is strong academic scores.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157738/academic_jcknnp.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157738/academic_jcknnp",
   },
   {
     id: "07",
     label: "FORTNIGHTLY GUIDANCE",
     title: "Get mentored Fortnightly by Guidance Coach",
     description: " Our guidance coach ask each alcovians the right set of questions- to enable them to introspect which stream of subjects makes the most sense to them in the long run. While being the best is the standard, understanding which sphere to be best at is equally, if not more important.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/counselerMeeting_few0qy.png",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/counselerMeeting_few0qy",
   },
   {
     id: "08",
     label: "BUILD EMPATHY",
     title: "Build Empathy",
     description: "Every quarter has a theme. Q2 of the program is building Empathy- Alcovians in groups solve social problems in groups, mentored by top NGOs.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157739/peertopeer_pkenhd.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/peertopeer_pkenhd",
   },
   {
     id: "09",
     label: "BUILD RESILIENCE",
     title: "Build Resilience",
     description: "For Q3, Teens individually build businesses- mentored monthly by founders building in similar space. Helps build resilience. Normalise failing till it becomes gamified.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/v1769157740/resilience_ptprkn.jpg",
+    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/resilience_ptprkn",
   }
 ];
 
@@ -198,13 +198,16 @@ export default function OfferingsHorizontal() {
                   </div>
 
                   {/* Image Area */}
-                  <div className="relative w-full h-[clamp(150px,16vw,280px)] overflow-hidden mb-6 bg-black/50">
+                  <div className="relative w-full h-[clamp(150px,16vw,280px)] overflow-hidden mb-6 bg-transparent">
                     <div className="parallax-image-inner absolute inset-[-10%] w-[110%] h-[110%]">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className={`object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500 grayscale group-hover:grayscale-0 ${['01', '02', '04'].includes(item.id) ? 'scale-110' : ''}`}
+                        className={`object-cover transition-opacity duration-500 ${['01', '02', '04'].includes(item.id) ? 'scale-110' : ''}`}
+                        sizes="(max-width: 1280px) 50vw, 30vw"
+                        priority={index < 3}
+                        loading={index < 3 ? "eager" : "lazy"}
                       />
                     </div>
                   </div>
@@ -281,6 +284,9 @@ export default function OfferingsHorizontal() {
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="100vw"
+                  priority={item.id === '01' || item.id === '02'}
+                  loading={(item.id === '01' || item.id === '02') ? "eager" : "lazy"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B2E] via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -330,6 +336,9 @@ export default function OfferingsHorizontal() {
                   alt={item.title}
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  sizes="(max-width: 1280px) 50vw, 33vw"
+                  priority={item.id === '01' || item.id === '02'}
+                  loading={(item.id === '01' || item.id === '02') ? "eager" : "lazy"}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B2E] via-transparent to-transparent opacity-80" />
                 <div className="absolute top-4 right-4">

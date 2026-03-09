@@ -28,7 +28,7 @@ const timelineData = [
 
 export default function TimelineGraph() {
     return (
-        <section className="relative flex min-h-screen flex-col justify-center py-20 lg:py-32 overflow-hidden" style={{ backgroundColor: '#234944' }}>
+        <section data-theme="dark" className="relative flex min-h-screen flex-col justify-center py-20 lg:py-32 overflow-hidden" style={{ backgroundColor: '#234944' }}>
             {/* Background Ambient Glow */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[80vw] bg-[#EABF36] opacity-5 blur-[120px] rounded-full" />

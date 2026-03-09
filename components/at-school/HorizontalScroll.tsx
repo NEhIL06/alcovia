@@ -184,7 +184,7 @@ export default function HorizontalScroll() {
     return (
         <>
             {/* Mobile Layout (Vertical Stack) */}
-            <div className="block lg:hidden">
+            <div className="block lg:hidden" data-theme="dark">
                 {quarters.map((q) => (
                     <div key={q.id} className="flex min-h-[80vh] flex-col justify-center px-8 py-20" style={{ backgroundColor: q.bgColor }}>
                         <div className="relative z-10">
@@ -207,7 +207,7 @@ export default function HorizontalScroll() {
             </div>
 
             {/* Desktop Layout (Horizontal Scroll) */}
-            <div ref={container} className="relative hidden h-screen overflow-hidden lg:block">
+            <div ref={container} className="relative hidden h-screen overflow-hidden lg:block" data-theme="dark">
                 <div
                     ref={panelsContainer}
                     className="flex h-full w-[400%]"

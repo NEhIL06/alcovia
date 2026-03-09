@@ -100,6 +100,7 @@ export default function SocialFan() {
     return (
         <section
             ref={containerRef}
+            data-theme="light"
             className="relative bg-[#F5F5EF] px-4 py-16 md:px-12 md:py-24 overflow-hidden"
         >
             {/* Background decorations */}
@@ -129,7 +130,7 @@ export default function SocialFan() {
                 </motion.div>
 
                 {/* FAN LAYOUT - Works on ALL screen sizes */}
-                <div 
+                <div
                     className="relative flex items-center justify-center"
                     style={{
                         // CRITICAL: Give enough height so cards don't get clipped
@@ -148,7 +149,7 @@ export default function SocialFan() {
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="absolute cursor-pointer will-change-transform touch-manipulation"
-                                
+
                                 // Start from center, very close to final position
                                 initial={{
                                     opacity: 0,
@@ -180,7 +181,7 @@ export default function SocialFan() {
                                 onTouchStart={() => setHoveredIndex(index)}
                                 onTouchEnd={() => setHoveredIndex(null)}
                             >
-                                <div 
+                                <div
                                     className="relative overflow-hidden rounded-2xl bg-[#0B0B0B] ring-1 ring-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                                     style={{
                                         width: `${cardWidth}px`,
@@ -202,13 +203,13 @@ export default function SocialFan() {
 
                                     {/* Content */}
                                     <div className="absolute bottom-0 left-0 right-0 p-3 md:p-6">
-                                        <span 
+                                        <span
                                             className="mb-1 md:mb-2 inline-block rounded-full bg-[#EABF36] px-2 md:px-3 py-0.5 md:py-1 font-bold uppercase tracking-wider text-[#0B0B0B] shadow-sm"
                                             style={{ fontSize: isMobile ? '7px' : '10px' }}
                                         >
                                             {social.platform}
                                         </span>
-                                        <h3 
+                                        <h3
                                             className="font-bold text-white"
                                             style={{ fontSize: isMobile ? '13px' : '20px' }}
                                         >
