@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function SpeakerSection() {
   return (
-    <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -15,7 +15,7 @@ export default function SpeakerSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl xl:max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
           className="text-center mb-12 sm:mb-16"
@@ -29,29 +29,81 @@ export default function SpeakerSection() {
           </span>
         </motion.div>
 
-        {/* Speaker card */}
-        <motion.div
-          className="flex flex-col lg:flex-row items-center gap-10 sm:gap-14 lg:gap-20"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Image placeholder */}
-          <div className="relative flex-shrink-0">
-            {/* Frame */}
-            <div className="relative w-64 h-80 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
-              {/* Outer border */}
+        {/* Speaker card — 3:2 section split so images get enough room */}
+        <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-10 sm:gap-12 lg:gap-16 items-center">
+
+          {/* ── Image gallery ── */}
+          <motion.div
+            className="relative"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {/* Outer premium frame */}
+            <div className="relative">
               <div className="absolute inset-0 border border-[#EABF36]/15 rounded-2xl" />
 
-              {/* Inner placeholder */}
-              <div className="absolute inset-3 rounded-xl bg-[#F7F7F3]/[0.03] border border-[#F7F7F3]/[0.06] flex flex-col items-center justify-center gap-4 overflow-hidden">
-                <Image
-                  src="/images/gaurav.jpg"
-                  alt="Gaurav Jain"
-                  fill
-                  className="object-cover"
-                />
+              {/* Three equal images — gold seam between cells */}
+              <div className="grid grid-cols-3 gap-[2px] bg-[#EABF36]/[0.07] p-2 rounded-2xl overflow-hidden h-64 sm:h-80 lg:h-[35rem] xl:h-[30rem]">
+
+                {/* Image 1 — main headshot */}
+                <motion.div
+                  className="relative overflow-hidden group cursor-pointer rounded-l-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.15 }}
+                >
+                  <Image
+                    src="/images/gaurav.jpg"
+                    alt="Gaurav Jain"
+                    fill
+                    sizes="(max-width: 1024px) 33vw, 20vw"
+                    priority
+                    loading="eager"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </motion.div>
+
+                {/* Image 2 */}
+                <motion.div
+                  className="relative overflow-hidden group cursor-pointer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.28 }}
+                >
+                  <Image
+                    src="/images/gaurav-jain.png"
+                    alt="Gaurav Jain"
+                    fill
+                    sizes="(max-width: 1024px) 33vw, 20vw"
+                    priority
+                    loading="eager"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </motion.div>
+
+                {/* Image 3 */}
+                <motion.div
+                  className="relative overflow-hidden group cursor-pointer rounded-r-lg"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.7, delay: 0.41 }}
+                >
+                  <Image
+                    src="/images/gaurav-jain2.png"
+                    alt="Gaurav Jain"
+                    fill
+                    sizes="(max-width: 1024px) 33vw, 20vw"
+                    priority
+                    loading="eager"
+                    className="object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                </motion.div>
+
               </div>
 
               {/* Corner accents */}
@@ -63,29 +115,29 @@ export default function SpeakerSection() {
 
             {/* Floating badge */}
             <motion.div
-              className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#08261e] border border-[#EABF36]/30 rounded-full px-4 py-1.5 flex items-center gap-2"
+              className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#08261e] border border-[#EABF36]/30 rounded-full px-4 py-1.5 flex items-center gap-2 z-10"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#EABF36]" />
               <span className="text-[10px] sm:text-xs text-[#EABF36] font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap">
                 Red Bull
               </span>
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Speaker info */}
-          <div className="text-center lg:text-left flex-1">
-            <motion.div
-              className="space-y-4 sm:space-y-6"
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-            >
-              {/* Speaker Header */}
+          {/* ── Speaker info ── */}
+          <motion.div
+            className="text-center lg:text-left"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div className="space-y-4 sm:space-y-6">
+              {/* Name & title */}
               <div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-[#F7F7F3] mb-2">
                   Gaurav Jain
@@ -98,8 +150,8 @@ export default function SpeakerSection() {
               {/* Divider */}
               <div className="w-12 h-px bg-[#EABF36]/30 mx-auto lg:mx-0" />
 
-              {/* Bio Content */}
-              <div className="text-sm sm:text-base text-[#F7F7F3]/70 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-lg mx-auto lg:mx-0 mt-4 space-y-4 text-left">
+              {/* Bio */}
+              <div className="text-sm sm:text-base xl:text-lg text-[#F7F7F3]/70 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-2xl mx-auto lg:mx-0 space-y-4 lg:space-y-6 text-left">
                 <p>
                   Gaurav Jain, based in Mumbai, is currently the Head Of Content, India at Red Bull. With a rich background spanning leadership roles at Disney+ Hotstar and Star TV, he brings unparalleled expertise in sports media, original content, and the business of entertainment.
                 </p>
@@ -139,9 +191,10 @@ export default function SpeakerSection() {
                   </span>
                 ))}
               </div>
-            </motion.div>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
