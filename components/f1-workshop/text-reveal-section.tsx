@@ -18,7 +18,7 @@ export default function TextRevealSection() {
   return (
     <section
       ref={containerRef}
-      className="relative flex items-center justify-center py-12 sm:py-16 overflow-hidden"
+      className="relative flex items-center justify-center pt-12 pb-20 sm:py-16 overflow-hidden"
     >
       {/* Subtle spotlight */}
       <div

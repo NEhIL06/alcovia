@@ -6,6 +6,7 @@ import SpeakerSection from "@/components/f1-workshop/speaker-section";
 import GainsSection from "@/components/f1-workshop/gains-section";
 import TestimonialsSection from "@/components/f1-workshop/testimonials-section";
 import CtaFooterSection from "@/components/f1-workshop/cta-footer-section";
+import MobileFloatingCta from "@/components/f1-workshop/mobile-floating-cta";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function F1WorkshopPage() {
       <GainsSection />
       <TestimonialsSection />
       <CtaFooterSection />
+      <MobileFloatingCta />
       <Footer />
     </main>
   );

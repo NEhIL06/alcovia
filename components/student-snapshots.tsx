@@ -23,7 +23,6 @@ export default function StudentSnapshots() {
           muted
           loop
           playsInline
-          poster="/images/video-poster.jpg"
         >
           {/* Add your video source here */}
           <source src="/videos/download.mp4" type="video/mp4" />

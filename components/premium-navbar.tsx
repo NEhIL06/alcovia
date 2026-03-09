@@ -324,9 +324,9 @@ export default function PremiumNavbar() {
               )}
             </AnimatePresence>
 
-            {/* Mobile Apply Button - Smaller size */}
+            {/* Mobile Apply Button - Smaller size (hidden on f1-workshop page, replaced by floating CTA) */}
             <AnimatePresence>
-              {scrolled && (
+              {scrolled && !isF1Page && (
                 <motion.a
                   href={applyHref}
                   target="_self"

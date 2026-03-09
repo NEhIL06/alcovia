@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CtaFooterSection() {
   return (
-    <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
+    <section id="f1-cta" className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"

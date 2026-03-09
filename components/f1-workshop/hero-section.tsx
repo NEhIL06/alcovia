@@ -16,8 +16,9 @@ export default function HeroSection() {
 
   return (
     <section
+      id="f1-hero"
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[80vh] sm:min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Animated background grid */}
       <div className="absolute inset-0 z-0">
