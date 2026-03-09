@@ -93,7 +93,7 @@ const navLinks: NavItem[] = [
 ]
 
 export default function PremiumNavbar() {
-  const [navMode, setNavMode] = useState<NavMode>("dark")
+  const [navMode, setNavMode] = useState<NavMode>("light")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -102,6 +102,16 @@ export default function PremiumNavbar() {
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
+    // Helper: check if a computed background color is "dark"
+    const isColorDark = (color: string): boolean => {
+      const match = color.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/)
+      if (!match) return false
+      const [, r, g, b] = match.map(Number)
+      // Luminance formula
+      const luminance = 0.299 * r + 0.587 * g + 0.114 * b
+      return luminance < 128
+    }
+
     const handleScroll = () => {
       const scrollY = window.scrollY
       setScrolled(scrollY > 20)
@@ -111,8 +121,18 @@ export default function PremiumNavbar() {
       const navRect = navRef.current.getBoundingClientRect()
       const navCenter = navRect.top + navRect.height / 2
 
+      // Check sections with explicit data-theme attributes
       const darkSections = document.querySelectorAll('[data-theme="graded"], [data-theme="dark"]')
-      let isOverDark = false
+      const lightSections = document.querySelectorAll('[data-theme="light"]')
+      let isOverDark: boolean | null = null
+
+      // Explicit light sections take priority
+      lightSections.forEach((section) => {
+        const rect = section.getBoundingClientRect()
+        if (navCenter >= rect.top && navCenter <= rect.bottom) {
+          isOverDark = false
+        }
+      })
 
       darkSections.forEach((section) => {
         const rect = section.getBoundingClientRect()
@@ -121,6 +141,7 @@ export default function PremiumNavbar() {
         }
       })
 
+      // Check the manifesto section by bg color class
       const manifesto = document.querySelector('.bg-\\[\\#3d4a2a\\]') as HTMLElement
       if (manifesto) {
         const manifestoRect = manifesto.getBoundingClientRect()
@@ -129,6 +150,7 @@ export default function PremiumNavbar() {
         }
       }
 
+      // Check footer
       const footer = document.querySelector("footer")
       if (footer) {
         const footerRect = footer.getBoundingClientRect()
@@ -137,7 +159,34 @@ export default function PremiumNavbar() {
         }
       }
 
-      setNavMode(isOverDark ? "light" : "dark")
+      // Fallback: walk up from the element directly under the navbar to find bg color
+      if (isOverDark === null) {
+        // Use elementFromPoint below the nav since the nav itself has pointer-events none on its parts
+        const elUnder = document.elementFromPoint(window.innerWidth / 2, navCenter + navRect.height / 2 + 10)
+
+        let el: Element | null = elUnder
+        while (el && el !== document.documentElement) {
+          if ((el as HTMLElement).dataset?.theme === 'light') { isOverDark = false; break }
+          if ((el as HTMLElement).dataset?.theme === 'dark' || (el as HTMLElement).dataset?.theme === 'graded') { isOverDark = true; break }
+          const bg = window.getComputedStyle(el as HTMLElement).backgroundColor
+          if (bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent') {
+            isOverDark = isColorDark(bg)
+            break
+          }
+          el = el.parentElement
+        }
+
+        // If still null, check body
+        if (isOverDark === null) {
+          const bodyBg = window.getComputedStyle(document.body).backgroundColor
+          if (bodyBg && bodyBg !== 'rgba(0, 0, 0, 0)') {
+            isOverDark = isColorDark(bodyBg)
+          }
+        }
+      }
+
+      // Default to dark background if still null (most pages are dark)
+      setNavMode((isOverDark ?? true) ? "light" : "dark")
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
@@ -201,17 +250,35 @@ export default function PremiumNavbar() {
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.2 }}
               >
-                <Image
-                  src={"/images/alcovia-logo-symbol.png"}
-                  alt="ALCOVIA"
-                  width={scrolled ? 220 : 150}
-                  height={scrolled ? 220 : 150}
-                  className={`transition-all duration-0 h-[200px] w-[120px] -mt-7 -ml-1 md:ml-0 object-contain object-bottom pt-6`}
-                  style={{
-                    filter: navMode === "light" ? "brightness(1.2) invert(0)" : "brightness(1) invert(0)"
-                  }}
-                  priority
-                />
+                {/* Logo: dark-bg version for dark pages, light-bg version for light pages */}
+                <div className="relative h-[200px] w-[140px] -mt-7 -ml-1 md:ml-0 pt-6 flex items-end justify-center pb-2">
+                  {/* Dark-background logo (light text) – shown on dark backgrounds */}
+                  <Image
+                    src={"/alcovia_logo_dark.png"}
+                    alt="ALCOVIA"
+                    width={120}
+                    height={100}
+                    className="absolute bottom-2 object-contain transition-all duration-300"
+                    style={{
+                      opacity: navMode === "light" ? 1 : 0,
+                      transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
+                    }}
+                    priority
+                  />
+                  {/* Light-background logo (dark text) – shown on light backgrounds */}
+                  <Image
+                    src={"/images/alcovia-logo-symbol.png"}
+                    alt="ALCOVIA"
+                    width={120}
+                    height={100}
+                    className="absolute bottom-2 object-contain transition-all duration-300"
+                    style={{
+                      opacity: navMode === "dark" ? 1 : 0,
+                      transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
+                    }}
+                    priority
+                  />
+                </div>
               </motion.div>
             </Link>
           </motion.div>
