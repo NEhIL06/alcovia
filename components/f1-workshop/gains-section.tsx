@@ -84,12 +84,7 @@ export default function GainsSection() {
                 </p>
               </div>
 
-              {/* Hover arrow */}
-              <div className="text-[#EABF36]/0 group-hover:text-[#EABF36]/60 transition-colors duration-500 mt-1 shrink-0">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </div>
+              
             </motion.div>
           ))}
         </div>
