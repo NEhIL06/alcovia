@@ -21,11 +21,11 @@ const team = [
     { id: "02", name: "Neera Handa", role: "Lead Advisor", img: "/images/team/neera.png", experience: "Careers and University Guidance Counsellor. 25 years of experience in Higher Education Counselling, Enrichment Programmes and a strong international network." },
     { id: "03", name: "Sanam", role: "Academic Advisor", img: "/images/team/sanam.png", experience: "Early Childhood Education | Harvard || Ex-Curriculum Designer, Masters' Union" },
     { id: "04", name: "Farah", role: "Strategy Head", img: "/images/team/farah.png", experience: "Ex-Senior Advisor at Keslio || Ex-McKinsey" },
-    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU'23" },
+    { id: "05", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", imgClass: "object-cover object-top scale-125", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU'23" },
     { id: "06", name: "Hita", role: "Systems Designer", img: "/images/team/hita.png" },
     { id: "07", name: "Nehil", role: "Full Stack Engineer", img: "/images/team/Nehil.png" },
     { id: "08", name: "Vansh", role: "Brand Experience Manager", img: "/images/team/vansh.png" },
-    { id: "09", name: "Manan", role: "GTM intern", img: "/images/team/manan.png" },
+    { id: "09", name: "Manan", role: "GTM intern", img: "/images/team/manan.png", experience: "Ex: Co-Founder Collision" },
 ];
 
 const experienceLogos = [
@@ -604,7 +604,7 @@ export default function MeetTheTeamGrid() {
                                 className="relative w-[24vw] aspect-[3/4] shadow-2xl mr-20"
                             >
                                 <div className="relative w-full h-full overflow-hidden rounded-3xl bg-[#111]">
-                                    <Image src={activeMember.img} alt={activeMember.name} fill className="object-cover" priority />
+                                    <Image src={activeMember.img} alt={activeMember.name} fill className={(activeMember as any).imgClass ?? "object-cover"} priority />
                                     {/* Gradient Overlay for Text Readability */}
                                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
 
@@ -672,7 +672,7 @@ export default function MeetTheTeamGrid() {
                                     src={mobileSelectedMember.img}
                                     alt={mobileSelectedMember.name}
                                     fill
-                                    className="object-cover"
+                                    className={(mobileSelectedMember as any).imgClass ?? "object-cover"}
                                 />
                                 {/* Gradient Overlay */}
                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90" />
