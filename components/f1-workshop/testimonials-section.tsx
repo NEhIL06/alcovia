@@ -117,7 +117,7 @@ export default function TestimonialsSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.5 }}
         >
-          Strategy of Success — Consulting workshop led by an Ex-MD of Accenture
+          Strategy of Success — Consulting workshop led by Nikunj Dang, Ex-MD of Accenture, CEO & Founder of Yognum
         </motion.p>
       </div>
     </section>
