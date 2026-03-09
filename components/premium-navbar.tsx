@@ -2,6 +2,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
+import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
@@ -93,6 +94,13 @@ const navLinks: NavItem[] = [
 ]
 
 export default function PremiumNavbar() {
+  const pathname = usePathname()
+  const isF1Page = pathname === "/f1-workshop"
+  const applyHref = isF1Page
+    ? "https://alcovia-workshop.short.gy/f1-workshop"
+    : "https://forms.gle/xrPqKciXL6aKwUbw7"
+  const applyLabel = isF1Page ? "Ready for boardroom?" : "Apply for Cohort 2026"
+
   const [navMode, setNavMode] = useState<NavMode>("light")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -291,7 +299,7 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                  href={applyHref}
                   target="_self"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
@@ -311,7 +319,7 @@ export default function PremiumNavbar() {
                   whileTap={{ scale: 0.95 }}
                 >
 
-                  <FlipText>Apply for Cohort 2026</FlipText>
+                  <FlipText>{applyLabel}</FlipText>
                 </motion.a>
               )}
             </AnimatePresence>
@@ -320,7 +328,7 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && (
                 <motion.a
-                  href="https://forms.gle/xrPqKciXL6aKwUbw7"
+                  href={applyHref}
                   target="_self"
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
@@ -339,7 +347,7 @@ export default function PremiumNavbar() {
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <FlipText>Apply for Cohort 2026</FlipText>
+                  <FlipText>{applyLabel}</FlipText>
                 </motion.a>
               )}
             </AnimatePresence>

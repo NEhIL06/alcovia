@@ -145,23 +145,7 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 1 }}
-      >
-        <span className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#F7F7F3]/30 font-[family-name:var(--font-satoshi)]">
-          Scroll
-        </span>
-        <motion.div
-          className="w-px h-8 sm:h-12 bg-gradient-to-b from-[#EABF36]/60 to-transparent"
-          animate={{ scaleY: [0, 1, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          style={{ transformOrigin: "top" }}
-        />
-      </motion.div>
+      
 
       {/* Corner accents */}
       <div className="hidden sm:block absolute top-8 left-8 w-12 h-12 border-t border-l border-[#EABF36]/20" />

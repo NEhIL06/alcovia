@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/f1-workshop/hero-section";
 import TextRevealSection from "@/components/f1-workshop/text-reveal-section";
-import WorkshopCardsSection from "@/components/f1-workshop/workshop-cards-section";
 import EventDetailsSection from "@/components/f1-workshop/event-details-section";
 import SpeakerSection from "@/components/f1-workshop/speaker-section";
+import GainsSection from "@/components/f1-workshop/gains-section";
+import TestimonialsSection from "@/components/f1-workshop/testimonials-section";
 import CtaFooterSection from "@/components/f1-workshop/cta-footer-section";
 import Footer from "@/components/footer";
 
@@ -24,9 +25,10 @@ export default function F1WorkshopPage() {
     <main className="relative">
       <HeroSection />
       <TextRevealSection />
-      <WorkshopCardsSection />
       <EventDetailsSection />
       <SpeakerSection />
+      <GainsSection />
+      <TestimonialsSection />
       <CtaFooterSection />
       <Footer />
     </main>

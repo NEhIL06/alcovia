@@ -12,13 +12,13 @@ export default function TextRevealSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.8", "end 0.4"],
+    offset: ["start 0.9", "end 0.65"],
   });
 
   return (
     <section
       ref={containerRef}
-      className="relative min-h-[80vh] sm:min-h-screen flex items-center justify-center py-20 sm:py-32 overflow-hidden"
+      className="relative flex items-center justify-center py-12 sm:py-16 overflow-hidden"
     >
       {/* Subtle spotlight */}
       <div

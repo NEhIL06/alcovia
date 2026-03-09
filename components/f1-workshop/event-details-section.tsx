@@ -40,7 +40,7 @@ const details = [
 
 export default function EventDetailsSection() {
   return (
-    <section className="relative py-20 sm:py-32 overflow-hidden">
+    <section className="relative py-12 sm:py-16 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -53,7 +53,7 @@ export default function EventDetailsSection() {
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

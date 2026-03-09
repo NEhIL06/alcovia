@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 export default function CtaFooterSection() {
   return (
-    <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-12 sm:py-16 lg:py-20 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -47,10 +47,10 @@ export default function CtaFooterSection() {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <a
-            href="https://pages.razorpay.com/Alcoviaworkshopf1IPL"
-            target="_blank"
+            href="https://alcovia-workshop.short.gy/f1-workshop"
+            target="_self"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-3 overflow-hidden"
+            className="group relative inline-flex items-center gap-3"
           >
             {/* Button bg */}
             <span className="relative z-10 inline-flex items-center gap-3 bg-[#EABF36] text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-8 sm:px-12 py-4 sm:py-5 rounded-full font-semibold transition-all duration-500 group-hover:bg-[#F7F7F3] group-hover:scale-105">
@@ -151,16 +151,7 @@ export default function CtaFooterSection() {
             </a>
           </div>
 
-          {/* Back to top */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="inline-flex items-center gap-2 text-xs text-[#F7F7F3]/20 hover:text-[#EABF36]/60 transition-colors font-[family-name:var(--font-satoshi)] tracking-wider uppercase mt-4 cursor-pointer"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-3 h-3 rotate-180">
-              <path d="M12 5v14M5 12l7-7 7 7" />
-            </svg>
-            Back to top
-          </button>
+
         </motion.div>
       </div>
     </section>
