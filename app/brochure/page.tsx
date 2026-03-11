@@ -1,5 +1,7 @@
 export const metadata = {
   robots: "noindex, nofollow",
+  title: "Alcovia Brochure | Ambition Building Program",
+  description: "Explore the Alcovia brochure - the world's first ambition building program for teenagers."
 };
 
 export default function BrochurePage() {
@@ -7,15 +9,13 @@ export default function BrochurePage() {
     <iframe
       src="/flipbook.html"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
+        width: "100vw",
+        height: "100vh",
         border: "none",
-        zIndex: 9999,
+        display: "block",
       }}
       title="Alcovia Brochure"
+      allow="fullscreen"
     />
   );
 }

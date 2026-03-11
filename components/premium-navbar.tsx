@@ -100,8 +100,35 @@ export default function PremiumNavbar() {
     ? "https://alcovia-workshop.short.gy/f1-workshop"
     : "https://forms.gle/xrPqKciXL6aKwUbw7"
   const applyLabel = isF1Page ? "Ready for boardroom?" : "Apply for Cohort 2026"
+  const isBrochurePage = pathname === "/brochure"
 
   const [navMode, setNavMode] = useState<NavMode>("light")
+  const [currentPage, setCurrentPage] = useState(0)
+  const [totalPages, setTotalPages] = useState(0)
+  const [zoom, setZoom] = useState(1)
+
+  useEffect(() => {
+    if (!isBrochurePage) return
+    const handleMessage = (e: MessageEvent) => {
+      if (e.data?.type === 'FLIPBOOK_STATE') {
+        setCurrentPage(e.data.currentPage)
+        setTotalPages(e.data.totalPages)
+        if (e.data.zoom !== undefined) {
+          setZoom(e.data.zoom)
+        }
+      }
+    }
+    window.addEventListener('message', handleMessage)
+    return () => window.removeEventListener('message', handleMessage)
+  }, [isBrochurePage])
+
+  const sendToFlipbook = (command: string) => {
+    const iframe = document.querySelector('iframe[src="/flipbook.html"]') as HTMLIFrameElement
+    if (iframe && iframe.contentWindow) {
+      iframe.contentWindow.postMessage({ command }, '*')
+    }
+  }
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
@@ -291,6 +318,38 @@ export default function PremiumNavbar() {
             </Link>
           </motion.div>
 
+          {isBrochurePage && totalPages > 0 && (
+            <motion.div layout className="hidden md:flex flex-1 items-center justify-center gap-6 pt-6 -ml-16">
+              <div className="flex items-center gap-2 bg-[#002C45] rounded-lg px-2 py-1.5 border border-[#EABF36]/50 shadow-sm">
+                <button onClick={() => sendToFlipbook('prev')} disabled={currentPage <= 0} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded disabled:opacity-30 transition-colors text-xl font-light pb-1">
+                  ‹
+                </button>
+                <span className="text-[#C8DDD9] text-xs font-mono w-16 text-center select-none">
+                  {(currentPage === 0 || currentPage === totalPages - 1) ? `${currentPage + 1} / ${totalPages}` : `${currentPage + 1}-${Math.min(currentPage + 2, totalPages)} / ${totalPages}`}
+                </span>
+                <button onClick={() => sendToFlipbook('next')} disabled={currentPage >= totalPages - 1} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded disabled:opacity-30 transition-colors text-xl font-light pb-1">
+                  ›
+                </button>
+              </div>
+
+              <div className="flex items-center gap-2 bg-[#002C45] rounded-lg px-2 py-1.5 border border-[#EABF36]/50 shadow-sm">
+                <button onClick={() => sendToFlipbook('zoomOut')} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded transition-colors text-2xl font-light pb-1">
+                  -
+                </button>
+                <span className="text-[#C8DDD9] text-xs font-mono w-12 text-center select-none">
+                  {Math.round(zoom * 100)}%
+                </span>
+                <button onClick={() => sendToFlipbook('zoomIn')} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded transition-colors text-xl font-light pb-0.5">
+                  +
+                </button>
+              </div>
+
+              <button onClick={() => sendToFlipbook('fullscreen')} className="bg-[#002C45] w-10 h-10 flex items-center justify-center border border-[#EABF36]/50 text-[#EABF36] hover:bg-[#EABF36]/10 rounded-lg transition-colors text-sm">
+                ⛶
+              </button>
+            </motion.div>
+          )}
+
           <motion.div
             layout
             className={`flex items-center gap-3 order-3 pt-6`}
@@ -369,6 +428,38 @@ export default function PremiumNavbar() {
       </motion.nav>
 
       <NavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
+
+      {/* Mobile Brochure Controls - Pinned to bottom */}
+      <AnimatePresence>
+        {isBrochurePage && totalPages > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#002C45]/95 backdrop-blur-md rounded-full px-4 py-2 border border-[#EABF36]/40 shadow-xl"
+          >
+            <div className="flex items-center gap-1">
+              <button onClick={() => sendToFlipbook('prev')} disabled={currentPage <= 0} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 disabled:opacity-30 text-3xl font-light pb-2">
+                ‹
+              </button>
+              <span className="text-[#C8DDD9] text-[11px] font-mono w-[60px] text-center">
+                {(currentPage === 0 || currentPage === totalPages - 1) ? `${currentPage + 1}/${totalPages}` : `${currentPage + 1}-${Math.min(currentPage + 2, totalPages)}/${totalPages}`}
+              </span>
+              <button onClick={() => sendToFlipbook('next')} disabled={currentPage >= totalPages - 1} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 disabled:opacity-30 text-3xl font-light pb-2">
+                ›
+              </button>
+            </div>
+
+            <div className="w-[1px] h-6 bg-[#EABF36]/20"></div>
+
+            <div className="flex items-center gap-1">
+              <button onClick={() => sendToFlipbook('zoomIn')} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 text-2xl font-light pb-1">
+                +
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }
