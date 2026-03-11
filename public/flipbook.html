@@ -24,7 +24,6 @@
       min-height: 100vh;
       font-family: 'Helvetica Neue', sans-serif;
       overflow-x: hidden;
-      padding-bottom: 40px;
     }
 
     /* ── Top bar ── */
@@ -55,46 +54,57 @@
       letter-spacing: 0.12em;
     }
 
-    /* ── Controls ── */
-    .controls {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin: 20px 0 12px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .btn {
-      background: #002C45;
-      color: #EABF36;
-      border: 1.5px solid #EABF36;
-      border-radius: 6px;
-      padding: 8px 18px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
+    /* ── Side nav arrows ── */
+    .nav-arrow {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 150;
+      background: none;
+      border: none;
+      color: rgba(234, 191, 54, 0.25);
+      font-size: 5rem;
+      line-height: 1;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      padding: 16px 20px;
+      transition: color 0.2s, transform 0.2s;
       user-select: none;
+      -webkit-user-select: none;
     }
 
-    .btn:hover {
-      background: #EABF36;
-      color: #002C45;
+    .nav-arrow:hover {
+      color: rgba(234, 191, 54, 0.75);
+      transform: translateY(-50%) scale(1.1);
     }
 
-    .btn:disabled {
-      opacity: 0.35;
-      cursor: default;
+    .nav-arrow:disabled {
+      opacity: 0;
       pointer-events: none;
     }
 
-    .page-counter {
-      color: #C8DDD9;
-      font-size: 0.82rem;
-      min-width: 80px;
-      text-align: center;
+    #nav-prev { left: 0; }
+    #nav-next { right: 0; }
+
+    /* Hide side arrows on mobile — not enough space */
+    @media (max-width: 768px) {
+      .nav-arrow { display: none; }
+    }
+
+    /* ── Fullscreen button ── */
+    .fs-btn {
+      background: transparent;
+      color: #8899AA;
+      border: 1px solid #4A6070;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .fs-btn:hover {
+      color: #EABF36;
+      border-color: #EABF36;
     }
 
     /* ── Flipbook container ── */
@@ -104,6 +114,7 @@
       align-items: flex-start;
       width: 100%;
       padding: 0 16px;
+      flex: 1;
     }
 
     #flipbook {
@@ -122,153 +133,21 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ── Mobile hint ── */
-    .hint {
-      color: #4A6070;
-      font-size: 0.72rem;
-      text-align: center;
-      margin-top: 14px;
-      letter-spacing: 0.04em;
-    }
-
-    /* ── Zoom controls ── */
-    .zoom-controls {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-left: 8px;
-    }
-
-    .zoom-btn {
-      background: #16302b;
-      color: #EABF36;
-      border: 1px solid #234944;
-      border-radius: 4px;
-      width: 30px;
-      height: 30px;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-
-    .zoom-btn:hover {
-      background: #234944;
-    }
-
-    .zoom-label {
-      color: #8899AA;
-      font-size: 0.72rem;
-      min-width: 36px;
-      text-align: center;
-    }
-
-    /* ── Fullscreen ── */
-    .fs-btn {
-      background: transparent;
-      color: #8899AA;
-      border: 1px solid #4A6070;
-      border-radius: 4px;
-      padding: 6px 10px;
-      font-size: 0.75rem;
-      cursor: pointer;
-      transition: color 0.2s, border-color 0.2s;
-    }
-
-    .fs-btn:hover {
-      color: #EABF36;
-      border-color: #EABF36;
-    }
-
     /* ── Fullscreen mode ── */
     body.is-fullscreen {
-      padding-bottom: 0;
       justify-content: center;
       overflow: hidden;
     }
 
-    body.is-fullscreen .top-bar,
-    body.is-fullscreen #thumb-strip,
-    body.is-fullscreen .hint {
+    body.is-fullscreen .top-bar {
       display: none;
     }
 
-    body.is-fullscreen .controls {
-      position: fixed;
-      bottom: 16px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 200;
-      margin: 0;
-      background: rgba(0, 44, 69, 0.85);
-      backdrop-filter: blur(8px);
-      padding: 8px 16px;
-      border-radius: 40px;
-      border: 1px solid rgba(234, 191, 54, 0.3);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    body.is-fullscreen .controls:hover,
-    body.is-fullscreen:hover .controls {
-      opacity: 1;
-    }
-
     body.is-fullscreen #flipbook-wrap {
-      flex: 1;
       align-items: center;
       padding: 0;
       width: 100vw;
       height: 100vh;
-    }
-
-    /* ── Thumbnail strip ── */
-    #thumb-strip {
-      margin-top: 8px;
-      display: flex;
-      gap: 6px;
-      overflow-x: auto;
-      padding: 6px 16px;
-      max-width: 100%;
-      flex-shrink: 0;
-    }
-
-    .thumb {
-      flex-shrink: 0;
-      width: 44px;
-      cursor: pointer;
-      border: 2px solid transparent;
-      border-radius: 3px;
-      transition: border-color 0.2s, opacity 0.2s, transform 0.2s;
-      opacity: 0.6;
-    }
-
-    .thumb:hover {
-      opacity: 0.85;
-      transform: scale(1.06);
-    }
-
-    .thumb.active {
-      border-color: #EABF36;
-      opacity: 1;
-    }
-
-    .thumb img {
-      width: 100%;
-      display: block;
-      border-radius: 2px;
-    }
-
-    /* ── Loading state ── */
-    .loading {
-      color: #EABF36;
-      font-size: 1.2rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 300px;
     }
 
     /* ── Responsive ── */
@@ -282,20 +161,6 @@
       .top-bar .tagline {
         display: none;
       }
-
-      .controls {
-        gap: 8px;
-        margin: 12px 0 8px;
-      }
-
-      .btn {
-        padding: 6px 12px;
-        font-size: 0.75rem;
-      }
-
-      .thumb {
-        width: 40px;
-      }
     }
   </style>
 </head>
@@ -307,16 +172,8 @@
     <button class="fs-btn" id="fs-btn">⛶ Fullscreen</button>
   </div>
 
-  <div class="controls">
-    <button class="btn" id="prev-btn" disabled>Prev</button>
-    <div class="page-counter" id="page-counter">-</div>
-    <button class="btn" id="next-btn" disabled>Next</button>
-    <div class="zoom-controls">
-      <button class="zoom-btn" id="zoom-out">−</button>
-      <div class="zoom-label" id="zoom-label">100%</div>
-      <button class="zoom-btn" id="zoom-in">+</button>
-    </div>
-  </div>
+  <button class="nav-arrow" id="nav-prev" disabled>&#8249;</button>
+  <button class="nav-arrow" id="nav-next" disabled>&#8250;</button>
 
   <div id="flipbook-wrap">
     <div id="flipbook">
@@ -335,9 +192,6 @@
     </div>
   </div>
 
-  <div id="thumb-strip"></div>
-  <div class="hint">Use arrow keys to flip • Click +/− to zoom</div>
-
   <script>
     const A4_RATIO = 595 / 842;
     const MAX_WIDTH = 2200;
@@ -345,18 +199,18 @@
 
     let currentPage = 0;
     let totalPages = 0;
-    let zoom = 1;
     let pageFlip = null;
     let images = [];
 
     function getBookDimensions() {
+      const isIframe = window.parent !== window;
       const vw = window.innerWidth;
       const vh = window.innerHeight;
-      const isMobile = vw < 768; // Single page threshold
+      const isMobile = vw < 768;
       const maxW = Math.min(vw - (isMobile ? 16 : 32), MAX_WIDTH);
       let pageW = Math.floor(isMobile ? maxW : maxW / 2);
       let pageH = Math.floor(pageW / A4_RATIO);
-      const maxH = vh - CHROME_DEDUCTION;
+      const maxH = vh - (isIframe ? 20 : CHROME_DEDUCTION);
       if (pageH > maxH) {
         pageH = maxH;
         pageW = Math.floor(pageH * A4_RATIO);
@@ -368,39 +222,23 @@
       try {
         console.log('%c=== FLIPBOOK INITIALIZATION START ===', 'color: #EABF36; font-weight: bold; font-size: 14px;');
 
-        // Step 1: Check PageFlip library
-        console.log('✓ Step 1: Checking PageFlip library...');
         if (typeof PageFlip === 'undefined') {
           throw new Error('PageFlip library not loaded. Check browser console for script loading errors.');
         }
-        console.log('✓ Step 1: PageFlip library available');
 
-        // Step 2: Load images from JSON with retry logic
-        console.log('✓ Step 2: Fetching /images.json...');
         let res;
         let retryCount = 0;
         const maxRetries = 3;
 
         while (retryCount < maxRetries) {
           try {
-            console.log(`  Attempt ${retryCount + 1}/${maxRetries}...`);
             res = await fetch('/images.json', { cache: 'no-store' });
-            console.log(`  Response: ${res.status} ${res.statusText}`);
-            if (res.ok) {
-              console.log('✓ Step 2: Successfully fetched /images.json');
-              break;
-            }
+            if (res.ok) break;
             retryCount++;
-            if (retryCount < maxRetries) {
-              console.log(`  Retrying in 500ms...`);
-              await new Promise(r => setTimeout(r, 500));
-            }
+            if (retryCount < maxRetries) await new Promise(r => setTimeout(r, 500));
           } catch (e) {
             retryCount++;
-            console.log(`  Fetch error: ${e.message}`);
-            if (retryCount < maxRetries) {
-              await new Promise(r => setTimeout(r, 500));
-            }
+            if (retryCount < maxRetries) await new Promise(r => setTimeout(r, 500));
           }
         }
 
@@ -408,20 +246,13 @@
           throw new Error(`Failed to load /images.json (${res?.status || 'no response'} ${res?.statusText || ''}). Verify file exists in public/images.json`);
         }
 
-        // Step 3: Parse JSON
-        console.log('✓ Step 3: Parsing images.json...');
         images = await res.json();
         totalPages = images.length;
-        console.log(`✓ Step 3: Loaded ${totalPages} images`);
-
         if (totalPages === 0) throw new Error('No images found in images.json');
 
-        // Step 4: Create page elements
-        console.log('✓ Step 4: Creating page elements...');
         const container = document.getElementById('flipbook');
         container.innerHTML = '';
         const dims = getBookDimensions();
-        console.log(`  Dimensions: ${dims.width}x${dims.height}`);
 
         const pageElements = images.map((src, i) => {
           const div = document.createElement('div');
@@ -431,25 +262,9 @@
           img.className = 'page-img';
           img.alt = `Page ${i + 1}`;
           img.style.imageRendering = 'crisp-edges';
-
-          // Add load/error listeners for debugging
-          img.addEventListener('load', () => {
-            console.log(`  ✓ Image loaded: ${src}`);
-          });
-          img.addEventListener('error', (e) => {
-            console.error(`  ✗ Failed to load image: ${src}`, e);
-          });
-
           div.appendChild(img);
           return div;
         });
-        console.log(`✓ Step 4: Created ${pageElements.length} page elements`);
-
-        // Step 5: Initialize PageFlip
-        console.log('✓ Step 5: Initializing PageFlip...');
-        console.log(`  PageFlip constructor available: ${typeof PageFlip}`);
-        console.log(`  window.St: ${typeof window.St}`);
-        console.log(`  window.St.PageFlip: ${typeof window.St?.PageFlip}`);
 
         pageFlip = new PageFlip(container, {
           width: dims.width,
@@ -467,29 +282,16 @@
           swipeDistance: 30,
           clickEventForward: true,
         });
-        console.log('✓ Step 5: PageFlip instance created');
-        console.log(`  PageFlip instance: ${pageFlip.constructor.name}`);
 
-        // Step 6: Load pages into PageFlip
-        console.log('✓ Step 6: Loading pages into PageFlip...');
         pageFlip.loadFromHTML(pageElements);
-        console.log('✓ Step 6: Pages loaded successfully');
 
-        // Step 7: Setup event listeners
-        console.log('✓ Step 7: Setting up event listeners...');
         pageFlip.on('flip', (e) => {
           currentPage = e.data;
           updateUI();
-          syncThumbnails();
         });
-        console.log('✓ Step 7: Event listeners ready');
 
-        // Step 8: Setup UI
-        console.log('✓ Step 8: Setting up UI...');
-        updateUI();
-        setupThumbnails();
         setupEventListeners();
-        console.log('✓ Step 8: UI ready');
+        updateUI();
 
         console.log('%c=== FLIPBOOK INITIALIZATION COMPLETE ===', 'color: #4CAF50; font-weight: bold; font-size: 14px;');
       } catch (err) {
@@ -513,81 +315,42 @@
             <div style="color: #EE6C4D; font-weight: bold; margin-bottom: 16px; font-size: 18px;">
               ❌ ERROR LOADING FLIPBOOK
             </div>
-            <div style="color: #FFB74D; margin-bottom: 12px;">
-              ${msg}
-            </div>
+            <div style="color: #FFB74D; margin-bottom: 12px;">${msg}</div>
             <div style="color: #8899AA; font-size: 12px; margin-top: 20px;">
-              ℹ️ Diagnostics:
-            </div>
-            <div style="color: #8899AA; font-size: 12px; margin-top: 8px;">
-              • Check browser console (F12) for more details
-              • Try refreshing the page (Ctrl+Shift+R for hard refresh)
+              • Check browser console (F12) for more details<br/>
+              • Try refreshing the page (Ctrl+Shift+R)<br/>
               • Verify /images.json exists and is accessible
-              • Check that dev server is running
             </div>
           </div>
         `;
         document.getElementById('flipbook').innerHTML = errorHtml;
-        document.getElementById('flipbook').style.display = 'flex';
-        document.getElementById('flipbook').style.justifyContent = 'center';
-        document.getElementById('flipbook').style.alignItems = 'center';
-        document.getElementById('flipbook').style.minHeight = '400px';
+        document.getElementById('flipbook').style.cssText = 'display:flex;justify-content:center;align-items:center;min-height:400px;';
       }
     }
 
     function updateUI() {
-      const prevBtn = document.getElementById('prev-btn');
-      const nextBtn = document.getElementById('next-btn');
-      const pageCounter = document.getElementById('page-counter');
-
-      prevBtn.disabled = currentPage <= 0;
-      nextBtn.disabled = currentPage >= totalPages - 1;
-
-      if (currentPage === 0 || currentPage === totalPages - 1) {
-        pageCounter.textContent = `${currentPage + 1} / ${totalPages}`;
-      } else {
-        pageCounter.textContent = `${currentPage + 1}–${Math.min(currentPage + 2, totalPages)} / ${totalPages}`;
-      }
-
+      const prevBtn = document.getElementById('nav-prev');
+      const nextBtn = document.getElementById('nav-next');
+      if (prevBtn) prevBtn.disabled = currentPage <= 0;
+      if (nextBtn) nextBtn.disabled = currentPage >= totalPages - 1;
       if (window.parent !== window) {
-        window.parent.postMessage({ type: 'FLIPBOOK_STATE', currentPage, totalPages, zoom }, '*');
+        window.parent.postMessage({ type: 'FLIPBOOK_STATE', currentPage, totalPages }, '*');
       }
-    }
-
-    function setupThumbnails() {
-      const strip = document.getElementById('thumb-strip');
-      strip.innerHTML = '';
-      images.forEach((src, i) => {
-        const div = document.createElement('div');
-        div.className = 'thumb' + (i === currentPage || i === currentPage + 1 ? ' active' : '');
-        div.addEventListener('click', () => pageFlip.turnToPage(i));
-        const img = document.createElement('img');
-        img.src = src;
-        img.alt = `Page ${i + 1}`;
-        img.loading = 'lazy';
-        div.appendChild(img);
-        strip.appendChild(div);
-      });
-    }
-
-    function syncThumbnails() {
-      const thumbs = document.querySelectorAll('.thumb');
-      thumbs.forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === currentPage || i === currentPage + 1);
-      });
     }
 
     function setupEventListeners() {
-      document.getElementById('prev-btn').addEventListener('click', () => pageFlip.flipPrev());
-      document.getElementById('next-btn').addEventListener('click', () => pageFlip.flipNext());
+      // Side arrow buttons
+      document.getElementById('nav-prev').addEventListener('click', () => pageFlip.flipPrev());
+      document.getElementById('nav-next').addEventListener('click', () => pageFlip.flipNext());
 
+      // Keyboard navigation
       document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') { pageFlip.flipNext(); e.preventDefault(); }
         if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') { pageFlip.flipPrev(); e.preventDefault(); }
       });
 
-      const fsBtn = document.getElementById('fs-btn');
-      fsBtn.addEventListener('click', () => {
+      // Fullscreen toggle
+      document.getElementById('fs-btn').addEventListener('click', () => {
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen().catch(() => { });
         } else {
@@ -597,17 +360,15 @@
 
       document.addEventListener('fullscreenchange', () => {
         document.body.classList.toggle('is-fullscreen', !!document.fullscreenElement);
-        zoom = 1;
+        const btn = document.getElementById('fs-btn');
+        if (btn) btn.textContent = document.fullscreenElement ? '✕ Exit' : '⛶ Fullscreen';
         setTimeout(() => {
           const dims = document.fullscreenElement ? getFullscreenDims() : getBookDimensions();
           pageFlip.updateFromData({ width: dims.width, height: dims.height });
-          document.getElementById('zoom-label').textContent = '100%';
-          if (window.parent !== window) {
-            window.parent.postMessage({ type: 'FLIPBOOK_STATE', currentPage, totalPages, zoom }, '*');
-          }
         }, 80);
       });
 
+      // Resize
       let resizeTimer;
       window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
@@ -618,40 +379,6 @@
           }
         }, 150);
       });
-
-      // Zoom controls
-      const wrap = document.getElementById('flipbook-wrap').firstChild.parentElement;
-      document.getElementById('zoom-in').addEventListener('click', () => {
-        if (zoom < 2) {
-          zoom = Math.round((zoom + 0.1) * 10) / 10;
-          if (typeof window.updateZoom === 'function') window.updateZoom();
-        }
-      });
-
-      document.getElementById('zoom-out').addEventListener('click', () => {
-        if (zoom > 0.5) {
-          zoom = Math.round((zoom - 0.1) * 10) / 10;
-          if (typeof window.updateZoom === 'function') window.updateZoom();
-        }
-      });
-
-      window.updateZoom = function updateZoom() {
-        if (!pageFlip) return;
-        // Resize the flipbook rather than CSS-scaling, so it fits naturally in the iframe
-        const baseDims = getBookDimensions();
-        const newW = Math.round(baseDims.width * zoom);
-        const newH = Math.round(baseDims.height * zoom);
-        pageFlip.updateFromData({ width: newW, height: newH });
-        document.getElementById('zoom-label').textContent = Math.round(zoom * 100) + '%';
-        const wrap = document.getElementById('flipbook-wrap');
-        wrap.style.transform = '';
-        wrap.style.marginBottom = '';
-        wrap.style.marginRight = '';
-        document.body.style.alignItems = 'center';
-        if (window.parent !== window) {
-          window.parent.postMessage({ type: 'FLIPBOOK_STATE', currentPage, totalPages, zoom }, '*');
-        }
-      }
     }
 
     function getFullscreenDims() {
@@ -666,18 +393,12 @@
       return { width: pW, height: pH };
     }
 
-    // Handle messages from parent for Next.js navbar integration
+    // Handle messages from parent
     window.addEventListener('message', (event) => {
       const { command } = event.data;
       if (!pageFlip) return;
       if (command === 'prev') pageFlip.flipPrev();
       if (command === 'next') pageFlip.flipNext();
-      if (command === 'zoomIn') {
-        if (zoom < 2) { zoom = Math.round((zoom + 0.1) * 10) / 10; if (typeof window.updateZoom === 'function') window.updateZoom(); }
-      }
-      if (command === 'zoomOut') {
-        if (zoom > 0.5) { zoom = Math.round((zoom - 0.1) * 10) / 10; if (typeof window.updateZoom === 'function') window.updateZoom(); }
-      }
       if (command === 'fullscreen') {
         if (!document.fullscreenElement) {
           document.documentElement.requestFullscreen().catch(() => { });
@@ -687,71 +408,30 @@
       }
     });
 
-    // Start - wait for PageFlip to load
-    console.log('Waiting for PageFlip library (/page-flip.browser.js) to load...');
-
-    // Hide controls if we're in an iframe
-    if (window.parent !== window && window.self !== window.top) {
+    // Hide top-bar when embedded in iframe; fill iframe exactly with no gaps
+    if (window.parent !== window) {
       document.querySelector('.top-bar').style.display = 'none';
-      document.querySelector('.controls').style.display = 'none';
-      document.querySelector('#thumb-strip').style.display = 'none';
-      document.querySelector('.hint').style.display = 'none';
-      document.body.style.paddingBottom = '0';
-      document.body.style.justifyContent = 'center';
+      document.documentElement.style.cssText = 'height:100%;overflow:hidden;';
+      document.body.style.cssText = 'height:100%;min-height:unset;overflow:hidden;background:#0B1120;display:flex;flex-direction:column;align-items:center;justify-content:center;';
     }
+
+    // Wait for PageFlip library then init
     (async () => {
-      // Wait for PageFlip to be available (max 10 seconds)
       let attempts = 0;
       while (typeof window.St === 'undefined' && attempts < 100) {
         await new Promise(r => setTimeout(r, 100));
         attempts++;
-        if (attempts === 1 || attempts === 50 || attempts === 100) {
-          console.log(`  Waiting... attempt ${attempts}/100 (${attempts * 100}ms elapsed)`);
-        }
       }
-      console.log(`Library check: window.St = ${typeof window.St}`);
       if (typeof window.St === 'undefined') {
-        console.error('%c❌ PageFlip library failed to load after 10 seconds', 'color: #EE6C4D; font-weight: bold;');
-        console.error('Check: 1) /public/page-flip.browser.js exists, 2) No network errors in Network tab, 3) Console for other errors');
         const errorHtml = `
-          <div style="
-            background: #1a1a1a;
-            border: 3px solid #EE6C4D;
-            color: #fff;
-            padding: 30px;
-            margin: 20px;
-            border-radius: 8px;
-            font-family: monospace;
-            font-size: 14px;
-            max-width: 600px;
-            line-height: 1.6;
-            white-space: pre-wrap;
-            word-break: break-word;
-          ">
-            <div style="color: #EE6C4D; font-weight: bold; margin-bottom: 16px; font-size: 18px;">
-              ❌ LIBRARY LOAD ERROR
-            </div>
-            <div style="color: #FFB74D; margin-bottom: 12px;">
-              PageFlip library (page-flip.browser.js) failed to load
-            </div>
-            <div style="color: #8899AA; font-size: 12px; margin-top: 20px;">
-              Try:
-              <br/>• Hard refresh: Ctrl+Shift+R
-              <br/>• Check browser console (F12) → Network tab for failed requests
-              <br/>• Verify dev server is running
-            </div>
-          </div>
-        `;
+          <div style="background:#1a1a1a;border:3px solid #EE6C4D;color:#fff;padding:30px;margin:20px;border-radius:8px;font-family:monospace;font-size:14px;max-width:600px;line-height:1.6;">
+            <div style="color:#EE6C4D;font-weight:bold;margin-bottom:16px;font-size:18px;">❌ LIBRARY LOAD ERROR</div>
+            <div style="color:#FFB74D;">PageFlip library failed to load. Try hard refresh (Ctrl+Shift+R).</div>
+          </div>`;
         document.getElementById('flipbook').innerHTML = errorHtml;
-        document.getElementById('flipbook').style.display = 'flex';
-        document.getElementById('flipbook').style.justifyContent = 'center';
-        document.getElementById('flipbook').style.alignItems = 'center';
-        document.getElementById('flipbook').style.minHeight = '400px';
+        document.getElementById('flipbook').style.cssText = 'display:flex;justify-content:center;align-items:center;min-height:400px;';
       } else {
-        console.log('%c✓ PageFlip library loaded successfully', 'color: #4CAF50; font-weight: bold;');
-        // Expose PageFlip to global scope for compatibility
         window.PageFlip = window.St.PageFlip;
-        console.log('✓ Exposed window.PageFlip for compatibility');
         initFlipbook();
       }
     })();

@@ -103,31 +103,6 @@ export default function PremiumNavbar() {
   const isBrochurePage = pathname === "/brochure"
 
   const [navMode, setNavMode] = useState<NavMode>("light")
-  const [currentPage, setCurrentPage] = useState(0)
-  const [totalPages, setTotalPages] = useState(0)
-  const [zoom, setZoom] = useState(1)
-
-  useEffect(() => {
-    if (!isBrochurePage) return
-    const handleMessage = (e: MessageEvent) => {
-      if (e.data?.type === 'FLIPBOOK_STATE') {
-        setCurrentPage(e.data.currentPage)
-        setTotalPages(e.data.totalPages)
-        if (e.data.zoom !== undefined) {
-          setZoom(e.data.zoom)
-        }
-      }
-    }
-    window.addEventListener('message', handleMessage)
-    return () => window.removeEventListener('message', handleMessage)
-  }, [isBrochurePage])
-
-  const sendToFlipbook = (command: string) => {
-    const iframe = document.querySelector('iframe[src="/flipbook.html"]') as HTMLIFrameElement
-    if (iframe && iframe.contentWindow) {
-      iframe.contentWindow.postMessage({ command }, '*')
-    }
-  }
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -286,73 +261,73 @@ export default function PremiumNavbar() {
                 transition={{ duration: 0.2 }}
               >
                 {/* Logo: dark-bg version for dark pages, light-bg version for light pages */}
-                <div className="relative h-[200px] w-[140px] -mt-7 -ml-1 md:ml-0 pt-6 flex items-end justify-center pb-2">
-                  {/* Dark-background logo (light text) – shown on dark backgrounds */}
-                  <Image
-                    src={"/alcovia_logo_dark.png"}
-                    alt="ALCOVIA"
-                    width={120}
-                    height={100}
-                    className="absolute bottom-2 object-contain transition-all duration-300"
-                    style={{
-                      opacity: navMode === "light" ? 1 : 0,
-                      transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
-                    }}
-                    priority
-                  />
-                  {/* Light-background logo (dark text) – shown on light backgrounds */}
-                  <Image
-                    src={"/images/alcovia-logo-symbol.png"}
-                    alt="ALCOVIA"
-                    width={120}
-                    height={100}
-                    className="absolute bottom-2 object-contain transition-all duration-300"
-                    style={{
-                      opacity: navMode === "dark" ? 1 : 0,
-                      transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
-                    }}
-                    priority
-                  />
-                </div>
+                {isBrochurePage ? (
+                  <div className="relative h-[65px] w-[100px] flex items-center">
+                    <Image
+                      src={"/alcovia_logo_dark.png"}
+                      alt="ALCOVIA"
+                      width={86}
+                      height={71}
+                      className="object-contain transition-all duration-300"
+                      style={{
+                        opacity: navMode === "light" ? 1 : 0,
+                        transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
+                        position: "absolute",
+                      }}
+                      priority
+                    />
+                    <Image
+                      src={"/images/alcovia-logo-symbol.png"}
+                      alt="ALCOVIA"
+                      width={86}
+                      height={71}
+                      className="object-contain transition-all duration-300"
+                      style={{
+                        opacity: navMode === "dark" ? 1 : 0,
+                        transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
+                        position: "absolute",
+                      }}
+                      priority
+                    />
+                  </div>
+                ) : (
+                  <div className="relative h-[200px] w-[140px] -mt-7 -ml-1 md:ml-0 pt-6 flex items-end justify-center pb-2">
+                    <Image
+                      src={"/alcovia_logo_dark.png"}
+                      alt="ALCOVIA"
+                      width={120}
+                      height={100}
+                      className="absolute bottom-2 object-contain transition-all duration-300"
+                      style={{
+                        opacity: navMode === "light" ? 1 : 0,
+                        transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
+                      }}
+                      priority
+                    />
+                    <Image
+                      src={"/images/alcovia-logo-symbol.png"}
+                      alt="ALCOVIA"
+                      width={120}
+                      height={100}
+                      className="absolute bottom-2 object-contain transition-all duration-300"
+                      style={{
+                        opacity: navMode === "dark" ? 1 : 0,
+                        transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
+                      }}
+                      priority
+                    />
+                  </div>
+                )}
               </motion.div>
             </Link>
           </motion.div>
 
-          {isBrochurePage && totalPages > 0 && (
-            <motion.div layout className="hidden md:flex flex-1 items-center justify-center gap-6 pt-6 -ml-16">
-              <div className="flex items-center gap-2 bg-[#002C45] rounded-lg px-2 py-1.5 border border-[#EABF36]/50 shadow-sm">
-                <button onClick={() => sendToFlipbook('prev')} disabled={currentPage <= 0} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded disabled:opacity-30 transition-colors text-xl font-light pb-1">
-                  ‹
-                </button>
-                <span className="text-[#C8DDD9] text-xs font-mono w-16 text-center select-none">
-                  {(currentPage === 0 || currentPage === totalPages - 1) ? `${currentPage + 1} / ${totalPages}` : `${currentPage + 1}-${Math.min(currentPage + 2, totalPages)} / ${totalPages}`}
-                </span>
-                <button onClick={() => sendToFlipbook('next')} disabled={currentPage >= totalPages - 1} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded disabled:opacity-30 transition-colors text-xl font-light pb-1">
-                  ›
-                </button>
-              </div>
-
-              <div className="flex items-center gap-2 bg-[#002C45] rounded-lg px-2 py-1.5 border border-[#EABF36]/50 shadow-sm">
-                <button onClick={() => sendToFlipbook('zoomOut')} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded transition-colors text-2xl font-light pb-1">
-                  -
-                </button>
-                <span className="text-[#C8DDD9] text-xs font-mono w-12 text-center select-none">
-                  {Math.round(zoom * 100)}%
-                </span>
-                <button onClick={() => sendToFlipbook('zoomIn')} className="w-8 h-8 flex items-center justify-center text-[#EABF36] hover:bg-[#EABF36]/10 rounded transition-colors text-xl font-light pb-0.5">
-                  +
-                </button>
-              </div>
-
-              <button onClick={() => sendToFlipbook('fullscreen')} className="bg-[#002C45] w-10 h-10 flex items-center justify-center border border-[#EABF36]/50 text-[#EABF36] hover:bg-[#EABF36]/10 rounded-lg transition-colors text-sm">
-                ⛶
-              </button>
-            </motion.div>
-          )}
+          
+          
 
           <motion.div
             layout
-            className={`flex items-center gap-3 order-3 pt-6`}
+            className={`flex items-center gap-3 order-3 ${isBrochurePage ? "" : "pt-6"}`}
           >
             {/* Apply for Cohort 2026 Button - Appears on scroll (Desktop) */}
             <AnimatePresence>
@@ -428,38 +403,6 @@ export default function PremiumNavbar() {
       </motion.nav>
 
       <NavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-
-      {/* Mobile Brochure Controls - Pinned to bottom */}
-      <AnimatePresence>
-        {isBrochurePage && totalPages > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 50 }}
-            className="md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 bg-[#002C45]/95 backdrop-blur-md rounded-full px-4 py-2 border border-[#EABF36]/40 shadow-xl"
-          >
-            <div className="flex items-center gap-1">
-              <button onClick={() => sendToFlipbook('prev')} disabled={currentPage <= 0} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 disabled:opacity-30 text-3xl font-light pb-2">
-                ‹
-              </button>
-              <span className="text-[#C8DDD9] text-[11px] font-mono w-[60px] text-center">
-                {(currentPage === 0 || currentPage === totalPages - 1) ? `${currentPage + 1}/${totalPages}` : `${currentPage + 1}-${Math.min(currentPage + 2, totalPages)}/${totalPages}`}
-              </span>
-              <button onClick={() => sendToFlipbook('next')} disabled={currentPage >= totalPages - 1} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 disabled:opacity-30 text-3xl font-light pb-2">
-                ›
-              </button>
-            </div>
-
-            <div className="w-[1px] h-6 bg-[#EABF36]/20"></div>
-
-            <div className="flex items-center gap-1">
-              <button onClick={() => sendToFlipbook('zoomIn')} className="w-10 h-10 flex items-center justify-center text-[#EABF36] rounded-full active:bg-[#EABF36]/20 text-2xl font-light pb-1">
-                +
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   )
 }

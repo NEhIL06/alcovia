@@ -6,16 +6,27 @@ export const metadata = {
 
 export default function BrochurePage() {
   return (
-    <iframe
-      src="/flipbook.html"
+    <div
       style={{
-        width: "100vw",
-        height: "100vh",
-        border: "none",
-        display: "block",
+        marginTop: "65px",
+        paddingTop: "16px",
+        background: "#0B1120",
+        height: "calc(100vh - 65px)",
+        display: "flex",
+        flexDirection: "column",
       }}
-      title="Alcovia Brochure"
-      allow="fullscreen"
-    />
+    >
+      <iframe
+        src="/flipbook.html"
+        style={{
+          flex: 1,
+          width: "100%",
+          border: "none",
+          display: "block",
+        }}
+        title="Alcovia Brochure"
+        allow="fullscreen"
+      />
+    </div>
   );
 }
