@@ -1,64 +1,98 @@
-# Alcovia Reimagined - Full Stack Engineering Challenge
+# Alcovia Reimagined
 
-![Alcovia Hero](https://via.placeholder.com/1200x630/CEFF2B/0B0B0B?text=Alcovia+Reimagined)
-
-## 🚀 The Mission
-
-This project is a comprehensive revamp of the Alcovia digital experience, designed to embody the fluidity, boldness, and interactivity of premium web experiences like Landonorris.com, while staying true to Alcovia's mission of building future leaders.
-
-**Role:** Full Stack Engineering Intern  
-**Timeline:** 24 Hours  
-**Deliverable:** High-performance, interactive web application
+A comprehensive revamp of the Alcovia digital experience — the world's first Ambition Building Program for Teenagers. Built with premium interactivity and animation-driven design, inspired by experiences like Landonorris.com, while staying true to Alcovia's mission of building future leaders.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** 
-  - [GSAP 3](https://greensock.com/gsap/) (Complex timelines, ScrollTrigger)
-  - [Framer Motion](https://www.framer.com/motion/) (UI transitions, layout animations)
-- **Language:** TypeScript
-- **Deployment:** Vercel
-
----
-
-## ✨ Key Features
-
-### 1. Cinematic Hero Section
-- **Parallax Experience:** Multi-layer parallax background that responds to scroll.
-- **"Take Flight" Interaction:** 
-  - Custom cursor morphs into a **winged Alcovian** when hovering over the student.
-  - Interactive wings reveal with a mask animation and follow the cursor in 3D space.
-  - "Future Leader" badge with micro-interactions.
-- **Performance:** Optimized using `will-change` and GPU-accelerated properties for 60fps performance.
-
-### 2. The Manifesto
-- **Bold Typography:** High-impact, justified text layout inspired by premium editorial design.
-- **Scroll Reveal:** Text reveals line-by-line with a neon mask effect using GSAP ScrollTrigger.
-- **Accessibility:** Respects `prefers-reduced-motion` settings.
-
-### 3. Offerings Scroll
-- **Horizontal Lifestyle Grid:** A seamless horizontal scroll section showcasing 9 key offerings.
-- **Interactive Cards:** Hover effects with lift, scale, and neon accent reveals.
-- **Content:** Covers everything from Career Discovery to Harvard/UCL Mentorship.
-
-### 4. Interactive Toggle
-- **"At School" vs. "Outside School":** A fluid toggle component comparing the two worlds.
-- **Dynamic Content:** 
-  - *At School:* "How Alcovia helps students ace school."
-  - *Outside School:* "How Alcovia fulfills its mission of building differentiation for each Alcovian."
-- **Handwritten Elements:** Animated SVG paths for a personal touch.
-
-### 5. Social Fan & Footer
-- **Fanned Card Layout:** Social media cards spread out like a hand of cards on scroll.
-- **Interactive Hover:** Cards scale and rotate on hover for a tactile feel.
-- **Links:** Direct access to LinkedIn, Instagram, and other platforms.
+| Category | Technologies |
+|----------|-------------|
+| **Framework** | [Next.js 16](https://nextjs.org/) (App Router), React 19, TypeScript |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com/), PostCSS |
+| **Animations** | [GSAP 3](https://greensock.com/gsap/) (ScrollTrigger, Timelines), [Framer Motion](https://www.framer.com/motion/), [Anime.js](https://animejs.com/), [Lenis](https://lenis.darkroom.engineering/) (Smooth Scroll) |
+| **UI Components** | [Radix UI](https://www.radix-ui.com/) primitives, [shadcn/ui](https://ui.shadcn.com/), [Lucide Icons](https://lucide.dev/) |
+| **Forms** | React Hook Form, Zod validation |
+| **Media** | Sharp (image optimization), pdf-parse, pdf2pic, page-flip (flipbook) |
+| **Analytics** | Google Analytics, Facebook Pixel, Vercel Analytics |
+| **Deployment** | [Vercel](https://vercel.com/) |
 
 ---
 
-## ⚡ Getting Started
+## Pages & Routes
+
+| Route | Description |
+|-------|-------------|
+| `/` | Home — Hero, Manifesto, Offerings, At School / Outside School toggle, Student Snapshots, Partners, Social Fan, Footer |
+| `/about` | About Alcovia |
+| `/programs` | Programs showcase — Career Discovery, Mentorship, Academic, Leadership |
+| `/f1-workshop` | F1 Workshop event page — "The Billion-Dollar Playbook" |
+| `/at-school` | How Alcovia helps students at school |
+| `/outside-school` | How Alcovia helps outside school |
+| `/meet-the-team` | Team member showcase |
+| `/brochure` | Interactive digital flipbook brochure |
+| `/contact` | Contact form for parents and students |
+| `/menu` | Full-screen navigation menu |
+| `/Legal/Privacy-policy` | Privacy policy |
+| `/Legal/terms-and-conditions` | Terms and conditions |
+
+---
+
+## Key Features
+
+### Cinematic Hero Section
+Multi-layer parallax background responding to scroll and cursor. Custom cursor morphs into a winged Alcovian on hover, with mask animation and 3D cursor tracking. Optimized with `will-change` and GPU-accelerated properties for 60fps.
+
+### The Manifesto
+Bold, justified typography with line-by-line scroll reveal using a neon mask effect (GSAP ScrollTrigger). Respects `prefers-reduced-motion`.
+
+### Offerings Horizontal Scroll
+9-card horizontal scroll grid with interactive hover effects — lift, scale, and neon accent reveals. Covers Career Discovery, Harvard/UCL Mentorship, and more.
+
+### At School vs. Outside School Toggle
+Fluid toggle comparing the two worlds with animated SVG handwritten elements and dynamic content transitions.
+
+### F1 Workshop
+Dedicated event page with hero video, text reveal, event details, speaker section, gains breakdown, testimonials, workshop cards, and a mobile floating CTA.
+
+### Interactive Flipbook Brochure
+PDF-to-image pipeline with an interactive page-flip viewer for the Alcovia brochure.
+
+### Social Fan & Footer
+Social media cards spread out like a hand of cards on scroll, with scale and rotate hover effects. Footer includes animated background, navigation, contact info, and social links.
+
+### Premium Navbar
+Color-adaptive navbar that adjusts based on the underlying background section for readability.
+
+### Background & Cursor Effects
+- **ParallaxBackground** — Multi-layer depth parallax
+- **InteractiveBackground** — Gradient animations responding to interaction
+- **LiquidBackground** — Morphing liquid effect
+- **ContourBackground** — Contour wave patterns
+- **CustomCursor / CursorLens** — Morphing cursor and magnifying lens effects
+
+---
+
+## Project Structure
+
+```
+app/                    # Next.js App Router pages
+components/             # React components
+  ├── f1-workshop/      #   F1 Workshop page components
+  ├── at-school/        #   At School page components
+  └── ui/               #   shadcn/ui components
+lib/                    # Utilities (GSAP animation presets, cn helper)
+hooks/                  # Custom React hooks (useMobile, useToast, etc.)
+context/                # React Context (HeroAnimation, Session)
+utils/                  # Animation presets
+scripts/                # PDF extraction utilities (JS + Python)
+styles/                 # Global CSS
+public/                 # Static assets (fonts, images, videos, brochure pages)
+```
+
+---
+
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+
@@ -66,49 +100,45 @@ This project is a comprehensive revamp of the Alcovia digital experience, design
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/alcovia-reimagined.git
-   cd alcovia-reimagined
-   ```
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/alcovia-reimagined.git
+cd alcovia-reimagined
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+# Install dependencies
+npm install
 
-3. Run the development server:
-   ```bash
-   npm run dev
-   ```
+# Run the development server
+npm run dev
+```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
----
+### Build for Production
 
-## 🎨 Design Philosophy
-
-### Motion & Feel
-Every interaction is designed to feel "heavy" and premium. We use custom easing curves, spring physics, and staggered animations to create a sense of depth and fluidity. The goal is to make the user feel like they are interacting with a living, breathing application.
-
-### Responsiveness
-The site is fully responsive, adapting seamlessly from large desktop screens to mobile devices. 
-- **Mobile Optimizations:** Touch-friendly interactions, simplified parallax, and optimized layout shifts.
-- **Desktop:** Enhanced cursor effects, complex hover states, and immersive scroll experiences.
-
-### Code Quality
-- **Component Architecture:** Modular, reusable components with clear separation of concerns.
-- **State Management:** React hooks and Context for local state; ready for global state integration.
-- **Semantic HTML:** Accessible structure with proper ARIA labels and roles.
+```bash
+npm run build
+npm start
+```
 
 ---
 
-## 🔗 Links
+## Design Philosophy
 
-- **Live Demo:** [Vercel Deployment Link](https://alcovia-reimagined.vercel.app)
-- **GitHub Repository:** [Repo Link](https://github.com/yourusername/alcovia-reimagined)
-- **Walkthrough Video:** [Loom Video Link](#)
+**Motion & Feel** — Every interaction is designed to feel weighty and premium. Custom easing curves, spring physics, and staggered animations create depth and fluidity.
+
+**Responsiveness** — Fully responsive from large desktop to mobile. Touch-friendly interactions and simplified parallax on mobile; enhanced cursor effects and immersive scroll on desktop.
+
+**Accessibility** — Semantic HTML, ARIA labels, keyboard navigation (via Radix UI), and `prefers-reduced-motion` support.
+
+**Architecture** — Modular components, React hooks and Context for state, TypeScript throughout.
 
 ---
 
-*Built with ❤️ for Alcovia*
+## Links
+
+- **Live Demo:** [alcovia-reimagined.vercel.app](https://alcovia-reimagined.vercel.app)
+
+---
+
+*Built for Alcovia*
