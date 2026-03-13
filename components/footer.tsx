@@ -128,7 +128,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
                 { name: "Cohort 2026", href: "https://forms.gle/xrPqKciXL6aKwUbw7" },
-                { name: "Workshop", href: "https://docs.google.com/forms/d/e/1FAIpQLSfGbxLIUVTzr3dlEnZdxVd_mXSDIKSPCKgz1KVzcjtEQpxF9A/viewform" }
+                { name: "Workshop", href: "/f1-workshop" }
               ].map((link) => (
                 <FlipLink
                   key={link.name}
