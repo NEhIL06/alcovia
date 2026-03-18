@@ -86,6 +86,8 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
     )
 })
 
+const BRAIN_SVG = "M 85 68 C 83 62, 82 55, 84 49 C 86 43, 90 38, 96 35 C 102 32, 108 31, 113 30 C 115 27, 118 24, 123 22 C 128 20, 134 19, 140 20 C 144 17, 149 15, 155 15 C 161 15, 167 17, 171 20 C 175 18, 180 17, 185 18 C 190 19, 194 22, 196 26 C 200 27, 204 29, 207 33 C 210 37, 211 42, 210 47 C 213 50, 215 54, 215 59 C 215 64, 213 69, 210 72 C 211 76, 210 80, 208 84 C 206 88, 202 91, 198 92 C 196 96, 192 99, 188 100 C 184 101, 179 101, 175 99 C 172 102, 168 104, 163 104 C 158 104, 153 102, 150 99 C 146 101, 141 102, 136 101 C 131 100, 127 97, 125 93 C 121 93, 117 91, 114 88 C 111 85, 109 81, 108 77 C 104 76, 100 74, 97 71 C 93 69, 88 68, 85 68 Z M 175 99 C 178 96, 182 94, 186 95 C 184 92, 183 88, 184 84 M 150 99 C 152 95, 155 92, 159 91 C 157 88, 156 84, 157 80 M 125 93 C 128 90, 132 88, 136 89 C 134 85, 134 81, 135 77 M 108 77 C 112 76, 116 76, 120 78 C 119 74, 119 70, 121 66 M 85 68 C 90 67, 95 68, 99 71 C 99 67, 100 63, 103 60 M 96 35 C 101 37, 105 41, 107 46 M 140 20 C 142 25, 142 30, 140 35 M 185 18 C 186 23, 185 28, 182 32 M 210 47 C 206 48, 202 48, 198 46"
+
 const NeuroAnimation = memo(() => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -104,263 +106,221 @@ const NeuroAnimation = memo(() => {
         const cw = rect.width
         const ch = rect.height
 
-        // Brain outline path (side profile, fills the widget)
-        const cx = cw * 0.5
-        const cy = ch * 0.47
-        const s = Math.min(cw, ch) * 0.013
+        // Brain SVG is in ~85-215 x ~15-104 space (width ~130, height ~89)
+        // Scale to fill widget with padding
+        const brainW = 130
+        const brainH = 89
+        const padX = cw * 0.08
+        const padY = ch * 0.08
+        const scaleX = (cw - padX * 2) / brainW
+        const scaleY = (ch - padY * 2) / brainH
+        const sc = Math.min(scaleX, scaleY)
+        const offX = (cw - brainW * sc) / 2 - 85 * sc
+        const offY = (ch - brainH * sc) / 2 - 15 * sc
 
-        // Brain path points (side-view silhouette, normalized ~0-100 range)
-        const brainPath = (c: CanvasRenderingContext2D) => {
-            c.beginPath()
-            // Start at bottom-back of brain (brain stem area)
-            c.moveTo(cx + 42 * s, cy + 38 * s)
-            // Back curve (occipital)
-            c.bezierCurveTo(cx + 48 * s, cy + 28 * s, cx + 48 * s, cy + 10 * s, cx + 38 * s, cy - 5 * s)
-            // Top curve (parietal)
-            c.bezierCurveTo(cx + 30 * s, cy - 18 * s, cx + 15 * s, cy - 28 * s, cx - 2 * s, cy - 30 * s)
-            // Top-front (frontal lobe top)
-            c.bezierCurveTo(cx - 18 * s, cy - 30 * s, cx - 35 * s, cy - 25 * s, cx - 42 * s, cy - 12 * s)
-            // Front curve (frontal lobe front)
-            c.bezierCurveTo(cx - 48 * s, cy - 2 * s, cx - 46 * s, cy + 12 * s, cx - 38 * s, cy + 20 * s)
-            // Bottom front (temporal)
-            c.bezierCurveTo(cx - 30 * s, cy + 28 * s, cx - 18 * s, cy + 32 * s, cx - 5 * s, cy + 34 * s)
-            // Bottom (underside)
-            c.bezierCurveTo(cx + 10 * s, cy + 36 * s, cx + 28 * s, cy + 40 * s, cx + 42 * s, cy + 38 * s)
-            c.closePath()
-        }
+        // Create Path2D with transform
+        const brainPath = new Path2D()
+        const transform = new DOMMatrix()
+            .translate(offX, offY)
+            .scale(sc, sc)
+        brainPath.addPath(new Path2D(BRAIN_SVG), transform)
 
-        // Brain folds/sulci paths
-        const drawFolds = (c: CanvasRenderingContext2D, alpha: number) => {
-            c.strokeStyle = `rgba(199, 125, 255, ${alpha * 0.15})`
-            c.lineWidth = 0.6
-            // Central sulcus
-            c.beginPath()
-            c.moveTo(cx + 5 * s, cy - 28 * s)
-            c.bezierCurveTo(cx + 8 * s, cy - 15 * s, cx + 3 * s, cy + 5 * s, cx + 10 * s, cy + 20 * s)
-            c.stroke()
-            // Lateral sulcus
-            c.beginPath()
-            c.moveTo(cx - 15 * s, cy + 22 * s)
-            c.bezierCurveTo(cx - 5 * s, cy + 10 * s, cx + 15 * s, cy + 5 * s, cx + 35 * s, cy + 8 * s)
-            c.stroke()
-            // Frontal fold
-            c.beginPath()
-            c.moveTo(cx - 35 * s, cy - 5 * s)
-            c.bezierCurveTo(cx - 20 * s, cy - 12 * s, cx - 10 * s, cy - 20 * s, cx + 2 * s, cy - 18 * s)
-            c.stroke()
-        }
+        // Point-in-brain test (use the filled outer shape only)
+        const outerOnly = BRAIN_SVG.split("Z")[0] + "Z"
+        const outerPath = new Path2D()
+        outerPath.addPath(new Path2D(outerOnly), transform)
 
-        // Check if point is inside brain shape
-        const isInsideBrain = (px: number, py: number): boolean => {
-            brainPath(ctx)
-            return ctx.isPointInPath(px, py)
-        }
+        const isInside = (px: number, py: number) => ctx.isPointInPath(outerPath, px, py)
+
+        // Brain center for node generation
+        const bcx = cw / 2
+        const bcy = ch / 2
 
         // Generate nodes inside brain
-        const nodeCount = 20
         const nodes: { x: number; y: number; vx: number; vy: number; r: number; pulse: number; fireTimer: number; isFiring: boolean }[] = []
-        while (nodes.length < nodeCount) {
-            const x = cx + (Math.random() - 0.5) * 75 * s
-            const y = cy + (Math.random() - 0.5) * 52 * s
-            if (isInsideBrain(x, y)) {
+        let attempts = 0
+        while (nodes.length < 18 && attempts < 2000) {
+            attempts++
+            const x = bcx + (Math.random() - 0.5) * cw * 0.75
+            const y = bcy + (Math.random() - 0.5) * ch * 0.7
+            if (isInside(x, y)) {
                 nodes.push({
                     x, y,
-                    vx: (Math.random() - 0.5) * 0.15,
-                    vy: (Math.random() - 0.5) * 0.15,
-                    r: Math.random() * 1.5 + 1,
+                    vx: (Math.random() - 0.5) * 0.2,
+                    vy: (Math.random() - 0.5) * 0.2,
+                    r: Math.random() * 1.8 + 1.2,
                     pulse: Math.random() * Math.PI * 2,
-                    fireTimer: Math.random() * 200,
+                    fireTimer: Math.floor(Math.random() * 120) + 30,
                     isFiring: false,
                 })
             }
         }
 
-        // Signal pulses traveling between nodes
-        const signals: { fromIdx: number; toIdx: number; progress: number; speed: number }[] = []
+        const signals: { from: number; to: number; progress: number; speed: number }[] = []
+        const maxDist = Math.min(cw, ch) * 0.45
 
         let frame: number
         const draw = () => {
             ctx.clearRect(0, 0, cw, ch)
-
-            // Background
             ctx.fillStyle = "#051a14"
             ctx.fillRect(0, 0, cw, ch)
 
             const t = Date.now() * 0.001
 
-            // Brain glow (subtle inner light)
-            const brainGlow = ctx.createRadialGradient(cx, cy, 0, cx, cy, 50 * s)
-            brainGlow.addColorStop(0, `rgba(199, 125, 255, ${0.06 + Math.sin(t * 0.5) * 0.02})`)
-            brainGlow.addColorStop(0.6, `rgba(199, 125, 255, 0.02)`)
-            brainGlow.addColorStop(1, "transparent")
-            ctx.fillStyle = brainGlow
-            brainPath(ctx)
-            ctx.fill()
+            // Brain fill: subtle inner glow
+            ctx.save()
+            ctx.fillStyle = `rgba(199, 125, 255, ${0.04 + Math.sin(t * 0.5) * 0.015})`
+            ctx.fill(outerPath)
+            ctx.restore()
 
-            // Draw brain outline
-            brainPath(ctx)
-            ctx.strokeStyle = `rgba(199, 125, 255, ${0.2 + Math.sin(t * 0.7) * 0.05})`
-            ctx.lineWidth = 1
-            ctx.stroke()
+            // Brain outline: glowing purple
+            ctx.save()
+            ctx.strokeStyle = `rgba(199, 125, 255, ${0.45 + Math.sin(t * 0.7) * 0.1})`
+            ctx.lineWidth = 1.2
+            ctx.stroke(brainPath)
+            ctx.restore()
 
-            // Second outline for glow effect
-            brainPath(ctx)
-            ctx.strokeStyle = `rgba(199, 125, 255, 0.06)`
-            ctx.lineWidth = 3
-            ctx.stroke()
+            // Outer glow on brain outline
+            ctx.save()
+            ctx.strokeStyle = `rgba(199, 125, 255, 0.1)`
+            ctx.lineWidth = 4
+            ctx.stroke(brainPath)
+            ctx.restore()
 
-            // Brain folds
-            drawFolds(ctx, 0.8 + Math.sin(t * 0.3) * 0.2)
-
-            // Update nodes (keep inside brain)
-            nodes.forEach((n) => {
-                n.x += n.vx
-                n.y += n.vy
+            // Update and bounce nodes
+            for (const n of nodes) {
                 n.pulse += 0.025
-
-                // Bounce off brain boundary
-                if (!isInsideBrain(n.x + n.vx * 5, n.y + n.vy * 5)) {
-                    n.vx *= -1
-                    n.vy *= -1
+                const nx = n.x + n.vx
+                const ny = n.y + n.vy
+                if (isInside(nx, ny)) {
+                    n.x = nx
+                    n.y = ny
+                } else {
+                    n.vx *= -0.8
+                    n.vy *= -0.8
+                    n.vx += (Math.random() - 0.5) * 0.1
+                    n.vy += (Math.random() - 0.5) * 0.1
                 }
 
-                // Random firing
                 n.fireTimer--
                 if (n.fireTimer <= 0) {
                     n.isFiring = true
-                    n.fireTimer = 80 + Math.random() * 200
-
-                    // Send signal to a nearby node
-                    let closest = -1
-                    let closestDist = 999
+                    n.fireTimer = 60 + Math.floor(Math.random() * 160)
+                    // Fire signal to nearest node
+                    let best = -1, bestD = maxDist
+                    const idx = nodes.indexOf(n)
                     for (let j = 0; j < nodes.length; j++) {
-                        if (j === nodes.indexOf(n)) continue
+                        if (j === idx) continue
                         const d = Math.hypot(n.x - nodes[j].x, n.y - nodes[j].y)
-                        if (d < closestDist && d < 45 * s) {
-                            closestDist = d
-                            closest = j
-                        }
+                        if (d < bestD) { bestD = d; best = j }
                     }
-                    if (closest >= 0 && signals.length < 12) {
-                        signals.push({
-                            fromIdx: nodes.indexOf(n),
-                            toIdx: closest,
-                            progress: 0,
-                            speed: 0.02 + Math.random() * 0.02,
-                        })
+                    if (best >= 0 && signals.length < 10) {
+                        signals.push({ from: idx, to: best, progress: 0, speed: 0.018 + Math.random() * 0.018 })
                     }
-                } else if (n.fireTimer > 5) {
+                } else if (n.fireTimer < n.fireTimer) {
                     n.isFiring = false
                 }
-            })
+                if (n.isFiring && n.fireTimer > 10) n.isFiring = false
+            }
 
-            // Draw dendrite connections (faint, always visible between nearby nodes)
+            // Dendrite connections
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y)
-                    if (d < 40 * s) {
-                        const alpha = (1 - d / (40 * s)) * 0.15
+                    if (d < maxDist * 0.6) {
+                        const alpha = (1 - d / (maxDist * 0.6)) * 0.18
+                        const mx = (nodes[i].x + nodes[j].x) / 2 + Math.sin(i + j) * 4
+                        const my = (nodes[i].y + nodes[j].y) / 2 + Math.cos(i + j) * 4
                         ctx.beginPath()
-                        // Slightly curved connections (dendrite-like)
-                        const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(i + j) * 5)
-                        const midY = (nodes[i].y + nodes[j].y) / 2 + (Math.cos(i + j) * 5)
                         ctx.moveTo(nodes[i].x, nodes[i].y)
-                        ctx.quadraticCurveTo(midX, midY, nodes[j].x, nodes[j].y)
+                        ctx.quadraticCurveTo(mx, my, nodes[j].x, nodes[j].y)
                         ctx.strokeStyle = `rgba(199, 125, 255, ${alpha})`
-                        ctx.lineWidth = 0.4
+                        ctx.lineWidth = 0.5
                         ctx.stroke()
                     }
                 }
             }
 
-            // Draw and update signals
+            // Signals
             for (let i = signals.length - 1; i >= 0; i--) {
-                const sig = signals[i]
-                sig.progress += sig.speed
-                if (sig.progress >= 1) {
-                    // Trigger receiving node to flash
-                    nodes[sig.toIdx].isFiring = true
-                    nodes[sig.toIdx].fireTimer = Math.max(nodes[sig.toIdx].fireTimer, 5)
+                const s = signals[i]
+                s.progress += s.speed
+                if (s.progress >= 1) {
+                    nodes[s.to].isFiring = true
+                    nodes[s.to].fireTimer = Math.max(nodes[s.to].fireTimer, 5)
                     signals.splice(i, 1)
                     continue
                 }
+                const a = nodes[s.from], b = nodes[s.to]
+                const mx = (a.x + b.x) / 2 + Math.sin(s.from + s.to) * 4
+                const my = (a.y + b.y) / 2 + Math.cos(s.from + s.to) * 4
+                const p = s.progress
+                const px = (1-p)*(1-p)*a.x + 2*(1-p)*p*mx + p*p*b.x
+                const py = (1-p)*(1-p)*a.y + 2*(1-p)*p*my + p*p*b.y
 
-                const from = nodes[sig.fromIdx]
-                const to = nodes[sig.toIdx]
-                const midX = (from.x + to.x) / 2 + (Math.sin(sig.fromIdx + sig.toIdx) * 5)
-                const midY = (from.y + to.y) / 2 + (Math.cos(sig.fromIdx + sig.toIdx) * 5)
-
-                // Quadratic bezier point at progress
-                const t2 = sig.progress
-                const px = (1 - t2) * (1 - t2) * from.x + 2 * (1 - t2) * t2 * midX + t2 * t2 * to.x
-                const py = (1 - t2) * (1 - t2) * from.y + 2 * (1 - t2) * t2 * midY + t2 * t2 * to.y
-
-                // Light up the path behind the signal
+                // Active path
                 ctx.beginPath()
-                ctx.moveTo(from.x, from.y)
-                ctx.quadraticCurveTo(midX, midY, to.x, to.y)
-                ctx.strokeStyle = `rgba(199, 125, 255, ${0.3 * (1 - sig.progress * 0.5)})`
-                ctx.lineWidth = 1
+                ctx.moveTo(a.x, a.y)
+                ctx.quadraticCurveTo(mx, my, b.x, b.y)
+                ctx.strokeStyle = `rgba(199, 125, 255, ${0.35 * (1 - p * 0.4)})`
+                ctx.lineWidth = 1.2
                 ctx.stroke()
 
-                // Signal dot (bright, with glow)
-                const sigGlow = ctx.createRadialGradient(px, py, 0, px, py, 6)
-                sigGlow.addColorStop(0, "rgba(255, 255, 255, 0.9)")
-                sigGlow.addColorStop(0.3, "rgba(199, 125, 255, 0.6)")
-                sigGlow.addColorStop(1, "transparent")
+                // Signal glow
+                const sg = ctx.createRadialGradient(px, py, 0, px, py, 7)
+                sg.addColorStop(0, "rgba(255,255,255,0.9)")
+                sg.addColorStop(0.3, "rgba(199,125,255,0.5)")
+                sg.addColorStop(1, "transparent")
                 ctx.beginPath()
-                ctx.arc(px, py, 6, 0, Math.PI * 2)
-                ctx.fillStyle = sigGlow
+                ctx.arc(px, py, 7, 0, Math.PI * 2)
+                ctx.fillStyle = sg
                 ctx.fill()
-
-                // Bright core
                 ctx.beginPath()
                 ctx.arc(px, py, 1.5, 0, Math.PI * 2)
-                ctx.fillStyle = "rgba(255, 255, 255, 0.95)"
+                ctx.fillStyle = "#fff"
                 ctx.fill()
             }
 
-            // Draw neuron nodes
-            nodes.forEach((n) => {
+            // Neuron nodes
+            for (const n of nodes) {
                 const glow = (Math.sin(n.pulse) + 1) * 0.5
-                const fireBoost = n.isFiring ? 1 : 0
-                const r = n.r + glow * 0.8 + fireBoost * 2
+                const fire = n.isFiring ? 1 : 0
+                const r = n.r + glow * 0.6 + fire * 2.5
 
-                // Firing glow ring
                 if (n.isFiring) {
-                    const fireGrad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 6)
-                    fireGrad.addColorStop(0, "rgba(199, 125, 255, 0.3)")
-                    fireGrad.addColorStop(0.5, "rgba(199, 125, 255, 0.08)")
-                    fireGrad.addColorStop(1, "transparent")
+                    const fg = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 5)
+                    fg.addColorStop(0, "rgba(199,125,255,0.35)")
+                    fg.addColorStop(0.5, "rgba(199,125,255,0.08)")
+                    fg.addColorStop(1, "transparent")
                     ctx.beginPath()
-                    ctx.arc(n.x, n.y, r * 6, 0, Math.PI * 2)
-                    ctx.fillStyle = fireGrad
+                    ctx.arc(n.x, n.y, r * 5, 0, Math.PI * 2)
+                    ctx.fillStyle = fg
                     ctx.fill()
                 }
 
-                // Subtle ambient glow
-                const ambGrad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3)
-                ambGrad.addColorStop(0, `rgba(199, 125, 255, ${0.1 + glow * 0.1 + fireBoost * 0.2})`)
-                ambGrad.addColorStop(1, "transparent")
+                // Ambient glow
+                const ag = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 3)
+                ag.addColorStop(0, `rgba(199,125,255,${0.12 + glow * 0.1 + fire * 0.2})`)
+                ag.addColorStop(1, "transparent")
                 ctx.beginPath()
                 ctx.arc(n.x, n.y, r * 3, 0, Math.PI * 2)
-                ctx.fillStyle = ambGrad
+                ctx.fillStyle = ag
                 ctx.fill()
 
-                // Neuron body
+                // Body
                 ctx.beginPath()
                 ctx.arc(n.x, n.y, r, 0, Math.PI * 2)
                 ctx.fillStyle = n.isFiring
-                    ? `rgba(255, 255, 255, ${0.8 + glow * 0.2})`
-                    : `rgba(199, 125, 255, ${0.5 + glow * 0.3})`
+                    ? `rgba(255,255,255,${0.85 + glow * 0.15})`
+                    : `rgba(199,125,255,${0.55 + glow * 0.3})`
                 ctx.fill()
 
-                // White center
+                // Center
                 ctx.beginPath()
-                ctx.arc(n.x, n.y, r * 0.35, 0, Math.PI * 2)
-                ctx.fillStyle = `rgba(255, 255, 255, ${0.3 + glow * 0.3 + fireBoost * 0.4})`
+                ctx.arc(n.x, n.y, r * 0.3, 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(255,255,255,${0.35 + glow * 0.3 + fire * 0.35})`
                 ctx.fill()
-            })
+            }
 
             frame = requestAnimationFrame(draw)
         }
