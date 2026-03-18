@@ -104,11 +104,10 @@ const NeuroAnimation = memo(() => {
         const cw = rect.width
         const ch = rect.height
 
-        // Brain outline path (side profile, fits ~220x160 widget)
-        // Scaled to center of canvas
-        const cx = cw * 0.48
-        const cy = ch * 0.48
-        const s = Math.min(cw, ch) * 0.0038
+        // Brain outline path (side profile, fills the widget)
+        const cx = cw * 0.5
+        const cy = ch * 0.47
+        const s = Math.min(cw, ch) * 0.013
 
         // Brain path points (side-view silhouette, normalized ~0-100 range)
         const brainPath = (c: CanvasRenderingContext2D) => {
@@ -158,11 +157,11 @@ const NeuroAnimation = memo(() => {
         }
 
         // Generate nodes inside brain
-        const nodeCount = 22
+        const nodeCount = 20
         const nodes: { x: number; y: number; vx: number; vy: number; r: number; pulse: number; fireTimer: number; isFiring: boolean }[] = []
         while (nodes.length < nodeCount) {
-            const x = cx + (Math.random() - 0.5) * 80 * s
-            const y = cy + (Math.random() - 0.5) * 55 * s
+            const x = cx + (Math.random() - 0.5) * 75 * s
+            const y = cy + (Math.random() - 0.5) * 52 * s
             if (isInsideBrain(x, y)) {
                 nodes.push({
                     x, y,
@@ -237,7 +236,7 @@ const NeuroAnimation = memo(() => {
                     for (let j = 0; j < nodes.length; j++) {
                         if (j === nodes.indexOf(n)) continue
                         const d = Math.hypot(n.x - nodes[j].x, n.y - nodes[j].y)
-                        if (d < closestDist && d < 60 * s) {
+                        if (d < closestDist && d < 45 * s) {
                             closestDist = d
                             closest = j
                         }
@@ -259,8 +258,8 @@ const NeuroAnimation = memo(() => {
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const d = Math.hypot(nodes[i].x - nodes[j].x, nodes[i].y - nodes[j].y)
-                    if (d < 50 * s) {
-                        const alpha = (1 - d / (50 * s)) * 0.12
+                    if (d < 40 * s) {
+                        const alpha = (1 - d / (40 * s)) * 0.15
                         ctx.beginPath()
                         // Slightly curved connections (dendrite-like)
                         const midX = (nodes[i].x + nodes[j].x) / 2 + (Math.sin(i + j) * 5)
