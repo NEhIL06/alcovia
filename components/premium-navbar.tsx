@@ -96,10 +96,17 @@ const navLinks: NavItem[] = [
 export default function PremiumNavbar() {
   const pathname = usePathname()
   const isF1Page = pathname === "/f1-workshop"
-  const applyHref = isF1Page
-    ? "https://alcovia-workshop.short.gy/f1-workshop"
-    : "https://forms.gle/xrPqKciXL6aKwUbw7"
-  const applyLabel = isF1Page ? "Ready for boardroom?" : "Apply for Cohort 2026"
+  const isNeuroPage = pathname === "/neuromarketing-workshop"
+  const applyHref = isNeuroPage
+    ? "#register"
+    : isF1Page
+      ? "https://alcovia-workshop.short.gy/f1-workshop"
+      : "https://forms.gle/xrPqKciXL6aKwUbw7"
+  const applyLabel = isNeuroPage
+    ? "Register for Workshop"
+    : isF1Page
+      ? "Ready for boardroom?"
+      : "Apply for Cohort 2026"
   const isBrochurePage = pathname === "/brochure"
 
   const [navMode, setNavMode] = useState<NavMode>("light")
@@ -342,13 +349,13 @@ export default function PremiumNavbar() {
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                   className="hidden md:flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/100"
                   style={{
-                    backgroundColor: '#EABF36',
-                    color: '#002C45',
-                    boxShadow: '0 4px 15px rgba(234, 191, 54, 0.3)',
+                    backgroundColor: isNeuroPage ? '#C77DFF' : '#EABF36',
+                    color: isNeuroPage ? '#0a0a0a' : '#002C45',
+                    boxShadow: isNeuroPage ? '0 4px 15px rgba(199, 125, 255, 0.3)' : '0 4px 15px rgba(234, 191, 54, 0.3)',
                   }}
                   whileHover={{
                     scale: 1.05,
-                    boxShadow: '0 6px 20px rgba(234, 191, 54, 0.4)',
+                    boxShadow: isNeuroPage ? '0 6px 20px rgba(199, 125, 255, 0.4)' : '0 6px 20px rgba(234, 191, 54, 0.4)',
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -360,7 +367,7 @@ export default function PremiumNavbar() {
 
             {/* Mobile Apply Button - Smaller size (hidden on f1-workshop page, replaced by floating CTA) */}
             <AnimatePresence>
-              {scrolled && !isF1Page && (
+              {scrolled && !isF1Page && !isNeuroPage && (
                 <motion.a
                   href={applyHref}
                   target="_self"
