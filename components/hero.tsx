@@ -86,19 +86,137 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
     )
 })
 
-const F1RaceVideo = memo(() => (
-    <div className="w-full h-full relative overflow-hidden bg-black">
-        <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-        >
-            <source src="/videos/f1-race.mp4" type="video/mp4" />
-        </video>
-    </div>
-))
+const NeuroAnimation = memo(() => {
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return
+
+        const dpr = window.devicePixelRatio || 1
+        const resize = () => {
+            const rect = canvas.getBoundingClientRect()
+            canvas.width = rect.width * dpr
+            canvas.height = rect.height * dpr
+            ctx.scale(dpr, dpr)
+        }
+        resize()
+
+        const w = () => canvas.width / (window.devicePixelRatio || 1)
+        const h = () => canvas.height / (window.devicePixelRatio || 1)
+
+        // Nodes
+        const nodeCount = 18
+        const nodes = Array.from({ length: nodeCount }, () => ({
+            x: Math.random() * 220,
+            y: Math.random() * 200,
+            vx: (Math.random() - 0.5) * 0.3,
+            vy: (Math.random() - 0.5) * 0.3,
+            r: Math.random() * 2 + 1.5,
+            pulse: Math.random() * Math.PI * 2,
+        }))
+
+        let frame: number
+        const draw = () => {
+            const cw = w()
+            const ch = h()
+            ctx.clearRect(0, 0, cw, ch)
+
+            // Background
+            ctx.fillStyle = "#051a14"
+            ctx.fillRect(0, 0, cw, ch)
+
+            const t = Date.now() * 0.001
+
+            // Update nodes
+            nodes.forEach((n) => {
+                n.x += n.vx
+                n.y += n.vy
+                n.pulse += 0.02
+                if (n.x < 0 || n.x > cw) n.vx *= -1
+                if (n.y < 0 || n.y > ch) n.vy *= -1
+            })
+
+            // Draw connections
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const dx = nodes[i].x - nodes[j].x
+                    const dy = nodes[i].y - nodes[j].y
+                    const dist = Math.sqrt(dx * dx + dy * dy)
+                    if (dist < 80) {
+                        const alpha = (1 - dist / 80) * 0.4
+                        // Pulse along the connection
+                        const pulseAlpha = (Math.sin(t * 2 + i + j) + 1) * 0.5
+                        ctx.beginPath()
+                        ctx.moveTo(nodes[i].x, nodes[i].y)
+                        ctx.lineTo(nodes[j].x, nodes[j].y)
+                        ctx.strokeStyle = `rgba(199, 125, 255, ${alpha * (0.4 + pulseAlpha * 0.6)})`
+                        ctx.lineWidth = 0.5 + pulseAlpha * 0.5
+                        ctx.stroke()
+
+                        // Traveling pulse dot
+                        if (pulseAlpha > 0.7) {
+                            const progress = (Math.sin(t * 3 + i * 0.5) + 1) * 0.5
+                            const px = nodes[i].x + (nodes[j].x - nodes[i].x) * progress
+                            const py = nodes[i].y + (nodes[j].y - nodes[i].y) * progress
+                            ctx.beginPath()
+                            ctx.arc(px, py, 1, 0, Math.PI * 2)
+                            ctx.fillStyle = `rgba(199, 125, 255, ${alpha * 0.8})`
+                            ctx.fill()
+                        }
+                    }
+                }
+            }
+
+            // Draw nodes
+            nodes.forEach((n) => {
+                const glow = (Math.sin(n.pulse) + 1) * 0.5
+                const r = n.r + glow * 1.5
+
+                // Outer glow
+                const grad = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 4)
+                grad.addColorStop(0, `rgba(199, 125, 255, ${0.15 + glow * 0.15})`)
+                grad.addColorStop(1, "transparent")
+                ctx.beginPath()
+                ctx.arc(n.x, n.y, r * 4, 0, Math.PI * 2)
+                ctx.fillStyle = grad
+                ctx.fill()
+
+                // Core
+                ctx.beginPath()
+                ctx.arc(n.x, n.y, r, 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(199, 125, 255, ${0.6 + glow * 0.4})`
+                ctx.fill()
+
+                // Bright center
+                ctx.beginPath()
+                ctx.arc(n.x, n.y, r * 0.4, 0, Math.PI * 2)
+                ctx.fillStyle = `rgba(255, 255, 255, ${0.4 + glow * 0.4})`
+                ctx.fill()
+            })
+
+            // Central brain glow
+            const centerGrad = ctx.createRadialGradient(cw / 2, ch / 2, 0, cw / 2, ch / 2, cw * 0.4)
+            centerGrad.addColorStop(0, `rgba(199, 125, 255, ${0.03 + Math.sin(t) * 0.02})`)
+            centerGrad.addColorStop(1, "transparent")
+            ctx.fillStyle = centerGrad
+            ctx.fillRect(0, 0, cw, ch)
+
+            frame = requestAnimationFrame(draw)
+        }
+
+        draw()
+        return () => cancelAnimationFrame(frame)
+    }, [])
+
+    return (
+        <div className="w-full h-full relative overflow-hidden bg-[#051a14]">
+            <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />
+        </div>
+    )
+})
 
 const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
     <motion.div
@@ -108,28 +226,28 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
         transition={{ delay: 1.5, duration: 0.8 }}
     >
         <a
-            href="/f1-workshop"
+            href="/neuromarketing-workshop"
             className="group block cursor-pointer"
         >
-            <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#BF953F]">
+            <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#C77DFF]">
                 <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]">
                     <span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span>
                 </div>
-                <div className="flex-1 relative overflow-hidden bg-black">
-                    <F1RaceVideo />
+                <div className="flex-1 relative overflow-hidden bg-[#051a14]">
+                    <NeuroAnimation />
                 </div>
                 <div className="border-t-2 border-[#0C0C0C] p-3 bg-white rounded-b-[9px]">
                     <div className="flex justify-between items-end gap-2">
                         <div className="flex-1 min-w-0">
-                            <span className="block text-[9px] font-bold uppercase text-[#EABF36]">WORKSHOP</span>
-                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE BILLION-DOLLAR PLAYBOOK: THE BUSINESS OF F1 & IPL</h4>
+                            <span className="block text-[9px] font-bold uppercase text-[#C77DFF]">WORKSHOP</span>
+                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE INVISIBLE INFLUENCE: BRAND WARFARE & NEUROMARKETING</h4>
                         </div>
                         <div className="flex flex-col items-end flex-shrink-0">
-                            <span className="text-xl font-black text-[#0C0C0C] leading-none">14</span>
+                            <span className="text-xl font-black text-[#0C0C0C] leading-none">28</span>
                             <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">MAR</span>
                         </div>
                     </div>
-                    <div className="mt-2 flex items-center gap-2 text-[10px] font-bold uppercase text-[#0C0C0C] transition-opacity opacity-0 group-hover:opacity-100">
+                    <div className="mt-2 flex items-center gap-2 text-[10px] font-bold uppercase text-[#C77DFF] transition-opacity opacity-0 group-hover:opacity-100">
                         <span>Register Now</span>
                         <ArrowUpRight className="w-3 h-3" />
                     </div>
