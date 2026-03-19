@@ -7,6 +7,7 @@ import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
 import PremiumNavbar from "@/components/premium-navbar"
 import PageTransition from "@/components/PageTransition"
+import ClarityAnalytics from "@/components/clarity-analytics"
 
 import "./globals.css"
 
@@ -120,6 +121,7 @@ export default function RootLayout({
           />
         </noscript>
         <Analytics />
+        <ClarityAnalytics />
         <SessionProvider>
           <SmoothScrollProvider>
             <PremiumNavbar />
