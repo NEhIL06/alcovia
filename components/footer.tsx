@@ -26,7 +26,7 @@ export default function Footer() {
     { name: "At School", href: "/at-school" },
     { name: "Outside School", href: "/outside-school" },
     { name: "Meet The Team", href: "/meet-the-team" },
-    { name: "Events", href: "/neuromarketing-workshop" },
+    { name: "Events", href: "/f1-workshop" },
   ]
 
 
@@ -128,7 +128,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
                 { name: "Cohort 2026", href: "https://forms.gle/xrPqKciXL6aKwUbw7" },
-                { name: "Workshop", href: "/neuromarketing-workshop" }
+                { name: "Workshop", href: "/f1-workshop" }
               ].map((link) => (
                 <FlipLink
                   key={link.name}
