@@ -16,67 +16,25 @@ if (typeof window !== "undefined") {
 const OFFERINGS = [
   {
     id: "01",
-    label: "CAREER DISCOVERY",
-    title: "Career Discovery Workshops",
-    description: "Workshops are created to enable real life learnings- we get a new professional to come and in 30 minutes, highlight their journey, how a day in their life looks like, what is the future of the Industry. This is followed by a real life simulation of those problem statements for all Teens to solve in groups. This experiential way not only builds real world understanding, but also build key soft skills needed to work in the dynamic world of tomorrow.",
+    label: "FROM IDEAS TO EXECUTION",
+    title: "They stop only consuming ideas. They start building.",
+    description: "At Alcovia, teenagers are expected to move from interest to execution. They do projects, make decisions, present work, test ideas and finish what they start.",
     image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/carrerDiscovery_tijhkf",
   },
   {
     id: "02",
-    label: "PODCAST SHOOTS",
-    title: "Podcast Shoots with Industry Experts",
-    description: "Alcovians, for the industries they are curious about, get to meet an industry veteran/ public personality and host a podcast and ask questions pertaining to their lives. Life lessons, trade secrets, cheat codes, all learnt- directly.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/podcast_ttfgpd",
-  },
-  {
-    id: "03",
-    label: "1:1 MENTORSHIP",
-    title: "1:1 Mentorship with Top Professionals",
-    description: "Once a month, a call with a professional that alcovian is curious about. Enable building conviction of which industry the teen is curious to solve problems in the long run.",
+    label: "CONVICTION OVER CONFORMITY",
+    title: "They build conviction, not borrowed ambition.",
+    description: "Instead of chasing what sounds impressive, they engage with real professionals, real domains and real-world questions until they begin to understand what genuinely fits them.",
     image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769158280/oneonone_mz0dio",
   },
   {
-    id: "04",
-    label: "FORGE BONDS",
-    title: "Forge Bonds with Similarly Driven Teens",
-    description: "Many studies have proven that a person is the summation of the next 5 people they hang out with. At alcovia, we enable teens to meet similarly ambitious teens. Rather than always competing, we create a safe space for all teens to discuss dreams, fears, ambitions & vulnerabilities with each other.",
+    id: "03",
+    label: "ENVIRONMENT AS MULTIPLIER",
+    title: "They grow in a room that raises their standards.",
+    description: "The right environment changes what feels normal. Teenagers begin to speak more clearly, think more deeply, attempt more difficult work and expect more from themselves.",
     image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/forgebonds_bwekt3",
   },
-  {
-    id: "05",
-    label: "WEEKLY MENTORSHIP",
-    title: "Get Mentored Weekly by Education Professionals from Harvard/ UCL/ Cambridge",
-    description: "Our academic advisors are the best in business- they lead each alcovian through the year, ensuring strong motivations throughout the year for everything life throws at our alcovians. Our alcovians see them as extended family.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/podcast_gm6zuj",
-  },
-  {
-    id: "06",
-    label: "ACADEMIC EXCELLENCE",
-    title: "Scientifically Build Academic Score",
-    description: "With scientific inputs on academic progress in terms of self study & the rigour of study, each alcovian moves with purpose. With right tech in place, we are also able to now predict upcoming exam scores at a subject level. We act as consultants to aid stronger academic performance. Everything is the icing, the cake still is strong academic scores.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157738/academic_jcknnp",
-  },
-  {
-    id: "07",
-    label: "FORTNIGHTLY GUIDANCE",
-    title: "Get mentored Fortnightly by Guidance Coach",
-    description: " Our guidance coach ask each alcovians the right set of questions- to enable them to introspect which stream of subjects makes the most sense to them in the long run. While being the best is the standard, understanding which sphere to be best at is equally, if not more important.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/counselerMeeting_few0qy",
-  },
-  {
-    id: "08",
-    label: "BUILD EMPATHY",
-    title: "Build Empathy",
-    description: "Every quarter has a theme. Q2 of the program is building Empathy- Alcovians in groups solve social problems in groups, mentored by top NGOs.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/peertopeer_pkenhd",
-  },
-  {
-    id: "09",
-    label: "BUILD RESILIENCE",
-    title: "Build Resilience",
-    description: "For Q3, Teens individually build businesses- mentored monthly by founders building in similar space. Helps build resilience. Normalise failing till it becomes gamified.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/resilience_ptprkn",
-  }
 ];
 
 export default function OfferingsHorizontal() {
@@ -153,7 +111,7 @@ export default function OfferingsHorizontal() {
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37]">
-                Your Year at Alcovia
+                The Transformation
               </p>
             </div>
 
@@ -161,12 +119,12 @@ export default function OfferingsHorizontal() {
             <div className="flex flex-col gap-2">
               <ScrollReveal className="w-fit">
                 <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3]">
-                  Everything you need
+                  What changes
                 </span>
               </ScrollReveal>
               <ScrollReveal className="w-fit">
                 <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  to take flight.
+                  inside Alcovia.
                 </span>
               </ScrollReveal>
             </div>
@@ -239,17 +197,17 @@ export default function OfferingsHorizontal() {
               <div className="flex flex-col items-center gap-2">
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
-                    "Building
+                    "If your child has
                   </span>
                 </ScrollReveal>
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                    future leaders,
+                    potential,
                   </span>
                 </ScrollReveal>
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
-                    one teen at a time."
+                    the right environment cannot wait."
                   </span>
                 </ScrollReveal>
               </div>
@@ -261,16 +219,13 @@ export default function OfferingsHorizontal() {
       {/* --- MOBILE VERTICAL LAYOUT (< 768px) --- */}
       <div className="md:hidden px-6 py-20 relative z-10">
         <div className="mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-3">Your Year at Alcovia</p>
+          <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-3">The Transformation</p>
           <div className="flex flex-col gap-1">
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">Everything you</span>
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">What changes</span>
             </ScrollReveal>
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">need to</span>
-            </ScrollReveal>
-            <ScrollReveal className="w-fit">
-              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>take flight.</span>
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>inside Alcovia.</span>
             </ScrollReveal>
           </div>
         </div>
@@ -316,13 +271,13 @@ export default function OfferingsHorizontal() {
       {/* --- TABLET VERTICAL LAYOUT (768px - 1280px) --- */}
       <div className="hidden md:block xl:hidden px-12 py-24 relative z-10">
         <div className="mb-20 text-center">
-          <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Your Year at Alcovia</p>
+          <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37] mb-4">The Transformation</p>
           <div className="flex flex-col items-center gap-1">
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight">Everything you need</span>
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight">What changes</span>
             </ScrollReveal>
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>to take flight.</span>
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>inside Alcovia.</span>
             </ScrollReveal>
           </div>
         </div>

@@ -26,12 +26,14 @@ import {
 // ========================================
 
 const HERO_TAGLINE_LINES = [
-    <>World&apos;s first <span className="text-[#EABF36]">Ambition</span></>,
-    <>building program for Teenagers.</>
+    <>For parents who know <span className="text-[#EABF36]">school</span></>,
+    <>is not enough.</>
 ]
 
-const MARQUEE_CONTENT_1 = "UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • ".repeat(3)
-const MARQUEE_CONTENT_2 = "PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • ".repeat(3)
+const HERO_SUBTITLE = "Bright teenagers are not automatically real-world ready."
+
+const MARQUEE_CONTENT_1 = "JUDGMENT • RESILIENCE • INITIATIVE • REAL-WORLD CONFIDENCE • CHALLENGE • MENTORSHIP • STRONGER PEER ENVIRONMENT • ".repeat(3)
+const MARQUEE_CONTENT_2 = "SCHOOL SUCCESS IS NOT FUTURE SUCCESS • THE RIGHT ENVIRONMENT CHANGES EVERYTHING • BUILD JUDGMENT NOT JUST GRADES • ".repeat(3)
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)'
 
@@ -82,6 +84,9 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
                     </p>
                 </div>
             ))}
+            <p className="text-[#0C0C0C]/60 font-[family-name:var(--font-satoshi)] text-xs sm:text-sm leading-relaxed mt-2 max-w-[280px]">
+                {HERO_SUBTITLE}
+            </p>
         </motion.div>
     )
 })
@@ -170,7 +175,7 @@ const CTAButton = memo(({
                 onMouseEnter={onMouseEnter}
                 onClick={onClick}
             >
-                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Start Your Journey</span>
+                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Book Your Child&apos;s Fit Call</span>
                 <motion.div
                     className="absolute inset-0 -z-0"
                     style={{ backgroundImage: GOLD_GRADIENT }}
@@ -179,6 +184,14 @@ const CTAButton = memo(({
                     transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 />
             </motion.button>
+            <button
+                className="mt-3 text-xs font-medium uppercase tracking-wider text-[#0C0C0C]/60 hover:text-[#0C0C0C] transition-colors underline underline-offset-4"
+                onClick={() => {
+                    document.getElementById("problem")?.scrollIntoView({ behavior: "smooth" })
+                }}
+            >
+                See how Alcovia works
+            </button>
         </motion.div>
     )
 })
@@ -678,9 +691,9 @@ export default function Hero() {
                             }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
                         >
-                            <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">World&apos;s first</p>
-                            <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[250px]">Ambition Building</p>
-                            <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">Program for Teenagers</p>
+                            <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[300px]">For parents who know</p>
+                            <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[300px]">school is not enough.</p>
+                            <p className="text-[#0C0C0C]/70 font-[family-name:var(--font-satoshi)] text-sm leading-relaxed tracking-normal max-w-[300px] mt-2">Bright teenagers are not automatically real-world ready.</p>
                         </motion.div>
 
                         {/* Workshop Widget - Bottom Left */}
