@@ -3,7 +3,7 @@
 import { ScrollReveal } from "@/components/text-reveal"
 
 // Words to highlight in gold (#EABF36)
-const accentWords = ["1%", "11-16.", "3%", "EARNED.", "FEW", "INVITED", "TEENS", "LEGACY", "GROWTH", "FAILING", "TOGETHER"]
+const accentWords = ["TALENT.", "READINESS.", "GUIDANCE.", "ENVIRONMENTS.", "JUDGMENT,", "INITIATIVE,", "CONFIDENCE."]
 
 // Helper function to render text with highlighted accent words
 function renderLineWithAccents(text: string) {
@@ -28,38 +28,38 @@ function renderLineWithAccents(text: string) {
   })
 }
 
-// DATA STRUCTURE: Grouped into lines matching user's exact text format
+// DATA STRUCTURE: Grouped into lines matching the new parent-facing copy
 const manifestoLines = [
-  // Block 1
-  { text: "ALCOVIA UNITES THE TOP 1%", isSpacerAfter: false },
-  { text: "OF TEENAGERS AGED 11-16.", isSpacerAfter: true },
+  // Block 1 - Header
+  { text: "WHY BRIGHT TEENAGERS", isSpacerAfter: false },
+  { text: "STILL GET LEFT BEHIND.", isSpacerAfter: true },
 
-  // Block 2
-  { text: "WITH A STRICT 3% ", isSpacerAfter: false },
-  { text: "SELECTION RATE, ", isSpacerAfter: false },
-  { text: "ENTRY IS EARNED.", isSpacerAfter: true },
+  // Block 2 - Problem statement
+  { text: "THE PROBLEM IS RARELY", isSpacerAfter: false },
+  { text: "A LACK OF TALENT.", isSpacerAfter: true },
 
-  // Block 3
-  { text: "FOR THE FEW", isSpacerAfter: false },
-  { text: "WHO ARE INVITED TO JOIN,", isSpacerAfter: false },
-  { text: "PREPARE FOR A YEAR OF:", isSpacerAfter: true },
+  // Block 3 - Explanation
+  { text: "IT IS THE WRONG PREPARATION,", isSpacerAfter: false },
+  { text: "THE WRONG ENVIRONMENT,", isSpacerAfter: false },
+  { text: "AND THE WRONG USE", isSpacerAfter: false },
+  { text: "OF FORMATIVE YEARS.", isSpacerAfter: true },
 
-  // Block 4 - List items
-  { text: "1. RADICAL GROWTH.", isSpacerAfter: false },
-  { text: "2. FAILING OFTEN,", isSpacerAfter: false },
-  { text: "3. BUILDING TOGETHER, AND", isSpacerAfter: false },
-  { text: "4. SELF DISCOVERY.", isSpacerAfter: true },
+  // Block 4 - Three problems
+  { text: "1. FALSE READINESS.", isSpacerAfter: false },
+  { text: "2. OUTDATED GUIDANCE.", isSpacerAfter: false },
+  { text: "3. WEAK ENVIRONMENTS.", isSpacerAfter: true },
 
-  // Block 5
+  // Block 5 - Resolution
   { text: "AT ALCOVIA,", isSpacerAfter: false },
-  { text: "WE ENABLE TEENS", isSpacerAfter: false },
-  { text: "TO START THEIR", isSpacerAfter: false },
-  { text: "LEGACY BUILDING JOURNEY TODAY.", isSpacerAfter: false },
+  { text: "WE BUILD JUDGMENT,", isSpacerAfter: false },
+  { text: "INITIATIVE, AND", isSpacerAfter: false },
+  { text: "REAL-WORLD CONFIDENCE.", isSpacerAfter: false },
 ]
 
 export default function Manifesto() {
   return (
     <section
+      id="problem"
       className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 pb-20 pt-8 md:min-h-screen md:px-12 md:py-24 lg:px-20"
       data-theme="graded"
     >

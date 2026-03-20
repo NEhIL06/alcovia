@@ -74,7 +74,9 @@ export default function CtaMidSection() {
               </div>
 
               <a
-                href="#register"
+                href="https://rzp.io/rzp/neuromarketingalcovia"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 overflow-hidden"
               >
                 <span
