@@ -178,7 +178,9 @@ export default function HeroSection() {
           transition={{ delay: 1.5, duration: 0.8 }}
         >
           <a
-            href="#register"
+            href="https://rzp.io/rzp/neuromarketingalcovia"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3 overflow-hidden"
           >
             <span
