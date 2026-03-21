@@ -106,7 +106,7 @@ export default function PremiumNavbar() {
     ? "Register for Workshop"
     : isF1Page
       ? "Ready for boardroom?"
-      : "Book a Fit Call"
+      : "Apply for Cohort 2026"
   const isBrochurePage = pathname === "/brochure"
 
   const [navMode, setNavMode] = useState<NavMode>("light")
