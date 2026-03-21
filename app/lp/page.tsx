@@ -2,13 +2,66 @@
 
 import { useRef } from "react"
 import Image from "next/image"
-import { motion, useScroll, useTransform, useInView } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle, Sparkles } from "lucide-react"
 
 const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSct-ZWoKEbSLmI3P59ZUj5bqPMoxJAeP9rt-1US3qBwUtAPgw/viewform"
 const GOLD = "#EABF36"
 const GOLD_GRADIENT = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)"
-const DARK = "#08261e"
+const GOLD_TEXT_STYLE = { backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text" as const, WebkitTextFillColor: "transparent" }
+
+function GoldText({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <span className={`bg-clip-text text-transparent ${className}`} style={GOLD_TEXT_STYLE}>{children}</span>
+}
+
+function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?: "sm" | "md" | "lg" }) {
+  const sizes = { sm: "px-5 py-2 text-[11px]", md: "px-8 py-4 text-sm", lg: "px-10 py-5 text-sm" }
+  return (
+    <a
+      href={FORM_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
+      style={{ background: GOLD_GRADIENT }}
+    >
+      {children}
+      <ArrowUpRight className="w-4 h-4" />
+    </a>
+  )
+}
+
+function SectionHeader({ subtitle, text, highlight }: { subtitle?: string; text: string; highlight: string }) {
+  return (
+    <motion.div
+      className="text-center mb-16"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      {subtitle && (
+        <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>{subtitle}</p>
+      )}
+      <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
+        {text}{" "}<GoldText>{highlight}</GoldText>
+      </h2>
+    </motion.div>
+  )
+}
+
+function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      {children}
+    </motion.div>
+  )
+}
 
 // ============================================================
 // SECTION 1: HERO
@@ -60,12 +113,7 @@ function HeroSection() {
           transition={{ delay: 0.4, duration: 0.7 }}
         >
           School is{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
-          >
-            not enough.
-          </span>
+          <GoldText>not enough.</GoldText>
         </motion.h1>
 
         <motion.p
@@ -74,7 +122,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
         >
-          Bright teenagers are not automatically real-world ready. At Alcovia, they build judgment, resilience, initiative and real-world confidence.
+          School success and future success are no longer the same thing. At Alcovia, teenagers build judgment, resilience, initiative and real-world confidence through challenge, mentorship and a stronger peer environment.
         </motion.p>
 
         <motion.div
@@ -83,16 +131,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <a
-            href={FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="group inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)]"
-            style={{ background: GOLD_GRADIENT }}
-          >
-            Book Your Child&apos;s Fit Call
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          <CTAButton>Book Your Child&apos;s Fit Call</CTAButton>
           <a
             href="#problems"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors"
@@ -122,56 +161,32 @@ const PROBLEMS = [
   {
     number: "02",
     title: "Outdated guidance",
-    body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. Teenagers do not need generic advice. They need sharper exposure to real work, real professionals and real questions.",
+    body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice. They need sharper exposure to real work, real professionals and real questions.",
     image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/counselerMeeting_few0qy",
   },
   {
     number: "03",
     title: "Weak environments",
-    body: "Teenagers do not grow in isolation. They are shaped by the norms, expectations and ambitions of the people around them. The right peer group is not a bonus. It is a developmental multiplier.",
+    body: "Teenagers do not grow in isolation. They are shaped by the norms, expectations and ambitions of the people around them. The World Health Organization notes that adolescence is a critical developmental stage and that pressure to conform with peers can be a significant source of stress. The right peer group is not a bonus. It is a developmental multiplier.",
     image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/peertopeer_pkenhd",
   },
 ]
 
-function FadeInSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const isInView = useInView(ref, { once: true, margin: "-80px" })
-
-  return (
-    <motion.div
-      ref={ref}
-      className={className}
-      initial={{ opacity: 0, y: 40 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
-      {children}
-    </motion.div>
-  )
-}
 
 function ProblemsSection() {
   return (
     <section id="problems" className="relative py-24 md:py-32 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
-        <FadeInSection className="text-center mb-16 md:mb-24">
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>
-            The real problem
-          </p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
-            Why bright teenagers still{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              get left behind.
-            </span>
-          </h2>
-          <p className="mt-6 text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+        <SectionHeader subtitle="The real problem" text="Why bright teenagers still" highlight="get left behind." />
+        <FadeIn className="text-center -mt-10 mb-16 md:mb-24">
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
             The problem is rarely a lack of talent. More often, it is the wrong preparation, the wrong environment and the wrong use of formative years.
           </p>
-        </FadeInSection>
+        </FadeIn>
 
         <div className="space-y-16 md:space-y-24">
           {PROBLEMS.map((p, i) => (
-            <FadeInSection key={p.number}>
+            <FadeIn key={p.number}>
               <div className={`flex flex-col ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-12 items-center`}>
                 {/* Image */}
                 <div className="w-full md:w-1/2 relative aspect-[4/3] rounded-lg overflow-hidden">
@@ -193,7 +208,7 @@ function ProblemsSection() {
                   </p>
                 </div>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -229,21 +244,16 @@ function TransformationSection() {
   return (
     <section className="relative py-24 md:py-32 px-6 bg-[#061f18]">
       <div className="max-w-6xl mx-auto">
-        <FadeInSection className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>
-            The transformation
+        <SectionHeader subtitle="The transformation" text="What changes" highlight="inside Alcovia." />
+        <FadeIn className="text-center -mt-10 mb-16">
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+            Alcovia is built to change how a teenager thinks, works, chooses and grows.
           </p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            What changes{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              inside Alcovia.
-            </span>
-          </h2>
-        </FadeInSection>
+        </FadeIn>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {TRANSFORMATIONS.map((t, i) => (
-            <FadeInSection key={i}>
+            <FadeIn key={i}>
               <div className="group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#EABF36]/30 transition-all duration-500">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={t.image} alt={t.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
@@ -263,32 +273,21 @@ function TransformationSection() {
                   </p>
                 </div>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
 
       {/* Mid-page CTA */}
-      <FadeInSection className="mt-20 text-center">
+      <FadeIn className="mt-20 text-center">
         <p className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-bold text-white mb-2">
           If your child has potential,
         </p>
         <p className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-bold mb-8">
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-            the right environment cannot wait.
-          </span>
+          <GoldText>the right environment cannot wait.</GoldText>
         </p>
-        <a
-          href={FORM_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full px-8 py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)]"
-          style={{ background: GOLD_GRADIENT }}
-        >
-          Book Your Teen&apos;s Fit Call
-          <ArrowUpRight className="w-4 h-4" />
-        </a>
-      </FadeInSection>
+        <CTAButton>Book Your Teen&apos;s Fit Call</CTAButton>
+      </FadeIn>
     </section>
   )
 }
@@ -299,7 +298,7 @@ function TransformationSection() {
 const FOR_LIST = [
   "Families who already know that marks, tuition and generic extracurriculars are no longer enough.",
   "Teenagers who are bright, curious and capable, but not yet stretched in the right way.",
-  "Teenagers who are doing reasonably well, but need stronger peers and sharper exposure.",
+  "Teenagers who are doing reasonably well, but need stronger peers, sharper exposure and greater real-world confidence.",
   "Teenagers who have ideas, but need more consistency, challenge and follow-through.",
   "Families looking for a curated, high-expectation environment rather than another class or hobby.",
 ]
@@ -314,18 +313,11 @@ function AudienceSection() {
   return (
     <section className="relative py-24 md:py-32 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
-        <FadeInSection className="text-center mb-16">
-          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Alcovia is intentionally{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              not built for everyone.
-            </span>
-          </h2>
-        </FadeInSection>
+        <SectionHeader text="Alcovia is intentionally" highlight="not built for everyone." />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* FOR */}
-          <FadeInSection>
+          <FadeIn>
             <div className="bg-white/5 border border-white/10 rounded-xl p-8 h-full">
               <div className="flex items-center gap-2 mb-6">
                 <CheckCircle2 className="w-5 h-5" style={{ color: GOLD }} />
@@ -342,10 +334,10 @@ function AudienceSection() {
                 ))}
               </ul>
             </div>
-          </FadeInSection>
+          </FadeIn>
 
           {/* NOT FOR */}
-          <FadeInSection>
+          <FadeIn>
             <div className="bg-white/5 border border-white/10 rounded-xl p-8 h-full">
               <div className="flex items-center gap-2 mb-6">
                 <XCircle className="w-5 h-5 text-white/30" />
@@ -362,7 +354,7 @@ function AudienceSection() {
                 ))}
               </ul>
             </div>
-          </FadeInSection>
+          </FadeIn>
         </div>
       </div>
     </section>
@@ -397,21 +389,16 @@ function PillarsSection() {
   return (
     <section className="relative py-24 md:py-32 px-6 bg-[#061f18]">
       <div className="max-w-5xl mx-auto">
-        <FadeInSection className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>
-            Why Alcovia can do this
+        <SectionHeader subtitle="Why Alcovia can do this" text="Exceptional through" highlight="stronger formation." />
+        <FadeIn className="text-center -mt-10 mb-16">
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+            Because teenagers do not become exceptional through information alone. They become exceptional through stronger formation.
           </p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Exceptional through{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              stronger formation.
-            </span>
-          </h2>
-        </FadeInSection>
+        </FadeIn>
 
         <div className="space-y-12">
           {PILLARS.map((p, i) => (
-            <FadeInSection key={p.number}>
+            <FadeIn key={p.number}>
               <div className="flex flex-col md:flex-row gap-6 items-center bg-white/[0.03] border border-white/[0.06] rounded-xl overflow-hidden">
                 <div className="w-full md:w-2/5 relative aspect-[3/2] md:aspect-auto md:h-64 overflow-hidden">
                   <Image src={p.image} alt={p.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" loading="lazy" />
@@ -428,7 +415,7 @@ function PillarsSection() {
                   </p>
                 </div>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
       </div>
@@ -455,22 +442,17 @@ function SocialProofSection() {
   return (
     <section className="relative py-24 md:py-32 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
-        <FadeInSection className="text-center mb-16">
-          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>
-            What families begin to notice
+        <SectionHeader subtitle="What families begin to notice" text="Better judgment. Stronger" highlight="follow-through." />
+        <FadeIn className="text-center -mt-10 mb-16">
+          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+            Not just more activity. Better judgment, stronger follow-through, sharper peer influence and clearer intent.
           </p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white">
-            Better judgment. Stronger{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              follow-through.
-            </span>
-          </h2>
-        </FadeInSection>
+        </FadeIn>
 
         {/* Proof cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-16">
           {PROOF_CARDS.map((card, i) => (
-            <FadeInSection key={i}>
+            <FadeIn key={i}>
               <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors">
                 <Sparkles className="w-4 h-4 mb-4" style={{ color: GOLD }} />
                 <p className="font-[family-name:var(--font-playfair)] text-lg md:text-xl font-semibold text-white mb-3 italic">
@@ -480,12 +462,12 @@ function SocialProofSection() {
                   {card.tag}
                 </span>
               </div>
-            </FadeInSection>
+            </FadeIn>
           ))}
         </div>
 
         {/* Logo bar */}
-        <FadeInSection>
+        <FadeIn>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-white/20 mb-8">
             Our mentors come from
           </p>
@@ -503,7 +485,7 @@ function SocialProofSection() {
               </div>
             ))}
           </div>
-        </FadeInSection>
+        </FadeIn>
       </div>
     </section>
   )
@@ -522,32 +504,21 @@ function ClosingCTASection() {
       />
 
       <div className="relative max-w-3xl mx-auto text-center">
-        <FadeInSection>
+        <FadeIn>
           <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
             The future will not ask your teenager for{" "}
-            <span className="bg-clip-text text-transparent" style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
-              marks alone.
-            </span>
+            <GoldText>marks alone.</GoldText>
           </h2>
           <p className="text-base md:text-lg text-white/50 max-w-xl mx-auto mb-10 leading-relaxed">
             It will ask for judgment, initiative, communication, resilience and clarity. The earlier these are built, the more naturally they become part of who your teenager is.
           </p>
 
-          <a
-            href={FORM_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full px-10 py-5 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(234,191,54,0.3)]"
-            style={{ background: GOLD_GRADIENT }}
-          >
-            Book Your Child&apos;s Alcovia Fit Call
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
+          <CTAButton size="lg">Book Your Child&apos;s Alcovia Fit Call</CTAButton>
 
           <p className="mt-6 text-xs text-white/30 max-w-md mx-auto">
             For families who want to understand whether Alcovia is the right ecosystem, not just another programme.
           </p>
-        </FadeInSection>
+        </FadeIn>
       </div>
     </section>
   )
