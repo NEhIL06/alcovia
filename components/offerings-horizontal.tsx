@@ -79,23 +79,7 @@ const OFFERINGS = [
   }
 ];
 
-interface OfferingsProps {
-  offerings?: typeof OFFERINGS
-  subLabel?: string
-  sectionTitle?: [string, string]
-  closingQuote?: [string, string, string]
-}
-
-export default function OfferingsHorizontal({
-  offerings,
-  subLabel,
-  sectionTitle,
-  closingQuote,
-}: OfferingsProps = {}) {
-  const ITEMS = offerings || OFFERINGS
-  const SUB_LABEL = subLabel || "Your Year at Alcovia"
-  const TITLE = sectionTitle || ["Everything you need", "to take flight."]
-  const QUOTE = closingQuote || ['"Building', "future leaders,", 'one teen at a time."']
+export default function OfferingsHorizontal() {
   const container = useRef<HTMLDivElement>(null);
   const scrollContainer = useRef<HTMLDivElement>(null);
   const [activeCard, setActiveCard] = useState<number | null>(null);
@@ -169,7 +153,7 @@ export default function OfferingsHorizontal({
             <div className="flex items-center gap-3 mb-6">
               <Sparkles className="w-4 h-4 text-[#D4AF37]" />
               <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37]">
-                {SUB_LABEL}
+                Your Year at Alcovia
               </p>
             </div>
 
@@ -177,19 +161,19 @@ export default function OfferingsHorizontal({
             <div className="flex flex-col gap-2">
               <ScrollReveal className="w-fit">
                 <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3]">
-                  {TITLE[0]}
+                  Everything you need
                 </span>
               </ScrollReveal>
               <ScrollReveal className="w-fit">
                 <span className="font-serif text-[clamp(2.5rem,4vw,3.5rem)] italic leading-[1.1] text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {TITLE[1]}
+                  to take flight.
                 </span>
               </ScrollReveal>
             </div>
           </div>
 
           {/* 2. DYNAMIC CARDS */}
-          {ITEMS.map((item, index) => {
+          {OFFERINGS.map((item, index) => {
             const titleLines = getTitleLines(item.title);
 
             return (
@@ -255,17 +239,17 @@ export default function OfferingsHorizontal({
               <div className="flex flex-col items-center gap-2">
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
-                    {QUOTE[0]}
+                    "Building
                   </span>
                 </ScrollReveal>
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3] bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                    {QUOTE[1]}
+                    future leaders,
                   </span>
                 </ScrollReveal>
                 <ScrollReveal className="w-fit">
                   <span className="font-serif text-[clamp(2rem,4vw,3rem)] italic leading-relaxed text-[#F7F7F3]">
-                    {QUOTE[2]}
+                    one teen at a time."
                   </span>
                 </ScrollReveal>
               </div>
@@ -280,16 +264,19 @@ export default function OfferingsHorizontal({
           <p className="text-xs uppercase tracking-[0.3em] text-[#D4AF37] mb-3">Your Year at Alcovia</p>
           <div className="flex flex-col gap-1">
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">{TITLE[0]}</span>
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">Everything you</span>
             </ScrollReveal>
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{TITLE[1]}</span>
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight">need to</span>
+            </ScrollReveal>
+            <ScrollReveal className="w-fit">
+              <span className="font-serif text-4xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>take flight.</span>
             </ScrollReveal>
           </div>
         </div>
 
         <div className="space-y-20">
-          {ITEMS.map((item) => (
+          {OFFERINGS.map((item) => (
             <div key={item.id} className="mobile-card group">
               <div className="relative aspect-[4/3] w-full mb-6 overflow-hidden rounded-sm border-l-2 border-[#D4AF37]">
                 <Image
@@ -332,16 +319,16 @@ export default function OfferingsHorizontal({
           <p className="text-sm uppercase tracking-[0.3em] text-[#D4AF37] mb-4">Your Year at Alcovia</p>
           <div className="flex flex-col items-center gap-1">
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight">{TITLE[0]}</span>
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight">Everything you need</span>
             </ScrollReveal>
             <ScrollReveal className="w-fit">
-              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{TITLE[1]}</span>
+              <span className="font-serif text-5xl italic text-[#F7F7F3] leading-tight bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>to take flight.</span>
             </ScrollReveal>
           </div>
         </div>
 
         <div className="grid grid-cols-2 gap-x-8 gap-y-24">
-          {ITEMS.map((item) => (
+          {OFFERINGS.map((item) => (
             <div key={item.id} className="tablet-card group">
               <div className="relative aspect-[3/4] w-full mb-8 overflow-hidden rounded-sm border-l-2 border-[#D4AF37] shadow-2xl">
                 <Image

@@ -22,28 +22,16 @@ import {
 } from "@/lib/hero-animations"
 
 // ========================================
-// TYPES & DEFAULTS
+// CONSTANTS
 // ========================================
 
-export interface HeroProps {
-    taglineLines?: React.ReactNode[]
-    desktopTagline?: React.ReactNode
-    marquee1?: string
-    marquee2?: string
-    ctaText?: string
-    ctaLink?: string
-    showSecondaryCTA?: boolean
-    secondaryCTAText?: string
-    secondaryCTATarget?: string
-}
-
-const DEFAULT_TAGLINE_LINES: React.ReactNode[] = [
+const HERO_TAGLINE_LINES = [
     <>World&apos;s first <span className="text-[#EABF36]">Ambition</span></>,
     <>building program for Teenagers.</>
 ]
 
-const DEFAULT_MARQUEE_1 = "UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • ".repeat(3)
-const DEFAULT_MARQUEE_2 = "PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • ".repeat(3)
+const MARQUEE_CONTENT_1 = "UNLEASH YOUR FULL POTENTIAL • MENTORSHIP • LEADERSHIP • BUILDERS OF TOMORROW • ".repeat(3)
+const MARQUEE_CONTENT_2 = "PROVE YOU ARE TOUGH • A PLACE WHERE YOU CAN BE REAL • BREAK AMBITION PARALYSIS • PURPOSE BEYOND STATUS • ".repeat(3)
 
 const GOLD_GRADIENT = 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)'
 
@@ -51,7 +39,7 @@ const GOLD_GRADIENT = 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 
 // SUBCOMPONENTS
 // ========================================
 
-const MobileTagline = memo(({ isRevealed, scrollProgress, taglineLines }: { isRevealed: boolean, scrollProgress: number, taglineLines: React.ReactNode[] }) => {
+const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolean, scrollProgress: number }) => {
     const taglineLinesRef = useRef<(HTMLDivElement | null)[]>([])
 
     useEffect(() => {
@@ -86,7 +74,7 @@ const MobileTagline = memo(({ isRevealed, scrollProgress, taglineLines }: { isRe
             }}
             transition={{ duration: 0.3 }}
         >
-            {taglineLines.map((line, i) => (
+            {HERO_TAGLINE_LINES.map((line, i) => (
                 <div key={i} ref={(el) => { taglineLinesRef.current[i] = el }} className="relative overflow-hidden w-fit my-[-0.05em]">
                     <div className="tagline-mask absolute inset-0 z-20 bg-[#EABF36]" />
                     <p className="tagline-text opacity-0 font-[family-name:var(--font-milan)] text-[20px] font-bold leading-[1.2] tracking-tight text-[#0C0C0C] sm:text-[42px] whitespace-nowrap px-1">
@@ -153,15 +141,13 @@ const CTAButton = memo(({
     scrollProgress,
     ctaRef,
     onMouseEnter,
-    onClick,
-    ctaText = "Start Your Journey"
+    onClick
 }: {
     isRevealed: boolean
     scrollProgress: number
     ctaRef: React.RefObject<HTMLButtonElement | null>
     onMouseEnter: () => void
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
-    ctaText?: string
 }) => {
     const isVisible = isRevealed && scrollProgress < 0.05
 
@@ -184,7 +170,7 @@ const CTAButton = memo(({
                 onMouseEnter={onMouseEnter}
                 onClick={onClick}
             >
-                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">{ctaText}</span>
+                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Start Your Journey</span>
                 <motion.div
                     className="absolute inset-0 -z-0"
                     style={{ backgroundImage: GOLD_GRADIENT }}
@@ -279,7 +265,7 @@ const MarqueeRow = memo(({
     )
 })
 
-const RollingBannerDesktop = memo(({ scrollProgress, marquee1, marquee2 }: { scrollProgress: number, marquee1: string, marquee2: string }) => {
+const RollingBannerDesktop = memo(({ scrollProgress }: { scrollProgress: number }) => {
     const marqueeRef1 = useRef<HTMLDivElement>(null)
     const marqueeRef2 = useRef<HTMLDivElement>(null)
 
@@ -295,14 +281,14 @@ const RollingBannerDesktop = memo(({ scrollProgress, marquee1, marquee2 }: { scr
             <div className="flex flex-col items-center justify-center">
                 <MarqueeRow
                     containerRef={marqueeRef1}
-                    content={marquee1}
+                    content={MARQUEE_CONTENT_1}
                     speed={0.4}
                     className="font-[family-name:var(--font-milan)] text-[3vw] font-bold uppercase tracking-tight bg-clip-text text-transparent mx-8 flex-shrink-0"
                     style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
                 />
                 <MarqueeRow
                     containerRef={marqueeRef2}
-                    content={marquee2}
+                    content={MARQUEE_CONTENT_2}
                     speed={-0.4}
                     className="font-[family-name:var(--font-milan)] text-[3vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-8 flex-shrink-0"
                 />
@@ -311,7 +297,7 @@ const RollingBannerDesktop = memo(({ scrollProgress, marquee1, marquee2 }: { scr
     )
 })
 
-const RollingBannerMobile = memo(({ scrollProgress, marquee1, marquee2 }: { scrollProgress: number, marquee1: string, marquee2: string }) => {
+const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }) => {
     const marqueeRef1 = useRef<HTMLDivElement>(null)
     const marqueeRef2 = useRef<HTMLDivElement>(null)
 
@@ -327,14 +313,14 @@ const RollingBannerMobile = memo(({ scrollProgress, marquee1, marquee2 }: { scro
             <div className="flex flex-col gap-0">
                 <MarqueeRow
                     containerRef={marqueeRef1}
-                    content={marquee1}
+                    content={MARQUEE_CONTENT_1}
                     speed={0.4}
                     className="font-[family-name:var(--font-milan)] text-[8vw] font-bold uppercase tracking-tight bg-clip-text text-transparent mx-4 flex-shrink-0"
                     style={{ backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}
                 />
                 <MarqueeRow
                     containerRef={marqueeRef2}
-                    content={marquee2}
+                    content={MARQUEE_CONTENT_2}
                     speed={-0.4}
                     className="font-[family-name:var(--font-milan)] text-[8vw] font-normal uppercase tracking-tight text-[#F7F7F3] mx-4 flex-shrink-0"
                 />
@@ -487,17 +473,7 @@ const OnePercentSVG = memo(({ scrollProgress }: { scrollProgress: number }) => {
 // MAIN HERO COMPONENT
 // ========================================
 
-export default function Hero({
-    taglineLines = DEFAULT_TAGLINE_LINES,
-    desktopTagline,
-    marquee1 = DEFAULT_MARQUEE_1,
-    marquee2 = DEFAULT_MARQUEE_2,
-    ctaText = "Start Your Journey",
-    ctaLink = "https://docs.google.com/forms/d/e/1FAIpQLSct-ZWoKEbSLmI3P59ZUj5bqPMoxJAeP9rt-1US3qBwUtAPgw/viewform",
-    showSecondaryCTA = false,
-    secondaryCTAText = "See how Alcovia works",
-    secondaryCTATarget = "#problem",
-}: HeroProps = {}) {
+export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null)
     const spotlightRef = useRef<HTMLDivElement>(null)
     const ctaRef = useRef<HTMLButtonElement>(null)
@@ -624,9 +600,9 @@ export default function Hero({
         createPlaneTakeoff(containerRef.current, rect.left + rect.width / 2, rect.top + rect.height / 2)
 
         setTimeout(() => {
-            window.open(ctaLink, "_self")
+            window.open("https://docs.google.com/forms/d/e/1FAIpQLSct-ZWoKEbSLmI3P59ZUj5bqPMoxJAeP9rt-1US3qBwUtAPgw/viewform", "_self")
         }, 800)
-    }, [ctaLink])
+    }, [])
 
     const handleCTAMouseEnter = useCallback(() => {
         ctaSweepRef.current?.play()
@@ -688,7 +664,7 @@ export default function Hero({
 
                         {/* Mobile Tagline - Top Center */}
                         <div className="absolute top-28 left-0 right-0 z-40 px-4 xl:hidden">
-                            <MobileTagline isRevealed={isRevealed} scrollProgress={scrollProgress} taglineLines={taglineLines} />
+                            <MobileTagline isRevealed={isRevealed} scrollProgress={scrollProgress} />
                         </div>
 
                         {/* Desktop Tagline - Right Side */}
@@ -702,11 +678,9 @@ export default function Hero({
                             }}
                             transition={{ duration: 0.4, ease: "easeOut" }}
                         >
-                            {desktopTagline || (<>
                             <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">World&apos;s first</p>
                             <p className="text-[#EABF36] font-[family-name:var(--font-milan)] text-2xl font-semibold leading-relaxed tracking-tight max-w-[250px]">Ambition Building</p>
                             <p className="text-[#0C0C0C] font-[family-name:var(--font-milan)] text-xl leading-relaxed tracking-tight max-w-[250px]">Program for Teenagers</p>
-                            </>)}
                         </motion.div>
 
                         {/* Workshop Widget - Bottom Left */}
@@ -719,13 +693,12 @@ export default function Hero({
                             ctaRef={ctaRef}
                             onMouseEnter={handleCTAMouseEnter}
                             onClick={handleCTAClick}
-                            ctaText={ctaText}
                         />
                     </section>
                 </div>
 
-                <RollingBannerDesktop scrollProgress={scrollProgress} marquee1={marquee1} marquee2={marquee2} />
-                <RollingBannerMobile scrollProgress={scrollProgress} marquee1={marquee1} marquee2={marquee2} />
+                <RollingBannerDesktop scrollProgress={scrollProgress} />
+                <RollingBannerMobile scrollProgress={scrollProgress} />
                 <OnePercentSVG scrollProgress={scrollProgress} />
             </div>
         </div>
