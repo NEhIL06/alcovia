@@ -57,7 +57,7 @@ export default function SpeakerSection() {
                   src="/images/austin-varughese.png"
                   alt="Austin Varughese"
                   fill
-                  className="object-cover scale-[2] object-[70%_25%]"
+                  className="object-cover object-top"
                   sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                   priority
                 />
