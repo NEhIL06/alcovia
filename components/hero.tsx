@@ -279,7 +279,7 @@ const MarqueeRow = memo(({
     )
 })
 
-const RollingBannerDesktop = memo(({ scrollProgress }: { scrollProgress: number }) => {
+const RollingBannerDesktop = memo(({ scrollProgress, marquee1, marquee2 }: { scrollProgress: number, marquee1: string, marquee2: string }) => {
     const marqueeRef1 = useRef<HTMLDivElement>(null)
     const marqueeRef2 = useRef<HTMLDivElement>(null)
 
@@ -311,7 +311,7 @@ const RollingBannerDesktop = memo(({ scrollProgress }: { scrollProgress: number 
     )
 })
 
-const RollingBannerMobile = memo(({ scrollProgress }: { scrollProgress: number }) => {
+const RollingBannerMobile = memo(({ scrollProgress, marquee1, marquee2 }: { scrollProgress: number, marquee1: string, marquee2: string }) => {
     const marqueeRef1 = useRef<HTMLDivElement>(null)
     const marqueeRef2 = useRef<HTMLDivElement>(null)
 
@@ -724,8 +724,8 @@ export default function Hero({
                     </section>
                 </div>
 
-                <RollingBannerDesktop scrollProgress={scrollProgress} />
-                <RollingBannerMobile scrollProgress={scrollProgress} />
+                <RollingBannerDesktop scrollProgress={scrollProgress} marquee1={marquee1} marquee2={marquee2} />
+                <RollingBannerMobile scrollProgress={scrollProgress} marquee1={marquee1} marquee2={marquee2} />
                 <OnePercentSVG scrollProgress={scrollProgress} />
             </div>
         </div>
