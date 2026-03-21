@@ -57,7 +57,7 @@ export default function SpeakerSection() {
                   src="/images/austin-varughese.png"
                   alt="Austin Varughese"
                   fill
-                  className="object-cover object-top"
+                  className="object-cover scale-150 object-[50%_15%]"
                   sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                   priority
                 />
@@ -98,7 +98,7 @@ export default function SpeakerSection() {
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
                 style={{ color: ACCENT }}
               >
-                Industry Expert
+                Affective Neuroscientist
               </span>
             </motion.div>
           </div>
@@ -117,23 +117,34 @@ export default function SpeakerSection() {
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-2">
                   Austin Varughese
                 </h3>
-                <a
-                  href="https://www.linkedin.com/in/austin-varughese-he-him-50561072"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm sm:text-base font-[family-name:var(--font-satoshi)] transition-opacity hover:opacity-80"
-                  style={{ color: `rgba(199,125,255,0.8)` }}
+                <p
+                  className="text-base sm:text-lg font-[family-name:var(--font-satoshi)] font-medium mb-1"
+                  style={{ color: ACCENT }}
                 >
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                    className="w-4 h-4"
-                  >
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                  </svg>
-                  View LinkedIn Profile
-                </a>
+                  Affective Neuroscientist
+                </p>
+                <p className="text-sm text-white/50 font-[family-name:var(--font-satoshi)]">
+                  Researcher at Temple &middot; MS Neuroscience, NBRC Gurgaon
+                </p>
               </div>
+
+              {/* LinkedIn link */}
+              <a
+                href="https://www.linkedin.com/in/austin-varughese-he-him-50561072"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-sm font-[family-name:var(--font-satoshi)] transition-opacity hover:opacity-80"
+                style={{ color: `rgba(199,125,255,0.7)` }}
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  className="w-4 h-4"
+                >
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                </svg>
+                View LinkedIn Profile
+              </a>
 
               {/* Divider */}
               <div
@@ -144,37 +155,35 @@ export default function SpeakerSection() {
               {/* Bio content */}
               <div className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-lg mx-auto lg:mx-0 space-y-4 text-left">
                 <p>
-                  We&apos;re bringing in someone who has been at the forefront of
-                  how brands engineer consumer behaviour. Someone who
-                  understands the invisible science behind every purchase you
-                  make.
+                  Austin is an Affective Neuroscientist and researcher exploring
+                  the neuroscience of emotion, perception, and decision-making.
+                  With a Master&apos;s in Neuroscience from the{" "}
+                  <span style={{ color: ACCENT }} className="font-medium">
+                    National Brain Research Centre
+                  </span>{" "}
+                  and research experience at{" "}
+                  <span style={{ color: ACCENT }} className="font-medium">
+                    IISc Bangalore
+                  </span>
+                  , he brings deep scientific rigour to the question of why we
+                  buy what we buy.
                 </p>
                 <p className="text-white/60">
-                  Our speakers don&apos;t teach from textbooks. They come from
-                  the war rooms of the brands you interact with every day.
-                  Previous workshops have featured leaders from{" "}
-                  <span style={{ color: ACCENT }} className="font-medium">
-                    Red Bull
-                  </span>
-                  ,{" "}
-                  <span style={{ color: ACCENT }} className="font-medium">
-                    Disney+ Hotstar
-                  </span>
-                  , and{" "}
-                  <span style={{ color: ACCENT }} className="font-medium">
-                    Star TV
-                  </span>
-                  .
+                  A published researcher in the journal{" "}
+                  <span className="italic">PAIN</span>, Austin bridges the gap
+                  between laboratory neuroscience and real-world consumer
+                  behaviour. He doesn&apos;t teach from textbooks. He brings the
+                  science straight from the lab to the boardroom.
                 </p>
               </div>
 
-              {/* Teaser tags */}
+              {/* Tags */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-8">
                 {[
-                  "Neuromarketing",
-                  "Brand Strategy",
-                  "Consumer Psychology",
-                  "Industry Leader",
+                  "Neuroscience",
+                  "Affective Science",
+                  "Consumer Behaviour",
+                  "Published Researcher",
                 ].map((tag) => (
                   <span
                     key={tag}
