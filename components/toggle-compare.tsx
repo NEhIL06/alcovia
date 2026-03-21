@@ -92,7 +92,16 @@ const sections = [
   },
 ]
 
-export default function ToggleCompare() {
+interface ToggleCompareProps {
+  data?: typeof sections
+  sectionHeader?: string
+  headerAccent?: string
+}
+
+export default function ToggleCompare({ data, sectionHeader, headerAccent }: ToggleCompareProps = {}) {
+  const displaySections = data || sections
+  const displayHeader = sectionHeader || "Our"
+  const displayAccent = headerAccent || "Impact"
   const containerRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
@@ -133,7 +142,7 @@ export default function ToggleCompare() {
       >
         <div className="relative h-full w-full">
           <Image
-            src={sections[0].image}
+            src={displaySections[0].image}
             alt="At School"
             fill
             className="object-cover object-right-top"
@@ -148,7 +157,7 @@ export default function ToggleCompare() {
       >
         <div className="relative h-full w-full">
           <Image
-            src={sections[1].image}
+            src={displaySections[1].image}
             alt="Outside School"
             fill
             className="object-cover object-left-top"
@@ -164,7 +173,7 @@ export default function ToggleCompare() {
       >
         <div className="relative h-full w-full">
           <Image
-            src={sections[0].image}
+            src={displaySections[0].image}
             alt="At School"
             fill
             className="object-cover object-right-top"
@@ -179,7 +188,7 @@ export default function ToggleCompare() {
       >
         <div className="relative h-full w-full">
           <Image
-            src={sections[1].image}
+            src={displaySections[1].image}
             alt="Outside School"
             fill
             className="object-cover object-left-top"
@@ -195,7 +204,7 @@ export default function ToggleCompare() {
           style={{ y: headerY, opacity: headerOpacity }}
         >
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
-            Our <span className="text-[#EABF36]">Impact</span>
+            {displayHeader} <span className="text-[#EABF36]">{displayAccent}</span>
           </h2>
         </motion.div>
 
@@ -208,17 +217,17 @@ export default function ToggleCompare() {
           >
             <div className="relative mb-4 flex flex-col items-end">
               <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
-                {sections[0].topText}
+                {displaySections[0].topText}
               </span>
               <div className="-mt-1">
                 <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl xl:text-7xl">
-                  {sections[0].bottomText}
+                  {displaySections[0].bottomText}
                 </span>
               </div>
             </div>
 
             <div className="ml-auto max-w-[160px] md:max-w-[200px] flex flex-col items-end">
-              {sections[0].descriptionLines.map((line, i) => (
+              {displaySections[0].descriptionLines.map((line, i) => (
                 <p key={i} className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-right">
                   {line.text}
                 </p>
@@ -235,17 +244,17 @@ export default function ToggleCompare() {
           >
             <div className="relative mb-4 flex flex-col items-start">
               <span className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-[#F7F7F3] md:text-6xl xl:text-7xl">
-                {sections[1].topText}
+                {displaySections[1].topText}
               </span>
               <div className="-mt-1">
                 <span className="text-4xl font-black uppercase tracking-tight text-[#F7F7F3] md:text-6xl xl:text-7xl">
-                  {sections[1].bottomText}
+                  {displaySections[1].bottomText}
                 </span>
               </div>
             </div>
 
             <div className="mr-auto max-w-[160px] md:max-w-[200px] flex flex-col items-start">
-              {sections[1].descriptionLines.map((line, i) => (
+              {displaySections[1].descriptionLines.map((line, i) => (
                 <p key={i} className="text-xs leading-relaxed text-[#F7F7F3]/60 md:text-sm text-left">
                   {line.text}
                 </p>
@@ -266,7 +275,7 @@ export default function ToggleCompare() {
         >
           <div className="relative h-full w-full">
             <Image
-              src={sections[0].image}
+              src={displaySections[0].image}
               alt=""
               fill
               className="object-cover object-top"
@@ -281,7 +290,7 @@ export default function ToggleCompare() {
         >
           <div className="relative h-full w-full">
             <Image
-              src={sections[1].image}
+              src={displaySections[1].image}
               alt=""
               fill
               className="object-cover object-top"

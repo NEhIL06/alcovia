@@ -6,13 +6,13 @@ import { ScrollReveal } from "@/components/text-reveal"
 const accentWords = ["1%", "11-16.", "3%", "EARNED.", "FEW", "INVITED", "TEENS", "LEGACY", "GROWTH", "FAILING", "TOGETHER"]
 
 // Helper function to render text with highlighted accent words
-function renderLineWithAccents(text: string) {
+function renderLineWithAccents(text: string, activeAccents: string[] = accentWords) {
   // Split text into words while preserving spaces
   const words = text.split(" ")
 
   return words.map((word, idx) => {
     // Check if this word (or its base form without punctuation) should be highlighted
-    const isAccent = accentWords.some(accent => word.includes(accent) || word === accent)
+    const isAccent = activeAccents.some(accent => word.includes(accent) || word === accent)
 
     return (
       <span key={idx}>
@@ -57,7 +57,14 @@ const manifestoLines = [
   { text: "LEGACY BUILDING JOURNEY TODAY.", isSpacerAfter: false },
 ]
 
-export default function Manifesto() {
+interface ManifestoProps {
+  lines?: typeof manifestoLines
+  accents?: string[]
+}
+
+export default function Manifesto({ lines, accents }: ManifestoProps = {}) {
+  const displayLines = lines || manifestoLines
+  const displayAccents = accents || accentWords
   return (
     <section
       className="relative min-h-[60vh] overflow-hidden bg-transparent px-4 pb-20 pt-8 md:min-h-screen md:px-12 md:py-24 lg:px-20"
@@ -65,13 +72,13 @@ export default function Manifesto() {
     >
       {/* Main Content */}
       <div className="relative z-10 mx-auto max-w-6xl flex flex-col items-center text-center">
-        {manifestoLines.map((line, i) => (
+        {displayLines.map((line, i) => (
           <div key={i}>
             <ScrollReveal className="reveal-line relative overflow-hidden w-fit my-[-0.05em]">
               <p
                 className="reveal-text font-[family-name:var(--font-milan)] text-[18px] font-normal leading-[1.3] tracking-tight sm:text-[34px] md:text-[38px] lg:text-[48px] xl:text-[70px] whitespace-nowrap px-1"
               >
-                {renderLineWithAccents(line.text)}
+                {renderLineWithAccents(line.text, displayAccents)}
               </p>
             </ScrollReveal>
 
