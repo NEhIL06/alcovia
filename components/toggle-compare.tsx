@@ -69,24 +69,24 @@ function FlowButton({ direction, href }: { direction: "left" | "right"; href: st
 
 const sections = [
   {
-    id: "who-its-for",
-    topText: "WHO IT'S",
-    bottomText: "FOR",
+    id: "at-school",
+    topText: "AT",
+    bottomText: "SCHOOL",
     descriptionLines: [
-      { text: "For families who know" },
-      { text: "marks and tuition are" },
-      { text: "no longer enough." }
+      { text: "Empowering academic " },
+      { text: "excellence through innovative" },
+      { text: "learning methodologies." }
     ],
     image: "/images/atschool.png",
   },
   {
-    id: "why-alcovia",
-    topText: "WHY",
-    bottomText: "ALCOVIA",
+    id: "outside-school",
+    topText: "OUTSIDE",
+    bottomText: "SCHOOL",
     descriptionLines: [
-      { text: "Built around the future," },
-      { text: "not the syllabus." },
-      { text: "Real-world formation." }
+      { text: "Building differentiation through" },
+      { text: "real-world experiences and" },
+      { text: "leadership development." }
     ],
     image: "/images/outsideschool.png",
   },

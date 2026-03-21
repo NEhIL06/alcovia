@@ -76,7 +76,7 @@ export default function ProblemSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background */}
       <div
@@ -88,7 +88,7 @@ export default function ProblemSection() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-14 sm:mb-20">
+        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -101,7 +101,7 @@ export default function ProblemSection() {
           </motion.span>
 
           <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-6"
+            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -127,7 +127,7 @@ export default function ProblemSection() {
         </div>
 
         {/* Problem cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
           {problems.map((problem, i) => (
             <motion.div
               key={problem.number}
@@ -140,27 +140,27 @@ export default function ProblemSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-6 sm:p-8 bg-[#F7F7F3]/[0.02] backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C77DFF]/20 hover:bg-[#F7F7F3]/[0.04]">
+              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-8 bg-[#F7F7F3]/[0.02] backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#C77DFF]/20 hover:bg-[#F7F7F3]/[0.04]">
                 {/* Top accent */}
                 <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#C77DFF]/40 transition-all duration-500" />
 
                 {/* Number */}
-                <span className="block text-[#C77DFF]/20 text-5xl sm:text-6xl font-[family-name:var(--font-monument)] font-bold leading-none mb-4 group-hover:text-[#C77DFF]/30 transition-colors duration-500">
+                <span className="block text-[#C77DFF]/20 text-4xl sm:text-6xl font-[family-name:var(--font-monument)] font-bold leading-none mb-2 group-hover:text-[#C77DFF]/30 transition-colors duration-500">
                   {problem.number}
                 </span>
 
                 {/* Icon */}
-                <div className="text-[#C77DFF]/60 mb-4 group-hover:text-[#C77DFF] transition-colors duration-500">
+                <div className="text-[#C77DFF]/60 mb-2 group-hover:text-[#C77DFF] transition-colors duration-500">
                   {problem.icon}
                 </div>
 
                 {/* Question */}
-                <h3 className="text-base sm:text-lg font-[family-name:var(--font-playfair)] italic text-white mb-4 leading-snug">
+                <h3 className="text-base sm:text-lg font-[family-name:var(--font-playfair)] italic text-white mb-2 leading-snug">
                   &ldquo;{problem.question}&rdquo;
                 </h3>
 
                 {/* Insight */}
-                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed mb-6">
+                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-snug mb-3">
                   {problem.insight}
                 </p>
 

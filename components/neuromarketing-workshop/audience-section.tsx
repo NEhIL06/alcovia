@@ -39,7 +39,7 @@ export default function AudienceSection() {
   return (
     <section
       ref={sectionRef}
-      className="relative py-20 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background */}
       <div
@@ -52,7 +52,7 @@ export default function AudienceSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-6 sm:mb-10">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -65,7 +65,7 @@ export default function AudienceSection() {
           </motion.span>
 
           <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-6"
+            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -89,7 +89,7 @@ export default function AudienceSection() {
         </div>
 
         {/* Audience grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 max-w-4xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-5 max-w-4xl mx-auto">
           {audiences.map((item, i) => (
             <motion.div
               key={item.title}
@@ -102,19 +102,19 @@ export default function AudienceSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-6 sm:p-8 bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#C77DFF]/20 hover:bg-[#F7F7F3]/[0.04]">
+              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#C77DFF]/20 hover:bg-[#F7F7F3]/[0.04]">
                 {/* Emoji */}
-                <span className="text-3xl sm:text-4xl mb-4 block">
+                <span className="text-2xl sm:text-4xl mb-2 block">
                   {item.emoji}
                 </span>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-[family-name:var(--font-monument)] uppercase tracking-wider text-white mb-3">
+                <h3 className="text-sm sm:text-lg font-[family-name:var(--font-monument)] uppercase tracking-wider text-white mb-1.5">
                   {item.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed">
+                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-snug">
                   {item.description}
                 </p>
 

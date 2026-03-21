@@ -6,7 +6,7 @@ const ACCENT = "#C77DFF";
 
 export default function CtaMidSection() {
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden">
+    <section className="relative py-8 sm:py-16 overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -32,7 +32,7 @@ export default function CtaMidSection() {
             }}
           />
 
-          <div className="p-8 sm:p-12 lg:p-16">
+          <div className="p-5 sm:p-10 lg:p-14">
             <motion.p
               className="text-[clamp(1.25rem,3vw,2rem)] font-[family-name:var(--font-playfair)] italic text-white/90 mb-3"
               initial={{ opacity: 0 }}
@@ -43,7 +43,7 @@ export default function CtaMidSection() {
               &ldquo;The best way to predict behaviour
             </motion.p>
             <motion.p
-              className="text-[clamp(1.25rem,3vw,2rem)] font-[family-name:var(--font-playfair)] italic mb-8"
+              className="text-[clamp(1.25rem,3vw,2rem)] font-[family-name:var(--font-playfair)] italic mb-5"
               style={{ color: ACCENT }}
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

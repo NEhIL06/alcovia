@@ -8,7 +8,7 @@ export default function ClosingCtaSection() {
   return (
     <section
       id="register"
-      className="relative py-20 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background */}
       <div
@@ -22,7 +22,7 @@ export default function ClosingCtaSection() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Headline */}
         <motion.h2
-          className="text-[clamp(1.75rem,5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight mb-4 sm:mb-6"
+          className="text-[clamp(1.75rem,5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight mb-2 sm:mb-4"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -34,7 +34,7 @@ export default function ClosingCtaSection() {
         </motion.h2>
 
         <motion.p
-          className="text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-8 sm:mb-10"
+          className="text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-4 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -46,7 +46,7 @@ export default function ClosingCtaSection() {
 
         {/* Event details mini */}
         <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-8 mb-5 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -144,7 +144,7 @@ export default function ClosingCtaSection() {
 
         {/* Divider */}
         <motion.div
-          className="w-16 h-px bg-[#F7F7F3]/10 mx-auto mt-14 sm:mt-20 mb-10 sm:mb-14"
+          className="w-16 h-px bg-[#F7F7F3]/10 mx-auto mt-8 sm:mt-14 mb-6 sm:mb-10"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}

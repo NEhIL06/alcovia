@@ -298,7 +298,7 @@ export default function PremiumNavbar() {
                     />
                   </div>
                 ) : (
-                  <div className="relative h-[200px] w-[140px] -mt-7 -ml-1 md:ml-0 pt-6 flex items-end justify-center pb-2">
+                  <div className="relative h-[200px] w-[140px] -mt-7 -ml-4 md:ml-0 pt-6 flex items-end justify-center pb-2">
                     <Image
                       src={"/alcovia_logo_dark.png"}
                       alt="ALCOVIA"
