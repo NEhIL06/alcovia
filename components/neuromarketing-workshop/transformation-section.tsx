@@ -45,7 +45,7 @@ export default function TransformationSection() {
   return (
     <section
       ref={containerRef}
-      className="relative py-20 sm:py-32 lg:py-40 overflow-hidden"
+      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background glow */}
       <div
@@ -58,7 +58,7 @@ export default function TransformationSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-14 sm:mb-20">
+        <div className="text-center mb-8 sm:mb-12">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -71,7 +71,7 @@ export default function TransformationSection() {
           </motion.span>
 
           <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-6"
+            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -94,7 +94,7 @@ export default function TransformationSection() {
         </div>
 
         {/* Transformation cards - stacked */}
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-3 sm:space-y-6">
           {transformations.map((item, i) => {
             const start = i / transformations.length;
             const end = start + 0.5 / transformations.length;
@@ -121,10 +121,10 @@ export default function TransformationSection() {
                     }}
                   />
 
-                  <div className="p-6 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-6 lg:gap-12">
+                  <div className="p-4 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-12">
                     {/* Left: number + stat */}
                     <div className="flex-shrink-0 flex lg:flex-col items-center lg:items-start gap-4 lg:gap-6 lg:w-32">
-                      <span className="text-[#C77DFF]/25 text-5xl sm:text-6xl lg:text-7xl font-[family-name:var(--font-monument)] font-bold leading-none group-hover:text-[#C77DFF]/35 transition-colors duration-500">
+                      <span className="text-[#C77DFF]/25 text-4xl sm:text-6xl lg:text-7xl font-[family-name:var(--font-monument)] font-bold leading-none group-hover:text-[#C77DFF]/35 transition-colors duration-500">
                         {item.number}
                       </span>
                       <div className="flex items-baseline gap-1.5">
@@ -153,7 +153,7 @@ export default function TransformationSection() {
                       <h3 className="text-lg sm:text-xl lg:text-2xl font-[family-name:var(--font-milan)] text-white mb-3">
                         {item.title}
                       </h3>
-                      <p className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-2xl">
+                      <p className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-2xl">
                         {item.description}
                       </p>
                     </div>

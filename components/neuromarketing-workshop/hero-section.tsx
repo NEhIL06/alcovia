@@ -20,7 +20,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-[85vh] sm:min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Neural network background */}
       <div className="absolute inset-0 z-0">
@@ -95,7 +95,7 @@ export default function HeroSection() {
       >
         {/* Overline */}
         <motion.div
-          className="flex items-center justify-center gap-3 mb-6 sm:mb-8"
+          className="flex items-center justify-center gap-3 mb-3 sm:mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
@@ -112,7 +112,7 @@ export default function HeroSection() {
 
         {/* Main headline */}
         <motion.h1
-          className="font-[family-name:var(--font-milan)] leading-[0.9] tracking-tight mb-4 sm:mb-6"
+          className="font-[family-name:var(--font-milan)] leading-[0.85] tracking-tight mb-2 sm:mb-6"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
@@ -130,7 +130,7 @@ export default function HeroSection() {
 
         {/* Subheadline */}
         <motion.p
-          className="text-[clamp(0.9rem,2.2vw,1.5rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-6 sm:mb-8"
+          className="text-[clamp(0.9rem,2.2vw,1.5rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
@@ -141,7 +141,7 @@ export default function HeroSection() {
 
         {/* Divider */}
         <motion.div
-          className="w-16 sm:w-24 h-px mx-auto mb-6 sm:mb-8"
+          className="w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
           style={{ background: `${ACCENT_DIM}0.4)` }}
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -150,7 +150,7 @@ export default function HeroSection() {
 
         {/* Hook line */}
         <motion.p
-          className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/75 max-w-xl mx-auto mb-4"
+          className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/75 max-w-xl mx-auto mb-2"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 1 }}
@@ -172,7 +172,7 @@ export default function HeroSection() {
 
         {/* CTA Button */}
         <motion.div
-          className="mt-10 sm:mt-12"
+          className="mt-5 sm:mt-12"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.5, duration: 0.8 }}
@@ -203,7 +203,7 @@ export default function HeroSection() {
 
         {/* Date + limited seats */}
         <motion.div
-          className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
+          className="mt-3 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.7, duration: 0.8 }}

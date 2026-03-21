@@ -62,7 +62,7 @@ const testimonials = [
 
 export default function SocialProofSection() {
   return (
-    <section className="relative py-20 sm:py-32 lg:py-40 overflow-hidden">
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -74,7 +74,7 @@ export default function SocialProofSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-14 sm:mb-20">
+        <div className="text-center mb-8 sm:mb-12">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -99,18 +99,18 @@ export default function SocialProofSection() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-14 sm:mb-20">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-12">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
-              className="group text-center p-5 sm:p-6 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#C77DFF]/20"
+              className="group text-center p-3 sm:p-5 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#C77DFF]/20"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
             >
               <span
-                className="block text-3xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-monument)] font-bold mb-2"
+                className="block text-2xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-monument)] font-bold mb-1"
                 style={{ color: ACCENT }}
               >
                 {stat.number}
@@ -126,11 +126,11 @@ export default function SocialProofSection() {
         </div>
 
         {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
           {testimonials.map((item, i) => (
             <motion.div
               key={item.name}
-              className={`relative border border-[#F7F7F3]/[0.06] rounded-2xl p-6 sm:p-8 bg-[#F7F7F3]/[0.02]${i === 4 ? " md:col-span-2 lg:col-span-1" : ""}`}
+              className={`relative border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02]${i === 4 ? " md:col-span-2 lg:col-span-1" : ""}`}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -138,13 +138,13 @@ export default function SocialProofSection() {
             >
               {/* Quote mark */}
               <span
-                className="block text-4xl sm:text-5xl font-[family-name:var(--font-playfair)] leading-none mb-4"
+                className="block text-3xl sm:text-5xl font-[family-name:var(--font-playfair)] leading-none mb-2"
                 style={{ color: `${ACCENT}30` }}
               >
                 &ldquo;
               </span>
 
-              <p className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-playfair)] italic leading-relaxed mb-5">
+              <p className="text-xs sm:text-base text-white/80 font-[family-name:var(--font-playfair)] italic leading-snug mb-3">
                 {item.quote}
               </p>
 
