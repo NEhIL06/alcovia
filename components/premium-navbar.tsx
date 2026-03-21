@@ -338,7 +338,7 @@ export default function PremiumNavbar() {
           >
             {/* Apply for Cohort 2026 Button - Appears on scroll (Desktop) */}
             <AnimatePresence>
-              {scrolled && (
+              {scrolled && !isNeuroPage && (
                 <motion.a
                   href={applyHref}
                   target="_self"

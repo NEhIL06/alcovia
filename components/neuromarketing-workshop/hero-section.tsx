@@ -20,6 +20,7 @@ export default function HeroSection() {
   return (
     <section
       ref={containerRef}
+      id="neuro-hero"
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
     >
       {/* Neural network background */}

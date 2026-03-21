@@ -7,7 +7,7 @@ const ACCENT = "#C77DFF";
 export default function ClosingCtaSection() {
   return (
     <section
-      id="register"
+      id="neuro-cta"
       className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       {/* Background */}
@@ -122,7 +122,7 @@ export default function ClosingCtaSection() {
             href="https://rzp.io/rzp/neuromarketingalcovia"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative inline-flex items-center gap-3 overflow-hidden"
+            className="group relative inline-flex items-center gap-3"
           >
             <span
               className="relative z-10 inline-flex items-center gap-3 text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-semibold transition-all duration-500 group-hover:scale-105 group-hover:bg-[#F7F7F3]"

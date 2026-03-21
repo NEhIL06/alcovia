@@ -8,6 +8,7 @@ import AuthoritySection from "@/components/neuromarketing-workshop/authority-sec
 import SpeakerSection from "@/components/neuromarketing-workshop/speaker-section";
 import SocialProofSection from "@/components/neuromarketing-workshop/social-proof-section";
 import ClosingCtaSection from "@/components/neuromarketing-workshop/closing-cta-section";
+import MobileFloatingCta from "@/components/neuromarketing-workshop/mobile-floating-cta";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -29,12 +30,13 @@ export default function NeuromarketingWorkshopPage() {
       <HeroSection />
       <ProblemSection />
       <TransformationSection />
-      <CtaMidSection />
-      <AudienceSection />
-      <AuthoritySection />
       <SpeakerSection />
+      
+     
+      <AuthoritySection />
       <SocialProofSection />
       <ClosingCtaSection />
+      <MobileFloatingCta />
       <Footer />
     </main>
   );

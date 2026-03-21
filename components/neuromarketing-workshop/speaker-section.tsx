@@ -7,7 +7,7 @@ const ACCENT = "#C77DFF";
 
 export default function SpeakerSection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -20,7 +20,7 @@ export default function SpeakerSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
-          className="text-center mb-6 sm:mb-10"
+          className="text-center mb-4 sm:mb-6"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -36,7 +36,7 @@ export default function SpeakerSection() {
 
         {/* Speaker card */}
         <motion.div
-          className="flex flex-col lg:flex-row items-center gap-6 sm:gap-10 lg:gap-16"
+          className="flex flex-col lg:flex-row items-center gap-6 sm:gap-10 lg:gap-14"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,7 +44,7 @@ export default function SpeakerSection() {
         >
           {/* Image placeholder */}
           <div className="relative flex-shrink-0">
-            <div className="relative w-48 h-60 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
+            <div className="relative w-48 h-60 sm:w-72 sm:h-[22rem] lg:w-80 lg:h-[26rem]">
               {/* Outer border */}
               <div
                 className="absolute inset-0 border rounded-2xl"
@@ -106,7 +106,7 @@ export default function SpeakerSection() {
           {/* Speaker info */}
           <div className="text-center lg:text-left flex-1">
             <motion.div
-              className="space-y-3 sm:space-y-5"
+              className="space-y-3 sm:space-y-4"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -114,7 +114,7 @@ export default function SpeakerSection() {
             >
               {/* Speaker Header */}
               <div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-2">
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-milan)] text-white mb-2">
                   Austin Varughese
                 </h3>
                 <p
@@ -153,7 +153,7 @@ export default function SpeakerSection() {
               />
 
               {/* Bio content */}
-              <div className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
+              <div className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-xl mx-auto lg:mx-0 text-left space-y-3">
                 <p>
                   Austin is an Affective Neuroscientist and researcher exploring
                   the neuroscience of emotion, perception, and decision-making.
@@ -178,7 +178,7 @@ export default function SpeakerSection() {
               </div>
 
               {/* Tags */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 pt-1">
                 {[
                   "Neuroscience",
                   "Affective Science",

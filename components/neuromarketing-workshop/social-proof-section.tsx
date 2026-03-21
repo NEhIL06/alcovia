@@ -46,23 +46,11 @@ const testimonials = [
     name: "Aryaana",
     age: "14",
   },
-  {
-    quote:
-      "I walked in thinking I knew how brands worked. I walked out realizing I had no idea. That's what makes Alcovia different.",
-    name: "Aanya",
-    age: "15",
-  },
-  {
-    quote:
-      "My parents thought it was just another workshop. By dinner I was explaining to them why Zomato's logo is red and they were genuinely impressed.",
-    name: "Taashi",
-    age: "16",
-  },
 ];
 
 export default function SocialProofSection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -74,7 +62,7 @@ export default function SocialProofSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-6 sm:mb-8">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -99,7 +87,7 @@ export default function SocialProofSection() {
         </div>
 
         {/* Stats grid */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-8 sm:mb-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
           {stats.map((stat, i) => (
             <motion.div
               key={stat.label}
@@ -130,7 +118,7 @@ export default function SocialProofSection() {
           {testimonials.map((item, i) => (
             <motion.div
               key={item.name}
-              className={`relative border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02]${i === 4 ? " md:col-span-2 lg:col-span-1" : ""}`}
+              className="relative border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02]"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
