@@ -57,7 +57,7 @@ export default function SpeakerSection() {
                   src="/images/murty-dinavahi.png"
                   alt="Dr. Murty V P S Dinavahi"
                   fill
-                  className="object-cover object-top"
+                  className="object-contain object-center"
                   sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
                   priority
                 />
