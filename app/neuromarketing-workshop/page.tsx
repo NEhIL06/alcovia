@@ -1,14 +1,12 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/neuromarketing-workshop/hero-section";
 import ProblemSection from "@/components/neuromarketing-workshop/problem-section";
+import SpeakerSection from "@/components/neuromarketing-workshop/speaker-section";
 import TransformationSection from "@/components/neuromarketing-workshop/transformation-section";
 import CtaMidSection from "@/components/neuromarketing-workshop/cta-mid-section";
-import AudienceSection from "@/components/neuromarketing-workshop/audience-section";
 import AuthoritySection from "@/components/neuromarketing-workshop/authority-section";
-import SpeakerSection from "@/components/neuromarketing-workshop/speaker-section";
 import SocialProofSection from "@/components/neuromarketing-workshop/social-proof-section";
 import ClosingCtaSection from "@/components/neuromarketing-workshop/closing-cta-section";
-import MobileFloatingCta from "@/components/neuromarketing-workshop/mobile-floating-cta";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -29,14 +27,12 @@ export default function NeuromarketingWorkshopPage() {
     <main className="relative">
       <HeroSection />
       <ProblemSection />
-      <TransformationSection />
       <SpeakerSection />
-      
-     
+      <TransformationSection />
+      <CtaMidSection />
       <AuthoritySection />
       <SocialProofSection />
       <ClosingCtaSection />
-      <MobileFloatingCta />
       <Footer />
     </main>
   );
