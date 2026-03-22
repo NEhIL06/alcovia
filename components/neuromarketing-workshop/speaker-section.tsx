@@ -7,7 +7,7 @@ const ACCENT = "#C77DFF";
 
 export default function SpeakerSection() {
   return (
-    <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
       {/* Background glow */}
       <div
         className="absolute inset-0 pointer-events-none"
@@ -20,7 +20,7 @@ export default function SpeakerSection() {
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section label */}
         <motion.div
-          className="text-center mb-4 sm:mb-6"
+          className="text-center mb-6 sm:mb-10"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -36,7 +36,7 @@ export default function SpeakerSection() {
 
         {/* Speaker card */}
         <motion.div
-          className="flex flex-col lg:flex-row items-center gap-6 sm:gap-10 lg:gap-14"
+          className="flex flex-col lg:flex-row items-center gap-6 sm:gap-10 lg:gap-16"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -44,7 +44,7 @@ export default function SpeakerSection() {
         >
           {/* Image placeholder */}
           <div className="relative flex-shrink-0">
-            <div className="relative w-48 h-60 sm:w-72 sm:h-[22rem] lg:w-80 lg:h-[26rem]">
+            <div className="relative w-48 h-60 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
               {/* Outer border */}
               <div
                 className="absolute inset-0 border rounded-2xl"
@@ -54,8 +54,8 @@ export default function SpeakerSection() {
               {/* Speaker photo */}
               <div className="absolute inset-3 rounded-xl overflow-hidden">
                 <Image
-                  src="/images/austin-varughese.png"
-                  alt="Austin Varughese"
+                  src="/images/murty-dinavahi.png"
+                  alt="Dr. Murty V P S Dinavahi"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 640px) 256px, (max-width: 1024px) 288px, 320px"
@@ -98,7 +98,7 @@ export default function SpeakerSection() {
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
                 style={{ color: ACCENT }}
               >
-                Affective Neuroscientist
+                Chief Neuroscientist
               </span>
             </motion.div>
           </div>
@@ -106,7 +106,7 @@ export default function SpeakerSection() {
           {/* Speaker info */}
           <div className="text-center lg:text-left flex-1">
             <motion.div
-              className="space-y-3 sm:space-y-4"
+              className="space-y-3 sm:space-y-5"
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -114,23 +114,23 @@ export default function SpeakerSection() {
             >
               {/* Speaker Header */}
               <div>
-                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-milan)] text-white mb-2">
-                  Austin Varughese
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-2">
+                  Dr. Murty V P S Dinavahi
                 </h3>
                 <p
                   className="text-base sm:text-lg font-[family-name:var(--font-satoshi)] font-medium mb-1"
                   style={{ color: ACCENT }}
                 >
-                  Affective Neuroscientist
+                  Chief Neuroscientist @ Pradhi.ai
                 </p>
                 <p className="text-sm text-white/50 font-[family-name:var(--font-satoshi)]">
-                  Researcher at Temple &middot; MS Neuroscience, NBRC Gurgaon
+                  PhD Neuroscience, IISc Bangalore &middot; MBBS &middot; Postdoc, University of Maryland
                 </p>
               </div>
 
               {/* LinkedIn link */}
               <a
-                href="https://www.linkedin.com/in/austin-varughese-he-him-50561072"
+                href="https://www.linkedin.com/in/murty-dinavahi/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 text-sm font-[family-name:var(--font-satoshi)] transition-opacity hover:opacity-80"
@@ -153,37 +153,40 @@ export default function SpeakerSection() {
               />
 
               {/* Bio content */}
-              <div className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-satoshi)] leading-relaxed max-w-xl mx-auto lg:mx-0 text-left space-y-3">
+              <div className="text-sm sm:text-base text-white/80 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
                 <p>
-                  Austin is an Affective Neuroscientist and researcher exploring
-                  the neuroscience of emotion, perception, and decision-making.
-                  With a Master&apos;s in Neuroscience from the{" "}
+                  Dr. Murty is a doctor-turned neuroscientist with interdisciplinary
+                  expertise spanning human EEG, functional MRI, eye tracking,
+                  machine learning, and affective neuroscience. With a{" "}
                   <span style={{ color: ACCENT }} className="font-medium">
-                    National Brain Research Centre
+                    PhD in Neuroscience from IISc Bangalore
                   </span>{" "}
-                  and research experience at{" "}
+                  and postdoctoral research at the{" "}
                   <span style={{ color: ACCENT }} className="font-medium">
-                    IISc Bangalore
+                    University of Maryland
                   </span>
                   , he brings deep scientific rigour to the question of why we
                   buy what we buy.
                 </p>
                 <p className="text-white/60">
-                  A published researcher in the journal{" "}
-                  <span className="italic">PAIN</span>, Austin bridges the gap
-                  between laboratory neuroscience and real-world consumer
-                  behaviour. He doesn&apos;t teach from textbooks. He brings the
-                  science straight from the lab to the boardroom.
+                  A published researcher in journals like{" "}
+                  <span className="italic">Journal of Cognitive Neuroscience</span>{" "}
+                  and <span className="italic">Neuroimaging</span>, Dr. Murty
+                  bridges the gap between laboratory neuroscience and real-world
+                  consumer behaviour. He currently leads neuroscience research at
+                  Pradhi.ai, applying brain science to voice intelligence and
+                  decision-making systems.
                 </p>
               </div>
 
               {/* Tags */}
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 pt-1">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
                 {[
                   "Neuroscience",
-                  "Affective Science",
+                  "Functional MRI",
                   "Consumer Behaviour",
                   "Published Researcher",
+                  "MBBS + PhD",
                 ].map((tag) => (
                   <span
                     key={tag}
