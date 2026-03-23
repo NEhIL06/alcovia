@@ -2,18 +2,19 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 
 export default function FloatingApplyButton() {
     const [isVisible, setIsVisible] = useState(false)
+    const { openModal } = useRegistrationModal()
 
     useEffect(() => {
         const handleScroll = () => {
-            // Show button after scrolling 200px
             setIsVisible(window.scrollY > 200)
         }
 
         window.addEventListener("scroll", handleScroll, { passive: true })
-        handleScroll() // Check initial state
+        handleScroll()
 
         return () => window.removeEventListener("scroll", handleScroll)
     }, [])
@@ -28,10 +29,8 @@ export default function FloatingApplyButton() {
                     exit={{ opacity: 0, y: 50 }}
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
-                    <motion.a
-                        href="https://docs.google.com/forms/d/e/1FAIpQLScvrS8qOc0BaUBKqw5-GSG6oyyBvK3fs0aklTw0eszc1EvBUg/viewform"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                    <motion.button
+                        onClick={openModal}
                         className="group flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold uppercase tracking-wide shadow-2xl transition-all duration-300 md:px-8 md:py-4 md:text-base"
                         style={{
                             backgroundColor: '#EABF36',
@@ -50,9 +49,9 @@ export default function FloatingApplyButton() {
                             animate={{ x: [0, 4, 0] }}
                             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                         >
-                            →
+                            &rarr;
                         </motion.span>
-                    </motion.a>
+                    </motion.button>
                 </motion.div>
             )}
         </AnimatePresence>

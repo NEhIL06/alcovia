@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import Link from "next/link"
 import Image from "next/image"
 import NavMenu from "@/components/nav-menu"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 
 // FlipText Component - Inline text flip animation
 const FLIP_DURATION = 0.25
@@ -95,13 +96,15 @@ const navLinks: NavItem[] = [
 
 export default function PremiumNavbar() {
   const pathname = usePathname()
+  const { openModal } = useRegistrationModal()
   const isF1Page = pathname === "/f1-workshop"
   const isNeuroPage = pathname === "/neuromarketing-workshop"
+  const isDefaultPage = !isNeuroPage && !isF1Page
   const applyHref = isNeuroPage
     ? "#register"
     : isF1Page
       ? "https://alcovia-workshop.short.gy/f1-workshop"
-      : "https://forms.gle/xrPqKciXL6aKwUbw7"
+      : "#"
   const applyLabel = isNeuroPage
     ? "Register for Workshop"
     : isF1Page
@@ -340,14 +343,15 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && !isNeuroPage && (
                 <motion.a
-                  href={applyHref}
-                  target="_self"
-                  rel="noopener noreferrer"
+                  href={isDefaultPage ? undefined : applyHref}
+                  onClick={isDefaultPage ? (e: React.MouseEvent) => { e.preventDefault(); openModal() } : undefined}
+                  target={isDefaultPage ? undefined : "_self"}
+                  rel={isDefaultPage ? undefined : "noopener noreferrer"}
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="hidden md:flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/100"
+                  className="hidden md:flex items-center gap-2 rounded-xl px-4 py-3 text-sm font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/100 cursor-pointer"
                   style={{
                     backgroundColor: isNeuroPage ? '#C77DFF' : '#EABF36',
                     color: isNeuroPage ? '#0a0a0a' : '#002C45',
@@ -369,14 +373,13 @@ export default function PremiumNavbar() {
             <AnimatePresence>
               {scrolled && !isF1Page && !isNeuroPage && (
                 <motion.a
-                  href={applyHref}
-                  target="_self"
-                  rel="noopener noreferrer"
+                  href={undefined}
+                  onClick={(e: React.MouseEvent) => { e.preventDefault(); openModal() }}
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}
                   transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                  className="flex md:hidden items-center rounded-lg px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/30"
+                  className="flex md:hidden items-center rounded-lg px-2 py-1.5 text-[10px] font-bold uppercase tracking-wide transition-all duration-300 hover:scale-105 border border-black/30 cursor-pointer"
                   style={{
                     backgroundColor: '#EABF36',
                     color: '#002C45',

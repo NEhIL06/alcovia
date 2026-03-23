@@ -4,8 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle, Sparkles } from "lucide-react"
-
-const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSct-ZWoKEbSLmI3P59ZUj5bqPMoxJAeP9rt-1US3qBwUtAPgw/viewform"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 const GOLD = "#EABF36"
 const GOLD_GRADIENT = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)"
 const GOLD_TEXT_STYLE = { backgroundImage: GOLD_GRADIENT, WebkitBackgroundClip: "text" as const, WebkitTextFillColor: "transparent" }
@@ -15,18 +14,17 @@ function GoldText({ children, className = "" }: { children: React.ReactNode; cla
 }
 
 function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?: "sm" | "md" | "lg" }) {
+  const { openModal } = useRegistrationModal()
   const sizes = { sm: "px-5 py-2 text-[11px]", md: "px-8 py-4 text-sm", lg: "px-10 py-5 text-sm" }
   return (
-    <a
-      href={FORM_URL}
-      target="_blank"
-      rel="noopener noreferrer"
+    <button
+      onClick={openModal}
       className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
     >
       {children}
       <ArrowUpRight className="w-4 h-4" />
-    </a>
+    </button>
   )
 }
 
@@ -528,6 +526,7 @@ function ClosingCTASection() {
 // FIXED ELEMENTS: NAVBAR + MOBILE CTA
 // ============================================================
 function LPNavbar() {
+  const { openModal } = useRegistrationModal()
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-3 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
       <a href="/" className="flex items-center gap-2">
@@ -536,33 +535,30 @@ function LPNavbar() {
           Alcovia
         </span>
       </a>
-      <a
-        href={FORM_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={openModal}
         className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105"
         style={{ background: GOLD_GRADIENT }}
       >
         Book a Fit Call
         <ArrowUpRight className="w-3 h-3" />
-      </a>
+      </button>
     </nav>
   )
 }
 
 function MobileFloatingCTA() {
+  const { openModal } = useRegistrationModal()
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden p-3 bg-gradient-to-t from-[#08261e] via-[#08261e]/95 to-transparent">
-      <a
-        href={FORM_URL}
-        target="_blank"
-        rel="noopener noreferrer"
+      <button
+        onClick={openModal}
         className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C]"
         style={{ background: GOLD_GRADIENT }}
       >
         Book a Fit Call
         <ArrowUpRight className="w-4 h-4" />
-      </a>
+      </button>
     </div>
   )
 }

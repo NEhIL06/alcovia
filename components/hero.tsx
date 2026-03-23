@@ -20,6 +20,7 @@ import {
     createAmbientParticles,
     createPlaneTakeoff,
 } from "@/lib/hero-animations"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 
 // ========================================
 // CONSTANTS
@@ -592,6 +593,8 @@ export default function Hero() {
         }
     }, [isRevealed, prefersReducedMotion])
 
+    const { openModal } = useRegistrationModal()
+
     const handleCTAClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
         if (!ctaRef.current || !containerRef.current) return
 
@@ -600,9 +603,9 @@ export default function Hero() {
         createPlaneTakeoff(containerRef.current, rect.left + rect.width / 2, rect.top + rect.height / 2)
 
         setTimeout(() => {
-            window.open("https://docs.google.com/forms/d/e/1FAIpQLSct-ZWoKEbSLmI3P59ZUj5bqPMoxJAeP9rt-1US3qBwUtAPgw/viewform", "_self")
+            openModal()
         }, 800)
-    }, [])
+    }, [openModal])
 
     const handleCTAMouseEnter = useCallback(() => {
         ctaSweepRef.current?.play()

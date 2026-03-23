@@ -5,8 +5,10 @@ import { motion, useInView, useScroll, useTransform } from "framer-motion"
 import Link from "next/link"
 import FlipLink from "@/components/flip-link"
 import TextReveal from "@/components/text-reveal"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 
 export default function Footer() {
+  const { openModal } = useRegistrationModal()
   const goldTextStyle = {
     backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)',
     WebkitBackgroundClip: 'text',
@@ -127,12 +129,13 @@ export default function Footer() {
 
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
-                { name: "Cohort 2026", href: "https://forms.gle/xrPqKciXL6aKwUbw7" },
-                { name: "Workshop", href: "/neuromarketing-workshop" }
+                { name: "Cohort 2026", href: "#", onClick: (e: React.MouseEvent) => { e.preventDefault(); openModal() } },
+                { name: "Workshop", href: "/neuromarketing-workshop", onClick: undefined }
               ].map((link) => (
                 <FlipLink
                   key={link.name}
                   href={link.href}
+                  onClick={link.onClick}
                   className="w-fit text-lg lg:text-sm"
                   baseColor="rgba(255,255,255,0.6)"
                   hoverColor="#EABF36"

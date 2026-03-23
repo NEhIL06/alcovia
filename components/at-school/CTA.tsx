@@ -2,8 +2,10 @@
 
 import { motion } from "framer-motion";
 import TextReveal from "@/components/text-reveal";
+import { useRegistrationModal } from "@/context/registration-modal-context";
 
 export default function CTA() {
+    const { openModal } = useRegistrationModal();
     return (
         <section
             className="relative flex h-screen flex-col items-center justify-center px-6 text-center overflow-hidden"
@@ -47,23 +49,20 @@ export default function CTA() {
                     </TextReveal>
                 </motion.h2>
 
-                <motion.a
-                    href="https://forms.gle/5VUPvvswL7zcKFaQA"
-                    target="_self"
-                    rel="noopener noreferrer"
+                <motion.button
+                    onClick={openModal}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="group relative inline-flex items-center justify-center px-12 py-6 overflow-hidden rounded-full transition-all duration-300 bg-[#EABF36]"
                 >
                     {/* Button Glow Effect */}
-                    <div className="absolute inset-0 w-full h-full text-[] bg-[#EABF36] group-hover:scale-[1.5] transition-transform duration-500 rounded-full blur-xl opacity-0 group-hover:opacity-100" />
+                    <div className="absolute inset-0 w-full h-full bg-[#EABF36] group-hover:scale-[1.5] transition-transform duration-500 rounded-full blur-xl opacity-0 group-hover:opacity-100" />
 
                     <span className="relative font-display text-xl md:text-2xl font-bold uppercase tracking-widest text-black/70" >
                         Start Your Journey
                     </span>
-                </motion.a>
+                </motion.button>
             </div>
         </section>
     );
 }
-

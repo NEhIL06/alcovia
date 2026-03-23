@@ -5,9 +5,11 @@ import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
+import { RegistrationModalProvider } from "@/context/registration-modal-context"
 import PremiumNavbar from "@/components/premium-navbar"
 import PageTransition from "@/components/PageTransition"
 import ClarityAnalytics from "@/components/clarity-analytics"
+import RegistrationModal from "@/components/registration-modal"
 
 import "./globals.css"
 
@@ -123,12 +125,15 @@ export default function RootLayout({
         <Analytics />
         <ClarityAnalytics />
         <SessionProvider>
-          <SmoothScrollProvider>
-            <PremiumNavbar />
-            <PageTransition>
-              {children}
-            </PageTransition>
-          </SmoothScrollProvider>
+          <RegistrationModalProvider>
+            <SmoothScrollProvider>
+              <PremiumNavbar />
+              <PageTransition>
+                {children}
+              </PageTransition>
+              <RegistrationModal />
+            </SmoothScrollProvider>
+          </RegistrationModalProvider>
         </SessionProvider>
 
       </body>

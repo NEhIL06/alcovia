@@ -3,6 +3,7 @@
 import { useEffect } from "react"
 import Image from "next/image"
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
+import { useRegistrationModal } from "@/context/registration-modal-context"
 import FlipLink from "@/components/flip-link"
 import TextReveal from "@/components/text-reveal"
 
@@ -102,6 +103,7 @@ const imageGridVariants = {
 }
 
 export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
+    const { openModal: openRegistrationModal } = useRegistrationModal()
     // --- PARALLAX SETUP ---
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
@@ -176,10 +178,8 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                     />
 
                     {/* Apply for Cohort 2026 Button - Top Left */}
-                    <motion.a
-                        href="https://forms.gle/xrPqKciXL6aKwUbw7"
-                        target="_self"
-                        rel="noopener noreferrer"
+                    <motion.button
+                        onClick={() => { onClose(); openRegistrationModal() }}
                         className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 active:scale-95"
                         style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         initial={{ opacity: 0, x: -20 }}
@@ -188,7 +188,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                         transition={{ duration: 0.3, delay: 0.15 }}
                     >
                         Apply for Cohort 2026
-                    </motion.a>
+                    </motion.button>
 
                     {/* Close Button */}
                     <motion.button
@@ -295,10 +295,8 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                             variants={itemVariants}
                             className="hidden lg:flex mt-10 w-full justify-center"
                         >
-                            <motion.a
-                                href="https://forms.gle/xrPqKciXL6aKwUbw7"
-                                target="_self"
-                                rel="noopener noreferrer"
+                            <motion.button
+                                onClick={() => { onClose(); openRegistrationModal() }}
                                 className="relative inline-flex items-center justify-center gap-3 rounded-2xl px-12 py-5 text-base font-bold uppercase tracking-widest text-[#0b0d0c] shadow-2xl transition-all duration-300"
                                 style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                                 whileHover={{ scale: 1.06, boxShadow: "0 0 40px 8px rgba(191,149,63,0.35)" }}
@@ -307,7 +305,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                 <span className="text-lg">✦</span>
                                 Apply for Cohort 2026
                                 <span className="text-lg">✦</span>
-                            </motion.a>
+                            </motion.button>
                         </motion.div>
 
                         {/* Footer / Utility Links */}

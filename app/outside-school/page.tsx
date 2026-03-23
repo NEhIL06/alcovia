@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import Link from "next/link";
 import gsap from "gsap";
+import { useRegistrationModal } from "@/context/registration-modal-context";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ReactLenis } from "lenis/react";
@@ -55,6 +56,7 @@ const quarters = [
 ];
 
 export default function OutsideSchoolPage() {
+    const { openModal } = useRegistrationModal();
     const container = useRef<HTMLDivElement>(null);
     const scrollContainer = useRef<HTMLDivElement>(null);
     const [progress, setProgress] = useState(0);
@@ -373,9 +375,8 @@ export default function OutsideSchoolPage() {
                         transition={{ duration: 0.8, delay: 0.3 }}
                         className="z-10"
                     >
-                        <Link
-                            href="https://forms.gle/xrPqKciXL6aKwUbw7"
-                            target="_self"
+                        <button
+                            onClick={openModal}
                             className="group relative inline-flex items-center gap-3 rounded-full px-10 py-5 font-sans text-lg font-bold uppercase tracking-wider text-[#0B0C15] overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:scale-105"
                             style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         >
@@ -384,7 +385,7 @@ export default function OutsideSchoolPage() {
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                             </svg>
                             <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300" />
-                        </Link>
+                        </button>
                     </motion.div>
                 </section>
 

@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback, memo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence, useScroll, useTransform, useInView } from 'framer-motion';
+import { useRegistrationModal } from "@/context/registration-modal-context";
 import { Rock_Salt } from 'next/font/google';
 
 const rockSalt = Rock_Salt({ subsets: ['latin'], weight: '400' });
@@ -102,6 +103,7 @@ const MobileTeamListItem = memo(({ member, setMobileSelectedMember }: { member: 
 ));
 
 export default function MeetTheTeamGrid() {
+    const { openModal } = useRegistrationModal();
     const [activeMember, setActiveMember] = useState<typeof team[0] | null>(null);
     const [mobileSelectedMember, setMobileSelectedMember] = useState<typeof team[0] | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -834,9 +836,9 @@ export default function MeetTheTeamGrid() {
                             <h2 className="text-white text-[clamp(3rem,10vw,8rem)] font-black uppercase mb-10 leading-[0.9]">
                                 Ready to join<br />the top <motion.span style={{ color: footerOnePercentColor }}>1%</motion.span>?
                             </h2>
-                            <a href="https://forms.gle/xrPqKciXL6aKwUbw7" target="_self" className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
+                            <button onClick={openModal} className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
                                 Apply for Cohort 2026
-                            </a>
+                            </button>
 
                             {/* Background decoration to make it pop */}
                             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/5 via-transparent to-transparent opacity-50 pointer-events-none" />
