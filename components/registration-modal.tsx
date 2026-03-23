@@ -241,7 +241,7 @@ export default function RegistrationModal() {
       {isOpen && (
         <motion.div
           ref={overlayRef}
-          className="fixed inset-0 z-[200] flex items-start sm:items-center justify-center overflow-y-auto overscroll-none"
+          className="fixed inset-0 z-[200] flex items-center justify-center overflow-y-auto overscroll-none"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
