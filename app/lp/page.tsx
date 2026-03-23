@@ -68,7 +68,7 @@ function HeroSection() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.55, 0.8])
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.72, 0.88])
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80])
 
   return (
@@ -255,9 +255,9 @@ function TransformationSection() {
               <div className="group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#EABF36]/30 transition-all duration-500">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={t.image} alt={t.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#061f18] via-[#061f18]/40 to-[#061f18]/30" />
+                  <div className="absolute inset-0 bg-[#061f18]/50" />
                   <div className="absolute top-3 left-3">
-                    <span className="text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border" style={{ color: GOLD, borderColor: `${GOLD}40` }}>
+                    <span className="text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border bg-[#061f18]/70 backdrop-blur-sm" style={{ color: GOLD, borderColor: `${GOLD}40` }}>
                       {t.label}
                     </span>
                   </div>
