@@ -19,7 +19,7 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
   return (
     <button
       onClick={openModal}
-      className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
+      className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
     >
       {children}
@@ -76,8 +76,8 @@ function HeroSection() {
       {/* Background image */}
       <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
         <Image
-          src="https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_1920/v1769157740/forgebonds_bwekt3"
-          alt=""
+          src="/images/lp/hero.jpg"
+          alt="Alcovia classroom"
           fill
           className="object-cover"
           priority
@@ -154,19 +154,19 @@ const PROBLEMS = [
     number: "01",
     title: "False readiness",
     body: "Good grades can create the illusion that a teenager is prepared. But the future will reward far more than academic performance. Employers expect 39% of workers\u2019 core skills to change by 2030. Marks do not automatically build judgment, initiative, adaptability or follow-through.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157738/academic_jcknnp",
+    image: "/images/lp/false-readiness.jpg",
   },
   {
     number: "02",
     title: "Outdated guidance",
     body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice. They need sharper exposure to real work, real professionals and real questions.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/counselerMeeting_few0qy",
+    image: "/images/lp/outdated-guidance.jpg",
   },
   {
     number: "03",
     title: "Weak environments",
     body: "Teenagers do not grow in isolation. They are shaped by the norms, expectations and ambitions of the people around them. The World Health Organization notes that adolescence is a critical developmental stage and that pressure to conform with peers can be a significant source of stress. The right peer group is not a bonus. It is a developmental multiplier.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/peertopeer_pkenhd",
+    image: "/images/lp/weak-environments.jpg",
   },
 ]
 
@@ -177,7 +177,7 @@ function ProblemsSection() {
       <div className="max-w-5xl mx-auto">
         <SectionHeader subtitle="The real problem" text="Why bright teenagers still" highlight="get left behind." />
         <FadeIn className="text-center -mt-10 mb-16 md:mb-24">
-          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             The problem is rarely a lack of talent. More often, it is the wrong preparation, the wrong environment and the wrong use of formative years.
           </p>
         </FadeIn>
@@ -222,19 +222,19 @@ const TRANSFORMATIONS = [
     label: "From ideas to execution",
     title: "They stop only consuming ideas. They start building.",
     body: "At Alcovia, teenagers are expected to move from interest to execution. They do projects, make decisions, present work, test ideas and finish what they start.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157739/carrerDiscovery_tijhkf",
+    image: "/images/lp/ideas-to-execution.jpg",
   },
   {
     label: "Conviction over conformity",
     title: "They build conviction, not borrowed ambition.",
     body: "Instead of chasing what sounds impressive, they engage with real professionals, real domains and real-world questions until they begin to understand what genuinely fits them.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769158280/oneonone_mz0dio",
+    image: "/images/lp/conviction.jpg",
   },
   {
     label: "Environment as multiplier",
     title: "They grow in a room that raises their standards.",
     body: "The right environment changes what feels normal. Teenagers begin to speak more clearly, think more deeply, attempt more difficult work and expect more from themselves.",
-    image: "https://res.cloudinary.com/ds1ka0bap/image/upload/f_auto,q_auto,w_800/v1769157740/forgebonds_bwekt3",
+    image: "/images/lp/environment.jpg",
   },
 ]
 
@@ -244,7 +244,7 @@ function TransformationSection() {
       <div className="max-w-6xl mx-auto">
         <SectionHeader subtitle="The transformation" text="What changes" highlight="inside Alcovia." />
         <FadeIn className="text-center -mt-10 mb-16">
-          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             Alcovia is built to change how a teenager thinks, works, chooses and grows.
           </p>
         </FadeIn>
@@ -266,7 +266,7 @@ function TransformationSection() {
                   <h3 className="font-[family-name:var(--font-playfair)] text-xl font-bold text-white mb-3 leading-snug">
                     {t.title}
                   </h3>
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-white/60 leading-relaxed">
                     {t.body}
                   </p>
                 </div>
@@ -367,19 +367,19 @@ const PILLARS = [
     number: "01",
     title: "Built around the future, not the syllabus",
     body: "Alcovia is designed around the widening gap between school success and future readiness. It responds to a world in which skills are changing quickly and conventional markers of achievement are becoming less reliable.",
-    image: "/images/resilience.jpg",
+    image: "/images/lp/future.jpg",
   },
   {
     number: "02",
     title: "Real-world adults, not just academic abstraction",
     body: "Teenagers need access to professionals, entrepreneurs and practitioners whose work helps them understand how the real world functions. Alcovia is built around that exposure.",
-    image: "/images/mentorshipmoments.jpeg",
+    image: "/images/lp/mentorship.jpg",
   },
   {
     number: "03",
     title: "Curated cohort and offline rigor",
     body: "The value of Alcovia is not only in what is taught, but in the room itself. Offline discussions, stronger peer expectations and real accountability help teenagers grow in ways screens and passive learning often cannot.",
-    image: "/images/peertopeer.jpg",
+    image: "/images/lp/cohort.jpg",
   },
 ]
 
@@ -389,7 +389,7 @@ function PillarsSection() {
       <div className="max-w-5xl mx-auto">
         <SectionHeader subtitle="Why Alcovia can do this" text="Exceptional through" highlight="stronger formation." />
         <FadeIn className="text-center -mt-10 mb-16">
-          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             Because teenagers do not become exceptional through information alone. They become exceptional through stronger formation.
           </p>
         </FadeIn>
@@ -408,7 +408,7 @@ function PillarsSection() {
                   <h3 className="font-[family-name:var(--font-playfair)] text-xl md:text-2xl font-bold text-white mb-3">
                     {p.title}
                   </h3>
-                  <p className="text-sm text-white/50 leading-relaxed">
+                  <p className="text-sm text-white/60 leading-relaxed">
                     {p.body}
                   </p>
                 </div>
@@ -442,7 +442,7 @@ function SocialProofSection() {
       <div className="max-w-5xl mx-auto">
         <SectionHeader subtitle="What families begin to notice" text="Better judgment. Stronger" highlight="follow-through." />
         <FadeIn className="text-center -mt-10 mb-16">
-          <p className="text-base md:text-lg text-white/50 max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             Not just more activity. Better judgment, stronger follow-through, sharper peer influence and clearer intent.
           </p>
         </FadeIn>
@@ -507,7 +507,7 @@ function ClosingCTASection() {
             The future will not ask your teenager for{" "}
             <GoldText>marks alone.</GoldText>
           </h2>
-          <p className="text-base md:text-lg text-white/50 max-w-xl mx-auto mb-10 leading-relaxed">
+          <p className="text-base md:text-lg text-white/60 max-w-xl mx-auto mb-10 leading-relaxed">
             It will ask for judgment, initiative, communication, resilience and clarity. The earlier these are built, the more naturally they become part of who your teenager is.
           </p>
 
@@ -529,15 +529,20 @@ function LPNavbar() {
   const { openModal } = useRegistrationModal()
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-3 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
-      <a href="/" className="flex items-center gap-2">
+      <a href="/" className="flex items-center gap-2.5">
         <Image src="/images/alcovia-logo-navbar.png" alt="Alcovia" width={28} height={28} className="object-contain" />
-        <span className="font-[family-name:var(--font-monument)] text-sm font-bold text-white tracking-tight uppercase">
-          Alcovia
-        </span>
+        <div className="flex flex-col">
+          <span className="font-[family-name:var(--font-space-grotesk)] text-[15px] font-bold text-white tracking-tight">
+            alcovia
+          </span>
+          <span className="font-[family-name:var(--font-space-grotesk)] text-[6px] font-medium text-white/60 tracking-[0.2em] uppercase leading-none">
+            ahead of the curve
+          </span>
+        </div>
       </a>
       <button
         onClick={openModal}
-        className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-105"
+        className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105"
         style={{ background: GOLD_GRADIENT }}
       >
         Book a Fit Call
@@ -553,7 +558,7 @@ function MobileFloatingCTA() {
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden p-3 bg-gradient-to-t from-[#08261e] via-[#08261e]/95 to-transparent">
       <button
         onClick={openModal}
-        className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C]"
+        className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer"
         style={{ background: GOLD_GRADIENT }}
       >
         Book a Fit Call
@@ -571,14 +576,21 @@ function LPFooter() {
     <footer className="bg-[#040f0b] py-12 px-6 border-t border-white/5">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <Image src="/images/alcovia-logo-navbar.png" alt="Alcovia" width={24} height={24} />
-            <span className="text-sm text-white/40">Alcovia Life</span>
+            <div className="flex flex-col">
+              <span className="font-[family-name:var(--font-space-grotesk)] text-sm font-bold text-white/40 tracking-tight">
+                alcovia
+              </span>
+              <span className="font-[family-name:var(--font-space-grotesk)] text-[5px] font-medium text-white/25 tracking-[0.2em] uppercase leading-none">
+                ahead of the curve
+              </span>
+            </div>
           </div>
           <div className="flex items-center gap-6 text-xs text-white/20">
-            <a href="/Legal/Privacy-policy" className="hover:text-white/50 transition-colors">Privacy Policy</a>
-            <a href="/Legal/terms-and-conditions" className="hover:text-white/50 transition-colors">Terms</a>
-            <a href="/contact" className="hover:text-white/50 transition-colors">Contact</a>
+            <a href="/Legal/Privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</a>
+            <a href="/Legal/terms-and-conditions" className="hover:text-white/60 transition-colors">Terms</a>
+            <a href="/contact" className="hover:text-white/60 transition-colors">Contact</a>
           </div>
         </div>
         {/* Sources */}

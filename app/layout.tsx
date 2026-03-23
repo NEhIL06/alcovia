@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono, Playfair_Display, Oswald, Inter } from "next/font/google"
+import { Geist, Geist_Mono, Playfair_Display, Oswald, Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
@@ -32,6 +32,12 @@ const oswald = Oswald({
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-satoshi",
+  display: "swap",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
   display: "swap",
 })
 
@@ -112,7 +118,7 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
+      <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} ${spaceGrotesk.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
         <noscript>
           <img
             height="1"
