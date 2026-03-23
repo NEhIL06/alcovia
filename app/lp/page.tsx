@@ -68,7 +68,7 @@ function HeroSection() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
   const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.72, 0.88])
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.78, 0.92])
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80])
 
   return (
