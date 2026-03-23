@@ -40,6 +40,7 @@ const GOLD_GRADIENT = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 
 
 interface FormData {
   student_name: string
+  parent_name: string
   phone: string
   school: string
   grade: string
@@ -59,6 +60,7 @@ export default function RegistrationModal() {
   const { isOpen, closeModal } = useRegistrationModal()
   const [formData, setFormData] = useState<FormData>({
     student_name: "",
+    parent_name: "",
     phone: "",
     school: "",
     grade: "",
@@ -99,6 +101,7 @@ export default function RegistrationModal() {
       setTimeout(() => {
         setFormData({
           student_name: "",
+          parent_name: "",
           phone: "",
           school: "",
           grade: "",
@@ -128,6 +131,7 @@ export default function RegistrationModal() {
 
   const validate = (): string | null => {
     if (!formData.student_name.trim()) return "Please enter the student's name."
+    if (!formData.parent_name.trim()) return "Please enter the parent/guardian's name."
     const phoneDigits = formData.phone.replace(/\D/g, "")
     if (phoneDigits.length < 10) return "Please enter a valid 10-digit phone number."
     if (!formData.school.trim()) return "Please enter the school name."
@@ -150,6 +154,7 @@ export default function RegistrationModal() {
 
     const payload = {
       student_name: formData.student_name.trim(),
+      parent_name: formData.parent_name.trim(),
       phone: formatPhone(formData.phone),
       school: formData.school.trim(),
       grade: formData.grade,
@@ -272,10 +277,24 @@ export default function RegistrationModal() {
                     />
                   </div>
 
-                  {/* WhatsApp Number */}
+                  {/* Parent/Guardian's Name */}
                   <div>
                     <label className="block text-xs font-medium text-white/50 mb-1.5">
-                      WhatsApp Number <span className="text-[#EABF36]">*</span>
+                      Parent/Guardian's Name <span className="text-[#EABF36]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      value={formData.parent_name}
+                      onChange={(e) => handleChange("parent_name", e.target.value)}
+                      placeholder="Full name"
+                      className="w-full rounded-lg border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/25 outline-none transition-colors focus:border-[#EABF36]/50 focus:bg-white/[0.07]"
+                    />
+                  </div>
+
+                  {/* Parent/Guardian's WhatsApp Number */}
+                  <div>
+                    <label className="block text-xs font-medium text-white/50 mb-1.5">
+                      Parent/Guardian's WhatsApp Number <span className="text-[#EABF36]">*</span>
                     </label>
                     <div className="flex items-center gap-2">
                       <span className="flex items-center rounded-lg border border-white/10 bg-white/5 px-3 py-3 text-sm text-white/50">
