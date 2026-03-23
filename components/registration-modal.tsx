@@ -10,9 +10,9 @@ const GRADE_OPTIONS = [
 ]
 
 const CITY_OPTIONS = [
+  "Gurgaon",
   "New Delhi",
   "Noida",
-  "Gurgaon",
   "Faridabad",
   "Ghaziabad",
   "Greater Noida",
