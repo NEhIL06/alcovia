@@ -78,6 +78,18 @@ export default function CtaMidSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 overflow-hidden"
+                onClick={() => {
+                  if (typeof window !== 'undefined') {
+                    (window as any).gtag?.('event', 'initiate_checkout', {
+                      payment_method: 'razorpay',
+                      item_name: 'neuromarketing_workshop',
+                    });
+                    (window as any).fbq?.('track', 'InitiateCheckout', {
+                      content_name: 'Neuromarketing Workshop',
+                      currency: 'INR',
+                    });
+                  }
+                }}
               >
                 <span
                   className="relative z-10 inline-flex items-center gap-3 text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-8 sm:px-10 py-3.5 sm:py-4 rounded-full font-semibold transition-all duration-500 group-hover:scale-105"

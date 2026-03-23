@@ -45,6 +45,18 @@ export default function MobileFloatingCta() {
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                (window as any).gtag?.('event', 'initiate_checkout', {
+                  payment_method: 'razorpay',
+                  item_name: 'neuromarketing_workshop',
+                });
+                (window as any).fbq?.('track', 'InitiateCheckout', {
+                  content_name: 'Neuromarketing Workshop',
+                  currency: 'INR',
+                });
+              }
+            }}
             style={{
               background: ACCENT,
               boxShadow: "0 4px 24px rgba(199,125,255,0.5)",

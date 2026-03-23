@@ -16,8 +16,14 @@ declare global {
 
 export default function ThankYouPage() {
   useEffect(() => {
-    if (typeof window !== "undefined" && window.fbq) {
-      window.fbq("track", "Purchase", {
+    if (typeof window !== "undefined") {
+      (window as any).gtag?.("event", "purchase", {
+        transaction_id: "rzp_" + Date.now(),
+        value: 3999,
+        currency: "INR",
+        items: [{ item_name: "Neuromarketing Workshop" }],
+      });
+      (window as any).fbq?.("track", "Purchase", {
         value: 3999,
         currency: "INR",
         content_name: "The Invisible Influence: Neuromarketing Workshop",

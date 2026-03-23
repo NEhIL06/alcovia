@@ -123,6 +123,18 @@ export default function ClosingCtaSection() {
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3"
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                (window as any).gtag?.('event', 'initiate_checkout', {
+                  payment_method: 'razorpay',
+                  item_name: 'neuromarketing_workshop',
+                });
+                (window as any).fbq?.('track', 'InitiateCheckout', {
+                  content_name: 'Neuromarketing Workshop',
+                  currency: 'INR',
+                });
+              }
+            }}
           >
             <span
               className="relative z-10 inline-flex items-center gap-3 text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-semibold transition-all duration-500 group-hover:scale-105 group-hover:bg-[#F7F7F3]"
