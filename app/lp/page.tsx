@@ -76,8 +76,8 @@ function HeroSection() {
       {/* Background image */}
       <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
         <Image
-          src="/images/lp/hero.jpg"
-          alt="Alcovia classroom"
+          src="/images/lp/conviction.jpg"
+          alt="Alcovia mentorship session"
           fill
           className="object-cover"
           priority
@@ -228,7 +228,7 @@ const TRANSFORMATIONS = [
     label: "Conviction over conformity",
     title: "They build conviction, not borrowed ambition.",
     body: "Instead of chasing what sounds impressive, they engage with real professionals, real domains and real-world questions until they begin to understand what genuinely fits them.",
-    image: "/images/lp/conviction.jpg",
+    image: "/images/lp/conviction-alt.jpg",
   },
   {
     label: "Environment as multiplier",
