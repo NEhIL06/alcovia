@@ -363,8 +363,31 @@ export default function RegistrationModal() {
                       />
                     </div>
 
-                    {/* Row: Grade + I am a + City */}
-                    <div className="grid grid-cols-3 gap-2">
+                    {/* I am a - Segmented control */}
+                    <div>
+                      <label className={labelClass}>
+                        I am a <span className="text-[#EABF36]">*</span>
+                      </label>
+                      <div className="flex rounded-lg border border-white/10 overflow-hidden">
+                        {PERSON_OPTIONS.map((option) => (
+                          <button
+                            key={option}
+                            type="button"
+                            onClick={() => handleChange("person_type", option)}
+                            className={`flex-1 py-2 text-sm font-medium transition-all duration-200 ${
+                              formData.person_type === option
+                                ? "bg-[#EABF36] text-[#0C0C0C]"
+                                : "bg-white/5 text-white/40 hover:text-white/60 hover:bg-white/[0.08]"
+                            }`}
+                          >
+                            {option}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Row: Grade + City */}
+                    <div className="grid grid-cols-2 gap-2.5">
                       <div>
                         <label className={labelClass}>
                           Grade <span className="text-[#EABF36]">*</span>
@@ -377,21 +400,6 @@ export default function RegistrationModal() {
                           <option value="" disabled className="bg-[#0a2e23] text-white/40">Select</option>
                           {GRADE_OPTIONS.map((g) => (
                             <option key={g} value={g} className="bg-[#0a2e23] text-white">{g}</option>
-                          ))}
-                        </select>
-                      </div>
-                      <div>
-                        <label className={labelClass}>
-                          I am a <span className="text-[#EABF36]">*</span>
-                        </label>
-                        <select
-                          value={formData.person_type}
-                          onChange={(e) => handleChange("person_type", e.target.value)}
-                          className={selectClass}
-                        >
-                          <option value="" disabled className="bg-[#0a2e23] text-white/40">Select</option>
-                          {PERSON_OPTIONS.map((p) => (
-                            <option key={p} value={p} className="bg-[#0a2e23] text-white">{p}</option>
                           ))}
                         </select>
                       </div>
