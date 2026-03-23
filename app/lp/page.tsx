@@ -255,7 +255,7 @@ function TransformationSection() {
               <div className="group relative bg-white/5 border border-white/10 rounded-xl overflow-hidden hover:border-[#EABF36]/30 transition-all duration-500">
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <Image src={t.image} alt={t.title} fill className="object-cover transition-transform duration-700 group-hover:scale-105" sizes="(max-width: 768px) 100vw, 33vw" loading="lazy" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#061f18] via-transparent to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#061f18] via-[#061f18]/40 to-[#061f18]/30" />
                   <div className="absolute top-3 left-3">
                     <span className="text-[10px] uppercase tracking-[0.2em] px-3 py-1 rounded-full border" style={{ color: GOLD, borderColor: `${GOLD}40` }}>
                       {t.label}
@@ -529,16 +529,8 @@ function LPNavbar() {
   const { openModal } = useRegistrationModal()
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-3 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
-      <a href="/" className="flex items-center gap-2.5">
-        <Image src="/images/alcovia-logo-navbar.png" alt="Alcovia" width={28} height={28} className="object-contain" />
-        <div className="flex flex-col">
-          <span className="font-[family-name:var(--font-space-grotesk)] text-[15px] font-bold text-white tracking-tight">
-            alcovia
-          </span>
-          <span className="font-[family-name:var(--font-space-grotesk)] text-[6px] font-medium text-white/60 tracking-[0.2em] uppercase leading-none">
-            ahead of the curve
-          </span>
-        </div>
+      <a href="/" className="flex items-center">
+        <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={120} height={39} className="object-contain h-[30px] w-auto" />
       </a>
       <button
         onClick={openModal}
@@ -576,16 +568,8 @@ function LPFooter() {
     <footer className="bg-[#040f0b] py-12 px-6 border-t border-white/5">
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex items-center gap-2.5">
-            <Image src="/images/alcovia-logo-navbar.png" alt="Alcovia" width={24} height={24} />
-            <div className="flex flex-col">
-              <span className="font-[family-name:var(--font-space-grotesk)] text-sm font-bold text-white/40 tracking-tight">
-                alcovia
-              </span>
-              <span className="font-[family-name:var(--font-space-grotesk)] text-[5px] font-medium text-white/25 tracking-[0.2em] uppercase leading-none">
-                ahead of the curve
-              </span>
-            </div>
+          <div className="flex items-center">
+            <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={100} height={32} className="object-contain h-[26px] w-auto opacity-40" />
           </div>
           <div className="flex items-center gap-6 text-xs text-white/20">
             <a href="/Legal/Privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</a>

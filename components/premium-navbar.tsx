@@ -97,8 +97,12 @@ const navLinks: NavItem[] = [
 export default function PremiumNavbar() {
   const pathname = usePathname()
   const { openModal } = useRegistrationModal()
+  const isLPPage = pathname === "/lp"
   const isF1Page = pathname === "/f1-workshop"
   const isNeuroPage = pathname === "/neuromarketing-workshop"
+
+  // LP page has its own navbar
+  if (isLPPage) return null
   const isDefaultPage = !isNeuroPage && !isF1Page
   const applyHref = isNeuroPage
     ? "#register"
