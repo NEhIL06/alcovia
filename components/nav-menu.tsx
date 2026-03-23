@@ -230,6 +230,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                     src="/images/carrerDiscovery.png"
                                     alt="Career Discovery"
                                     fill
+                                    sizes="20vw"
                                     className="object-cover opacity-80 grayscale transition-all duration-700 hover:scale-105 hover:opacity-100 hover:grayscale-0"
                                 />
                             </motion.div>
@@ -244,6 +245,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                         src="/images/oneonone.jpeg"
                                         alt="One on One Mentoring"
                                         fill
+                                        sizes="20vw"
                                         className="object-cover opacity-80 grayscale transition-all duration-700 hover:scale-105 hover:opacity-100 hover:grayscale-0"
                                     />
                                 </div>
@@ -252,6 +254,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                                         src="/images/academic.jpeg"
                                         alt="Academic Excellence"
                                         fill
+                                        sizes="20vw"
                                         className="object-cover opacity-80 grayscale transition-all duration-700 hover:scale-105 hover:opacity-100 hover:grayscale-0"
                                     />
                                 </div>

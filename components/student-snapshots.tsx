@@ -23,6 +23,7 @@ export default function StudentSnapshots() {
           muted
           loop
           playsInline
+          preload="metadata"
         >
           {/* Add your video source here */}
           <source src="/videos/download.mp4" type="video/mp4" />

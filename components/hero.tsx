@@ -7,6 +7,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { useHeroAnimation } from "@/context/hero-animation-context"
 import { ArrowUpRight } from "lucide-react"
+import Image from "next/image"
 import CursorLens from "./cursor-lens"
 
 import {
@@ -89,11 +90,13 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
 
 const BrainVisual = memo(() => (
     <div className="w-full h-full relative overflow-hidden bg-[#051a14]">
-        <img
+        <Image
             src="/images/brain-neuro.gif"
             alt="Neural activity"
-            className="absolute inset-0 w-full h-full object-cover"
+            fill
+            className="object-cover"
             style={{ filter: "hue-rotate(260deg) saturate(1.4) brightness(1.1)" }}
+            unoptimized
         />
     </div>
 ))
@@ -374,13 +377,14 @@ const WingsReveal = memo(({
                     ease: [0.22, 1, 0.36, 1],
                 }}
             >
-                <img
+                <Image
                     src="/images/element-download-1764790639.png"
                     alt=""
-                    loading="lazy"
-                    className="w-full h-full object-contain"
+                    fill
+                    className="object-contain"
                     style={{ transform: 'scaleX(-1)' }}
                     draggable={false}
+                    sizes="525px"
                 />
             </motion.div>
 
@@ -406,12 +410,13 @@ const WingsReveal = memo(({
                     delay: 0.1,
                 }}
             >
-                <img
+                <Image
                     src="/images/element-download-1764790639.png"
                     alt=""
-                    loading="lazy"
-                    className="w-full h-full object-contain"
+                    fill
+                    className="object-contain"
                     draggable={false}
+                    sizes="525px"
                 />
             </motion.div>
         </>
