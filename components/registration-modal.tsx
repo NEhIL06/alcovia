@@ -37,6 +37,12 @@ const PERSON_OPTIONS = ["Student", "Parent"]
 
 const WEBHOOK_URL = "https://n8n.alcovia.life/webhook/lead-form"
 
+function getCookie(name: string): string | undefined {
+  if (typeof document === "undefined") return undefined
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`))
+  return match ? match[2] : undefined
+}
+
 const GOLD_GRADIENT = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)"
 
 interface FormData {
@@ -207,13 +213,33 @@ export default function RegistrationModal() {
       if (!res.ok) throw new Error("Submission failed")
       setSubmitted(true)
 
-      // Fire Meta Pixel Lead event
+      // Event ID for deduplication between Pixel and Conversions API
+      const eventId = crypto.randomUUID()
+
+      // Fire Meta Pixel Lead event (client-side)
       if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
         (window as any).fbq("track", "Lead", {
           content_name: "Alcovia Registration",
           content_category: "lead_form",
-        })
+        }, { eventID: eventId })
       }
+
+      // Fire Conversions API Lead event (server-side)
+      fetch("/api/meta-capi", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          event_name: "Lead",
+          event_id: eventId,
+          phone: formatPhone(formData.phone),
+          email: formData.email.trim() || undefined,
+          city: formData.city,
+          source_url: window.location.href,
+          client_user_agent: navigator.userAgent,
+          fbc: getCookie("_fbc"),
+          fbp: getCookie("_fbp"),
+        }),
+      }).catch(() => {})
 
       // Auto-close after 4 seconds
       setTimeout(() => {
