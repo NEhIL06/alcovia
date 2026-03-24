@@ -1,9 +1,9 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useEffect } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle, Sparkles } from "lucide-react"
+import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 const GOLD = "#EABF36"
 const GOLD_GRADIENT = "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)"
@@ -72,14 +72,14 @@ function HeroSection() {
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 80])
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden">
+    <section ref={ref} className="relative h-[100svh] min-h-[580px] sm:min-h-[700px] flex items-center justify-center overflow-hidden">
       {/* Background image */}
       <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
         <Image
-          src="/images/lp/conviction.jpg"
+          src="/images/lp/hero.jpg"
           alt="Alcovia mentorship session"
           fill
-          className="object-cover"
+          className="object-cover object-[center_40%]"
           priority
         />
       </motion.div>
@@ -115,10 +115,19 @@ function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="font-[family-name:var(--font-satoshi)] text-base sm:text-lg md:text-xl text-white/70 max-w-xl mx-auto mb-10 leading-relaxed"
+          className="font-[family-name:var(--font-playfair)] text-base sm:text-xl md:text-2xl text-white/90 max-w-xl mx-auto mb-4 leading-snug"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
+          transition={{ delay: 0.55, duration: 0.6 }}
+        >
+          Bright teenagers are not automatically real-world ready.
+        </motion.p>
+
+        <motion.p
+          className="font-[family-name:var(--font-satoshi)] text-xs sm:text-sm md:text-base text-white/60 max-w-xl mx-auto mb-8 leading-relaxed"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7, duration: 0.6 }}
         >
           School success and future success are no longer the same thing. At Alcovia, teenagers build judgment, resilience, initiative and real-world confidence through challenge, mentorship and a stronger peer environment.
         </motion.p>
@@ -387,11 +396,11 @@ function PillarsSection() {
   return (
     <section className="relative py-24 md:py-32 px-6 bg-[#061f18]">
       <div className="max-w-5xl mx-auto">
-        <SectionHeader subtitle="Why Alcovia can do this" text="Exceptional through" highlight="stronger formation." />
-        <FadeIn className="text-center -mt-10 mb-16">
-          <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
-            Because teenagers do not become exceptional through information alone. They become exceptional through stronger formation.
-          </p>
+        <FadeIn className="text-center mb-16">
+          <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>Why Alcovia can do this</p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight max-w-3xl mx-auto">
+            Because teenagers do not become exceptional through information alone. They become exceptional through{" "}<GoldText>stronger formation.</GoldText>
+          </h2>
         </FadeIn>
 
         <div className="space-y-12">
@@ -425,10 +434,10 @@ function PillarsSection() {
 // SECTION 6: SOCIAL PROOF
 // ============================================================
 const PROOF_CARDS = [
-  { quote: "They finish what they start now.", tag: "Real projects" },
-  { quote: "The peer group changed everything.", tag: "Curated peer group" },
-  { quote: "For the first time, my child is thinking ahead with clarity.", tag: "Mentors from the real world" },
-  { quote: "This feels nothing like tuition.", tag: "Offline accountability" },
+  { title: "Real projects", body: "Teenagers move from ideas to execution through hands-on projects with real stakes and deadlines." },
+  { title: "Curated peer group", body: "A carefully selected cohort of driven teenagers who raise each other's standards and expectations." },
+  { title: "Mentors from the real world", body: "Access to professionals, entrepreneurs and practitioners who share how the real world actually works." },
+  { title: "Offline accountability", body: "In-person sessions with real follow-through, not passive online content or recorded lectures." },
 ]
 
 const LOGOS = [
@@ -452,39 +461,83 @@ function SocialProofSection() {
           {PROOF_CARDS.map((card, i) => (
             <FadeIn key={i}>
               <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors">
-                <Sparkles className="w-4 h-4 mb-4" style={{ color: GOLD }} />
-                <p className="font-[family-name:var(--font-playfair)] text-lg md:text-xl font-semibold text-white mb-3 italic">
-                  &ldquo;{card.quote}&rdquo;
+                <div className="w-8 h-8 rounded-full flex items-center justify-center mb-4" style={{ background: `${GOLD}15`, border: `1px solid ${GOLD}30` }}>
+                  <span className="text-xs font-bold" style={{ color: GOLD }}>{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg md:text-xl font-bold text-white mb-2">
+                  {card.title}
+                </h3>
+                <p className="text-sm text-white/50 leading-relaxed">
+                  {card.body}
                 </p>
-                <span className="text-xs uppercase tracking-[0.2em] text-white/30">
-                  {card.tag}
-                </span>
               </div>
             </FadeIn>
           ))}
         </div>
 
-        {/* Logo bar */}
+        {/* Mentor logos - infinite scroll carousel */}
         <FadeIn>
           <p className="text-center text-xs uppercase tracking-[0.3em] text-white/20 mb-8">
             Our mentors come from
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12 opacity-40">
-            {LOGOS.map((logo) => (
-              <div key={logo} className="relative w-16 h-10 md:w-20 md:h-12">
-                <Image
-                  src={`/images/logos/${logo}`}
-                  alt={logo.replace(".png", "")}
-                  fill
-                  className="object-contain brightness-0 invert"
-                  sizes="80px"
-                  loading="lazy"
-                />
-              </div>
-            ))}
+          <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
+            <style>{`@keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
+            <div className="flex items-center opacity-40" style={{ animation: "logo-scroll 25s linear infinite", width: "max-content" }}>
+              {[...LOGOS, ...LOGOS].map((logo, i) => (
+                <div key={i} className="flex-shrink-0 relative w-20 h-12 md:w-24 md:h-14 mx-6 md:mx-8">
+                  <Image
+                    src={`/images/logos/${logo}`}
+                    alt={logo.replace(".png", "")}
+                    fill
+                    className="object-contain brightness-0 invert"
+                    sizes="96px"
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </FadeIn>
       </div>
+    </section>
+  )
+}
+
+// ============================================================
+// VIDEO SECTION (lazy-loaded, zero impact on initial load)
+// ============================================================
+function VideoSection() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const sectionRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && videoRef.current) {
+          videoRef.current.src = "/videos/download.mp4"
+          videoRef.current.load()
+          observer.disconnect()
+        }
+      },
+      { rootMargin: "300px" }
+    )
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <section ref={sectionRef} className="relative w-full bg-[#061f18]">
+      <video
+        ref={videoRef}
+        className="w-full aspect-video object-cover"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="none"
+      />
     </section>
   )
 }
@@ -530,7 +583,7 @@ function LPNavbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-3 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
       <a href="/" className="flex items-center">
-        <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={120} height={39} className="object-contain h-[30px] w-auto" />
+        <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={180} height={58} className="object-contain h-[42px] w-auto" />
       </a>
       <button
         onClick={openModal}
@@ -569,7 +622,7 @@ function LPFooter() {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center">
-            <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={100} height={32} className="object-contain h-[26px] w-auto opacity-40" />
+            <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={140} height={45} className="object-contain h-[36px] w-auto opacity-40" />
           </div>
           <div className="flex items-center gap-6 text-xs text-white/20">
             <a href="/Legal/Privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</a>
@@ -599,6 +652,7 @@ export default function LandingPage() {
         <HeroSection />
         <ProblemsSection />
         <TransformationSection />
+        <VideoSection />
         <AudienceSection />
         <PillarsSection />
         <SocialProofSection />
