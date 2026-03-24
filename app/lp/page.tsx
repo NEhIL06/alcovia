@@ -101,7 +101,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.6 }}
         >
-          For parents who see more
+          For parents who know school is not enough
         </motion.p>
 
         <motion.h1
@@ -110,18 +110,9 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 0.7 }}
         >
-          School is{" "}
-          <GoldText>not enough.</GoldText>
+          Bright teenagers are not automatically{" "}
+          <GoldText>real-world ready.</GoldText>
         </motion.h1>
-
-        <motion.p
-          className="font-[family-name:var(--font-playfair)] text-base sm:text-xl md:text-2xl text-white/90 max-w-xl mx-auto mb-4 leading-snug"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.55, duration: 0.6 }}
-        >
-          Bright teenagers are not automatically real-world ready.
-        </motion.p>
 
         <motion.p
           className="font-[family-name:var(--font-satoshi)] text-xs sm:text-sm md:text-base text-white/60 max-w-xl mx-auto mb-8 leading-relaxed"
@@ -138,7 +129,7 @@ function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
         >
-          <CTAButton>Book Your Child&apos;s Fit Call</CTAButton>
+          <CTAButton>Book Your Child&apos;s Alcovia Fit Call</CTAButton>
           <a
             href="#problems"
             className="inline-flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors"
@@ -162,13 +153,13 @@ const PROBLEMS = [
   {
     number: "01",
     title: "False readiness",
-    body: "Good grades can create the illusion that a teenager is prepared. But the future will reward far more than academic performance. Employers expect 39% of workers\u2019 core skills to change by 2030. Marks do not automatically build judgment, initiative, adaptability or follow-through.",
+    body: "Good grades can create the illusion that a teenager is prepared. But the future will reward far more than academic performance. According to the World Economic Forum\u2019s Future of Jobs Report 2025, employers expect 39% of workers\u2019 core skills to change by 2030. Marks may signal discipline or memory, but they do not automatically build judgment, initiative, adaptability or follow-through.",
     image: "/images/lp/false-readiness.jpg",
   },
   {
     number: "02",
     title: "Outdated guidance",
-    body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice. They need sharper exposure to real work, real professionals and real questions.",
+    body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice or formulaic profile-building. They need sharper exposure to real work, real professionals and real questions.",
     image: "/images/lp/outdated-guidance.jpg",
   },
   {
@@ -303,17 +294,17 @@ function TransformationSection() {
 // SECTION 4: WHO IT'S FOR / NOT FOR
 // ============================================================
 const FOR_LIST = [
-  "Families who already know that marks, tuition and generic extracurriculars are no longer enough.",
-  "Teenagers who are bright, curious and capable, but not yet stretched in the right way.",
-  "Teenagers who are doing reasonably well, but need stronger peers, sharper exposure and greater real-world confidence.",
-  "Teenagers who have ideas, but need more consistency, challenge and follow-through.",
-  "Families looking for a curated, high-expectation environment rather than another class or hobby.",
+  "For families who already know that marks, tuition and generic extracurriculars are no longer enough.",
+  "For teenagers who are bright, curious and capable, but not yet stretched in the right way.",
+  "For teenagers who are doing reasonably well, but need stronger peers, sharper exposure and greater real-world confidence.",
+  "For teenagers who have ideas, but need more consistency, challenge and follow-through.",
+  "For families looking for a curated, high-expectation environment rather than another class or hobby.",
 ]
 
 const NOT_FOR_LIST = [
   "Families looking for passive online content.",
-  "Formulaic college packaging or admissions coaching.",
-  "A generic enrichment programme or another tuition centre.",
+  "Formulaic college packaging.",
+  "A generic enrichment programme.",
 ]
 
 function AudienceSection() {
