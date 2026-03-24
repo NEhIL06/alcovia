@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle } from "lucide-react"
@@ -440,10 +440,84 @@ const PROOF_CARDS = [
   { title: "Offline accountability", body: "In-person sessions with real follow-through, not passive online content or recorded lectures." },
 ]
 
-const LOGOS = [
-  "bain.png", "mckinsey.png", "flipkart.png", "panasonic.png",
-  "noise.png", "nothing.png", "master-union.png", "british-school.png", "vasant-valley.png",
+const EXPERIENCE_LOGOS = [
+  { name: "Flipkart", src: "/images/logos/flipkart.png" },
+  { name: "Panasonic", src: "/images/logos/panasonic.png" },
+  { name: "Noise", src: "/images/logos/noise.png" },
+  { name: "Nothing", src: "/images/logos/nothing.png" },
+  { name: "Masters Union", src: "/images/logos/master-union.png" },
+  { name: "Bain", src: "/images/logos/bain.png" },
+  { name: "McKinsey", src: "/images/logos/mckinsey.png" },
+  { name: "British School", src: "/images/logos/british-school.png" },
+  { name: "Vasant Valley", src: "/images/logos/vasant-valley.png" },
 ]
+
+function LogoCarousel() {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollPosRef = useRef(0)
+  const [isPaused, setIsPaused] = useState(false)
+
+  useEffect(() => {
+    const container = scrollRef.current
+    if (!container) return
+
+    let raf: number
+    const animate = () => {
+      if (!isPaused && container) {
+        const oneThird = container.scrollWidth / 3
+        if (scrollPosRef.current === 0) {
+          scrollPosRef.current = oneThird
+          container.scrollLeft = oneThird
+        }
+        scrollPosRef.current += 0.8
+        if (scrollPosRef.current >= oneThird * 2) {
+          scrollPosRef.current = oneThird
+          container.scrollLeft = oneThird
+        } else {
+          container.scrollLeft = scrollPosRef.current
+        }
+      }
+      raf = requestAnimationFrame(animate)
+    }
+    raf = requestAnimationFrame(animate)
+    return () => cancelAnimationFrame(raf)
+  }, [isPaused])
+
+  return (
+    <FadeIn>
+      <p className="text-center font-mono text-xs uppercase tracking-widest text-white/20 mb-8">
+        Experienced Folks Who Have Worked In
+      </p>
+      <div className="relative w-full overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="flex gap-4 md:gap-6 items-center overflow-hidden px-4"
+          style={{ msOverflowStyle: "none", scrollbarWidth: "none" }}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
+          onTouchEnd={() => setIsPaused(false)}
+        >
+          {[...EXPERIENCE_LOGOS, ...EXPERIENCE_LOGOS, ...EXPERIENCE_LOGOS].map((logo, i) => (
+            <div
+              key={i}
+              className="flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-4 md:p-5 border border-white/10"
+            >
+              <Image
+                src={logo.src}
+                alt={logo.name}
+                width={200}
+                height={100}
+                className="h-10 sm:h-12 md:h-16 w-auto object-contain min-w-[60px] sm:min-w-[80px] brightness-0 invert"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    </FadeIn>
+  )
+}
 
 function SocialProofSection() {
   return (
@@ -475,29 +549,8 @@ function SocialProofSection() {
           ))}
         </div>
 
-        {/* Mentor logos - infinite scroll carousel */}
-        <FadeIn>
-          <p className="text-center text-xs uppercase tracking-[0.3em] text-white/20 mb-8">
-            Our mentors come from
-          </p>
-          <div className="relative overflow-hidden" style={{ maskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)", WebkitMaskImage: "linear-gradient(to right, transparent, black 10%, black 90%, transparent)" }}>
-            <style>{`@keyframes logo-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>
-            <div className="flex items-center opacity-40" style={{ animation: "logo-scroll 25s linear infinite", width: "max-content" }}>
-              {[...LOGOS, ...LOGOS].map((logo, i) => (
-                <div key={i} className="flex-shrink-0 relative w-20 h-12 md:w-24 md:h-14 mx-6 md:mx-8">
-                  <Image
-                    src={`/images/logos/${logo}`}
-                    alt={logo.replace(".png", "")}
-                    fill
-                    className="object-contain brightness-0 invert"
-                    sizes="96px"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </FadeIn>
+        {/* Mentor logos - auto-scroll carousel (matches team page) */}
+        <LogoCarousel />
       </div>
     </section>
   )
@@ -581,9 +634,9 @@ function ClosingCTASection() {
 function LPNavbar() {
   const { openModal } = useRegistrationModal()
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-2 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
-      <a href="/" className="flex items-center -my-3">
-        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={120} height={100} className="object-contain h-[72px] w-auto" priority />
+    <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-4 py-1 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
+      <a href="/" className="flex items-center -my-5">
+        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority />
       </a>
       <button
         onClick={openModal}
