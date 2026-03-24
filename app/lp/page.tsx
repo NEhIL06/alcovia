@@ -31,7 +31,7 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
 function SectionHeader({ subtitle, text, highlight }: { subtitle?: string; text: string; highlight: string }) {
   return (
     <motion.div
-      className="text-center mb-16"
+      className="text-center mb-8 md:mb-14"
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
@@ -115,7 +115,7 @@ function HeroSection() {
         </motion.h1>
 
         <motion.p
-          className="font-[family-name:var(--font-satoshi)] text-xs sm:text-sm md:text-base text-white/60 max-w-xl mx-auto mb-8 leading-relaxed"
+          className="font-[family-name:var(--font-satoshi)] text-sm sm:text-base md:text-lg text-white/70 max-w-xl mx-auto mb-6 leading-relaxed"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.6 }}
@@ -173,16 +173,16 @@ const PROBLEMS = [
 
 function ProblemsSection() {
   return (
-    <section id="problems" className="relative py-24 md:py-32 px-6 bg-[#08261e]">
+    <section id="problems" className="relative py-14 md:py-24 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
         <SectionHeader subtitle="The real problem" text="Why bright teenagers still" highlight="get left behind." />
-        <FadeIn className="text-center -mt-10 mb-16 md:mb-24">
+        <FadeIn className="text-center -mt-6 mb-8 md:mb-14">
           <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             The problem is rarely a lack of talent. More often, it is the wrong preparation, the wrong environment and the wrong use of formative years.
           </p>
         </FadeIn>
 
-        <div className="space-y-16 md:space-y-24">
+        <div className="space-y-10 md:space-y-16">
           {PROBLEMS.map((p, i) => (
             <FadeIn key={p.number}>
               <div className={`flex flex-col ${i % 2 === 1 ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-12 items-center`}>
@@ -240,10 +240,10 @@ const TRANSFORMATIONS = [
 
 function TransformationSection() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#061f18]">
+    <section className="relative py-14 md:py-24 px-6 bg-[#061f18]">
       <div className="max-w-6xl mx-auto">
         <SectionHeader subtitle="The transformation" text="What changes" highlight="inside Alcovia." />
-        <FadeIn className="text-center -mt-10 mb-16">
+        <FadeIn className="text-center -mt-6 mb-8">
           <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             Alcovia is built to change how a teenager thinks, works, chooses and grows.
           </p>
@@ -277,7 +277,7 @@ function TransformationSection() {
       </div>
 
       {/* Mid-page CTA */}
-      <FadeIn className="mt-20 text-center">
+      <FadeIn className="mt-10 text-center">
         <p className="font-[family-name:var(--font-playfair)] text-2xl md:text-3xl font-bold text-white mb-2">
           If your child has potential,
         </p>
@@ -309,7 +309,7 @@ const NOT_FOR_LIST = [
 
 function AudienceSection() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#08261e]">
+    <section className="relative py-14 md:py-24 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
         <SectionHeader text="Alcovia is intentionally" highlight="not built for everyone." />
 
@@ -385,16 +385,16 @@ const PILLARS = [
 
 function PillarsSection() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#061f18]">
+    <section className="relative py-14 md:py-24 px-6 bg-[#061f18]">
       <div className="max-w-5xl mx-auto">
-        <FadeIn className="text-center mb-16">
+        <FadeIn className="text-center mb-8 md:mb-12">
           <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>Why Alcovia can do this</p>
           <h2 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl md:text-4xl font-bold text-white leading-tight max-w-3xl mx-auto">
             Because teenagers do not become exceptional through information alone. They become exceptional through{" "}<GoldText>stronger formation.</GoldText>
           </h2>
         </FadeIn>
 
-        <div className="space-y-12">
+        <div className="space-y-6 md:space-y-10">
           {PILLARS.map((p, i) => (
             <FadeIn key={p.number}>
               <div className="flex flex-col md:flex-row gap-6 items-center bg-white/[0.03] border border-white/[0.06] rounded-xl overflow-hidden">
@@ -509,17 +509,17 @@ function LogoCarousel() {
 
 function SocialProofSection() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#08261e]">
+    <section className="relative py-14 md:py-24 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
         <SectionHeader subtitle="What families begin to notice" text="Better judgment. Stronger" highlight="follow-through." />
-        <FadeIn className="text-center -mt-10 mb-16">
+        <FadeIn className="text-center -mt-6 mb-8">
           <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto">
             Not just more activity. Better judgment, stronger follow-through, sharper peer influence and clearer intent.
           </p>
         </FadeIn>
 
         {/* Proof cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-10">
           {PROOF_CARDS.map((card, i) => (
             <FadeIn key={i}>
               <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors">
@@ -588,7 +588,7 @@ function VideoSection() {
 // ============================================================
 function ClosingCTASection() {
   return (
-    <section className="relative py-24 md:py-32 px-6 bg-[#061f18] overflow-hidden">
+    <section className="relative py-14 md:py-24 px-6 bg-[#061f18] overflow-hidden">
       {/* Subtle radial glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full pointer-events-none"
