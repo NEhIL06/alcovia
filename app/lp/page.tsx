@@ -490,16 +490,13 @@ function LogoCarousel() {
           onTouchEnd={() => setIsPaused(false)}
         >
           {[...EXPERIENCE_LOGOS, ...EXPERIENCE_LOGOS, ...EXPERIENCE_LOGOS].map((logo, i) => (
-            <div
-              key={i}
-              className="flex-shrink-0 opacity-70 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-300 bg-white/5 backdrop-blur-sm rounded-lg p-3 sm:p-4 md:p-5 border border-white/10"
-            >
+            <div key={i} className="flex-shrink-0 opacity-50 hover:opacity-80 transition-opacity duration-300">
               <Image
                 src={logo.src}
                 alt={logo.name}
                 width={200}
                 height={100}
-                className="h-10 sm:h-12 md:h-16 w-auto object-contain min-w-[60px] sm:min-w-[80px] brightness-0 invert"
+                className="h-8 sm:h-10 md:h-14 w-auto object-contain min-w-[60px] sm:min-w-[80px] brightness-0 invert"
                 loading="lazy"
               />
             </div>
