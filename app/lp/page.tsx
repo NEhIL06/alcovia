@@ -581,9 +581,9 @@ function ClosingCTASection() {
 function LPNavbar() {
   const { openModal } = useRegistrationModal()
   return (
-    <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-3 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
-      <a href="/" className="flex items-center">
-        <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={180} height={58} className="object-contain h-[42px] w-auto" />
+    <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-5 py-2 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
+      <a href="/" className="flex items-center -my-3">
+        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={120} height={100} className="object-contain h-[72px] w-auto" priority />
       </a>
       <button
         onClick={openModal}
@@ -622,7 +622,7 @@ function LPFooter() {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center">
-            <Image src="/images/alcovia-logo-white.png" alt="Alcovia" width={140} height={45} className="object-contain h-[36px] w-auto opacity-40" />
+            <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={120} height={100} className="object-contain h-[50px] w-auto opacity-40" />
           </div>
           <div className="flex items-center gap-6 text-xs text-white/20">
             <a href="/Legal/Privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</a>
