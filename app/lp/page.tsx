@@ -572,7 +572,7 @@ function VideoSection() {
     <section ref={sectionRef} className="relative w-full bg-[#061f18]">
       <video
         ref={videoRef}
-        className="w-full aspect-video object-cover"
+        className="w-full aspect-[21/9] md:aspect-[21/9] object-cover"
         autoPlay
         muted
         loop
