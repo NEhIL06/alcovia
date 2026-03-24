@@ -320,7 +320,7 @@ export default function RegistrationModal() {
                   {/* Header */}
                   <div className="mb-4 text-center">
                     <h2 className="font-[family-name:var(--font-playfair)] text-xl font-bold text-white mb-0.5">
-                      Join Alcovia
+                      Book a Call with Alcovia
                     </h2>
                     <p className="text-[11px] text-white/40">
                       Begin your ambition-building journey
