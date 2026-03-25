@@ -414,10 +414,10 @@ function LPFooter() {
 
 const content: LPContent = {
   hero: {
-    subtitle: "For parents who know busyness is not the same as growth",
+    subtitle: "For parents who know business is not the same as growth",
     headline: "Time is your teenager’s biggest asset. The right environment can",
     highlight: "multiply it.",
-    body: "Many teenagers look busy: tuitions, hobbies, screens, endless “study time.” But busyness is not the same as direction. At Alcovia, teenagers learn how to use time with intent, build stronger routines, and turn scattered effort into real momentum.",
+    body: "Many teenagers look busy: tuitions, hobbies, screens, endless “study time.” But business is not the same as direction. At Alcovia, teenagers learn how to use time with intent, build stronger routines, and turn scattered effort into real momentum.",
     primaryCta: "High performance without burnout- learn how Alcovia does it",
     secondaryCta: "Understand the exact frameworks we use"
   },
@@ -493,7 +493,7 @@ const content: LPContent = {
     headingHighlight: "to notice",
     intro: "Not more pressure. Better structure, better focus, and better use of time.",
     prompts: [
-      "They stop confusing busyness with progress.",
+      "They stop confusing business with progress.",
       "They become more deliberate about what they say yes to.",
       "They start finishing more of what matters.",
       "They look calmer, clearer, and more in control of their week."
