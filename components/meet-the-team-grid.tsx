@@ -836,7 +836,7 @@ export default function MeetTheTeamGrid() {
                             <h2 className="text-white text-[clamp(3rem,10vw,8rem)] font-black uppercase mb-10 leading-[0.9]">
                                 Ready to join<br />the top <motion.span style={{ color: footerOnePercentColor }}>1%</motion.span>?
                             </h2>
-                            <button onClick={openModal} className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
+                            <button onClick={() => openModal("team_page_cta")} className="inline-block border border-[#EABF36] text-[#EABF36] px-12 py-4 font-mono uppercase hover:bg-[#EABF36] hover:text-black transition-all z-10">
                                 Apply for Cohort 2026
                             </button>
 

@@ -179,7 +179,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
 
                     {/* Apply for Cohort 2026 Button - Top Left */}
                     <motion.button
-                        onClick={() => { onClose(); openRegistrationModal() }}
+                        onClick={() => { onClose(); openRegistrationModal("nav_menu") }}
                         className="absolute left-6 top-6 z-[110] flex lg:hidden items-center justify-center rounded-lg px-4 py-2 text-xs font-bold uppercase tracking-wider text-[#0b0d0c] transition-all hover:scale-105 active:scale-95"
                         style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         initial={{ opacity: 0, x: -20 }}
@@ -299,7 +299,7 @@ export default function NavMenu({ isOpen, onClose }: NavMenuProps) {
                             className="hidden lg:flex mt-10 w-full justify-center"
                         >
                             <motion.button
-                                onClick={() => { onClose(); openRegistrationModal() }}
+                                onClick={() => { onClose(); openRegistrationModal("nav_menu") }}
                                 className="relative inline-flex items-center justify-center gap-3 rounded-2xl px-12 py-5 text-base font-bold uppercase tracking-widest text-[#0b0d0c] shadow-2xl transition-all duration-300"
                                 style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                                 whileHover={{ scale: 1.06, boxShadow: "0 0 40px 8px rgba(191,149,63,0.35)" }}

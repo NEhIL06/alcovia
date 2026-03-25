@@ -18,7 +18,7 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
   const sizes = { sm: "px-5 py-2 text-[11px]", md: "px-8 py-4 text-sm", lg: "px-10 py-5 text-sm" }
   return (
     <button
-      onClick={openModal}
+      onClick={() => openModal("lp_cta_button")}
       className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
     >
@@ -627,7 +627,7 @@ function LPNavbar() {
         <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority />
       </a>
       <button
-        onClick={openModal}
+        onClick={() => openModal("lp_navbar")}
         className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105"
         style={{ background: GOLD_GRADIENT }}
       >
@@ -643,7 +643,7 @@ function MobileFloatingCTA() {
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden p-3 bg-gradient-to-t from-[#08261e] via-[#08261e]/95 to-transparent">
       <button
-        onClick={openModal}
+        onClick={() => openModal("lp_mobile_floating")}
         className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer"
         style={{ background: GOLD_GRADIENT }}
       >

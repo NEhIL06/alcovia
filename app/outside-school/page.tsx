@@ -376,7 +376,7 @@ export default function OutsideSchoolPage() {
                         className="z-10"
                     >
                         <button
-                            onClick={openModal}
+                            onClick={() => openModal("outside_school_cta")}
                             className="group relative inline-flex items-center gap-3 rounded-full px-10 py-5 font-sans text-lg font-bold uppercase tracking-wider text-[#0B0C15] overflow-hidden transition-all duration-500 hover:shadow-[0_0_40px_rgba(212,175,55,0.4)] hover:scale-105"
                             style={{ backgroundImage: 'linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)' }}
                         >

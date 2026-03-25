@@ -103,7 +103,7 @@ function getTrafficSource(): string {
 }
 
 export default function RegistrationModal() {
-  const { isOpen, closeModal } = useRegistrationModal()
+  const { isOpen, closeModal, formOpenSource } = useRegistrationModal()
   const { lenis } = useLenis()
   const [formData, setFormData] = useState<FormData>({
     student_name: "",
@@ -248,6 +248,7 @@ export default function RegistrationModal() {
       utm_medium: searchParams.get("utm_medium") || undefined,
       utm_campaign: searchParams.get("utm_campaign") || undefined,
       utm_content: searchParams.get("utm_content") || undefined,
+      form_open_source: formOpenSource,
     }
 
     try {

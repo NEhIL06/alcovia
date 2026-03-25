@@ -50,7 +50,7 @@ export default function CTA() {
                 </motion.h2>
 
                 <motion.button
-                    onClick={openModal}
+                    onClick={() => openModal("at_school_cta")}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="group relative inline-flex items-center justify-center px-12 py-6 overflow-hidden rounded-full transition-all duration-300 bg-[#EABF36]"
