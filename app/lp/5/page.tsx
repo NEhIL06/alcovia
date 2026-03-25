@@ -81,8 +81,8 @@ function HeroSection({ hero }: { hero: LPContent["hero"] }) {
       </motion.div>
       <motion.div className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: overlayOpacity }} />
 
-      <motion.div className="relative z-10 max-w-3xl mx-auto px-6 text-center" style={{ y: contentY }}>
-        <motion.p className="text-xs md:text-sm uppercase tracking-[0.35em] mb-6" style={{ color: GOLD }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+      <motion.div className="relative z-10 max-w-3xl mx-auto px-6 pt-24 md:pt-32 text-center" style={{ y: contentY }}>
+        <motion.p className="text-xs md:text-sm uppercase tracking-[0.35em] mb-6 leading-relaxed" style={{ color: GOLD }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
           {hero.subtitle}
         </motion.p>
 

@@ -4,7 +4,8 @@
       "Bash(npm install:*)",
       "Bash(curl -s http://localhost:3000/images.json)",
       "Bash(pkill -f \"next dev\")",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(ls:*)"
     ]
   }
 }
