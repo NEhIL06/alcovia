@@ -98,22 +98,13 @@ export default function PremiumNavbar() {
   const pathname = usePathname()
   const { openModal } = useRegistrationModal()
   const isLPPage = pathname === "/lp"
-  const isF1Page = pathname === "/f1-workshop"
   const isNeuroPage = pathname === "/neuromarketing-workshop"
 
   // LP page has its own navbar
   if (isLPPage) return null
-  const isDefaultPage = !isNeuroPage && !isF1Page
-  const applyHref = isNeuroPage
-    ? "#register"
-    : isF1Page
-      ? "https://alcovia-workshop.short.gy/f1-workshop"
-      : "#"
-  const applyLabel = isNeuroPage
-    ? "Register for Workshop"
-    : isF1Page
-      ? "Ready for boardroom?"
-      : "Book a Fit Call"
+  const isDefaultPage = !isNeuroPage
+  const applyHref = isNeuroPage ? "#register" : "#"
+  const applyLabel = isNeuroPage ? "Register for Workshop" : "Book a Fit Call"
   const isBrochurePage = pathname === "/brochure"
 
   const [navMode, setNavMode] = useState<NavMode>("light")
@@ -373,9 +364,9 @@ export default function PremiumNavbar() {
               )}
             </AnimatePresence>
 
-            {/* Mobile Apply Button - Smaller size (hidden on f1-workshop page, replaced by floating CTA) */}
+            {/* Mobile Apply Button - Smaller size */}
             <AnimatePresence>
-              {scrolled && !isF1Page && !isNeuroPage && (
+              {scrolled && !isNeuroPage && (
                 <motion.a
                   href={undefined}
                   onClick={(e: React.MouseEvent) => { e.preventDefault(); openModal() }}
