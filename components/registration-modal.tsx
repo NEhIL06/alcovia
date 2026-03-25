@@ -63,6 +63,45 @@ function getAdIdFromUrl(): string {
   return params.get("ad_id") || ""
 }
 
+function getTrafficSource(): string {
+  if (typeof document === "undefined") return "unknown"
+  const ref = document.referrer
+  if (!ref) return "direct"
+  try {
+    const hostname = new URL(ref).hostname.replace("www.", "").replace("l.", "").replace("lm.", "")
+    const sourceMap: Record<string, string> = {
+      "google.com": "google",
+      "google.co.in": "google",
+      "bing.com": "bing",
+      "yahoo.com": "yahoo",
+      "duckduckgo.com": "duckduckgo",
+      "chatgpt.com": "chatgpt",
+      "chat.openai.com": "chatgpt",
+      "perplexity.ai": "perplexity",
+      "instagram.com": "instagram",
+      "facebook.com": "facebook",
+      "fb.com": "facebook",
+      "whatsapp.com": "whatsapp",
+      "web.whatsapp.com": "whatsapp",
+      "twitter.com": "twitter",
+      "x.com": "twitter",
+      "t.co": "twitter",
+      "linkedin.com": "linkedin",
+      "youtube.com": "youtube",
+      "reddit.com": "reddit",
+      "telegram.org": "telegram",
+      "web.telegram.org": "telegram",
+      "pinterest.com": "pinterest",
+      "quora.com": "quora",
+      "snapchat.com": "snapchat",
+      "alcovia.life": "internal",
+    }
+    return sourceMap[hostname] || hostname
+  } catch {
+    return ref
+  }
+}
+
 export default function RegistrationModal() {
   const { isOpen, closeModal } = useRegistrationModal()
   const { lenis } = useLenis()
@@ -190,6 +229,7 @@ export default function RegistrationModal() {
     setSubmitting(true)
     setError("")
 
+    const searchParams = new URLSearchParams(window.location.search)
     const payload = {
       student_name: formData.student_name.trim(),
       parent_name: formData.parent_name.trim(),
@@ -201,6 +241,13 @@ export default function RegistrationModal() {
       email: formData.email.trim() || undefined,
       whatsapp_optin: formData.whatsapp_optin,
       ad_id: getAdIdFromUrl() || undefined,
+      traffic_source: getTrafficSource(),
+      referrer_raw: document.referrer || "direct",
+      landing_page: window.location.pathname,
+      utm_source: searchParams.get("utm_source") || undefined,
+      utm_medium: searchParams.get("utm_medium") || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || undefined,
+      utm_content: searchParams.get("utm_content") || undefined,
     }
 
     try {
