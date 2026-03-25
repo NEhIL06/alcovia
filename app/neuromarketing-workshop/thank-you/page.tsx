@@ -32,6 +32,27 @@ export default function ThankYouPage() {
     }
   }, []);
 
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const name = params.get("name")
+    const email = params.get("email")
+    const phone = params.get("phone")
+    if (name || email || phone) {
+      fetch("https://n8n.alcovia.life/webhook/workshop-confirmation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name || "",
+          email: email || "",
+          phone: phone || "",
+          workshop: "The Invisible Influence: Neuromarketing Workshop",
+          date: "28th March, 2026",
+          amount: 3999,
+        }),
+      }).catch(() => {})
+    }
+  }, []);
+
   return (
     <main className="relative min-h-screen flex flex-col">
       {/* Background */}
