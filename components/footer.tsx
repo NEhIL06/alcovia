@@ -28,7 +28,6 @@ export default function Footer() {
     { name: "At School", href: "/at-school" },
     { name: "Outside School", href: "/outside-school" },
     { name: "Meet The Team", href: "/meet-the-team" },
-    { name: "Events", href: "/neuromarketing-workshop" },
   ]
 
 

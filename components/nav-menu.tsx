@@ -12,12 +12,13 @@ interface NavMenuProps {
     onClose: () => void
 }
 
-const menuItems = [
+type MenuItem = { label: string; href: string; mobileOnly?: boolean };
+
+const menuItems: MenuItem[] = [
     { label: "HOME", href: "/" },
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
     { label: "TEAM", href: "/meet-the-team" },
-    { label: "EVENTS", href: "/neuromarketing-workshop", mobileOnly: true },
 ]
 
 const socialLinks = [
