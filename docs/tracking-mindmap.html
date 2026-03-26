@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcovia Tracking Architecture</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:#0a0f0d;color:#e8e8e0;padding:40px 20px}
+.title{text-align:center;margin-bottom:40px}
+.title h1{font-size:2rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#FCF6BA,#B38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.title p{color:#7a8a7e;font-size:0.9rem}
+.map{max-width:1200px;margin:0 auto}
+.section{margin-bottom:32px;background:#111916;border:1px solid #1a2a22;border-radius:16px;padding:24px;position:relative}
+.section::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.section.gold::before{background:#EABF36}
+.section.blue::before{background:#3b82f6}
+.section.green::before{background:#10b981}
+.section.purple::before{background:#a855f7}
+.section.red::before{background:#ef4444}
+.section h2{font-size:1.1rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.section h2 span{font-size:1.3rem}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.node{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:8px 14px;font-size:0.78rem;font-weight:500}
+.node.highlight{border-color:#EABF36;color:#EABF36}
+.node.tool{border-color:#3b82f6;color:#3b82f6}
+.node.data{border-color:#10b981;color:#10b981}
+.arrow{color:#7a8a7e;font-weight:700}
+.detail{font-size:0.75rem;color:#7a8a7e;line-height:1.6;margin-top:8px}
+.detail strong{color:#e8e8e0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:16px}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:14px}
+.card h4{font-size:0.8rem;font-weight:600;margin-bottom:6px;color:#EABF36}
+.card p{font-size:0.72rem;color:#7a8a7e;line-height:1.5}
+.card code{background:rgba(234,191,54,0.1);color:#EABF36;padding:1px 5px;border-radius:3px;font-size:0.68rem}
+table{width:100%;border-collapse:collapse;margin-top:12px;font-size:0.75rem}
+th{text-align:left;padding:8px;border-bottom:1px solid #1a2a22;color:#7a8a7e;font-weight:600;font-size:0.65rem;text-transform:uppercase}
+td{padding:6px 8px;border-bottom:1px solid rgba(255,255,255,0.03)}
+.tag{display:inline-block;padding:2px 6px;border-radius:3px;font-size:0.6rem;font-weight:600}
+.tag-gold{background:rgba(234,191,54,0.15);color:#EABF36}
+.tag-blue{background:rgba(59,130,246,0.15);color:#3b82f6}
+.tag-green{background:rgba(16,185,129,0.15);color:#10b981}
+</style>
+</head>
+<body>
+<div class="title">
+  <h1>Alcovia Tracking Architecture</h1>
+  <p>Complete end-to-end tracking system for ad campaigns, organic traffic, and lead analytics</p>
+</div>
+
+<div class="map">
+
+<!-- SECTION 1: THE FLOW -->
+<div class="section gold">
+  <h2><span>1.</span> How a Lead is Tracked (End to End)</h2>
+
+  <h3 style="font-size:0.85rem;color:#EABF36;margin:12px 0 8px">Paid Ad Flow:</h3>
+  <div class="flow">
+    <div class="node highlight">Instagram Ad</div><span class="arrow">-></span>
+    <div class="node">User clicks ad</div><span class="arrow">-></span>
+    <div class="node highlight">alcovia.life/lp/1?ad_id=...&utm_content=m1_fear</div><span class="arrow">-></span>
+    <div class="node tool">Meta Pixel fires PageView</div><span class="arrow">-></span>
+    <div class="node">User clicks CTA button</div><span class="arrow">-></span>
+    <div class="node highlight">Registration form opens</div><span class="arrow">-></span>
+    <div class="node data">Form submitted</div><span class="arrow">-></span>
+    <div class="node tool">Meta Pixel fires Lead + CAPI fires Lead</div><span class="arrow">-></span>
+    <div class="node data">n8n webhook receives ALL data</div><span class="arrow">-></span>
+    <div class="node">ClickUp task + Google Sheet + Email + WhatsApp</div>
+  </div>
+
+  <h3 style="font-size:0.85rem;color:#10b981;margin:12px 0 8px">Organic Flow:</h3>
+  <div class="flow">
+    <div class="node data">User finds site via Google/WhatsApp/ChatGPT/Direct</div><span class="arrow">-></span>
+    <div class="node">Lands on any page</div><span class="arrow">-></span>
+    <div class="node tool">Browser records referrer</div><span class="arrow">-></span>
+    <div class="node">User clicks any CTA</div><span class="arrow">-></span>
+    <div class="node highlight">Form opens (button tracked)</div><span class="arrow">-></span>
+    <div class="node data">Form submitted with: traffic_source + referrer + landing_page + button</div>
+  </div>
+</div>
+
+<!-- SECTION 2: TRACKING TOOLS -->
+<div class="section blue">
+  <h2><span>2.</span> Tracking Tools Installed</h2>
+  <table>
+    <thead><tr><th>Tool</th><th>ID</th><th>Where</th><th>What it tracks</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Google Analytics (GA4)</strong></td><td><code>G-T46NRQ65FV</code></td><td>Every page</td><td>All page visits, user behavior</td></tr>
+      <tr><td><strong>Meta Pixel (Main)</strong></td><td><code>1606881963979917</code></td><td>Every page</td><td>PageView on all pages</td></tr>
+      <tr><td><strong>Meta Pixel (LP Campaign)</strong></td><td><code>26011379345197572</code></td><td>LP pages only (/lp, /lp/1-5)</td><td>PageView + Lead event on form submit</td></tr>
+      <tr><td><strong>Conversions API (Server)</strong></td><td>Same as LP pixel</td><td>Server-side API route</td><td>Lead event (redundant with pixel for reliability)</td></tr>
+      <tr><td><strong>Microsoft Clarity (Main)</strong></td><td><code>vy2qj0kssf</code></td><td>Every page</td><td>Heatmaps, session recordings, rage clicks</td></tr>
+      <tr><td><strong>Microsoft Clarity (Workshop)</strong></td><td><code>vyomq18cqq</code></td><td>Workshop page only</td><td>Same, separate project</td></tr>
+      <tr><td><strong>Vercel Analytics</strong></td><td>Auto</td><td>Every page</td><td>Core Web Vitals, page speed</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 3: DATA CAPTURED -->
+<div class="section green">
+  <h2><span>3.</span> Data Captured Per Lead (19 Fields)</h2>
+  <div class="grid">
+    <div class="card">
+      <h4>Form Data (9 fields)</h4>
+      <p><code>student_name</code> <code>parent_name</code> <code>phone</code> <code>school</code> <code>grade</code> <code>person_type</code> <code>city</code> <code>email</code> <code>whatsapp_optin</code></p>
+    </div>
+    <div class="card">
+      <h4>Ad Attribution (5 fields)</h4>
+      <p><code>ad_id</code> which specific ad (e.g. alc_m1_fear_240326)<br>
+      <code>utm_source</code> = meta<br>
+      <code>utm_medium</code> = paid<br>
+      <code>utm_campaign</code> = lp_leadgen_mar26<br>
+      <code>utm_content</code> = m1_fear (messaging + tone)</p>
+    </div>
+    <div class="card">
+      <h4>Source Tracking (3 fields)</h4>
+      <p><code>traffic_source</code> = google / whatsapp / instagram / direct / chatgpt / etc.<br>
+      <code>referrer_raw</code> = full referrer URL<br>
+      <code>landing_page</code> = /lp/1, /, /meet-the-team, etc.</p>
+    </div>
+    <div class="card">
+      <h4>Behavior Tracking (2 fields)</h4>
+      <p><code>form_open_source</code> = which button opened the form (hero_cta, lp_navbar, lp_mobile_floating, navbar_desktop, etc.)<br>
+      <code>timestamp</code> = when submitted</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4: WHERE DATA GOES -->
+<div class="section purple">
+  <h2><span>4.</span> Where Data Goes After Form Submit</h2>
+  <div class="flow">
+    <div class="node data">Form submitted</div><span class="arrow">-></span>
+    <div class="node tool">n8n Webhook</div>
+  </div>
+  <div style="margin-left:20px;margin-top:8px">
+    <div class="flow"><span class="arrow" style="margin-right:8px">1.</span><div class="node">ClickUp task created (assigned to Sahil or Naincy randomly)</div></div>
+    <div class="flow"><span class="arrow" style="margin-right:8px">2.</span><div class="node data">Google Sheet "Lead Log" tab (all 19 fields logged)</div></div>
+    <div class="flow"><span class="arrow" style="margin-right:8px">3.</span><div class="node">Email sent to assigned person with ClickUp link</div></div>
+    <div class="flow"><span class="arrow" style="margin-right:8px">4.</span><div class="node">WhatsApp sent via AiSensy to assigned person</div></div>
+    <div class="flow"><span class="arrow" style="margin-right:8px">5.</span><div class="node tool">Meta Pixel "Lead" event (client-side)</div></div>
+    <div class="flow"><span class="arrow" style="margin-right:8px">6.</span><div class="node tool">Conversions API "Lead" event (server-side, same event_id for dedup)</div></div>
+  </div>
+</div>
+
+<!-- SECTION 5: AD STRUCTURE -->
+<div class="section red">
+  <h2><span>5.</span> Ad Campaign Structure (25 Ads)</h2>
+  <div class="detail">
+    <strong>5 Messaging Categories:</strong> Real-world readiness, Career counselling, Time management, Peer group, Top 1%<br>
+    <strong>5 Tones per Messaging:</strong> Fear, Aspirational, Authority, Myth Busting, Comparison<br>
+    <strong>5 Landing Pages:</strong> /lp/1 (Fear), /lp/2 (Aspirational), /lp/3 (Authority), /lp/4 (Myth Busting), /lp/5 (Comparison)<br>
+    <strong>Landing page is determined by tone</strong>, not messaging. All fear-toned ads go to /lp/1, all aspirational to /lp/2, etc.<br>
+    <strong>Each ad has a unique ad_id:</strong> e.g. alc_m1_fear_240326 = Messaging 1, Fear tone, dated March 26.
+  </div>
+  <table style="margin-top:16px">
+    <thead><tr><th>Metric</th><th>Where to See</th></tr></thead>
+    <tbody>
+      <tr><td>Which ad got clicked</td><td>Dashboard > Ad Performance tab > "Leads by Ad" chart</td></tr>
+      <tr><td>Which messaging works best</td><td>Dashboard > Ad Performance > "Leads by Messaging (m1-m5)"</td></tr>
+      <tr><td>Which tone converts best</td><td>Dashboard > Ad Performance > "Leads by Tone"</td></tr>
+      <tr><td>Which landing page converts</td><td>Dashboard > Overview > "Landing Page Performance"</td></tr>
+      <tr><td>Which button converts</td><td>Dashboard > Overview > "CTA Button Performance"</td></tr>
+      <tr><td>Full user journey</td><td>Dashboard > User Journey tab</td></tr>
+      <tr><td>Organic vs Paid split</td><td>Dashboard > Summary cards at top</td></tr>
+      <tr><td>Individual lead details</td><td>Dashboard > All Leads tab (searchable, filterable)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- SECTION 6: DASHBOARD -->
+<div class="section gold">
+  <h2><span>6.</span> Dashboard Access</h2>
+  <div class="detail">
+    <strong>URL:</strong> alcovia.life/dashboard.html<br>
+    <strong>Password:</strong> alcovia2026<br>
+    <strong>Auto-refreshes:</strong> every 60 seconds<br>
+    <strong>Data source:</strong> Google Sheet "Lead Log" tab via n8n API<br>
+    <strong>Hidden from search engines:</strong> noindex, nofollow meta tag
+  </div>
+</div>
+
+</div>
+</body>
+</html>
