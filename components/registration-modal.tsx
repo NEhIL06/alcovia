@@ -114,7 +114,7 @@ export default function RegistrationModal() {
     person_type: "",
     city: "",
     email: "",
-    whatsapp_optin: false,
+    whatsapp_optin: true,
   })
   const [submitting, setSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
@@ -185,7 +185,7 @@ export default function RegistrationModal() {
           person_type: "",
           city: "",
           email: "",
-          whatsapp_optin: false,
+          whatsapp_optin: true,
         })
         setSubmitted(false)
         setError("")
