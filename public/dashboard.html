@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alcovia Lead Analytics Dashboard</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0f0d;--card:#111916;--border:#1a2a22;--gold:#EABF36;--gold-dim:rgba(234,191,54,0.15);--text:#e8e8e0;--muted:#7a8a7e;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+.container{max-width:1400px;margin:0 auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px;flex-wrap:wrap;gap:12px}
+h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#FCF6BA,#B38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.badge{font-size:0.65rem;padding:4px 10px;border-radius:20px;background:var(--gold-dim);color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
+.header-right{display:flex;gap:8px;align-items:center}
+.btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.2s}
+.btn:hover{border-color:var(--gold);color:var(--gold)}
+.btn-gold{background:var(--gold);color:#0a0f0d;border-color:var(--gold);font-weight:700}
+.btn-gold:hover{opacity:0.9}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden}
+.stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.stat-card.gold::before{background:var(--gold)}
+.stat-card.green::before{background:var(--green)}
+.stat-card.blue::before{background:var(--blue)}
+.stat-card.purple::before{background:var(--purple)}
+.stat-card.red::before{background:var(--red)}
+.stat-label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.stat-value{font-size:1.8rem;font-weight:800;line-height:1}
+.stat-sub{font-size:0.7rem;color:var(--muted);margin-top:4px}
+.section{margin-bottom:24px}
+.section-title{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:24px}
+.chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
+.chart-card h3{font-size:0.85rem;font-weight:600;margin-bottom:12px;color:var(--muted)}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:0.75rem}
+.bar-label{width:120px;text-align:right;color:var(--muted);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bar-track{flex:1;height:20px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:6px;font-size:0.65rem;font-weight:600;color:#0a0f0d;min-width:fit-content}
+.bar-count{width:40px;text-align:right;font-weight:600;flex-shrink:0}
+table{width:100%;border-collapse:collapse;font-size:0.78rem}
+th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:0.65rem;letter-spacing:0.05em;cursor:pointer;user-select:none}
+th:hover{color:var(--gold)}
+td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600}
+.tag-paid{background:rgba(59,130,246,0.15);color:var(--blue)}
+.tag-organic{background:rgba(16,185,129,0.15);color:var(--green)}
+.tag-direct{background:rgba(168,85,247,0.15);color:var(--purple)}
+.loading{text-align:center;padding:60px;color:var(--muted)}
+.spinner{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filter-input{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.75rem;outline:none}
+.filter-input:focus{border-color:var(--gold)}
+select.filter-input{cursor:pointer}
+.table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:12px}
+.empty{text-align:center;padding:40px;color:var(--muted)}
+.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:-1px}
+.tab{padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s}
+.tab:hover{color:var(--text)}
+.tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-content{display:none}
+.tab-content.active{display:block}
+@media(max-width:768px){.summary{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.bar-label{width:80px}}
+</style>
+</head>
+<body>
+<div class="container">
+<header>
+  <div style="display:flex;align-items:center;gap:12px">
+    <h1>Alcovia Analytics</h1>
+    <span class="badge">Live Dashboard</span>
+  </div>
+  <div class="header-right">
+    <span id="lastUpdated" style="font-size:0.7rem;color:var(--muted)"></span>
+    <button class="btn" id="refreshBtn" onclick="loadData()">Refresh</button>
+  </div>
+</header>
+
+<div class="summary" id="summaryCards">
+  <div class="stat-card gold"><div class="stat-label">Total Leads</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
+  <div class="stat-card blue"><div class="stat-label">Paid (Ads)</div><div class="stat-value" id="paidLeads">-</div><div class="stat-sub" id="paidPct">-</div></div>
+  <div class="stat-card green"><div class="stat-label">Organic</div><div class="stat-value" id="organicLeads">-</div><div class="stat-sub" id="organicPct">-</div></div>
+  <div class="stat-card purple"><div class="stat-label">Direct</div><div class="stat-value" id="directLeads">-</div><div class="stat-sub" id="directPct">-</div></div>
+  <div class="stat-card red"><div class="stat-label">Top Source</div><div class="stat-value" id="topSource" style="font-size:1.2rem">-</div><div class="stat-sub" id="topSourceCount">-</div></div>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="overview">Overview</div>
+  <div class="tab" data-tab="ads">Ad Performance</div>
+  <div class="tab" data-tab="journey">User Journey</div>
+  <div class="tab" data-tab="leads">All Leads</div>
+</div>
+
+<div id="tab-overview" class="tab-content active">
+  <div class="charts">
+    <div class="chart-card"><h3>Traffic Source Breakdown</h3><div id="chartSource"></div></div>
+    <div class="chart-card"><h3>Landing Page Performance</h3><div id="chartLP"></div></div>
+    <div class="chart-card"><h3>CTA Button Performance</h3><div id="chartButton"></div></div>
+    <div class="chart-card"><h3>City Distribution</h3><div id="chartCity"></div></div>
+  </div>
+</div>
+
+<div id="tab-ads" class="tab-content">
+  <div class="charts">
+    <div class="chart-card"><h3>Leads by Ad (utm_content)</h3><div id="chartAd"></div></div>
+    <div class="chart-card"><h3>Leads by Messaging (m1-m5)</h3><div id="chartMessaging"></div></div>
+    <div class="chart-card"><h3>Leads by Tone</h3><div id="chartTone"></div></div>
+    <div class="chart-card"><h3>Ad ID Breakdown</h3><div id="chartAdId"></div></div>
+  </div>
+</div>
+
+<div id="tab-journey" class="tab-content">
+  <div class="charts">
+    <div class="chart-card" style="grid-column:1/-1"><h3>User Journeys (Source -> Landing Page -> Button -> Registration)</h3><div id="journeyTable"></div></div>
+  </div>
+</div>
+
+<div id="tab-leads" class="tab-content">
+  <div class="filters">
+    <input type="text" class="filter-input" id="filterSearch" placeholder="Search name, phone, school...">
+    <select class="filter-input" id="filterSource"><option value="">All Sources</option></select>
+    <select class="filter-input" id="filterLP"><option value="">All Pages</option></select>
+    <select class="filter-input" id="filterCity"><option value="">All Cities</option></select>
+  </div>
+  <div class="table-wrap"><table><thead><tr>
+    <th data-sort="timestamp">Time</th>
+    <th data-sort="student_name">Student</th>
+    <th data-sort="parent_name">Parent</th>
+    <th>Phone</th>
+    <th data-sort="school">School</th>
+    <th data-sort="grade">Grade</th>
+    <th data-sort="city">City</th>
+    <th data-sort="traffic_source">Source</th>
+    <th data-sort="landing_page">Page</th>
+    <th data-sort="form_open_source">Button</th>
+    <th data-sort="ad_id">Ad ID</th>
+    <th data-sort="utm_content">Ad Tone</th>
+  </tr></thead><tbody id="leadsTable"></tbody></table></div>
+</div>
+
+<div class="loading" id="loadingState"><div class="spinner"></div><p>Loading analytics...</p></div>
+</div>
+
+<script>
+const API_URL = 'https://n8n.alcovia.life/webhook/dashboard-data';
+let allLeads = [];
+let sortField = 'timestamp';
+let sortAsc = false;
+
+const COLORS = {
+  google:'#4285f4', whatsapp:'#25d366', instagram:'#e1306c', facebook:'#1877f2', chatgpt:'#10a37f',
+  direct:'#a855f7', twitter:'#1da1f2', linkedin:'#0077b5', meta:'#3b82f6', unknown:'#6b7280',
+  youtube:'#ff0000', reddit:'#ff4500', telegram:'#0088cc', perplexity:'#20b2aa', bing:'#00809d'
+};
+
+function getColor(key) { return COLORS[key.toLowerCase()] || '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); }
+
+async function loadData() {
+  document.getElementById('loadingState').style.display = 'block';
+  try {
+    const res = await fetch(API_URL + '?_t=' + Date.now());
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    allLeads = Array.isArray(data) ? data : [];
+    render();
+    document.getElementById('lastUpdated').textContent = 'Updated: ' + new Date().toLocaleString('en-IN', {dateStyle:'medium',timeStyle:'short'});
+  } catch(e) {
+    console.error(e);
+    document.getElementById('loadingState').innerHTML = '<p style="color:#ef4444">Failed to load data. The "Lead Log" sheet tab may not exist yet. Submit a test form first, then refresh.</p>';
+  }
+  document.getElementById('loadingState').style.display = 'none';
+}
+
+function render() {
+  renderSummary();
+  renderCharts();
+  renderAds();
+  renderJourney();
+  renderLeadsTable();
+  populateFilters();
+}
+
+function renderSummary() {
+  const total = allLeads.length;
+  const today = allLeads.filter(l => isToday(l.timestamp)).length;
+  const paid = allLeads.filter(l => l.utm_source && l.utm_source !== '').length;
+  const organic = allLeads.filter(l => (!l.utm_source || l.utm_source === '') && l.traffic_source && l.traffic_source !== 'direct').length;
+  const direct = allLeads.filter(l => (!l.utm_source || l.utm_source === '') && (!l.traffic_source || l.traffic_source === 'direct' || l.traffic_source === 'unknown')).length;
+
+  document.getElementById('totalLeads').textContent = total;
+  document.getElementById('leadsToday').textContent = today + ' today';
+  document.getElementById('paidLeads').textContent = paid;
+  document.getElementById('paidPct').textContent = total ? Math.round(paid/total*100) + '% of total' : '-';
+  document.getElementById('organicLeads').textContent = organic;
+  document.getElementById('organicPct').textContent = total ? Math.round(organic/total*100) + '% of total' : '-';
+  document.getElementById('directLeads').textContent = direct;
+  document.getElementById('directPct').textContent = total ? Math.round(direct/total*100) + '% of total' : '-';
+
+  const sources = countBy(allLeads, 'traffic_source');
+  const topSrc = Object.entries(sources).sort((a,b) => b[1]-a[1])[0];
+  if (topSrc) {
+    document.getElementById('topSource').textContent = topSrc[0] || 'unknown';
+    document.getElementById('topSourceCount').textContent = topSrc[1] + ' leads';
+  }
+}
+
+function renderCharts() {
+  renderBarChart('chartSource', countBy(allLeads, 'traffic_source'));
+  renderBarChart('chartLP', countBy(allLeads, 'landing_page'));
+  renderBarChart('chartButton', countBy(allLeads, 'form_open_source'));
+  renderBarChart('chartCity', countBy(allLeads, 'city'));
+}
+
+function renderAds() {
+  const paidLeads = allLeads.filter(l => l.utm_content && l.utm_content !== '');
+  renderBarChart('chartAd', countBy(paidLeads, 'utm_content'));
+  renderBarChart('chartAdId', countBy(paidLeads, 'ad_id'));
+
+  // Messaging breakdown (m1, m2, m3, m4, m5)
+  const messaging = {};
+  paidLeads.forEach(l => {
+    const match = (l.utm_content || '').match(/^(m\d)/);
+    if (match) messaging[match[1]] = (messaging[match[1]] || 0) + 1;
+  });
+  renderBarChart('chartMessaging', messaging);
+
+  // Tone breakdown
+  const tones = {};
+  paidLeads.forEach(l => {
+    const parts = (l.utm_content || '').split('_');
+    if (parts.length > 1) tones[parts.slice(1).join('_')] = (tones[parts.slice(1).join('_')] || 0) + 1;
+  });
+  renderBarChart('chartTone', tones);
+}
+
+function renderJourney() {
+  const journeys = {};
+  allLeads.forEach(l => {
+    const src = l.traffic_source || 'unknown';
+    const page = l.landing_page || '/';
+    const btn = l.form_open_source || 'unknown';
+    const key = src + ' -> ' + page + ' -> ' + btn;
+    journeys[key] = (journeys[key] || 0) + 1;
+  });
+
+  const sorted = Object.entries(journeys).sort((a,b) => b[1]-a[1]);
+  let html = '<table style="width:100%;font-size:0.78rem"><thead><tr><th>Source</th><th>Landing Page</th><th>Button</th><th>Count</th></tr></thead><tbody>';
+  sorted.forEach(([key, count]) => {
+    const [src, page, btn] = key.split(' -> ');
+    const srcType = allLeads.find(l => l.traffic_source === src && l.utm_source) ? 'paid' : (src === 'direct' ? 'direct' : 'organic');
+    html += '<tr><td><span class="tag tag-' + srcType + '">' + esc(src) + '</span></td><td>' + esc(page) + '</td><td>' + esc(btn) + '</td><td style="font-weight:700">' + count + '</td></tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('journeyTable').innerHTML = sorted.length ? html : '<div class="empty">No journey data yet</div>';
+}
+
+function renderLeadsTable() {
+  const filtered = getFilteredLeads();
+  const sorted = [...filtered].sort((a,b) => {
+    let va = a[sortField] || '', vb = b[sortField] || '';
+    if (sortField === 'timestamp') { va = new Date(va); vb = new Date(vb); }
+    if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
+    return sortAsc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+  });
+
+  const tbody = document.getElementById('leadsTable');
+  tbody.innerHTML = sorted.map(l => {
+    const srcType = l.utm_source ? 'paid' : (l.traffic_source === 'direct' ? 'direct' : 'organic');
+    return '<tr>' +
+      '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + formatTime(l.timestamp) + '</td>' +
+      '<td style="font-weight:600">' + esc(l.student_name) + '</td>' +
+      '<td>' + esc(l.parent_name) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(l.phone) + '</td>' +
+      '<td>' + esc(l.school) + '</td>' +
+      '<td>' + esc(l.grade) + '</td>' +
+      '<td>' + esc(l.city) + '</td>' +
+      '<td><span class="tag tag-' + srcType + '">' + esc(l.traffic_source || 'unknown') + '</span></td>' +
+      '<td style="font-size:0.7rem">' + esc(l.landing_page) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(l.form_open_source) + '</td>' +
+      '<td style="font-size:0.65rem;color:var(--muted)">' + esc(l.ad_id) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(l.utm_content) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (!sorted.length) tbody.innerHTML = '<tr><td colspan="12" class="empty">No leads yet. Submit a test form to see data.</td></tr>';
+}
+
+function getFilteredLeads() {
+  const search = (document.getElementById('filterSearch').value || '').toLowerCase();
+  const srcFilter = document.getElementById('filterSource').value;
+  const lpFilter = document.getElementById('filterLP').value;
+  const cityFilter = document.getElementById('filterCity').value;
+
+  return allLeads.filter(l => {
+    if (search && !JSON.stringify(l).toLowerCase().includes(search)) return false;
+    if (srcFilter && l.traffic_source !== srcFilter) return false;
+    if (lpFilter && l.landing_page !== lpFilter) return false;
+    if (cityFilter && l.city !== cityFilter) return false;
+    return true;
+  });
+}
+
+function populateFilters() {
+  populateSelect('filterSource', countBy(allLeads, 'traffic_source'), 'All Sources');
+  populateSelect('filterLP', countBy(allLeads, 'landing_page'), 'All Pages');
+  populateSelect('filterCity', countBy(allLeads, 'city'), 'All Cities');
+}
+
+function populateSelect(id, data, defaultLabel) {
+  const el = document.getElementById(id);
+  const current = el.value;
+  el.innerHTML = '<option value="">' + defaultLabel + '</option>' +
+    Object.entries(data).sort((a,b)=>b[1]-a[1]).map(([k,v]) => '<option value="'+esc(k)+'">'+esc(k)+' ('+v+')</option>').join('');
+  el.value = current;
+}
+
+function renderBarChart(containerId, data) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const entries = Object.entries(data).sort((a,b) => b[1]-a[1]).slice(0, 10);
+  const max = Math.max(...entries.map(e => e[1]), 1);
+
+  if (!entries.length) { container.innerHTML = '<div class="empty" style="padding:20px">No data yet</div>'; return; }
+
+  container.innerHTML = entries.map(([label, count]) => {
+    const pct = Math.round(count/max*100);
+    const color = getColor(label);
+    return '<div class="bar-row">' +
+      '<span class="bar-label" title="' + esc(label) + '">' + esc(label || 'unknown') + '</span>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + color + '">' + (pct > 15 ? count : '') + '</div></div>' +
+      '<span class="bar-count">' + count + '</span></div>';
+  }).join('');
+}
+
+function countBy(arr, field) {
+  const counts = {};
+  arr.forEach(item => {
+    const val = item[field] || 'unknown';
+    counts[val] = (counts[val] || 0) + 1;
+  });
+  return counts;
+}
+
+function isToday(ts) {
+  if (!ts) return false;
+  const d = new Date(ts);
+  const now = new Date();
+  return d.getDate() === now.getDate() && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+}
+
+function formatTime(ts) {
+  if (!ts) return '-';
+  try { return new Date(ts).toLocaleString('en-IN', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
+  catch { return ts; }
+}
+
+function esc(s) {
+  if (!s) return '';
+  const d = document.createElement('div');
+  d.textContent = String(s);
+  return d.innerHTML;
+}
+
+// Tab switching
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+  });
+});
+
+// Sorting
+document.querySelectorAll('th[data-sort]').forEach(th => {
+  th.addEventListener('click', () => {
+    const field = th.dataset.sort;
+    if (sortField === field) sortAsc = !sortAsc;
+    else { sortField = field; sortAsc = true; }
+    renderLeadsTable();
+  });
+});
+
+// Filter listeners
+['filterSearch','filterSource','filterLP','filterCity'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => { renderLeadsTable(); });
+  document.getElementById(id).addEventListener('change', () => { renderLeadsTable(); });
+});
+
+// Auto-refresh every 60 seconds
+setInterval(loadData, 60000);
+
+// Initial load
+loadData();
+</script>
+</body>
+</html>
