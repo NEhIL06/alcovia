@@ -1,5 +1,6 @@
 import type React from "react"
 import Script from "next/script"
+import LPPixelTracker from "@/components/lp-pixel-tracker"
 
 export default function LPLayout({
   children,
@@ -31,6 +32,7 @@ export default function LPLayout({
           alt=""
         />
       </noscript>
+      <LPPixelTracker />
       {children}
     </>
   )
