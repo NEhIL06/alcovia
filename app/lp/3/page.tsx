@@ -20,7 +20,12 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
   const sizes = { sm: "px-5 py-2 text-[11px]", md: "px-8 py-4 text-sm", lg: "px-10 py-5 text-sm" }
   return (
     <button
-      onClick={() => openModal("lp_cta_button")}
+      onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_cta_button" });
+        }
+        openModal("lp_cta_button");
+      }}
       className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
     >
@@ -262,8 +267,8 @@ function SocialProofSection({ socialProof }: { socialProof: LPContent["socialPro
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-10">
           {socialProof.prompts.map((prompt, i) => (
-            <FadeIn key={i}>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors">
+            <FadeIn key={i} className="h-full">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors h-full flex flex-col">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mb-4" style={{ background: `${GOLD}15`, border: `1px solid ${GOLD}30` }}>
                   <span className="text-xs font-bold" style={{ color: GOLD }}>{String(i + 1).padStart(2, "0")}</span>
                 </div>
@@ -373,7 +378,12 @@ function LPNavbar() {
       <a href="/" className="flex items-center -my-5">
         <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority />
       </a>
-      <button onClick={() => openModal("lp_navbar")} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105" style={{ background: GOLD_GRADIENT }}>
+      <button onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_navbar" });
+        }
+        openModal("lp_navbar");
+      }} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-3 h-3" />
       </button>
@@ -385,7 +395,12 @@ function MobileFloatingCTA() {
   const { openModal } = useRegistrationModal()
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden p-3 bg-gradient-to-t from-[#08261e] via-[#08261e]/95 to-transparent">
-      <button onClick={() => openModal("lp_mobile_floating")} className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer" style={{ background: GOLD_GRADIENT }}>
+      <button onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_mobile_floating" });
+        }
+        openModal("lp_mobile_floating");
+      }} className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-4 h-4" />
       </button>
@@ -414,10 +429,10 @@ function LPFooter() {
 
 const content: LPContent = {
   hero: {
-    subtitle: "For parents who know business is not the same as growth",
+    subtitle: "For parents who know busyness is not the same as growth",
     headline: "Time is your teenager’s biggest asset. The right environment can",
     highlight: "multiply it.",
-    body: "Many teenagers look busy: tuitions, hobbies, screens, endless “study time.” But business is not the same as direction. At Alcovia, teenagers learn how to use time with intent, build stronger routines, and turn scattered effort into real momentum.",
+    body: "Many teenagers look busy: tuitions, hobbies, screens, endless “study time.” But busyness is not the same as direction. At Alcovia, teenagers learn how to use time with intent, build stronger routines, and turn scattered effort into real momentum.",
     primaryCta: "High performance without burnout- learn how Alcovia does it",
     secondaryCta: "Understand the exact frameworks we use"
   },
@@ -493,7 +508,7 @@ const content: LPContent = {
     headingHighlight: "to notice",
     intro: "Not more pressure. Better structure, better focus, and better use of time.",
     prompts: [
-      "They stop confusing business with progress.",
+      "They stop confusing busyness with progress.",
       "They become more deliberate about what they say yes to.",
       "They start finishing more of what matters.",
       "They look calmer, clearer, and more in control of their week."
