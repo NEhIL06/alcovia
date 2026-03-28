@@ -378,14 +378,18 @@ function countBy(arr, field) {
 function isToday(ts) {
   if (!ts) return false;
   const d = new Date(ts);
-  const now = new Date();
-  return d.getDate() === now.getDate() && d.getMonth() === now.getMonth() && d.getFullYear() === now.getFullYear();
+  if (isNaN(d.getTime())) return false;
+  const opts = {timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'};
+  return d.toLocaleDateString('en-IN',opts) === new Date().toLocaleDateString('en-IN',opts);
 }
 
 function formatTime(ts) {
   if (!ts) return '-';
-  try { return new Date(ts).toLocaleString('en-IN', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}); }
-  catch { return ts; }
+  try {
+    const d = new Date(ts);
+    if (isNaN(d.getTime())) return ts;
+    return d.toLocaleString('en-IN', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata'});
+  } catch { return ts; }
 }
 
 function esc(s) {
