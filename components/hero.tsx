@@ -109,29 +109,34 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
         transition={{ delay: 1.5, duration: 0.8 }}
     >
         <a
-            href="/neuromarketing-workshop"
+            href="/workshop"
             className="group block cursor-pointer"
         >
-            <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#C77DFF]">
+            <div className="relative flex h-[280px] w-[220px] flex-col rounded-xl border-2 border-[#0C0C0C] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[4px_4px_0px_0px_#FF6B2B]">
                 <div className="border-b-2 border-[#0C0C0C] px-4 py-2 bg-[#f4f4f4] rounded-t-[9px]">
                     <span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span>
                 </div>
-                <div className="flex-1 relative overflow-hidden bg-[#051a14]">
-                    <BrainVisual />
+                <div className="flex-1 relative overflow-hidden bg-[#1a0a05] flex items-center justify-center">
+                    <div className="absolute inset-0 opacity-[0.06]"
+                        style={{
+                            backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,107,43,0.4) 2px, rgba(255,107,43,0.4) 4px), repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,107,43,0.2) 20px, rgba(255,107,43,0.2) 21px)`,
+                        }}
+                    />
+                    <span className="font-[family-name:var(--font-milan)] text-[42px] font-black leading-none text-[#FF6B2B] opacity-30 select-none">CS</span>
                 </div>
                 <div className="border-t-2 border-[#0C0C0C] p-3 bg-white rounded-b-[9px]">
                     <div className="flex justify-between items-end gap-2">
                         <div className="flex-1 min-w-0">
-                            <span className="block text-[9px] font-bold uppercase text-[#C77DFF]">WORKSHOP</span>
-                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE INVISIBLE INFLUENCE: BRAND WARFARE & NEUROMARKETING</h4>
+                            <span className="block text-[9px] font-bold uppercase text-[#FF6B2B]">WORKSHOP</span>
+                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE CULT STRATEGY: HOW BRANDS MANUFACTURE HYPE</h4>
                         </div>
                         <div className="flex flex-col items-end flex-shrink-0">
-                            <span className="text-xl font-black text-[#0C0C0C] leading-none">28</span>
-                            <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">MAR</span>
+                            <span className="text-xl font-black text-[#0C0C0C] leading-none">11</span>
+                            <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">APR</span>
                         </div>
                     </div>
-                    <div className="mt-2 flex items-center gap-2 text-[10px] font-bold uppercase text-[#C77DFF] transition-opacity opacity-0 group-hover:opacity-100">
-                        <span>Register Now</span>
+                    <div className="mt-2 flex items-center gap-2 text-[10px] font-bold uppercase text-[#FF6B2B] transition-opacity opacity-0 group-hover:opacity-100">
+                        <span>Secure My Spot</span>
                         <ArrowUpRight className="w-3 h-3" />
                     </div>
                 </div>

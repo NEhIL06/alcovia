@@ -5,7 +5,6 @@ import Image from "next/image"
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 import FlipLink from "@/components/flip-link"
-import TextReveal from "@/components/text-reveal"
 
 interface NavMenuProps {
     isOpen: boolean
@@ -18,6 +17,7 @@ const menuItems: MenuItem[] = [
     { label: "HOME", href: "/" },
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
+    { label: "WORKSHOP", href: "/workshop" },
     { label: "TEAM", href: "/meet-the-team" },
 ]
 
