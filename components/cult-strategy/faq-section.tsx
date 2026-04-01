@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
 
@@ -115,11 +116,12 @@ export default function FaqSection() {
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
-        }}
-      />
+      >
+        <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
+        <div style={{
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
+        }} className="absolute inset-0" />
+      </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}

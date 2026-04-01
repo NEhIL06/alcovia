@@ -36,7 +36,7 @@ export default function CultStrategyWorkshopPage() {
       <SpeakerSection />
       <WorkshopPhases />
       <TakeawaysSection />
-      <CtaMidSection />
+      
       <AuthoritySection />
       <SocialProofSection />
       <FaqSection />

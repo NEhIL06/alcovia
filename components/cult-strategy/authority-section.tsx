@@ -1,19 +1,15 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
+const ACCENT_DIM = "rgba(255,107,43,";
 
 const credentials = [
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-6 h-6"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
@@ -23,13 +19,7 @@ const credentials = [
   },
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-6 h-6"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
@@ -41,13 +31,7 @@ const credentials = [
   },
   {
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-6 h-6"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
@@ -72,15 +56,16 @@ export default function AuthoritySection() {
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
-        }}
-      />
+      >
+        <CursorParallaxGrid opacity={0.038} depth={13} spotlight />
+        <div style={{
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
+        }} className="absolute inset-0" />
+      </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="text-center mb-8 sm:mb-12">
+        <div className="text-center mb-10 sm:mb-14">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -119,7 +104,7 @@ export default function AuthoritySection() {
         </div>
 
         {/* Credential cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-8 sm:mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-10 sm:mb-14">
           {credentials.map((cred, i) => (
             <motion.div
               key={cred.title}
@@ -133,18 +118,56 @@ export default function AuthoritySection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20 hover:bg-[#F7F7F3]/[0.04]">
-                <div className="text-[#FF6B2B]/60 mb-2 group-hover:text-[#FF6B2B] transition-colors duration-500">
+              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-6 bg-[#F7F7F3]/[0.02] overflow-hidden transition-all duration-500 hover:border-[#FF6B2B]/20 hover:bg-[#F7F7F3]/[0.04] hover:shadow-[0_8px_36px_rgba(255,107,43,0.08)]">
+                {/* Left accent bar */}
+                <div
+                  className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
+                  style={{
+                    background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)`,
+                  }}
+                />
+
+                {/* Top accent line */}
+                <div
+                  className="absolute top-0 left-5 right-5 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.4), transparent)`,
+                  }}
+                />
+
+                {/* Icon circle */}
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(255,107,43,0.3)]"
+                  style={{
+                    background: `${ACCENT_DIM}0.1)`,
+                    border: `1px solid ${ACCENT_DIM}0.2)`,
+                    color: ACCENT,
+                  }}
+                >
                   {cred.icon}
                 </div>
-                <h3 className="text-sm sm:text-lg font-[family-name:var(--font-monument)] uppercase tracking-wider text-white mb-1.5">
+
+                <h3 className="text-sm sm:text-base font-[family-name:var(--font-monument)] uppercase tracking-wider text-white mb-2 leading-snug">
                   {cred.title}
                 </h3>
-                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-snug">
+
+                {/* Separator */}
+                <div
+                  className="h-px mb-3 w-6 group-hover:w-full transition-all duration-700"
+                  style={{ background: `${ACCENT_DIM}0.2)` }}
+                />
+
+                <p className="text-xs sm:text-sm text-white/55 font-[family-name:var(--font-satoshi)] leading-relaxed">
                   {cred.description}
                 </p>
 
-                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#FF6B2B] to-transparent group-hover:w-full transition-all duration-700" />
+                {/* Bottom accent line */}
+                <div
+                  className="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-700"
+                  style={{
+                    background: `linear-gradient(to right, ${ACCENT}, transparent)`,
+                  }}
+                />
               </div>
             </motion.div>
           ))}
@@ -158,14 +181,27 @@ export default function AuthoritySection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/35 font-[family-name:var(--font-satoshi)] mb-3">
-            The brands we decode
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8">
+          {/* Divider with label */}
+          <div className="flex items-center gap-4 mb-5">
+            <div
+              className="flex-1 h-px"
+              style={{ background: "linear-gradient(to right, transparent, rgba(247,247,243,0.06))" }}
+            />
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/30 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
+              The brands we decode
+            </p>
+            <div
+              className="flex-1 h-px"
+              style={{ background: "linear-gradient(to left, transparent, rgba(247,247,243,0.06))" }}
+            />
+          </div>
+
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {logos.map((logo) => (
               <span
                 key={logo}
-                className="text-xs sm:text-sm border border-[#F7F7F3]/[0.08] rounded-full px-4 py-2 text-white/40 font-[family-name:var(--font-satoshi)] tracking-wider uppercase transition-colors duration-300 hover:border-[#FF6B2B]/20 hover:text-white/60"
+                className="text-[10px] sm:text-xs border rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-white/35 font-[family-name:var(--font-satoshi)] tracking-[0.12em] uppercase transition-all duration-300 hover:border-[#FF6B2B]/25 hover:text-white/60 hover:bg-[#FF6B2B]/[0.04]"
+                style={{ borderColor: "rgba(247,247,243,0.07)" }}
               >
                 {logo}
               </span>

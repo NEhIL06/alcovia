@@ -2,8 +2,10 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
+const ACCENT_DIM = "rgba(255,107,43,";
 
 const takeaways = [
   {
@@ -13,13 +15,7 @@ const takeaways = [
     description:
       "Understand the neurological mechanism that makes scarcity irresistible. Learn how brands like Supreme, Jordan, and Rolex engineer desire by restricting supply — and how you can apply the same principle to any product or idea.",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-7 h-7"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
         <path d="M12 8v4l3 3" />
         <path d="M12 6v.01" />
@@ -33,13 +29,7 @@ const takeaways = [
     description:
       "Discover how the world's most powerful brands build belonging — not just customers. From Apple's 'Think Different' to Nike's 'Just Do It', learn how to design tribal identity that makes people proudly wear your logo, defend your brand, and recruit for you.",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-7 h-7"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
         <circle cx="9" cy="7" r="4" />
         <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
@@ -53,13 +43,7 @@ const takeaways = [
     description:
       "Move beyond ideation into action. Learn the exact sequence — positioning, launch strategy, pricing psychology, and social proof stacking — that transforms a concept into something people actually queue for. Leave with a real framework you can apply immediately.",
     icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={1.5}
-        className="w-7 h-7"
-      >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
@@ -78,14 +62,16 @@ export default function TakeawaysSection() {
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background: `linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)`,
-        }}
-      />
+      >
+        <CursorParallaxGrid opacity={0.038} depth={14} spotlight />
+        <div style={{
+          background: `linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.025) 50%, transparent 100%)`,
+        }} className="absolute inset-0" />
+      </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-8 sm:mb-12">
+        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
           <motion.span
             className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
@@ -109,7 +95,7 @@ export default function TakeawaysSection() {
           </motion.h2>
 
           <motion.p
-            className="text-sm sm:text-base lg:text-lg text-white/70 font-[family-name:var(--font-satoshi)] leading-relaxed"
+            className="text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -134,40 +120,82 @@ export default function TakeawaysSection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-8 bg-[#F7F7F3]/[0.02] backdrop-blur-sm overflow-hidden transition-all duration-500 hover:border-[#FF6B2B]/20 hover:bg-[#F7F7F3]/[0.04]">
-                {/* Top accent */}
-                <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-transparent to-transparent group-hover:via-[#FF6B2B]/40 transition-all duration-500" />
+              <div
+                className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-8 overflow-hidden transition-all duration-500 hover:border-[#FF6B2B]/20 hover:shadow-[0_8px_40px_rgba(255,107,43,0.1)]"
+                style={{
+                  background: "rgba(247,247,243,0.02)",
+                }}
+              >
+                {/* Left accent bar */}
+                <div
+                  className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
+                  style={{
+                    background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)`,
+                  }}
+                />
 
-                {/* Number */}
-                <span className="block text-[#FF6B2B]/20 text-4xl sm:text-6xl font-[family-name:var(--font-monument)] font-bold leading-none mb-2 group-hover:text-[#FF6B2B]/30 transition-colors duration-500">
+                {/* Top accent — always slightly visible */}
+                <div
+                  className="absolute top-0 left-6 right-6 h-px transition-opacity duration-500 group-hover:opacity-100 opacity-30"
+                  style={{
+                    background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.5), transparent)`,
+                  }}
+                />
+
+                {/* Decorative large number */}
+                <span
+                  className="absolute top-4 right-4 font-[family-name:var(--font-monument)] font-bold leading-none select-none pointer-events-none transition-opacity duration-500 group-hover:opacity-60"
+                  style={{
+                    fontSize: "clamp(3.5rem, 6vw, 5rem)",
+                    color: `${ACCENT_DIM}0.08)`,
+                  }}
+                >
                   {item.number}
                 </span>
 
-                {/* Icon */}
-                <div className="text-[#FF6B2B]/60 mb-3 group-hover:text-[#FF6B2B] transition-colors duration-500">
+                {/* Icon circle */}
+                <div
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(255,107,43,0.3)]"
+                  style={{
+                    background: `${ACCENT_DIM}0.1)`,
+                    border: `1px solid ${ACCENT_DIM}0.2)`,
+                    color: ACCENT,
+                  }}
+                >
                   {item.icon}
                 </div>
 
                 {/* Subtitle */}
                 <span
                   className="block text-[10px] sm:text-xs tracking-[0.2em] uppercase font-[family-name:var(--font-satoshi)] mb-2"
-                  style={{ color: `rgba(255,107,43,0.6)` }}
+                  style={{ color: `${ACCENT_DIM}0.65)` }}
                 >
                   {item.subtitle}
                 </span>
 
                 {/* Title */}
-                <h3 className="text-base sm:text-lg font-[family-name:var(--font-milan)] text-white mb-2 leading-snug">
+                <h3 className="text-base sm:text-lg font-[family-name:var(--font-milan)] text-white mb-3 leading-snug">
                   {item.title}
                 </h3>
 
+                {/* Separator */}
+                <div
+                  className="h-px mb-3 w-8 group-hover:w-full transition-all duration-700"
+                  style={{ background: `${ACCENT_DIM}0.2)` }}
+                />
+
                 {/* Description */}
-                <p className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)] leading-snug">
+                <p className="text-xs sm:text-sm text-white/55 font-[family-name:var(--font-satoshi)] leading-relaxed">
                   {item.description}
                 </p>
 
-                {/* Bottom accent */}
-                <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#FF6B2B] to-transparent group-hover:w-full transition-all duration-700" />
+                {/* Bottom accent line */}
+                <div
+                  className="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-700"
+                  style={{
+                    background: `linear-gradient(to right, ${ACCENT}, transparent)`,
+                  }}
+                />
               </div>
             </motion.div>
           ))}

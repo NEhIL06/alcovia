@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
 
@@ -54,11 +55,12 @@ export default function SocialProofSection() {
       {/* Background */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)",
-        }}
-      />
+      >
+        <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
+        <div style={{
+          background: "linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)",
+        }} className="absolute inset-0" />
+      </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section header */}
