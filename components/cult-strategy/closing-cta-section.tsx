@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+
+import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
@@ -189,22 +191,9 @@ export default function ClosingCtaSection() {
           </div>
 
           {/* CTA */}
-          <a
-            href="#"
+          <WorkshopCheckoutLink
+            ctaSource="closing"
             className="group relative inline-flex items-center gap-3 overflow-hidden"
-            onClick={(e) => {
-              e.preventDefault();
-              if (typeof window !== "undefined") {
-                (window as any).gtag?.("event", "initiate_checkout", {
-                  payment_method: "razorpay",
-                  item_name: "cult_strategy_workshop",
-                });
-                (window as any).fbq?.("track", "InitiateCheckout", {
-                  content_name: "Cult Strategy Workshop",
-                  currency: "INR",
-                });
-              }
-            }}
           >
             <span
               className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-400 group-hover:scale-[1.04]"
@@ -224,7 +213,7 @@ export default function ClosingCtaSection() {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </span>
-          </a>
+          </WorkshopCheckoutLink>
 
           <p className="text-xs text-white/30 font-[family-name:var(--font-satoshi)] tracking-wide">
             Secure payment &middot; Instant confirmation

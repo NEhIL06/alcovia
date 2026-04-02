@@ -7,18 +7,20 @@
 <meta name="robots" content="noindex, nofollow">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0f0d;--card:#111916;--border:#1a2a22;--gold:#EABF36;--gold-dim:rgba(234,191,54,0.15);--text:#e8e8e0;--muted:#7a8a7e;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7}
+:root{--bg:#0a0f0d;--card:#111916;--border:#1a2a22;--gold:#EABF36;--gold-dim:rgba(234,191,54,0.15);--text:#e8e8e0;--muted:#7a8a7e;--green:#10b981;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--orange:#ff6b2b}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
-.container{max-width:1400px;margin:0 auto;padding:20px}
-header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.container{max-width:1480px;margin:0 auto;padding:20px}
+header{display:flex;justify-content:space-between;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--border);margin-bottom:24px;flex-wrap:wrap;gap:14px}
 h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#FCF6BA,#B38728);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.header-copy{display:flex;flex-direction:column;gap:6px}
+.header-sub{font-size:0.78rem;color:var(--muted);max-width:700px;line-height:1.5}
 .badge{font-size:0.65rem;padding:4px 10px;border-radius:20px;background:var(--gold-dim);color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.05em}
-.header-right{display:flex;gap:8px;align-items:center}
+.header-right{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .btn{padding:8px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);color:var(--text);cursor:pointer;font-size:0.8rem;font-weight:500;transition:all 0.2s}
 .btn:hover{border-color:var(--gold);color:var(--gold)}
 .btn-gold{background:var(--gold);color:#0a0f0d;border-color:var(--gold);font-weight:700}
 .btn-gold:hover{opacity:0.9}
-.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:24px}
+.summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
 .stat-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;position:relative;overflow:hidden}
 .stat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
 .stat-card.gold::before{background:var(--gold)}
@@ -26,11 +28,13 @@ h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#F
 .stat-card.blue::before{background:var(--blue)}
 .stat-card.purple::before{background:var(--purple)}
 .stat-card.red::before{background:var(--red)}
+.stat-card.orange::before{background:var(--orange)}
 .stat-label{font-size:0.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
 .stat-value{font-size:1.8rem;font-weight:800;line-height:1}
 .stat-sub{font-size:0.7rem;color:var(--muted);margin-top:4px}
 .section{margin-bottom:24px}
 .section-title{font-size:1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.section-note{font-size:0.75rem;color:var(--muted);margin-bottom:14px}
 .charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-bottom:24px}
 .chart-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px}
 .chart-card h3{font-size:0.85rem;font-weight:600;margin-bottom:12px;color:var(--muted)}
@@ -38,32 +42,43 @@ h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#F
 .bar-label{width:120px;text-align:right;color:var(--muted);flex-shrink:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bar-track{flex:1;height:20px;background:rgba(255,255,255,0.04);border-radius:4px;overflow:hidden;position:relative}
 .bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:6px;font-size:0.65rem;font-weight:600;color:#0a0f0d;min-width:fit-content}
-.bar-count{width:40px;text-align:right;font-weight:600;flex-shrink:0}
+.bar-count{width:78px;text-align:right;font-weight:600;flex-shrink:0;font-size:0.7rem}
 table{width:100%;border-collapse:collapse;font-size:0.78rem}
 th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:0.65rem;letter-spacing:0.05em;cursor:pointer;user-select:none}
 th:hover{color:var(--gold)}
-td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.03)}
+td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:top}
 tr:hover td{background:rgba(255,255,255,0.02)}
 .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600}
 .tag-paid{background:rgba(59,130,246,0.15);color:var(--blue)}
 .tag-organic{background:rgba(16,185,129,0.15);color:var(--green)}
 .tag-direct{background:rgba(168,85,247,0.15);color:var(--purple)}
+.tag-success{background:rgba(16,185,129,0.15);color:var(--green)}
+.tag-failed{background:rgba(239,68,68,0.15);color:var(--red)}
+.tag-pending{background:rgba(234,191,54,0.15);color:var(--gold)}
 .loading{text-align:center;padding:60px;color:var(--muted)}
 .spinner{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.filters,.global-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .filter-input{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.75rem;outline:none}
 .filter-input:focus{border-color:var(--gold)}
 select.filter-input{cursor:pointer}
 .table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--border);border-radius:12px}
 .empty{text-align:center;padding:40px;color:var(--muted)}
-.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:-1px}
-.tab{padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s}
+.tabs{display:flex;gap:4px;margin-bottom:16px;border-bottom:1px solid var(--border);padding-bottom:-1px;overflow:auto}
+.tab{padding:8px 16px;cursor:pointer;font-size:0.8rem;font-weight:500;color:var(--muted);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap}
 .tab:hover{color:var(--text)}
 .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
 .tab-content{display:none}
 .tab-content.active{display:block}
-@media(max-width:768px){.summary{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.bar-label{width:80px}}
+.mini-summary{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:18px}
+.mini-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px}
+.mini-card .label{font-size:0.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.05em;margin-bottom:4px}
+.mini-card .value{font-size:1.45rem;font-weight:800}
+.muted{color:var(--muted)}
+.metric-chip{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);padding:6px 10px;border-radius:999px;font-size:0.72rem;color:var(--muted)}
+.stack{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.danger{color:var(--red)}
+@media(max-width:768px){.summary,.mini-summary{grid-template-columns:repeat(2,1fr)}.charts{grid-template-columns:1fr}.bar-label{width:90px}.header-right{justify-content:flex-start}}
 </style>
 </head>
 <body>
@@ -76,85 +91,212 @@ select.filter-input{cursor:pointer}
     <p id="loginError" style="color:var(--red);font-size:0.75rem;margin-top:8px;display:none">Incorrect password</p>
   </div>
 </div>
+
 <div class="container" id="dashboardMain" style="display:none">
-<header>
-  <div style="display:flex;align-items:center;gap:12px">
-    <h1>Alcovia Analytics</h1>
-    <span class="badge">Live Dashboard</span>
+  <header>
+    <div class="header-copy">
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <h1>Alcovia Analytics</h1>
+        <span class="badge">Live Dashboard</span>
+      </div>
+      <p class="header-sub">Lead capture, workshop conversion, Razorpay payment success, and Meta campaign performance in one view. Existing lead tracking remains intact; workshop and Meta sections are additive.</p>
+    </div>
+    <div class="header-right">
+      <span id="lastUpdated" style="font-size:0.7rem;color:var(--muted)"></span>
+      <button class="btn" id="refreshBtn" onclick="loadData()">Refresh</button>
+    </div>
+  </header>
+
+  <div class="global-filters">
+    <input type="date" class="filter-input" id="globalStartDate">
+    <input type="date" class="filter-input" id="globalEndDate">
+    <select class="filter-input" id="globalFunnel">
+      <option value="">All Funnels</option>
+      <option value="workshop">Workshop</option>
+      <option value="lp">LP Campaigns</option>
+      <option value="lead">Lead Funnel</option>
+    </select>
+    <select class="filter-input" id="globalCampaign">
+      <option value="">All Campaigns</option>
+    </select>
+    <button class="btn" onclick="clearGlobalFilters()">Clear Filters</button>
   </div>
-  <div class="header-right">
-    <span id="lastUpdated" style="font-size:0.7rem;color:var(--muted)"></span>
-    <button class="btn" id="refreshBtn" onclick="loadData()">Refresh</button>
+
+  <div class="summary">
+    <div class="stat-card gold"><div class="stat-label">Lead Submissions</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
+    <div class="stat-card orange"><div class="stat-label">Workshop Checkouts</div><div class="stat-value" id="workshopStarts">-</div><div class="stat-sub" id="workshopStartRate">-</div></div>
+    <div class="stat-card green"><div class="stat-label">Paid Registrations</div><div class="stat-value" id="paidRegistrations">-</div><div class="stat-sub" id="paidRegistrationsSub">-</div></div>
+    <div class="stat-card purple"><div class="stat-label">Workshop Revenue</div><div class="stat-value" id="workshopRevenue">-</div><div class="stat-sub" id="workshopRevenueSub">-</div></div>
+    <div class="stat-card blue"><div class="stat-label">Meta Spend</div><div class="stat-value" id="metaSpend">-</div><div class="stat-sub" id="metaSpendSub">-</div></div>
+    <div class="stat-card red"><div class="stat-label">Blended ROAS</div><div class="stat-value" id="blendedRoas">-</div><div class="stat-sub" id="topCampaign">-</div></div>
   </div>
-</header>
 
-<div class="summary" id="summaryCards">
-  <div class="stat-card gold"><div class="stat-label">Total Leads</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
-  <div class="stat-card blue"><div class="stat-label">Paid (Ads)</div><div class="stat-value" id="paidLeads">-</div><div class="stat-sub" id="paidPct">-</div></div>
-  <div class="stat-card green"><div class="stat-label">Organic</div><div class="stat-value" id="organicLeads">-</div><div class="stat-sub" id="organicPct">-</div></div>
-  <div class="stat-card purple"><div class="stat-label">Direct</div><div class="stat-value" id="directLeads">-</div><div class="stat-sub" id="directPct">-</div></div>
-  <div class="stat-card red"><div class="stat-label">Top Source</div><div class="stat-value" id="topSource" style="font-size:1.2rem">-</div><div class="stat-sub" id="topSourceCount">-</div></div>
-</div>
-
-<div class="tabs">
-  <div class="tab active" data-tab="overview">Overview</div>
-  <div class="tab" data-tab="ads">Ad Performance</div>
-  <div class="tab" data-tab="journey">User Journey</div>
-  <div class="tab" data-tab="leads">All Leads</div>
-</div>
-
-<div id="tab-overview" class="tab-content active">
-  <div class="charts">
-    <div class="chart-card"><h3>Traffic Source Breakdown</h3><div id="chartSource"></div></div>
-    <div class="chart-card"><h3>Landing Page Performance</h3><div id="chartLP"></div></div>
-    <div class="chart-card"><h3>CTA Button Performance</h3><div id="chartButton"></div></div>
-    <div class="chart-card"><h3>City Distribution</h3><div id="chartCity"></div></div>
+  <div class="tabs">
+    <div class="tab active" data-tab="lead-overview">Lead Overview</div>
+    <div class="tab" data-tab="lead-ads">Lead Ads</div>
+    <div class="tab" data-tab="lead-journey">Lead Journey</div>
+    <div class="tab" data-tab="workshop-funnel">Workshop Funnel</div>
+    <div class="tab" data-tab="workshop-orders">Workshop Orders</div>
+    <div class="tab" data-tab="meta-performance">Meta Performance</div>
+    <div class="tab" data-tab="attribution">Attribution</div>
+    <div class="tab" data-tab="all-leads">All Leads</div>
   </div>
-</div>
 
-<div id="tab-ads" class="tab-content">
-  <div class="charts">
-    <div class="chart-card"><h3>Leads by Ad (utm_content)</h3><div id="chartAd"></div></div>
-    <div class="chart-card"><h3>Leads by Messaging (m1-m5)</h3><div id="chartMessaging"></div></div>
-    <div class="chart-card"><h3>Leads by Tone</h3><div id="chartTone"></div></div>
-    <div class="chart-card"><h3>Ad ID Breakdown</h3><div id="chartAdId"></div></div>
+  <div id="tab-lead-overview" class="tab-content active">
+    <div class="charts">
+      <div class="chart-card"><h3>Traffic Source Breakdown</h3><div id="chartSource"></div></div>
+      <div class="chart-card"><h3>Landing Page Performance</h3><div id="chartLP"></div></div>
+      <div class="chart-card"><h3>CTA Button Performance</h3><div id="chartButton"></div></div>
+      <div class="chart-card"><h3>City Distribution</h3><div id="chartCity"></div></div>
+    </div>
   </div>
-</div>
 
-<div id="tab-journey" class="tab-content">
-  <div class="charts">
-    <div class="chart-card" style="grid-column:1/-1"><h3>User Journeys (Source -> Landing Page -> Button -> Registration)</h3><div id="journeyTable"></div></div>
+  <div id="tab-lead-ads" class="tab-content">
+    <div class="charts">
+      <div class="chart-card"><h3>Leads by Ad (utm_content)</h3><div id="chartAd"></div></div>
+      <div class="chart-card"><h3>Leads by Messaging</h3><div id="chartMessaging"></div></div>
+      <div class="chart-card"><h3>Leads by Tone</h3><div id="chartTone"></div></div>
+      <div class="chart-card"><h3>Ad ID Breakdown</h3><div id="chartAdId"></div></div>
+    </div>
   </div>
-</div>
 
-<div id="tab-leads" class="tab-content">
-  <div class="filters">
-    <input type="text" class="filter-input" id="filterSearch" placeholder="Search name, phone, school...">
-    <select class="filter-input" id="filterSource"><option value="">All Sources</option></select>
-    <select class="filter-input" id="filterLP"><option value="">All Pages</option></select>
-    <select class="filter-input" id="filterCity"><option value="">All Cities</option></select>
+  <div id="tab-lead-journey" class="tab-content">
+    <div class="charts">
+      <div class="chart-card" style="grid-column:1/-1">
+        <h3>User Journeys (Source -> Landing Page -> Button -> Registration)</h3>
+        <div id="journeyTable"></div>
+      </div>
+    </div>
   </div>
-  <div class="table-wrap"><table><thead><tr>
-    <th data-sort="timestamp">Time</th>
-    <th data-sort="student_name">Student</th>
-    <th data-sort="parent_name">Parent</th>
-    <th>Phone</th>
-    <th data-sort="school">School</th>
-    <th data-sort="grade">Grade</th>
-    <th data-sort="city">City</th>
-    <th data-sort="traffic_source">Source</th>
-    <th data-sort="landing_page">Page</th>
-    <th data-sort="form_open_source">Button</th>
-    <th data-sort="ad_id">Ad ID</th>
-    <th data-sort="utm_content">Ad Tone</th>
-  </tr></thead><tbody id="leadsTable"></tbody></table></div>
-</div>
 
-<div class="loading" id="loadingState"><div class="spinner"></div><p>Loading analytics...</p></div>
+  <div id="tab-workshop-funnel" class="tab-content">
+    <div class="mini-summary">
+      <div class="mini-card"><div class="label">Workshop Page Views</div><div class="value" id="miniWorkshopViews">-</div></div>
+      <div class="mini-card"><div class="label">Checkout Starts</div><div class="value" id="miniWorkshopStarts">-</div></div>
+      <div class="mini-card"><div class="label">Paid Orders</div><div class="value" id="miniWorkshopPaid">-</div></div>
+      <div class="mini-card"><div class="label">Checkout to Paid</div><div class="value" id="miniWorkshopConversion">-</div></div>
+    </div>
+    <div class="charts">
+      <div class="chart-card"><h3>Workshop Funnel Stages</h3><div id="chartWorkshopStages"></div></div>
+      <div class="chart-card"><h3>Workshop CTA Sources</h3><div id="chartWorkshopCta"></div></div>
+      <div class="chart-card"><h3>Workshop Traffic Sources</h3><div id="chartWorkshopSources"></div></div>
+      <div class="chart-card"><h3>Workshop Revenue by Date</h3><div id="chartWorkshopRevenue"></div></div>
+    </div>
+  </div>
+
+  <div id="tab-workshop-orders" class="tab-content">
+    <div class="filters">
+      <input type="text" class="filter-input" id="orderSearch" placeholder="Search payment id, campaign, source...">
+      <select class="filter-input" id="orderStatusFilter"><option value="">All statuses</option></select>
+      <select class="filter-input" id="orderSourceFilter"><option value="">All sources</option></select>
+    </div>
+    <div class="table-wrap"><table><thead><tr>
+      <th data-order-sort="timestamp">Time</th>
+      <th data-order-sort="workshop_title">Workshop</th>
+      <th data-order-sort="payment_status">Status</th>
+      <th data-order-sort="payment_id">Payment ID</th>
+      <th data-order-sort="order_id">Order ID</th>
+      <th data-order-sort="amount">Amount</th>
+      <th data-order-sort="traffic_source">Source</th>
+      <th data-order-sort="utm_campaign">Campaign</th>
+      <th data-order-sort="cta_source">CTA</th>
+      <th data-order-sort="ad_id">Ad ID</th>
+    </tr></thead><tbody id="ordersTable"></tbody></table></div>
+  </div>
+
+  <div id="tab-meta-performance" class="tab-content">
+    <div class="stack">
+      <span class="metric-chip">Official Meta spend/click fields should continue to come from your Meta-side ingestion, not client events.</span>
+    </div>
+    <div class="charts">
+      <div class="chart-card"><h3>Spend by Campaign</h3><div id="chartMetaSpend"></div></div>
+      <div class="chart-card"><h3>Link Clicks by Campaign</h3><div id="chartMetaClicks"></div></div>
+      <div class="chart-card"><h3>Purchases / Results by Campaign</h3><div id="chartMetaResults"></div></div>
+      <div class="chart-card"><h3>CTR by Campaign</h3><div id="chartMetaCtr"></div></div>
+    </div>
+    <div class="table-wrap"><table><thead><tr>
+      <th>Campaign</th>
+      <th>Spend</th>
+      <th>Impressions</th>
+      <th>Reach</th>
+      <th>Link Clicks</th>
+      <th>CTR</th>
+      <th>CPC</th>
+      <th>CPM</th>
+      <th>Results</th>
+      <th>Cost / Result</th>
+    </tr></thead><tbody id="metaTable"></tbody></table></div>
+  </div>
+
+  <div id="tab-attribution" class="tab-content">
+    <p class="section-note">If the dedicated attribution endpoint is empty, this table falls back to a client-side merge across Meta, lead, and workshop datasets using the strongest available campaign or ad keys.</p>
+    <div class="table-wrap"><table><thead><tr>
+      <th>Key</th>
+      <th>Meta Spend</th>
+      <th>Link Clicks</th>
+      <th>Lead Submissions</th>
+      <th>Workshop Starts</th>
+      <th>Paid Orders</th>
+      <th>Revenue</th>
+      <th>ROAS</th>
+    </tr></thead><tbody id="attributionTable"></tbody></table></div>
+  </div>
+
+  <div id="tab-all-leads" class="tab-content">
+    <div class="filters">
+      <input type="text" class="filter-input" id="filterSearch" placeholder="Search name, phone, school...">
+      <select class="filter-input" id="filterSource"><option value="">All Sources</option></select>
+      <select class="filter-input" id="filterLP"><option value="">All Pages</option></select>
+      <select class="filter-input" id="filterCity"><option value="">All Cities</option></select>
+    </div>
+    <div class="table-wrap"><table><thead><tr>
+      <th data-sort="timestamp">Time</th>
+      <th data-sort="student_name">Student</th>
+      <th data-sort="parent_name">Parent</th>
+      <th>Phone</th>
+      <th data-sort="school">School</th>
+      <th data-sort="grade">Grade</th>
+      <th data-sort="city">City</th>
+      <th data-sort="traffic_source">Source</th>
+      <th data-sort="landing_page">Page</th>
+      <th data-sort="form_open_source">Button</th>
+      <th data-sort="ad_id">Ad ID</th>
+      <th data-sort="utm_content">Ad Tone</th>
+    </tr></thead><tbody id="leadsTable"></tbody></table></div>
+  </div>
+
+  <div class="loading" id="loadingState"><div class="spinner"></div><p>Loading analytics...</p></div>
 </div>
 
 <script>
 const DASHBOARD_PASS = 'alcovia2026';
+const API_URLS = {
+  leads: '/api/dashboard/leads',
+  workshopFunnel: '/api/dashboard/workshop-funnel',
+  workshopOrders: '/api/dashboard/workshop-orders',
+  metaInsights: '/api/dashboard/meta-insights',
+  attribution: '/api/dashboard/attribution',
+};
+
+const state = {
+  leads: [],
+  workshopFunnel: [],
+  workshopOrders: [],
+  metaInsights: [],
+  attribution: [],
+};
+
+let leadSortField = 'timestamp';
+let leadSortAsc = false;
+let orderSortField = 'timestamp';
+let orderSortAsc = false;
+
+const COLORS = {
+  google:'#4285f4', whatsapp:'#25d366', instagram:'#e1306c', facebook:'#1877f2', chatgpt:'#10a37f',
+  direct:'#a855f7', twitter:'#1da1f2', linkedin:'#0077b5', meta:'#3b82f6', unknown:'#6b7280',
+  youtube:'#ff0000', reddit:'#ff4500', telegram:'#0088cc', perplexity:'#20b2aa', bing:'#00809d',
+  workshop:'#ff6b2b', lead:'#EABF36', purchase:'#10b981'
+};
 
 function checkLogin() {
   const input = document.getElementById('loginPassword').value;
@@ -176,260 +318,659 @@ if (sessionStorage.getItem('dash_auth') === 'true') {
   window.addEventListener('DOMContentLoaded', showDashboard);
 }
 
-const API_URL = 'https://n8n.alcovia.life/webhook/dashboard-data';
-let allLeads = [];
-let sortField = 'timestamp';
-let sortAsc = false;
+function getColor(key) {
+  const normalized = String(key || 'unknown').toLowerCase();
+  if (COLORS[normalized]) return COLORS[normalized];
+  let hash = 0;
+  for (let index = 0; index < normalized.length; index += 1) hash = normalized.charCodeAt(index) + ((hash << 5) - hash);
+  const color = Math.abs(hash).toString(16).slice(0, 6).padEnd(6, '0');
+  return '#' + color;
+}
 
-const COLORS = {
-  google:'#4285f4', whatsapp:'#25d366', instagram:'#e1306c', facebook:'#1877f2', chatgpt:'#10a37f',
-  direct:'#a855f7', twitter:'#1da1f2', linkedin:'#0077b5', meta:'#3b82f6', unknown:'#6b7280',
-  youtube:'#ff0000', reddit:'#ff4500', telegram:'#0088cc', perplexity:'#20b2aa', bing:'#00809d'
-};
+function clearGlobalFilters() {
+  ['globalStartDate','globalEndDate','globalFunnel','globalCampaign'].forEach((id) => {
+    document.getElementById(id).value = '';
+  });
+  render();
+}
 
-function getColor(key) { return COLORS[key.toLowerCase()] || '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0'); }
+function buildQueryString() {
+  const params = new URLSearchParams();
+  const start = document.getElementById('globalStartDate').value;
+  const end = document.getElementById('globalEndDate').value;
+  const funnel = document.getElementById('globalFunnel').value;
+  const campaign = document.getElementById('globalCampaign').value;
+  if (start) params.set('start', start);
+  if (end) params.set('end', end);
+  if (funnel) params.set('funnel', funnel);
+  if (campaign) params.set('campaign', campaign);
+  params.set('_t', Date.now());
+  return '?' + params.toString();
+}
+
+async function fetchDataset(url) {
+  const response = await fetch(url + buildQueryString(), { cache: 'no-store' });
+  if (!response.ok) throw new Error('API error');
+  const data = await response.json();
+  return normalizeRows(data);
+}
+
+function normalizeRows(data) {
+  if (Array.isArray(data)) return data;
+  if (data && Array.isArray(data.items)) return data.items;
+  if (data && Array.isArray(data.data)) return data.data;
+  if (data && Array.isArray(data.rows)) return data.rows;
+  return [];
+}
 
 async function loadData() {
   document.getElementById('loadingState').style.display = 'block';
   try {
-    const res = await fetch(API_URL + '?_t=' + Date.now());
-    if (!res.ok) throw new Error('API error');
-    const data = await res.json();
-    allLeads = Array.isArray(data) ? data : [];
+    const [leads, workshopFunnel, workshopOrders, metaInsights, attribution] = await Promise.all([
+      fetchDataset(API_URLS.leads),
+      fetchDataset(API_URLS.workshopFunnel),
+      fetchDataset(API_URLS.workshopOrders),
+      fetchDataset(API_URLS.metaInsights),
+      fetchDataset(API_URLS.attribution),
+    ]);
+
+    state.leads = leads;
+    state.workshopFunnel = workshopFunnel;
+    state.workshopOrders = workshopOrders;
+    state.metaInsights = metaInsights;
+    state.attribution = attribution;
+
     render();
     document.getElementById('lastUpdated').textContent = 'Updated: ' + new Date().toLocaleString('en-IN', {dateStyle:'medium',timeStyle:'short'});
-  } catch(e) {
-    console.error(e);
-    document.getElementById('loadingState').innerHTML = '<p style="color:#ef4444">Failed to load data. The "Lead Log" sheet tab may not exist yet. Submit a test form first, then refresh.</p>';
+  } catch (error) {
+    console.error(error);
+    document.getElementById('loadingState').innerHTML = '<p class="danger">Failed to load one or more dashboard datasets. Lead data should continue working from the existing endpoint; workshop and Meta sections require their n8n dashboard feeds to be configured.</p>';
   }
   document.getElementById('loadingState').style.display = 'none';
 }
 
 function render() {
+  populateGlobalCampaigns();
+  populateLeadFilters();
+  populateOrderFilters();
   renderSummary();
-  renderCharts();
-  renderAds();
-  renderJourney();
+  renderLeadOverview();
+  renderLeadAds();
+  renderLeadJourney();
+  renderWorkshopFunnel();
+  renderWorkshopOrders();
+  renderMetaPerformance();
+  renderAttribution();
   renderLeadsTable();
-  populateFilters();
+}
+
+function parseNumber(value) {
+  if (value == null || value === '') return 0;
+  if (Array.isArray(value)) return value.reduce((sum, item) => sum + parseNumber(item && item.value != null ? item.value : item), 0);
+  if (typeof value === 'object') {
+    if (value.value != null) return parseNumber(value.value);
+    if (value.amount != null) return parseNumber(value.amount);
+    if (value.count != null) return parseNumber(value.count);
+    return 0;
+  }
+  if (typeof value === 'number') return Number.isFinite(value) ? value : 0;
+  const normalized = String(value).replace(/,/g, '').replace(/%/g, '').trim();
+  const parsed = Number(normalized);
+  return Number.isFinite(parsed) ? parsed : 0;
+}
+
+function pick(item, keys, fallback = '') {
+  for (const key of keys) {
+    if (item && item[key] != null && item[key] !== '') return item[key];
+  }
+  return fallback;
+}
+
+function parseDate(item, keys) {
+  const raw = pick(item, keys, '');
+  if (!raw) return null;
+  const date = new Date(raw);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function withinDateRange(item) {
+  const startRaw = document.getElementById('globalStartDate').value;
+  const endRaw = document.getElementById('globalEndDate').value;
+  if (!startRaw && !endRaw) return true;
+  const date = parseDate(item, ['timestamp','created_at','date','date_start','event_time']);
+  if (!date) return true;
+  if (startRaw) {
+    const start = new Date(startRaw + 'T00:00:00');
+    if (date < start) return false;
+  }
+  if (endRaw) {
+    const end = new Date(endRaw + 'T23:59:59');
+    if (date > end) return false;
+  }
+  return true;
+}
+
+function matchesCampaignFilter(item) {
+  const selected = document.getElementById('globalCampaign').value;
+  if (!selected) return true;
+  const campaign = String(pick(item, ['campaign_name','campaign','utm_campaign','campaign_id','ad_name','ad_id'], '')).toLowerCase();
+  return campaign === selected.toLowerCase();
+}
+
+function matchesFunnelFilter(item) {
+  const selected = document.getElementById('globalFunnel').value;
+  if (!selected) return true;
+  const page = String(pick(item, ['page_path','landing_page','source_url'], '')).toLowerCase();
+  const funnel = String(pick(item, ['funnel_name','page_type','page_group'], '')).toLowerCase();
+  if (selected === 'workshop') return funnel.includes('workshop') || page.includes('/workshop');
+  if (selected === 'lp') return funnel.includes('lp') || page.includes('/lp');
+  if (selected === 'lead') return !page.includes('/workshop');
+  return true;
+}
+
+function filterRows(rows) {
+  return rows.filter((item) => withinDateRange(item) && matchesCampaignFilter(item) && matchesFunnelFilter(item));
+}
+
+function getFilteredLeads() {
+  const search = (document.getElementById('filterSearch').value || '').toLowerCase();
+  const source = document.getElementById('filterSource').value;
+  const landingPage = document.getElementById('filterLP').value;
+  const city = document.getElementById('filterCity').value;
+
+  return filterRows(state.leads).filter((item) => {
+    if (search && !JSON.stringify(item).toLowerCase().includes(search)) return false;
+    if (source && pick(item, ['traffic_source']) !== source) return false;
+    if (landingPage && pick(item, ['landing_page']) !== landingPage) return false;
+    if (city && pick(item, ['city']) !== city) return false;
+    return true;
+  });
+}
+
+function getFilteredWorkshopFunnel() {
+  return filterRows(state.workshopFunnel);
+}
+
+function getFilteredWorkshopOrders() {
+  const search = (document.getElementById('orderSearch').value || '').toLowerCase();
+  const status = document.getElementById('orderStatusFilter').value;
+  const source = document.getElementById('orderSourceFilter').value;
+
+  return filterRows(state.workshopOrders).filter((item) => {
+    if (search && !JSON.stringify(item).toLowerCase().includes(search)) return false;
+    if (status && normalizeStatus(item) !== status) return false;
+    if (source && pick(item, ['traffic_source']) !== source) return false;
+    return true;
+  });
+}
+
+function getFilteredMetaInsights() {
+  return filterRows(state.metaInsights);
+}
+
+function normalizeStatus(item) {
+  const status = String(pick(item, ['payment_status','status','order_status'], '')).toLowerCase();
+  if (!status && pick(item, ['payment_id','order_id'])) return 'paid';
+  if (['paid','captured','authorized','success'].includes(status)) return 'paid';
+  if (['failed','cancelled','canceled','expired'].includes(status)) return 'failed';
+  return status || 'pending';
+}
+
+function getAmountInRupees(item) {
+  const amount = parseNumber(pick(item, ['amount_display','amount_inr','revenue','value','amount_paid','amount'], 0));
+  const provider = String(pick(item, ['payment_provider'], '')).toLowerCase();
+  if (provider === 'razorpay' && amount >= 10000 && amount % 100 === 0) return amount / 100;
+  return amount;
+}
+
+function countBy(rows, keyFn) {
+  const counts = {};
+  rows.forEach((item) => {
+    const key = keyFn(item) || 'unknown';
+    counts[key] = (counts[key] || 0) + 1;
+  });
+  return counts;
+}
+
+function sumBy(rows, keyFn, valueFn) {
+  const totals = {};
+  rows.forEach((item) => {
+    const key = keyFn(item) || 'unknown';
+    totals[key] = (totals[key] || 0) + valueFn(item);
+  });
+  return totals;
+}
+
+function isToday(ts) {
+  if (!ts) return false;
+  const date = new Date(ts);
+  if (Number.isNaN(date.getTime())) return false;
+  const options = { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit' };
+  return date.toLocaleDateString('en-IN', options) === new Date().toLocaleDateString('en-IN', options);
+}
+
+function formatTime(value) {
+  if (!value) return '-';
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return value;
+  return date.toLocaleString('en-IN', { day:'numeric', month:'short', hour:'2-digit', minute:'2-digit', timeZone:'Asia/Kolkata' });
+}
+
+function esc(value) {
+  if (value == null) return '';
+  const div = document.createElement('div');
+  div.textContent = String(value);
+  return div.innerHTML;
+}
+
+function formatCurrency(value) {
+  return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(parseNumber(value));
+}
+
+function formatPercent(value, digits = 1) {
+  const numeric = parseNumber(value);
+  return Number.isFinite(numeric) ? numeric.toFixed(digits) + '%' : '-';
 }
 
 function renderSummary() {
-  const total = allLeads.length;
-  const today = allLeads.filter(l => isToday(l.timestamp)).length;
-  const paid = allLeads.filter(l => l.utm_source && l.utm_source !== '').length;
-  const organic = allLeads.filter(l => (!l.utm_source || l.utm_source === '') && l.traffic_source && l.traffic_source !== 'direct').length;
-  const direct = allLeads.filter(l => (!l.utm_source || l.utm_source === '') && (!l.traffic_source || l.traffic_source === 'direct' || l.traffic_source === 'unknown')).length;
+  const leads = getFilteredLeads();
+  const workshopFunnel = getFilteredWorkshopFunnel();
+  const workshopOrders = getFilteredWorkshopOrders();
+  const metaRows = getFilteredMetaInsights();
 
-  document.getElementById('totalLeads').textContent = total;
-  document.getElementById('leadsToday').textContent = today + ' today';
-  document.getElementById('paidLeads').textContent = paid;
-  document.getElementById('paidPct').textContent = total ? Math.round(paid/total*100) + '% of total' : '-';
-  document.getElementById('organicLeads').textContent = organic;
-  document.getElementById('organicPct').textContent = total ? Math.round(organic/total*100) + '% of total' : '-';
-  document.getElementById('directLeads').textContent = direct;
-  document.getElementById('directPct').textContent = total ? Math.round(direct/total*100) + '% of total' : '-';
+  const workshopViews = workshopFunnel.filter((item) => String(pick(item, ['event_name'], '')).includes('page_view')).length;
+  const workshopStarts = workshopFunnel.filter((item) => String(pick(item, ['event_name'], '')).includes('checkout_started')).length;
+  const paidOrders = workshopOrders.filter((item) => normalizeStatus(item) === 'paid').length;
+  const revenue = workshopOrders.filter((item) => normalizeStatus(item) === 'paid').reduce((sum, item) => sum + getAmountInRupees(item), 0);
+  const spend = metaRows.reduce((sum, item) => sum + parseNumber(pick(item, ['spend','cost'], 0)), 0);
+  const topCampaignEntry = Object.entries(sumBy(metaRows, (item) => pick(item, ['campaign_name','campaign','utm_campaign','ad_name'], 'unattributed'), (item) => parseNumber(pick(item, ['spend','cost'], 0))))
+    .sort((a,b) => b[1] - a[1])[0];
 
-  const sources = countBy(allLeads, 'traffic_source');
-  const topSrc = Object.entries(sources).sort((a,b) => b[1]-a[1])[0];
-  if (topSrc) {
-    document.getElementById('topSource').textContent = topSrc[0] || 'unknown';
-    document.getElementById('topSourceCount').textContent = topSrc[1] + ' leads';
+  document.getElementById('totalLeads').textContent = leads.length;
+  document.getElementById('leadsToday').textContent = leads.filter((item) => isToday(pick(item, ['timestamp']))).length + ' today';
+  document.getElementById('workshopStarts').textContent = workshopStarts;
+  document.getElementById('workshopStartRate').textContent = workshopViews ? Math.round((workshopStarts / workshopViews) * 100) + '% of page views' : (workshopStarts ? 'Live' : '-');
+  document.getElementById('paidRegistrations').textContent = paidOrders;
+  document.getElementById('paidRegistrationsSub').textContent = workshopStarts ? Math.round((paidOrders / Math.max(workshopStarts, 1)) * 100) + '% of checkouts' : '-';
+  document.getElementById('workshopRevenue').textContent = revenue ? formatCurrency(revenue) : '-';
+  document.getElementById('workshopRevenueSub').textContent = paidOrders ? (paidOrders + ' paid orders') : '-';
+  document.getElementById('metaSpend').textContent = spend ? formatCurrency(spend) : '-';
+  document.getElementById('metaSpendSub').textContent = metaRows.length ? (metaRows.length + ' Meta rows') : '-';
+  document.getElementById('blendedRoas').textContent = spend ? (revenue / spend).toFixed(2) + 'x' : '-';
+  document.getElementById('topCampaign').textContent = topCampaignEntry ? ('Top spend: ' + topCampaignEntry[0]) : 'No campaign data';
+}
+
+function renderBarChart(containerId, entries, formatter) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const normalizedEntries = Object.entries(entries).filter(([, value]) => parseNumber(value) > 0).sort((a,b) => parseNumber(b[1]) - parseNumber(a[1])).slice(0, 10);
+  const max = Math.max(...normalizedEntries.map((entry) => parseNumber(entry[1])), 1);
+
+  if (!normalizedEntries.length) {
+    container.innerHTML = '<div class="empty" style="padding:20px">No data yet</div>';
+    return;
   }
+
+  container.innerHTML = normalizedEntries.map(([label, value]) => {
+    const numeric = parseNumber(value);
+    const width = Math.max(6, Math.round((numeric / max) * 100));
+    const color = getColor(label);
+    return '<div class="bar-row">' +
+      '<span class="bar-label" title="' + esc(label) + '">' + esc(label) + '</span>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + width + '%;background:' + color + '">' + (width > 20 ? esc(formatter ? formatter(numeric) : numeric) : '') + '</div></div>' +
+      '<span class="bar-count">' + esc(formatter ? formatter(numeric) : numeric) + '</span></div>';
+  }).join('');
 }
 
-function renderCharts() {
-  renderBarChart('chartSource', countBy(allLeads, 'traffic_source'));
-  renderBarChart('chartLP', countBy(allLeads, 'landing_page'));
-  renderBarChart('chartButton', countBy(allLeads, 'form_open_source'));
-  renderBarChart('chartCity', countBy(allLeads, 'city'));
+function renderLeadOverview() {
+  const leads = getFilteredLeads();
+  renderBarChart('chartSource', countBy(leads, (item) => pick(item, ['traffic_source'], 'unknown')));
+  renderBarChart('chartLP', countBy(leads, (item) => pick(item, ['landing_page'], 'unknown')));
+  renderBarChart('chartButton', countBy(leads, (item) => pick(item, ['form_open_source'], 'unknown')));
+  renderBarChart('chartCity', countBy(leads, (item) => pick(item, ['city'], 'unknown')));
 }
 
-function renderAds() {
-  const paidLeads = allLeads.filter(l => l.utm_content && l.utm_content !== '');
-  renderBarChart('chartAd', countBy(paidLeads, 'utm_content'));
-  renderBarChart('chartAdId', countBy(paidLeads, 'ad_id'));
+function renderLeadAds() {
+  const paidLeads = getFilteredLeads().filter((item) => pick(item, ['utm_content','ad_id','utm_campaign']));
+  renderBarChart('chartAd', countBy(paidLeads, (item) => pick(item, ['utm_content'], 'unknown')));
+  renderBarChart('chartAdId', countBy(paidLeads, (item) => pick(item, ['ad_id'], 'unknown')));
 
-  // Messaging breakdown (m1, m2, m3, m4, m5)
   const messaging = {};
-  paidLeads.forEach(l => {
-    const match = (l.utm_content || '').match(/^(m\d)/);
-    if (match) messaging[match[1]] = (messaging[match[1]] || 0) + 1;
-  });
-  renderBarChart('chartMessaging', messaging);
-
-  // Tone breakdown
   const tones = {};
-  paidLeads.forEach(l => {
-    const parts = (l.utm_content || '').split('_');
-    if (parts.length > 1) tones[parts.slice(1).join('_')] = (tones[parts.slice(1).join('_')] || 0) + 1;
+  paidLeads.forEach((item) => {
+    const utmContent = String(pick(item, ['utm_content'], ''));
+    const match = utmContent.match(/^(m\d+)/i);
+    if (match) messaging[match[1].toLowerCase()] = (messaging[match[1].toLowerCase()] || 0) + 1;
+    const parts = utmContent.split('_');
+    if (parts.length > 1) {
+      const tone = parts.slice(1).join('_');
+      tones[tone] = (tones[tone] || 0) + 1;
+    }
   });
+
+  renderBarChart('chartMessaging', messaging);
   renderBarChart('chartTone', tones);
 }
 
-function renderJourney() {
+function renderLeadJourney() {
+  const leads = getFilteredLeads();
   const journeys = {};
-  allLeads.forEach(l => {
-    const src = l.traffic_source || 'unknown';
-    const page = l.landing_page || '/';
-    const btn = l.form_open_source || 'unknown';
-    const key = src + ' -> ' + page + ' -> ' + btn;
+  leads.forEach((item) => {
+    const source = pick(item, ['traffic_source'], 'unknown');
+    const page = pick(item, ['landing_page'], '/');
+    const button = pick(item, ['form_open_source'], 'unknown');
+    const key = source + ' -> ' + page + ' -> ' + button;
     journeys[key] = (journeys[key] || 0) + 1;
   });
 
-  const sorted = Object.entries(journeys).sort((a,b) => b[1]-a[1]);
+  const sorted = Object.entries(journeys).sort((a,b) => b[1] - a[1]);
   let html = '<table style="width:100%;font-size:0.78rem"><thead><tr><th>Source</th><th>Landing Page</th><th>Button</th><th>Count</th></tr></thead><tbody>';
   sorted.forEach(([key, count]) => {
-    const [src, page, btn] = key.split(' -> ');
-    const srcType = allLeads.find(l => l.traffic_source === src && l.utm_source) ? 'paid' : (src === 'direct' ? 'direct' : 'organic');
-    html += '<tr><td><span class="tag tag-' + srcType + '">' + esc(src) + '</span></td><td>' + esc(page) + '</td><td>' + esc(btn) + '</td><td style="font-weight:700">' + count + '</td></tr>';
+    const [source, page, button] = key.split(' -> ');
+    const sourceType = leads.find((item) => pick(item, ['traffic_source']) === source && pick(item, ['utm_source'])) ? 'paid' : (source === 'direct' ? 'direct' : 'organic');
+    html += '<tr><td><span class="tag tag-' + sourceType + '">' + esc(source) + '</span></td><td>' + esc(page) + '</td><td>' + esc(button) + '</td><td style="font-weight:700">' + count + '</td></tr>';
   });
   html += '</tbody></table>';
   document.getElementById('journeyTable').innerHTML = sorted.length ? html : '<div class="empty">No journey data yet</div>';
 }
 
-function renderLeadsTable() {
-  const filtered = getFilteredLeads();
-  const sorted = [...filtered].sort((a,b) => {
-    let va = a[sortField] || '', vb = b[sortField] || '';
-    if (sortField === 'timestamp') { va = new Date(va); vb = new Date(vb); }
-    if (typeof va === 'string') { va = va.toLowerCase(); vb = vb.toLowerCase(); }
-    return sortAsc ? (va > vb ? 1 : -1) : (va < vb ? 1 : -1);
+function renderWorkshopFunnel() {
+  const funnel = getFilteredWorkshopFunnel();
+  const orders = getFilteredWorkshopOrders();
+  const stageCounts = {
+    'Page Views': funnel.filter((item) => String(pick(item, ['event_name'], '')).includes('page_view')).length,
+    'Checkout Starts': funnel.filter((item) => String(pick(item, ['event_name'], '')).includes('checkout_started')).length,
+    'Thank You Views': funnel.filter((item) => String(pick(item, ['event_name'], '')).includes('thank_you_view')).length,
+    'Paid Orders': orders.filter((item) => normalizeStatus(item) === 'paid').length,
+  };
+
+  const paidOrders = orders.filter((item) => normalizeStatus(item) === 'paid');
+  const revenue = paidOrders.reduce((sum, item) => sum + getAmountInRupees(item), 0);
+  const pageViews = stageCounts['Page Views'];
+  const starts = stageCounts['Checkout Starts'];
+
+  document.getElementById('miniWorkshopViews').textContent = pageViews;
+  document.getElementById('miniWorkshopStarts').textContent = starts;
+  document.getElementById('miniWorkshopPaid').textContent = paidOrders.length;
+  document.getElementById('miniWorkshopConversion').textContent = starts ? Math.round((paidOrders.length / starts) * 100) + '%' : '-';
+
+  renderBarChart('chartWorkshopStages', stageCounts);
+  renderBarChart('chartWorkshopCta', countBy(funnel.filter((item) => String(pick(item, ['event_name'], '')).includes('checkout_started')), (item) => pick(item, ['cta_source'], 'unknown')));
+  renderBarChart('chartWorkshopSources', countBy([].concat(funnel, orders), (item) => pick(item, ['traffic_source'], 'unknown')));
+  renderBarChart('chartWorkshopRevenue', sumBy(paidOrders, (item) => {
+    const workshopDate = pick(item, ['workshop_date','date','date_start'], '');
+    if (workshopDate) return workshopDate;
+    const timestamp = pick(item, ['timestamp','created_at'], '');
+    return timestamp ? new Date(timestamp).toLocaleDateString('en-IN', { day:'numeric', month:'short' }) : 'unknown';
+  }, (item) => getAmountInRupees(item)), formatCurrency);
+}
+
+function renderWorkshopOrders() {
+  const orders = [...getFilteredWorkshopOrders()].sort((left, right) => {
+    let a = pick(left, [orderSortField], '');
+    let b = pick(right, [orderSortField], '');
+    if (orderSortField === 'timestamp') {
+      a = parseDate(left, ['timestamp','created_at']) || new Date(0);
+      b = parseDate(right, ['timestamp','created_at']) || new Date(0);
+    } else if (orderSortField === 'amount') {
+      a = getAmountInRupees(left);
+      b = getAmountInRupees(right);
+    } else {
+      a = String(a).toLowerCase();
+      b = String(b).toLowerCase();
+    }
+    return orderSortAsc ? (a > b ? 1 : -1) : (a < b ? 1 : -1);
   });
 
-  const tbody = document.getElementById('leadsTable');
-  tbody.innerHTML = sorted.map(l => {
-    const srcType = l.utm_source ? 'paid' : (l.traffic_source === 'direct' ? 'direct' : 'organic');
+  const tbody = document.getElementById('ordersTable');
+  tbody.innerHTML = orders.map((item) => {
+    const status = normalizeStatus(item);
+    const statusClass = status === 'paid' ? 'success' : (status === 'failed' ? 'failed' : 'pending');
     return '<tr>' +
-      '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + formatTime(l.timestamp) + '</td>' +
-      '<td style="font-weight:600">' + esc(l.student_name) + '</td>' +
-      '<td>' + esc(l.parent_name) + '</td>' +
-      '<td style="font-size:0.7rem">' + esc(l.phone) + '</td>' +
-      '<td>' + esc(l.school) + '</td>' +
-      '<td>' + esc(l.grade) + '</td>' +
-      '<td>' + esc(l.city) + '</td>' +
-      '<td><span class="tag tag-' + srcType + '">' + esc(l.traffic_source || 'unknown') + '</span></td>' +
-      '<td style="font-size:0.7rem">' + esc(l.landing_page) + '</td>' +
-      '<td style="font-size:0.7rem">' + esc(l.form_open_source) + '</td>' +
-      '<td style="font-size:0.65rem;color:var(--muted)">' + esc(l.ad_id) + '</td>' +
-      '<td style="font-size:0.7rem">' + esc(l.utm_content) + '</td>' +
+      '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + esc(formatTime(pick(item, ['timestamp','created_at']))) + '</td>' +
+      '<td style="font-weight:600">' + esc(pick(item, ['workshop_title'], 'Workshop')) + '</td>' +
+      '<td><span class="tag tag-' + statusClass + '">' + esc(status) + '</span></td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['payment_id'], '-')) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['order_id'], '-')) + '</td>' +
+      '<td>' + esc(formatCurrency(getAmountInRupees(item) || 0)) + '</td>' +
+      '<td>' + esc(pick(item, ['traffic_source'], 'unknown')) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['utm_campaign','campaign_name','campaign'], '-')) + '</td>' +
+      '<td>' + esc(pick(item, ['cta_source'], '-')) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['ad_id'], '-')) + '</td>' +
     '</tr>';
   }).join('');
 
-  if (!sorted.length) tbody.innerHTML = '<tr><td colspan="12" class="empty">No leads yet. Submit a test form to see data.</td></tr>';
+  if (!orders.length) tbody.innerHTML = '<tr><td colspan="10" class="empty">No workshop orders yet. Configure the Razorpay redirect URL and the workshop payment-success webhook to populate this view.</td></tr>';
 }
 
-function getFilteredLeads() {
-  const search = (document.getElementById('filterSearch').value || '').toLowerCase();
-  const srcFilter = document.getElementById('filterSource').value;
-  const lpFilter = document.getElementById('filterLP').value;
-  const cityFilter = document.getElementById('filterCity').value;
-
-  return allLeads.filter(l => {
-    if (search && !JSON.stringify(l).toLowerCase().includes(search)) return false;
-    if (srcFilter && l.traffic_source !== srcFilter) return false;
-    if (lpFilter && l.landing_page !== lpFilter) return false;
-    if (cityFilter && l.city !== cityFilter) return false;
-    return true;
+function aggregateMetaByCampaign(rows) {
+  const buckets = {};
+  rows.forEach((item) => {
+    const key = pick(item, ['campaign_name','campaign','utm_campaign','campaign_id'], 'unattributed');
+    if (!buckets[key]) {
+      buckets[key] = {
+        key,
+        spend: 0,
+        impressions: 0,
+        reach: 0,
+        linkClicks: 0,
+        results: 0,
+      };
+    }
+    const bucket = buckets[key];
+    bucket.spend += parseNumber(pick(item, ['spend','cost'], 0));
+    bucket.impressions += parseNumber(pick(item, ['impressions'], 0));
+    bucket.reach += parseNumber(pick(item, ['reach'], 0));
+    bucket.linkClicks += parseNumber(pick(item, ['link_clicks','clicks','outbound_clicks'], 0));
+    bucket.results += parseNumber(pick(item, ['purchases','results','leads','conversions'], 0));
   });
+  return Object.values(buckets).map((bucket) => ({
+    key: bucket.key,
+    spend: bucket.spend,
+    impressions: bucket.impressions,
+    reach: bucket.reach,
+    linkClicks: bucket.linkClicks,
+    ctr: bucket.impressions ? ((bucket.linkClicks / bucket.impressions) * 100) : 0,
+    cpc: bucket.linkClicks ? (bucket.spend / bucket.linkClicks) : 0,
+    cpm: bucket.impressions ? ((bucket.spend * 1000) / bucket.impressions) : 0,
+    results: bucket.results,
+    costPerResult: bucket.results ? (bucket.spend / bucket.results) : 0,
+  })).sort((a,b) => b.spend - a.spend);
 }
 
-function populateFilters() {
-  populateSelect('filterSource', countBy(allLeads, 'traffic_source'), 'All Sources');
-  populateSelect('filterLP', countBy(allLeads, 'landing_page'), 'All Pages');
-  populateSelect('filterCity', countBy(allLeads, 'city'), 'All Cities');
+function renderMetaPerformance() {
+  const campaigns = aggregateMetaByCampaign(getFilteredMetaInsights());
+
+  renderBarChart('chartMetaSpend', Object.fromEntries(campaigns.map((item) => [item.key, item.spend])), formatCurrency);
+  renderBarChart('chartMetaClicks', Object.fromEntries(campaigns.map((item) => [item.key, item.linkClicks])));
+  renderBarChart('chartMetaResults', Object.fromEntries(campaigns.map((item) => [item.key, item.results])));
+  renderBarChart('chartMetaCtr', Object.fromEntries(campaigns.map((item) => [item.key, item.ctr])), (value) => value.toFixed(1) + '%');
+
+  const tbody = document.getElementById('metaTable');
+  tbody.innerHTML = campaigns.map((item) => (
+    '<tr>' +
+      '<td style="font-weight:600">' + esc(item.key) + '</td>' +
+      '<td>' + esc(formatCurrency(item.spend)) + '</td>' +
+      '<td>' + esc(Math.round(item.impressions)) + '</td>' +
+      '<td>' + esc(Math.round(item.reach)) + '</td>' +
+      '<td>' + esc(Math.round(item.linkClicks)) + '</td>' +
+      '<td>' + esc(formatPercent(item.ctr)) + '</td>' +
+      '<td>' + esc(item.cpc ? formatCurrency(item.cpc) : '-') + '</td>' +
+      '<td>' + esc(item.cpm ? formatCurrency(item.cpm) : '-') + '</td>' +
+      '<td>' + esc(Math.round(item.results)) + '</td>' +
+      '<td>' + esc(item.costPerResult ? formatCurrency(item.costPerResult) : '-') + '</td>' +
+    '</tr>'
+  )).join('');
+
+  if (!campaigns.length) tbody.innerHTML = '<tr><td colspan="10" class="empty">No Meta insights yet. Wire your Meta ingestion workflow in n8n to the Meta dashboard endpoints to populate spend, impressions, clicks, and result metrics.</td></tr>';
 }
 
-function populateSelect(id, data, defaultLabel) {
-  const el = document.getElementById(id);
-  const current = el.value;
-  el.innerHTML = '<option value="">' + defaultLabel + '</option>' +
-    Object.entries(data).sort((a,b)=>b[1]-a[1]).map(([k,v]) => '<option value="'+esc(k)+'">'+esc(k)+' ('+v+')</option>').join('');
-  el.value = current;
+function deriveAttributionRows() {
+  const rows = {};
+  const touch = (key) => {
+    const normalizedKey = key || 'unattributed';
+    if (!rows[normalizedKey]) rows[normalizedKey] = { key: normalizedKey, spend: 0, clicks: 0, leads: 0, workshopStarts: 0, paidOrders: 0, revenue: 0 };
+    return rows[normalizedKey];
+  };
+
+  getFilteredMetaInsights().forEach((item) => {
+    const bucket = touch(pick(item, ['campaign_name','campaign','utm_campaign','campaign_id'], pick(item, ['ad_id'], 'unattributed')));
+    bucket.spend += parseNumber(pick(item, ['spend','cost'], 0));
+    bucket.clicks += parseNumber(pick(item, ['link_clicks','clicks','outbound_clicks'], 0));
+  });
+
+  getFilteredLeads().forEach((item) => {
+    const bucket = touch(pick(item, ['utm_campaign','ad_id','traffic_source'], 'unattributed'));
+    bucket.leads += 1;
+  });
+
+  getFilteredWorkshopFunnel().forEach((item) => {
+    if (!String(pick(item, ['event_name'], '')).includes('checkout_started')) return;
+    const bucket = touch(pick(item, ['utm_campaign','ad_id','traffic_source'], 'unattributed'));
+    bucket.workshopStarts += 1;
+  });
+
+  getFilteredWorkshopOrders().forEach((item) => {
+    const bucket = touch(pick(item, ['utm_campaign','ad_id','traffic_source'], 'unattributed'));
+    if (normalizeStatus(item) === 'paid') {
+      bucket.paidOrders += 1;
+      bucket.revenue += getAmountInRupees(item);
+    }
+  });
+
+  return Object.values(rows).sort((a,b) => b.revenue - a.revenue || b.spend - a.spend);
 }
 
-function renderBarChart(containerId, data) {
-  const container = document.getElementById(containerId);
-  if (!container) return;
-  const entries = Object.entries(data).sort((a,b) => b[1]-a[1]).slice(0, 10);
-  const max = Math.max(...entries.map(e => e[1]), 1);
+function renderAttribution() {
+  const upstreamRows = normalizeRows(state.attribution).filter((item) => withinDateRange(item) && matchesCampaignFilter(item) && matchesFunnelFilter(item));
+  const rows = upstreamRows.length ? upstreamRows.map((item) => ({
+    key: pick(item, ['key','campaign_name','campaign','utm_campaign','ad_id'], 'unattributed'),
+    spend: parseNumber(pick(item, ['spend','meta_spend'], 0)),
+    clicks: parseNumber(pick(item, ['clicks','link_clicks'], 0)),
+    leads: parseNumber(pick(item, ['lead_submissions','leads'], 0)),
+    workshopStarts: parseNumber(pick(item, ['workshop_starts','checkout_starts'], 0)),
+    paidOrders: parseNumber(pick(item, ['paid_orders','purchases'], 0)),
+    revenue: parseNumber(pick(item, ['revenue','purchase_value'], 0)),
+  })) : deriveAttributionRows();
 
-  if (!entries.length) { container.innerHTML = '<div class="empty" style="padding:20px">No data yet</div>'; return; }
-
-  container.innerHTML = entries.map(([label, count]) => {
-    const pct = Math.round(count/max*100);
-    const color = getColor(label);
-    return '<div class="bar-row">' +
-      '<span class="bar-label" title="' + esc(label) + '">' + esc(label || 'unknown') + '</span>' +
-      '<div class="bar-track"><div class="bar-fill" style="width:' + pct + '%;background:' + color + '">' + (pct > 15 ? count : '') + '</div></div>' +
-      '<span class="bar-count">' + count + '</span></div>';
+  const tbody = document.getElementById('attributionTable');
+  tbody.innerHTML = rows.map((item) => {
+    const roas = item.spend ? (item.revenue / item.spend).toFixed(2) + 'x' : '-';
+    return '<tr>' +
+      '<td style="font-weight:600">' + esc(item.key) + '</td>' +
+      '<td>' + esc(formatCurrency(item.spend)) + '</td>' +
+      '<td>' + esc(Math.round(item.clicks)) + '</td>' +
+      '<td>' + esc(Math.round(item.leads)) + '</td>' +
+      '<td>' + esc(Math.round(item.workshopStarts)) + '</td>' +
+      '<td>' + esc(Math.round(item.paidOrders)) + '</td>' +
+      '<td>' + esc(formatCurrency(item.revenue)) + '</td>' +
+      '<td>' + esc(roas) + '</td>' +
+    '</tr>';
   }).join('');
+
+  if (!rows.length) tbody.innerHTML = '<tr><td colspan="8" class="empty">No attribution rows available yet.</td></tr>';
 }
 
-function countBy(arr, field) {
-  const counts = {};
-  arr.forEach(item => {
-    const val = item[field] || 'unknown';
-    counts[val] = (counts[val] || 0) + 1;
+function renderLeadsTable() {
+  const leads = [...getFilteredLeads()].sort((left, right) => {
+    let a = pick(left, [leadSortField], '');
+    let b = pick(right, [leadSortField], '');
+    if (leadSortField === 'timestamp') {
+      a = parseDate(left, ['timestamp']) || new Date(0);
+      b = parseDate(right, ['timestamp']) || new Date(0);
+    } else {
+      a = String(a).toLowerCase();
+      b = String(b).toLowerCase();
+    }
+    return leadSortAsc ? (a > b ? 1 : -1) : (a < b ? 1 : -1);
   });
-  return counts;
+
+  const tbody = document.getElementById('leadsTable');
+  tbody.innerHTML = leads.map((item) => {
+    const sourceType = pick(item, ['utm_source']) ? 'paid' : (pick(item, ['traffic_source']) === 'direct' ? 'direct' : 'organic');
+    return '<tr>' +
+      '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + esc(formatTime(pick(item, ['timestamp']))) + '</td>' +
+      '<td style="font-weight:600">' + esc(pick(item, ['student_name'])) + '</td>' +
+      '<td>' + esc(pick(item, ['parent_name'])) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['phone'])) + '</td>' +
+      '<td>' + esc(pick(item, ['school'])) + '</td>' +
+      '<td>' + esc(pick(item, ['grade'])) + '</td>' +
+      '<td>' + esc(pick(item, ['city'])) + '</td>' +
+      '<td><span class="tag tag-' + sourceType + '">' + esc(pick(item, ['traffic_source'], 'unknown')) + '</span></td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['landing_page'])) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['form_open_source'])) + '</td>' +
+      '<td style="font-size:0.65rem;color:var(--muted)">' + esc(pick(item, ['ad_id'])) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['utm_content'])) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (!leads.length) tbody.innerHTML = '<tr><td colspan="12" class="empty">No leads yet. Submit a test form to see data.</td></tr>';
 }
 
-function isToday(ts) {
-  if (!ts) return false;
-  const d = new Date(ts);
-  if (isNaN(d.getTime())) return false;
-  const opts = {timeZone:'Asia/Kolkata',year:'numeric',month:'2-digit',day:'2-digit'};
-  return d.toLocaleDateString('en-IN',opts) === new Date().toLocaleDateString('en-IN',opts);
+function populateSelect(id, values, defaultLabel) {
+  const element = document.getElementById(id);
+  const current = element.value;
+  element.innerHTML = '<option value="">' + defaultLabel + '</option>' + values.map((value) => '<option value="' + esc(value) + '">' + esc(value) + '</option>').join('');
+  element.value = current;
 }
 
-function formatTime(ts) {
-  if (!ts) return '-';
-  try {
-    const d = new Date(ts);
-    if (isNaN(d.getTime())) return ts;
-    return d.toLocaleString('en-IN', {day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Asia/Kolkata'});
-  } catch { return ts; }
+function populateLeadFilters() {
+  const leads = filterRows(state.leads);
+  populateSelect('filterSource', Object.keys(countBy(leads, (item) => pick(item, ['traffic_source'], 'unknown'))).sort(), 'All Sources');
+  populateSelect('filterLP', Object.keys(countBy(leads, (item) => pick(item, ['landing_page'], 'unknown'))).sort(), 'All Pages');
+  populateSelect('filterCity', Object.keys(countBy(leads, (item) => pick(item, ['city'], 'unknown'))).sort(), 'All Cities');
 }
 
-function esc(s) {
-  if (!s) return '';
-  const d = document.createElement('div');
-  d.textContent = String(s);
-  return d.innerHTML;
+function populateOrderFilters() {
+  const orders = filterRows(state.workshopOrders);
+  populateSelect('orderStatusFilter', [...new Set(orders.map((item) => normalizeStatus(item)))].sort(), 'All statuses');
+  populateSelect('orderSourceFilter', [...new Set(orders.map((item) => pick(item, ['traffic_source'], 'unknown')))].sort(), 'All sources');
 }
 
-// Tab switching
-document.querySelectorAll('.tab').forEach(tab => {
+function populateGlobalCampaigns() {
+  const values = new Set();
+  [].concat(state.leads, state.workshopFunnel, state.workshopOrders, state.metaInsights, state.attribution).forEach((item) => {
+    const campaign = pick(item, ['campaign_name','campaign','utm_campaign','campaign_id'], '');
+    if (campaign) values.add(campaign);
+  });
+  populateSelect('globalCampaign', Array.from(values).sort(), 'All Campaigns');
+}
+
+document.querySelectorAll('.tab').forEach((tab) => {
   tab.addEventListener('click', () => {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach((item) => item.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach((item) => item.classList.remove('active'));
     tab.classList.add('active');
     document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
   });
 });
 
-// Sorting
-document.querySelectorAll('th[data-sort]').forEach(th => {
-  th.addEventListener('click', () => {
-    const field = th.dataset.sort;
-    if (sortField === field) sortAsc = !sortAsc;
-    else { sortField = field; sortAsc = true; }
+document.querySelectorAll('th[data-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.sort;
+    if (leadSortField === field) leadSortAsc = !leadSortAsc;
+    else { leadSortField = field; leadSortAsc = true; }
     renderLeadsTable();
   });
 });
 
-// Filter listeners
-['filterSearch','filterSource','filterLP','filterCity'].forEach(id => {
-  document.getElementById(id).addEventListener('input', () => { renderLeadsTable(); });
-  document.getElementById(id).addEventListener('change', () => { renderLeadsTable(); });
+document.querySelectorAll('th[data-order-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.orderSort;
+    if (orderSortField === field) orderSortAsc = !orderSortAsc;
+    else { orderSortField = field; orderSortAsc = true; }
+    renderWorkshopOrders();
+  });
 });
 
-// Auto-refresh every 60 seconds
-setInterval(loadData, 60000);
+['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','globalStartDate','globalEndDate','globalFunnel','globalCampaign'].forEach((id) => {
+  const element = document.getElementById(id);
+  if (!element) return;
+  element.addEventListener('input', render);
+  element.addEventListener('change', render);
+});
 
-// Initial load only if already authenticated
-if (sessionStorage.getItem('dash_auth') === 'true') loadData();
+setInterval(loadData, 60000);
 </script>
 </body>
 </html>
