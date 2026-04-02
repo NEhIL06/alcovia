@@ -55,6 +55,17 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .tag-success{background:rgba(16,185,129,0.15);color:var(--green)}
 .tag-failed{background:rgba(239,68,68,0.15);color:var(--red)}
 .tag-pending{background:rgba(234,191,54,0.15);color:var(--gold)}
+.tag-workshop{background:rgba(255,107,43,0.15);color:var(--orange)}
+.tag-leads{background:rgba(234,191,54,0.15);color:var(--gold)}
+.tag-events{background:rgba(59,130,246,0.15);color:var(--blue)}
+.tag-engagement{background:rgba(168,85,247,0.15);color:var(--purple)}
+.tag-other{background:rgba(122,138,126,0.15);color:var(--muted)}
+.sparkline{display:flex;align-items:flex-end;gap:2px;height:48px;padding:4px 0}
+.sparkline .bar{flex:1;background:var(--gold);border-radius:2px 2px 0 0;min-width:3px;transition:height 0.3s;opacity:0.85}
+.sparkline .bar:hover{opacity:1}
+.cat-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.cat-pill{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;font-size:0.72rem;font-weight:600;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03)}
+.cat-pill .dot{width:8px;height:8px;border-radius:50%}
 .loading{text-align:center;padding:60px;color:var(--muted)}
 .spinner{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -205,27 +216,57 @@ select.filter-input{cursor:pointer}
   </div>
 
   <div id="tab-meta-performance" class="tab-content">
-    <div class="stack">
-      <span class="metric-chip">Official Meta spend/click fields should continue to come from your Meta-side ingestion, not client events.</span>
+    <div id="metaCategoryRow" class="cat-row"></div>
+    <div class="mini-summary" id="metaSummaryCards">
+      <div class="mini-card"><div class="label">Total Spend</div><div class="value" id="metaTotalSpend">-</div></div>
+      <div class="mini-card"><div class="label">Total Reach</div><div class="value" id="metaTotalReach">-</div></div>
+      <div class="mini-card"><div class="label">Avg Frequency</div><div class="value" id="metaAvgFreq">-</div></div>
+      <div class="mini-card"><div class="label">Cost / Lead</div><div class="value" id="metaCPL">-</div></div>
+      <div class="mini-card"><div class="label">Cost / Purchase</div><div class="value" id="metaCPA">-</div></div>
+      <div class="mini-card"><div class="label">Overall ROAS</div><div class="value" id="metaROAS">-</div></div>
     </div>
     <div class="charts">
       <div class="chart-card"><h3>Spend by Campaign</h3><div id="chartMetaSpend"></div></div>
       <div class="chart-card"><h3>Link Clicks by Campaign</h3><div id="chartMetaClicks"></div></div>
-      <div class="chart-card"><h3>Purchases / Results by Campaign</h3><div id="chartMetaResults"></div></div>
-      <div class="chart-card"><h3>CTR by Campaign</h3><div id="chartMetaCtr"></div></div>
+      <div class="chart-card"><h3>Results by Campaign</h3><div id="chartMetaResults"></div></div>
+      <div class="chart-card"><h3>Daily Spend Trend</h3><div id="chartMetaDaily" class="sparkline"></div></div>
     </div>
+    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">Campaign Breakdown</h3>
     <div class="table-wrap"><table><thead><tr>
       <th>Campaign</th>
+      <th>Category</th>
       <th>Spend</th>
-      <th>Impressions</th>
+      <th>Impr</th>
       <th>Reach</th>
-      <th>Link Clicks</th>
+      <th>Freq</th>
+      <th>Clicks</th>
+      <th>LP Views</th>
       <th>CTR</th>
       <th>CPC</th>
-      <th>CPM</th>
+      <th>Leads</th>
+      <th>Purchases</th>
+      <th>CPL</th>
+      <th>ROAS</th>
+    </tr></thead><tbody id="metaTable"></tbody></table></div>
+
+    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">Top Ads (by Spend)</h3>
+    <div class="table-wrap"><table><thead><tr>
+      <th>Ad Name</th>
+      <th>Ad Set</th>
+      <th>Category</th>
+      <th>Spend</th>
+      <th>Impr</th>
+      <th>Clicks</th>
+      <th>CTR</th>
+      <th>CPC</th>
       <th>Results</th>
       <th>Cost / Result</th>
-    </tr></thead><tbody id="metaTable"></tbody></table></div>
+    </tr></thead><tbody id="metaAdsTable"></tbody></table></div>
+
+    <div class="charts" style="margin-top:18px">
+      <div class="chart-card"><h3>Spend by Placement</h3><div id="chartMetaPlacements"></div></div>
+      <div class="chart-card"><h3>Spend by Age / Gender</h3><div id="chartMetaDemographics"></div></div>
+    </div>
   </div>
 
   <div id="tab-attribution" class="tab-content">
@@ -283,8 +324,11 @@ const state = {
   workshopFunnel: [],
   workshopOrders: [],
   metaInsights: [],
+  metaData: null,
   attribution: [],
 };
+
+const CAT_COLORS = {workshop:'#ff6b2b',leads:'#EABF36',events:'#3b82f6',engagement:'#a855f7',other:'#6b7280'};
 
 let leadSortField = 'timestamp';
 let leadSortAsc = false;
@@ -378,7 +422,14 @@ async function loadData() {
     state.leads = extract(results[0]);
     state.workshopFunnel = extract(results[1]);
     state.workshopOrders = extract(results[2]);
-    state.metaInsights = extract(results[3]);
+    const metaRaw = extract(results[3]);
+    if (metaRaw.length === 1 && metaRaw[0] && metaRaw[0].campaigns) {
+      state.metaData = metaRaw[0];
+      state.metaInsights = metaRaw[0].campaigns || [];
+    } else {
+      state.metaData = null;
+      state.metaInsights = metaRaw;
+    }
     state.attribution = extract(results[4]);
 
     const failedCount = results.filter((r) => r.status === 'rejected').length;
@@ -785,30 +836,113 @@ function aggregateMetaByCampaign(rows) {
 }
 
 function renderMetaPerformance() {
-  const campaigns = aggregateMetaByCampaign(getFilteredMetaInsights());
+  const md = state.metaData;
+  const campaigns = md ? md.campaigns : aggregateMetaByCampaign(getFilteredMetaInsights()).map((c) => ({...c, campaign_name: c.key, category: 'other', frequency: 0, link_clicks: c.linkClicks, landing_page_views: 0, leads: 0, purchases: 0, cost_per_lead: 0, cost_per_result: c.costPerResult}));
 
-  renderBarChart('chartMetaSpend', Object.fromEntries(campaigns.map((item) => [item.key, item.spend])), formatCurrency);
-  renderBarChart('chartMetaClicks', Object.fromEntries(campaigns.map((item) => [item.key, item.linkClicks])));
-  renderBarChart('chartMetaResults', Object.fromEntries(campaigns.map((item) => [item.key, item.results])));
-  renderBarChart('chartMetaCtr', Object.fromEntries(campaigns.map((item) => [item.key, item.ctr])), (value) => value.toFixed(1) + '%');
+  // Summary cards
+  const summary = md ? md.summary : {};
+  const ts = summary.total_spend || campaigns.reduce((s,c) => s + (c.spend||0), 0);
+  const tr = summary.total_reach || campaigns.reduce((s,c) => s + (c.reach||0), 0);
+  document.getElementById('metaTotalSpend').textContent = ts ? formatCurrency(ts) : '-';
+  document.getElementById('metaTotalReach').textContent = tr ? tr.toLocaleString('en-IN') : '-';
+  document.getElementById('metaAvgFreq').textContent = summary.avg_frequency ? summary.avg_frequency.toFixed(2) + 'x' : (campaigns.length ? (campaigns.reduce((s,c) => s + (c.frequency||0), 0) / campaigns.length).toFixed(2) + 'x' : '-');
+  document.getElementById('metaCPL').textContent = summary.avg_cpl ? formatCurrency(summary.avg_cpl) : '-';
+  document.getElementById('metaCPA').textContent = summary.avg_cpa ? formatCurrency(summary.avg_cpa) : '-';
+  document.getElementById('metaROAS').textContent = summary.overall_roas ? summary.overall_roas.toFixed(2) + 'x' : '-';
 
-  const tbody = document.getElementById('metaTable');
-  tbody.innerHTML = campaigns.map((item) => (
-    '<tr>' +
-      '<td style="font-weight:600">' + esc(item.key) + '</td>' +
-      '<td>' + esc(formatCurrency(item.spend)) + '</td>' +
-      '<td>' + esc(Math.round(item.impressions)) + '</td>' +
-      '<td>' + esc(Math.round(item.reach)) + '</td>' +
-      '<td>' + esc(Math.round(item.linkClicks)) + '</td>' +
-      '<td>' + esc(formatPercent(item.ctr)) + '</td>' +
-      '<td>' + esc(item.cpc ? formatCurrency(item.cpc) : '-') + '</td>' +
-      '<td>' + esc(item.cpm ? formatCurrency(item.cpm) : '-') + '</td>' +
-      '<td>' + esc(Math.round(item.results)) + '</td>' +
-      '<td>' + esc(item.costPerResult ? formatCurrency(item.costPerResult) : '-') + '</td>' +
-    '</tr>'
+  // Category pills
+  const catRow = document.getElementById('metaCategoryRow');
+  const catData = md ? md.category_breakdown : {};
+  catRow.innerHTML = Object.entries(catData).filter(([,v]) => v.count > 0).map(([cat, v]) => (
+    '<div class="cat-pill"><span class="dot" style="background:' + (CAT_COLORS[cat]||'#6b7280') + '"></span>' +
+    esc(cat) + ': ' + esc(formatCurrency(v.spend)) + ' (' + v.count + ' campaigns)</div>'
   )).join('');
 
-  if (!campaigns.length) tbody.innerHTML = '<tr><td colspan="10" class="empty">No Meta insights yet. Wire your Meta ingestion workflow in n8n to the Meta dashboard endpoints to populate spend, impressions, clicks, and result metrics.</td></tr>';
+  // Bar charts
+  renderBarChart('chartMetaSpend', Object.fromEntries(campaigns.map((c) => [c.campaign_name, c.spend])), formatCurrency);
+  renderBarChart('chartMetaClicks', Object.fromEntries(campaigns.map((c) => [c.campaign_name, c.link_clicks || 0])));
+  renderBarChart('chartMetaResults', Object.fromEntries(campaigns.map((c) => [c.campaign_name, c.results || 0])));
+
+  // Daily sparkline
+  renderDailySparkline(md ? md.daily : []);
+
+  // Campaign table
+  const tbody = document.getElementById('metaTable');
+  tbody.innerHTML = campaigns.map((c) => (
+    '<tr>' +
+      '<td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(c.campaign_name) + '">' + esc(c.campaign_name) + '</td>' +
+      '<td><span class="tag tag-' + (c.category||'other') + '">' + esc(c.category||'other') + '</span></td>' +
+      '<td>' + esc(formatCurrency(c.spend)) + '</td>' +
+      '<td>' + esc(Math.round(c.impressions||0).toLocaleString()) + '</td>' +
+      '<td>' + esc(Math.round(c.reach||0).toLocaleString()) + '</td>' +
+      '<td>' + esc((c.frequency||0).toFixed(1)) + '</td>' +
+      '<td>' + esc(Math.round(c.link_clicks||c.clicks||0)) + '</td>' +
+      '<td>' + esc(Math.round(c.landing_page_views||0)) + '</td>' +
+      '<td>' + esc(formatPercent(c.ctr)) + '</td>' +
+      '<td>' + esc(c.cpc ? formatCurrency(c.cpc) : '-') + '</td>' +
+      '<td>' + esc(c.leads||0) + '</td>' +
+      '<td>' + esc(c.purchases||0) + '</td>' +
+      '<td>' + esc(c.cost_per_lead ? formatCurrency(c.cost_per_lead) : '-') + '</td>' +
+      '<td>' + esc(c.roas ? c.roas.toFixed(2) + 'x' : '-') + '</td>' +
+    '</tr>'
+  )).join('');
+  if (!campaigns.length) tbody.innerHTML = '<tr><td colspan="14" class="empty">No Meta insights yet. Attach the HTTP Header Auth credential to the Fetch nodes in the Meta Ads Insights workflow, then refresh.</td></tr>';
+
+  // Ads table
+  renderMetaAds(md ? md.ads : []);
+
+  // Placements + demographics
+  renderMetaPlacements(md ? md.placements : []);
+  renderMetaDemographics(md ? md.demographics : []);
+}
+
+function renderDailySparkline(daily) {
+  const container = document.getElementById('chartMetaDaily');
+  if (!daily || !daily.length) { container.innerHTML = '<div class="empty" style="padding:12px">No daily data yet</div>'; return; }
+  const max = Math.max(...daily.map((d) => d.spend), 1);
+  container.innerHTML = daily.map((d) => {
+    const pct = Math.max(4, Math.round((d.spend / max) * 100));
+    return '<div class="bar" style="height:' + pct + '%" title="' + esc(d.date) + ': ' + esc(formatCurrency(d.spend)) + '"></div>';
+  }).join('');
+}
+
+function renderMetaAds(ads) {
+  const tbody = document.getElementById('metaAdsTable');
+  if (!ads || !ads.length) { tbody.innerHTML = '<tr><td colspan="10" class="empty">No ad-level data yet</td></tr>'; return; }
+  tbody.innerHTML = ads.slice(0, 30).map((a) => (
+    '<tr>' +
+      '<td style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.ad_name) + '">' + esc(a.ad_name) + '</td>' +
+      '<td style="font-size:0.7rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.adset_name) + '">' + esc(a.adset_name) + '</td>' +
+      '<td><span class="tag tag-' + (a.category||'other') + '">' + esc(a.category||'other') + '</span></td>' +
+      '<td>' + esc(formatCurrency(a.spend)) + '</td>' +
+      '<td>' + esc(Math.round(a.impressions||0).toLocaleString()) + '</td>' +
+      '<td>' + esc(Math.round(a.link_clicks||a.clicks||0)) + '</td>' +
+      '<td>' + esc(formatPercent(a.ctr)) + '</td>' +
+      '<td>' + esc(a.cpc ? formatCurrency(a.cpc) : '-') + '</td>' +
+      '<td>' + esc(a.results||0) + '</td>' +
+      '<td>' + esc(a.cost_per_result ? formatCurrency(a.cost_per_result) : '-') + '</td>' +
+    '</tr>'
+  )).join('');
+}
+
+function renderMetaPlacements(placements) {
+  if (!placements || !placements.length) { renderBarChart('chartMetaPlacements', {}); return; }
+  const grouped = {};
+  placements.forEach((p) => {
+    const key = (p.platform||'unknown') + ' / ' + (p.position||'unknown');
+    grouped[key] = (grouped[key]||0) + p.spend;
+  });
+  renderBarChart('chartMetaPlacements', grouped, formatCurrency);
+}
+
+function renderMetaDemographics(demographics) {
+  if (!demographics || !demographics.length) { renderBarChart('chartMetaDemographics', {}); return; }
+  const grouped = {};
+  demographics.forEach((d) => {
+    const key = (d.age||'?') + ' ' + (d.gender||'?');
+    grouped[key] = (grouped[key]||0) + d.spend;
+  });
+  renderBarChart('chartMetaDemographics', grouped, formatCurrency);
 }
 
 function deriveAttributionRows() {
