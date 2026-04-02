@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import crypto from "crypto"
 
-const PIXEL_ID = process.env.META_PIXEL_ID || "26011379345197572"
+const PIXEL_ID = process.env.META_PIXEL_ID || "1606881963979917"
 const ACCESS_TOKEN = process.env.META_CAPI_TOKEN
 
 function hashSha256(value: string): string {

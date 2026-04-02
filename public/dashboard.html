@@ -366,7 +366,7 @@ function normalizeRows(data) {
 async function loadData() {
   document.getElementById('loadingState').style.display = 'block';
   try {
-    const [leads, workshopFunnel, workshopOrders, metaInsights, attribution] = await Promise.all([
+    const results = await Promise.allSettled([
       fetchDataset(API_URLS.leads),
       fetchDataset(API_URLS.workshopFunnel),
       fetchDataset(API_URLS.workshopOrders),
@@ -374,17 +374,23 @@ async function loadData() {
       fetchDataset(API_URLS.attribution),
     ]);
 
-    state.leads = leads;
-    state.workshopFunnel = workshopFunnel;
-    state.workshopOrders = workshopOrders;
-    state.metaInsights = metaInsights;
-    state.attribution = attribution;
+    const extract = (result) => result.status === 'fulfilled' ? result.value : [];
+    state.leads = extract(results[0]);
+    state.workshopFunnel = extract(results[1]);
+    state.workshopOrders = extract(results[2]);
+    state.metaInsights = extract(results[3]);
+    state.attribution = extract(results[4]);
+
+    const failedCount = results.filter((r) => r.status === 'rejected').length;
+    if (failedCount > 0 && failedCount < results.length) {
+      console.warn(failedCount + ' dashboard endpoints failed; partial data shown.');
+    }
 
     render();
     document.getElementById('lastUpdated').textContent = 'Updated: ' + new Date().toLocaleString('en-IN', {dateStyle:'medium',timeStyle:'short'});
   } catch (error) {
     console.error(error);
-    document.getElementById('loadingState').innerHTML = '<p class="danger">Failed to load one or more dashboard datasets. Lead data should continue working from the existing endpoint; workshop and Meta sections require their n8n dashboard feeds to be configured.</p>';
+    document.getElementById('loadingState').innerHTML = '<p class="danger">Failed to load dashboard datasets. Check console for details.</p>';
   }
   document.getElementById('loadingState').style.display = 'none';
 }
