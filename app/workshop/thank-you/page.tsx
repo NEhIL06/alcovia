@@ -26,7 +26,6 @@ declare global {
 }
 
 export default function WorkshopThankYouPage() {
-  const [isSuccess, setIsSuccess] = useState(false)
   const [paymentReference, setPaymentReference] = useState<string | null>(null)
 
   const fallbackReference = useMemo(() => `alcovia-${Date.now()}`, [])
@@ -35,18 +34,18 @@ export default function WorkshopThankYouPage() {
     const searchParams = new URLSearchParams(window.location.search)
     const razorpayResult = parseRazorpayResult(searchParams)
     const checkoutContext = readWorkshopCheckoutContext()
+    const hasConfirmedRedirect = razorpayResult.success || Boolean(checkoutContext)
     const paymentReferenceId =
       razorpayResult.paymentId ||
       razorpayResult.orderId ||
       checkoutContext?.checkout_attempt_id ||
       fallbackReference
 
-    setIsSuccess(razorpayResult.success)
     setPaymentReference(razorpayResult.paymentId || razorpayResult.orderId || null)
 
     trackWorkshopEvent("workshop_thank_you_view").catch(() => {})
 
-    if (!razorpayResult.success || hasPurchaseBeenTracked(paymentReferenceId)) {
+    if (!hasConfirmedRedirect || hasPurchaseBeenTracked(paymentReferenceId)) {
       return
     }
 
@@ -148,39 +147,25 @@ export default function WorkshopThankYouPage() {
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            {isSuccess ? (
-              <motion.svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke={ACCENT}
-                strokeWidth={2.5}
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-10 h-10 sm:w-12 sm:h-12"
+            <motion.svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={ACCENT}
+              strokeWidth={2.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="w-10 h-10 sm:w-12 sm:h-12"
+              initial={{ pathLength: 0 }}
+              animate={{ pathLength: 1 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+            >
+              <motion.path
+                d="M5 13l4 4L19 7"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                <motion.path
-                  d="M5 13l4 4L19 7"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
-                />
-              </motion.svg>
-            ) : (
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke={ACCENT}
-                strokeWidth={2}
-                className="w-10 h-10 sm:w-12 sm:h-12"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 8v5" />
-                <circle cx="12" cy="16.5" r="1" fill={ACCENT} stroke="none" />
-              </svg>
-            )}
+                transition={{ delay: 0.5, duration: 0.6, ease: "easeOut" }}
+              />
+            </motion.svg>
           </motion.div>
 
           <motion.div
@@ -194,7 +179,7 @@ export default function WorkshopThankYouPage() {
               className="text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)]"
               style={{ color: ACCENT }}
             >
-              {isSuccess ? "Payment Successful" : "Payment Verification"}
+              Payment Successful
             </span>
             <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
           </motion.div>
@@ -205,11 +190,9 @@ export default function WorkshopThankYouPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
           >
-            <span className="block text-white">
-              {isSuccess ? "You’re In." : "We’re Checking Your Payment."}
-            </span>
+            <span className="block text-white">You’re In.</span>
             <span className="block" style={{ color: ACCENT }}>
-              {isSuccess ? "Welcome to the Workshop." : "We’ll confirm it shortly."}
+              Welcome to the Workshop.
             </span>
           </motion.h1>
 
@@ -219,9 +202,7 @@ export default function WorkshopThankYouPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            {isSuccess
-              ? `Your seat for ${WORKSHOP_DETAILS.title} is confirmed. Keep this page handy while we sync the payment with your backend workflows.`
-              : "If your bank has already debited the amount, Razorpay and your backend webhooks will usually reconcile it in a moment. You can safely keep this tab open or contact Alcovia if needed."}
+            {`Your seat for ${WORKSHOP_DETAILS.title} is confirmed. Keep this page handy while we sync the payment with your backend workflows.`}
           </motion.p>
 
           <motion.div
