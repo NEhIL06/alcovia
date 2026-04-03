@@ -311,7 +311,6 @@ const EXPERIENCE_LOGOS = [
   { name: "Masters Union", src: "/images/logos/master-union.png" },
   { name: "Bain", src: "/images/logos/bain.png" },
   { name: "McKinsey", src: "/images/logos/mckinsey.png" },
-  { name: "British School", src: "/images/logos/british-school.png" },
   { name: "Vasant Valley", src: "/images/logos/vasant-valley.png" },
 ]
 
