@@ -33,7 +33,7 @@ export default function CultStrategyWorkshopPage() {
     <main className="relative">
       <HeroSection />
       <ProblemSection />
-      <SpeakerSection />
+      {/* <SpeakerSection /> */}
       <WorkshopPhases />
       <TakeawaysSection />
       
