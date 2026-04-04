@@ -44,8 +44,11 @@ h1{font-size:1.5rem;font-weight:800;background:linear-gradient(135deg,#BF953F,#F
 .bar-fill{height:100%;border-radius:4px;transition:width 0.6s ease;display:flex;align-items:center;padding-left:6px;font-size:0.65rem;font-weight:600;color:#0a0f0d;min-width:fit-content}
 .bar-count{width:78px;text-align:right;font-weight:600;flex-shrink:0;font-size:0.7rem}
 table{width:100%;border-collapse:collapse;font-size:0.78rem}
-th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:0.65rem;letter-spacing:0.05em;cursor:pointer;user-select:none}
+th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:0.65rem;letter-spacing:0.05em;cursor:pointer;user-select:none;position:relative}
 th:hover{color:var(--gold)}
+th.sort-asc::after,th.sort-desc::after{margin-left:4px;font-size:0.55rem}
+th.sort-asc::after{content:'\25B2'}
+th.sort-desc::after{content:'\25BC'}
 td{padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:top}
 tr:hover td{background:rgba(255,255,255,0.02)}
 .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:0.65rem;font-weight:600}
@@ -138,6 +141,7 @@ select.filter-input{cursor:pointer}
     <div class="tab" data-tab="workshop-orders">Workshop Payments</div>
     <div class="tab" data-tab="meta-performance">Meta Ad Spend</div>
     <div class="tab" data-tab="attribution">Attribution</div>
+    <div class="tab" data-tab="ad-creatives">Ad Creatives</div>
     <div class="tab" data-tab="all-leads">All Leads</div>
   </div>
 
@@ -221,34 +225,34 @@ select.filter-input{cursor:pointer}
     </div>
     <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">Campaign Breakdown</h3>
     <div class="table-wrap"><table><thead><tr>
-      <th>Campaign</th>
-      <th>Category</th>
-      <th>Spend</th>
-      <th>Impr</th>
-      <th>Reach</th>
-      <th>Freq</th>
-      <th>Clicks</th>
-      <th>LP Views</th>
-      <th>CTR</th>
-      <th>CPC</th>
-      <th>Leads</th>
-      <th>Purchases</th>
-      <th>CPL</th>
-      <th>ROAS</th>
+      <th data-meta-sort="campaign_name">Campaign</th>
+      <th data-meta-sort="category">Category</th>
+      <th data-meta-sort="spend">Spend</th>
+      <th data-meta-sort="impressions">Impr</th>
+      <th data-meta-sort="reach">Reach</th>
+      <th data-meta-sort="frequency">Freq</th>
+      <th data-meta-sort="link_clicks">Clicks</th>
+      <th data-meta-sort="landing_page_views">LP Views</th>
+      <th data-meta-sort="ctr">CTR</th>
+      <th data-meta-sort="cpc">CPC</th>
+      <th data-meta-sort="leads">Leads</th>
+      <th data-meta-sort="purchases">Purchases</th>
+      <th data-meta-sort="cost_per_lead">CPL</th>
+      <th data-meta-sort="roas">ROAS</th>
     </tr></thead><tbody id="metaTable"></tbody></table></div>
 
     <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">Top Ads (by Spend)</h3>
     <div class="table-wrap"><table><thead><tr>
-      <th>Ad Name</th>
-      <th>Ad Set</th>
-      <th>Category</th>
-      <th>Spend</th>
-      <th>Impr</th>
-      <th>Clicks</th>
-      <th>CTR</th>
-      <th>CPC</th>
-      <th>Results</th>
-      <th>Cost / Result</th>
+      <th data-ads-sort="ad_name">Ad Name</th>
+      <th data-ads-sort="adset_name">Ad Set</th>
+      <th data-ads-sort="category">Category</th>
+      <th data-ads-sort="spend">Spend</th>
+      <th data-ads-sort="impressions">Impr</th>
+      <th data-ads-sort="link_clicks">Clicks</th>
+      <th data-ads-sort="ctr">CTR</th>
+      <th data-ads-sort="cpc">CPC</th>
+      <th data-ads-sort="results">Results</th>
+      <th data-ads-sort="cost_per_result">Cost / Result</th>
     </tr></thead><tbody id="metaAdsTable"></tbody></table></div>
 
     <div class="charts" style="margin-top:18px">
@@ -260,15 +264,63 @@ select.filter-input{cursor:pointer}
   <div id="tab-attribution" class="tab-content">
     <p class="section-note">If the dedicated attribution endpoint is empty, this table falls back to a client-side merge across Meta, lead, and workshop datasets using the strongest available campaign or ad keys.</p>
     <div class="table-wrap"><table><thead><tr>
-      <th>Key</th>
-      <th>Meta Spend</th>
-      <th>Link Clicks</th>
-      <th>Lead Submissions</th>
-      <th>Workshop Starts</th>
-      <th>Paid Orders</th>
-      <th>Revenue</th>
-      <th>ROAS</th>
+      <th data-attr-sort="key">Key</th>
+      <th data-attr-sort="spend">Meta Spend</th>
+      <th data-attr-sort="clicks">Link Clicks</th>
+      <th data-attr-sort="leads">Lead Submissions</th>
+      <th data-attr-sort="workshopStarts">Workshop Starts</th>
+      <th data-attr-sort="paidOrders">Paid Orders</th>
+      <th data-attr-sort="revenue">Revenue</th>
+      <th data-attr-sort="roas">ROAS</th>
     </tr></thead><tbody id="attributionTable"></tbody></table></div>
+  </div>
+
+  <div id="tab-ad-creatives" class="tab-content">
+    <div class="filters">
+      <select class="filter-input" id="creativeFunnelFilter">
+        <option value="">All Funnel Stages</option>
+        <option value="awareness">Awareness (LP1-LP2)</option>
+        <option value="consideration">Consideration (LP3-LP5)</option>
+        <option value="bofu">BOFU (Workshop)</option>
+      </select>
+      <select class="filter-input" id="creativeMessagingFilter">
+        <option value="">All Messaging</option>
+        <option value="m1">M1: Real-World Readiness</option>
+        <option value="m2">M2: Career Clarity</option>
+        <option value="m3">M3: Time Management</option>
+        <option value="m4">M4: Peer Group</option>
+        <option value="m5">M5: The 1% Club</option>
+      </select>
+      <select class="filter-input" id="creativeToneFilter">
+        <option value="">All Tones</option>
+        <option value="fear">Fear Based</option>
+        <option value="aspirational">Aspirational</option>
+        <option value="authority">Authority</option>
+        <option value="myth_busting">Myth Busting</option>
+        <option value="comparison">Comparison</option>
+      </select>
+    </div>
+    <div class="mini-summary" id="creativeSummaryCards"></div>
+    <div class="charts">
+      <div class="chart-card"><h3>Spend by Messaging Theme</h3><div id="chartCreativeMessaging"></div></div>
+      <div class="chart-card"><h3>Spend by Tone / Emotion</h3><div id="chartCreativeTone"></div></div>
+      <div class="chart-card"><h3>Leads by Messaging Theme</h3><div id="chartCreativeLeadsByMsg"></div></div>
+      <div class="chart-card"><h3>Leads by Tone / Emotion</h3><div id="chartCreativeLeadsByTone"></div></div>
+    </div>
+    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">All Ad Creatives (25 Ads)</h3>
+    <div class="table-wrap"><table><thead><tr>
+      <th data-creative-sort="image">#</th>
+      <th data-creative-sort="msg">Messaging</th>
+      <th data-creative-sort="tone">Tone</th>
+      <th data-creative-sort="funnel">Funnel</th>
+      <th>Headline</th>
+      <th data-creative-sort="spend">Spend</th>
+      <th data-creative-sort="impressions">Impr</th>
+      <th data-creative-sort="clicks">Clicks</th>
+      <th data-creative-sort="ctr">CTR</th>
+      <th data-creative-sort="leads">Leads</th>
+      <th data-creative-sort="cpl">CPL</th>
+    </tr></thead><tbody id="creativeTable"></tbody></table></div>
   </div>
 
   <div id="tab-all-leads" class="tab-content">
@@ -322,6 +374,47 @@ let leadSortField = 'timestamp';
 let leadSortAsc = false;
 let orderSortField = 'timestamp';
 let orderSortAsc = false;
+let metaSortField = 'spend';
+let metaSortAsc = false;
+let adsSortField = 'spend';
+let adsSortAsc = false;
+let attrSortField = 'revenue';
+let attrSortAsc = false;
+let creativeSortField = 'image';
+let creativeSortAsc = true;
+
+const MSG_LABELS = { m1:'M1: Real-World Readiness', m2:'M2: Career Clarity', m3:'M3: Time Management', m4:'M4: Peer Group', m5:'M5: The 1% Club' };
+const TONE_LABELS = { fear:'Fear Based', aspirational:'Aspirational', authority:'Authority', myth_busting:'Myth Busting', comparison:'Comparison' };
+const TONE_COLORS = { fear:'#ef4444', aspirational:'#10b981', authority:'#3b82f6', myth_busting:'#a855f7', comparison:'#ff6b2b' };
+const FUNNEL_LABELS = { awareness:'Awareness', consideration:'Consideration', bofu:'BOFU' };
+
+const AD_CREATIVES = [
+  {image:1,msg:'m1',tone:'fear',lp:'/lp/1',funnel:'awareness',headline:'Is your teenager too "soft" for the real world?',sub:'Good grades won\'t save them when real-world friction hits.',utmContent:'m1_fear',adIdPrefix:'alc_m1_fear'},
+  {image:2,msg:'m1',tone:'aspirational',lp:'/lp/1',funnel:'awareness',headline:'Raise a teen who finishes what they start.',sub:'We turn ideas teenagers talk about into projects they actually build.',utmContent:'m1_aspirational',adIdPrefix:'alc_m1_asp'},
+  {image:3,msg:'m1',tone:'authority',lp:'/lp/1',funnel:'awareness',headline:'Bright teenagers are not automatically real-world ready.',sub:'What distinguishes exceptional teenagers is not intelligence but how early they build real world readiness.',utmContent:'m1_authority',adIdPrefix:'alc_m1_auth'},
+  {image:4,msg:'m1',tone:'myth_busting',lp:'/lp/1',funnel:'awareness',headline:'Being "book smart" isn\'t enough anymore.',sub:'"Book smart" means nothing if they quit when things get hard.',utmContent:'m1_myth_busting',adIdPrefix:'alc_m1_myth'},
+  {image:5,msg:'m1',tone:'comparison',lp:'/lp/1',funnel:'awareness',headline:'Book-Smart vs. Real-World Ready.',sub:'Average students memorize and quit. Alcovians build actual grit.',utmContent:'m1_comparison',adIdPrefix:'alc_m1_comp'},
+  {image:6,msg:'m2',tone:'fear',lp:'/lp/2',funnel:'awareness',headline:'Why is your teen going through "elite" career counselling for a career that won\'t exist in 5 years?',sub:'Old-school career & college counselling can\'t keep up.',utmContent:'m2_fear',adIdPrefix:'alc_m2_fear'},
+  {image:7,msg:'m2',tone:'aspirational',lp:'/lp/2',funnel:'awareness',headline:'True career clarity starts here.',sub:'Give them the ultimate gift: total clarity.',utmContent:'m2_aspirational',adIdPrefix:'alc_m2_asp'},
+  {image:8,msg:'m2',tone:'authority',lp:'/lp/2',funnel:'awareness',headline:'Preparing for top universities is not equal to preparing for the future.',sub:'At Alcovia, your teenager will explore real work with real professionals.',utmContent:'m2_authority',adIdPrefix:'alc_m2_auth'},
+  {image:9,msg:'m2',tone:'myth_busting',lp:'/lp/2',funnel:'awareness',headline:'Marks measure memory. The real world measures initiatives.',sub:'Why plan for 2035 using outdated advice?',utmContent:'m2_myth_busting',adIdPrefix:'alc_m2_myth'},
+  {image:10,msg:'m2',tone:'comparison',lp:'/lp/2',funnel:'awareness',headline:'Stop Preparing Teens For Yesterday\'s Careers.',sub:'Old-school prep breeds imposter syndrome.',utmContent:'m2_comparison',adIdPrefix:'alc_m2_comp'},
+  {image:11,msg:'m3',tone:'fear',lp:'/lp/3',funnel:'consideration',headline:'What if your teenager is working hard but in all the wrong directions?',sub:'Fake "study calls" and endless tuitions are destroying their focus.',utmContent:'m3_fear',adIdPrefix:'alc_m3_fear'},
+  {image:12,msg:'m3',tone:'aspirational',lp:'/lp/3',funnel:'consideration',headline:'Time Is Your Teenager\'s Biggest Asset.',sub:'Imagine your teen managing their time like a CXO.',utmContent:'m3_aspirational',adIdPrefix:'alc_m3_asp'},
+  {image:13,msg:'m3',tone:'authority',lp:'/lp/3',funnel:'consideration',headline:'CXO-level time management for teenagers',sub:'We train teens using the exact productivity frameworks taught to top business owners.',utmContent:'m3_authority',adIdPrefix:'alc_m3_auth'},
+  {image:14,msg:'m3',tone:'myth_busting',lp:'/lp/3',funnel:'consideration',headline:'"Busy" doesn\'t mean productive.',sub:'Juggling 4 hobbies isn\'t productive, it\'s burnout.',utmContent:'m3_myth_busting',adIdPrefix:'alc_m3_myth'},
+  {image:15,msg:'m3',tone:'comparison',lp:'/lp/3',funnel:'consideration',headline:'Average teens waste hours scrolling',sub:'Alcovians master their schedules using CXO-level time management systems.',utmContent:'m3_comparison',adIdPrefix:'alc_m3_comp'},
+  {image:16,msg:'m4',tone:'fear',lp:'/lp/4',funnel:'consideration',headline:'Your teenager\'s peer group may be deciding more than you are.',sub:'An average peer group will create an average teenager.',utmContent:'m4_fear',adIdPrefix:'alc_m4_fear'},
+  {image:17,msg:'m4',tone:'aspirational',lp:'/lp/4',funnel:'consideration',headline:'Ambitious Teens Need Ambitious Friends.',sub:'How about those were the top 1% of Gurgaon.',utmContent:'m4_aspirational',adIdPrefix:'alc_m4_asp'},
+  {image:18,msg:'m4',tone:'authority',lp:'/lp/4',funnel:'consideration',headline:'Welcome to the 1% Club for teens.',sub:'National robotics winner, India\'s top gymnasts, golfers, equestrians are already onboard.',utmContent:'m4_authority',adIdPrefix:'alc_m4_auth'},
+  {image:19,msg:'m4',tone:'myth_busting',lp:'/lp/4',funnel:'consideration',headline:'Myth: School success is a reliable sign of future success.',sub:'Exceptional teenagers are shaped by stronger environments, sharper peers & real-world exposure.',utmContent:'m4_myth_busting',adIdPrefix:'alc_m4_myth'},
+  {image:20,msg:'m4',tone:'comparison',lp:'/lp/4',funnel:'consideration',headline:'Average teen V/s alcovian',sub:'While others gossip online, alcovians are launching startups.',utmContent:'m4_comparison',adIdPrefix:'alc_m4_comp'},
+  {image:21,msg:'m5',tone:'fear',lp:'/lp/5',funnel:'consideration',headline:'Potential alone does not put a teenager in the top 1%.',sub:'If your teen isn\'t building an unfair advantage today, they\'ll be left behind.',utmContent:'m5_fear',adIdPrefix:'alc_m5_fear'},
+  {image:22,msg:'m5',tone:'aspirational',lp:'/lp/5',funnel:'consideration',headline:'You Built A Top 1% Life. Now Build it for your Teenager.',sub:'Join an elite cohort of driven teens building real companies today.',utmContent:'m5_aspirational',adIdPrefix:'alc_m5_asp'},
+  {image:23,msg:'m5',tone:'authority',lp:'/lp/5',funnel:'consideration',headline:'Know where the top 1% of teenagers learn how the real world works',sub:'',utmContent:'m5_authority',adIdPrefix:'alc_m5_auth'},
+  {image:24,msg:'m5',tone:'myth_busting',lp:'/lp/5',funnel:'consideration',headline:'Myth: Cracking a top university means your teenager is set.',sub:'Get your teen into the rooms where real startups and leaders are made.',utmContent:'m5_myth_busting',adIdPrefix:'alc_m5_myth'},
+  {image:25,msg:'m5',tone:'comparison',lp:'/lp/5',funnel:'consideration',headline:'The 99% wait. The 1% build.',sub:'The 99% teens wait for graduation while the 1% are already building companies.',utmContent:'m5_comparison',adIdPrefix:'alc_m5_comp'},
+];
 
 const COLORS = {
   google:'#4285f4', whatsapp:'#25d366', instagram:'#e1306c', facebook:'#1877f2', chatgpt:'#10a37f',
@@ -442,6 +535,7 @@ function render() {
   renderWorkshopOrders();
   renderMetaPerformance();
   renderAttribution();
+  renderAdCreatives();
   renderLeadsTable();
 }
 
@@ -613,6 +707,30 @@ function formatPercent(value, digits = 1) {
   return Number.isFinite(numeric) ? numeric.toFixed(digits) + '%' : '-';
 }
 
+function sortTableData(data, field, asc) {
+  return [...data].sort(function(a, b) {
+    var av = a[field] != null ? a[field] : '';
+    var bv = b[field] != null ? b[field] : '';
+    if (typeof av === 'number' || typeof bv === 'number') {
+      av = parseNumber(av); bv = parseNumber(bv);
+    } else {
+      av = String(av).toLowerCase(); bv = String(bv).toLowerCase();
+    }
+    if (av < bv) return asc ? -1 : 1;
+    if (av > bv) return asc ? 1 : -1;
+    return 0;
+  });
+}
+
+function updateSortHeaders(attr, field, asc) {
+  document.querySelectorAll('th[' + attr + ']').forEach(function(th) {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.getAttribute(attr) === field) {
+      th.classList.add(asc ? 'sort-asc' : 'sort-desc');
+    }
+  });
+}
+
 function renderSummary() {
   const leads = getFilteredLeads();
   const workshopFunnel = getFilteredWorkshopFunnel();
@@ -747,6 +865,7 @@ function renderWorkshopFunnel() {
 }
 
 function renderWorkshopOrders() {
+  updateSortHeaders('data-order-sort', orderSortField, orderSortAsc);
   const orders = [...getFilteredWorkshopOrders()].sort((left, right) => {
     let a = pick(left, [orderSortField], '');
     let b = pick(right, [orderSortField], '');
@@ -851,8 +970,10 @@ function renderMetaPerformance() {
   renderDailySparkline(md ? md.daily : []);
 
   // Campaign table
+  const sortedCampaigns = sortTableData(campaigns, metaSortField, metaSortAsc);
+  updateSortHeaders('data-meta-sort', metaSortField, metaSortAsc);
   const tbody = document.getElementById('metaTable');
-  tbody.innerHTML = campaigns.map((c) => (
+  tbody.innerHTML = sortedCampaigns.map((c) => (
     '<tr>' +
       '<td style="font-weight:600;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(c.campaign_name) + '">' + esc(c.campaign_name) + '</td>' +
       '<td><span class="tag tag-' + (c.category||'other') + '">' + esc(c.category||'other') + '</span></td>' +
@@ -870,7 +991,7 @@ function renderMetaPerformance() {
       '<td>' + esc(c.roas ? c.roas.toFixed(2) + 'x' : '-') + '</td>' +
     '</tr>'
   )).join('');
-  if (!campaigns.length) tbody.innerHTML = '<tr><td colspan="14" class="empty">No Meta insights yet. Attach the HTTP Header Auth credential to the Fetch nodes in the Meta Ads Insights workflow, then refresh.</td></tr>';
+  if (!sortedCampaigns.length) tbody.innerHTML = '<tr><td colspan="14" class="empty">No Meta insights yet. Attach the HTTP Header Auth credential to the Fetch nodes in the Meta Ads Insights workflow, then refresh.</td></tr>';
 
   // Ads table
   renderMetaAds(md ? md.ads : []);
@@ -893,7 +1014,9 @@ function renderDailySparkline(daily) {
 function renderMetaAds(ads) {
   const tbody = document.getElementById('metaAdsTable');
   if (!ads || !ads.length) { tbody.innerHTML = '<tr><td colspan="10" class="empty">No ad-level data yet</td></tr>'; return; }
-  tbody.innerHTML = ads.slice(0, 30).map((a) => (
+  const sortedAds = sortTableData(ads, adsSortField, adsSortAsc);
+  updateSortHeaders('data-ads-sort', adsSortField, adsSortAsc);
+  tbody.innerHTML = sortedAds.slice(0, 30).map((a) => (
     '<tr>' +
       '<td style="font-weight:600;max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.ad_name) + '">' + esc(a.ad_name) + '</td>' +
       '<td style="font-size:0.7rem;max-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(a.adset_name) + '">' + esc(a.adset_name) + '</td>' +
@@ -977,9 +1100,11 @@ function renderAttribution() {
     revenue: parseNumber(pick(item, ['revenue','purchase_value'], 0)),
   })) : deriveAttributionRows();
 
+  rows.forEach(function(item) { item.roas = item.spend ? item.revenue / item.spend : 0; });
+  const sortedAttrRows = sortTableData(rows, attrSortField, attrSortAsc);
+  updateSortHeaders('data-attr-sort', attrSortField, attrSortAsc);
   const tbody = document.getElementById('attributionTable');
-  tbody.innerHTML = rows.map((item) => {
-    const roas = item.spend ? (item.revenue / item.spend).toFixed(2) + 'x' : '-';
+  tbody.innerHTML = sortedAttrRows.map((item) => {
     return '<tr>' +
       '<td style="font-weight:600">' + esc(item.key) + '</td>' +
       '<td>' + esc(formatCurrency(item.spend)) + '</td>' +
@@ -988,14 +1113,107 @@ function renderAttribution() {
       '<td>' + esc(Math.round(item.workshopStarts)) + '</td>' +
       '<td>' + esc(Math.round(item.paidOrders)) + '</td>' +
       '<td>' + esc(formatCurrency(item.revenue)) + '</td>' +
-      '<td>' + esc(roas) + '</td>' +
+      '<td>' + esc(item.roas ? item.roas.toFixed(2) + 'x' : '-') + '</td>' +
     '</tr>';
   }).join('');
 
-  if (!rows.length) tbody.innerHTML = '<tr><td colspan="8" class="empty">No attribution rows available yet.</td></tr>';
+  if (!sortedAttrRows.length) tbody.innerHTML = '<tr><td colspan="8" class="empty">No attribution rows available yet.</td></tr>';
+}
+
+function renderAdCreatives() {
+  var funnelFilter = document.getElementById('creativeFunnelFilter').value;
+  var msgFilter = document.getElementById('creativeMessagingFilter').value;
+  var toneFilter = document.getElementById('creativeToneFilter').value;
+
+  var creatives = AD_CREATIVES.filter(function(c) {
+    if (funnelFilter && c.funnel !== funnelFilter) return false;
+    if (msgFilter && c.msg !== msgFilter) return false;
+    if (toneFilter && c.tone !== toneFilter) return false;
+    return true;
+  });
+
+  var ads = (state.metaData && state.metaData.ads) || [];
+  var leads = getFilteredLeads();
+
+  var enriched = creatives.map(function(c) {
+    var matchingAds = ads.filter(function(a) {
+      var name = (a.ad_name || '').toLowerCase();
+      var id = (a.ad_id || '').toLowerCase();
+      return name.includes(c.adIdPrefix) || name.includes(c.utmContent) || id.includes(c.adIdPrefix) || id.includes(c.utmContent);
+    });
+    var spend = matchingAds.reduce(function(s, a) { return s + (a.spend || 0); }, 0);
+    var impressions = matchingAds.reduce(function(s, a) { return s + (a.impressions || 0); }, 0);
+    var clicks = matchingAds.reduce(function(s, a) { return s + (a.link_clicks || a.clicks || 0); }, 0);
+    var ctr = impressions ? ((clicks / impressions) * 100) : 0;
+
+    var matchingLeads = leads.filter(function(l) {
+      var utmC = String(pick(l, ['utm_content'], '')).toLowerCase();
+      var adId = String(pick(l, ['ad_id'], '')).toLowerCase();
+      return utmC === c.utmContent || utmC.includes(c.utmContent) || adId.includes(c.adIdPrefix);
+    });
+    var leadCount = matchingLeads.length;
+    var cpl = leadCount ? (spend / leadCount) : 0;
+
+    return {image:c.image, msg:c.msg, tone:c.tone, lp:c.lp, funnel:c.funnel, headline:c.headline, sub:c.sub, utmContent:c.utmContent, spend:spend, impressions:impressions, clicks:clicks, ctr:ctr, leads:leadCount, cpl:cpl};
+  });
+
+  var totalSpend = enriched.reduce(function(s, c) { return s + c.spend; }, 0);
+  var totalLeads = enriched.reduce(function(s, c) { return s + c.leads; }, 0);
+  var awarenessSpend = enriched.filter(function(c) { return c.funnel === 'awareness'; }).reduce(function(s, c) { return s + c.spend; }, 0);
+  var considerationSpend = enriched.filter(function(c) { return c.funnel === 'consideration'; }).reduce(function(s, c) { return s + c.spend; }, 0);
+  var workshopCampaigns = (state.metaData && state.metaData.campaigns || []).filter(function(c) { return c.category === 'workshop'; });
+  var bofuSpend = workshopCampaigns.reduce(function(s, c) { return s + (c.spend || 0); }, 0);
+  var avgCpl = totalLeads ? (totalSpend / totalLeads) : 0;
+
+  document.getElementById('creativeSummaryCards').innerHTML =
+    '<div class="mini-card"><div class="label">Awareness Spend (LP1-LP2)</div><div class="value">' + (awarenessSpend ? formatCurrency(awarenessSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Consideration Spend (LP3-LP5)</div><div class="value">' + (considerationSpend ? formatCurrency(considerationSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">BOFU Spend (Workshop)</div><div class="value">' + (bofuSpend ? formatCurrency(bofuSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Total LP Leads</div><div class="value">' + totalLeads + '</div></div>' +
+    '<div class="mini-card"><div class="label">LP Ad Spend</div><div class="value">' + (totalSpend ? formatCurrency(totalSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Avg CPL</div><div class="value">' + (avgCpl ? formatCurrency(avgCpl) : '-') + '</div></div>';
+
+  var spendByMsg = {}, spendByTone = {}, leadsByMsg = {}, leadsByTone = {};
+  enriched.forEach(function(c) {
+    var ml = MSG_LABELS[c.msg] || c.msg;
+    var tl = TONE_LABELS[c.tone] || c.tone;
+    spendByMsg[ml] = (spendByMsg[ml] || 0) + c.spend;
+    spendByTone[tl] = (spendByTone[tl] || 0) + c.spend;
+    leadsByMsg[ml] = (leadsByMsg[ml] || 0) + c.leads;
+    leadsByTone[tl] = (leadsByTone[tl] || 0) + c.leads;
+  });
+
+  renderBarChart('chartCreativeMessaging', spendByMsg, formatCurrency);
+  renderBarChart('chartCreativeTone', spendByTone, formatCurrency);
+  renderBarChart('chartCreativeLeadsByMsg', leadsByMsg);
+  renderBarChart('chartCreativeLeadsByTone', leadsByTone);
+
+  var sorted = sortTableData(enriched, creativeSortField, creativeSortAsc);
+  updateSortHeaders('data-creative-sort', creativeSortField, creativeSortAsc);
+
+  var ctbody = document.getElementById('creativeTable');
+  ctbody.innerHTML = sorted.map(function(c) {
+    var tc = TONE_COLORS[c.tone] || '#6b7280';
+    return '<tr>' +
+      '<td style="font-weight:700">' + c.image + '</td>' +
+      '<td style="font-size:0.72rem">' + esc(MSG_LABELS[c.msg] || c.msg) + '</td>' +
+      '<td><span class="tag" style="background:' + tc + '22;color:' + tc + '">' + esc(TONE_LABELS[c.tone] || c.tone) + '</span></td>' +
+      '<td><span class="tag tag-' + (c.funnel === 'awareness' ? 'leads' : 'other') + '">' + esc(FUNNEL_LABELS[c.funnel] || c.funnel) + '</span></td>' +
+      '<td style="font-size:0.72rem;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(c.headline) + '">' + esc(c.headline) + '</td>' +
+      '<td>' + (c.spend ? formatCurrency(c.spend) : '-') + '</td>' +
+      '<td>' + (c.impressions ? Math.round(c.impressions).toLocaleString() : '-') + '</td>' +
+      '<td>' + (c.clicks || '-') + '</td>' +
+      '<td>' + (c.ctr ? formatPercent(c.ctr) : '-') + '</td>' +
+      '<td style="font-weight:600">' + (c.leads || 0) + '</td>' +
+      '<td>' + (c.cpl ? formatCurrency(c.cpl) : '-') + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (!sorted.length) ctbody.innerHTML = '<tr><td colspan="11" class="empty">No matching ad creatives</td></tr>';
 }
 
 function renderLeadsTable() {
+  updateSortHeaders('data-sort', leadSortField, leadSortAsc);
   const leads = [...getFilteredLeads()].sort((left, right) => {
     let a = pick(left, [leadSortField], '');
     let b = pick(right, [leadSortField], '');
@@ -1087,7 +1305,43 @@ document.querySelectorAll('th[data-order-sort]').forEach((header) => {
   });
 });
 
-['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','globalStartDate','globalEndDate'].forEach((id) => {
+document.querySelectorAll('th[data-meta-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.metaSort;
+    if (metaSortField === field) metaSortAsc = !metaSortAsc;
+    else { metaSortField = field; metaSortAsc = false; }
+    renderMetaPerformance();
+  });
+});
+
+document.querySelectorAll('th[data-ads-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.adsSort;
+    if (adsSortField === field) adsSortAsc = !adsSortAsc;
+    else { adsSortField = field; adsSortAsc = false; }
+    renderMetaAds(state.metaData ? state.metaData.ads : []);
+  });
+});
+
+document.querySelectorAll('th[data-attr-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.attrSort;
+    if (attrSortField === field) attrSortAsc = !attrSortAsc;
+    else { attrSortField = field; attrSortAsc = false; }
+    renderAttribution();
+  });
+});
+
+document.querySelectorAll('th[data-creative-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.creativeSort;
+    if (creativeSortField === field) creativeSortAsc = !creativeSortAsc;
+    else { creativeSortField = field; creativeSortAsc = true; }
+    renderAdCreatives();
+  });
+});
+
+['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','globalStartDate','globalEndDate','creativeFunnelFilter','creativeMessagingFilter','creativeToneFilter'].forEach((id) => {
   const element = document.getElementById(id);
   if (!element) return;
   element.addEventListener('input', render);
