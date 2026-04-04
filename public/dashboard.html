@@ -1137,9 +1137,12 @@ function renderAdCreatives() {
 
   var enriched = creatives.map(function(c) {
     var matchingAds = ads.filter(function(a) {
-      var name = (a.ad_name || '').toLowerCase();
+      var name = a.ad_name || '';
+      var imgMatch = name.match(/^Image\s+(\d+)/i);
+      if (imgMatch && parseInt(imgMatch[1]) === c.image) return true;
+      var lower = name.toLowerCase();
       var id = (a.ad_id || '').toLowerCase();
-      return name.includes(c.adIdPrefix) || name.includes(c.utmContent) || id.includes(c.adIdPrefix) || id.includes(c.utmContent);
+      return lower.includes(c.adIdPrefix) || lower.includes(c.utmContent) || id.includes(c.adIdPrefix) || id.includes(c.utmContent);
     });
     var spend = matchingAds.reduce(function(s, a) { return s + (a.spend || 0); }, 0);
     var impressions = matchingAds.reduce(function(s, a) { return s + (a.impressions || 0); }, 0);
