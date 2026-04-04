@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
+
 const ACCENT = "#FF6B2B";
 
 export default function MobileFloatingCta() {
@@ -40,22 +42,9 @@ export default function MobileFloatingCta() {
           exit={{ opacity: 0, y: 24 }}
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <a
-            href="#"
+          <WorkshopCheckoutLink
+            ctaSource="mobile_floating"
             className="inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
-            onClick={(e) => {
-              e.preventDefault();
-              if (typeof window !== "undefined") {
-                (window as any).gtag?.("event", "initiate_checkout", {
-                  payment_method: "razorpay",
-                  item_name: "cult_strategy_workshop",
-                });
-                (window as any).fbq?.("track", "InitiateCheckout", {
-                  content_name: "Cult Strategy Workshop",
-                  currency: "INR",
-                });
-              }
-            }}
             style={{
               background: ACCENT,
               boxShadow: `0 4px 24px rgba(255,107,43,0.5)`,
@@ -71,7 +60,7 @@ export default function MobileFloatingCta() {
             >
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </a>
+          </WorkshopCheckoutLink>
         </motion.div>
       )}
     </AnimatePresence>

@@ -4,12 +4,12 @@ import ProblemSection from "@/components/cult-strategy/problem-section";
 import SpeakerSection from "@/components/cult-strategy/speaker-section";
 import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
 import TakeawaysSection from "@/components/cult-strategy/takeaways-section";
-import CtaMidSection from "@/components/cult-strategy/cta-mid-section";
 import AuthoritySection from "@/components/cult-strategy/authority-section";
 import SocialProofSection from "@/components/cult-strategy/social-proof-section";
 import FaqSection from "@/components/cult-strategy/faq-section";
 import ClosingCtaSection from "@/components/cult-strategy/closing-cta-section";
 import MobileFloatingCta from "@/components/cult-strategy/mobile-floating-cta";
+import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracker";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 export default function CultStrategyWorkshopPage() {
   return (
     <main className="relative">
+      <WorkshopPageTracker />
       <HeroSection />
       <ProblemSection />
       {/* <SpeakerSection /> */}
