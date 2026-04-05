@@ -1309,7 +1309,7 @@ function renderLeadsTable() {
       '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + esc(formatTime(pick(item, ['timestamp']))) + '</td>' +
       '<td style="font-weight:600">' + esc(pick(item, ['student_name'])) + '</td>' +
       '<td>' + esc(pick(item, ['parent_name'])) + '</td>' +
-      '<td style="font-size:0.7rem">' + esc(pick(item, ['phone'])) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['phone','phone_e164','phone_clean'])) + '</td>' +
       '<td>' + esc(pick(item, ['school'])) + '</td>' +
       '<td>' + esc(pick(item, ['grade'])) + '</td>' +
       '<td>' + esc(pick(item, ['city'])) + '</td>' +
