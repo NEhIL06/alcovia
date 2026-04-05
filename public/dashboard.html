@@ -258,7 +258,22 @@ select.filter-input{cursor:pointer}
     <div class="charts" style="margin-top:18px">
       <div class="chart-card"><h3>Spend by Placement</h3><div id="chartMetaPlacements"></div></div>
       <div class="chart-card"><h3>Spend by Age / Gender</h3><div id="chartMetaDemographics"></div></div>
+      <div class="chart-card"><h3>Leads by Age / Gender</h3><div id="chartMetaDemoLeads"></div></div>
+      <div class="chart-card"><h3>CPL by Age / Gender</h3><div id="chartMetaDemoCPL"></div></div>
     </div>
+
+    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">Demographics Breakdown (Age x Gender)</h3>
+    <div class="table-wrap"><table><thead><tr>
+      <th data-demo-sort="age">Age</th>
+      <th data-demo-sort="gender">Gender</th>
+      <th data-demo-sort="spend">Spend</th>
+      <th data-demo-sort="impressions">Impr</th>
+      <th data-demo-sort="clicks">Clicks</th>
+      <th data-demo-sort="leads">Leads</th>
+      <th data-demo-sort="purchases">Purchases</th>
+      <th data-demo-sort="cost_per_lead">CPL</th>
+      <th data-demo-sort="ctr">CTR</th>
+    </tr></thead><tbody id="metaDemoTable"></tbody></table></div>
   </div>
 
   <div id="tab-attribution" class="tab-content">
@@ -382,6 +397,8 @@ let attrSortField = 'revenue';
 let attrSortAsc = false;
 let creativeSortField = 'image';
 let creativeSortAsc = true;
+let demoSortField = 'spend';
+let demoSortAsc = false;
 
 const MSG_LABELS = { m1:'M1: Real-World Readiness', m2:'M2: Career Clarity', m3:'M3: Time Management', m4:'M4: Peer Group', m5:'M5: The 1% Club' };
 const TONE_LABELS = { fear:'Fear Based', aspirational:'Aspirational', authority:'Authority', myth_busting:'Myth Busting', comparison:'Comparison' };
@@ -1043,13 +1060,68 @@ function renderMetaPlacements(placements) {
 }
 
 function renderMetaDemographics(demographics) {
-  if (!demographics || !demographics.length) { renderBarChart('chartMetaDemographics', {}); return; }
-  const grouped = {};
-  demographics.forEach((d) => {
-    const key = (d.age||'?') + ' ' + (d.gender||'?');
-    grouped[key] = (grouped[key]||0) + d.spend;
+  if (!demographics || !demographics.length) {
+    renderBarChart('chartMetaDemographics', {});
+    renderBarChart('chartMetaDemoLeads', {});
+    renderBarChart('chartMetaDemoCPL', {}, formatCurrency);
+    var emptyBody = document.getElementById('metaDemoTable');
+    if (emptyBody) emptyBody.innerHTML = '<tr><td colspan="9" class="empty">No demographic data yet</td></tr>';
+    return;
+  }
+
+  var spendBy = {}, leadsBy = {}, cplBy = {};
+  demographics.forEach(function(d) {
+    var gender = (d.gender || '?').toLowerCase();
+    if (gender === 'unknown') return;
+    var key = (d.age || '?') + ' ' + gender;
+    spendBy[key] = (spendBy[key] || 0) + (d.spend || 0);
+    leadsBy[key] = (leadsBy[key] || 0) + (d.leads || 0);
   });
-  renderBarChart('chartMetaDemographics', grouped, formatCurrency);
+  Object.keys(spendBy).forEach(function(k) {
+    if (leadsBy[k] > 0) cplBy[k] = spendBy[k] / leadsBy[k];
+  });
+
+  renderBarChart('chartMetaDemographics', spendBy, formatCurrency);
+  renderBarChart('chartMetaDemoLeads', leadsBy);
+  renderBarChart('chartMetaDemoCPL', cplBy, formatCurrency);
+
+  var rows = demographics.filter(function(d) {
+    return (d.gender || '').toLowerCase() !== 'unknown' && (d.age || '') !== 'Unknown';
+  }).map(function(d) {
+    var ctr = d.impressions ? (d.clicks / d.impressions) * 100 : 0;
+    return {
+      age: d.age || '?',
+      gender: d.gender || '?',
+      spend: d.spend || 0,
+      impressions: d.impressions || 0,
+      clicks: d.clicks || 0,
+      leads: d.leads || 0,
+      purchases: d.purchases || 0,
+      cost_per_lead: d.cost_per_lead || (d.leads > 0 ? d.spend / d.leads : 0),
+      ctr: ctr,
+    };
+  });
+
+  var sorted = sortTableData(rows, demoSortField, demoSortAsc);
+  updateSortHeaders('data-demo-sort', demoSortField, demoSortAsc);
+
+  var tbody = document.getElementById('metaDemoTable');
+  tbody.innerHTML = sorted.map(function(r) {
+    var genderColor = r.gender === 'female' ? '#e1306c' : (r.gender === 'male' ? '#3b82f6' : '#6b7280');
+    return '<tr>' +
+      '<td style="font-weight:600">' + esc(r.age) + '</td>' +
+      '<td><span class="tag" style="background:' + genderColor + '22;color:' + genderColor + '">' + esc(r.gender) + '</span></td>' +
+      '<td>' + formatCurrency(r.spend) + '</td>' +
+      '<td>' + Math.round(r.impressions).toLocaleString() + '</td>' +
+      '<td>' + Math.round(r.clicks).toLocaleString() + '</td>' +
+      '<td style="font-weight:700">' + r.leads + '</td>' +
+      '<td>' + (r.purchases || '-') + '</td>' +
+      '<td>' + (r.cost_per_lead ? formatCurrency(r.cost_per_lead) : '-') + '</td>' +
+      '<td>' + formatPercent(r.ctr) + '</td>' +
+    '</tr>';
+  }).join('');
+
+  if (!sorted.length) tbody.innerHTML = '<tr><td colspan="9" class="empty">No demographic data yet</td></tr>';
 }
 
 function deriveAttributionRows() {
@@ -1341,6 +1413,15 @@ document.querySelectorAll('th[data-creative-sort]').forEach((header) => {
     if (creativeSortField === field) creativeSortAsc = !creativeSortAsc;
     else { creativeSortField = field; creativeSortAsc = true; }
     renderAdCreatives();
+  });
+});
+
+document.querySelectorAll('th[data-demo-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.demoSort;
+    if (demoSortField === field) demoSortAsc = !demoSortAsc;
+    else { demoSortField = field; demoSortAsc = false; }
+    renderMetaDemographics(state.metaData ? state.metaData.demographics : []);
   });
 });
 
