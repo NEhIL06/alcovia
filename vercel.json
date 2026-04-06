@@ -1,8 +1,12 @@
 {
   "rewrites": [
     {
+      "source": "/sys-ctrl",
+      "destination": "https://dashboard-tau-snowy-77.vercel.app/"
+    },
+    {
       "source": "/sys-ctrl/:path*",
-      "destination": "https://dashboard-tau-snowy-77.vercel.app/sys-ctrl/:path*"
+      "destination": "https://dashboard-tau-snowy-77.vercel.app/:path*"
     }
   ],
   "headers": [
