@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/sys-ctrl/:path*",
+      "destination": "https://dashboard-tau-snowy-77.vercel.app/sys-ctrl/:path*"
+    }
+  ],
   "headers": [
     {
       "source": "/videos/(.*)",
