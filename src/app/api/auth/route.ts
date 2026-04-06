@@ -1,20 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { validateCredentials, encodeToken } from '@/lib/auth';
+import { validateLogin, createSession, SESSION_COOKIE, MAX_AGE } from '@/lib/auth';
 
 export async function POST(req: NextRequest) {
   const { username, password } = await req.json();
-  const user = validateCredentials(username, password);
+
+  if (!username || !password) {
+    return NextResponse.json({ error: 'Username and password required' }, { status: 400 });
+  }
+
+  const user = validateLogin(username, password);
   if (!user) {
+    // Deliberate delay to slow brute force
+    await new Promise(r => setTimeout(r, 1000));
     return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
   }
-  const token = encodeToken(user);
-  const res = NextResponse.json({ user, token });
-  res.cookies.set('auth_token', token, {
+
+  const token = createSession(user.id);
+  const res = NextResponse.json({ user: { name: user.name, role: user.role } });
+
+  res.cookies.set(SESSION_COOKIE, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: true,
     sameSite: 'lax',
-    maxAge: 86400,
+    maxAge: MAX_AGE,
     path: '/',
   });
+
   return res;
 }

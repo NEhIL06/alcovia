@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Lock } from 'lucide-react';
+import { Shield } from 'lucide-react';
 
 export default function LoginPage() {
   const [username, setUsername] = useState('');
@@ -25,11 +25,12 @@ export default function LoginPage() {
         const data = await res.json();
         localStorage.setItem('user', JSON.stringify(data.user));
         router.push('/');
+        router.refresh();
       } else {
-        setError('Invalid username or password');
+        setError('Access denied');
       }
     } catch {
-      setError('Login failed. Try again.');
+      setError('Connection failed');
     } finally {
       setLoading(false);
     }
@@ -41,10 +42,10 @@ export default function LoginPage() {
         <div className="card p-8">
           <div className="text-center mb-8">
             <div className="w-12 h-12 rounded-xl bg-[var(--accent)] flex items-center justify-center mx-auto mb-4">
-              <Lock size={20} className="text-white" />
+              <Shield size={20} className="text-white" />
             </div>
-            <h1 className="text-xl font-semibold">Alcovia Ops</h1>
-            <p className="text-sm text-[var(--text-secondary)] mt-1">Sign in to the dashboard</p>
+            <h1 className="text-xl font-semibold">Alcovia Systems</h1>
+            <p className="text-sm text-[var(--text-secondary)] mt-1">Authorized access only</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-4">
@@ -55,18 +56,18 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--accent)]"
-                placeholder="Enter username"
                 autoFocus
+                autoComplete="username"
               />
             </div>
             <div>
-              <label className="text-xs font-medium text-[var(--text-secondary)] block mb-1.5">Password</label>
+              <label className="text-xs font-medium text-[var(--text-secondary)] block mb-1.5">Access Key</label>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-[var(--bg-surface)] border border-[var(--border)] rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:border-[var(--accent)]"
-                placeholder="Enter password"
+                autoComplete="current-password"
               />
             </div>
             {error && <p className="text-xs text-red-400">{error}</p>}
@@ -75,7 +76,7 @@ export default function LoginPage() {
               disabled={loading}
               className="w-full bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white py-2.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {loading ? 'Signing in...' : 'Sign in'}
+              {loading ? 'Authenticating...' : 'Access Dashboard'}
             </button>
           </form>
         </div>

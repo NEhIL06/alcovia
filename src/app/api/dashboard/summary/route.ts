@@ -8,9 +8,11 @@ export async function GET(req: NextRequest) {
     const url = new URL(req.url);
     const dateFrom = url.searchParams.get('from') || new Date().toISOString().split('T')[0];
 
-    const [executions, workflows] = await Promise.all([
+    const N8N_BASE = process.env.N8N_BASE_URL || 'https://n8n.alcovia.life';
+    const [executions, workflows, messagesRaw] = await Promise.all([
       getRecentExecutions(200).catch(() => []),
       getWorkflows().catch(() => []),
+      fetch(`${N8N_BASE}/webhook/dashboard-read-messages`, { next: { revalidate: 300 } }).then(r => r.json()).catch(() => []),
     ]);
 
     // Build workflow name lookup from the workflows list
@@ -70,7 +72,14 @@ export async function GET(req: NextRequest) {
 
     const summary = {
       system_health: { score: avgScore, trend: avgScore > 75 ? 'stable' : 'degrading', prev_score: avgScore - 3 },
-      messages_today: { sent: 0, delivered: 0, read: 0, delivery_rate: 0 },
+      messages_today: {
+        sent: Array.isArray(messagesRaw) ? messagesRaw.length : 0,
+        delivered: Array.isArray(messagesRaw) ? messagesRaw.filter((m: any) => m['Delivered '] || m['Status (Success to Meta server?)'] === 'True').length : 0,
+        read: Array.isArray(messagesRaw) ? messagesRaw.filter((m: any) => m['Read']).length : 0,
+        delivery_rate: Array.isArray(messagesRaw) && messagesRaw.length > 0
+          ? messagesRaw.filter((m: any) => m['Status (Success to Meta server?)'] === 'Success' || m['Status (Success to Meta server?)'] === 'True').length / messagesRaw.length
+          : 0,
+      },
       active_workflows: {
         total: workflows.length,
         active: activeWorkflows.length,

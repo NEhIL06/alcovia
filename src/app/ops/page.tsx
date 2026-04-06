@@ -13,6 +13,7 @@ export default function OpsPage() {
   const [executions, setExecutions] = useState<any[]>([]);
   const [workflows, setWorkflows] = useState<any[]>([]);
   const [healthData, setHealthData] = useState<any>(null);
+  const [messagesData, setMessagesData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('');
@@ -30,6 +31,10 @@ export default function OpsPage() {
         const res = await fetch('/api/workflows');
         const data = await res.json();
         setWorkflows(data.workflows || []);
+      } else if (tab === 'messages') {
+        const res = await fetch('/api/messages');
+        const data = await res.json();
+        setMessagesData(data);
       } else if (tab === 'health') {
         const res = await fetch('/api/health/overview');
         const data = await res.json();
@@ -215,10 +220,45 @@ export default function OpsPage() {
             )}
 
             {/* Messages Tab */}
-            {tab === 'messages' && (
-              <div className="card text-center py-12">
-                <p className="text-[var(--text-secondary)]">Message tracking data from AiSensy will be populated via the sync worker.</p>
-                <p className="text-xs text-[var(--text-muted)] mt-2">Connect to the n8n Messages data table for live data.</p>
+            {tab === 'messages' && messagesData && (
+              <div className="space-y-4">
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  <div className="card"><p className="text-xs text-[var(--text-secondary)]">Total Sent</p><p className="text-2xl font-semibold tabular-nums">{messagesData.funnel?.sent || 0}</p></div>
+                  <div className="card"><p className="text-xs text-[var(--text-secondary)]">Success</p><p className="text-2xl font-semibold tabular-nums text-green-400">{messagesData.funnel?.success || 0}</p></div>
+                  <div className="card"><p className="text-xs text-[var(--text-secondary)]">Errors</p><p className="text-2xl font-semibold tabular-nums text-red-400">{messagesData.funnel?.errors || 0}</p></div>
+                  <div className="card"><p className="text-xs text-[var(--text-secondary)]">Delivery Rate</p><p className="text-2xl font-semibold tabular-nums">{messagesData.funnel?.delivery_rate || 0}%</p></div>
+                  <div className="card"><p className="text-xs text-[var(--text-secondary)]">Read Rate</p><p className="text-2xl font-semibold tabular-nums">{messagesData.funnel?.read_rate || 0}%</p></div>
+                </div>
+                <div className="card overflow-hidden p-0">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b border-[var(--border)] text-[var(--text-secondary)]">
+                        <th className="text-left px-4 py-3 text-xs font-medium">Template</th>
+                        <th className="text-left px-4 py-3 text-xs font-medium">Recipient</th>
+                        <th className="text-left px-4 py-3 text-xs font-medium">Status</th>
+                        <th className="text-left px-4 py-3 text-xs font-medium">Timestamp</th>
+                        <th className="text-left px-4 py-3 text-xs font-medium">Delivered</th>
+                        <th className="text-left px-4 py-3 text-xs font-medium">Read</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {messagesData.messages?.slice(0, 100).map((msg: any, i: number) => (
+                        <tr key={i} className="border-b border-[var(--border)] hover:bg-[var(--bg-card-hover)]">
+                          <td className="px-4 py-2.5 truncate max-w-[200px]">{msg.template_name}</td>
+                          <td className="px-4 py-2.5 text-[var(--text-secondary)]">{msg.recipient}</td>
+                          <td className="px-4 py-2.5">
+                            <span className={`text-xs px-2 py-0.5 rounded-full ${msg.status_meta === 'Success' || msg.status_meta === 'True' ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>
+                              {msg.status_meta}
+                            </span>
+                          </td>
+                          <td className="px-4 py-2.5 text-xs text-[var(--text-secondary)] font-mono">{msg.timestamp}</td>
+                          <td className="px-4 py-2.5 text-xs text-[var(--text-muted)] font-mono">{msg.delivered_at || '-'}</td>
+                          <td className="px-4 py-2.5 text-xs text-[var(--text-muted)] font-mono">{msg.read_at || '-'}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               </div>
             )}
 
