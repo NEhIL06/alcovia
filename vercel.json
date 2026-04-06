@@ -1,7 +1,7 @@
 {
   "redirects": [
-    {"source": "/sys-ctrl", "destination": "https://dashboard-fv1w4h4zj-portfoliomoms-projects.vercel.app", "permanent": false},
-    {"source": "/sys-ctrl/:path*", "destination": "https://dashboard-fv1w4h4zj-portfoliomoms-projects.vercel.app/:path*", "permanent": false}
+    {"source": "/sys-ctrl", "destination": "https://dashboard-tau-snowy-77.vercel.app", "permanent": false},
+    {"source": "/sys-ctrl/:path*", "destination": "https://dashboard-tau-snowy-77.vercel.app/:path*", "permanent": false}
   ],
   "headers": [
     {"source": "/videos/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
