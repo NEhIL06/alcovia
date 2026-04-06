@@ -2,43 +2,18 @@
   "rewrites": [
     {
       "source": "/sys-ctrl",
-      "destination": "https://dashboard-tau-snowy-77.vercel.app/"
+      "destination": "https://dashboard-cunym4pzx-portfoliomoms-projects.vercel.app/"
     },
     {
       "source": "/sys-ctrl/:path*",
-      "destination": "https://dashboard-tau-snowy-77.vercel.app/:path*"
+      "destination": "https://dashboard-cunym4pzx-portfoliomoms-projects.vercel.app/:path*"
     }
   ],
   "headers": [
-    {
-      "source": "/videos/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/images/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/assets/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/fonts/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    },
-    {
-      "source": "/brochure-pages/(.*)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    }
+    {"source": "/videos/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
+    {"source": "/images/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
+    {"source": "/assets/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
+    {"source": "/fonts/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]},
+    {"source": "/brochure-pages/(.*)", "headers": [{"key": "Cache-Control", "value": "public, max-age=31536000, immutable"}]}
   ]
 }
