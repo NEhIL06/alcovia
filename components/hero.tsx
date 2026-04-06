@@ -117,12 +117,17 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
                     <span className="block text-[10px] font-black uppercase tracking-widest text-[#0C0C0C]/60">NEXT EVENT</span>
                 </div>
                 <div className="flex-1 relative overflow-hidden bg-[#1a0a05] flex items-center justify-center">
-                    <div className="absolute inset-0 opacity-[0.06]"
+                    <Image
+                        src="/images/nike-billboard.gif"
+                        alt="Nike Air Max Billboard"
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 opacity-[0.1] pointer-events-none"
                         style={{
                             backgroundImage: `repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,107,43,0.4) 2px, rgba(255,107,43,0.4) 4px), repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,107,43,0.2) 20px, rgba(255,107,43,0.2) 21px)`,
                         }}
                     />
-                    <span className="font-[family-name:var(--font-milan)] text-[42px] font-black leading-none text-[#FF6B2B] opacity-30 select-none">CS</span>
                 </div>
                 <div className="border-t-2 border-[#0C0C0C] p-3 bg-white rounded-b-[9px]">
                     <div className="flex justify-between items-end gap-2">
