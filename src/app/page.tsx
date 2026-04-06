@@ -1,65 +1,152 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useEffect, useState, useCallback } from 'react';
+import { Activity, MessageSquare, Workflow, User, LogOut } from 'lucide-react';
+import MetricCard from '@/components/MetricCard';
+import NeedsAttention from '@/components/NeedsAttention';
+import ActivityFeed from '@/components/ActivityFeed';
+import ChatBot from '@/components/ChatBot';
+import DatePicker from '@/components/DatePicker';
+import type { DashboardSummary, DatePreset } from '@/lib/types';
+import { healthColor } from '@/lib/n8n';
+import Link from 'next/link';
+
+export default function DashboardPage() {
+  const [data, setData] = useState<DashboardSummary | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [datePreset, setDatePreset] = useState<DatePreset>('today');
+  const [user, setUser] = useState<{ name: string; role: string } | null>(null);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('user');
+    if (stored) {
+      setUser(JSON.parse(stored));
+    }
+  }, []);
+
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const today = new Date();
+      let from: string;
+      if (datePreset === 'yesterday') {
+        const d = new Date(today);
+        d.setDate(d.getDate() - 1);
+        from = d.toISOString().split('T')[0];
+      } else if (datePreset === 'last7') {
+        const d = new Date(today);
+        d.setDate(d.getDate() - 7);
+        from = d.toISOString().split('T')[0];
+      } else if (datePreset === 'last30') {
+        const d = new Date(today);
+        d.setDate(d.getDate() - 30);
+        from = d.toISOString().split('T')[0];
+      } else {
+        from = today.toISOString().split('T')[0];
+      }
+      const res = await fetch(`/api/dashboard/summary?from=${from}`);
+      const json = await res.json();
+      setData(json);
+    } catch (err) {
+      console.error('Failed to fetch dashboard data:', err);
+    } finally {
+      setLoading(false);
+    }
+  }, [datePreset]);
+
+  useEffect(() => {
+    fetchData();
+    const interval = setInterval(fetchData, 60000);
+    return () => clearInterval(interval);
+  }, [fetchData]);
+
+  function handleLogout() {
+    localStorage.removeItem('user');
+    setUser(null);
+  }
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="min-h-screen">
+      {/* Header */}
+      <header className="border-b border-[var(--border)] bg-[var(--bg-surface)]">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <h1 className="text-lg font-semibold tracking-tight">ALCOVIA OPS</h1>
+            <nav className="hidden md:flex items-center gap-1 ml-6">
+              <Link href="/" className="px-3 py-1.5 text-xs font-medium rounded-md bg-[var(--accent)] text-white">
+                Overview
+              </Link>
+              <Link href="/ops" className="px-3 py-1.5 text-xs font-medium rounded-md text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-card)]">
+                Ops Console
+              </Link>
+            </nav>
+          </div>
+          <div className="flex items-center gap-4">
+            <DatePicker value={datePreset} onChange={(p) => setDatePreset(p)} />
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-[var(--text-secondary)]">{user.name}</span>
+                <button onClick={handleLogout} className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                  <LogOut size={14} />
+                </button>
+              </div>
+            ) : (
+              <Link href="/login" className="text-[var(--text-muted)] hover:text-[var(--text-primary)]">
+                <User size={16} />
+              </Link>
+            )}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-6 py-6 space-y-6">
+        {loading && !data ? (
+          <div className="flex items-center justify-center py-20">
+            <div className="w-6 h-6 border-2 border-[var(--accent)] border-t-transparent rounded-full animate-spin" />
+          </div>
+        ) : data ? (
+          <>
+            {/* Metric Cards */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <MetricCard
+                title="System Health"
+                value={`${data.system_health.score}%`}
+                color={healthColor(data.system_health.score)}
+                trend={data.system_health.score > data.system_health.prev_score ? 'up' : data.system_health.score < data.system_health.prev_score ? 'down' : 'stable'}
+                trendValue={`from ${data.system_health.prev_score}%`}
+                icon={<Activity size={16} />}
+              />
+              <MetricCard
+                title="Messages Sent"
+                value={data.messages_today.sent || 'N/A'}
+                subtitle={data.messages_today.sent > 0 ? `${Math.round(data.messages_today.delivery_rate * 100)}% delivered` : 'Message tracking via AiSensy'}
+                icon={<MessageSquare size={16} />}
+              />
+              <MetricCard
+                title="Active Workflows"
+                value={`${data.active_workflows.active}/${data.active_workflows.total}`}
+                subtitle={data.active_workflows.erroring > 0 ? `${data.active_workflows.erroring} currently erroring` : 'All clear'}
+                color={data.active_workflows.erroring > 0 ? '#f59e0b' : undefined}
+                icon={<Workflow size={16} />}
+              />
+            </div>
+
+            {/* Needs Attention */}
+            <NeedsAttention items={data.needs_attention} />
+
+            {/* Activity Feed */}
+            <ActivityFeed items={data.activity_feed} />
+          </>
+        ) : (
+          <div className="text-center py-20 text-[var(--text-muted)]">
+            Failed to load dashboard data. Check your n8n connection.
+          </div>
+        )}
       </main>
+
+      {/* Chatbot */}
+      <ChatBot />
     </div>
   );
 }
