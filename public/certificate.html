@@ -229,54 +229,25 @@
     #certificate {
       width: 960px;
       height: 679px;
-      background: #fff;
+      background: var(--navy);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
-    }
-
-    .cert-bg-lines {
-      position: absolute;
-      inset: 0;
-      background-image: repeating-linear-gradient(
-        45deg, transparent, transparent 14px,
-        rgba(1,44,70,0.025) 14px, rgba(1,44,70,0.025) 15px
-      );
-      pointer-events: none;
-    }
-
-    .cert-watermark {
-      position: absolute;
-      bottom: 30px; right: 40px;
-      width: 180px; height: 180px;
-      opacity: 0.04;
-      pointer-events: none;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.5);
     }
 
     .cert-border-outer {
       position: absolute;
-      top: 12px; left: 12px; right: 12px; bottom: 12px;
-      border: 2px solid var(--gold);
+      top: 8px; left: 8px; right: 8px; bottom: 8px;
+      border: 3px solid var(--gold);
       pointer-events: none;
     }
 
     .cert-border-inner {
       position: absolute;
-      top: 18px; left: 18px; right: 18px; bottom: 18px;
-      border: 0.5px solid var(--beige);
+      top: 16px; left: 16px; right: 16px; bottom: 16px;
+      border: 1px solid rgba(234,191,54,0.4);
       pointer-events: none;
     }
-
-    .corner {
-      position: absolute;
-      width: 28px; height: 28px;
-      pointer-events: none;
-    }
-
-    .corner-tl { top: 6px; left: 6px; border-top: 3px solid var(--maroon); border-left: 3px solid var(--maroon); }
-    .corner-tr { top: 6px; right: 6px; border-top: 3px solid var(--maroon); border-right: 3px solid var(--maroon); }
-    .corner-bl { bottom: 6px; left: 6px; border-bottom: 3px solid var(--maroon); border-left: 3px solid var(--maroon); }
-    .corner-br { bottom: 6px; right: 6px; border-bottom: 3px solid var(--maroon); border-right: 3px solid var(--maroon); }
 
     .cert-content {
       position: relative;
@@ -284,31 +255,31 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 32px 60px 24px;
+      padding: 32px 60px 28px;
       height: 100%;
     }
 
     .cert-logo {
-      width: 380px;
+      width: 200px;
       height: auto;
       object-fit: contain;
     }
 
     .cert-title {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 22px;
-      font-weight: 600;
+      font-size: 24px;
+      font-weight: 700;
       color: var(--gold);
-      letter-spacing: 5px;
+      letter-spacing: 6px;
       text-transform: uppercase;
-      margin-top: 18px;
+      margin-top: 20px;
     }
 
     .cert-presented {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 12px;
-      color: var(--navy);
-      margin-top: 12px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 14px;
       letter-spacing: 0.5px;
     }
 
@@ -316,25 +287,25 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 700;
-      font-size: 38px;
-      color: var(--navy);
+      font-size: 42px;
+      color: #fff;
       margin-top: 8px;
       text-align: center;
       line-height: 1.15;
     }
 
     .cert-name-line {
-      width: 280px;
+      width: 300px;
       height: 2px;
       background: var(--gold);
-      margin-top: 6px;
+      margin-top: 8px;
       border-radius: 2px;
     }
 
     .cert-achievement {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11.5px;
-      color: #555;
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
       text-align: center;
       max-width: 580px;
       line-height: 1.7;
@@ -344,20 +315,20 @@
     .cert-workshop-label {
       font-family: 'Playfair Display', serif;
       font-style: italic;
-      font-weight: 700;
+      font-weight: 600;
       font-size: 17px;
-      color: var(--maroon);
+      color: #fff;
       margin-top: 6px;
       text-align: center;
     }
 
     .cert-date {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 11px;
-      color: var(--navy);
+      font-size: 10px;
+      color: rgba(255,255,255,0.5);
       letter-spacing: 3px;
       text-transform: uppercase;
-      margin-top: 14px;
+      margin-top: 12px;
       font-weight: 500;
     }
 
@@ -367,7 +338,7 @@
       justify-content: space-between;
       width: 100%;
       margin-top: auto;
-      padding: 0 20px;
+      padding: 0 24px;
     }
 
     .cert-signatory { text-align: center; min-width: 160px; }
@@ -376,19 +347,19 @@
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-size: 18px;
-      color: var(--navy);
+      color: #fff;
     }
 
     .cert-sig-line {
       width: 140px;
       height: 1px;
-      background: var(--navy);
+      background: rgba(255,255,255,0.4);
       margin: 4px auto 4px;
     }
 
     .cert-sig-title {
       font-size: 9px;
-      color: #666;
+      color: rgba(255,255,255,0.5);
       letter-spacing: 0.5px;
     }
 
@@ -397,7 +368,7 @@
     .cert-footer-brand { text-align: center; min-width: 160px; }
 
     .cert-footer-brand img {
-      width: 180px;
+      width: 140px;
       height: auto;
       object-fit: contain;
     }
@@ -538,18 +509,11 @@
     <div class="cert-scroll">
       <div class="cert-scale" id="certScale">
         <div id="certificate">
-          <div class="cert-bg-lines"></div>
-          <svg class="cert-watermark" viewBox="0 0 200 200"><polygon points="100,10 127,75 198,80 143,128 158,198 100,162 42,198 57,128 2,80 73,75" fill="#012C46"/></svg>
-
           <div class="cert-border-outer"></div>
           <div class="cert-border-inner"></div>
-          <div class="corner corner-tl"></div>
-          <div class="corner corner-tr"></div>
-          <div class="corner corner-bl"></div>
-          <div class="corner corner-br"></div>
 
           <div class="cert-content">
-            <img class="cert-logo" src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
+            <img class="cert-logo" src="/images/alcovia-logo-white.png" alt="Alcovia" crossorigin="anonymous">
 
             <div class="cert-title">Certificate of Excellence</div>
 
@@ -574,18 +538,18 @@
               </div>
 
               <div class="cert-seal">
-                <svg viewBox="0 0 100 100" width="80" height="80">
-                  <circle cx="50" cy="50" r="48" fill="rgba(145,47,60,0.12)"/>
-                  <circle cx="50" cy="50" r="38" fill="rgba(145,47,60,0.08)"/>
-                  <circle cx="50" cy="50" r="42" fill="none" stroke="#EABF36" stroke-width="1" stroke-dasharray="4 3"/>
-                  <polygon points="50,28 54.7,41.5 69,41.8 57.6,50.5 61.8,64.2 50,56 38.2,64.2 42.4,50.5 31,41.8 45.3,41.5" fill="#EABF36"/>
-                  <text x="50" y="76" text-anchor="middle" fill="#EABF36" font-size="7" font-family="Space Grotesk, sans-serif" font-weight="600" letter-spacing="2">EXCELLENCE</text>
-                  <text x="50" y="86" text-anchor="middle" fill="#012C46" font-size="5.5" font-family="Space Grotesk, sans-serif" font-weight="500" letter-spacing="1.5">ALCOVIA</text>
+                <svg viewBox="0 0 100 100" width="85" height="85">
+                  <circle cx="50" cy="50" r="46" fill="#c8960a"/>
+                  <circle cx="50" cy="50" r="40" fill="#EABF36"/>
+                  <circle cx="50" cy="50" r="36" fill="none" stroke="#c8960a" stroke-width="1" stroke-dasharray="3 2"/>
+                  <polygon points="50,26 54.7,40 69,40.5 57.6,49 61.8,63 50,54.5 38.2,63 42.4,49 31,40.5 45.3,40" fill="#c8960a"/>
+                  <text x="50" y="74" text-anchor="middle" fill="#7a5a00" font-size="6.5" font-family="Space Grotesk, sans-serif" font-weight="700" letter-spacing="1.5">EXCELLENCE</text>
+                  <text x="50" y="83" text-anchor="middle" fill="#7a5a00" font-size="5" font-family="Space Grotesk, sans-serif" font-weight="600" letter-spacing="1">ALCOVIA</text>
                 </svg>
               </div>
 
               <div class="cert-footer-brand">
-                <img src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
+                <img src="/images/alcovia-logo-white.png" alt="Alcovia" crossorigin="anonymous">
               </div>
             </div>
           </div>
@@ -758,7 +722,7 @@
 
       document.fonts.ready.then(function() {
         return html2canvas(document.getElementById('certificate'), {
-          scale: 3, useCORS: true, backgroundColor: '#FFFFFF', logging: false
+          scale: 3, useCORS: true, backgroundColor: '#012C46', logging: false
         });
       }).then(function(canvas) {
         scaler.style.transform = origTransform;
@@ -800,7 +764,7 @@
 
       document.fonts.ready.then(function() {
         return html2canvas(document.getElementById('certificate'), {
-          scale: 3, useCORS: true, backgroundColor: '#FFFFFF', logging: false
+          scale: 3, useCORS: true, backgroundColor: '#012C46', logging: false
         });
       }).then(function(canvas) {
         scaler.style.transform = origTransform;
