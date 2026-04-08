@@ -493,13 +493,18 @@
 
         <div class="field-row">
           <div class="field">
+            <label for="gradeInput">Grade/Class *</label>
+            <input type="text" id="gradeInput" required placeholder="e.g. 9th, 10th, 11th">
+          </div>
+          <div class="field">
             <label for="phoneInput">Your Phone *</label>
             <input type="tel" id="phoneInput" required placeholder="+91 XXXXXXXXXX" autocomplete="tel">
           </div>
-          <div class="field">
-            <label for="emailInput">Email (optional)</label>
-            <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
-          </div>
+        </div>
+
+        <div class="field">
+          <label for="emailInput">Email (optional)</label>
+          <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
         </div>
 
         <div class="field-row">
@@ -646,6 +651,7 @@
       document.querySelectorAll('.error-msg').forEach(function(el) { el.remove(); });
 
       var nameVal = document.getElementById('nameInput').value.trim();
+      var gradeVal = document.getElementById('gradeInput').value.trim();
       var phoneVal = document.getElementById('phoneInput').value.trim();
       var emailVal = document.getElementById('emailInput').value.trim();
       var motherNameVal = document.getElementById('motherNameInput').value.trim();
@@ -666,6 +672,7 @@
       }
 
       if (!nameVal) markError('nameInput', 'Name is required');
+      if (!gradeVal) markError('gradeInput', 'Grade is required');
       if (!phoneVal || !isValidPhone(phoneVal)) markError('phoneInput', 'Enter a valid 10-digit phone');
       if (!motherNameVal) markError('motherNameInput', "Mother's name is required");
       if (!fatherNameVal) markError('fatherNameInput', "Father's name is required");
@@ -680,6 +687,7 @@
 
       var payload = {
         name: nameVal,
+        grade: gradeVal,
         phone: normalizePhone(phoneVal),
         motherName: motherNameVal,
         fatherName: fatherNameVal,
