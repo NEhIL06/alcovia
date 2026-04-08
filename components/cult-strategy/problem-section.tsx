@@ -41,7 +41,7 @@ export default function ProblemSection() {
             A shoe is just leather and rubber
             <br />
             <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>
-              — until it becomes a Nike.
+               until it becomes a Nike.
             </span>
           </motion.h2>
 

@@ -108,7 +108,7 @@ export default function HeroSection() {
             className="block text-[clamp(2.5rem,8vw,7rem)] text-white"
             style={{ textShadow: "0 0 40px rgba(255,255,255,0.1)" }}
           >
-            The Nike
+            The Cult
           </span>
           <span
             className="block text-[clamp(2.5rem,8vw,7rem)]"
@@ -117,7 +117,7 @@ export default function HeroSection() {
               textShadow: `0 0 60px ${ACCENT_DIM}0.4), 0 0 20px ${ACCENT_DIM}0.2)`,
             }}
           >
-            Playbook
+            Strategy
           </span>
         </motion.h1>
 
@@ -128,8 +128,8 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.8 }}
         >
-          Engineering a{" "}
-          <span style={{ color: ACCENT }}>Cult Brand</span>
+          Manufacturing Status &amp;{" "}
+          <span style={{ color: ACCENT }}>Hype</span>
         </motion.p>
 
         {/* Divider */}
@@ -148,7 +148,7 @@ export default function HeroSection() {
           animate={{ opacity: 1 }}
           transition={{ delay: 1.1, duration: 1 }}
         >
-          A masterclass by Siddhant Narayan,
+          Learn how Nike manufactures hype and global communities with Marketing Head Siddhant Narayan
         </motion.p>
         <motion.p
           className="text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
