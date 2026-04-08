@@ -21,6 +21,15 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
+
+  async rewrites() {
+    return [
+      {
+        source: '/certificate',
+        destination: '/certificate.html',
+      },
+    ]
+  },
 }
 
 export default nextConfig
