@@ -486,46 +486,30 @@
       <p class="subtitle">"Why Your Dream Job Doesn't Exist Yet"</p>
 
       <form id="certForm" novalidate>
-        <div class="field">
-          <label for="nameInput">Full Name *</label>
-          <input type="text" id="nameInput" required placeholder="Enter your full name" autocomplete="name">
-        </div>
-
         <div class="field-row">
           <div class="field">
-            <label for="gradeInput">Grade/Class *</label>
-            <input type="text" id="gradeInput" required placeholder="e.g. 9th, 10th, 11th">
+            <label for="nameInput">Student Name *</label>
+            <input type="text" id="nameInput" required placeholder="Student's name" autocomplete="name">
           </div>
           <div class="field">
-            <label for="phoneInput">Your Phone *</label>
-            <input type="tel" id="phoneInput" required placeholder="+91 XXXXXXXXXX" autocomplete="tel">
+            <label for="parentNameInput">Parent/Guardian *</label>
+            <input type="text" id="parentNameInput" required placeholder="Parent's name">
           </div>
         </div>
 
         <div class="field">
-          <label for="emailInput">Email (optional)</label>
-          <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          <label for="parentPhoneInput">Parent/Guardian's WhatsApp *</label>
+          <input type="tel" id="parentPhoneInput" required placeholder="+91 XXXXXXXXXX">
         </div>
 
         <div class="field-row">
           <div class="field">
-            <label for="motherNameInput">Mother's Name *</label>
-            <input type="text" id="motherNameInput" required placeholder="Mother's full name">
+            <label for="studentPhoneInput">Student's Phone (optional)</label>
+            <input type="tel" id="studentPhoneInput" placeholder="+91 XXXXXXXXXX">
           </div>
           <div class="field">
-            <label for="fatherNameInput">Father's Name *</label>
-            <input type="text" id="fatherNameInput" required placeholder="Father's full name">
-          </div>
-        </div>
-
-        <div class="field-row">
-          <div class="field">
-            <label for="motherPhoneInput">Mother's Phone *</label>
-            <input type="tel" id="motherPhoneInput" required placeholder="+91 XXXXXXXXXX">
-          </div>
-          <div class="field">
-            <label for="fatherPhoneInput">Father's Phone *</label>
-            <input type="tel" id="fatherPhoneInput" required placeholder="+91 XXXXXXXXXX">
+            <label for="parentEmailInput">Parent's Email (optional)</label>
+            <input type="email" id="parentEmailInput" placeholder="email@example.com">
           </div>
         </div>
 
@@ -651,13 +635,10 @@
       document.querySelectorAll('.error-msg').forEach(function(el) { el.remove(); });
 
       var nameVal = document.getElementById('nameInput').value.trim();
-      var gradeVal = document.getElementById('gradeInput').value.trim();
-      var phoneVal = document.getElementById('phoneInput').value.trim();
-      var emailVal = document.getElementById('emailInput').value.trim();
-      var motherNameVal = document.getElementById('motherNameInput').value.trim();
-      var fatherNameVal = document.getElementById('fatherNameInput').value.trim();
-      var motherPhoneVal = document.getElementById('motherPhoneInput').value.trim();
-      var fatherPhoneVal = document.getElementById('fatherPhoneInput').value.trim();
+      var parentNameVal = document.getElementById('parentNameInput').value.trim();
+      var parentPhoneVal = document.getElementById('parentPhoneInput').value.trim();
+      var studentPhoneVal = document.getElementById('studentPhoneInput').value.trim();
+      var parentEmailVal = document.getElementById('parentEmailInput').value.trim();
 
       var valid = true;
 
@@ -672,12 +653,8 @@
       }
 
       if (!nameVal) markError('nameInput', 'Name is required');
-      if (!gradeVal) markError('gradeInput', 'Grade is required');
-      if (!phoneVal || !isValidPhone(phoneVal)) markError('phoneInput', 'Enter a valid 10-digit phone');
-      if (!motherNameVal) markError('motherNameInput', "Mother's name is required");
-      if (!fatherNameVal) markError('fatherNameInput', "Father's name is required");
-      if (!motherPhoneVal || !isValidPhone(motherPhoneVal)) markError('motherPhoneInput', 'Enter a valid 10-digit phone');
-      if (!fatherPhoneVal || !isValidPhone(fatherPhoneVal)) markError('fatherPhoneInput', 'Enter a valid 10-digit phone');
+      if (!parentNameVal) markError('parentNameInput', "Parent's name is required");
+      if (!parentPhoneVal || !isValidPhone(parentPhoneVal)) markError('parentPhoneInput', 'Enter a valid 10-digit phone');
 
       if (!valid) return;
 
@@ -687,13 +664,10 @@
 
       var payload = {
         name: nameVal,
-        grade: gradeVal,
-        phone: normalizePhone(phoneVal),
-        motherName: motherNameVal,
-        fatherName: fatherNameVal,
-        motherPhone: normalizePhone(motherPhoneVal),
-        fatherPhone: normalizePhone(fatherPhoneVal),
-        email: emailVal,
+        parentName: parentNameVal,
+        parentPhone: normalizePhone(parentPhoneVal),
+        studentPhone: studentPhoneVal ? normalizePhone(studentPhoneVal) : '',
+        parentEmail: parentEmailVal,
         timestamp: new Date().toISOString(),
         workshop: "Why Your Dream Job Doesn't Exist Yet",
         school: "Heritage School"
