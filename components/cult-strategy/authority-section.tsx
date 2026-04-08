@@ -15,7 +15,7 @@ const credentials = [
     ),
     title: "We Teach What Schools Won't",
     description:
-      "Brand psychology, cult-status engineering, and strategic hype-building sit at the intersection of psychology, business, and culture. Subjects the formal education system ignores entirely — because they work too well.",
+      "Brand psychology, 'The Drop,' community engineering, and strategic hype-building sit at the intersection of psychology, business, and culture. Subjects the formal education system ignores entirely — because they work too well.",
   },
   {
     icon: (
@@ -27,7 +27,7 @@ const credentials = [
     ),
     title: "Industry Operators, Not Theorists",
     description:
-      "Our mentors built the brands you obsess over. Praful Akali and others who have run campaigns for Nike, Red Bull, and Flipkart bring the real playbook — not a textbook version of it.",
+      "Siddhant Narayan isn't a professor — he's the Country Head of Marketing at Nike. He builds the campaigns you obsess over, runs the drops you queue for, and architects the communities you belong to. This is the real playbook.",
   },
   {
     icon: (
@@ -37,17 +37,17 @@ const credentials = [
     ),
     title: "High Stakes, Not Passive",
     description:
-      "You won't sit and watch slides. You'll decode real brand campaigns, build your own cult brand from scratch, and pitch it to industry mentors who will challenge your thinking the way real investors do.",
+      "You won't sit and watch slides. You'll decode real Nike campaigns, build your own cult brand from scratch, and pitch it for feedback. The same way real investors and CMOs challenge thinking at the highest level.",
   },
 ];
 
 const logos = [
   "Nike",
-  "Red Bull",
   "Supreme",
-  "Flipkart",
-  "Disney+ Hotstar",
-  "McKinsey",
+  "Jordan",
+  "Red Bull",
+  "Apple",
+  "Rolex",
 ];
 
 export default function AuthoritySection() {
@@ -84,10 +84,9 @@ export default function AuthoritySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Built by the{" "}
-            <span style={{ color: ACCENT }}>top 1%</span>
-            <br />
-            for the next 1%
+            From buying the hype{" "}
+            <br className="hidden sm:block" />
+            <span style={{ color: ACCENT }}>to building it</span>
           </motion.h2>
 
           <motion.p
@@ -97,9 +96,10 @@ export default function AuthoritySection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Alcovia is India&apos;s first ambition-building program for teenagers.
-            We don&apos;t do generic. We build for those who want to understand
-            the game — and win it.
+            Alcovia moves teenagers from being consumers of the world&apos;s biggest
+            brands to strategists who understand how they are built. This is a deep
+            dive into the psychology of &ldquo;The Drop,&rdquo; community building,
+            and brand status.
           </motion.p>
         </div>
 

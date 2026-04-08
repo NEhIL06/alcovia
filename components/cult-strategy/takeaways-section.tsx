@@ -10,10 +10,10 @@ const ACCENT_DIM = "rgba(255,107,43,";
 const takeaways = [
   {
     number: "01",
-    title: "Psychology of Scarcity",
-    subtitle: "Why 'Limited Edition' works every time",
+    title: "Psychology of 'The Drop'",
+    subtitle: "Why scarcity makes humans move faster",
     description:
-      "Understand the neurological mechanism that makes scarcity irresistible. Learn how brands like Supreme, Jordan, and Rolex engineer desire by restricting supply — and how you can apply the same principle to any product or idea.",
+      "Understand the neurological mechanism behind 'The Drop' and why it's irresistible. Learn how Nike, Supreme, and Jordan engineer desire by restricting supply — and how the brain treats scarcity as danger, making fear of loss always beat desire for gain.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
@@ -25,9 +25,9 @@ const takeaways = [
   {
     number: "02",
     title: "Community Architecture",
-    subtitle: "How to turn followers into a cult following",
+    subtitle: "Turn followers into a tribe",
     description:
-      "Discover how the world's most powerful brands build belonging — not just customers. From Apple's 'Think Different' to Nike's 'Just Do It', learn how to design tribal identity that makes people proudly wear your logo, defend your brand, and recruit for you.",
+      "Discover how Nike turns customers into a global community. From 'Just Do It' to athlete partnerships, learn the frameworks that make people proudly wear the swoosh, defend the brand, and recruit others into the tribe.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -38,10 +38,10 @@ const takeaways = [
   },
   {
     number: "03",
-    title: "Strategic Execution",
-    subtitle: "From a cool idea to a high-demand product",
+    title: "Brand Status Engineering",
+    subtitle: "From concept to cult campaign",
     description:
-      "Move beyond ideation into action. Learn the exact sequence — positioning, launch strategy, pricing psychology, and social proof stacking — that transforms a concept into something people actually queue for. Leave with a real framework you can apply immediately.",
+      "Move beyond theory into execution. Learn the exact sequence — positioning, launch strategy, hype engineering, and social proof stacking — that transforms a concept into something people queue for. Leave with a real framework you can apply immediately.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -90,8 +90,8 @@ export default function TakeawaysSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            Skills that actually{" "}
-            <span style={{ color: ACCENT }}>move the needle</span>
+            The Nike Playbook,{" "}
+            <span style={{ color: ACCENT }}>decoded</span>
           </motion.h2>
 
           <motion.p
@@ -101,8 +101,8 @@ export default function TakeawaysSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Not theory. Not slides. Real frameworks from the brands that dominate
-            culture — handed to you in one day.
+            Not theory. Not slides. Real frameworks from the brand that dominates
+            culture — handed to you by the person who runs it in India.
           </motion.p>
         </div>
 

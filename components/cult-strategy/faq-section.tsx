@@ -8,6 +8,11 @@ const ACCENT = "#FF6B2B";
 
 const faqs = [
   {
+    question: "Who is the speaker?",
+    answer:
+      "Siddhant Narayan — Country Head of Marketing at Nike. This isn't a school teacher or a motivational speaker. This is the person responsible for the brand that defined 'The Drop' and built one of the most powerful communities in the world.",
+  },
+  {
     question: "What do attendees need to bring?",
     answer:
       "Just their brains. Everything else — materials, worksheets, and frameworks — is provided. Come ready to think, challenge, and build.",
@@ -15,22 +20,22 @@ const faqs = [
   {
     question: "Is food provided?",
     answer:
-      "Yes. Lunch is fully included in the ₹3,999 registration fee. You won't need to worry about anything outside the room.",
+      "Yes. Lunch and all materials are fully included in the ₹3,999 registration fee. You won't need to worry about anything outside the room.",
   },
   {
     question: "What age group is this for?",
     answer:
-      "This workshop is designed for Grades 6–10 (ages approximately 11–16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how the world actually works.",
+      "This workshop is designed for Grades 6–10 (ages approximately 11–16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how the world's most iconic brands actually work.",
   },
   {
     question: "Where exactly is it?",
     answer:
-      "One Horizon Center, DLF Phase 5, Gurugram. The venue is easily accessible and well-connected. Exact address and directions will be shared upon registration.",
+      "One Horizon Centre, DLF Phase 5, Gurgaon. The venue is easily accessible and well-connected. Exact address and directions will be shared upon registration.",
   },
   {
-    question: "How long is the workshop?",
+    question: "What are the timings?",
     answer:
-      "It's a full-day immersive — 11 AM to 4 PM (5 hours). Unlike a 1-hour lecture, this gives enough depth to actually learn, build, and pitch a real brand strategy.",
+      "Saturday, 18th April — 11:00 AM to 4:00 PM (5 hours). Unlike a 1-hour lecture, this gives enough depth to actually learn, build, and pitch a real brand strategy.",
   },
   {
     question: "Why are seats limited?",

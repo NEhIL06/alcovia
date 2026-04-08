@@ -13,13 +13,13 @@ import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracke
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "The Cult Strategy: How Brands Manufacture Hype | Alcovia",
+  title: "The Nike Playbook: Engineering a Cult Brand | Alcovia",
   description:
-    "Stop getting played by the hype. Learn the secret playbook the world's biggest brands use to engineer status and loyalty. An immersive workshop for Grades 6–10.",
+    "Join Siddhant Narayan (Country Head of Marketing, Nike) to pull back the curtain on how the world's most iconic brand manufactures hype and builds global communities. Grades 6–10.",
   openGraph: {
-    title: "The Cult Strategy: How Brands Manufacture Hype",
+    title: "The Nike Playbook: Engineering a Cult Brand",
     description:
-      "Why do people obsess over Nike, Supreme, or Apple? Learn the psychology behind cult brands — and build one yourself. Alcovia Workshop, April 11th.",
+      "A masterclass from the man behind Nike India's marketing engine. Learn the psychology of 'The Drop,' community building, and brand status. April 18th, Gurgaon.",
     type: "website",
   },
   robots: {
@@ -34,7 +34,7 @@ export default function CultStrategyWorkshopPage() {
       <WorkshopPageTracker />
       <HeroSection />
       <ProblemSection />
-      {/* <SpeakerSection /> */}
+      <SpeakerSection />
       <WorkshopPhases />
       <TakeawaysSection />
       

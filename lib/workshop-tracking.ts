@@ -5,11 +5,11 @@ const WORKSHOP_EVENT_ENDPOINT = "/api/workshop-funnel"
 const WORKSHOP_CHECKOUT_STORAGE_KEY = "alcovia_workshop_checkout_context_v1"
 
 export const WORKSHOP_DETAILS = {
-  slug: "cult-strategy-workshop",
-  title: "The Cult Strategy: How Brands Manufacture Hype",
-  dateIso: "2026-04-11",
-  dateLabel: "April 11th, 2026",
-  locationLabel: "One Horizon Center",
+  slug: "nike-playbook-workshop",
+  title: "The Nike Playbook: Engineering a Cult Brand",
+  dateIso: "2026-04-18",
+  dateLabel: "April 18th, 2026",
+  locationLabel: "One Horizon Centre, Gurgaon",
   amount: 3999,
   currency: "INR",
   paymentProvider: "razorpay",

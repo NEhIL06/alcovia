@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
@@ -31,7 +32,7 @@ export default function SpeakerSection() {
             className="text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)]"
             style={{ color: ACCENT }}
           >
-            Meet Your Speaker
+            Meet the Mentor
           </span>
         </motion.div>
 
@@ -43,7 +44,7 @@ export default function SpeakerSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
         >
-          {/* Image placeholder */}
+          {/* Speaker image */}
           <div className="relative flex-shrink-0">
             <div className="relative w-48 h-60 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
               {/* Outer border */}
@@ -52,25 +53,18 @@ export default function SpeakerSection() {
                 style={{ borderColor: `rgba(255,107,43,0.15)` }}
               />
 
-              {/* Placeholder silhouette */}
-              <div className="absolute inset-3 rounded-xl overflow-hidden bg-[#F7F7F3]/[0.03] flex flex-col items-center justify-center gap-3">
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={1}
-                  className="w-16 h-16 sm:w-20 sm:h-20"
-                  style={{ color: `rgba(255,107,43,0.2)` }}
-                >
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-                <span
-                  className="text-[10px] sm:text-xs tracking-[0.2em] uppercase font-[family-name:var(--font-satoshi)] text-center px-4"
-                  style={{ color: `rgba(255,107,43,0.35)` }}
-                >
-                  Speaker Reveal Soon
-                </span>
+              {/* Actual image */}
+              <div className="absolute inset-3 rounded-xl overflow-hidden">
+                <Image
+                  src="/assets/mentors/siddhant-narayan.png"
+                  alt="Siddhant Narayan — Country Head of Marketing, Nike"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 320px"
+                  priority
+                />
+                {/* Subtle dark overlay to tone down brightness */}
+                <div className="absolute inset-0 bg-black/15" />
               </div>
 
               {/* Corner accents */}
@@ -108,7 +102,7 @@ export default function SpeakerSection() {
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
                 style={{ color: ACCENT }}
               >
-                Industry Expert
+                Country Head of Marketing · Nike
               </span>
             </motion.div>
           </div>
@@ -124,17 +118,27 @@ export default function SpeakerSection() {
             >
               {/* Speaker Header */}
               <div>
-                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-2">
-                  Speaker Coming Soon
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-3">
+                  Siddhant Narayan
                 </h3>
-                <p
-                  className="text-base sm:text-lg font-[family-name:var(--font-satoshi)] font-medium mb-1"
-                  style={{ color: ACCENT }}
-                >
-                  High-Profile Industry Mentor
-                </p>
+                <div className="flex items-center gap-2.5 justify-center lg:justify-start mb-2">
+                  <span
+                    className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium"
+                    style={{ color: ACCENT }}
+                  >
+                    Country Head of Marketing
+                  </span>
+                  <span className="text-white/25">at</span>
+                  <Image
+                    src="/assets/logos/nike-logo.png"
+                    alt="Nike"
+                    width={96}
+                    height={40}
+                    className="h-12 sm:h-14 w-auto object-contain"
+                  />
+                </div>
                 <p className="text-sm text-white/50 font-[family-name:var(--font-satoshi)]">
-                  Details to be announced closer to the event
+                  The architect behind India&apos;s biggest marketing engine
                 </p>
               </div>
 
@@ -144,28 +148,29 @@ export default function SpeakerSection() {
                 style={{ background: `rgba(255,107,43,0.3)` }}
               />
 
-              {/* Bio placeholder */}
+              {/* Bio */}
               <div className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
                 <p>
-                  We&apos;re bringing in a{" "}
+                  This isn&apos;t a lecture. This is a{" "}
                   <span style={{ color: ACCENT }} className="font-medium">
-                    world-class brand strategist
-                  </span>{" "}
-                  with a proven track record of building cult-status brands from the ground up.
+                    masterclass from the man responsible for the brand that defined &ldquo;The Drop&rdquo; and &ldquo;The Community.&rdquo;
+                  </span>
                 </p>
                 <p className="text-white/40">
-                  This isn&apos;t a school teacher. This is someone who has been in the rooms
-                  where these strategies are built — and they&apos;re bringing the playbook to you.
+                  Your teen will learn the exact frameworks used at the highest level
+                  of global marketing — from the person who deploys them every day
+                  at the world&apos;s most iconic brand.
                 </p>
               </div>
 
-              {/* Placeholder tags */}
+              {/* Tags */}
               <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
                 {[
-                  "Brand Strategy",
-                  "Marketing",
-                  "Consumer Psychology",
-                  "Industry Operator",
+                  "The Drop",
+                  "Community Building",
+                  "Brand Psychology",
+                  "Hype Engineering",
+                  "Global Marketing",
                 ].map((tag) => (
                   <span
                     key={tag}

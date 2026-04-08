@@ -11,7 +11,7 @@ const ACCENT_DIM = "rgba(255,107,43,";
 const eventDetails = [
   {
     icon: <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
-    label: "April 11th, 2026",
+    label: "Saturday, April 18th",
   },
   {
     icon: <><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>,
@@ -19,11 +19,11 @@ const eventDetails = [
   },
   {
     icon: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></>,
-    label: "One Horizon Center",
+    label: "One Horizon Centre, Gurgaon",
   },
   {
     icon: <><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" /></>,
-    label: "Lunch Included",
+    label: "Lunch & Materials Included",
   },
 ];
 
@@ -108,7 +108,7 @@ export default function ClosingCtaSection() {
         >
           Ready to learn{" "}
           <br />
-          <span style={{ color: ACCENT }}>the playbook?</span>
+          <span style={{ color: ACCENT }}>the Nike Playbook?</span>
         </motion.h2>
 
         <motion.p
@@ -118,7 +118,7 @@ export default function ClosingCtaSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
         >
-          Spots are strictly limited to ensure high-stakes mentorship. One day.
+          Spots are strictly limited to ensure high-stakes mentorship with Siddhant Narayan. One day.
           The brand-building knowledge that changes how you see everything.
         </motion.p>
 
@@ -189,6 +189,10 @@ export default function ClosingCtaSection() {
               }}
             />
           </div>
+
+          <p className="text-xs text-white/40 font-[family-name:var(--font-satoshi)]">
+            Inclusive of lunch and materials
+          </p>
 
           {/* CTA */}
           <WorkshopCheckoutLink
@@ -271,7 +275,7 @@ export default function ClosingCtaSection() {
             </span>
             {/* WhatsApp */}
             <a
-              href="https://wa.me/?text=Check%20out%20The%20Cult%20Strategy%20Workshop%20by%20Alcovia%20-%20How%20Brands%20Manufacture%20Hype!"
+              href="https://wa.me/?text=Check%20out%20The%20Nike%20Playbook%20Workshop%20by%20Alcovia%20-%20Engineering%20a%20Cult%20Brand!"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"
@@ -283,7 +287,7 @@ export default function ClosingCtaSection() {
             </a>
             {/* X / Twitter */}
             <a
-              href="https://twitter.com/intent/tweet?text=Check%20out%20The%20Cult%20Strategy%20Workshop%20by%20Alcovia%20-%20How%20Brands%20Manufacture%20Hype!"
+              href="https://twitter.com/intent/tweet?text=Check%20out%20The%20Nike%20Playbook%20Workshop%20by%20Alcovia%20-%20Engineering%20a%20Cult%20Brand!"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"

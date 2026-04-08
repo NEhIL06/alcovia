@@ -7,14 +7,14 @@ import CursorParallaxGrid from "./cursor-parallax-grid";
 const ACCENT = "#FF6B2B";
 const ACCENT_DIM = "rgba(255,107,43,";
 
-const phases = [
+const pillars = [
   {
     number: "01",
-    phase: "Phase 1",
-    title: "The Deconstruction",
-    subtitle: "Pull back the curtain",
+    phase: "Pillar 1",
+    title: "The Anatomy of Hype",
+    subtitle: "Why humans crave status symbols",
     description:
-      "We expose the hidden machinery behind the world's most obsessive brands. Neuromarketing, scarcity engineering, anchoring, social proof, and the tribal psychology that makes people queue overnight for a sneaker. You'll never look at a logo the same way again.",
+      "Understanding the psychology of scarcity, 'The Drop,' and why humans crave status symbols. We decode the neurological mechanism that makes limited editions irresistible and how brands like Nike, Supreme, and Jordan engineer desire by restricting supply.",
     stat: "3+",
     statLabel: "psychological triggers decoded",
     icon: (
@@ -25,13 +25,13 @@ const phases = [
   },
   {
     number: "02",
-    phase: "Phase 2",
-    title: "The Lab",
-    subtitle: "Stop watching. Start building.",
+    phase: "Pillar 2",
+    title: "Brand Warfare",
+    subtitle: "Hacking the subconscious",
     description:
-      "Teens aren't just listening — they're building. Working in teams, you'll design your own Cult Brand from scratch using the real-world triggers you just learned. Scarcity drops, community architecture, identity alignment, influencer hooks — all of it goes into your brand strategy.",
+      "How Nike and other giants stay at the top of the food chain by hacking the subconscious. Learn how the world's most powerful brands build belonging — not just customers — and why fans defend brands like family. From 'Just Do It' to 'The Drop,' decode the warfare.",
     stat: "100%",
-    statLabel: "hands-on, team-based learning",
+    statLabel: "real-world brand strategy",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
@@ -40,11 +40,11 @@ const phases = [
   },
   {
     number: "03",
-    phase: "Phase 3",
-    title: "The Pitch",
-    subtitle: "Prove it to the room",
+    phase: "Pillar 3",
+    title: "The Execution Lab",
+    subtitle: "Build your own cult campaign",
     description:
-      "The stakes are real. Each team presents their hype-driven brand strategy to a panel of industry mentors. They'll push back, drill down, and challenge your thinking — the same way real investors and CMOs would. Walk out with feedback from people who actually build brands for a living.",
+      "Teens will work in teams to build their own 'Cult' campaign and present it for feedback. Scarcity drops, community architecture, identity alignment, influencer hooks — all of it goes into your brand strategy. Present to mentors who will challenge your thinking like real CMOs.",
     stat: "₹3,999",
     statLabel: "per seat · lunch included",
     icon: (
@@ -84,7 +84,7 @@ export default function WorkshopPhases() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            The Workshop
+            The 3 Pillars
           </motion.span>
 
           <motion.h2
@@ -105,12 +105,12 @@ export default function WorkshopPhases() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Three phases. One day. A complete transformation in how you see
+            Three pillars. One day. A complete transformation in how you see
             brands — and how you build them.
           </motion.p>
         </div>
 
-        {/* Phase cards — stacked with timeline connector */}
+        {/* Pillar cards — stacked with timeline connector */}
         <div className="relative">
           {/* Vertical timeline line — desktop only */}
           <div
@@ -121,7 +121,7 @@ export default function WorkshopPhases() {
           />
 
           <div className="space-y-4 sm:space-y-6">
-            {phases.map((item, i) => (
+            {pillars.map((item, i) => (
               <motion.div
                 key={item.number}
                 className="group"
