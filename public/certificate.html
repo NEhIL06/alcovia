@@ -58,29 +58,14 @@
 
     .logo-area {
       text-align: center;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .logo-area img {
-      width: 56px;
-      height: 56px;
+      width: 220px;
+      max-width: 60%;
+      height: auto;
       object-fit: contain;
-      margin-bottom: 8px;
-    }
-
-    .wordmark {
-      font-size: 22px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      color: #fff;
-    }
-
-    .tagline {
-      font-size: 9px;
-      letter-spacing: 3.5px;
-      color: var(--beige);
-      text-transform: uppercase;
-      margin-top: 2px;
     }
 
     .form-card h1 {
@@ -177,6 +162,32 @@
     .field-error { border-color: #e74c3c !important; }
     .error-msg { color: #e74c3c; font-size: 11px; margin-top: 3px; }
 
+    /* ── ALREADY CLAIMED ── */
+    #claimedView {
+      display: none;
+      width: 100%;
+      max-width: 520px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .claimed-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 48px 28px;
+      text-align: center;
+    }
+
+    .claimed-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .claimed-card p { font-size: 14px; color: rgba(255,255,255,0.6); }
+
     /* ── TOAST ── */
     #toast {
       position: fixed;
@@ -212,9 +223,7 @@
       padding-bottom: 8px;
     }
 
-    .cert-scale {
-      transform-origin: top left;
-    }
+    .cert-scale { transform-origin: top left; }
 
     /* ── THE CERTIFICATE ── */
     #certificate {
@@ -226,32 +235,24 @@
       box-shadow: 0 12px 48px rgba(0,0,0,0.35);
     }
 
-    /* diagonal lines */
     .cert-bg-lines {
       position: absolute;
       inset: 0;
       background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 14px,
-        rgba(1,44,70,0.025) 14px,
-        rgba(1,44,70,0.025) 15px
+        45deg, transparent, transparent 14px,
+        rgba(1,44,70,0.025) 14px, rgba(1,44,70,0.025) 15px
       );
       pointer-events: none;
     }
 
-    /* watermark star */
     .cert-watermark {
       position: absolute;
-      bottom: 30px;
-      right: 40px;
-      width: 180px;
-      height: 180px;
+      bottom: 30px; right: 40px;
+      width: 180px; height: 180px;
       opacity: 0.04;
       pointer-events: none;
     }
 
-    /* outer border */
     .cert-border-outer {
       position: absolute;
       top: 12px; left: 12px; right: 12px; bottom: 12px;
@@ -259,7 +260,6 @@
       pointer-events: none;
     }
 
-    /* inner border */
     .cert-border-inner {
       position: absolute;
       top: 18px; left: 18px; right: 18px; bottom: 18px;
@@ -267,11 +267,9 @@
       pointer-events: none;
     }
 
-    /* corner ornaments */
     .corner {
       position: absolute;
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       pointer-events: none;
     }
 
@@ -280,37 +278,20 @@
     .corner-bl { bottom: 6px; left: 6px; border-bottom: 3px solid var(--maroon); border-left: 3px solid var(--maroon); }
     .corner-br { bottom: 6px; right: 6px; border-bottom: 3px solid var(--maroon); border-right: 3px solid var(--maroon); }
 
-    /* certificate content */
     .cert-content {
       position: relative;
       z-index: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 36px 60px 28px;
+      padding: 32px 60px 24px;
       height: 100%;
     }
 
     .cert-logo {
-      width: 52px;
-      height: 52px;
+      width: 200px;
+      height: auto;
       object-fit: contain;
-    }
-
-    .cert-wordmark {
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: 1px;
-      margin-top: 4px;
-    }
-
-    .cert-tagline {
-      font-size: 7px;
-      letter-spacing: 3.5px;
-      color: var(--beige);
-      text-transform: uppercase;
-      margin-top: 1px;
     }
 
     .cert-title {
@@ -320,14 +301,14 @@
       color: var(--gold);
       letter-spacing: 5px;
       text-transform: uppercase;
-      margin-top: 22px;
+      margin-top: 18px;
     }
 
     .cert-presented {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 12px;
       color: var(--navy);
-      margin-top: 14px;
+      margin-top: 12px;
       letter-spacing: 0.5px;
     }
 
@@ -337,7 +318,7 @@
       font-weight: 700;
       font-size: 38px;
       color: var(--navy);
-      margin-top: 10px;
+      margin-top: 8px;
       text-align: center;
       line-height: 1.15;
     }
@@ -350,32 +331,24 @@
       border-radius: 2px;
     }
 
-    .cert-for {
+    .cert-achievement {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 12px;
-      color: var(--navy);
+      font-size: 11.5px;
+      color: #555;
+      text-align: center;
+      max-width: 580px;
+      line-height: 1.7;
       margin-top: 14px;
-      letter-spacing: 0.5px;
     }
 
-    .cert-workshop {
+    .cert-workshop-label {
       font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 700;
-      font-size: 18px;
+      font-size: 17px;
       color: var(--maroon);
-      margin-top: 8px;
+      margin-top: 6px;
       text-align: center;
-    }
-
-    .cert-desc {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 10.5px;
-      color: #666;
-      text-align: center;
-      max-width: 600px;
-      line-height: 1.6;
-      margin-top: 10px;
     }
 
     .cert-date {
@@ -388,7 +361,6 @@
       font-weight: 500;
     }
 
-    /* footer row */
     .cert-footer {
       display: flex;
       align-items: flex-end;
@@ -398,10 +370,7 @@
       padding: 0 20px;
     }
 
-    .cert-signatory {
-      text-align: center;
-      min-width: 160px;
-    }
+    .cert-signatory { text-align: center; min-width: 160px; }
 
     .cert-sig-name {
       font-family: 'Playfair Display', serif;
@@ -425,29 +394,12 @@
 
     .cert-seal { flex-shrink: 0; }
 
-    .cert-footer-brand {
-      text-align: center;
-      min-width: 160px;
-    }
+    .cert-footer-brand { text-align: center; min-width: 160px; }
 
     .cert-footer-brand img {
-      width: 36px;
-      height: 36px;
+      width: 120px;
+      height: auto;
       object-fit: contain;
-    }
-
-    .cert-footer-wordmark {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--navy);
-      margin-top: 2px;
-    }
-
-    .cert-footer-tagline {
-      font-size: 6px;
-      letter-spacing: 2.5px;
-      color: var(--beige);
-      text-transform: uppercase;
     }
 
     /* ── ACTION BUTTONS ── */
@@ -503,6 +455,7 @@
       .form-card { padding: 28px 20px 20px; }
       .form-card h1 { font-size: 22px; }
       .field-row { grid-template-columns: 1fr; gap: 0; }
+      .logo-area img { width: 180px; }
     }
 
     @media (max-width: 480px) {
@@ -514,16 +467,21 @@
 </head>
 <body>
 
-  <!-- Toast -->
   <div id="toast"></div>
+
+  <!-- ════ ALREADY CLAIMED ════ -->
+  <div id="claimedView">
+    <div class="claimed-card">
+      <h2>Certificate Already Claimed</h2>
+      <p>You have already claimed your certificate in this session.</p>
+    </div>
+  </div>
 
   <!-- ════ FORM VIEW ════ -->
   <div id="formView">
     <div class="form-card">
       <div class="logo-area">
-        <img src="/images/alcovia-logo-symbol.png" alt="Alcovia">
-        <div class="wordmark">alcovia</div>
-        <div class="tagline">AHEAD OF THE CURVE</div>
+        <img src="/images/alcovia-logo-white.png" alt="Alcovia">
       </div>
 
       <h1>Claim Your Certificate</h1>
@@ -543,6 +501,17 @@
           <div class="field">
             <label for="emailInput">Email (optional)</label>
             <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="motherNameInput">Mother's Name *</label>
+            <input type="text" id="motherNameInput" required placeholder="Mother's full name">
+          </div>
+          <div class="field">
+            <label for="fatherNameInput">Father's Name *</label>
+            <input type="text" id="fatherNameInput" required placeholder="Father's full name">
           </div>
         </div>
 
@@ -569,11 +538,9 @@
     <div class="cert-scroll">
       <div class="cert-scale" id="certScale">
         <div id="certificate">
-          <!-- bg decorations -->
           <div class="cert-bg-lines"></div>
           <svg class="cert-watermark" viewBox="0 0 200 200"><polygon points="100,10 127,75 198,80 143,128 158,198 100,162 42,198 57,128 2,80 73,75" fill="#012C46"/></svg>
 
-          <!-- borders -->
           <div class="cert-border-outer"></div>
           <div class="cert-border-inner"></div>
           <div class="corner corner-tl"></div>
@@ -581,32 +548,24 @@
           <div class="corner corner-bl"></div>
           <div class="corner corner-br"></div>
 
-          <!-- content -->
           <div class="cert-content">
-            <img class="cert-logo" src="/images/alcovia-logo-symbol.png" alt="Alcovia" crossorigin="anonymous">
-            <div class="cert-wordmark">alcovia</div>
-            <div class="cert-tagline">AHEAD OF THE CURVE</div>
+            <img class="cert-logo" src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
 
             <div class="cert-title">Certificate of Excellence</div>
 
-            <div class="cert-presented">is proudly presented to</div>
+            <div class="cert-presented">This certificate is proudly presented to</div>
 
             <div class="cert-name" id="certName"></div>
             <div class="cert-name-line"></div>
 
-            <div class="cert-for">for attending the workshop</div>
-
-            <div class="cert-workshop">"Why Your Dream Job Doesn't Exist Yet"</div>
-
-            <div class="cert-desc">
-              Every adult you know asks "What do you want to become?" &mdash; but the careers that will
-              define your generation might not have a name yet. This workshop explored how the world
-              is changing and what you can do about it.
+            <div class="cert-achievement">
+              in recognition of their outstanding participation and successful completion of the workshop
             </div>
+
+            <div class="cert-workshop-label">"Why Your Dream Job Doesn't Exist Yet"</div>
 
             <div class="cert-date">April 9, 2026 &middot; Heritage School</div>
 
-            <!-- footer row -->
             <div class="cert-footer">
               <div class="cert-signatory">
                 <div class="cert-sig-name">Sahil Puri</div>
@@ -626,9 +585,7 @@
               </div>
 
               <div class="cert-footer-brand">
-                <img src="/images/alcovia-logo-symbol.png" alt="Alcovia" crossorigin="anonymous">
-                <div class="cert-footer-wordmark">alcovia</div>
-                <div class="cert-footer-tagline">AHEAD OF THE CURVE</div>
+                <img src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
               </div>
             </div>
           </div>
@@ -639,12 +596,19 @@
     <div class="cert-actions">
       <button class="btn-download" id="downloadPdf" onclick="downloadPDF()">Download as PDF</button>
       <button class="btn-ghost" id="downloadPng" onclick="downloadPNG()">Download as PNG</button>
-      <button class="btn-ghost" id="claimAnother" onclick="resetForm()">Claim Another</button>
     </div>
   </div>
 
   <script>
     var studentName = '';
+
+    // ── Duplicate prevention ──
+    (function() {
+      if (sessionStorage.getItem('alcovia_cert_claimed')) {
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('claimedView').style.display = 'block';
+      }
+    })();
 
     // ── Phone validation ──
     function isValidPhone(val) {
@@ -673,15 +637,16 @@
     document.getElementById('certForm').addEventListener('submit', function(e) {
       e.preventDefault();
 
-      // clear previous errors
       document.querySelectorAll('.field-error').forEach(function(el) { el.classList.remove('field-error'); });
       document.querySelectorAll('.error-msg').forEach(function(el) { el.remove(); });
 
       var nameVal = document.getElementById('nameInput').value.trim();
       var phoneVal = document.getElementById('phoneInput').value.trim();
       var emailVal = document.getElementById('emailInput').value.trim();
-      var motherVal = document.getElementById('motherPhoneInput').value.trim();
-      var fatherVal = document.getElementById('fatherPhoneInput').value.trim();
+      var motherNameVal = document.getElementById('motherNameInput').value.trim();
+      var fatherNameVal = document.getElementById('fatherNameInput').value.trim();
+      var motherPhoneVal = document.getElementById('motherPhoneInput').value.trim();
+      var fatherPhoneVal = document.getElementById('fatherPhoneInput').value.trim();
 
       var valid = true;
 
@@ -697,8 +662,10 @@
 
       if (!nameVal) markError('nameInput', 'Name is required');
       if (!phoneVal || !isValidPhone(phoneVal)) markError('phoneInput', 'Enter a valid 10-digit phone');
-      if (!motherVal || !isValidPhone(motherVal)) markError('motherPhoneInput', 'Enter a valid 10-digit phone');
-      if (!fatherVal || !isValidPhone(fatherVal)) markError('fatherPhoneInput', 'Enter a valid 10-digit phone');
+      if (!motherNameVal) markError('motherNameInput', "Mother's name is required");
+      if (!fatherNameVal) markError('fatherNameInput', "Father's name is required");
+      if (!motherPhoneVal || !isValidPhone(motherPhoneVal)) markError('motherPhoneInput', 'Enter a valid 10-digit phone');
+      if (!fatherPhoneVal || !isValidPhone(fatherPhoneVal)) markError('fatherPhoneInput', 'Enter a valid 10-digit phone');
 
       if (!valid) return;
 
@@ -709,8 +676,10 @@
       var payload = {
         name: nameVal,
         phone: normalizePhone(phoneVal),
-        motherPhone: normalizePhone(motherVal),
-        fatherPhone: normalizePhone(fatherVal),
+        motherName: motherNameVal,
+        fatherName: fatherNameVal,
+        motherPhone: normalizePhone(motherPhoneVal),
+        fatherPhone: normalizePhone(fatherPhoneVal),
         email: emailVal,
         timestamp: new Date().toISOString(),
         workshop: "Why Your Dream Job Doesn't Exist Yet",
@@ -727,6 +696,7 @@
         return res.json();
       })
       .then(function() {
+        sessionStorage.setItem('alcovia_cert_claimed', 'true');
         studentName = nameVal;
         showCertificate(nameVal);
       })
@@ -742,7 +712,6 @@
       var nameEl = document.getElementById('certName');
       nameEl.textContent = name;
 
-      // adjust font size for long names
       if (name.length > 30) {
         nameEl.style.fontSize = '26px';
       } else if (name.length > 22) {
@@ -772,9 +741,7 @@
     }
 
     window.addEventListener('resize', function() {
-      if (document.getElementById('certView').style.display !== 'none') {
-        scaleCert();
-      }
+      if (document.getElementById('certView').style.display !== 'none') scaleCert();
     });
 
     // ── Download as PDF ──
@@ -783,7 +750,6 @@
       btn.disabled = true;
       btn.textContent = 'GENERATING PDF...';
 
-      // temporarily reset scale for capture
       var scaler = document.getElementById('certScale');
       var origTransform = scaler.style.transform;
       var origHeight = scaler.style.height;
@@ -792,13 +758,9 @@
 
       document.fonts.ready.then(function() {
         return html2canvas(document.getElementById('certificate'), {
-          scale: 3,
-          useCORS: true,
-          backgroundColor: '#FFFFFF',
-          logging: false
+          scale: 3, useCORS: true, backgroundColor: '#FFFFFF', logging: false
         });
       }).then(function(canvas) {
-        // restore scale
         scaler.style.transform = origTransform;
         scaler.style.height = origHeight;
 
@@ -807,15 +769,10 @@
         var pdfW = pdf.internal.pageSize.getWidth();
         var pdfH = pdf.internal.pageSize.getHeight();
         var imgData = canvas.toDataURL('image/png');
-        var imgW = canvas.width;
-        var imgH = canvas.height;
-        var ratio = Math.min(pdfW / imgW, pdfH / imgH);
-        var w = imgW * ratio;
-        var h = imgH * ratio;
-        var x = (pdfW - w) / 2;
-        var y = (pdfH - h) / 2;
-
-        pdf.addImage(imgData, 'PNG', x, y, w, h);
+        var ratio = Math.min(pdfW / canvas.width, pdfH / canvas.height);
+        var w = canvas.width * ratio;
+        var h = canvas.height * ratio;
+        pdf.addImage(imgData, 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
         pdf.save('Alcovia_Certificate_' + studentName.replace(/\s+/g, '_') + '.pdf');
 
         btn.disabled = false;
@@ -843,10 +800,7 @@
 
       document.fonts.ready.then(function() {
         return html2canvas(document.getElementById('certificate'), {
-          scale: 3,
-          useCORS: true,
-          backgroundColor: '#FFFFFF',
-          logging: false
+          scale: 3, useCORS: true, backgroundColor: '#FFFFFF', logging: false
         });
       }).then(function(canvas) {
         scaler.style.transform = origTransform;
@@ -866,16 +820,6 @@
         btn.disabled = false;
         btn.textContent = 'DOWNLOAD AS PNG';
       });
-    }
-
-    // ── Reset ──
-    function resetForm() {
-      document.getElementById('certView').style.display = 'none';
-      document.getElementById('formView').style.display = 'block';
-      document.getElementById('certForm').reset();
-      document.getElementById('submitBtn').classList.remove('loading');
-      document.getElementById('submitBtn').textContent = 'GET MY CERTIFICATE';
-      studentName = '';
     }
   </script>
 </body>
