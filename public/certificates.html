@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Your Certificate | Alcovia</title>
+  <meta name="description" content="Claim your Certificate of Excellence from Alcovia's workshop: Why Your Dream Job Doesn't Exist Yet">
+  <link rel="icon" href="/images/alcovia-logo-symbol.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #012C46;
+      --dark-blue: #002C45;
+      --emerald: #234944;
+      --gold: #EABF36;
+      --beige: #E5D1BE;
+      --maroon: #912F3C;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 50%, var(--emerald) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    /* ── FORM VIEW ── */
+    #formView {
+      width: 100%;
+      max-width: 520px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 36px 28px 28px;
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .logo-area img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      margin-bottom: 8px;
+    }
+
+    .wordmark {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: #fff;
+    }
+
+    .tagline {
+      font-size: 9px;
+      letter-spacing: 3.5px;
+      color: var(--beige);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .form-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input::placeholder { color: rgba(255,255,255,0.3); }
+    .field input:focus { border-color: var(--gold); }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-row .field { margin-bottom: 14px; }
+
+    #submitBtn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    #submitBtn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(234,191,54,0.3); }
+    #submitBtn:active { transform: translateY(0); }
+
+    #submitBtn.loading {
+      pointer-events: none;
+      background: linear-gradient(90deg, var(--gold) 25%, #f5d877 50%, var(--gold) 75%);
+      background-size: 200% auto;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    .field-error { border-color: #e74c3c !important; }
+    .error-msg { color: #e74c3c; font-size: 11px; margin-top: 3px; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #e74c3c;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 9999;
+      transition: transform 0.3s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── CERTIFICATE VIEW ── */
+    #certView {
+      display: none;
+      width: 100%;
+      max-width: 1020px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .cert-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+
+    .cert-scale {
+      transform-origin: top left;
+    }
+
+    /* ── THE CERTIFICATE ── */
+    #certificate {
+      width: 960px;
+      height: 679px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+    }
+
+    /* diagonal lines */
+    .cert-bg-lines {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 14px,
+        rgba(1,44,70,0.025) 14px,
+        rgba(1,44,70,0.025) 15px
+      );
+      pointer-events: none;
+    }
+
+    /* watermark star */
+    .cert-watermark {
+      position: absolute;
+      bottom: 30px;
+      right: 40px;
+      width: 180px;
+      height: 180px;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+
+    /* outer border */
+    .cert-border-outer {
+      position: absolute;
+      top: 12px; left: 12px; right: 12px; bottom: 12px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+    }
+
+    /* inner border */
+    .cert-border-inner {
+      position: absolute;
+      top: 18px; left: 18px; right: 18px; bottom: 18px;
+      border: 0.5px solid var(--beige);
+      pointer-events: none;
+    }
+
+    /* corner ornaments */
+    .corner {
+      position: absolute;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+    }
+
+    .corner-tl { top: 6px; left: 6px; border-top: 3px solid var(--maroon); border-left: 3px solid var(--maroon); }
+    .corner-tr { top: 6px; right: 6px; border-top: 3px solid var(--maroon); border-right: 3px solid var(--maroon); }
+    .corner-bl { bottom: 6px; left: 6px; border-bottom: 3px solid var(--maroon); border-left: 3px solid var(--maroon); }
+    .corner-br { bottom: 6px; right: 6px; border-bottom: 3px solid var(--maroon); border-right: 3px solid var(--maroon); }
+
+    /* certificate content */
+    .cert-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 36px 60px 28px;
+      height: 100%;
+    }
+
+    .cert-logo {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+    }
+
+    .cert-wordmark {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 1px;
+      margin-top: 4px;
+    }
+
+    .cert-tagline {
+      font-size: 7px;
+      letter-spacing: 3.5px;
+      color: var(--beige);
+      text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .cert-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-top: 22px;
+    }
+
+    .cert-presented {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      color: var(--navy);
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 38px;
+      color: var(--navy);
+      margin-top: 10px;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .cert-name-line {
+      width: 280px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 6px;
+      border-radius: 2px;
+    }
+
+    .cert-for {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 12px;
+      color: var(--navy);
+      margin-top: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-workshop {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--maroon);
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .cert-desc {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 10.5px;
+      color: #666;
+      text-align: center;
+      max-width: 600px;
+      line-height: 1.6;
+      margin-top: 10px;
+    }
+
+    .cert-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      color: var(--navy);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-top: 14px;
+      font-weight: 500;
+    }
+
+    /* footer row */
+    .cert-footer {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: auto;
+      padding: 0 20px;
+    }
+
+    .cert-signatory {
+      text-align: center;
+      min-width: 160px;
+    }
+
+    .cert-sig-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 18px;
+      color: var(--navy);
+    }
+
+    .cert-sig-line {
+      width: 140px;
+      height: 1px;
+      background: var(--navy);
+      margin: 4px auto 4px;
+    }
+
+    .cert-sig-title {
+      font-size: 9px;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-seal { flex-shrink: 0; }
+
+    .cert-footer-brand {
+      text-align: center;
+      min-width: 160px;
+    }
+
+    .cert-footer-brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+    }
+
+    .cert-footer-wordmark {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-top: 2px;
+    }
+
+    .cert-footer-tagline {
+      font-size: 6px;
+      letter-spacing: 2.5px;
+      color: var(--beige);
+      text-transform: uppercase;
+    }
+
+    /* ── ACTION BUTTONS ── */
+    .cert-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      padding: 13px 28px;
+      border: none;
+      border-radius: 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-download:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(234,191,54,0.3); }
+
+    .btn-ghost {
+      padding: 13px 28px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      background: transparent;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); }
+
+    .btn-download:disabled, .btn-ghost:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .form-card { padding: 28px 20px 20px; }
+      .form-card h1 { font-size: 22px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .cert-actions { flex-direction: column; align-items: stretch; }
+      .cert-actions button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- ════ FORM VIEW ════ -->
+  <div id="formView">
+    <div class="form-card">
+      <div class="logo-area">
+        <img src="/images/alcovia-logo-symbol.png" alt="Alcovia">
+        <div class="wordmark">alcovia</div>
+        <div class="tagline">AHEAD OF THE CURVE</div>
+      </div>
+
+      <h1>Claim Your Certificate</h1>
+      <p class="subtitle">"Why Your Dream Job Doesn't Exist Yet"</p>
+
+      <form id="certForm" novalidate>
+        <div class="field">
+          <label for="nameInput">Full Name *</label>
+          <input type="text" id="nameInput" required placeholder="Enter your full name" autocomplete="name">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="phoneInput">Your Phone *</label>
+            <input type="tel" id="phoneInput" required placeholder="+91 XXXXXXXXXX" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="emailInput">Email (optional)</label>
+            <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="motherPhoneInput">Mother's Phone *</label>
+            <input type="tel" id="motherPhoneInput" required placeholder="+91 XXXXXXXXXX">
+          </div>
+          <div class="field">
+            <label for="fatherPhoneInput">Father's Phone *</label>
+            <input type="tel" id="fatherPhoneInput" required placeholder="+91 XXXXXXXXXX">
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn">GET MY CERTIFICATE</button>
+      </form>
+
+      <div class="form-footer">alcovia.life &middot; Ahead of the Curve</div>
+    </div>
+  </div>
+
+  <!-- ════ CERTIFICATE VIEW ════ -->
+  <div id="certView">
+    <div class="cert-scroll">
+      <div class="cert-scale" id="certScale">
+        <div id="certificate">
+          <!-- bg decorations -->
+          <div class="cert-bg-lines"></div>
+          <svg class="cert-watermark" viewBox="0 0 200 200"><polygon points="100,10 127,75 198,80 143,128 158,198 100,162 42,198 57,128 2,80 73,75" fill="#012C46"/></svg>
+
+          <!-- borders -->
+          <div class="cert-border-outer"></div>
+          <div class="cert-border-inner"></div>
+          <div class="corner corner-tl"></div>
+          <div class="corner corner-tr"></div>
+          <div class="corner corner-bl"></div>
+          <div class="corner corner-br"></div>
+
+          <!-- content -->
+          <div class="cert-content">
+            <img class="cert-logo" src="/images/alcovia-logo-symbol.png" alt="Alcovia" crossorigin="anonymous">
+            <div class="cert-wordmark">alcovia</div>
+            <div class="cert-tagline">AHEAD OF THE CURVE</div>
+
+            <div class="cert-title">Certificate of Excellence</div>
+
+            <div class="cert-presented">is proudly presented to</div>
+
+            <div class="cert-name" id="certName"></div>
+            <div class="cert-name-line"></div>
+
+            <div class="cert-for">for attending the workshop</div>
+
+            <div class="cert-workshop">"Why Your Dream Job Doesn't Exist Yet"</div>
+
+            <div class="cert-desc">
+              Every adult you know asks "What do you want to become?" &mdash; but the careers that will
+              define your generation might not have a name yet. This workshop explored how the world
+              is changing and what you can do about it.
+            </div>
+
+            <div class="cert-date">April 9, 2026 &middot; Heritage School</div>
+
+            <!-- footer row -->
+            <div class="cert-footer">
+              <div class="cert-signatory">
+                <div class="cert-sig-name">Sahil Puri</div>
+                <div class="cert-sig-line"></div>
+                <div class="cert-sig-title">Founder &amp; CEO, Alcovia</div>
+              </div>
+
+              <div class="cert-seal">
+                <svg viewBox="0 0 100 100" width="80" height="80">
+                  <circle cx="50" cy="50" r="48" fill="rgba(145,47,60,0.12)"/>
+                  <circle cx="50" cy="50" r="38" fill="rgba(145,47,60,0.08)"/>
+                  <circle cx="50" cy="50" r="42" fill="none" stroke="#EABF36" stroke-width="1" stroke-dasharray="4 3"/>
+                  <polygon points="50,28 54.7,41.5 69,41.8 57.6,50.5 61.8,64.2 50,56 38.2,64.2 42.4,50.5 31,41.8 45.3,41.5" fill="#EABF36"/>
+                  <text x="50" y="76" text-anchor="middle" fill="#EABF36" font-size="7" font-family="Space Grotesk, sans-serif" font-weight="600" letter-spacing="2">EXCELLENCE</text>
+                  <text x="50" y="86" text-anchor="middle" fill="#012C46" font-size="5.5" font-family="Space Grotesk, sans-serif" font-weight="500" letter-spacing="1.5">ALCOVIA</text>
+                </svg>
+              </div>
+
+              <div class="cert-footer-brand">
+                <img src="/images/alcovia-logo-symbol.png" alt="Alcovia" crossorigin="anonymous">
+                <div class="cert-footer-wordmark">alcovia</div>
+                <div class="cert-footer-tagline">AHEAD OF THE CURVE</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-actions">
+      <button class="btn-download" id="downloadPdf" onclick="downloadPDF()">Download as PDF</button>
+      <button class="btn-ghost" id="downloadPng" onclick="downloadPNG()">Download as PNG</button>
+      <button class="btn-ghost" id="claimAnother" onclick="resetForm()">Claim Another</button>
+    </div>
+  </div>
+
+  <script>
+    var studentName = '';
+
+    // ── Phone validation ──
+    function isValidPhone(val) {
+      var digits = val.replace(/\D/g, '');
+      if (digits.length === 10 && /^[6-9]/.test(digits)) return true;
+      if (digits.length === 12 && /^91[6-9]/.test(digits)) return true;
+      return false;
+    }
+
+    function normalizePhone(val) {
+      var digits = val.replace(/\D/g, '');
+      if (digits.length === 10 && /^[6-9]/.test(digits)) return '+91' + digits;
+      if (digits.length === 12 && digits.indexOf('91') === 0) return '+' + digits;
+      return val.trim();
+    }
+
+    // ── Toast ──
+    function showToast(msg, duration) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, duration || 4000);
+    }
+
+    // ── Form submit ──
+    document.getElementById('certForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // clear previous errors
+      document.querySelectorAll('.field-error').forEach(function(el) { el.classList.remove('field-error'); });
+      document.querySelectorAll('.error-msg').forEach(function(el) { el.remove(); });
+
+      var nameVal = document.getElementById('nameInput').value.trim();
+      var phoneVal = document.getElementById('phoneInput').value.trim();
+      var emailVal = document.getElementById('emailInput').value.trim();
+      var motherVal = document.getElementById('motherPhoneInput').value.trim();
+      var fatherVal = document.getElementById('fatherPhoneInput').value.trim();
+
+      var valid = true;
+
+      function markError(id, msg) {
+        var inp = document.getElementById(id);
+        inp.classList.add('field-error');
+        var div = document.createElement('div');
+        div.className = 'error-msg';
+        div.textContent = msg;
+        inp.parentNode.appendChild(div);
+        valid = false;
+      }
+
+      if (!nameVal) markError('nameInput', 'Name is required');
+      if (!phoneVal || !isValidPhone(phoneVal)) markError('phoneInput', 'Enter a valid 10-digit phone');
+      if (!motherVal || !isValidPhone(motherVal)) markError('motherPhoneInput', 'Enter a valid 10-digit phone');
+      if (!fatherVal || !isValidPhone(fatherVal)) markError('fatherPhoneInput', 'Enter a valid 10-digit phone');
+
+      if (!valid) return;
+
+      var btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.textContent = 'GENERATING...';
+
+      var payload = {
+        name: nameVal,
+        phone: normalizePhone(phoneVal),
+        motherPhone: normalizePhone(motherVal),
+        fatherPhone: normalizePhone(fatherVal),
+        email: emailVal,
+        timestamp: new Date().toISOString(),
+        workshop: "Why Your Dream Job Doesn't Exist Yet",
+        school: "Heritage School"
+      };
+
+      fetch('https://n8n.alcovia.life/webhook/certificate-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (!res.ok) throw new Error('Server error');
+        return res.json();
+      })
+      .then(function() {
+        studentName = nameVal;
+        showCertificate(nameVal);
+      })
+      .catch(function() {
+        showToast('Something went wrong. Please try again.');
+        btn.classList.remove('loading');
+        btn.textContent = 'GET MY CERTIFICATE';
+      });
+    });
+
+    // ── Show certificate ──
+    function showCertificate(name) {
+      var nameEl = document.getElementById('certName');
+      nameEl.textContent = name;
+
+      // adjust font size for long names
+      if (name.length > 30) {
+        nameEl.style.fontSize = '26px';
+      } else if (name.length > 22) {
+        nameEl.style.fontSize = '32px';
+      } else {
+        nameEl.style.fontSize = '38px';
+      }
+
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('certView').style.display = 'block';
+      scaleCert();
+    }
+
+    // ── Scale certificate to fit viewport ──
+    function scaleCert() {
+      var wrapper = document.querySelector('.cert-scroll');
+      var scaler = document.getElementById('certScale');
+      var w = wrapper.clientWidth;
+      if (w < 960) {
+        var s = w / 960;
+        scaler.style.transform = 'scale(' + s + ')';
+        scaler.style.height = Math.ceil(679 * s) + 'px';
+      } else {
+        scaler.style.transform = 'none';
+        scaler.style.height = 'auto';
+      }
+    }
+
+    window.addEventListener('resize', function() {
+      if (document.getElementById('certView').style.display !== 'none') {
+        scaleCert();
+      }
+    });
+
+    // ── Download as PDF ──
+    function downloadPDF() {
+      var btn = document.getElementById('downloadPdf');
+      btn.disabled = true;
+      btn.textContent = 'GENERATING PDF...';
+
+      // temporarily reset scale for capture
+      var scaler = document.getElementById('certScale');
+      var origTransform = scaler.style.transform;
+      var origHeight = scaler.style.height;
+      scaler.style.transform = 'none';
+      scaler.style.height = 'auto';
+
+      document.fonts.ready.then(function() {
+        return html2canvas(document.getElementById('certificate'), {
+          scale: 3,
+          useCORS: true,
+          backgroundColor: '#FFFFFF',
+          logging: false
+        });
+      }).then(function(canvas) {
+        // restore scale
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+
+        var jsPDF = window.jspdf.jsPDF;
+        var pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+        var pdfW = pdf.internal.pageSize.getWidth();
+        var pdfH = pdf.internal.pageSize.getHeight();
+        var imgData = canvas.toDataURL('image/png');
+        var imgW = canvas.width;
+        var imgH = canvas.height;
+        var ratio = Math.min(pdfW / imgW, pdfH / imgH);
+        var w = imgW * ratio;
+        var h = imgH * ratio;
+        var x = (pdfW - w) / 2;
+        var y = (pdfH - h) / 2;
+
+        pdf.addImage(imgData, 'PNG', x, y, w, h);
+        pdf.save('Alcovia_Certificate_' + studentName.replace(/\s+/g, '_') + '.pdf');
+
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PDF';
+      }).catch(function() {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+        showToast('PDF generation failed. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PDF';
+      });
+    }
+
+    // ── Download as PNG ──
+    function downloadPNG() {
+      var btn = document.getElementById('downloadPng');
+      btn.disabled = true;
+      btn.textContent = 'GENERATING PNG...';
+
+      var scaler = document.getElementById('certScale');
+      var origTransform = scaler.style.transform;
+      var origHeight = scaler.style.height;
+      scaler.style.transform = 'none';
+      scaler.style.height = 'auto';
+
+      document.fonts.ready.then(function() {
+        return html2canvas(document.getElementById('certificate'), {
+          scale: 3,
+          useCORS: true,
+          backgroundColor: '#FFFFFF',
+          logging: false
+        });
+      }).then(function(canvas) {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+
+        var link = document.createElement('a');
+        link.download = 'Alcovia_Certificate_' + studentName.replace(/\s+/g, '_') + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PNG';
+      }).catch(function() {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+        showToast('PNG generation failed. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PNG';
+      });
+    }
+
+    // ── Reset ──
+    function resetForm() {
+      document.getElementById('certView').style.display = 'none';
+      document.getElementById('formView').style.display = 'block';
+      document.getElementById('certForm').reset();
+      document.getElementById('submitBtn').classList.remove('loading');
+      document.getElementById('submitBtn').textContent = 'GET MY CERTIFICATE';
+      studentName = '';
+    }
+  </script>
+</body>
+</html>
