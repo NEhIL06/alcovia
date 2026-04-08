@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Your Certificate | Alcovia</title>
+  <meta name="description" content="Claim your Certificate of Excellence from Alcovia's workshop: Why Your Dream Job Doesn't Exist Yet">
+  <link rel="icon" href="/images/alcovia-logo-symbol.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #012C46;
+      --dark-blue: #002C45;
+      --emerald: #234944;
+      --gold: #EABF36;
+      --beige: #E5D1BE;
+      --maroon: #912F3C;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 50%, var(--emerald) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      color: #fff;
+    }
+
+    /* ── FORM VIEW ── */
+    #formView {
+      width: 100%;
+      max-width: 520px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 36px 28px 28px;
+    }
+
+    .logo-area {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-area img {
+      width: 220px;
+      max-width: 60%;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .form-card h1 {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 26px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 13px;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      margin-bottom: 5px;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .field input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.07);
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input::placeholder { color: rgba(255,255,255,0.3); }
+    .field input:focus { border-color: var(--gold); }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .field-row .field { margin-bottom: 14px; }
+
+    #submitBtn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      margin-top: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    #submitBtn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(234,191,54,0.3); }
+    #submitBtn:active { transform: translateY(0); }
+
+    #submitBtn.loading {
+      pointer-events: none;
+      background: linear-gradient(90deg, var(--gold) 25%, #f5d877 50%, var(--gold) 75%);
+      background-size: 200% auto;
+      animation: shimmer 1.5s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% center; }
+      100% { background-position: -200% center; }
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.5px;
+    }
+
+    .field-error { border-color: #e74c3c !important; }
+    .error-msg { color: #e74c3c; font-size: 11px; margin-top: 3px; }
+
+    /* ── ALREADY CLAIMED ── */
+    #claimedView {
+      display: none;
+      width: 100%;
+      max-width: 520px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .claimed-card {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 48px 28px;
+      text-align: center;
+    }
+
+    .claimed-card h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .claimed-card p { font-size: 14px; color: rgba(255,255,255,0.6); }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: #e74c3c;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 9999;
+      transition: transform 0.3s ease;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── CERTIFICATE VIEW ── */
+    #certView {
+      display: none;
+      width: 100%;
+      max-width: 1020px;
+      animation: fadeUp 0.6s ease;
+    }
+
+    .cert-scroll {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 8px;
+    }
+
+    .cert-scale { transform-origin: top left; }
+
+    /* ── THE CERTIFICATE ── */
+    #certificate {
+      width: 960px;
+      height: 679px;
+      background: #F5EFE0;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+    }
+
+    /* navy outer frame */
+    .cert-frame {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      border: 14px solid var(--navy);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* gold border inside navy frame */
+    .cert-gold-border {
+      position: absolute;
+      top: 14px; left: 14px; right: 14px; bottom: 14px;
+      border: 2px solid var(--gold);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* gold inner line */
+    .cert-gold-inner {
+      position: absolute;
+      top: 20px; left: 20px; right: 20px; bottom: 20px;
+      border: 0.5px solid rgba(234,191,54,0.5);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* ornate gold corner decorations */
+    .cert-corner-svg {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      z-index: 3;
+      pointer-events: none;
+      color: var(--gold);
+    }
+    .cert-corner-svg.tl { top: 18px; left: 18px; }
+    .cert-corner-svg.tr { top: 18px; right: 18px; transform: scaleX(-1); }
+    .cert-corner-svg.bl { bottom: 18px; left: 18px; transform: scaleY(-1); }
+    .cert-corner-svg.br { bottom: 18px; right: 18px; transform: scale(-1,-1); }
+
+    .cert-content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 28px 70px 24px;
+      height: 100%;
+    }
+
+    .cert-logo {
+      width: 320px;
+      height: auto;
+      object-fit: contain;
+      margin-top: 8px;
+    }
+
+    .cert-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .cert-presented {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 13px;
+      color: #555;
+      margin-top: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 46px;
+      color: var(--navy);
+      margin-top: 4px;
+      text-align: center;
+      line-height: 1.15;
+    }
+
+    .cert-name-line {
+      width: 300px;
+      height: 2px;
+      background: var(--gold);
+      margin-top: 4px;
+      border-radius: 2px;
+    }
+
+    .cert-achievement {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11.5px;
+      color: #666;
+      text-align: center;
+      max-width: 560px;
+      line-height: 1.7;
+      margin-top: 10px;
+    }
+
+    .cert-workshop-label {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--navy);
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .cert-date {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 11px;
+      color: #888;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 8px;
+      font-weight: 500;
+    }
+
+    .cert-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: auto;
+      padding: 0 30px;
+    }
+
+    .cert-signatory { text-align: center; min-width: 160px; }
+
+    .cert-sig-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--navy);
+    }
+
+    .cert-sig-line {
+      width: 140px;
+      height: 1px;
+      background: var(--navy);
+      margin: 4px auto 4px;
+    }
+
+    .cert-sig-title {
+      font-size: 9px;
+      color: #666;
+      letter-spacing: 0.5px;
+    }
+
+    .cert-seal { flex-shrink: 0; }
+
+    .cert-footer-brand { text-align: center; min-width: 160px; }
+
+    .cert-footer-brand img {
+      width: 140px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    /* ── ACTION BUTTONS ── */
+    .cert-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-download {
+      padding: 13px 28px;
+      border: none;
+      border-radius: 12px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-download:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(234,191,54,0.3); }
+
+    .btn-ghost {
+      padding: 13px 28px;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 12px;
+      background: transparent;
+      color: #fff;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); }
+
+    .btn-download:disabled, .btn-ghost:disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      .form-card { padding: 28px 20px 20px; }
+      .form-card h1 { font-size: 22px; }
+      .field-row { grid-template-columns: 1fr; gap: 0; }
+      .logo-area img { width: 180px; }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 12px; }
+      .cert-actions { flex-direction: column; align-items: stretch; }
+      .cert-actions button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="toast"></div>
+
+  <!-- ════ ALREADY CLAIMED ════ -->
+  <div id="claimedView">
+    <div class="claimed-card">
+      <h2>Certificate Already Claimed</h2>
+      <p>You have already claimed your certificate in this session.</p>
+    </div>
+  </div>
+
+  <!-- ════ FORM VIEW ════ -->
+  <div id="formView">
+    <div class="form-card">
+      <div class="logo-area">
+        <img src="/images/alcovia-logo-white.png" alt="Alcovia">
+      </div>
+
+      <h1>Claim Your Certificate</h1>
+      <p class="subtitle">"Why Your Dream Job Doesn't Exist Yet"</p>
+
+      <form id="certForm" novalidate>
+        <div class="field">
+          <label for="nameInput">Full Name *</label>
+          <input type="text" id="nameInput" required placeholder="Enter your full name" autocomplete="name">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="phoneInput">Your Phone *</label>
+            <input type="tel" id="phoneInput" required placeholder="+91 XXXXXXXXXX" autocomplete="tel">
+          </div>
+          <div class="field">
+            <label for="emailInput">Email (optional)</label>
+            <input type="email" id="emailInput" placeholder="your@email.com" autocomplete="email">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="motherNameInput">Mother's Name *</label>
+            <input type="text" id="motherNameInput" required placeholder="Mother's full name">
+          </div>
+          <div class="field">
+            <label for="fatherNameInput">Father's Name *</label>
+            <input type="text" id="fatherNameInput" required placeholder="Father's full name">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="motherPhoneInput">Mother's Phone *</label>
+            <input type="tel" id="motherPhoneInput" required placeholder="+91 XXXXXXXXXX">
+          </div>
+          <div class="field">
+            <label for="fatherPhoneInput">Father's Phone *</label>
+            <input type="tel" id="fatherPhoneInput" required placeholder="+91 XXXXXXXXXX">
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn">GET MY CERTIFICATE</button>
+      </form>
+
+      <div class="form-footer">alcovia.life &middot; Ahead of the Curve</div>
+    </div>
+  </div>
+
+  <!-- ════ CERTIFICATE VIEW ════ -->
+  <div id="certView">
+    <div class="cert-scroll">
+      <div class="cert-scale" id="certScale">
+        <div id="certificate">
+          <!-- frames -->
+          <div class="cert-frame"></div>
+          <div class="cert-gold-border"></div>
+          <div class="cert-gold-inner"></div>
+
+          <!-- ornate gold corners -->
+          <svg class="cert-corner-svg tl" viewBox="0 0 80 80"><path d="M2,2 L2,30 Q2,2 30,2 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6,6 L6,50 Q6,6 50,6" fill="none" stroke="currentColor" stroke-width="0.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M2,30 Q10,20 20,25 Q15,15 25,10 Q18,8 15,2" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M30,2 Q20,10 25,20 Q15,15 10,25 Q8,18 2,15" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="20" cy="20" r="1.5" fill="currentColor"/><path d="M10,40 Q14,30 24,32 Q20,24 30,18" fill="none" stroke="currentColor" stroke-width="0.5"/><path d="M40,10 Q30,14 32,24 Q24,20 18,30" fill="none" stroke="currentColor" stroke-width="0.5"/></svg>
+          <svg class="cert-corner-svg tr" viewBox="0 0 80 80"><path d="M2,2 L2,30 Q2,2 30,2 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6,6 L6,50 Q6,6 50,6" fill="none" stroke="currentColor" stroke-width="0.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M2,30 Q10,20 20,25 Q15,15 25,10 Q18,8 15,2" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M30,2 Q20,10 25,20 Q15,15 10,25 Q8,18 2,15" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="20" cy="20" r="1.5" fill="currentColor"/><path d="M10,40 Q14,30 24,32 Q20,24 30,18" fill="none" stroke="currentColor" stroke-width="0.5"/><path d="M40,10 Q30,14 32,24 Q24,20 18,30" fill="none" stroke="currentColor" stroke-width="0.5"/></svg>
+          <svg class="cert-corner-svg bl" viewBox="0 0 80 80"><path d="M2,2 L2,30 Q2,2 30,2 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6,6 L6,50 Q6,6 50,6" fill="none" stroke="currentColor" stroke-width="0.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M2,30 Q10,20 20,25 Q15,15 25,10 Q18,8 15,2" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M30,2 Q20,10 25,20 Q15,15 10,25 Q8,18 2,15" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="20" cy="20" r="1.5" fill="currentColor"/><path d="M10,40 Q14,30 24,32 Q20,24 30,18" fill="none" stroke="currentColor" stroke-width="0.5"/><path d="M40,10 Q30,14 32,24 Q24,20 18,30" fill="none" stroke="currentColor" stroke-width="0.5"/></svg>
+          <svg class="cert-corner-svg br" viewBox="0 0 80 80"><path d="M2,2 L2,30 Q2,2 30,2 Z" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6,6 L6,50 Q6,6 50,6" fill="none" stroke="currentColor" stroke-width="0.5"/><circle cx="8" cy="8" r="2" fill="currentColor"/><path d="M2,30 Q10,20 20,25 Q15,15 25,10 Q18,8 15,2" fill="none" stroke="currentColor" stroke-width="0.8"/><path d="M30,2 Q20,10 25,20 Q15,15 10,25 Q8,18 2,15" fill="none" stroke="currentColor" stroke-width="0.8"/><circle cx="20" cy="20" r="1.5" fill="currentColor"/><path d="M10,40 Q14,30 24,32 Q20,24 30,18" fill="none" stroke="currentColor" stroke-width="0.5"/><path d="M40,10 Q30,14 32,24 Q24,20 18,30" fill="none" stroke="currentColor" stroke-width="0.5"/></svg>
+
+          <div class="cert-content">
+            <img class="cert-logo" src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
+
+            <div class="cert-title">Certificate of Excellence</div>
+
+            <div class="cert-presented">This certificate is proudly presented to</div>
+
+            <div class="cert-name" id="certName"></div>
+            <div class="cert-name-line"></div>
+
+            <div class="cert-achievement">
+              in recognition of their outstanding participation and successful completion of the workshop
+            </div>
+
+            <div class="cert-workshop-label">"Why Your Dream Job Doesn't Exist Yet"</div>
+
+            <div class="cert-date">April 9, 2026 &ndash; Heritage School</div>
+
+            <div class="cert-footer">
+              <div class="cert-signatory">
+                <div class="cert-sig-name">Sahil Puri</div>
+                <div class="cert-sig-line"></div>
+                <div class="cert-sig-title">Founder &amp; CEO, Alcovia</div>
+              </div>
+
+              <div class="cert-seal">
+                <svg viewBox="0 0 120 140" width="95" height="110">
+                  <!-- ribbon tails -->
+                  <polygon points="40,100 30,138 45,120 60,138 50,100" fill="#c8960a"/>
+                  <polygon points="70,100 60,138 75,120 90,138 80,100" fill="#c8960a"/>
+                  <!-- medal body -->
+                  <circle cx="60" cy="56" r="48" fill="#b8860b"/>
+                  <circle cx="60" cy="56" r="42" fill="#EABF36"/>
+                  <circle cx="60" cy="56" r="36" fill="none" stroke="#c8960a" stroke-width="1.5" stroke-dasharray="4 2"/>
+                  <!-- star -->
+                  <polygon points="60,28 65.5,44 82,44.5 69,54 73.5,70 60,61 46.5,70 51,54 38,44.5 54.5,44" fill="#b8860b"/>
+                  <!-- text -->
+                  <text x="60" y="82" text-anchor="middle" fill="#7a5a00" font-size="8" font-family="Space Grotesk, sans-serif" font-weight="700" letter-spacing="1.5">EXCELLENCE</text>
+                  <text x="60" y="93" text-anchor="middle" fill="#7a5a00" font-size="6" font-family="Space Grotesk, sans-serif" font-weight="600" letter-spacing="1">alcovia</text>
+                </svg>
+              </div>
+
+              <div class="cert-footer-brand">
+                <img src="/images/alcovia-logo.png" alt="Alcovia" crossorigin="anonymous">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-actions">
+      <button class="btn-download" id="downloadPdf" onclick="downloadPDF()">Download as PDF</button>
+      <button class="btn-ghost" id="downloadPng" onclick="downloadPNG()">Download as PNG</button>
+    </div>
+  </div>
+
+  <script>
+    var studentName = '';
+
+    // ── Duplicate prevention ──
+    (function() {
+      if (sessionStorage.getItem('alcovia_cert_claimed')) {
+        document.getElementById('formView').style.display = 'none';
+        document.getElementById('claimedView').style.display = 'block';
+      }
+    })();
+
+    // ── Phone validation ──
+    function isValidPhone(val) {
+      var digits = val.replace(/\D/g, '');
+      if (digits.length === 10 && /^[6-9]/.test(digits)) return true;
+      if (digits.length === 12 && /^91[6-9]/.test(digits)) return true;
+      return false;
+    }
+
+    function normalizePhone(val) {
+      var digits = val.replace(/\D/g, '');
+      if (digits.length === 10 && /^[6-9]/.test(digits)) return '+91' + digits;
+      if (digits.length === 12 && digits.indexOf('91') === 0) return '+' + digits;
+      return val.trim();
+    }
+
+    // ── Toast ──
+    function showToast(msg, duration) {
+      var t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, duration || 4000);
+    }
+
+    // ── Form submit ──
+    document.getElementById('certForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      document.querySelectorAll('.field-error').forEach(function(el) { el.classList.remove('field-error'); });
+      document.querySelectorAll('.error-msg').forEach(function(el) { el.remove(); });
+
+      var nameVal = document.getElementById('nameInput').value.trim();
+      var phoneVal = document.getElementById('phoneInput').value.trim();
+      var emailVal = document.getElementById('emailInput').value.trim();
+      var motherNameVal = document.getElementById('motherNameInput').value.trim();
+      var fatherNameVal = document.getElementById('fatherNameInput').value.trim();
+      var motherPhoneVal = document.getElementById('motherPhoneInput').value.trim();
+      var fatherPhoneVal = document.getElementById('fatherPhoneInput').value.trim();
+
+      var valid = true;
+
+      function markError(id, msg) {
+        var inp = document.getElementById(id);
+        inp.classList.add('field-error');
+        var div = document.createElement('div');
+        div.className = 'error-msg';
+        div.textContent = msg;
+        inp.parentNode.appendChild(div);
+        valid = false;
+      }
+
+      if (!nameVal) markError('nameInput', 'Name is required');
+      if (!phoneVal || !isValidPhone(phoneVal)) markError('phoneInput', 'Enter a valid 10-digit phone');
+      if (!motherNameVal) markError('motherNameInput', "Mother's name is required");
+      if (!fatherNameVal) markError('fatherNameInput', "Father's name is required");
+      if (!motherPhoneVal || !isValidPhone(motherPhoneVal)) markError('motherPhoneInput', 'Enter a valid 10-digit phone');
+      if (!fatherPhoneVal || !isValidPhone(fatherPhoneVal)) markError('fatherPhoneInput', 'Enter a valid 10-digit phone');
+
+      if (!valid) return;
+
+      var btn = document.getElementById('submitBtn');
+      btn.classList.add('loading');
+      btn.textContent = 'GENERATING...';
+
+      var payload = {
+        name: nameVal,
+        phone: normalizePhone(phoneVal),
+        motherName: motherNameVal,
+        fatherName: fatherNameVal,
+        motherPhone: normalizePhone(motherPhoneVal),
+        fatherPhone: normalizePhone(fatherPhoneVal),
+        email: emailVal,
+        timestamp: new Date().toISOString(),
+        workshop: "Why Your Dream Job Doesn't Exist Yet",
+        school: "Heritage School"
+      };
+
+      fetch('https://n8n.alcovia.life/webhook/certificate-form', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(res) {
+        if (!res.ok) throw new Error('Server error');
+        return res.json();
+      })
+      .then(function() {
+        sessionStorage.setItem('alcovia_cert_claimed', 'true');
+        studentName = nameVal;
+        showCertificate(nameVal);
+      })
+      .catch(function() {
+        showToast('Something went wrong. Please try again.');
+        btn.classList.remove('loading');
+        btn.textContent = 'GET MY CERTIFICATE';
+      });
+    });
+
+    // ── Show certificate ──
+    function showCertificate(name) {
+      var nameEl = document.getElementById('certName');
+      nameEl.textContent = name;
+
+      if (name.length > 30) {
+        nameEl.style.fontSize = '26px';
+      } else if (name.length > 22) {
+        nameEl.style.fontSize = '32px';
+      } else {
+        nameEl.style.fontSize = '38px';
+      }
+
+      document.getElementById('formView').style.display = 'none';
+      document.getElementById('certView').style.display = 'block';
+      scaleCert();
+    }
+
+    // ── Scale certificate to fit viewport ──
+    function scaleCert() {
+      var wrapper = document.querySelector('.cert-scroll');
+      var scaler = document.getElementById('certScale');
+      var w = wrapper.clientWidth;
+      if (w < 960) {
+        var s = w / 960;
+        scaler.style.transform = 'scale(' + s + ')';
+        scaler.style.height = Math.ceil(679 * s) + 'px';
+      } else {
+        scaler.style.transform = 'none';
+        scaler.style.height = 'auto';
+      }
+    }
+
+    window.addEventListener('resize', function() {
+      if (document.getElementById('certView').style.display !== 'none') scaleCert();
+    });
+
+    // ── Download as PDF ──
+    function downloadPDF() {
+      var btn = document.getElementById('downloadPdf');
+      btn.disabled = true;
+      btn.textContent = 'GENERATING PDF...';
+
+      var scaler = document.getElementById('certScale');
+      var origTransform = scaler.style.transform;
+      var origHeight = scaler.style.height;
+      scaler.style.transform = 'none';
+      scaler.style.height = 'auto';
+
+      document.fonts.ready.then(function() {
+        return html2canvas(document.getElementById('certificate'), {
+          scale: 3, useCORS: true, backgroundColor: '#F5EFE0', logging: false
+        });
+      }).then(function(canvas) {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+
+        var jsPDF = window.jspdf.jsPDF;
+        var pdf = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+        var pdfW = pdf.internal.pageSize.getWidth();
+        var pdfH = pdf.internal.pageSize.getHeight();
+        var imgData = canvas.toDataURL('image/png');
+        var ratio = Math.min(pdfW / canvas.width, pdfH / canvas.height);
+        var w = canvas.width * ratio;
+        var h = canvas.height * ratio;
+        pdf.addImage(imgData, 'PNG', (pdfW - w) / 2, (pdfH - h) / 2, w, h);
+        pdf.save('Alcovia_Certificate_' + studentName.replace(/\s+/g, '_') + '.pdf');
+
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PDF';
+      }).catch(function() {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+        showToast('PDF generation failed. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PDF';
+      });
+    }
+
+    // ── Download as PNG ──
+    function downloadPNG() {
+      var btn = document.getElementById('downloadPng');
+      btn.disabled = true;
+      btn.textContent = 'GENERATING PNG...';
+
+      var scaler = document.getElementById('certScale');
+      var origTransform = scaler.style.transform;
+      var origHeight = scaler.style.height;
+      scaler.style.transform = 'none';
+      scaler.style.height = 'auto';
+
+      document.fonts.ready.then(function() {
+        return html2canvas(document.getElementById('certificate'), {
+          scale: 3, useCORS: true, backgroundColor: '#F5EFE0', logging: false
+        });
+      }).then(function(canvas) {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+
+        var link = document.createElement('a');
+        link.download = 'Alcovia_Certificate_' + studentName.replace(/\s+/g, '_') + '.png';
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PNG';
+      }).catch(function() {
+        scaler.style.transform = origTransform;
+        scaler.style.height = origHeight;
+        showToast('PNG generation failed. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'DOWNLOAD AS PNG';
+      });
+    }
+  </script>
+</body>
+</html>
