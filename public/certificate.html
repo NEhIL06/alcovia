@@ -48,7 +48,7 @@
       inset: 0;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr 0.8fr;
+      grid-template-rows: 1fr 1fr;
       gap: 3px;
     }
 
@@ -59,8 +59,8 @@
       display: block;
     }
 
-    .collage-grid img:nth-child(5) {
-      grid-column: 1 / -1;
+    .collage-grid img:nth-child(1) {
+      display: none;
     }
 
     .hero-overlay {
@@ -125,8 +125,8 @@
         grid-template-rows: 1fr 1fr;
         gap: 4px;
       }
-      .collage-grid img:nth-child(5) {
-        grid-column: auto;
+      .collage-grid img:nth-child(1) {
+        display: block;
       }
       /* w1 (speaker shot) in center spanning both rows */
       .collage-grid img:nth-child(3) {
