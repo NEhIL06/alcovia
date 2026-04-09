@@ -92,7 +92,7 @@ function HeroSection({ hero }: { hero: LPContent["hero"] }) {
   return (
     <section ref={ref} className="relative h-[100svh] min-h-[580px] sm:min-h-[700px] flex items-center justify-center overflow-hidden">
       <div data-hero-img className="absolute inset-0 z-0 will-change-transform">
-        <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" priority />
+        <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" priority sizes="100vw" />
       </div>
       <div data-hero-overlay className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: 0.78 }} />
 

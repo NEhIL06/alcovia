@@ -1,6 +1,5 @@
 import type React from "react"
 import Script from "next/script"
-import LPPixelTracker from "@/components/lp-pixel-tracker"
 
 export default function LPLayout({
   children,
@@ -9,6 +8,12 @@ export default function LPLayout({
 }>) {
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="/images/lp/hero.jpg"
+        fetchPriority="high"
+      />
       <Script id="meta-pixel-lp-campaign" strategy="lazyOnload">
         {`
           !function(f,b,e,v,n,t,s)
@@ -23,16 +28,6 @@ export default function LPLayout({
           fbq('track', 'PageView');
         `}
       </Script>
-      <noscript>
-        <img
-          height="1"
-          width="1"
-          style={{ display: "none" }}
-          src="https://www.facebook.com/tr?id=26011379345197572&ev=PageView&noscript=1"
-          alt=""
-        />
-      </noscript>
-      <LPPixelTracker />
       {children}
     </>
   )

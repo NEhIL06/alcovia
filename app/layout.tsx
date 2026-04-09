@@ -3,11 +3,9 @@ import type { Metadata, Viewport } from "next"
 import { Playfair_Display, Oswald, Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
-import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
 import { RegistrationModalProvider } from "@/context/registration-modal-context"
 import LayoutShell from "@/components/layout-shell"
-import ClarityAnalytics from "@/components/clarity-analytics"
 
 import "./globals.css"
 
@@ -88,9 +86,9 @@ export default function RootLayout({
       <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-T46NRQ65FV"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="google-analytics" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -99,7 +97,7 @@ export default function RootLayout({
             gtag('config', 'G-T46NRQ65FV');
           `}
         </Script>
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -113,6 +111,9 @@ export default function RootLayout({
             fbq('track', 'PageView');
           `}
         </Script>
+        <Script id="clarity-analytics" strategy="lazyOnload">
+          {`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/vy2qj0kssf";y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script");`}
+        </Script>
       </head>
       <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} ${spaceGrotesk.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
         <noscript>
@@ -125,14 +126,11 @@ export default function RootLayout({
           />
         </noscript>
         <Analytics />
-        <ClarityAnalytics />
         <SessionProvider>
           <RegistrationModalProvider>
-            <SmoothScrollProvider>
-              <LayoutShell>
-                {children}
-              </LayoutShell>
-            </SmoothScrollProvider>
+            <LayoutShell>
+              {children}
+            </LayoutShell>
           </RegistrationModalProvider>
         </SessionProvider>
 
