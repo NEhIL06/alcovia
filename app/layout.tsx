@@ -1,22 +1,18 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Geist, Geist_Mono, Playfair_Display, Oswald, Inter, Space_Grotesk } from "next/font/google"
+import { Playfair_Display, Oswald, Inter, Space_Grotesk } from "next/font/google"
 import Script from "next/script"
 import { Analytics } from "@vercel/analytics/next"
 import SmoothScrollProvider from "@/components/smooth-scroll-provider"
 import { SessionProvider } from "@/context/session-context"
 import { RegistrationModalProvider } from "@/context/registration-modal-context"
-import PremiumNavbar from "@/components/premium-navbar"
-import PageTransition from "@/components/PageTransition"
+import LayoutShell from "@/components/layout-shell"
 import ClarityAnalytics from "@/components/clarity-analytics"
-import RegistrationModal from "@/components/registration-modal"
 
 import "./globals.css"
 
 import localFont from "next/font/local"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -133,11 +129,9 @@ export default function RootLayout({
         <SessionProvider>
           <RegistrationModalProvider>
             <SmoothScrollProvider>
-              <PremiumNavbar />
-              <PageTransition>
+              <LayoutShell>
                 {children}
-              </PageTransition>
-              <RegistrationModal />
+              </LayoutShell>
             </SmoothScrollProvider>
           </RegistrationModalProvider>
         </SessionProvider>

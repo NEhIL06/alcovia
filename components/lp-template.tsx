@@ -2,7 +2,6 @@
 
 import { useRef, useEffect, useState } from "react"
 import Image from "next/image"
-import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowUpRight, ArrowDown, CheckCircle2, XCircle } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 import type { LPContent } from "@/lib/lp-content-types"
@@ -20,7 +19,12 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
   const sizes = { sm: "px-5 py-2 text-[11px]", md: "px-8 py-4 text-sm", lg: "px-10 py-5 text-sm" }
   return (
     <button
-      onClick={() => openModal("lp_cta_button")}
+      onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_cta_button" })
+        }
+        openModal("lp_cta_button")
+      }}
       className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
     >
@@ -32,34 +36,22 @@ function CTAButton({ children, size = "md" }: { children: React.ReactNode; size?
 
 function SectionHeader({ subtitle, text, highlight }: { subtitle?: string; text: string; highlight: string }) {
   return (
-    <motion.div
-      className="text-center mb-8 md:mb-14"
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
+    <div className="lp-fade-in text-center mb-8 md:mb-14">
       {subtitle && (
         <p className="text-xs uppercase tracking-[0.3em] mb-4" style={{ color: GOLD }}>{subtitle}</p>
       )}
       <h2 className="font-[family-name:var(--font-playfair)] text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight">
         {text}{" "}<GoldText>{highlight}</GoldText>
       </h2>
-    </motion.div>
+    </div>
   )
 }
 
 function FadeIn({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: "easeOut" }}
-    >
+    <div className={`lp-fade-in ${className}`}>
       {children}
-    </motion.div>
+    </div>
   )
 }
 
@@ -69,39 +61,62 @@ const PILLAR_IMAGES = ["/images/lp/future.jpg", "/images/lp/mentorship.jpg", "/i
 
 function HeroSection({ hero }: { hero: LPContent["hero"] }) {
   const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] })
-  const imageScale = useTransform(scrollYProgress, [0, 1], [1, 1.15])
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.5], [0.78, 0.92])
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 80])
+
+  useEffect(() => {
+    const section = ref.current
+    if (!section) return
+    let ticking = false
+
+    function update() {
+      if (!section) return
+      const rect = section.getBoundingClientRect()
+      if (rect.bottom < 0) { ticking = false; return }
+      const progress = Math.min(1, Math.max(0, -rect.top / rect.height))
+      const img = section.querySelector<HTMLElement>("[data-hero-img]")
+      const overlay = section.querySelector<HTMLElement>("[data-hero-overlay]")
+      const content = section.querySelector<HTMLElement>("[data-hero-content]")
+      if (img) img.style.transform = `scale(${1 + progress * 0.15})`
+      if (overlay) overlay.style.opacity = `${0.78 + progress * 0.14}`
+      if (content) content.style.transform = `translateY(${progress * 80}px)`
+      ticking = false
+    }
+
+    function onScroll() {
+      if (!ticking) { requestAnimationFrame(update); ticking = true }
+    }
+
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
 
   return (
     <section ref={ref} className="relative h-[100svh] min-h-[580px] sm:min-h-[700px] flex items-center justify-center overflow-hidden">
-      <motion.div className="absolute inset-0 z-0" style={{ scale: imageScale }}>
+      <div data-hero-img className="absolute inset-0 z-0 will-change-transform">
         <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" priority />
-      </motion.div>
-      <motion.div className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: overlayOpacity }} />
+      </div>
+      <div data-hero-overlay className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: 0.78 }} />
 
-      <motion.div className="relative z-10 max-w-3xl mx-auto px-6 text-center" style={{ y: contentY }}>
-        <motion.p className="text-xs md:text-sm uppercase tracking-[0.35em] mb-6" style={{ color: GOLD }} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.6 }}>
+      <div data-hero-content className="relative z-10 max-w-3xl mx-auto px-6 pt-24 md:pt-32 text-center will-change-transform">
+        <p className="lp-hero-stagger-1 text-xs md:text-sm uppercase tracking-[0.35em] mb-6 leading-relaxed" style={{ color: GOLD }}>
           {hero.subtitle}
-        </motion.p>
+        </p>
 
-        <motion.h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.7 }}>
+        <h1 className="lp-hero-stagger-2 font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
           {hero.headline}{" "}<GoldText>{hero.highlight}</GoldText>
-        </motion.h1>
+        </h1>
 
-        <motion.p className="font-[family-name:var(--font-satoshi)] text-sm sm:text-base md:text-lg text-white/70 max-w-xl mx-auto mb-6 leading-relaxed" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.7, duration: 0.6 }}>
+        <p className="lp-hero-stagger-3 font-[family-name:var(--font-satoshi)] text-sm sm:text-base md:text-lg text-white/70 max-w-xl mx-auto mb-6 leading-relaxed">
           {hero.body}
-        </motion.p>
+        </p>
 
-        <motion.div className="flex flex-col sm:flex-row items-center justify-center gap-4" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8, duration: 0.6 }}>
+        <div className="lp-hero-stagger-4 flex flex-col sm:flex-row items-center justify-center gap-4">
           <CTAButton>{hero.primaryCta}</CTAButton>
           <a href="#problems" className="inline-flex items-center gap-2 text-sm font-medium text-white/60 hover:text-white transition-colors">
             {hero.secondaryCta}
             <ArrowDown className="w-4 h-4 animate-bounce" />
           </a>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#08261e] to-transparent z-[2]" />
     </section>
@@ -262,8 +277,8 @@ function SocialProofSection({ socialProof }: { socialProof: LPContent["socialPro
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 mb-10">
           {socialProof.prompts.map((prompt, i) => (
-            <FadeIn key={i}>
-              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors">
+            <FadeIn key={i} className="h-full">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors h-full flex flex-col">
                 <div className="w-8 h-8 rounded-full flex items-center justify-center mb-4" style={{ background: `${GOLD}15`, border: `1px solid ${GOLD}30` }}>
                   <span className="text-xs font-bold" style={{ color: GOLD }}>{String(i + 1).padStart(2, "0")}</span>
                 </div>
@@ -372,7 +387,12 @@ function LPNavbar() {
       <a href="/" className="flex items-center -my-5">
         <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority />
       </a>
-      <button onClick={() => openModal("lp_navbar")} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105" style={{ background: GOLD_GRADIENT }}>
+      <button onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_navbar" })
+        }
+        openModal("lp_navbar")
+      }} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-3 h-3" />
       </button>
@@ -384,7 +404,12 @@ function MobileFloatingCTA() {
   const { openModal } = useRegistrationModal()
   return (
     <div className="fixed bottom-0 left-0 right-0 z-[90] md:hidden p-3 bg-gradient-to-t from-[#08261e] via-[#08261e]/95 to-transparent">
-      <button onClick={() => openModal("lp_mobile_floating")} className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer" style={{ background: GOLD_GRADIENT }}>
+      <button onClick={() => {
+        if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
+          (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_mobile_floating" })
+        }
+        openModal("lp_mobile_floating")
+      }} className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-4 h-4" />
       </button>
@@ -412,71 +437,93 @@ function LPFooter() {
 }
 
 export interface LPTemplateProps {
-  heroSubtitle: string
-  heroHeadline: string
-  heroHighlight: string
-  heroBody: string
-  primaryCta: string
-  secondaryCta: string
+  heroSubtitle?: string
+  heroHeadline?: string
+  heroHighlight?: string
+  heroBody?: string
+  primaryCta?: string
+  secondaryCta?: string
   content?: LPContent
+  showVideo?: boolean
 }
 
-export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody, primaryCta, secondaryCta, content }: LPTemplateProps) {
-  const c: LPContent = content || {
-    hero: { subtitle: heroSubtitle, headline: heroHeadline, highlight: heroHighlight, body: heroBody, primaryCta, secondaryCta },
-    problems: {
-      heading: "Why bright teenagers still", headingHighlight: "get left behind.",
-      intro: "The problem is rarely a lack of talent. More often, it is the wrong preparation, the wrong environment and the wrong use of formative years.",
-      items: [
-        { title: "False readiness", body: "Good grades can create the illusion that a teenager is prepared. But the future will reward far more than academic performance. According to the World Economic Forum\u2019s Future of Jobs Report 2025, employers expect 39% of workers\u2019 core skills to change by 2030. Marks may signal discipline or memory, but they do not automatically build judgment, initiative, adaptability or follow-through." },
-        { title: "Outdated guidance", body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice or formulaic profile-building. They need sharper exposure to real work, real professionals and real questions." },
-        { title: "Weak environments", body: "Teenagers do not grow in isolation. They are shaped by the norms, expectations and ambitions of the people around them. The World Health Organization notes that adolescence is a critical developmental stage and that pressure to conform with peers can be a significant source of stress. The right peer group is not a bonus. It is a developmental multiplier." },
-      ],
-    },
-    transformation: {
-      heading: "What changes", headingHighlight: "inside Alcovia.",
-      intro: "Alcovia is built to change how a teenager thinks, works, chooses and grows.",
-      items: [
-        { title: "They stop only consuming ideas. They start building.", body: "At Alcovia, teenagers are expected to move from interest to execution. They do projects, make decisions, present work, test ideas and finish what they start." },
-        { title: "They build conviction, not borrowed ambition.", body: "Instead of chasing what sounds impressive, they engage with real professionals, real domains and real-world questions until they begin to understand what genuinely fits them." },
-        { title: "They grow in a room that raises their standards.", body: "The right environment changes what feels normal. Teenagers begin to speak more clearly, think more deeply, attempt more difficult work and expect more from themselves." },
-      ],
-      midCta: "Book Your Teen's Fit Call",
-    },
-    audience: {
-      intro: "Alcovia is intentionally not built for everyone.",
-      forList: [
-        "For families who already know that marks, tuition and generic extracurriculars are no longer enough.",
-        "For teenagers who are bright, curious and capable, but not yet stretched in the right way.",
-        "For teenagers who are doing reasonably well, but need stronger peers, sharper exposure and greater real-world confidence.",
-        "For teenagers who have ideas, but need more consistency, challenge and follow-through.",
-        "For families looking for a curated, high-expectation environment rather than another class or hobby.",
-      ],
-      gatekeepingLine: "It is probably not the right fit for families looking for passive online content, formulaic college packaging or a generic enrichment programme.",
-    },
-    authority: {
-      label: "Why Alcovia can do this",
-      intro: "Because teenagers do not become exceptional through information alone. They become exceptional through stronger formation.",
-      pillars: [
-        { title: "Built around the future, not the syllabus", body: "Alcovia is designed around the widening gap between school success and future readiness. It responds to a world in which skills are changing quickly and conventional markers of achievement are becoming less reliable." },
-        { title: "Real-world adults, not just academic abstraction", body: "Teenagers need access to professionals, entrepreneurs and practitioners whose work helps them understand how the real world functions. Alcovia is built around that exposure." },
-        { title: "Curated cohort and offline rigor", body: "The value of Alcovia is not only in what is taught, but in the room itself. Offline discussions, stronger peer expectations and real accountability help teenagers grow in ways screens and passive learning often cannot." },
-      ],
-    },
-    socialProof: {
-      heading: "Better judgment. Stronger", headingHighlight: "follow-through.",
-      intro: "Not just more activity. Better judgment, stronger follow-through, sharper peer influence and clearer intent.",
-      prompts: ["Real projects", "Curated peer group", "Mentors from the real world", "Offline accountability"],
-    },
-    closing: {
-      headline: "The future will not ask your teenager for", headlineHighlight: "marks alone.",
-      body: "It will ask for judgment, initiative, communication, resilience and clarity. The earlier these are built, the more naturally they become part of who your teenager is.",
-      primaryCta: "Book Your Child's Alcovia Fit Call",
-      finePrint: "For families who want to understand whether Alcovia is the right ecosystem, not just another programme.",
-    },
-  }
+const DEFAULT_CONTENT: LPContent = {
+  hero: { subtitle: "", headline: "", highlight: "", body: "", primaryCta: "", secondaryCta: "" },
+  problems: {
+    heading: "Why bright teenagers still", headingHighlight: "get left behind.",
+    intro: "The problem is rarely a lack of talent. More often, it is the wrong preparation, the wrong environment and the wrong use of formative years.",
+    items: [
+      { title: "False readiness", body: "Good grades can create the illusion that a teenager is prepared. But the future will reward far more than academic performance. According to the World Economic Forum\u2019s Future of Jobs Report 2025, employers expect 39% of workers\u2019 core skills to change by 2030. Marks may signal discipline or memory, but they do not automatically build judgment, initiative, adaptability or follow-through." },
+      { title: "Outdated guidance", body: "Traditional career counselling often asks teenagers to choose too early, with too little exposure and too much borrowed ambition. OECD analysis shows that career uncertainty among teenagers remains high and that students with clearer career thinking tend to fare better later. Teenagers do not need generic advice or formulaic profile-building. They need sharper exposure to real work, real professionals and real questions." },
+      { title: "Weak environments", body: "Teenagers do not grow in isolation. They are shaped by the norms, expectations and ambitions of the people around them. The World Health Organization notes that adolescence is a critical developmental stage and that pressure to conform with peers can be a significant source of stress. The right peer group is not a bonus. It is a developmental multiplier." },
+    ],
+  },
+  transformation: {
+    heading: "What changes", headingHighlight: "inside Alcovia.",
+    intro: "Alcovia is built to change how a teenager thinks, works, chooses and grows.",
+    items: [
+      { title: "They stop only consuming ideas. They start building.", body: "At Alcovia, teenagers are expected to move from interest to execution. They do projects, make decisions, present work, test ideas and finish what they start." },
+      { title: "They build conviction, not borrowed ambition.", body: "Instead of chasing what sounds impressive, they engage with real professionals, real domains and real-world questions until they begin to understand what genuinely fits them." },
+      { title: "They grow in a room that raises their standards.", body: "The right environment changes what feels normal. Teenagers begin to speak more clearly, think more deeply, attempt more difficult work and expect more from themselves." },
+    ],
+    midCta: "Book Your Teen's Fit Call",
+  },
+  audience: {
+    intro: "Alcovia is intentionally not built for everyone.",
+    forList: [
+      "For families who already know that marks, tuition and generic extracurriculars are no longer enough.",
+      "For teenagers who are bright, curious and capable, but not yet stretched in the right way.",
+      "For teenagers who are doing reasonably well, but need stronger peers, sharper exposure and greater real-world confidence.",
+      "For teenagers who have ideas, but need more consistency, challenge and follow-through.",
+      "For families looking for a curated, high-expectation environment rather than another class or hobby.",
+    ],
+    gatekeepingLine: "It is probably not the right fit for families looking for passive online content, formulaic college packaging or a generic enrichment programme.",
+  },
+  authority: {
+    label: "Why Alcovia can do this",
+    intro: "Because teenagers do not become exceptional through information alone. They become exceptional through stronger formation.",
+    pillars: [
+      { title: "Built around the future, not the syllabus", body: "Alcovia is designed around the widening gap between school success and future readiness. It responds to a world in which skills are changing quickly and conventional markers of achievement are becoming less reliable." },
+      { title: "Real-world adults, not just academic abstraction", body: "Teenagers need access to professionals, entrepreneurs and practitioners whose work helps them understand how the real world functions. Alcovia is built around that exposure." },
+      { title: "Curated cohort and offline rigor", body: "The value of Alcovia is not only in what is taught, but in the room itself. Offline discussions, stronger peer expectations and real accountability help teenagers grow in ways screens and passive learning often cannot." },
+    ],
+  },
+  socialProof: {
+    heading: "Better judgment. Stronger", headingHighlight: "follow-through.",
+    intro: "Not just more activity. Better judgment, stronger follow-through, sharper peer influence and clearer intent.",
+    prompts: ["Real projects", "Curated peer group", "Mentors from the real world", "Offline accountability"],
+  },
+  closing: {
+    headline: "The future will not ask your teenager for", headlineHighlight: "marks alone.",
+    body: "It will ask for judgment, initiative, communication, resilience and clarity. The earlier these are built, the more naturally they become part of who your teenager is.",
+    primaryCta: "Book Your Child's Alcovia Fit Call",
+    finePrint: "For families who want to understand whether Alcovia is the right ecosystem, not just another programme.",
+  },
+}
 
-  const hero = content ? c.hero : { subtitle: heroSubtitle, headline: heroHeadline, highlight: heroHighlight, body: heroBody, primaryCta, secondaryCta }
+export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody, primaryCta, secondaryCta, content, showVideo }: LPTemplateProps) {
+  const c: LPContent = content || DEFAULT_CONTENT
+  const hero = content
+    ? c.hero
+    : { subtitle: heroSubtitle || "", headline: heroHeadline || "", highlight: heroHighlight || "", body: heroBody || "", primaryCta: primaryCta || "", secondaryCta: secondaryCta || "" }
+  const shouldShowVideo = showVideo ?? !content
+
+  // Single IntersectionObserver for all scroll-triggered fade-in animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible")
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { rootMargin: "-80px" }
+    )
+    document.querySelectorAll(".lp-fade-in").forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <>
@@ -485,7 +532,7 @@ export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody
         <HeroSection hero={hero} />
         <ProblemsSection problems={c.problems} />
         <TransformationSection transformation={c.transformation} />
-        <VideoSection />
+        {shouldShowVideo && <VideoSection />}
         <AudienceSection audience={c.audience} />
         <PillarsSection authority={c.authority} />
         <SocialProofSection socialProof={c.socialProof} />
