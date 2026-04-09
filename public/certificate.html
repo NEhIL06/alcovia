@@ -121,14 +121,16 @@
 
     @media (min-width: 768px) {
       .collage-grid {
-        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1.2fr 1fr;
         grid-template-rows: 1fr 1fr;
         gap: 4px;
       }
       .collage-grid img:nth-child(5) {
         grid-column: auto;
       }
+      /* w1 (speaker shot) in center spanning both rows */
       .collage-grid img:nth-child(3) {
+        grid-column: 2;
         grid-row: 1 / -1;
       }
       .hero-content h1 { font-size: 44px; }
@@ -583,11 +585,11 @@
   <!-- ════ HERO COLLAGE ════ -->
   <div id="heroView">
     <div class="collage-grid">
-      <img src="/images/workshop/w1.jpeg" alt="Workshop">
-      <img src="/images/workshop/w2.jpeg" alt="Workshop">
-      <img src="/images/workshop/w3.jpeg" alt="Workshop">
-      <img src="/images/workshop/w4.jpeg" alt="Workshop">
-      <img src="/images/workshop/w5.jpeg" alt="Workshop">
+      <img src="/images/workshop/w2.jpeg" alt="Workshop" style="object-position:center 30%">
+      <img src="/images/workshop/w5.jpeg" alt="Workshop" style="object-position:center 30%">
+      <img src="/images/workshop/w1.jpeg" alt="Workshop" style="object-position:center 40%">
+      <img src="/images/workshop/w3.jpeg" alt="Workshop" style="object-position:center bottom">
+      <img src="/images/workshop/w4.jpeg" alt="Workshop" style="object-position:center bottom">
     </div>
     <div class="hero-overlay"></div>
     <div class="hero-content">
