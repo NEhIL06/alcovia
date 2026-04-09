@@ -31,72 +31,73 @@
       margin: 0;
     }
 
-    /* ── HERO COLLAGE ── */
+    /* ── HERO ── */
     #heroView {
-      position: relative;
       width: 100%;
       min-height: 100vh;
       min-height: 100dvh;
-      overflow: hidden;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      padding: 32px 20px;
+      gap: 24px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 50%, var(--emerald) 100%);
     }
 
-    .collage-grid {
-      position: absolute;
-      inset: 0;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-template-rows: 1fr 1fr;
-      gap: 3px;
-    }
-
-    .collage-grid img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .collage-grid img:nth-child(1) {
-      display: none;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(1, 44, 70, 0.72);
-      z-index: 1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      text-align: center;
-      padding: 24px;
-      max-width: 520px;
-    }
-
-    .hero-content img {
-      width: 200px;
+    .hero-logo {
+      width: 160px;
       height: auto;
-      margin-bottom: 20px;
     }
 
-    .hero-content h1 {
+    .hero-photos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      height: 200px;
+    }
+
+    .hero-photos img {
+      position: absolute;
+      width: 140px;
+      height: 180px;
+      object-fit: cover;
+      border: 4px solid #fff;
+      border-radius: 4px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+
+    .hero-photos img:nth-child(1) { transform: rotate(-8deg) translateX(-120px); z-index: 1; }
+    .hero-photos img:nth-child(2) { transform: rotate(-3deg) translateX(-55px) translateY(8px); z-index: 2; }
+    .hero-photos img:nth-child(3) { transform: rotate(2deg) translateX(10px) translateY(-4px); z-index: 3; }
+    .hero-photos img:nth-child(4) { transform: rotate(6deg) translateX(75px) translateY(6px); z-index: 2; }
+    .hero-photos img:nth-child(5) { display: none; }
+
+    .hero-text {
+      text-align: center;
+    }
+
+    .hero-text h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 36px;
+      font-size: 34px;
       font-weight: 700;
       line-height: 1.2;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
     }
 
-    .hero-content p {
-      font-size: 15px;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 28px;
-      line-height: 1.6;
+    .hero-text h1 span {
+      color: var(--gold);
+    }
+
+    .hero-text p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 24px;
+      line-height: 1.5;
     }
 
     .hero-cta {
@@ -105,7 +106,7 @@
       background: var(--gold);
       color: var(--navy);
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 700;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -120,21 +121,21 @@
     }
 
     @media (min-width: 768px) {
-      .collage-grid {
-        grid-template-columns: 1fr 1.2fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 4px;
+      .hero-logo { width: 220px; }
+      .hero-photos {
+        max-width: 700px;
+        height: 260px;
       }
-      .collage-grid img:nth-child(1) {
-        display: block;
+      .hero-photos img {
+        width: 190px;
+        height: 240px;
       }
-      /* w1 (speaker shot) in center spanning both rows */
-      .collage-grid img:nth-child(3) {
-        grid-column: 2;
-        grid-row: 1 / -1;
-      }
-      .hero-content h1 { font-size: 44px; }
-      .hero-content img { width: 260px; }
+      .hero-photos img:nth-child(1) { transform: rotate(-10deg) translateX(-200px); }
+      .hero-photos img:nth-child(2) { transform: rotate(-4deg) translateX(-90px) translateY(10px); }
+      .hero-photos img:nth-child(3) { transform: rotate(1deg) translateX(10px) translateY(-6px); }
+      .hero-photos img:nth-child(4) { transform: rotate(5deg) translateX(110px) translateY(8px); }
+      .hero-photos img:nth-child(5) { display: block; transform: rotate(9deg) translateX(210px) translateY(-2px); z-index: 1; }
+      .hero-text h1 { font-size: 48px; }
     }
 
     /* ── FORM VIEW ── */
@@ -582,20 +583,21 @@
 
   <div id="toast"></div>
 
-  <!-- ════ HERO COLLAGE ════ -->
+  <!-- ════ HERO ════ -->
   <div id="heroView">
-    <div class="collage-grid">
-      <img src="/images/workshop/w2.jpeg" alt="Workshop" style="object-position:center 30%">
-      <img src="/images/workshop/w5.jpeg" alt="Workshop" style="object-position:center 30%">
-      <img src="/images/workshop/w1.jpeg" alt="Workshop" style="object-position:center 40%">
-      <img src="/images/workshop/w3.jpeg" alt="Workshop" style="object-position:center bottom">
-      <img src="/images/workshop/w4.jpeg" alt="Workshop" style="object-position:center bottom">
+    <img class="hero-logo" src="/images/alcovia-logo-white.png" alt="Alcovia">
+
+    <div class="hero-photos">
+      <img src="/images/workshop/w1.jpeg" alt="Workshop">
+      <img src="/images/workshop/w2.jpeg" alt="Workshop">
+      <img src="/images/workshop/w5.jpeg" alt="Workshop">
+      <img src="/images/workshop/w3.jpeg" alt="Workshop">
+      <img src="/images/workshop/w4.jpeg" alt="Workshop">
     </div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <img src="/images/alcovia-logo-white.png" alt="Alcovia">
-      <h1>Claim Your Certificate</h1>
-      <p>You attended our workshop "Why Your Dream Job Doesn't Exist Yet" at Heritage School. Claim your Certificate of Excellence now.</p>
+
+    <div class="hero-text">
+      <h1>Thank You, <span>HIXS</span>!</h1>
+      <p>Collect your Certificate of Excellence</p>
       <a href="#" class="hero-cta" onclick="showForm(event)">Claim Certificate</a>
     </div>
   </div>
