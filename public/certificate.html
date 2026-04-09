@@ -27,19 +27,131 @@
       font-family: 'Space Grotesk', sans-serif;
       min-height: 100vh;
       background: linear-gradient(135deg, var(--navy) 0%, var(--dark-blue) 50%, var(--emerald) 100%);
+      color: #fff;
+      margin: 0;
+    }
+
+    /* ── HERO COLLAGE ── */
+    #heroView {
+      position: relative;
+      width: 100%;
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow: hidden;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      color: #fff;
+    }
+
+    .collage-grid {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr 0.8fr;
+      gap: 3px;
+    }
+
+    .collage-grid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .collage-grid img:nth-child(5) {
+      grid-column: 1 / -1;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(1, 44, 70, 0.72);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px;
+      max-width: 520px;
+    }
+
+    .hero-content img {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .hero-content p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 28px;
+      line-height: 1.6;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      padding: 16px 40px;
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(234,191,54,0.35);
+    }
+
+    @media (min-width: 768px) {
+      .collage-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 4px;
+      }
+      .collage-grid img:nth-child(5) {
+        grid-column: auto;
+      }
+      .collage-grid img:nth-child(3) {
+        grid-row: 1 / -1;
+      }
+      .hero-content h1 { font-size: 44px; }
+      .hero-content img { width: 260px; }
     }
 
     /* ── FORM VIEW ── */
     #formView {
+      display: none;
       width: 100%;
       max-width: 520px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding: 20px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       animation: fadeUp 0.6s ease;
+    }
+
+    #formView.active {
+      display: flex;
     }
 
     @keyframes fadeUp {
@@ -213,6 +325,8 @@
       display: none;
       width: 100%;
       max-width: 1020px;
+      margin: 0 auto;
+      padding: 20px;
       animation: fadeUp 0.6s ease;
     }
 
@@ -457,7 +571,6 @@
     }
 
     @media (max-width: 480px) {
-      body { padding: 12px; }
       .cert-actions { flex-direction: column; align-items: stretch; }
       .cert-actions button { width: 100%; }
     }
@@ -467,9 +580,27 @@
 
   <div id="toast"></div>
 
+  <!-- ════ HERO COLLAGE ════ -->
+  <div id="heroView">
+    <div class="collage-grid">
+      <img src="/images/workshop/w1.jpeg" alt="Workshop">
+      <img src="/images/workshop/w2.jpeg" alt="Workshop">
+      <img src="/images/workshop/w3.jpeg" alt="Workshop">
+      <img src="/images/workshop/w4.jpeg" alt="Workshop">
+      <img src="/images/workshop/w5.jpeg" alt="Workshop">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <img src="/images/alcovia-logo-white.png" alt="Alcovia">
+      <h1>Claim Your Certificate</h1>
+      <p>You attended our workshop "Why Your Dream Job Doesn't Exist Yet" at Heritage School. Claim your Certificate of Excellence now.</p>
+      <a href="#" class="hero-cta" onclick="showForm(event)">Claim Certificate</a>
+    </div>
+  </div>
+
   <!-- ════ ALREADY CLAIMED ════ -->
-  <div id="claimedView">
-    <div class="claimed-card">
+  <div id="claimedView" style="display:none">
+    <div class="claimed-card" style="margin:auto;padding:20px">
       <h2>Certificate Already Claimed</h2>
       <p>You have already claimed your certificate in this session.</p>
     </div>
@@ -601,11 +732,21 @@
   <script>
     var studentName = '';
 
-    // ── Duplicate prevention ──
+    // ── Show form (from hero CTA) ──
+    function showForm(e) {
+      if (e) e.preventDefault();
+      document.getElementById('heroView').style.display = 'none';
+      if (sessionStorage.getItem('alcovia_cert_claimed')) {
+        document.getElementById('claimedView').style.display = 'flex';
+      } else {
+        document.getElementById('formView').classList.add('active');
+      }
+    }
+
+    // ── Duplicate prevention on direct load ──
     (function() {
       if (sessionStorage.getItem('alcovia_cert_claimed')) {
-        document.getElementById('formView').style.display = 'none';
-        document.getElementById('claimedView').style.display = 'block';
+        // Still show hero - they can click CTA to see the "already claimed" message
       }
     })();
 
@@ -717,6 +858,7 @@
         nameEl.style.fontSize = '38px';
       }
 
+      document.getElementById('formView').classList.remove('active');
       document.getElementById('formView').style.display = 'none';
       document.getElementById('certView').style.display = 'block';
       scaleCert();
