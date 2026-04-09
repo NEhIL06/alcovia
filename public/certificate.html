@@ -504,8 +504,8 @@
 
         <div class="field-row">
           <div class="field">
-            <label for="studentPhoneInput">Student's Phone (optional)</label>
-            <input type="tel" id="studentPhoneInput" placeholder="+91 XXXXXXXXXX">
+            <label for="studentPhoneInput">Student's Phone *</label>
+            <input type="tel" id="studentPhoneInput" required placeholder="+91 XXXXXXXXXX">
           </div>
           <div class="field">
             <label for="parentEmailInput">Parent's Email *</label>
@@ -660,6 +660,7 @@
       if (!nameVal) markError('nameInput', 'Name is required');
       if (!parentNameVal) markError('parentNameInput', "Parent's name is required");
       if (!parentPhoneVal || !isValidPhone(parentPhoneVal)) markError('parentPhoneInput', 'Enter a valid 10-digit phone');
+      if (!studentPhoneVal || !isValidPhone(studentPhoneVal)) markError('studentPhoneInput', 'Enter a valid 10-digit phone');
       if (!parentEmailVal) markError('parentEmailInput', "Parent's email is required");
 
       if (!valid) return;
@@ -674,7 +675,7 @@
         name: nameVal,
         parentName: parentNameVal,
         parentPhone: normalizePhone(parentPhoneVal),
-        studentPhone: studentPhoneVal ? normalizePhone(studentPhoneVal) : '',
+        studentPhone: normalizePhone(studentPhoneVal),
         parentEmail: parentEmailVal,
         whatsappOptIn: whatsappOptIn,
         timestamp: new Date().toISOString(),
