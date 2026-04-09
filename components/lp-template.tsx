@@ -38,11 +38,11 @@ const PILLAR_IMAGES = ["/images/lp/future.jpg", "/images/lp/mentorship.jpg", "/i
 function HeroSection({ hero }: { hero: LPContent["hero"] }) {
   return (
     <section data-hero-section className="relative h-[100svh] min-h-[580px] sm:min-h-[700px] flex items-center justify-center overflow-hidden">
-      <div data-hero-img className="absolute inset-0 z-0 will-change-transform">
+      <div data-hero-img className="absolute inset-0 z-0">
         <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" loading="eager" sizes="100vw" fetchPriority="high" />
       </div>
       <div data-hero-overlay className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: 0.78 }} />
-      <div data-hero-content className="relative z-10 max-w-3xl mx-auto px-6 pt-24 md:pt-32 text-center will-change-transform">
+      <div data-hero-content className="relative z-10 max-w-3xl mx-auto px-6 pt-24 md:pt-32 text-center">
         <p className="lp-hero-stagger-1 text-xs md:text-sm uppercase tracking-[0.35em] mb-6 leading-relaxed" style={{ color: GOLD }}>{hero.subtitle}</p>
         <h1 className="lp-hero-stagger-2 font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] mb-6">
           {hero.headline}{" "}<GoldText>{hero.highlight}</GoldText>
