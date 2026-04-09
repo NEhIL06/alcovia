@@ -33,12 +33,14 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space-grotesk",
   display: "swap",
+  preload: false,
 })
 
 const milan = localFont({
   src: "../public/fonts/GCMilanHeadlineDemo-ExLtSubhe.ttf",
   variable: "--font-milan",
   display: "swap",
+  preload: false,
 })
 
 export const metadata: Metadata = {
