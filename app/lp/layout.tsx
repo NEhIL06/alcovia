@@ -8,12 +8,6 @@ export default function LPLayout({
 }>) {
   return (
     <>
-      <link
-        rel="preload"
-        as="image"
-        href="/images/lp/hero.jpg"
-        fetchPriority="high"
-      />
       <Script id="meta-pixel-lp-campaign" strategy="lazyOnload">
         {`
           !function(f,b,e,v,n,t,s)

@@ -92,7 +92,7 @@ function HeroSection({ hero }: { hero: LPContent["hero"] }) {
   return (
     <section ref={ref} className="relative h-[100svh] min-h-[580px] sm:min-h-[700px] flex items-center justify-center overflow-hidden">
       <div data-hero-img className="absolute inset-0 z-0 will-change-transform">
-        <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" priority sizes="100vw" />
+        <Image src="/images/lp/hero.jpg" alt="Alcovia mentorship session" fill className="object-cover object-[center_40%]" loading="eager" sizes="100vw" fetchPriority="high" />
       </div>
       <div data-hero-overlay className="absolute inset-0 z-[1] bg-[#08261e]" style={{ opacity: 0.78 }} />
 
@@ -385,7 +385,7 @@ function LPNavbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-4 py-1 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
       <a href="/" className="flex items-center -my-5">
-        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority />
+        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" loading="eager" />
       </a>
       <button onClick={() => {
         if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
@@ -423,7 +423,7 @@ function LPFooter() {
       <div className="max-w-5xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center">
-            <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={120} height={100} className="object-contain h-[50px] w-auto opacity-40" />
+            <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={120} height={100} className="object-contain h-[50px] w-auto opacity-40" loading="lazy" />
           </div>
           <div className="flex items-center gap-6 text-xs text-white/20">
             <a href="/Legal/Privacy-policy" className="hover:text-white/60 transition-colors">Privacy Policy</a>
