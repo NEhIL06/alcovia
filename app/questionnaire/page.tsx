@@ -1,7 +1,7 @@
 import { QuestionnaireForm } from "./_components/questionnaire-form"
 
 export const metadata = {
-  title: "Student Questionnaire | Alcovia",
+  title: "Student Questionnaire | alcovia",
   description:
     "Help us understand you better so we can create a personalised learning plan.",
 }

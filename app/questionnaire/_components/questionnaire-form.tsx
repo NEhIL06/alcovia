@@ -17,6 +17,7 @@ export function QuestionnaireForm() {
   const [direction, setDirection] = useState(1) // 1 = forward, -1 = backward
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fieldError, setFieldError] = useState<string | null>(null)
 
   // Build question flow based on selected grade
   const questions = useMemo(() => {
@@ -35,6 +36,7 @@ export function QuestionnaireForm() {
   const updateValue = useCallback(
     (value: string | string[]) => {
       setFormData((prev) => ({ ...prev, [currentQuestion.id]: value }))
+      setFieldError(null)
     },
     [currentQuestion?.id]
   )
@@ -45,9 +47,27 @@ export function QuestionnaireForm() {
     // Validate required field
     if (currentQuestion.required) {
       const val = formData[currentQuestion.id]
-      const isEmpty = Array.isArray(val) ? val.length === 0 : !val
+      const isEmpty = Array.isArray(val) ? val.length === 0 : (!val || val === "Other: ")
       if (isEmpty) return
     }
+
+    // Inline format validation for phone and email
+    const val = formData[currentQuestion.id] as string
+    if (currentQuestion.id === "parent_phone" && val) {
+      const digits = val.replace(/\D/g, "")
+      if (digits.length < 10) {
+        setFieldError("Please enter a valid phone number (at least 10 digits)")
+        return
+      }
+    }
+    if (currentQuestion.id === "parent_email" && val) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+      if (!emailRegex.test(val)) {
+        setFieldError("Please enter a valid email address")
+        return
+      }
+    }
+    setFieldError(null)
 
     // If we just answered the grade question (index 6 in common questions),
     // the questions list will rebuild via useMemo on next render.
@@ -158,6 +178,7 @@ export function QuestionnaireForm() {
               onBack={goBack}
               isFirst={isFirst}
               isLast={isLast}
+              fieldError={fieldError}
             />
           </motion.div>
         </AnimatePresence>

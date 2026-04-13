@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-const phoneRegex = /^(\+?\d{1,3}[\s-]?)?\d{10}$/
+const phoneRegex = /^(\+?\d{1,3}[\s-]?)?\d{10,}$/
 
 export const questionnaireSchema = z.object({
   // ── Common fields ──

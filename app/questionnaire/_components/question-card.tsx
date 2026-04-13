@@ -14,6 +14,7 @@ type QuestionCardProps = {
   onBack: () => void
   isFirst: boolean
   isLast: boolean
+  fieldError?: string | null
 }
 
 const LETTER_KEYS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -28,6 +29,7 @@ export function QuestionCard({
   onBack,
   isFirst,
   isLast,
+  fieldError,
 }: QuestionCardProps) {
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const [otherText, setOtherText] = useState("")
@@ -73,7 +75,8 @@ export function QuestionCard({
         onChange(current)
       }
     } else {
-      onChange(text ? `Other: ${text}` : "")
+      // Keep "Other: " prefix even when text is cleared so the button stays active
+      onChange(text ? `Other: ${text}` : "Other: ")
     }
   }
 
@@ -110,17 +113,23 @@ export function QuestionCard({
       case "email":
       case "tel":
         return (
-          <input
-            ref={inputRef as React.RefObject<HTMLInputElement>}
-            type={question.type}
-            value={(value as string) || ""}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder={question.placeholder}
-            className="w-full border-b-2 border-gray-300 bg-transparent py-3 text-lg outline-none transition-colors focus:border-[#1a1a2e] md:text-2xl"
-            autoComplete={
-              question.type === "email" ? "email" : question.type === "tel" ? "tel" : "off"
-            }
-          />
+          <>
+            <input
+              ref={inputRef as React.RefObject<HTMLInputElement>}
+              type={question.type}
+              value={(value as string) || ""}
+              onChange={(e) => onChange(e.target.value)}
+              placeholder={question.placeholder}
+              className={`w-full border-b-2 bg-transparent py-3 text-lg outline-none transition-colors focus:border-[#1a1a2e] md:text-2xl ${fieldError ? "border-red-400" : "border-gray-300"
+                }`}
+              autoComplete={
+                question.type === "email" ? "email" : question.type === "tel" ? "tel" : "off"
+              }
+            />
+            {fieldError && (
+              <p className="mt-2 text-sm text-red-500">{fieldError}</p>
+            )}
+          </>
         )
 
       case "textarea":
@@ -156,16 +165,19 @@ export function QuestionCard({
                     <button
                       type="button"
                       onClick={() => {
-                        if (!isOtherSelected) handleOptionSelect("")
+                        if (isOtherSelected) {
+                          onChange("")
+                        } else {
+                          onChange("Other: ")
+                        }
                         setOtherText("")
                       }}
-                      className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${
-                        isOtherSelected
+                      className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${isOtherSelected
                           ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
                           : focused
-                          ? "border-[#1a1a2e] bg-gray-50"
-                          : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                      }`}
+                            ? "border-[#1a1a2e] bg-gray-50"
+                            : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                        }`}
                     >
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium">
                         {letter}
@@ -191,18 +203,16 @@ export function QuestionCard({
                   key={option}
                   type="button"
                   onClick={() => handleOptionSelect(option)}
-                  className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${
-                    selected
+                  className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${selected
                       ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
                       : focused
-                      ? "border-[#1a1a2e] bg-gray-50"
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                  }`}
+                        ? "border-[#1a1a2e] bg-gray-50"
+                        : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                    }`}
                 >
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium ${
-                      selected ? "border-white/30 bg-white/20" : "border-gray-300"
-                    }`}
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium ${selected ? "border-white/30 bg-white/20" : "border-gray-300"
+                      }`}
                   >
                     {letter}
                   </span>
@@ -230,11 +240,12 @@ export function QuestionCard({
               const letter = LETTER_KEYS[i]
               const selected = isSelected(option)
               const focused = focusedOption === i
-              const atLimit =
+              const atLimit = Boolean(
                 question.maxSelections &&
                 Array.isArray(value) &&
                 value.length >= question.maxSelections &&
                 !selected
+              )
 
               if (option === "Other") {
                 const otherValues = Array.isArray(value) ? value.filter((v) => v.startsWith("Other: ")) : []
@@ -251,13 +262,12 @@ export function QuestionCard({
                         }
                       }}
                       disabled={atLimit && !isOtherSelected}
-                      className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${
-                        isOtherSelected
+                      className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${isOtherSelected
                           ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
                           : atLimit
-                          ? "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-400"
-                          : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                      }`}
+                            ? "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-400"
+                            : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                        }`}
                     >
                       <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium">
                         {letter}
@@ -293,24 +303,22 @@ export function QuestionCard({
                   type="button"
                   onClick={() => handleOptionSelect(option)}
                   disabled={!!atLimit}
-                  className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${
-                    selected
+                  className={`flex items-center gap-3 rounded-lg border-2 px-4 py-3 text-left text-base transition-all md:text-lg ${selected
                       ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
                       : atLimit
-                      ? "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-400"
-                      : focused
-                      ? "border-[#1a1a2e] bg-gray-50"
-                      : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                  }`}
+                        ? "cursor-not-allowed border-gray-100 bg-gray-50 text-gray-400"
+                        : focused
+                          ? "border-[#1a1a2e] bg-gray-50"
+                          : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
+                    }`}
                 >
                   <span
-                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium ${
-                      selected
+                    className={`flex h-7 w-7 shrink-0 items-center justify-center rounded border text-sm font-medium ${selected
                         ? "border-white/30 bg-white/20"
                         : atLimit
-                        ? "border-gray-200"
-                        : "border-gray-300"
-                    }`}
+                          ? "border-gray-200"
+                          : "border-gray-300"
+                      }`}
                   >
                     {letter}
                   </span>
@@ -335,11 +343,10 @@ export function QuestionCard({
                       key={num}
                       type="button"
                       onClick={() => onChange(String(num))}
-                      className={`flex h-12 w-12 items-center justify-center rounded-lg border-2 text-lg font-medium transition-all md:h-14 md:w-14 md:text-xl ${
-                        selected
+                      className={`flex h-12 w-12 items-center justify-center rounded-lg border-2 text-lg font-medium transition-all md:h-14 md:w-14 md:text-xl ${selected
                           ? "border-[#1a1a2e] bg-[#1a1a2e] text-white"
                           : "border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50"
-                      }`}
+                        }`}
                     >
                       {num}
                     </button>
@@ -404,11 +411,10 @@ export function QuestionCard({
             type="button"
             onClick={onNext}
             disabled={question.required && !hasValue}
-            className={`rounded-lg px-6 py-2.5 text-sm font-medium transition-all ${
-              question.required && !hasValue
+            className={`rounded-lg px-6 py-2.5 text-sm font-medium transition-all ${question.required && !hasValue
                 ? "cursor-not-allowed bg-gray-200 text-gray-400"
                 : "bg-[#1a1a2e] text-white hover:bg-[#2a2a4e]"
-            }`}
+              }`}
           >
             {isLast ? "Submit" : "OK"}
           </button>

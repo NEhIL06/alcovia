@@ -1,7 +1,7 @@
 import Link from "next/link"
 
 export const metadata = {
-  title: "Thank You | Alcovia",
+  title: "Thank You | alcovia",
   description: "Your questionnaire has been submitted successfully.",
 }
 
