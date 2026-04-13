@@ -136,7 +136,7 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
                             <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">THE CULT STRATEGY: HOW BRANDS MANUFACTURE HYPE</h4>
                         </div>
                         <div className="flex flex-col items-end flex-shrink-0">
-                            <span className="text-xl font-black text-[#0C0C0C] leading-none">11</span>
+                            <span className="text-xl font-black text-[#0C0C0C] leading-none">18</span>
                             <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">APR</span>
                         </div>
                     </div>
