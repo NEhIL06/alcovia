@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section
       id="cult-hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-12"
     >
       <div className="absolute inset-0 z-0">
         <div
