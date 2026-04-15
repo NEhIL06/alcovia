@@ -28,7 +28,7 @@ export default function ClosingCtaSection() {
   return (
     <section
       id="cult-cta"
-      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
+      className="relative py-6 sm:py-16 lg:py-24 overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="hidden lg:block">
@@ -101,6 +101,26 @@ export default function ClosingCtaSection() {
           Spots are strictly limited to ensure high-stakes mentorship with Siddhant Narayan. One day.
           The brand-building knowledge that changes how you see everything.
         </p>
+
+        <div className="md:hidden lp-fade-in flex flex-col gap-2 max-w-sm mx-auto mb-6">
+          {[
+            { quote: "I can't unsee how brands are designed to make me feel things.", name: "Aksh, 16" },
+            { quote: "Showed me marketing is psychology, not ads. Genuinely changed how I think.", name: "Ansh, 15" },
+            { quote: "You actually build and compete. Nothing like school.", name: "Aryaana, 14" },
+          ].map((t) => (
+            <div
+              key={t.name}
+              className="border border-white/[0.06] bg-white/[0.02] rounded-xl px-3.5 py-2.5 text-left"
+            >
+              <p className="text-[11px] text-white/75 font-[family-name:var(--font-playfair)] italic leading-snug">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+              <p className="mt-1 text-[10px] text-white/40 font-[family-name:var(--font-satoshi)] tracking-wide">
+                {t.name}
+              </p>
+            </div>
+          ))}
+        </div>
 
         <div className="lp-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">
           {eventDetails.map((detail, i) => (

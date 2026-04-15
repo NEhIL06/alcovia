@@ -33,15 +33,15 @@ export default function CultStrategyWorkshopPage() {
     <main className="relative">
       <WorkshopPageTracker />
       <HeroSection />
-      <ProblemSection />
+      <div className="hidden md:block">
+        <ProblemSection />
+      </div>
       <SpeakerSection />
       <WorkshopPhases />
       <div className="hidden md:block">
         <TakeawaysSection />
         <AuthoritySection />
-      </div>
-      <SocialProofSection />
-      <div className="hidden md:block">
+        <SocialProofSection />
         <FaqSection />
       </div>
       <ClosingCtaSection />

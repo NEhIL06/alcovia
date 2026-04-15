@@ -53,7 +53,7 @@ const pillars = [
 
 export default function WorkshopPhases() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative py-6 sm:py-16 lg:py-24 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="hidden lg:block">
           <CursorParallaxGrid opacity={0.04} depth={16} spotlight />
@@ -68,7 +68,7 @@ export default function WorkshopPhases() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 sm:mb-14">
+        <div className="text-center mb-6 sm:mb-14">
           <span
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}

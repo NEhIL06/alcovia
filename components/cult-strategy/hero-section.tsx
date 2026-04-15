@@ -7,7 +7,7 @@ export default function HeroSection() {
   return (
     <section
       id="cult-hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-12"
+      className="relative min-h-[80vh] sm:min-h-screen flex items-center justify-center overflow-hidden pt-16 sm:pt-24 lg:pt-28 pb-6 sm:pb-12"
     >
       <div className="absolute inset-0 z-0">
         <div
@@ -50,7 +50,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div
-          className="cult-fade flex items-center justify-center gap-3 mb-6 sm:mb-8"
+          className="cult-fade flex items-center justify-center gap-3 mb-3 sm:mb-8"
           style={{ animationDelay: "0.3s" }}
         >
           <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
@@ -84,7 +84,7 @@ export default function HeroSection() {
         </h1>
 
         <p
-          className="cult-fade text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-6 sm:mb-8"
+          className="cult-fade text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
           style={{ animationDelay: "0.7s" }}
         >
           Manufacturing Status &amp;{" "}
@@ -92,7 +92,7 @@ export default function HeroSection() {
         </p>
 
         <div
-          className="cult-fade w-16 sm:w-24 h-px mx-auto mb-6 sm:mb-8"
+          className="cult-fade w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
           style={{ background: `${ACCENT_DIM}0.4)`, animationDelay: "0.9s" }}
         />
 
@@ -110,7 +110,7 @@ export default function HeroSection() {
         </p>
 
         <div
-          className="cult-fade mt-10 sm:mt-12 flex flex-col items-center gap-3"
+          className="cult-fade mt-6 sm:mt-12 flex flex-col items-center gap-3"
           style={{ animationDelay: "1.4s" }}
         >
           <WorkshopCheckoutLink
@@ -143,7 +143,7 @@ export default function HeroSection() {
         </div>
 
         <div
-          className="cult-fade mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
+          className="cult-fade mt-5 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
           style={{ animationDelay: "1.6s" }}
         >
           <div className="flex items-center gap-2">
