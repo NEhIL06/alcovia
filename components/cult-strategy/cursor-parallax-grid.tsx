@@ -1,30 +1,17 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 
 const ACCENT = "#FF6B2B";
 
 interface CursorParallaxGridProps {
-    /** How many columns the grid has (default 28) */
     cols?: number;
-    /** How many rows the grid has (default 18) */
     rows?: number;
-    /** Max pixel offset the grid can move on each axis (default 18) */
     depth?: number;
-    /** Overall opacity of the grid lines (default 0.14) */
     opacity?: number;
-    /** Show a soft parallaxing radial spotlight following the cursor */
     spotlight?: boolean;
 }
 
-/**
- * A full-cover decorative grid that softly follows the cursor position,
- * giving sections a live, spatial feel without hurting performance.
- *
- * Drop it as the first child inside the `<section>` absolute bg layer.
- * It is pointer-events-none, purely decorative.
- */
 export default function CursorParallaxGrid({
     cols = 28,
     rows = 18,
@@ -32,49 +19,59 @@ export default function CursorParallaxGrid({
     opacity = 0.14,
     spotlight = true,
 }: CursorParallaxGridProps) {
-    const containerRef = useRef<HTMLDivElement>(null);
-
-    // Raw mouse position as 0→1 fractions
-    const rawX = useMotionValue(0.5);
-    const rawY = useMotionValue(0.5);
-
-    // Springy smoothed values
-    const springConfig = { stiffness: 60, damping: 22, mass: 1 };
-    const smoothX = useSpring(rawX, springConfig);
-    const smoothY = useSpring(rawY, springConfig);
-
-    // Map 0→1 to -depth→+depth for translation
-    const translateX = useTransform(smoothX, [0, 1], [-depth, depth]);
-    const translateY = useTransform(smoothY, [0, 1], [-depth, depth]);
-
-    // Spotlight position (percentage strings)
-    const spotX = useTransform(smoothX, [0, 1], ["20%", "80%"]);
-    const spotY = useTransform(smoothY, [0, 1], ["20%", "80%"]);
+    const gridRef = useRef<HTMLDivElement>(null);
+    const spotRef = useRef<HTMLDivElement>(null);
+    const frame = useRef(0);
+    const target = useRef({ x: 0.5, y: 0.5 });
+    const current = useRef({ x: 0.5, y: 0.5 });
 
     useEffect(() => {
-        const onMove = (e: MouseEvent) => {
-            rawX.set(e.clientX / window.innerWidth);
-            rawY.set(e.clientY / window.innerHeight);
+        if (window.matchMedia("(pointer: coarse)").matches) return;
+
+        const tick = () => {
+            current.current.x += (target.current.x - current.current.x) * 0.08;
+            current.current.y += (target.current.y - current.current.y) * 0.08;
+
+            const tx = (current.current.x - 0.5) * 2 * depth;
+            const ty = (current.current.y - 0.5) * 2 * depth;
+
+            if (gridRef.current) {
+                gridRef.current.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+            }
+            if (spotRef.current) {
+                const sx = 20 + current.current.x * 60;
+                const sy = 20 + current.current.y * 60;
+                spotRef.current.style.background = `radial-gradient(ellipse 30% 25% at ${sx}% ${sy}%, rgba(255,107,43,0.06) 0%, transparent 70%)`;
+            }
+            frame.current = requestAnimationFrame(tick);
         };
+
+        const onMove = (e: MouseEvent) => {
+            target.current.x = e.clientX / window.innerWidth;
+            target.current.y = e.clientY / window.innerHeight;
+        };
+
         window.addEventListener("mousemove", onMove, { passive: true });
-        return () => window.removeEventListener("mousemove", onMove);
-    }, [rawX, rawY]);
+        frame.current = requestAnimationFrame(tick);
+
+        return () => {
+            window.removeEventListener("mousemove", onMove);
+            cancelAnimationFrame(frame.current);
+        };
+    }, [depth]);
 
     const colW = 100 / cols;
     const rowH = 100 / rows;
 
     return (
         <div
-            ref={containerRef}
             className="absolute inset-0 overflow-hidden pointer-events-none select-none"
             aria-hidden="true"
         >
-            {/* The grid — translates with cursor */}
-            <motion.div
-                className="absolute inset-[-5%] w-[110%] h-[110%]"
-                style={{ x: translateX, y: translateY }}
+            <div
+                ref={gridRef}
+                className="absolute inset-[-5%] w-[110%] h-[110%] will-change-transform"
             >
-                {/* Vertical lines */}
                 {Array.from({ length: cols + 1 }).map((_, i) => (
                     <div
                         key={`v${i}`}
@@ -88,7 +85,6 @@ export default function CursorParallaxGrid({
                     />
                 ))}
 
-                {/* Horizontal lines */}
                 {Array.from({ length: rows + 1 }).map((_, i) => (
                     <div
                         key={`h${i}`}
@@ -102,7 +98,6 @@ export default function CursorParallaxGrid({
                     />
                 ))}
 
-                {/* Intersection dots — sparse, accent-coloured */}
                 {Array.from({ length: cols + 1 }).map((_, ci) =>
                     Array.from({ length: rows + 1 })
                         .filter((_, ri) => (ci + ri) % 5 === 0)
@@ -119,14 +114,14 @@ export default function CursorParallaxGrid({
                             />
                         ))
                 )}
-            </motion.div>
+            </div>
 
-            {/* Cursor spotlight */}
             {spotlight && (
-                <motion.div
+                <div
+                    ref={spotRef}
                     className="absolute inset-0"
                     style={{
-                        background: `radial-gradient(ellipse 30% 25% at ${spotX} ${spotY}, rgba(255,107,43,0.06) 0%, transparent 70%)`,
+                        background: `radial-gradient(ellipse 30% 25% at 50% 50%, rgba(255,107,43,0.06) 0%, transparent 70%)`,
                     }}
                 />
             )}

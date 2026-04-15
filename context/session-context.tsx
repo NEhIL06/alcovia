@@ -12,24 +12,18 @@ const SessionContext = createContext<SessionContextType | undefined>(undefined)
 const SESSION_STORAGE_KEY = "alcovia_loader_shown"
 
 export function SessionProvider({ children }: { children: ReactNode }) {
-    const [hasShownLoader, setHasShownLoader] = useState(false)
-    const [isHydrated, setIsHydrated] = useState(false)
+    const [hasShownLoader, setHasShownLoader] = useState(true)
 
     useEffect(() => {
         const stored = sessionStorage.getItem(SESSION_STORAGE_KEY)
-        if (stored === "true") {
-            setHasShownLoader(true)
+        if (stored !== "true") {
+            setHasShownLoader(false)
         }
-        setIsHydrated(true)
     }, [])
 
     const setLoaderShown = () => {
         setHasShownLoader(true)
         sessionStorage.setItem(SESSION_STORAGE_KEY, "true")
-    }
-
-    if (!isHydrated) {
-        return null
     }
 
     return (

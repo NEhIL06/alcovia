@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
@@ -29,7 +25,7 @@ const pillars = [
     title: "Brand Warfare",
     subtitle: "Hacking the subconscious",
     description:
-      "How Nike and other giants stay at the top of the food chain by hacking the subconscious. Learn how the world's most powerful brands build belonging — not just customers — and why fans defend brands like family. From 'Just Do It' to 'The Drop,' decode the warfare.",
+      "How Nike and other giants stay at the top of the food chain by hacking the subconscious. Learn how the world's most powerful brands build belonging, not just customers, and why fans defend brands like family. From 'Just Do It' to 'The Drop,' decode the warfare.",
     stat: "100%",
     statLabel: "real-world brand strategy",
     icon: (
@@ -44,7 +40,7 @@ const pillars = [
     title: "The Execution Lab",
     subtitle: "Build your own cult campaign",
     description:
-      "Teens will work in teams to build their own 'Cult' campaign and present it for feedback. Scarcity drops, community architecture, identity alignment, influencer hooks — all of it goes into your brand strategy. Present to mentors who will challenge your thinking like real CMOs.",
+      "Teens will work in teams to build their own 'Cult' campaign and present it for feedback. Scarcity drops, community architecture, identity alignment, influencer hooks, all of it goes into your brand strategy. Present to mentors who will challenge your thinking like real CMOs.",
     stat: "₹3,999",
     statLabel: "per seat · lunch included",
     icon: (
@@ -56,63 +52,42 @@ const pillars = [
 ];
 
 export default function WorkshopPhases() {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   return (
-    <section
-      ref={containerRef}
-      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
-    >
-      {/* Background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-      >
-        <CursorParallaxGrid opacity={0.04} depth={16} spotlight />
-        <div style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.04) 0%, transparent 70%)",
-        }} className="absolute inset-0" />
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="hidden lg:block">
+          <CursorParallaxGrid opacity={0.04} depth={16} spotlight />
+        </div>
+        <div
+          style={{
+            background:
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.04) 0%, transparent 70%)",
+          }}
+          className="absolute inset-0"
+        />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-10 sm:mb-14">
-          <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
+          <span
+            className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             The 3 Pillars
-          </motion.span>
+          </span>
 
-          <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
+          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3">
             What happens{" "}
             <span style={{ color: ACCENT }}>inside</span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+          <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
             Three pillars. One day. A complete transformation in how you see
-            brands — and how you build them.
-          </motion.p>
+            brands and how you build them.
+          </p>
         </div>
 
-        {/* Pillar cards — stacked with timeline connector */}
         <div className="relative">
-          {/* Vertical timeline line — desktop only */}
           <div
             className="hidden lg:block absolute left-[2.25rem] top-10 bottom-10 w-px"
             style={{
@@ -121,21 +96,9 @@ export default function WorkshopPhases() {
           />
 
           <div className="space-y-4 sm:space-y-6">
-            {pillars.map((item, i) => (
-              <motion.div
-                key={item.number}
-                className="group"
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{
-                  duration: 0.7,
-                  delay: i * 0.12,
-                  ease: [0.22, 1, 0.36, 1],
-                }}
-              >
+            {pillars.map((item) => (
+              <div key={item.number} className="lp-fade-in group">
                 <div className="flex gap-4 lg:gap-6 items-start">
-                  {/* Timeline node — desktop */}
                   <div className="hidden lg:flex flex-col items-center flex-shrink-0 pt-6">
                     <div
                       className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(255,107,43,0.4)] z-10"
@@ -149,9 +112,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
 
-                  {/* Card */}
                   <div className="relative flex-1 border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20 hover:bg-[#F7F7F3]/[0.04] hover:shadow-[0_8px_40px_rgba(255,107,43,0.08)]">
-                    {/* Left accent bar */}
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                       style={{
@@ -159,7 +120,6 @@ export default function WorkshopPhases() {
                       }}
                     />
 
-                    {/* Top accent line */}
                     <div
                       className="h-px"
                       style={{
@@ -168,9 +128,7 @@ export default function WorkshopPhases() {
                     />
 
                     <div className="p-4 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12">
-                      {/* Left: phase badge + stat */}
                       <div className="flex-shrink-0 flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-5">
-                        {/* Phase badge */}
                         <div
                           className="inline-flex items-center gap-2 rounded-full px-3 py-1 border"
                           style={{
@@ -186,7 +144,6 @@ export default function WorkshopPhases() {
                           </span>
                         </div>
 
-                        {/* Stat */}
                         <div className="flex flex-col gap-0.5 lg:pl-1">
                           <span
                             className="text-xl sm:text-2xl font-[family-name:var(--font-monument)] font-bold leading-none"
@@ -200,7 +157,6 @@ export default function WorkshopPhases() {
                         </div>
                       </div>
 
-                      {/* Divider — vertical on desktop */}
                       <div
                         className="hidden lg:block w-px self-stretch"
                         style={{
@@ -208,9 +164,7 @@ export default function WorkshopPhases() {
                         }}
                       />
 
-                      {/* Right: content */}
                       <div className="flex-1">
-                        {/* Decorative number */}
                         <div className="flex items-baseline gap-3 mb-1.5">
                           <span
                             className="font-[family-name:var(--font-monument)] font-bold leading-none transition-colors duration-500 group-hover:opacity-50"
@@ -238,7 +192,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

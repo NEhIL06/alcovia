@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
@@ -33,36 +32,33 @@ export default function MobileFloatingCta() {
   }, []);
 
   return (
-    <AnimatePresence>
-      {visible && (
-        <motion.div
-          className="fixed bottom-6 left-0 right-0 flex justify-center z-50 px-6"
-          initial={{ opacity: 0, y: 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 24 }}
-          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+    <div
+      className="fixed bottom-6 left-0 right-0 flex justify-center z-50 px-6 pointer-events-none transition-all duration-300 ease-out"
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: visible ? "translateY(0)" : "translateY(24px)",
+      }}
+      aria-hidden={!visible}
+    >
+      <WorkshopCheckoutLink
+        ctaSource="mobile_floating"
+        className="pointer-events-auto inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
+        style={{
+          background: ACCENT,
+          boxShadow: `0 4px 24px rgba(255,107,43,0.5)`,
+        }}
+      >
+        Secure My Spot
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          className="w-4 h-4 shrink-0"
         >
-          <WorkshopCheckoutLink
-            ctaSource="mobile_floating"
-            className="inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
-            style={{
-              background: ACCENT,
-              boxShadow: `0 4px 24px rgba(255,107,43,0.5)`,
-            }}
-          >
-            Secure My Spot
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              className="w-4 h-4 shrink-0"
-            >
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </WorkshopCheckoutLink>
-        </motion.div>
-      )}
-    </AnimatePresence>
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </WorkshopCheckoutLink>
+    </div>
   );
 }

@@ -138,6 +138,7 @@ select.filter-input{cursor:pointer}
     <div class="tab" data-tab="lead-ads">Ad Performance</div>
     <div class="tab" data-tab="lead-journey">User Journey</div>
     <div class="tab" data-tab="workshop-funnel">Workshop Pipeline</div>
+    <div class="tab" data-tab="workshop-checkout-leads">Workshop Checkout Leads</div>
     <div class="tab" data-tab="workshop-orders">Workshop Payments</div>
     <div class="tab" data-tab="meta-performance">Meta Ad Spend</div>
     <div class="tab" data-tab="attribution">Attribution</div>
@@ -185,6 +186,36 @@ select.filter-input{cursor:pointer}
       <div class="chart-card"><h3>Workshop Traffic Sources</h3><div id="chartWorkshopSources"></div></div>
       <div class="chart-card"><h3>Workshop Revenue by Date</h3><div id="chartWorkshopRevenue"></div></div>
     </div>
+  </div>
+
+  <div id="tab-workshop-checkout-leads" class="tab-content">
+    <div class="filters">
+      <input type="text" class="filter-input" id="checkoutLeadSearch" placeholder="Search name, phone, school, UTM...">
+      <select class="filter-input" id="checkoutLeadPaidFilter">
+        <option value="">All leads</option>
+        <option value="paid">Paid only</option>
+        <option value="unpaid">Unpaid only</option>
+      </select>
+      <select class="filter-input" id="checkoutLeadCtaFilter"><option value="">All CTAs</option></select>
+    </div>
+    <div class="mini-summary">
+      <div class="mini-card"><div class="label">Total Leads</div><div class="value" id="miniCheckoutLeadTotal">-</div></div>
+      <div class="mini-card"><div class="label">Paid</div><div class="value" id="miniCheckoutLeadPaid">-</div></div>
+      <div class="mini-card"><div class="label">Unpaid</div><div class="value" id="miniCheckoutLeadUnpaid">-</div></div>
+      <div class="mini-card"><div class="label">Conversion</div><div class="value" id="miniCheckoutLeadConversion">-</div></div>
+    </div>
+    <div class="table-wrap"><table><thead><tr>
+      <th data-checkout-lead-sort="timestamp">Time</th>
+      <th data-checkout-lead-sort="parent_name">Parent</th>
+      <th data-checkout-lead-sort="student_name">Student</th>
+      <th data-checkout-lead-sort="parent_phone">Phone</th>
+      <th data-checkout-lead-sort="grade">Grade</th>
+      <th data-checkout-lead-sort="school">School</th>
+      <th data-checkout-lead-sort="cta_source">CTA</th>
+      <th data-checkout-lead-sort="utm_source">UTM Source</th>
+      <th data-checkout-lead-sort="utm_campaign">Campaign</th>
+      <th data-checkout-lead-sort="paid">Paid?</th>
+    </tr></thead><tbody id="checkoutLeadsTable"></tbody></table></div>
   </div>
 
   <div id="tab-workshop-orders" class="tab-content">
@@ -370,6 +401,7 @@ const API_URLS = {
   leads: '/api/dashboard/leads',
   workshopFunnel: '/api/dashboard/workshop-funnel',
   workshopOrders: '/api/dashboard/workshop-orders',
+  workshopCheckoutLeads: '/api/dashboard/workshop-checkout-leads',
   metaInsights: '/api/dashboard/meta-insights',
   attribution: '/api/dashboard/attribution',
 };
@@ -378,6 +410,7 @@ const state = {
   leads: [],
   workshopFunnel: [],
   workshopOrders: [],
+  workshopCheckoutLeads: [],
   metaInsights: [],
   metaData: null,
   attribution: [],
@@ -389,6 +422,8 @@ let leadSortField = 'timestamp';
 let leadSortAsc = false;
 let orderSortField = 'timestamp';
 let orderSortAsc = false;
+let checkoutLeadSortField = 'timestamp';
+let checkoutLeadSortAsc = false;
 let metaSortField = 'spend';
 let metaSortAsc = false;
 let adsSortField = 'spend';
@@ -509,6 +544,7 @@ async function loadData() {
       fetchDataset(API_URLS.leads),
       fetchDataset(API_URLS.workshopFunnel),
       fetchDataset(API_URLS.workshopOrders),
+      fetchDataset(API_URLS.workshopCheckoutLeads),
       fetchDataset(API_URLS.metaInsights),
       fetchDataset(API_URLS.attribution),
     ]);
@@ -517,7 +553,8 @@ async function loadData() {
     state.leads = extract(results[0]);
     state.workshopFunnel = extract(results[1]);
     state.workshopOrders = extract(results[2]);
-    const metaRaw = extract(results[3]);
+    state.workshopCheckoutLeads = extract(results[3]);
+    const metaRaw = extract(results[4]);
     if (metaRaw.length === 1 && metaRaw[0] && metaRaw[0].campaigns) {
       state.metaData = metaRaw[0];
       state.metaInsights = metaRaw[0].campaigns || [];
@@ -525,7 +562,7 @@ async function loadData() {
       state.metaData = null;
       state.metaInsights = metaRaw;
     }
-    state.attribution = extract(results[4]);
+    state.attribution = extract(results[5]);
 
     const failedCount = results.filter((r) => r.status === 'rejected').length;
     if (failedCount > 0 && failedCount < results.length) {
@@ -549,6 +586,7 @@ function render() {
   renderLeadAds();
   renderLeadJourney();
   renderWorkshopFunnel();
+  renderWorkshopCheckoutLeads();
   renderWorkshopOrders();
   renderMetaPerformance();
   renderAttribution();
@@ -918,6 +956,138 @@ function renderWorkshopOrders() {
   }).join('');
 
   if (!orders.length) tbody.innerHTML = '<tr><td colspan="10" class="empty">No workshop orders yet. Configure the Razorpay redirect URL and the workshop payment-success webhook to populate this view.</td></tr>';
+}
+
+function normalizePhone(value) {
+  const digits = String(value || '').replace(/\D/g, '');
+  if (!digits) return '';
+  return digits.replace(/^91/, '').slice(-10);
+}
+
+function buildPaidPhoneSet() {
+  const set = new Set();
+  (state.workshopOrders || []).forEach((order) => {
+    if (normalizeStatus(order) !== 'paid') return;
+    const candidates = [
+      pick(order, ['parent_phone','phone','contact','buyer_phone'], ''),
+      pick(order, ['notes_parent_phone','notes.parent_phone'], ''),
+    ];
+    candidates.forEach((candidate) => {
+      const normalized = normalizePhone(candidate);
+      if (normalized) set.add(normalized);
+    });
+  });
+  return set;
+}
+
+function buildPaidLeadIdSet() {
+  const set = new Set();
+  (state.workshopOrders || []).forEach((order) => {
+    if (normalizeStatus(order) !== 'paid') return;
+    const leadId = pick(order, ['lead_id','notes_lead_id','notes.lead_id'], '');
+    if (leadId) set.add(String(leadId));
+  });
+  return set;
+}
+
+function isCheckoutLeadPaid(lead, paidPhones, paidLeadIds) {
+  const leadId = String(pick(lead, ['lead_id'], ''));
+  if (leadId && paidLeadIds.has(leadId)) return true;
+  const normalized = normalizePhone(pick(lead, ['parent_phone','phone'], ''));
+  if (normalized && paidPhones.has(normalized)) return true;
+  return false;
+}
+
+function getFilteredWorkshopCheckoutLeads() {
+  return filterRows(state.workshopCheckoutLeads || []);
+}
+
+function populateCheckoutLeadFilters() {
+  const leads = state.workshopCheckoutLeads || [];
+  const ctaSelect = document.getElementById('checkoutLeadCtaFilter');
+  if (!ctaSelect) return;
+  const current = ctaSelect.value;
+  const ctas = Array.from(new Set(leads.map((item) => String(pick(item, ['cta_source'], 'unknown'))).filter(Boolean))).sort();
+  ctaSelect.innerHTML = '<option value="">All CTAs</option>' + ctas.map((cta) => '<option value="' + esc(cta) + '"' + (cta === current ? ' selected' : '') + '>' + esc(cta) + '</option>').join('');
+}
+
+function renderWorkshopCheckoutLeads() {
+  populateCheckoutLeadFilters();
+  updateSortHeaders('data-checkout-lead-sort', checkoutLeadSortField, checkoutLeadSortAsc);
+
+  const paidPhones = buildPaidPhoneSet();
+  const paidLeadIds = buildPaidLeadIdSet();
+
+  const search = (document.getElementById('checkoutLeadSearch').value || '').toLowerCase();
+  const paidFilter = document.getElementById('checkoutLeadPaidFilter').value;
+  const ctaFilter = document.getElementById('checkoutLeadCtaFilter').value;
+
+  const rows = getFilteredWorkshopCheckoutLeads().filter((item) => {
+    if (ctaFilter && String(pick(item, ['cta_source'], '')) !== ctaFilter) return false;
+    const paid = isCheckoutLeadPaid(item, paidPhones, paidLeadIds);
+    if (paidFilter === 'paid' && !paid) return false;
+    if (paidFilter === 'unpaid' && paid) return false;
+    if (search) {
+      const haystack = [
+        pick(item, ['parent_name'], ''),
+        pick(item, ['student_name'], ''),
+        pick(item, ['parent_phone'], ''),
+        pick(item, ['school'], ''),
+        pick(item, ['grade'], ''),
+        pick(item, ['cta_source'], ''),
+        pick(item, ['utm_source'], ''),
+        pick(item, ['utm_campaign'], ''),
+        pick(item, ['utm_content'], ''),
+      ].join(' ').toLowerCase();
+      if (!haystack.includes(search)) return false;
+    }
+    return true;
+  });
+
+  const sorted = [...rows].sort((left, right) => {
+    let a, b;
+    if (checkoutLeadSortField === 'timestamp') {
+      a = parseDate(left, ['timestamp','created_at']) || new Date(0);
+      b = parseDate(right, ['timestamp','created_at']) || new Date(0);
+    } else if (checkoutLeadSortField === 'paid') {
+      a = isCheckoutLeadPaid(left, paidPhones, paidLeadIds) ? 1 : 0;
+      b = isCheckoutLeadPaid(right, paidPhones, paidLeadIds) ? 1 : 0;
+    } else {
+      a = String(pick(left, [checkoutLeadSortField], '')).toLowerCase();
+      b = String(pick(right, [checkoutLeadSortField], '')).toLowerCase();
+    }
+    return checkoutLeadSortAsc ? (a > b ? 1 : -1) : (a < b ? 1 : -1);
+  });
+
+  const paidCount = sorted.filter((item) => isCheckoutLeadPaid(item, paidPhones, paidLeadIds)).length;
+  const total = sorted.length;
+  const unpaidCount = total - paidCount;
+  document.getElementById('miniCheckoutLeadTotal').textContent = total || '-';
+  document.getElementById('miniCheckoutLeadPaid').textContent = paidCount || '-';
+  document.getElementById('miniCheckoutLeadUnpaid').textContent = unpaidCount || '-';
+  document.getElementById('miniCheckoutLeadConversion').textContent = total ? Math.round((paidCount / total) * 100) + '%' : '-';
+
+  const tbody = document.getElementById('checkoutLeadsTable');
+  tbody.innerHTML = sorted.map((item) => {
+    const paid = isCheckoutLeadPaid(item, paidPhones, paidLeadIds);
+    const phoneRaw = pick(item, ['parent_phone','phone'], '');
+    const phoneDigits = normalizePhone(phoneRaw);
+    const phoneDisplay = phoneDigits ? ('+91 ' + phoneDigits) : String(phoneRaw || '-');
+    return '<tr>' +
+      '<td style="white-space:nowrap;font-size:0.7rem;color:var(--muted)">' + esc(formatTime(pick(item, ['timestamp','created_at']))) + '</td>' +
+      '<td style="font-weight:600">' + esc(pick(item, ['parent_name'], '-')) + '</td>' +
+      '<td>' + esc(pick(item, ['student_name'], '-')) + '</td>' +
+      '<td style="font-size:0.75rem;white-space:nowrap">' + esc(phoneDisplay) + '</td>' +
+      '<td>' + esc(pick(item, ['grade'], '-')) + '</td>' +
+      '<td style="font-size:0.75rem">' + esc(pick(item, ['school'], '-')) + '</td>' +
+      '<td><span class="tag tag-workshop">' + esc(pick(item, ['cta_source'], 'unknown')) + '</span></td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['utm_source'], '-')) + '</td>' +
+      '<td style="font-size:0.7rem">' + esc(pick(item, ['utm_campaign'], '-')) + '</td>' +
+      '<td><span class="tag tag-' + (paid ? 'success' : 'pending') + '">' + (paid ? 'Paid' : 'Pending') + '</span></td>' +
+    '</tr>';
+  }).join('');
+
+  if (!sorted.length) tbody.innerHTML = '<tr><td colspan="10" class="empty">No workshop checkout leads yet. Leads appear here when visitors submit the pre-payment form on the workshop page.</td></tr>';
 }
 
 function aggregateMetaByCampaign(rows) {
@@ -1380,6 +1550,15 @@ document.querySelectorAll('th[data-order-sort]').forEach((header) => {
   });
 });
 
+document.querySelectorAll('th[data-checkout-lead-sort]').forEach((header) => {
+  header.addEventListener('click', () => {
+    const field = header.dataset.checkoutLeadSort;
+    if (checkoutLeadSortField === field) checkoutLeadSortAsc = !checkoutLeadSortAsc;
+    else { checkoutLeadSortField = field; checkoutLeadSortAsc = false; }
+    renderWorkshopCheckoutLeads();
+  });
+});
+
 document.querySelectorAll('th[data-meta-sort]').forEach((header) => {
   header.addEventListener('click', () => {
     const field = header.dataset.metaSort;
@@ -1425,7 +1604,7 @@ document.querySelectorAll('th[data-demo-sort]').forEach((header) => {
   });
 });
 
-['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','globalStartDate','globalEndDate','creativeFunnelFilter','creativeMessagingFilter','creativeToneFilter'].forEach((id) => {
+['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','checkoutLeadSearch','checkoutLeadPaidFilter','checkoutLeadCtaFilter','globalStartDate','globalEndDate','creativeFunnelFilter','creativeMessagingFilter','creativeToneFilter'].forEach((id) => {
   const element = document.getElementById(id);
   if (!element) return;
   element.addEventListener('input', render);

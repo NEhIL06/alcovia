@@ -2,7 +2,8 @@
 
 import type { AnchorHTMLAttributes, MouseEvent, ReactNode } from "react"
 
-import { beginWorkshopCheckout, getWorkshopPaymentUrl, type WorkshopCtaSource } from "@/lib/workshop-tracking"
+import { useWorkshopCheckout } from "@/context/workshop-checkout-context"
+import { getWorkshopPaymentUrl, type WorkshopCtaSource } from "@/lib/workshop-tracking"
 
 interface WorkshopCheckoutLinkProps
   extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href" | "onClick"> {
@@ -15,11 +16,11 @@ export default function WorkshopCheckoutLink({
   ctaSource,
   ...anchorProps
 }: WorkshopCheckoutLinkProps) {
+  const { open } = useWorkshopCheckout()
+
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault()
-    beginWorkshopCheckout(ctaSource).catch(() => {
-      window.location.assign(getWorkshopPaymentUrl())
-    })
+    open(ctaSource)
   }
 
   return (

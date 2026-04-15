@@ -1,6 +1,3 @@
-"use client";
-
-import { motion } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#FF6B2B";
@@ -52,52 +49,39 @@ const testimonials = [
 export default function SocialProofSection() {
   return (
     <section className="relative py-8 sm:py-12 lg:py-16 overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-      >
-        <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
-        <div style={{
-          background: "linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)",
-        }} className="absolute inset-0" />
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="hidden lg:block">
+          <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
+        </div>
+        <div
+          style={{
+            background:
+              "linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)",
+          }}
+          className="absolute inset-0"
+        />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-6 sm:mb-8">
-          <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
+          <span
+            className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
             style={{ color: ACCENT }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             The Proof
-          </motion.span>
+          </span>
 
-          <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
+          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight">
             Numbers don&apos;t lie.{" "}
             <span style={{ color: ACCENT }}>Neither do they.</span>
-          </motion.h2>
+          </h2>
         </div>
 
-        {/* Stats grid */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
-          {stats.map((stat, i) => (
-            <motion.div
+          {stats.map((stat) => (
+            <div
               key={stat.label}
-              className="group text-center p-3 sm:p-5 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="lp-fade-in group text-center p-3 sm:p-5 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20"
             >
               <span
                 className="block text-2xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-monument)] font-bold mb-1"
@@ -111,22 +95,16 @@ export default function SocialProofSection() {
               <span className="block text-[10px] sm:text-xs text-white/50 font-[family-name:var(--font-satoshi)] leading-snug">
                 {stat.description}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Testimonials */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
-          {testimonials.map((item, i) => (
-            <motion.div
+          {testimonials.map((item) => (
+            <div
               key={item.name}
-              className="relative border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02]"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 + i * 0.08 }}
+              className="lp-fade-in relative border border-[#F7F7F3]/[0.06] rounded-2xl p-4 sm:p-6 bg-[#F7F7F3]/[0.02]"
             >
-              {/* Quote mark */}
               <span
                 className="block text-3xl sm:text-5xl font-[family-name:var(--font-playfair)] leading-none mb-2"
                 style={{ color: `${ACCENT}30` }}
@@ -154,7 +132,7 @@ export default function SocialProofSection() {
                   </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

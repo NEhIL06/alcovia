@@ -1,6 +1,10 @@
 import type React from "react"
 import Script from "next/script"
 
+import { WorkshopCheckoutProvider } from "@/context/workshop-checkout-context"
+import { ScrollFadeInit } from "@/components/lp/scroll-fade-init"
+import WorkshopNavbar from "@/components/workshop/workshop-navbar"
+
 // Server-side Meta Conversion API — fires on every page load
 async function sendMetaCAPIPageView() {
   const accessToken = process.env.META_CAPI_ACCESS_TOKEN
@@ -47,7 +51,7 @@ export default async function WorkshopLayout({
   return (
     <>
       {/* Microsoft Clarity — Cult Strategy Workshop */}
-      <Script id="clarity-cult-strategy" strategy="afterInteractive">
+      <Script id="clarity-cult-strategy" strategy="lazyOnload">
         {`
           (function(c,l,a,r,i,t,y){
             c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -56,7 +60,9 @@ export default async function WorkshopLayout({
           })(window, document, "clarity", "script", "vyomq18cqq");
         `}
       </Script>
-      {children}
+      <ScrollFadeInit />
+      <WorkshopNavbar />
+      <WorkshopCheckoutProvider>{children}</WorkshopCheckoutProvider>
     </>
   )
 }

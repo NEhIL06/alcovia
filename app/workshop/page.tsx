@@ -36,11 +36,14 @@ export default function CultStrategyWorkshopPage() {
       <ProblemSection />
       <SpeakerSection />
       <WorkshopPhases />
-      <TakeawaysSection />
-      
-      <AuthoritySection />
+      <div className="hidden md:block">
+        <TakeawaysSection />
+        <AuthoritySection />
+      </div>
       <SocialProofSection />
-      <FaqSection />
+      <div className="hidden md:block">
+        <FaqSection />
+      </div>
       <ClosingCtaSection />
       <MobileFloatingCta />
       <Footer />
