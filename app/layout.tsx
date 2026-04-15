@@ -40,7 +40,7 @@ const milan = localFont({
   src: "../public/fonts/GCMilanHeadlineDemo-ExLtSubhe.ttf",
   variable: "--font-milan",
   display: "swap",
-  preload: false,
+  preload: true,
 })
 
 export const metadata: Metadata = {
