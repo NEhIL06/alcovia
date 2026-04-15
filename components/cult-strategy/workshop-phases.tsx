@@ -95,7 +95,7 @@ export default function WorkshopPhases() {
             }}
           />
 
-          <div className="space-y-4 sm:space-y-6">
+          <div className="space-y-3 sm:space-y-6">
             {pillars.map((item) => (
               <div key={item.number} className="lp-fade-in group">
                 <div className="flex gap-4 lg:gap-6 items-start">
@@ -127,7 +127,7 @@ export default function WorkshopPhases() {
                       }}
                     />
 
-                    <div className="p-4 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-12">
+                    <div className="p-3 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-12">
                       <div className="flex-shrink-0 flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-5">
                         <div
                           className="inline-flex items-center gap-2 rounded-full px-3 py-1 border"

@@ -104,7 +104,6 @@ export default function ClosingCtaSection() {
 
         <div className="md:hidden lp-fade-in flex flex-col gap-2 max-w-sm mx-auto mb-6">
           {[
-            { quote: "I can't unsee how brands are designed to make me feel things.", name: "Aksh, 16" },
             { quote: "Showed me marketing is psychology, not ads. Genuinely changed how I think.", name: "Ansh, 15" },
             { quote: "You actually build and compete. Nothing like school.", name: "Aryaana, 14" },
           ].map((t) => (

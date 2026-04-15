@@ -119,14 +119,14 @@ export default function SpeakerSection() {
                     masterclass from the man responsible for the brand that defined &ldquo;The Drop&rdquo; and &ldquo;The Community.&rdquo;
                   </span>
                 </p>
-                <p className="text-white/40">
+                <p className="hidden sm:block text-white/40">
                   Your teen will learn the exact frameworks used at the highest level
                   of global marketing, from the person who deploys them every day
                   at the world&apos;s most iconic brand.
                 </p>
               </div>
 
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
+              <div className="hidden sm:flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
                 {[
                   "The Drop",
                   "Community Building",
