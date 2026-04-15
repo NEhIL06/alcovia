@@ -3,8 +3,10 @@ import HeroSection from "@/components/cult-strategy/hero-section";
 import ProblemSection from "@/components/cult-strategy/problem-section";
 import SpeakerSection from "@/components/cult-strategy/speaker-section";
 import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
+import TakeawaysSection from "@/components/cult-strategy/takeaways-section";
+import AuthoritySection from "@/components/cult-strategy/authority-section";
 import SocialProofSection from "@/components/cult-strategy/social-proof-section";
-import { DesktopTakeawaysAuthority, DesktopFaq } from "@/components/cult-strategy/desktop-only-sections";
+import FaqSection from "@/components/cult-strategy/faq-section";
 import ClosingCtaSection from "@/components/cult-strategy/closing-cta-section";
 import MobileFloatingCta from "@/components/cult-strategy/mobile-floating-cta";
 import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracker";
@@ -34,9 +36,14 @@ export default function CultStrategyWorkshopPage() {
       <ProblemSection />
       <SpeakerSection />
       <WorkshopPhases />
-      <DesktopTakeawaysAuthority />
+      <div className="hidden md:block">
+        <TakeawaysSection />
+        <AuthoritySection />
+      </div>
       <SocialProofSection />
-      <DesktopFaq />
+      <div className="hidden md:block">
+        <FaqSection />
+      </div>
       <ClosingCtaSection />
       <MobileFloatingCta />
       <Footer />
