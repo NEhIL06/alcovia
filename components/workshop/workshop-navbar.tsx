@@ -1,5 +1,6 @@
 import Link from "next/link"
 import Image from "next/image"
+import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link"
 
 export default function WorkshopNavbar() {
   return (
@@ -16,9 +17,9 @@ export default function WorkshopNavbar() {
             className="h-10 sm:h-14 lg:h-16 w-auto"
           />
         </Link>
-        <a
-          href="#register"
-          className="group inline-flex items-center gap-2 rounded-full bg-[#FF6B2B] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#ff7a3f] transition-all shadow-lg shadow-[#FF6B2B]/30 hover:shadow-[#FF6B2B]/50"
+        <WorkshopCheckoutLink
+          ctaSource="navbar"
+          className="group inline-flex items-center gap-2 rounded-full bg-[#FF6B2B] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#ff7a3f] transition-all shadow-lg shadow-[#FF6B2B]/30 hover:shadow-[#FF6B2B]/50 cursor-pointer"
         >
           Register
           <svg
@@ -34,7 +35,7 @@ export default function WorkshopNavbar() {
             <path d="M5 12h14" />
             <path d="m12 5 7 7-7 7" />
           </svg>
-        </a>
+        </WorkshopCheckoutLink>
       </div>
     </header>
   )

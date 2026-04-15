@@ -26,6 +26,7 @@ export const WORKSHOP_DETAILS = {
 } as const
 
 export type WorkshopCtaSource =
+  | "navbar"
   | "hero"
   | "mid"
   | "closing"

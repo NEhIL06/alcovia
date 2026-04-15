@@ -48,10 +48,10 @@ export default async function WorkshopLayout({
   await sendMetaCAPIPageView()
 
   return (
-    <>
+    <WorkshopCheckoutProvider>
       <ScrollFadeInit />
       <WorkshopNavbar />
-      <WorkshopCheckoutProvider>{children}</WorkshopCheckoutProvider>
-    </>
+      {children}
+    </WorkshopCheckoutProvider>
   )
 }
