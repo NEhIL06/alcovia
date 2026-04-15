@@ -50,7 +50,7 @@ export default function HeroSection() {
 
       <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
         <div
-          className="cult-fade flex items-center justify-center gap-3 mb-3 sm:mb-8"
+          className="flex items-center justify-center gap-3 mb-3 sm:mb-8"
           style={{ animationDelay: "0.3s" }}
         >
           <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
@@ -84,7 +84,7 @@ export default function HeroSection() {
         </h1>
 
         <p
-          className="cult-fade text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
+          className="text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
           style={{ animationDelay: "0.7s" }}
         >
           Manufacturing Status &amp;{" "}
@@ -92,25 +92,25 @@ export default function HeroSection() {
         </p>
 
         <div
-          className="cult-fade w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
+          className="w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
           style={{ background: `${ACCENT_DIM}0.4)`, animationDelay: "0.9s" }}
         />
 
         <p
-          className="cult-fade text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/70 max-w-xl mx-auto mb-2"
+          className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/70 max-w-xl mx-auto mb-2"
           style={{ animationDelay: "1.1s" }}
         >
           Learn how Nike manufactures hype and global communities with Marketing Head Siddhant Narayan
         </p>
         <p
-          className="cult-fade text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
+          className="text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
           style={{ animationDelay: "1.2s" }}
         >
           Country Head of Marketing, Nike
         </p>
 
         <div
-          className="cult-fade mt-6 sm:mt-12 flex flex-col items-center gap-3"
+          className="mt-6 sm:mt-12 flex flex-col items-center gap-3"
           style={{ animationDelay: "1.4s" }}
         >
           <WorkshopCheckoutLink
@@ -143,7 +143,7 @@ export default function HeroSection() {
         </div>
 
         <div
-          className="cult-fade mt-5 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
+          className="mt-5 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
           style={{ animationDelay: "1.6s" }}
         >
           <div className="flex items-center gap-2">
@@ -185,7 +185,7 @@ export default function HeroSection() {
       </div>
 
       <div
-        className="cult-fade absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10"
+        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10"
         style={{ animationDelay: "2s" }}
       >
         <svg
