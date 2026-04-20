@@ -1,33 +1,15 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#FF6B2B";
 const ACCENT_DIM = "rgba(255,107,43,";
 
 export default function HeroSection() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const heroOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const heroScale = useTransform(scrollYProgress, [0, 0.8], [1, 0.95]);
-  const textY = useTransform(scrollYProgress, [0, 0.8], [0, -60]);
-
   return (
     <section
-      ref={containerRef}
       id="cult-hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative sm:min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-6 sm:pb-12"
     >
-      {/* ── BACKGROUND ── */}
       <div className="absolute inset-0 z-0">
-        {/* Single radial glow */}
         <div
           className="absolute inset-0"
           style={{
@@ -35,10 +17,9 @@ export default function HeroSection() {
           }}
         />
 
-        {/* Vertical lines — sparse, subtle */}
-        <div className="absolute inset-0 opacity-[0.03]">
+        <div className="hidden md:block absolute inset-0 opacity-[0.03]">
           {Array.from({ length: 16 }).map((_, i) => (
-            <motion.div
+            <div
               key={i}
               className="absolute h-full"
               style={{
@@ -46,14 +27,10 @@ export default function HeroSection() {
                 width: "1px",
                 background: `linear-gradient(180deg, transparent 0%, ${ACCENT} 50%, transparent 100%)`,
               }}
-              initial={{ opacity: 0, scaleY: 0 }}
-              animate={{ opacity: 1, scaleY: 1 }}
-              transition={{ delay: i * 0.03, duration: 1.2, ease: "easeOut" }}
             />
           ))}
         </div>
 
-        {/* Grain overlay */}
         <div
           className="absolute inset-0 opacity-[0.025]"
           style={{
@@ -63,29 +40,18 @@ export default function HeroSection() {
           }}
         />
 
-        {/* Top accent stripe */}
-        <motion.div
-          className="absolute top-0 left-0 right-0 h-[2px]"
+        <div
+          className="cult-scale-x absolute top-0 left-0 right-0 h-[2px]"
           style={{
             background: `linear-gradient(to right, transparent 0%, ${ACCENT} 40%, ${ACCENT} 60%, transparent 100%)`,
           }}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
         />
       </div>
 
-      {/* ── MAIN CONTENT ── */}
-      <motion.div
-        className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto"
-        style={{ opacity: heroOpacity, scale: heroScale, y: textY }}
-      >
-        {/* Overline — accent lines + label */}
-        <motion.div
-          className="flex items-center justify-center gap-3 mb-6 sm:mb-8"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div
+          className="flex items-center justify-center gap-3 mb-3 sm:mb-8"
+          style={{ animationDelay: "0.3s" }}
         >
           <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
           <span
@@ -95,14 +61,10 @@ export default function HeroSection() {
             Alcovia Workshop
           </span>
           <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
-        </motion.div>
+        </div>
 
-        {/* Headline */}
-        <motion.h1
+        <h1
           className="font-[family-name:var(--font-milan)] leading-[0.9] tracking-tight mb-4 sm:mb-6"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
         >
           <span
             className="block text-[clamp(2.5rem,8vw,7rem)] text-white"
@@ -119,52 +81,37 @@ export default function HeroSection() {
           >
             Strategy
           </span>
-        </motion.h1>
+        </h1>
 
-        {/* Subheadline */}
-        <motion.p
-          className="text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-6 sm:mb-8"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
+        <p
+          className="text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
+          style={{ animationDelay: "0.7s" }}
         >
           Manufacturing Status &amp;{" "}
           <span style={{ color: ACCENT }}>Hype</span>
-        </motion.p>
+        </p>
 
-        {/* Divider */}
-        <motion.div
-          className="w-16 sm:w-24 h-px mx-auto mb-6 sm:mb-8"
-          style={{ background: `${ACCENT_DIM}0.4)` }}
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ delay: 0.9, duration: 0.8 }}
+        <div
+          className="w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
+          style={{ background: `${ACCENT_DIM}0.4)`, animationDelay: "0.9s" }}
         />
 
-        {/* Hook line */}
-        <motion.p
+        <p
           className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/70 max-w-xl mx-auto mb-2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1, duration: 1 }}
+          style={{ animationDelay: "1.1s" }}
         >
           Learn how Nike manufactures hype and global communities with Marketing Head Siddhant Narayan
-        </motion.p>
-        <motion.p
+        </p>
+        <p
           className="text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 1 }}
+          style={{ animationDelay: "1.2s" }}
         >
           Country Head of Marketing, Nike
-        </motion.p>
+        </p>
 
-        {/* CTA */}
-        <motion.div
-          className="mt-10 sm:mt-12 flex flex-col items-center gap-3"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.8 }}
+        <div
+          className="mt-6 sm:mt-12 flex flex-col items-center gap-3"
+          style={{ animationDelay: "1.4s" }}
         >
           <WorkshopCheckoutLink
             ctaSource="hero"
@@ -193,14 +140,11 @@ export default function HeroSection() {
           <p className="text-xs text-white/35 font-[family-name:var(--font-satoshi)] tracking-wide">
             ₹3,999 per seat · Inclusive of lunch and materials
           </p>
-        </motion.div>
+        </div>
 
-        {/* Details row */}
-        <motion.div
-          className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.8 }}
+        <div
+          className="mt-5 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
+          style={{ animationDelay: "1.6s" }}
         >
           <div className="flex items-center gap-2">
             <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-4 h-4">
@@ -237,30 +181,24 @@ export default function HeroSection() {
               Limited Spots
             </span>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
-      {/* Scroll indicator — chevron only */}
-      <motion.div
+      <div
         className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.0, duration: 1 }}
+        style={{ animationDelay: "2s" }}
       >
-        <motion.svg
+        <svg
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
           strokeWidth={1.5}
-          className="w-5 h-5 text-white/20"
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="cult-scroll-chevron w-5 h-5 text-white/20"
         >
           <path d="M19 9l-7 7-7-7" />
-        </motion.svg>
-      </motion.div>
+        </svg>
+      </div>
 
-      {/* Corner accents */}
       <div className="hidden sm:block absolute top-8 left-8 w-12 h-12 border-t border-l" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
       <div className="hidden sm:block absolute top-8 right-8 w-12 h-12 border-t border-r" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
       <div className="hidden sm:block absolute bottom-8 left-8 w-12 h-12 border-b border-l" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />

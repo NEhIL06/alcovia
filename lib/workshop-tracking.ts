@@ -2,7 +2,17 @@
 
 const DEFAULT_WORKSHOP_PAYMENT_URL = "https://rzp.io/rzp/mbJ5dfd"
 const WORKSHOP_EVENT_ENDPOINT = "/api/workshop-funnel"
+const WORKSHOP_CHECKOUT_LEAD_ENDPOINT = "/api/workshop-checkout-lead"
 const WORKSHOP_CHECKOUT_STORAGE_KEY = "alcovia_workshop_checkout_context_v1"
+const WORKSHOP_LAST_LEAD_STORAGE_KEY = "alcovia_workshop_last_lead_v1"
+
+export interface WorkshopCheckoutLeadInput {
+  parent_name: string
+  parent_phone: string
+  student_name: string
+  grade: string
+  school: string
+}
 
 export const WORKSHOP_DETAILS = {
   slug: "nike-playbook-workshop",
@@ -16,6 +26,7 @@ export const WORKSHOP_DETAILS = {
 } as const
 
 export type WorkshopCtaSource =
+  | "navbar"
   | "hero"
   | "mid"
   | "closing"
@@ -252,14 +263,151 @@ export function parseRazorpayResult(searchParams: URLSearchParams): ParsedRazorp
   }
 }
 
-export async function beginWorkshopCheckout(ctaSource: WorkshopCtaSource) {
+interface BeginWorkshopCheckoutOptions {
+  lead?: WorkshopCheckoutLeadInput
+  leadId?: string
+}
+
+function buildRazorpayUrl(
+  base: string,
+  options: BeginWorkshopCheckoutOptions,
+  context: WorkshopTrackingContext
+): string {
+  const url = new URL(base)
+  const { lead, leadId } = options
+
+  if (lead) {
+    const fullPhone = lead.parent_phone.startsWith("+")
+      ? lead.parent_phone
+      : `+91${lead.parent_phone.replace(/\D/g, "")}`
+    url.searchParams.set("prefill[name]", lead.parent_name)
+    url.searchParams.set("prefill[contact]", fullPhone)
+    url.searchParams.set("notes[parent_name]", lead.parent_name)
+    url.searchParams.set("notes[parent_phone]", fullPhone)
+    url.searchParams.set("notes[student_name]", lead.student_name)
+    url.searchParams.set("notes[grade]", lead.grade)
+    url.searchParams.set("notes[school]", lead.school)
+  }
+
+  if (leadId) {
+    url.searchParams.set("notes[lead_id]", leadId)
+  }
+  url.searchParams.set("notes[cta_source]", context.cta_source || "unknown")
+  url.searchParams.set("notes[checkout_attempt_id]", context.checkout_attempt_id)
+
+  if (context.utm_source) url.searchParams.set("notes[utm_source]", context.utm_source)
+  if (context.utm_campaign) url.searchParams.set("notes[utm_campaign]", context.utm_campaign)
+  if (context.utm_medium) url.searchParams.set("notes[utm_medium]", context.utm_medium)
+  if (context.utm_content) url.searchParams.set("notes[utm_content]", context.utm_content)
+  if (context.ad_id) url.searchParams.set("notes[ad_id]", context.ad_id)
+
+  return url.toString()
+}
+
+function persistLastLead(lead: WorkshopCheckoutLeadInput, leadId: string | undefined) {
+  if (typeof sessionStorage === "undefined") return
+  try {
+    sessionStorage.setItem(
+      WORKSHOP_LAST_LEAD_STORAGE_KEY,
+      JSON.stringify({ ...lead, lead_id: leadId })
+    )
+  } catch {
+    /* ignore storage errors */
+  }
+}
+
+export function readLastWorkshopLead():
+  | (WorkshopCheckoutLeadInput & { lead_id?: string })
+  | null {
+  if (typeof sessionStorage === "undefined") return null
+  const raw = sessionStorage.getItem(WORKSHOP_LAST_LEAD_STORAGE_KEY)
+  if (!raw) return null
+  try {
+    return JSON.parse(raw)
+  } catch {
+    return null
+  }
+}
+
+export async function submitWorkshopCheckoutLead(
+  lead: WorkshopCheckoutLeadInput,
+  ctaSource: WorkshopCtaSource
+): Promise<{ leadId: string }> {
+  const clientLeadId = `lead_${crypto.randomUUID()}`
+  const fullPhone = `+91${lead.parent_phone.replace(/\D/g, "")}`
+  const params = new URLSearchParams(window.location.search)
+
+  const payload = {
+    lead_id: clientLeadId,
+    parent_name: lead.parent_name,
+    parent_phone: fullPhone,
+    student_name: lead.student_name,
+    grade: lead.grade,
+    school: lead.school,
+    cta_source: ctaSource,
+    funnel_name: "workshop",
+    workshop_slug: WORKSHOP_DETAILS.slug,
+    workshop_title: WORKSHOP_DETAILS.title,
+    workshop_date: WORKSHOP_DETAILS.dateIso,
+    amount: WORKSHOP_DETAILS.amount,
+    currency: WORKSHOP_DETAILS.currency,
+    payment_status: "pending",
+    landing_page: window.location.pathname,
+    source_url: window.location.href,
+    referrer_raw: document.referrer || "direct",
+    traffic_source: getTrafficSource(),
+    utm_source: params.get("utm_source") || undefined,
+    utm_medium: params.get("utm_medium") || undefined,
+    utm_campaign: params.get("utm_campaign") || undefined,
+    utm_content: params.get("utm_content") || undefined,
+    utm_term: params.get("utm_term") || undefined,
+    ad_id: params.get("ad_id") || undefined,
+    fbc: getCookie("_fbc"),
+    fbp: getCookie("_fbp"),
+    client_user_agent: navigator.userAgent,
+    timestamp: new Date().toISOString(),
+  }
+
+  const response = await fetch(WORKSHOP_CHECKOUT_LEAD_ENDPOINT, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  })
+
+  let leadId = clientLeadId
+  if (response.ok) {
+    try {
+      const json = (await response.clone().json()) as { lead_id?: string; id?: string }
+      if (json?.lead_id) leadId = json.lead_id
+      else if (json?.id) leadId = json.id
+    } catch {
+      /* use client-generated id */
+    }
+  } else {
+    throw new Error(`Lead submission failed with status ${response.status}`)
+  }
+
+  persistLastLead(lead, leadId)
+  return { leadId }
+}
+
+export async function beginWorkshopCheckout(
+  ctaSource: WorkshopCtaSource,
+  options: BeginWorkshopCheckoutOptions = {}
+) {
   const checkoutEventId = `checkout_${crypto.randomUUID()}`
   const payload = await trackWorkshopEvent("workshop_checkout_started", {
     ctaSource,
     eventId: checkoutEventId,
   })
 
-  persistWorkshopCheckoutContext(payload)
+  const contextWithLead: WorkshopTrackingContext = {
+    ...payload,
+    ...(options.leadId ? { checkout_attempt_id: payload.checkout_attempt_id } : {}),
+  }
+
+  persistWorkshopCheckoutContext(contextWithLead)
 
   ;(window as Window & { gtag?: (...args: unknown[]) => void }).gtag?.("event", "begin_checkout", {
     currency: WORKSHOP_DETAILS.currency,
@@ -293,5 +441,6 @@ export async function beginWorkshopCheckout(ctaSource: WorkshopCtaSource) {
     keepalive: true,
   }).catch(() => {})
 
-  window.location.assign(getWorkshopPaymentUrl())
+  const finalUrl = buildRazorpayUrl(getWorkshopPaymentUrl(), options, contextWithLead)
+  window.location.assign(finalUrl)
 }
