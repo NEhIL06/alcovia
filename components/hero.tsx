@@ -184,7 +184,7 @@ const CTAButton = memo(({
                 onMouseEnter={onMouseEnter}
                 onClick={onClick}
             >
-                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Start Your Journey</span>
+                <span className="relative z-10 transition-colors group-hover:text-[#0C0C0C]">Apply Now</span>
                 <motion.div
                     className="absolute inset-0 -z-0"
                     style={{ backgroundImage: GOLD_GRADIENT }}
