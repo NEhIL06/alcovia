@@ -355,10 +355,10 @@ export default function RegistrationModal() {
                   <CheckCircle className="h-14 w-14 text-[#EABF36] mb-5" />
                 </motion.div>
                 <h3 className="font-[family-name:var(--font-playfair)] text-xl font-bold text-white mb-2">
-                  You're In!
+                  Thank you!
                 </h3>
                 <p className="text-sm text-white/60 leading-relaxed max-w-xs">
-                  Thank you for your interest in Alcovia. A representative will be in touch with you within 24 hours.
+                  We have received your details. Someone from our team will be in touch with you within 24 hours.
                 </p>
               </div>
             ) : (
