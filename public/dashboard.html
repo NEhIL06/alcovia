@@ -323,11 +323,16 @@ select.filter-input{cursor:pointer}
 
   <div id="tab-ad-creatives" class="tab-content">
     <div class="filters">
+      <select class="filter-input" id="creativeStatusFilter">
+        <option value="active">Active (9 Ads)</option>
+        <option value="">All (25 Ads)</option>
+        <option value="inactive">Inactive (16 Ads)</option>
+      </select>
       <select class="filter-input" id="creativeFunnelFilter">
         <option value="">All Funnel Stages</option>
-        <option value="awareness">Awareness (LP1-LP2)</option>
-        <option value="consideration">Consideration (LP3-LP5)</option>
-        <option value="bofu">BOFU (Workshop)</option>
+        <option value="awareness">Awareness</option>
+        <option value="consideration">Consideration</option>
+        <option value="bofu">BOFU</option>
       </select>
       <select class="filter-input" id="creativeMessagingFilter">
         <option value="">All Messaging</option>
@@ -353,7 +358,7 @@ select.filter-input{cursor:pointer}
       <div class="chart-card"><h3>Leads by Messaging Theme</h3><div id="chartCreativeLeadsByMsg"></div></div>
       <div class="chart-card"><h3>Leads by Tone / Emotion</h3><div id="chartCreativeLeadsByTone"></div></div>
     </div>
-    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px">All Ad Creatives (25 Ads)</h3>
+    <h3 style="font-size:0.9rem;font-weight:700;margin:18px 0 10px" id="creativeTableTitle">Active Ad Creatives (9 Ads)</h3>
     <div class="table-wrap"><table><thead><tr>
       <th data-creative-sort="image">#</th>
       <th data-creative-sort="msg">Messaging</th>
@@ -441,31 +446,31 @@ const TONE_COLORS = { fear:'#ef4444', aspirational:'#10b981', authority:'#3b82f6
 const FUNNEL_LABELS = { awareness:'Awareness', consideration:'Consideration', bofu:'BOFU' };
 
 const AD_CREATIVES = [
-  {image:1,msg:'m1',tone:'fear',lp:'/lp/1',funnel:'awareness',headline:'Is your teenager too "soft" for the real world?',sub:'Good grades won\'t save them when real-world friction hits.',utmContent:'m1_fear',adIdPrefix:'alc_m1_fear'},
-  {image:2,msg:'m1',tone:'aspirational',lp:'/lp/1',funnel:'awareness',headline:'Raise a teen who finishes what they start.',sub:'We turn ideas teenagers talk about into projects they actually build.',utmContent:'m1_aspirational',adIdPrefix:'alc_m1_asp'},
-  {image:3,msg:'m1',tone:'authority',lp:'/lp/1',funnel:'awareness',headline:'Bright teenagers are not automatically real-world ready.',sub:'What distinguishes exceptional teenagers is not intelligence but how early they build real world readiness.',utmContent:'m1_authority',adIdPrefix:'alc_m1_auth'},
-  {image:4,msg:'m1',tone:'myth_busting',lp:'/lp/1',funnel:'awareness',headline:'Being "book smart" isn\'t enough anymore.',sub:'"Book smart" means nothing if they quit when things get hard.',utmContent:'m1_myth_busting',adIdPrefix:'alc_m1_myth'},
-  {image:5,msg:'m1',tone:'comparison',lp:'/lp/1',funnel:'awareness',headline:'Book-Smart vs. Real-World Ready.',sub:'Average students memorize and quit. Alcovians build actual grit.',utmContent:'m1_comparison',adIdPrefix:'alc_m1_comp'},
-  {image:6,msg:'m2',tone:'fear',lp:'/lp/2',funnel:'awareness',headline:'Why is your teen going through "elite" career counselling for a career that won\'t exist in 5 years?',sub:'Old-school career & college counselling can\'t keep up.',utmContent:'m2_fear',adIdPrefix:'alc_m2_fear'},
-  {image:7,msg:'m2',tone:'aspirational',lp:'/lp/2',funnel:'awareness',headline:'True career clarity starts here.',sub:'Give them the ultimate gift: total clarity.',utmContent:'m2_aspirational',adIdPrefix:'alc_m2_asp'},
-  {image:8,msg:'m2',tone:'authority',lp:'/lp/2',funnel:'awareness',headline:'Preparing for top universities is not equal to preparing for the future.',sub:'At Alcovia, your teenager will explore real work with real professionals.',utmContent:'m2_authority',adIdPrefix:'alc_m2_auth'},
-  {image:9,msg:'m2',tone:'myth_busting',lp:'/lp/2',funnel:'awareness',headline:'Marks measure memory. The real world measures initiatives.',sub:'Why plan for 2035 using outdated advice?',utmContent:'m2_myth_busting',adIdPrefix:'alc_m2_myth'},
-  {image:10,msg:'m2',tone:'comparison',lp:'/lp/2',funnel:'awareness',headline:'Stop Preparing Teens For Yesterday\'s Careers.',sub:'Old-school prep breeds imposter syndrome.',utmContent:'m2_comparison',adIdPrefix:'alc_m2_comp'},
-  {image:11,msg:'m3',tone:'fear',lp:'/lp/3',funnel:'consideration',headline:'What if your teenager is working hard but in all the wrong directions?',sub:'Fake "study calls" and endless tuitions are destroying their focus.',utmContent:'m3_fear',adIdPrefix:'alc_m3_fear'},
-  {image:12,msg:'m3',tone:'aspirational',lp:'/lp/3',funnel:'consideration',headline:'Time Is Your Teenager\'s Biggest Asset.',sub:'Imagine your teen managing their time like a CXO.',utmContent:'m3_aspirational',adIdPrefix:'alc_m3_asp'},
-  {image:13,msg:'m3',tone:'authority',lp:'/lp/3',funnel:'consideration',headline:'CXO-level time management for teenagers',sub:'We train teens using the exact productivity frameworks taught to top business owners.',utmContent:'m3_authority',adIdPrefix:'alc_m3_auth'},
-  {image:14,msg:'m3',tone:'myth_busting',lp:'/lp/3',funnel:'consideration',headline:'"Busy" doesn\'t mean productive.',sub:'Juggling 4 hobbies isn\'t productive, it\'s burnout.',utmContent:'m3_myth_busting',adIdPrefix:'alc_m3_myth'},
-  {image:15,msg:'m3',tone:'comparison',lp:'/lp/3',funnel:'consideration',headline:'Average teens waste hours scrolling',sub:'Alcovians master their schedules using CXO-level time management systems.',utmContent:'m3_comparison',adIdPrefix:'alc_m3_comp'},
-  {image:16,msg:'m4',tone:'fear',lp:'/lp/4',funnel:'consideration',headline:'Your teenager\'s peer group may be deciding more than you are.',sub:'An average peer group will create an average teenager.',utmContent:'m4_fear',adIdPrefix:'alc_m4_fear'},
-  {image:17,msg:'m4',tone:'aspirational',lp:'/lp/4',funnel:'consideration',headline:'Ambitious Teens Need Ambitious Friends.',sub:'How about those were the top 1% of Gurgaon.',utmContent:'m4_aspirational',adIdPrefix:'alc_m4_asp'},
-  {image:18,msg:'m4',tone:'authority',lp:'/lp/4',funnel:'consideration',headline:'Welcome to the 1% Club for teens.',sub:'National robotics winner, India\'s top gymnasts, golfers, equestrians are already onboard.',utmContent:'m4_authority',adIdPrefix:'alc_m4_auth'},
-  {image:19,msg:'m4',tone:'myth_busting',lp:'/lp/4',funnel:'consideration',headline:'Myth: School success is a reliable sign of future success.',sub:'Exceptional teenagers are shaped by stronger environments, sharper peers & real-world exposure.',utmContent:'m4_myth_busting',adIdPrefix:'alc_m4_myth'},
-  {image:20,msg:'m4',tone:'comparison',lp:'/lp/4',funnel:'consideration',headline:'Average teen V/s alcovian',sub:'While others gossip online, alcovians are launching startups.',utmContent:'m4_comparison',adIdPrefix:'alc_m4_comp'},
-  {image:21,msg:'m5',tone:'fear',lp:'/lp/5',funnel:'consideration',headline:'Potential alone does not put a teenager in the top 1%.',sub:'If your teen isn\'t building an unfair advantage today, they\'ll be left behind.',utmContent:'m5_fear',adIdPrefix:'alc_m5_fear'},
-  {image:22,msg:'m5',tone:'aspirational',lp:'/lp/5',funnel:'consideration',headline:'You Built A Top 1% Life. Now Build it for your Teenager.',sub:'Join an elite cohort of driven teens building real companies today.',utmContent:'m5_aspirational',adIdPrefix:'alc_m5_asp'},
-  {image:23,msg:'m5',tone:'authority',lp:'/lp/5',funnel:'consideration',headline:'Know where the top 1% of teenagers learn how the real world works',sub:'',utmContent:'m5_authority',adIdPrefix:'alc_m5_auth'},
-  {image:24,msg:'m5',tone:'myth_busting',lp:'/lp/5',funnel:'consideration',headline:'Myth: Cracking a top university means your teenager is set.',sub:'Get your teen into the rooms where real startups and leaders are made.',utmContent:'m5_myth_busting',adIdPrefix:'alc_m5_myth'},
-  {image:25,msg:'m5',tone:'comparison',lp:'/lp/5',funnel:'consideration',headline:'The 99% wait. The 1% build.',sub:'The 99% teens wait for graduation while the 1% are already building companies.',utmContent:'m5_comparison',adIdPrefix:'alc_m5_comp'},
+  {image:1,msg:'m1',tone:'fear',lp:'/lp/1',funnel:'awareness',active:true,headline:'Is your teenager too "soft" for the real world?',sub:'Good grades won\'t save them when real-world friction hits.',utmContent:'m1_fear',adIdPrefix:'alc_m1_fear'},
+  {image:2,msg:'m1',tone:'aspirational',lp:'/lp/1',funnel:'awareness',active:false,headline:'Raise a teen who finishes what they start.',sub:'We turn ideas teenagers talk about into projects they actually build.',utmContent:'m1_aspirational',adIdPrefix:'alc_m1_asp'},
+  {image:3,msg:'m1',tone:'authority',lp:'/lp/2',funnel:'awareness',active:true,headline:'Bright teenagers are not automatically real-world ready.',sub:'What distinguishes exceptional teenagers is not intelligence but how early they build real world readiness.',utmContent:'m1_authority',adIdPrefix:'alc_m1_auth'},
+  {image:4,msg:'m1',tone:'myth_busting',lp:'/lp/1',funnel:'awareness',active:false,headline:'Being "book smart" isn\'t enough anymore.',sub:'"Book smart" means nothing if they quit when things get hard.',utmContent:'m1_myth_busting',adIdPrefix:'alc_m1_myth'},
+  {image:5,msg:'m1',tone:'comparison',lp:'/lp/1',funnel:'awareness',active:false,headline:'Book-Smart vs. Real-World Ready.',sub:'Average students memorize and quit. Alcovians build actual grit.',utmContent:'m1_comparison',adIdPrefix:'alc_m1_comp'},
+  {image:6,msg:'m2',tone:'fear',lp:'/lp/2',funnel:'awareness',active:false,headline:'Why is your teen going through "elite" career counselling for a career that won\'t exist in 5 years?',sub:'Old-school career & college counselling can\'t keep up.',utmContent:'m2_fear',adIdPrefix:'alc_m2_fear'},
+  {image:7,msg:'m2',tone:'aspirational',lp:'/lp/2',funnel:'awareness',active:false,headline:'True career clarity starts here.',sub:'Give them the ultimate gift: total clarity.',utmContent:'m2_aspirational',adIdPrefix:'alc_m2_asp'},
+  {image:8,msg:'m2',tone:'authority',lp:'/lp/2',funnel:'awareness',active:false,headline:'Preparing for top universities is not equal to preparing for the future.',sub:'At Alcovia, your teenager will explore real work with real professionals.',utmContent:'m2_authority',adIdPrefix:'alc_m2_auth'},
+  {image:9,msg:'m2',tone:'myth_busting',lp:'/lp/2',funnel:'awareness',active:false,headline:'Marks measure memory. The real world measures initiatives.',sub:'Why plan for 2035 using outdated advice?',utmContent:'m2_myth_busting',adIdPrefix:'alc_m2_myth'},
+  {image:10,msg:'m2',tone:'comparison',lp:'/lp/2',funnel:'awareness',active:false,headline:'Stop Preparing Teens For Yesterday\'s Careers.',sub:'Old-school prep breeds imposter syndrome.',utmContent:'m2_comparison',adIdPrefix:'alc_m2_comp'},
+  {image:11,msg:'m3',tone:'fear',lp:'/lp/3',funnel:'consideration',active:false,headline:'What if your teenager is working hard but in all the wrong directions?',sub:'Fake "study calls" and endless tuitions are destroying their focus.',utmContent:'m3_fear',adIdPrefix:'alc_m3_fear'},
+  {image:12,msg:'m3',tone:'aspirational',lp:'/lp/3',funnel:'awareness',active:true,headline:'Time Is Your Teenager\'s Biggest Asset.',sub:'Imagine your teen managing their time like a CXO.',utmContent:'m3_aspirational',adIdPrefix:'alc_m3_asp'},
+  {image:13,msg:'m3',tone:'authority',lp:'/lp/3',funnel:'consideration',active:false,headline:'CXO-level time management for teenagers',sub:'We train teens using the exact productivity frameworks taught to top business owners.',utmContent:'m3_authority',adIdPrefix:'alc_m3_auth'},
+  {image:14,msg:'m3',tone:'myth_busting',lp:'/lp/3',funnel:'consideration',active:true,headline:'"Busy" doesn\'t mean productive.',sub:'Juggling 4 hobbies isn\'t productive, it\'s burnout.',utmContent:'m3_myth_busting',adIdPrefix:'alc_m3_myth'},
+  {image:15,msg:'m3',tone:'comparison',lp:'/lp/3',funnel:'consideration',active:false,headline:'Average teens waste hours scrolling',sub:'Alcovians master their schedules using CXO-level time management systems.',utmContent:'m3_comparison',adIdPrefix:'alc_m3_comp'},
+  {image:16,msg:'m4',tone:'fear',lp:'/lp/2',funnel:'consideration',active:true,headline:'Your teenager\'s peer group may be deciding more than you are.',sub:'An average peer group will create an average teenager.',utmContent:'m4_fear',adIdPrefix:'alc_m4_fear'},
+  {image:17,msg:'m4',tone:'aspirational',lp:'/lp/3',funnel:'consideration',active:true,headline:'Ambitious Teens Need Ambitious Friends.',sub:'How about those were the top 1% of Gurgaon.',utmContent:'m4_aspirational',adIdPrefix:'alc_m4_asp'},
+  {image:18,msg:'m4',tone:'authority',lp:'/lp/4',funnel:'consideration',active:false,headline:'Welcome to the 1% Club for teens.',sub:'National robotics winner, India\'s top gymnasts, golfers, equestrians are already onboard.',utmContent:'m4_authority',adIdPrefix:'alc_m4_auth'},
+  {image:19,msg:'m4',tone:'myth_busting',lp:'/lp/4',funnel:'consideration',active:false,headline:'Myth: School success is a reliable sign of future success.',sub:'Exceptional teenagers are shaped by stronger environments, sharper peers & real-world exposure.',utmContent:'m4_myth_busting',adIdPrefix:'alc_m4_myth'},
+  {image:20,msg:'m4',tone:'comparison',lp:'/lp/4',funnel:'consideration',active:false,headline:'Average teen V/s alcovian',sub:'While others gossip online, alcovians are launching startups.',utmContent:'m4_comparison',adIdPrefix:'alc_m4_comp'},
+  {image:21,msg:'m5',tone:'fear',lp:'/lp/5',funnel:'consideration',active:false,headline:'Potential alone does not put a teenager in the top 1%.',sub:'If your teen isn\'t building an unfair advantage today, they\'ll be left behind.',utmContent:'m5_fear',adIdPrefix:'alc_m5_fear'},
+  {image:22,msg:'m5',tone:'aspirational',lp:'/lp/1',funnel:'bofu',active:true,headline:'You Built A Top 1% Life. Now Build it for your Teenager.',sub:'Join an elite cohort of driven teens building real companies today.',utmContent:'m5_aspirational',adIdPrefix:'alc_m5_asp'},
+  {image:23,msg:'m5',tone:'authority',lp:'/lp/5',funnel:'consideration',active:false,headline:'Know where the top 1% of teenagers learn how the real world works',sub:'',utmContent:'m5_authority',adIdPrefix:'alc_m5_auth'},
+  {image:24,msg:'m5',tone:'myth_busting',lp:'/lp/2',funnel:'bofu',active:true,headline:'Myth: Cracking a top university means your teenager is set.',sub:'Get your teen into the rooms where real startups and leaders are made.',utmContent:'m5_myth_busting',adIdPrefix:'alc_m5_myth'},
+  {image:25,msg:'m5',tone:'comparison',lp:'/lp/1',funnel:'bofu',active:true,headline:'The 99% wait. The 1% build.',sub:'The 99% teens wait for graduation while the 1% are already building companies.',utmContent:'m5_comparison',adIdPrefix:'alc_m5_comp'},
 ];
 
 const COLORS = {
@@ -1363,16 +1368,22 @@ function renderAttribution() {
 }
 
 function renderAdCreatives() {
+  var statusFilter = document.getElementById('creativeStatusFilter').value;
   var funnelFilter = document.getElementById('creativeFunnelFilter').value;
   var msgFilter = document.getElementById('creativeMessagingFilter').value;
   var toneFilter = document.getElementById('creativeToneFilter').value;
 
   var creatives = AD_CREATIVES.filter(function(c) {
+    if (statusFilter === 'active' && !c.active) return false;
+    if (statusFilter === 'inactive' && c.active) return false;
     if (funnelFilter && c.funnel !== funnelFilter) return false;
     if (msgFilter && c.msg !== msgFilter) return false;
     if (toneFilter && c.tone !== toneFilter) return false;
     return true;
   });
+
+  var statusLabel = statusFilter === 'active' ? 'Active' : (statusFilter === 'inactive' ? 'Inactive' : 'All');
+  document.getElementById('creativeTableTitle').textContent = statusLabel + ' Ad Creatives (' + creatives.length + ' Ads)';
 
   var ads = (state.metaData && state.metaData.ads) || [];
   var leads = getFilteredLeads();
@@ -1399,7 +1410,7 @@ function renderAdCreatives() {
     var leadCount = matchingLeads.length;
     var cpl = leadCount ? (spend / leadCount) : 0;
 
-    return {image:c.image, msg:c.msg, tone:c.tone, lp:c.lp, funnel:c.funnel, headline:c.headline, sub:c.sub, utmContent:c.utmContent, spend:spend, impressions:impressions, clicks:clicks, ctr:ctr, leads:leadCount, cpl:cpl};
+    return {image:c.image, msg:c.msg, tone:c.tone, lp:c.lp, funnel:c.funnel, active:c.active, headline:c.headline, sub:c.sub, utmContent:c.utmContent, spend:spend, impressions:impressions, clicks:clicks, ctr:ctr, leads:leadCount, cpl:cpl};
   });
 
   var totalSpend = enriched.reduce(function(s, c) { return s + c.spend; }, 0);
@@ -1410,12 +1421,14 @@ function renderAdCreatives() {
   var bofuSpend = workshopCampaigns.reduce(function(s, c) { return s + (c.spend || 0); }, 0);
   var avgCpl = totalLeads ? (totalSpend / totalLeads) : 0;
 
+  var bofuCreativeSpend = enriched.filter(function(c) { return c.funnel === 'bofu'; }).reduce(function(s, c) { return s + c.spend; }, 0);
+
   document.getElementById('creativeSummaryCards').innerHTML =
-    '<div class="mini-card"><div class="label">Awareness Spend (LP1-LP2)</div><div class="value">' + (awarenessSpend ? formatCurrency(awarenessSpend) : '-') + '</div></div>' +
-    '<div class="mini-card"><div class="label">Consideration Spend (LP3-LP5)</div><div class="value">' + (considerationSpend ? formatCurrency(considerationSpend) : '-') + '</div></div>' +
-    '<div class="mini-card"><div class="label">BOFU Spend (Workshop)</div><div class="value">' + (bofuSpend ? formatCurrency(bofuSpend) : '-') + '</div></div>' +
-    '<div class="mini-card"><div class="label">Total LP Leads</div><div class="value">' + totalLeads + '</div></div>' +
-    '<div class="mini-card"><div class="label">LP Ad Spend</div><div class="value">' + (totalSpend ? formatCurrency(totalSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Awareness Spend</div><div class="value">' + (awarenessSpend ? formatCurrency(awarenessSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Consideration Spend</div><div class="value">' + (considerationSpend ? formatCurrency(considerationSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">BOFU Spend</div><div class="value">' + (bofuCreativeSpend ? formatCurrency(bofuCreativeSpend) : '-') + '</div></div>' +
+    '<div class="mini-card"><div class="label">Total Leads</div><div class="value">' + totalLeads + '</div></div>' +
+    '<div class="mini-card"><div class="label">Total Ad Spend</div><div class="value">' + (totalSpend ? formatCurrency(totalSpend) : '-') + '</div></div>' +
     '<div class="mini-card"><div class="label">Avg CPL</div><div class="value">' + (avgCpl ? formatCurrency(avgCpl) : '-') + '</div></div>';
 
   var spendByMsg = {}, spendByTone = {}, leadsByMsg = {}, leadsByTone = {};
@@ -1439,11 +1452,12 @@ function renderAdCreatives() {
   var ctbody = document.getElementById('creativeTable');
   ctbody.innerHTML = sorted.map(function(c) {
     var tc = TONE_COLORS[c.tone] || '#6b7280';
-    return '<tr>' +
-      '<td style="font-weight:700">' + c.image + '</td>' +
+    var rowOpacity = c.active ? '' : 'opacity:0.45;';
+    return '<tr style="' + rowOpacity + '">' +
+      '<td style="font-weight:700">' + c.image + (c.active ? '' : ' <span style="color:#ef4444;font-size:0.6rem;font-weight:400">OFF</span>') + '</td>' +
       '<td style="font-size:0.72rem">' + esc(MSG_LABELS[c.msg] || c.msg) + '</td>' +
       '<td><span class="tag" style="background:' + tc + '22;color:' + tc + '">' + esc(TONE_LABELS[c.tone] || c.tone) + '</span></td>' +
-      '<td><span class="tag tag-' + (c.funnel === 'awareness' ? 'leads' : 'other') + '">' + esc(FUNNEL_LABELS[c.funnel] || c.funnel) + '</span></td>' +
+      '<td><span class="tag tag-' + (c.funnel === 'awareness' ? 'leads' : (c.funnel === 'bofu' ? 'purchase' : 'other')) + '">' + esc(FUNNEL_LABELS[c.funnel] || c.funnel) + '</span></td>' +
       '<td style="font-size:0.72rem;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="' + esc(c.headline) + '">' + esc(c.headline) + '</td>' +
       '<td>' + (c.spend ? formatCurrency(c.spend) : '-') + '</td>' +
       '<td>' + (c.impressions ? Math.round(c.impressions).toLocaleString() : '-') + '</td>' +
@@ -1604,7 +1618,7 @@ document.querySelectorAll('th[data-demo-sort]').forEach((header) => {
   });
 });
 
-['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','checkoutLeadSearch','checkoutLeadPaidFilter','checkoutLeadCtaFilter','globalStartDate','globalEndDate','creativeFunnelFilter','creativeMessagingFilter','creativeToneFilter'].forEach((id) => {
+['filterSearch','filterSource','filterLP','filterCity','orderSearch','orderStatusFilter','orderSourceFilter','checkoutLeadSearch','checkoutLeadPaidFilter','checkoutLeadCtaFilter','globalStartDate','globalEndDate','creativeStatusFilter','creativeFunnelFilter','creativeMessagingFilter','creativeToneFilter'].forEach((id) => {
   const element = document.getElementById(id);
   if (!element) return;
   element.addEventListener('input', render);
