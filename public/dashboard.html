@@ -849,9 +849,14 @@ function renderLeadOverview() {
   renderBarChart('chartCity', countBy(leads, (item) => pick(item, ['city'], 'unknown')));
 }
 
+function utmToImageLabel(utmContent) {
+  var creative = AD_CREATIVES.find(function(c) { return c.utmContent === utmContent; });
+  return creative ? 'Img ' + creative.image + ': ' + utmContent : utmContent;
+}
+
 function renderLeadAds() {
   const paidLeads = getFilteredLeads().filter((item) => pick(item, ['utm_content','ad_id','utm_campaign']));
-  renderBarChart('chartAd', countBy(paidLeads, (item) => pick(item, ['utm_content'], 'unknown')));
+  renderBarChart('chartAd', countBy(paidLeads, (item) => utmToImageLabel(pick(item, ['utm_content'], 'unknown'))));
   renderBarChart('chartAdId', countBy(paidLeads, (item) => pick(item, ['ad_id'], 'unknown')));
 
   const messaging = {};
@@ -859,11 +864,16 @@ function renderLeadAds() {
   paidLeads.forEach((item) => {
     const utmContent = String(pick(item, ['utm_content'], ''));
     const match = utmContent.match(/^(m\d+)/i);
-    if (match) messaging[match[1].toLowerCase()] = (messaging[match[1].toLowerCase()] || 0) + 1;
+    if (match) {
+      const key = match[1].toLowerCase();
+      const label = MSG_LABELS[key] || key;
+      messaging[label] = (messaging[label] || 0) + 1;
+    }
     const parts = utmContent.split('_');
     if (parts.length > 1) {
       const tone = parts.slice(1).join('_');
-      tones[tone] = (tones[tone] || 0) + 1;
+      const label = TONE_LABELS[tone] || tone;
+      tones[label] = (tones[label] || 0) + 1;
     }
   });
 
@@ -1392,16 +1402,16 @@ function renderAdCreatives() {
     var matchingAds = ads.filter(function(a) {
       var name = a.ad_name || '';
       var lower = name.toLowerCase();
-      if (c.active && c.metaAdNames && c.metaAdNames.length) {
-        for (var mi = 0; mi < c.metaAdNames.length; mi++) {
-          if (lower.includes(c.metaAdNames[mi])) return true;
-        }
-        return false;
-      }
       var imgMatch = name.match(/^Image\s+(\d+)/i);
       if (imgMatch && parseInt(imgMatch[1]) === c.image) return true;
       var id = (a.ad_id || '').toLowerCase();
-      return lower.includes(c.adIdPrefix) || lower.includes(c.utmContent) || id.includes(c.adIdPrefix) || id.includes(c.utmContent);
+      if (lower.includes(c.adIdPrefix) || lower.includes(c.utmContent) || id.includes(c.adIdPrefix) || id.includes(c.utmContent)) return true;
+      if (c.metaAdNames && c.metaAdNames.length) {
+        for (var mi = 0; mi < c.metaAdNames.length; mi++) {
+          if (lower.includes(c.metaAdNames[mi])) return true;
+        }
+      }
+      return false;
     });
     var spend = matchingAds.reduce(function(s, a) { return s + (a.spend || 0); }, 0);
     var impressions = matchingAds.reduce(function(s, a) { return s + (a.impressions || 0); }, 0);
