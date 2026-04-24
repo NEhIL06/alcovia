@@ -24,7 +24,7 @@ const team = [
     { id: "04", name: "Vibhor", role: "AI Product Manager", img: "/images/team/vibhor.png", imgClass: "object-cover object-top scale-125", experience: "Ex: Co-Founder Widushi || Ex: Bain, PwC | DTU'23" },
     { id: "05", name: "Hita", role: "Systems Designer", img: "/images/team/hita.png" },
     { id: "06", name: "Nehil", role: "Full Stack Engineer", img: "/images/team/Nehil.png" },
-    { id: "07", name: "Samanyu Pant", role: "GTM & Marketing Lead", img: "/images/team/samanyu.png", experience: "SSCBS’25 | Ex Kora Management LP | Ex Fino Bank" },
+    { id: "07", name: "Samanyu", role: "GTM & Marketing Lead", img: "/images/team/samanyu.png", experience: "SSCBS’25 | Ex Kora Management LP | Ex Fino Bank" },
     { id: "08", name: "Manan", role: "GTM", img: "/images/team/manan.png", experience: "Ex: Co-Founder Collision" },
 ];
 
