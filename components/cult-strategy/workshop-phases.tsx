@@ -53,7 +53,7 @@ const pillars = [
 
 export default function WorkshopPhases() {
   return (
-    <section className="relative py-6 sm:py-16 lg:py-24 overflow-hidden">
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
       <div className="absolute inset-0 pointer-events-none">
         <div className="hidden lg:block">
           <CursorParallaxGrid opacity={0.04} depth={16} spotlight />

@@ -28,7 +28,7 @@ export default function ClosingCtaSection() {
   return (
     <section
       id="cult-cta"
-      className="relative py-6 sm:py-16 lg:py-24 overflow-hidden"
+      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
     >
       <div className="absolute inset-0 pointer-events-none">
         <div className="hidden lg:block">
