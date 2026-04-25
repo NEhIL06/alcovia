@@ -1,7 +1,6 @@
-import Image from "next/image";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
+const ACCENT = "#22C55E";
 
 export default function SpeakerSection() {
   return (
@@ -13,7 +12,7 @@ export default function SpeakerSection() {
         <div
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.03) 0%, transparent 70%)",
           }}
           className="absolute inset-0"
         />
@@ -25,7 +24,7 @@ export default function SpeakerSection() {
             className="text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)]"
             style={{ color: ACCENT }}
           >
-            Meet the Mentor
+            The Challenge
           </span>
         </div>
 
@@ -34,39 +33,43 @@ export default function SpeakerSection() {
             <div className="relative w-48 h-60 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
               <div
                 className="absolute inset-0 border rounded-2xl"
-                style={{ borderColor: `rgba(255,107,43,0.15)` }}
+                style={{ borderColor: `rgba(34,197,94,0.15)` }}
               />
 
-              <div className="absolute inset-3 rounded-xl overflow-hidden">
-                <Image
-                  src="/assets/mentors/siddhant-narayan.png"
-                  alt="Siddhant Narayan, Country Head of Marketing, Nike"
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 320px"
-                />
-                <div className="absolute inset-0 bg-black/15" />
+              <div className="absolute inset-3 rounded-xl overflow-hidden bg-[#0d1a0f] flex flex-col items-center justify-center px-5 py-6 text-center gap-4">
+                <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-10 h-10 sm:w-14 sm:h-14 opacity-60">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+                <p className="text-sm sm:text-lg font-[family-name:var(--font-playfair)] italic text-white/70 leading-snug">
+                  &ldquo;Every superfood you eat today started in someone&apos;s notebook.&rdquo;
+                </p>
+                <div className="w-8 h-px" style={{ background: `rgba(34,197,94,0.3)` }} />
+                <p className="text-xs sm:text-sm font-[family-name:var(--font-playfair)] italic text-white/50 leading-snug">
+                  &ldquo;School teaches photosynthesis, not how to build a food company.&rdquo;
+                </p>
               </div>
 
               <div
                 className="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-2 border-l-2 rounded-tl-md"
-                style={{ borderColor: `rgba(255,107,43,0.4)` }}
+                style={{ borderColor: `rgba(34,197,94,0.4)` }}
               />
               <div
                 className="absolute -top-1.5 -right-1.5 w-5 h-5 border-t-2 border-r-2 rounded-tr-md"
-                style={{ borderColor: `rgba(255,107,43,0.4)` }}
+                style={{ borderColor: `rgba(34,197,94,0.4)` }}
               />
               <div
                 className="absolute -bottom-1.5 -left-1.5 w-5 h-5 border-b-2 border-l-2 rounded-bl-md"
-                style={{ borderColor: `rgba(255,107,43,0.4)` }}
+                style={{ borderColor: `rgba(34,197,94,0.4)` }}
               />
               <div
                 className="absolute -bottom-1.5 -right-1.5 w-5 h-5 border-b-2 border-r-2 rounded-br-md"
-                style={{ borderColor: `rgba(255,107,43,0.4)` }}
+                style={{ borderColor: `rgba(34,197,94,0.4)` }}
               />
             </div>
 
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#0b0d0c] border border-[#FF6B2B]/30 rounded-full px-4 py-1.5 flex items-center gap-2">
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-[#0b0d0c] border border-[#22C55E]/30 rounded-full px-4 py-1.5 flex items-center gap-2">
               <div
                 className="w-1.5 h-1.5 rounded-full animate-pulse"
                 style={{ background: ACCENT }}
@@ -75,7 +78,7 @@ export default function SpeakerSection() {
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
                 style={{ color: ACCENT }}
               >
-                Country Head of Marketing · Nike
+                One Day · Complete Loop
               </span>
             </div>
           </div>
@@ -84,55 +87,47 @@ export default function SpeakerSection() {
             <div className="space-y-3 sm:space-y-5">
               <div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-3">
-                  Siddhant Narayan
+                  The Whole Loop
                 </h3>
                 <div className="flex items-center gap-2.5 justify-center lg:justify-start mb-2">
                   <span
                     className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium"
                     style={{ color: ACCENT }}
                   >
-                    Country Head of Marketing
+                    Trend to Pitch in One Day
                   </span>
-                  <span className="text-white/25">at</span>
-                  <Image
-                    src="/assets/logos/nike-logo.png"
-                    alt="Nike"
-                    width={96}
-                    height={40}
-                    className="h-12 sm:h-14 w-auto object-contain"
-                  />
                 </div>
                 <p className="text-sm text-white/50 font-[family-name:var(--font-satoshi)]">
-                  The architect behind India&apos;s biggest marketing engine
+                  Research, interview, build, and pitch a real superfood brand
                 </p>
               </div>
 
               <div
                 className="w-12 h-px mx-auto lg:mx-0"
-                style={{ background: `rgba(255,107,43,0.3)` }}
+                style={{ background: `rgba(34,197,94,0.3)` }}
               />
 
               <div className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
                 <p>
                   This isn&apos;t a lecture. This is a{" "}
                   <span style={{ color: ACCENT }} className="font-medium">
-                    masterclass from the man responsible for the brand that defined &ldquo;The Drop&rdquo; and &ldquo;The Community.&rdquo;
+                    hands-on sprint where you spot a real food trend, interview actual customers, and pitch your brand like you&apos;re raising money.
                   </span>
                 </p>
                 <p className="hidden sm:block text-white/40">
-                  Your teen will learn the exact frameworks used at the highest level
-                  of global marketing, from the person who deploys them every day
-                  at the world&apos;s most iconic brand.
+                  Your teen will learn the exact process real food entrepreneurs
+                  use to take an idea from a notebook to a funded product,
+                  all in a single high-intensity session.
                 </p>
               </div>
 
               <div className="hidden sm:flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
                 {[
-                  "The Drop",
-                  "Community Building",
-                  "Brand Psychology",
-                  "Hype Engineering",
-                  "Global Marketing",
+                  "Trend Spotting",
+                  "Customer Research",
+                  "Brand Building",
+                  "Investor Pitching",
+                  "Food Science",
                 ].map((tag) => (
                   <span
                     key={tag}
