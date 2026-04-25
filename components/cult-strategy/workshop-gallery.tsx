@@ -30,7 +30,7 @@ export default function WorkshopGallery() {
 
       <div className="relative w-full overflow-hidden">
         <div
-          className="flex gap-2.5 animate-[workshopScroll_40s_linear_infinite]"
+          className="flex gap-2.5 animate-[workshopScroll_120s_linear_infinite]"
           style={{ width: "max-content" }}
         >
           {[...images, ...images].map((img, i) => (
