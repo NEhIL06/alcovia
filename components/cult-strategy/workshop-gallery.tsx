@@ -5,10 +5,11 @@ import Image from "next/image";
 const ACCENT = "#22C55E";
 
 const images = [
-  { src: "/images/workshop/w4.jpeg", alt: "Workshop presentation" },
-  { src: "/images/workshop/w1.jpeg", alt: "Mentor speaking" },
-  { src: "/images/workshop/w5.jpeg", alt: "Student discussion" },
-  { src: "/images/workshop/w2.jpeg", alt: "Group activity" },
+  { src: "/images/lp/cohort.jpg", alt: "Intimate mentoring session" },
+  { src: "/images/lp/environment.jpg", alt: "Teens collaborating on ideas" },
+  { src: "/images/workshop/w4.jpeg", alt: "Full audience workshop" },
+  { src: "/images/lp/ideas-to-execution.jpg", alt: "Students pitching their brand" },
+  { src: "/images/workshop/w2.jpeg", alt: "Group discussion with mentor" },
 ];
 
 export default function WorkshopGallery() {
@@ -29,7 +30,7 @@ export default function WorkshopGallery() {
 
       <div className="relative w-full overflow-hidden">
         <div
-          className="flex gap-2.5 animate-[workshopScroll_18s_linear_infinite]"
+          className="flex gap-2.5 animate-[workshopScroll_40s_linear_infinite]"
           style={{ width: "max-content" }}
         >
           {[...images, ...images].map((img, i) => (
