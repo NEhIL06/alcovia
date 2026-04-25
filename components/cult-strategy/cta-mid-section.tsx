@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 export default function CtaMidSection() {
   return (
@@ -17,7 +17,7 @@ export default function CtaMidSection() {
       >
         <CursorParallaxGrid opacity={0.05} depth={20} spotlight />
         <div style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(255,107,43,0.07) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34,197,94,0.07) 0%, transparent 65%)",
         }} className="absolute inset-0" />
       </div>
 
@@ -85,7 +85,7 @@ export default function CtaMidSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              &ldquo;The best brands don&apos;t sell products.
+              &ldquo;Every superfood you eat today started
             </motion.p>
             <motion.p
               className="text-[clamp(1.15rem,2.8vw,1.9rem)] font-[family-name:var(--font-playfair)] italic mb-2 leading-snug"
@@ -95,7 +95,7 @@ export default function CtaMidSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.35 }}
             >
-              They sell belonging.&rdquo;
+              in someone&apos;s notebook.&rdquo;
             </motion.p>
 
             {/* Attribution divider */}
@@ -111,7 +111,7 @@ export default function CtaMidSection() {
                 className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-[family-name:var(--font-satoshi)]"
                 style={{ color: `${ACCENT_DIM}0.55)` }}
               >
-                The Cult Strategy
+                Edible Engineering
               </span>
               <div className="h-px w-8" style={{ background: `${ACCENT_DIM}0.3)` }} />
             </motion.div>
@@ -154,7 +154,7 @@ export default function CtaMidSection() {
                 <span
                   className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-9 sm:px-12 py-4 sm:py-5 rounded-full font-bold transition-all duration-400 group-hover:scale-[1.04]"
                   style={{
-                    background: `linear-gradient(135deg, #FF6B2B 0%, #FF4500 100%)`,
+                    background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
                     boxShadow: `0 4px 28px ${ACCENT_DIM}0.4), 0 1px 0 rgba(255,255,255,0.12) inset`,
                   }}
                 >
@@ -172,7 +172,7 @@ export default function CtaMidSection() {
               </WorkshopCheckoutLink>
 
               <p className="text-[10px] sm:text-xs text-white/35 font-[family-name:var(--font-satoshi)]">
-                Lunch included &middot; April 11th, 2026 &middot; One Horizon Center
+                Lunch included &middot; May 2nd, 2026 &middot; Horizon Center
               </p>
             </motion.div>
           </div>

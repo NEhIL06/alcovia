@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/cult-strategy/hero-section";
 import ProblemSection from "@/components/cult-strategy/problem-section";
-import SpeakerSection from "@/components/cult-strategy/speaker-section";
 import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
 import TakeawaysSection from "@/components/cult-strategy/takeaways-section";
 import AuthoritySection from "@/components/cult-strategy/authority-section";
@@ -13,13 +12,13 @@ import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracke
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "The Nike Playbook: Engineering a Cult Brand | Alcovia",
+  title: "Edible Engineering: Architecting the Next Superfood | Alcovia",
   description:
-    "Join Siddhant Narayan (Country Head of Marketing, Nike) to pull back the curtain on how the world's most iconic brand manufactures hype and builds global communities. Grades 6–10.",
+    "A hands-on workshop where teenagers spot food trends, interview real customers, and pitch a superfood brand like they are raising money. Grades 6-10. May 2nd, Gurgaon.",
   openGraph: {
-    title: "The Nike Playbook: Engineering a Cult Brand",
+    title: "Edible Engineering: Architecting the Next Superfood",
     description:
-      "A masterclass from the man behind Nike India's marketing engine. Learn the psychology of 'The Drop,' community building, and brand status. April 18th, Gurgaon.",
+      "Every superfood started in someone's notebook. Learn customer research, product strategy, and investor pitching in one day. May 2nd, Gurgaon.",
     type: "website",
   },
   robots: {
@@ -36,7 +35,6 @@ export default function CultStrategyWorkshopPage() {
       <div className="hidden md:block">
         <ProblemSection />
       </div>
-      <SpeakerSection />
       <WorkshopPhases />
       <div className="hidden md:block">
         <TakeawaysSection />

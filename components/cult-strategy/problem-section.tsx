@@ -1,13 +1,13 @@
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 const CARDS = [
   {
     number: "01",
-    title: "The Psychology",
-    description: "Every colourway, drop date, and influencer post is designed to hack your brain. Nike doesn't sell shoes. It sells identity, status, and the fear of missing out.",
+    title: "The Trend",
+    description: "Every superfood on shelves today started as an obscure ingredient someone spotted before the crowd. Learn how to read consumer behaviour, decode health trends, and identify what people will pay a premium for next.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -17,8 +17,8 @@ const CARDS = [
   },
   {
     number: "02",
-    title: "The Community",
-    description: "Brands like Nike don't build customers. They build tribes. When someone insults the brand, your brain processes it as a personal attack because it merged brand identity with self-identity.",
+    title: "The Customer",
+    description: "Building a food brand is not about recipes. It is about asking a hundred customers what they actually want before you make anything. The best products are built from conversations, not assumptions.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -29,8 +29,8 @@ const CARDS = [
   },
   {
     number: "03",
-    title: "The Status",
-    description: "Scarcity isn't an accident. It's engineered. Supreme drops 100 hoodies, not 10,000, because the queue IS the marketing. The brain treats scarcity as danger.",
+    title: "The Pitch",
+    description: "Ideas are worthless until someone funds them. Learn how real food entrepreneurs pitch investors, tell a story with data, and convince people to bet money on an idea that only exists on paper.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <circle cx="12" cy="12" r="10" />
@@ -61,21 +61,20 @@ export default function ProblemSection() {
           </span>
 
           <h2 className="lp-fade-in text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight mb-6">
-            A shoe is just leather and rubber
+            A seed is just biology
             <br />
             <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>
-               until it becomes a Nike.
+               until it becomes a superfood brand.
             </span>
           </h2>
 
           <p className="lp-fade-in text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-2xl mx-auto">
-            Why? Because of{" "}
-            <span className="text-white/90 font-semibold">The Cult Strategy</span>.
-            For the first time, we are bringing the architect of India&apos;s biggest marketing
-            engine to show teenagers how to transition from{" "}
-            <span style={{ color: ACCENT }} className="font-medium">buying the hype</span>{" "}
+            School teaches you photosynthesis, not{" "}
+            <span className="text-white/90 font-semibold">how to build a food company</span>.
+            We are doing the whole loop in one day: showing teenagers how to go from{" "}
+            <span style={{ color: ACCENT }} className="font-medium">eating the product</span>{" "}
             to{" "}
-            <span style={{ color: ACCENT }} className="font-medium">building it</span>.
+            <span style={{ color: ACCENT }} className="font-medium">building the brand</span>.
           </p>
         </div>
 
@@ -110,7 +109,7 @@ export default function ProblemSection() {
                     <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
                       style={{ background: `${ACCENT_DIM}0.1)`, border: `1px solid ${ACCENT_DIM}0.2)`, color: `${ACCENT_DIM}0.7)` }}
                     >
-                      <div className="group-hover:text-[#FF6B2B] transition-colors duration-300">
+                      <div className="group-hover:text-[#22C55E] transition-colors duration-300">
                         {item.icon}
                       </div>
                     </div>

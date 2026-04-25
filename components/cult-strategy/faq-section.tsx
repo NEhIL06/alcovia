@@ -4,43 +4,43 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
+const ACCENT = "#22C55E";
 
 const faqs = [
   {
-    question: "Who is the speaker?",
+    question: "Who are the mentors?",
     answer:
-      "Siddhant Narayan — Country Head of Marketing at Nike. This isn't a school teacher or a motivational speaker. This is the person responsible for the brand that defined 'The Drop' and built one of the most powerful communities in the world.",
+      "Industry operators who have built food brands from scratch, raised funding, and put products on shelves. Mentor details will be announced shortly. These are not school teachers or motivational speakers. These are people who have done it.",
   },
   {
     question: "What do attendees need to bring?",
     answer:
-      "Just their brains. Everything else — materials, worksheets, and frameworks — is provided. Come ready to think, challenge, and build.",
+      "Just their brains. Everything else, including materials, worksheets, and frameworks, is provided. Come ready to think, challenge, and build.",
   },
   {
     question: "Is food provided?",
     answer:
-      "Yes. Lunch and all materials are fully included in the ₹3,999 registration fee. You won't need to worry about anything outside the room.",
+      "Yes. Lunch and all materials are fully included in the registration fee. You will not need to worry about anything outside the room.",
   },
   {
     question: "What age group is this for?",
     answer:
-      "This workshop is designed for Grades 6–10 (ages approximately 11–16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how the world's most iconic brands actually work.",
+      "This workshop is designed for Grades 6 to 10 (ages approximately 11 to 16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how real food brands are built from scratch.",
   },
   {
     question: "Where exactly is it?",
     answer:
-      "One Horizon Centre, DLF Phase 5, Gurgaon. The venue is easily accessible and well-connected. Exact address and directions will be shared upon registration.",
+      "Horizon Center, Gurgaon. The venue is easily accessible and well-connected. Exact address and directions will be shared upon registration.",
   },
   {
     question: "What are the timings?",
     answer:
-      "Saturday, 18th April — 11:00 AM to 4:00 PM (5 hours). Unlike a 1-hour lecture, this gives enough depth to actually learn, build, and pitch a real brand strategy.",
+      "Friday, 2nd May, 11:00 AM to 3:00 PM (4 hours). Unlike a 1-hour lecture, this gives enough depth to actually research trends, interview customers, and pitch a real food brand.",
   },
   {
     question: "Why are seats limited?",
     answer:
-      "High-stakes mentorship doesn't scale. We cap numbers to ensure every participant gets real feedback, direct mentor time, and a meaningful competitive environment. When we say limited, we mean it.",
+      "Hands-on mentorship does not scale. We cap numbers to ensure every participant gets real feedback, direct mentor time, and a meaningful competitive environment. When we say limited, we mean it.",
   },
 ];
 
@@ -55,7 +55,7 @@ function FaqItem({
 
   return (
     <motion.div
-      className="border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-colors duration-300 hover:border-[#FF6B2B]/15"
+      className="border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-colors duration-300 hover:border-[#22C55E]/15"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -124,7 +124,7 @@ export default function FaqSection() {
       >
         <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
         <div style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.03) 0%, transparent 70%)",
         }} className="absolute inset-0" />
       </div>
 

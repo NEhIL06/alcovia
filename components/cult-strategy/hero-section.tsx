@@ -1,7 +1,7 @@
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 export default function HeroSection() {
   return (
@@ -70,7 +70,7 @@ export default function HeroSection() {
             className="block text-[clamp(2.5rem,8vw,7rem)] text-white"
             style={{ textShadow: "0 0 40px rgba(255,255,255,0.1)" }}
           >
-            The Cult
+            Edible
           </span>
           <span
             className="block text-[clamp(2.5rem,8vw,7rem)]"
@@ -79,7 +79,7 @@ export default function HeroSection() {
               textShadow: `0 0 60px ${ACCENT_DIM}0.4), 0 0 20px ${ACCENT_DIM}0.2)`,
             }}
           >
-            Strategy
+            Engineering
           </span>
         </h1>
 
@@ -87,8 +87,8 @@ export default function HeroSection() {
           className="text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
           style={{ animationDelay: "0.7s" }}
         >
-          Manufacturing Status &amp;{" "}
-          <span style={{ color: ACCENT }}>Hype</span>
+          Architecting the Next{" "}
+          <span style={{ color: ACCENT }}>Superfood</span>
         </p>
 
         <div
@@ -100,13 +100,13 @@ export default function HeroSection() {
           className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/70 max-w-xl mx-auto mb-2"
           style={{ animationDelay: "1.1s" }}
         >
-          Learn how Nike manufactures hype and global communities with Marketing Head Siddhant Narayan
+          Every superfood you eat today started in someone&apos;s notebook. Learn to build the next one.
         </p>
         <p
           className="text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
           style={{ animationDelay: "1.2s" }}
         >
-          Country Head of Marketing, Nike
+          Spot a trend. Interview real people. Pitch it like you&apos;re raising money.
         </p>
 
         <div
@@ -120,7 +120,7 @@ export default function HeroSection() {
             <span
               className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
               style={{
-                background: `linear-gradient(135deg, #FF7A3D 0%, #FF4500 100%)`,
+                background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
                 boxShadow: `0 4px 32px ${ACCENT_DIM}0.45), 0 1px 0 rgba(255,255,255,0.15) inset`,
               }}
             >
@@ -152,7 +152,7 @@ export default function HeroSection() {
               <path d="M16 2v4M8 2v4M3 10h18" />
             </svg>
             <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
-              Sat, April 18th · 11 AM – 4 PM
+              Fri, May 2nd · 11 AM – 3 PM
             </span>
           </div>
 
@@ -162,7 +162,7 @@ export default function HeroSection() {
               <circle cx="12" cy="10" r="3" />
             </svg>
             <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
-              One Horizon Centre, Gurgaon
+              Horizon Center, Gurgaon
             </span>
           </div>
 

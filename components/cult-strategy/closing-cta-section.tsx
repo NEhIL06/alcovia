@@ -2,21 +2,21 @@ import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-l
 import BackToTopButton from "@/components/cult-strategy/back-to-top-button";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 const eventDetails = [
   {
     icon: <><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></>,
-    label: "Saturday, April 18th",
+    label: "Friday, May 2nd",
   },
   {
     icon: <><circle cx="12" cy="12" r="10" /><path d="M12 6v6l4 2" /></>,
-    label: "11:00 AM to 4:00 PM",
+    label: "11:00 AM to 3:00 PM",
   },
   {
     icon: <><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></>,
-    label: "One Horizon Centre, Gurgaon",
+    label: "Horizon Center, Gurgaon",
   },
   {
     icon: <><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3" /></>,
@@ -37,7 +37,7 @@ export default function ClosingCtaSection() {
         <div
           style={{
             background:
-              "radial-gradient(ellipse 70% 60% at 50% 80%, rgba(255,107,43,0.07) 0%, transparent 70%)",
+              "radial-gradient(ellipse 70% 60% at 50% 80%, rgba(34,197,94,0.07) 0%, transparent 70%)",
           }}
           className="absolute inset-0"
         />
@@ -92,19 +92,19 @@ export default function ClosingCtaSection() {
         </div>
 
         <h2 className="lp-fade-in text-[clamp(1.75rem,5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight mb-3 sm:mb-4">
-          Ready to learn{" "}
+          Ready to architect{" "}
           <br />
-          <span style={{ color: ACCENT }}>the Nike Playbook?</span>
+          <span style={{ color: ACCENT }}>the next superfood?</span>
         </h2>
 
         <p className="lp-fade-in text-sm sm:text-base lg:text-lg text-white/55 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-6 sm:mb-10">
-          Spots are strictly limited to ensure high-stakes mentorship with Siddhant Narayan. One day.
-          The brand-building knowledge that changes how you see everything.
+          Spots are strictly limited to ensure hands-on mentorship. One day.
+          The product-building knowledge that changes how you see the food industry.
         </p>
 
         <div className="md:hidden lp-fade-in flex flex-col gap-2 max-w-sm mx-auto mb-6">
           {[
-            { quote: "Showed me marketing is psychology, not ads. Genuinely changed how I think.", name: "Ansh, 15" },
+            { quote: "Showed me that building a brand is about understanding people, not just making stuff.", name: "Ansh, 15" },
             { quote: "You actually build and compete. Nothing like school.", name: "Aryaana, 14" },
           ].map((t) => (
             <div
@@ -185,7 +185,7 @@ export default function ClosingCtaSection() {
             <span
               className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-400 group-hover:scale-[1.04]"
               style={{
-                background: `linear-gradient(135deg, #FF6B2B 0%, #FF4500 100%)`,
+                background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
                 boxShadow: `0 4px 32px ${ACCENT_DIM}0.45), 0 1px 0 rgba(255,255,255,0.15) inset`,
               }}
             >
@@ -217,7 +217,7 @@ export default function ClosingCtaSection() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
             <a
               href="mailto:info@alcovia.life"
-              className="flex items-center gap-2 text-sm text-white/40 hover:text-[#FF6B2B] transition-colors font-[family-name:var(--font-satoshi)]"
+              className="flex items-center gap-2 text-sm text-white/40 hover:text-[#22C55E] transition-colors font-[family-name:var(--font-satoshi)]"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
@@ -227,7 +227,7 @@ export default function ClosingCtaSection() {
             </a>
             <a
               href="tel:8085901818"
-              className="flex items-center gap-2 text-sm text-white/40 hover:text-[#FF6B2B] transition-colors font-[family-name:var(--font-satoshi)]"
+              className="flex items-center gap-2 text-sm text-white/40 hover:text-[#22C55E] transition-colors font-[family-name:var(--font-satoshi)]"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
@@ -241,10 +241,10 @@ export default function ClosingCtaSection() {
               Share
             </span>
             <a
-              href="https://wa.me/?text=Check%20out%20The%20Nike%20Playbook%20Workshop%20by%20Alcovia%20-%20Engineering%20a%20Cult%20Brand!"
+              href="https://wa.me/?text=Check%20out%20Edible%20Engineering%20Workshop%20by%20Alcovia%20-%20Architecting%20the%20Next%20Superfood!"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#22C55E] hover:border-[#22C55E]/30 hover:bg-[#22C55E]/[0.05] transition-all duration-300"
               aria-label="Share on WhatsApp"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -252,10 +252,10 @@ export default function ClosingCtaSection() {
               </svg>
             </a>
             <a
-              href="https://twitter.com/intent/tweet?text=Check%20out%20The%20Nike%20Playbook%20Workshop%20by%20Alcovia%20-%20Engineering%20a%20Cult%20Brand!"
+              href="https://twitter.com/intent/tweet?text=Check%20out%20Edible%20Engineering%20Workshop%20by%20Alcovia%20-%20Architecting%20the%20Next%20Superfood!"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#22C55E] hover:border-[#22C55E]/30 hover:bg-[#22C55E]/[0.05] transition-all duration-300"
               aria-label="Share on X"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
@@ -266,7 +266,7 @@ export default function ClosingCtaSection() {
               href="https://www.linkedin.com/sharing/share-offsite/?url="
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#22C55E] hover:border-[#22C55E]/30 hover:bg-[#22C55E]/[0.05] transition-all duration-300"
               aria-label="Share on LinkedIn"
             >
               <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5">
@@ -277,7 +277,7 @@ export default function ClosingCtaSection() {
               href="https://www.instagram.com/alcovia.life/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#FF6B2B] hover:border-[#FF6B2B]/30 hover:bg-[#FF6B2B]/[0.05] transition-all duration-300"
+              className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-[#F7F7F3]/[0.08] flex items-center justify-center text-[#F7F7F3]/25 hover:text-[#22C55E] hover:border-[#22C55E]/30 hover:bg-[#22C55E]/[0.05] transition-all duration-300"
               aria-label="Follow on Instagram"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-4 h-4">

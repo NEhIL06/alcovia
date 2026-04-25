@@ -1,18 +1,18 @@
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 const pillars = [
   {
     number: "01",
     phase: "Pillar 1",
-    title: "The Anatomy of Hype",
-    subtitle: "Why humans crave status symbols",
+    title: "Trend Spotting",
+    subtitle: "Identifying what the market wants next",
     description:
-      "Understanding the psychology of scarcity, 'The Drop,' and why humans crave status symbols. We decode the neurological mechanism that makes limited editions irresistible and how brands like Nike, Supreme, and Jordan engineer desire by restricting supply.",
+      "Before any superfood hits shelves, someone spotted the trend first. Learn how to read consumer data, decode health and wellness movements, and identify the next ingredient the market will pay a premium for. This is research, not guesswork.",
     stat: "3+",
-    statLabel: "psychological triggers decoded",
+    statLabel: "food trends decoded live",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -22,12 +22,12 @@ const pillars = [
   {
     number: "02",
     phase: "Pillar 2",
-    title: "Brand Warfare",
-    subtitle: "Hacking the subconscious",
+    title: "Customer Discovery",
+    subtitle: "Interviewing real people",
     description:
-      "How Nike and other giants stay at the top of the food chain by hacking the subconscious. Learn how the world's most powerful brands build belonging, not just customers, and why fans defend brands like family. From 'Just Do It' to 'The Drop,' decode the warfare.",
+      "Building a food brand is not about recipes. It is about asking a hundred customers what they actually want before you make anything. Learn structured interviewing, how to extract honest feedback, and how to build a product people will actually buy.",
     stat: "100%",
-    statLabel: "real-world brand strategy",
+    statLabel: "real customer interviews",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" />
@@ -37,10 +37,10 @@ const pillars = [
   {
     number: "03",
     phase: "Pillar 3",
-    title: "The Execution Lab",
-    subtitle: "Build your own cult campaign",
+    title: "The Investor Pitch",
+    subtitle: "Pitch like you are raising money",
     description:
-      "Teens will work in teams to build their own 'Cult' campaign and present it for feedback. Scarcity drops, community architecture, identity alignment, influencer hooks, all of it goes into your brand strategy. Present to mentors who will challenge your thinking like real CMOs.",
+      "Teens will work in teams to build a complete superfood brand strategy and pitch it for funding. Market sizing, pricing, packaging, distribution, all of it goes into your pitch deck. Present to mentors who will challenge your thinking like real investors.",
     stat: "₹3,999",
     statLabel: "per seat · lunch included",
     icon: (
@@ -61,7 +61,7 @@ export default function WorkshopPhases() {
         <div
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(255,107,43,0.04) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.04) 0%, transparent 70%)",
           }}
           className="absolute inset-0"
         />
@@ -82,8 +82,8 @@ export default function WorkshopPhases() {
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
-            Three pillars. One day. A complete transformation in how you see
-            brands and how you build them.
+            Three pillars. One day. The complete journey from spotting
+            a food trend to pitching it for real money.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export default function WorkshopPhases() {
                 <div className="flex gap-4 lg:gap-6 items-start">
                   <div className="hidden lg:flex flex-col items-center flex-shrink-0 pt-6">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(255,107,43,0.4)] z-10"
+                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.4)] z-10"
                       style={{
                         borderColor: `${ACCENT_DIM}0.35)`,
                         background: `${ACCENT_DIM}0.08)`,
@@ -112,7 +112,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
 
-                  <div className="relative flex-1 border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20 hover:bg-[#F7F7F3]/[0.04] hover:shadow-[0_8px_40px_rgba(255,107,43,0.08)]">
+                  <div className="relative flex-1 border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#22C55E]/20 hover:bg-[#F7F7F3]/[0.04] hover:shadow-[0_8px_40px_rgba(34,197,94,0.08)]">
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                       style={{

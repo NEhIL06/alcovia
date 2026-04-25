@@ -19,7 +19,7 @@ export default function WorkshopNavbar() {
         </Link>
         <WorkshopCheckoutLink
           ctaSource="navbar"
-          className="group inline-flex items-center gap-2 rounded-full bg-[#FF6B2B] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#ff7a3f] transition-all shadow-lg shadow-[#FF6B2B]/30 hover:shadow-[#FF6B2B]/50 cursor-pointer"
+          className="group inline-flex items-center gap-2 rounded-full bg-[#22C55E] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#16A34A] transition-all shadow-lg shadow-[#22C55E]/30 hover:shadow-[#22C55E]/50 cursor-pointer"
         >
           Register
           <svg

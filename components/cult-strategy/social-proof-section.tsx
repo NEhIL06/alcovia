@@ -1,6 +1,6 @@
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
+const ACCENT = "#22C55E";
 
 const stats = [
   {
@@ -11,17 +11,17 @@ const stats = [
   {
     number: "15+",
     label: "Industry Mentors",
-    description: "From Nike, Red Bull, Supreme, McKinsey & more",
+    description: "Food entrepreneurs, investors, and brand builders",
   },
   {
-    number: "5hrs",
+    number: "4hrs",
     label: "Immersive Workshop",
-    description: "Hands-on brand-building, not boring lectures",
+    description: "Hands-on product building, not boring lectures",
   },
   {
-    number: "₹100B+",
-    label: "Cult Brand Value",
-    description: "The combined value of brands we decode in one day.",
+    number: "₹500Cr+",
+    label: "Superfood Market",
+    description: "The booming market we teach you to enter.",
   },
 ];
 
@@ -56,7 +56,7 @@ export default function SocialProofSection() {
         <div
           style={{
             background:
-              "linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.02) 50%, transparent 100%)",
+              "linear-gradient(180deg, transparent 0%, rgba(34,197,94,0.02) 50%, transparent 100%)",
           }}
           className="absolute inset-0"
         />
@@ -81,7 +81,7 @@ export default function SocialProofSection() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="lp-fade-in group text-center p-3 sm:p-5 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#FF6B2B]/20"
+              className="lp-fade-in group text-center p-3 sm:p-5 border border-[#F7F7F3]/[0.06] rounded-2xl bg-[#F7F7F3]/[0.02] transition-all duration-500 hover:border-[#22C55E]/20"
             >
               <span
                 className="block text-2xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-monument)] font-bold mb-1"

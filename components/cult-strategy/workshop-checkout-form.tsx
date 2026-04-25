@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 
-const ACCENT = "#FF6B2B"
-const ACCENT_DIM = "rgba(255,107,43,"
+const ACCENT = "#22C55E"
+const ACCENT_DIM = "rgba(34,197,94,"
 
 const GRADE_OPTIONS = ["6th", "7th", "8th", "9th", "10th", "11th", "12th"]
 
@@ -116,7 +116,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
 
   const displayError = error ?? localError
   const inputBase =
-    "w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#FF6B2B]/60 focus:bg-white/[0.07]"
+    "w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#22C55E]/60 focus:bg-white/[0.07]"
 
   return (
     <div
@@ -290,7 +290,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
             disabled={submitting}
             className="mt-5 flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100"
             style={{
-              background: "linear-gradient(135deg, #FF7A3D 0%, #FF4500 100%)",
+              background: "linear-gradient(135deg, #22C55E 0%, #16A34A 100%)",
               boxShadow: `0 4px 24px ${ACCENT_DIM}0.35)`,
               fontFamily: "var(--font-monument)",
             }}

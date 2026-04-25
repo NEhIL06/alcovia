@@ -15,11 +15,11 @@ export interface WorkshopCheckoutLeadInput {
 }
 
 export const WORKSHOP_DETAILS = {
-  slug: "nike-playbook-workshop",
-  title: "The Nike Playbook: Engineering a Cult Brand",
-  dateIso: "2026-04-18",
-  dateLabel: "April 18th, 2026",
-  locationLabel: "One Horizon Centre, Gurgaon",
+  slug: "edible-engineering-workshop",
+  title: "Edible Engineering: Architecting the Next Superfood",
+  dateIso: "2026-05-02",
+  dateLabel: "May 2nd, 2026",
+  locationLabel: "Horizon Center, Gurgaon",
   amount: 3999,
   currency: "INR",
   paymentProvider: "razorpay",

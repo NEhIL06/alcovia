@@ -15,8 +15,8 @@ import {
   WORKSHOP_DETAILS,
 } from "@/lib/workshop-tracking"
 
-const ACCENT = "#FF6B2B"
-const ACCENT_DIM = "rgba(255,107,43,"
+const ACCENT = "#22C55E"
+const ACCENT_DIM = "rgba(34,197,94,"
 
 declare global {
   interface Window {

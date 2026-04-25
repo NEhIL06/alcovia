@@ -4,16 +4,16 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#FF6B2B";
-const ACCENT_DIM = "rgba(255,107,43,";
+const ACCENT = "#22C55E";
+const ACCENT_DIM = "rgba(34,197,94,";
 
 const takeaways = [
   {
     number: "01",
-    title: "Psychology of 'The Drop'",
-    subtitle: "Why scarcity makes humans move faster",
+    title: "Trend Analysis Frameworks",
+    subtitle: "Read the market before it moves",
     description:
-      "Understand the neurological mechanism behind 'The Drop' and why it's irresistible. Learn how Nike, Supreme, and Jordan engineer desire by restricting supply — and how the brain treats scarcity as danger, making fear of loss always beat desire for gain.",
+      "Learn how to identify emerging food trends using real consumer data and market signals. Understand why certain ingredients go from obscure to mainstream and how the best food entrepreneurs spot opportunities months before the competition.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <circle cx="12" cy="12" r="10" />
@@ -24,10 +24,10 @@ const takeaways = [
   },
   {
     number: "02",
-    title: "Community Architecture",
-    subtitle: "Turn followers into a tribe",
+    title: "Customer Interview Playbook",
+    subtitle: "Build what people actually want",
     description:
-      "Discover how Nike turns customers into a global community. From 'Just Do It' to athlete partnerships, learn the frameworks that make people proudly wear the swoosh, defend the brand, and recruit others into the tribe.",
+      "Discover structured techniques for interviewing real customers and extracting honest feedback. Learn why the best products are built from conversations, not assumptions, and how to validate a food concept before spending a single rupee on production.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -38,10 +38,10 @@ const takeaways = [
   },
   {
     number: "03",
-    title: "Brand Status Engineering",
-    subtitle: "From concept to cult campaign",
+    title: "Investor-Ready Pitching",
+    subtitle: "From concept to funded brand",
     description:
-      "Move beyond theory into execution. Learn the exact sequence — positioning, launch strategy, hype engineering, and social proof stacking — that transforms a concept into something people queue for. Leave with a real framework you can apply immediately.",
+      "Move beyond theory into execution. Learn the exact sequence for pitching a food brand: market sizing, pricing strategy, packaging, distribution, and storytelling with data. Leave with a real framework you can use to pitch any product idea.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
@@ -65,7 +65,7 @@ export default function TakeawaysSection() {
       >
         <CursorParallaxGrid opacity={0.038} depth={14} spotlight />
         <div style={{
-          background: `linear-gradient(180deg, transparent 0%, rgba(255,107,43,0.025) 50%, transparent 100%)`,
+          background: `linear-gradient(180deg, transparent 0%, rgba(34,197,94,0.025) 50%, transparent 100%)`,
         }} className="absolute inset-0" />
       </div>
 
@@ -90,7 +90,7 @@ export default function TakeawaysSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            The Nike Playbook,{" "}
+            The Superfood Playbook,{" "}
             <span style={{ color: ACCENT }}>decoded</span>
           </motion.h2>
 
@@ -101,8 +101,8 @@ export default function TakeawaysSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Not theory. Not slides. Real frameworks from the brand that dominates
-            culture — handed to you by the person who runs it in India.
+            Not theory. Not slides. Real frameworks used by food entrepreneurs
+            who turned simple ingredients into brands worth crores.
           </motion.p>
         </div>
 
@@ -121,7 +121,7 @@ export default function TakeawaysSection() {
               }}
             >
               <div
-                className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-8 overflow-hidden transition-all duration-500 hover:border-[#FF6B2B]/20 hover:shadow-[0_8px_40px_rgba(255,107,43,0.1)]"
+                className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-8 overflow-hidden transition-all duration-500 hover:border-[#22C55E]/20 hover:shadow-[0_8px_40px_rgba(34,197,94,0.1)]"
                 style={{
                   background: "rgba(247,247,243,0.02)",
                 }}
@@ -155,7 +155,7 @@ export default function TakeawaysSection() {
 
                 {/* Icon circle */}
                 <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(255,107,43,0.3)]"
+                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.3)]"
                   style={{
                     background: `${ACCENT_DIM}0.1)`,
                     border: `1px solid ${ACCENT_DIM}0.2)`,
