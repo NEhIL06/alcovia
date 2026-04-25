@@ -12,6 +12,7 @@ export interface WorkshopCheckoutLeadInput {
   student_name: string
   grade: string
   school: string
+  whatsapp_optin: boolean
 }
 
 export const WORKSHOP_DETAILS = {
@@ -344,6 +345,7 @@ export async function submitWorkshopCheckoutLead(
     student_name: lead.student_name,
     grade: lead.grade,
     school: lead.school,
+    whatsapp_optin: lead.whatsapp_optin,
     cta_source: ctaSource,
     funnel_name: "workshop",
     workshop_slug: WORKSHOP_DETAILS.slug,
