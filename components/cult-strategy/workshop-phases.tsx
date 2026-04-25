@@ -41,8 +41,8 @@ const pillars = [
     subtitle: "Pitch like you are raising money",
     description:
       "Work in teams to build a superfood brand strategy and pitch it. Market sizing, pricing, packaging, all of it. Present to mentors who challenge your thinking like real investors.",
-    stat: "₹3,999",
-    statLabel: "per seat · lunch included",
+    stat: "Live",
+    statLabel: "pitch to real mentors",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
