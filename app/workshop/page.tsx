@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/cult-strategy/hero-section";
 import ProblemSection from "@/components/cult-strategy/problem-section";
+import WorkshopGallery from "@/components/cult-strategy/workshop-gallery";
 import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
 import TakeawaysSection from "@/components/cult-strategy/takeaways-section";
 import AuthoritySection from "@/components/cult-strategy/authority-section";
@@ -36,6 +37,7 @@ export default function CultStrategyWorkshopPage() {
         <ProblemSection />
       </div>
       <WorkshopPhases />
+      <WorkshopGallery />
       <div className="hidden md:block">
         <TakeawaysSection />
         <AuthoritySection />

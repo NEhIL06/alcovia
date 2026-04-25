@@ -166,6 +166,15 @@ export default function HeroSection() {
             </span>
           </div>
 
+          <div className="flex items-center gap-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-4 h-4">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
+            </svg>
+            <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
+              Grades 6 – 10
+            </span>
+          </div>
+
           <div
             className="inline-flex items-center gap-2 border rounded-full px-4 py-1.5"
             style={{ borderColor: `${ACCENT_DIM}0.25)` }}
