@@ -5,7 +5,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
 const ACCENT = "#22C55E"
 const ACCENT_DIM = "rgba(34,197,94,"
 
-const GRADE_OPTIONS = ["6th", "7th", "8th", "9th", "10th", "11th", "12th"]
+const GRADE_OPTIONS = ["6th", "7th", "8th", "9th", "10th"]
 
 export interface WorkshopCheckoutFormData {
   parent_name: string
@@ -13,6 +13,7 @@ export interface WorkshopCheckoutFormData {
   student_name: string
   grade: string
   school: string
+  whatsapp_optin: boolean
 }
 
 interface Props {
@@ -29,6 +30,7 @@ const EMPTY_FORM: WorkshopCheckoutFormData = {
   student_name: "",
   grade: "",
   school: "",
+  whatsapp_optin: true,
 }
 
 export default function WorkshopCheckoutForm({ open, submitting, error, onClose, onSubmit }: Props) {
@@ -279,6 +281,18 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
             </div>
           </div>
 
+          <label className="flex items-start gap-2 cursor-pointer group mt-1">
+            <input
+              type="checkbox"
+              checked={form.whatsapp_optin}
+              onChange={(event) => updateField("whatsapp_optin", event.target.checked)}
+              className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 text-[#22C55E] accent-[#22C55E] focus:ring-[#22C55E]/50 flex-shrink-0"
+            />
+            <span className="text-[10px] text-white/40 leading-relaxed group-hover:text-white/50 transition-colors">
+              I agree to receive promotional messages and updates from Expargent India Private Limited via WhatsApp. You can opt out at any time by replying STOP.
+            </span>
+          </label>
+
           {displayError && (
             <p className="mt-3 text-xs text-red-400 text-center" role="alert">
               {displayError}
@@ -313,7 +327,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
           </button>
 
           <p className="mt-3 text-center text-[10px] text-white/35 font-[family-name:var(--font-satoshi)]">
-            ₹3,999 · Secured by Razorpay · By continuing you agree to receive workshop updates on WhatsApp.
+            ₹3,999 · Secured by Razorpay
           </p>
         </form>
       </div>

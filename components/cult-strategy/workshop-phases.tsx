@@ -10,7 +10,7 @@ const pillars = [
     title: "Trend Spotting",
     subtitle: "Identifying what the market wants next",
     description:
-      "Before any superfood hits shelves, someone spotted the trend first. Learn how to read consumer data, decode health and wellness movements, and identify the next ingredient the market will pay a premium for. This is research, not guesswork.",
+      "Learn how to read consumer data, decode health trends, and identify the next ingredient the market will pay a premium for.",
     stat: "3+",
     statLabel: "food trends decoded live",
     icon: (
@@ -25,7 +25,7 @@ const pillars = [
     title: "Customer Discovery",
     subtitle: "Interviewing real people",
     description:
-      "Building a food brand is not about recipes. It is about asking a hundred customers what they actually want before you make anything. Learn structured interviewing, how to extract honest feedback, and how to build a product people will actually buy.",
+      "It is about asking a hundred customers what they actually want before you make anything. Learn structured interviewing and honest feedback extraction.",
     stat: "100%",
     statLabel: "real customer interviews",
     icon: (
@@ -40,7 +40,7 @@ const pillars = [
     title: "The Investor Pitch",
     subtitle: "Pitch like you are raising money",
     description:
-      "Teens will work in teams to build a complete superfood brand strategy and pitch it for funding. Market sizing, pricing, packaging, distribution, all of it goes into your pitch deck. Present to mentors who will challenge your thinking like real investors.",
+      "Work in teams to build a superfood brand strategy and pitch it. Market sizing, pricing, packaging, all of it. Present to mentors who challenge your thinking like real investors.",
     stat: "₹3,999",
     statLabel: "per seat · lunch included",
     icon: (

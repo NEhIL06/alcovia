@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
@@ -15,7 +16,7 @@ const credentials = [
     ),
     title: "We Teach What Schools Won't",
     description:
-      "Customer research, product strategy, market sizing, and investor pitching sit at the intersection of science, business, and design. Subjects the formal education system ignores entirely, even though they power every brand you consume.",
+      "Customer research, product strategy, and investor pitching. Subjects school ignores, even though they power every brand you consume.",
   },
   {
     icon: (
@@ -27,7 +28,7 @@ const credentials = [
     ),
     title: "Real Operators, Not Theorists",
     description:
-      "Our mentors are food entrepreneurs and industry operators who have built brands from scratch, raised funding, and put products on shelves. This is not a classroom lecture. This is the real playbook from people who have done it.",
+      "Our mentors have built food brands from scratch, raised funding, and put products on shelves. Not a lecture. The real playbook.",
   },
   {
     icon: (
@@ -37,7 +38,7 @@ const credentials = [
     ),
     title: "High Stakes, Not Passive",
     description:
-      "You will not sit and watch slides. You will spot real food trends, interview actual customers, build a brand strategy from scratch, and pitch it for funding. The same way real entrepreneurs compete for investor attention.",
+      "You spot trends, interview customers, build a strategy, and pitch for funding. The same way real entrepreneurs compete.",
   },
 ];
 
@@ -205,6 +206,30 @@ export default function AuthoritySection() {
               >
                 {logo}
               </span>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="mt-8 sm:mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="flex items-center gap-4 mb-5">
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(247,247,243,0.06))" }} />
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/30 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
+              From our workshops
+            </p>
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(247,247,243,0.06))" }} />
+          </div>
+
+          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+            {["/images/workshop/w4.jpeg", "/images/workshop/w1.jpeg", "/images/workshop/w5.jpeg"].map((src, i) => (
+              <div key={i} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/[0.06]">
+                <Image src={src} alt="Alcovia workshop" fill className="object-cover" sizes="(max-width: 640px) 33vw, 200px" />
+              </div>
             ))}
           </div>
         </motion.div>

@@ -1,6 +1,6 @@
 "use client"
 
-const DEFAULT_WORKSHOP_PAYMENT_URL = "https://rzp.io/rzp/mbJ5dfd"
+const DEFAULT_WORKSHOP_PAYMENT_URL = "https://rzp.io/rzp/superfood"
 const WORKSHOP_EVENT_ENDPOINT = "/api/workshop-funnel"
 const WORKSHOP_CHECKOUT_LEAD_ENDPOINT = "/api/workshop-checkout-lead"
 const WORKSHOP_CHECKOUT_STORAGE_KEY = "alcovia_workshop_checkout_context_v1"

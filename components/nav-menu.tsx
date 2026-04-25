@@ -17,6 +17,7 @@ const menuItems: MenuItem[] = [
     { label: "HOME", href: "/" },
     { label: "AT SCHOOL", href: "/at-school" },
     { label: "OUTSIDE SCHOOL", href: "/outside-school" },
+    { label: "WORKSHOP", href: "/workshop" },
     { label: "TEAM", href: "/meet-the-team" },
 ]
 
