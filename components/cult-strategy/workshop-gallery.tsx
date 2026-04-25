@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const ACCENT = "#22C55E";
 
@@ -13,6 +15,15 @@ const images = [
 ];
 
 export default function WorkshopGallery() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  useEffect(() => {
+    if (trackRef.current) {
+      setTrackWidth(trackRef.current.scrollWidth / 2);
+    }
+  }, []);
+
   return (
     <section className="relative py-4 sm:py-8 overflow-hidden">
       <div className="px-4 sm:px-6 mb-3">
@@ -29,9 +40,18 @@ export default function WorkshopGallery() {
       </div>
 
       <div className="relative w-full overflow-hidden">
-        <div
+        <motion.div
+          ref={trackRef}
           className="flex gap-2.5"
-          style={{ width: "max-content", animation: "workshopScroll 300s linear infinite" }}
+          style={{ width: "max-content" }}
+          animate={trackWidth ? { x: [0, -trackWidth] } : undefined}
+          transition={{
+            x: {
+              duration: 60,
+              repeat: Infinity,
+              ease: "linear",
+            },
+          }}
         >
           {[...images, ...images].map((img, i) => (
             <div
@@ -47,15 +67,8 @@ export default function WorkshopGallery() {
               />
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes workshopScroll {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-      `}</style>
     </section>
   );
 }
