@@ -125,12 +125,12 @@ select.filter-input{cursor:pointer}
   </header>
 
   <div class="summary">
-    <div class="stat-card gold"><div class="stat-label">Lead Submissions</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
-    <div class="stat-card orange"><div class="stat-label">Workshop Checkouts</div><div class="stat-value" id="workshopStarts">-</div><div class="stat-sub" id="workshopStartRate">-</div></div>
+    <div class="stat-card gold"><div class="stat-label">Form Submissions</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
+    <div class="stat-card orange"><div class="stat-label">Landing Page Views</div><div class="stat-value" id="workshopStarts">-</div><div class="stat-sub" id="workshopStartRate">-</div></div>
     <div class="stat-card green"><div class="stat-label">Paid Registrations</div><div class="stat-value" id="paidRegistrations">-</div><div class="stat-sub" id="paidRegistrationsSub">-</div></div>
-    <div class="stat-card purple"><div class="stat-label">Workshop Revenue</div><div class="stat-value" id="workshopRevenue">-</div><div class="stat-sub" id="workshopRevenueSub">-</div></div>
-    <div class="stat-card blue"><div class="stat-label">Meta Spend</div><div class="stat-value" id="metaSpend">-</div><div class="stat-sub" id="metaSpendSub">-</div></div>
-    <div class="stat-card red"><div class="stat-label">Blended ROAS</div><div class="stat-value" id="blendedRoas">-</div><div class="stat-sub" id="topCampaign">-</div></div>
+    <div class="stat-card purple"><div class="stat-label">Workshop Ad Spend</div><div class="stat-value" id="metaSpend">-</div><div class="stat-sub" id="metaSpendSub">-</div></div>
+    <div class="stat-card blue"><div class="stat-label">Total Meta Spend</div><div class="stat-value" id="totalMetaSpend">-</div><div class="stat-sub" id="totalMetaSpendSub">-</div></div>
+    <div class="stat-card red"><div class="stat-label">Form Rate</div><div class="stat-value" id="blendedRoas">-</div><div class="stat-sub" id="topCampaign">-</div></div>
   </div>
 
   <div class="tabs">
@@ -808,18 +808,22 @@ function renderSummary() {
   const workshopResults = md.summary && md.summary.workshop_results != null ? md.summary.workshop_results : workshopCampaigns.reduce((sum, item) => sum + parseNumber(pick(item, ['results','landing_page_views'], 0)), 0);
   const workshopCPR = workshopResults > 0 ? spend / workshopResults : 0;
 
-  document.getElementById('totalLeads').textContent = workshopCheckoutLeads.length || leads.length;
-  document.getElementById('leadsToday').textContent = (workshopCheckoutLeads.length ? workshopCheckoutLeads : leads).filter((item) => isToday(pick(item, ['timestamp']))).length + ' today';
-  document.getElementById('workshopStarts').textContent = workshopViews || workshopResults;
-  document.getElementById('workshopStartRate').textContent = workshopResults ? (workshopCPR ? formatCurrency(workshopCPR) + ' per view' : '-') : (workshopViews ? Math.round((workshopStarts / workshopViews) * 100) + '% checkout rate' : '-');
+  const totalSpend = metaRows.reduce((sum, item) => sum + parseNumber(pick(item, ['spend','cost'], 0)), 0);
+  const formFills = workshopCheckoutLeads.length;
+  const metaLPV = workshopResults;
+
+  document.getElementById('totalLeads').textContent = formFills;
+  document.getElementById('leadsToday').textContent = formFills + ' of ' + metaLPV + ' visitors';
+  document.getElementById('workshopStarts').textContent = metaLPV;
+  document.getElementById('workshopStartRate').textContent = workshopCPR ? (formatCurrency(workshopCPR) + ' CPR') : (workshopViews + ' tracked views');
   document.getElementById('paidRegistrations').textContent = paidOrders;
-  document.getElementById('paidRegistrationsSub').textContent = workshopStarts ? Math.round((paidOrders / Math.max(workshopStarts, 1)) * 100) + '% of checkouts' : '-';
-  document.getElementById('workshopRevenue').textContent = revenue ? formatCurrency(revenue) : '-';
-  document.getElementById('workshopRevenueSub').textContent = paidOrders ? (paidOrders + ' paid orders') : '-';
+  document.getElementById('paidRegistrationsSub').textContent = formFills ? Math.round((paidOrders / Math.max(formFills, 1)) * 100) + '% of form fills' : '-';
   document.getElementById('metaSpend').textContent = spend ? formatCurrency(spend) : '-';
-  document.getElementById('metaSpendSub').textContent = workshopCampaigns.length ? (workshopResults + ' landing page views') : '-';
-  document.getElementById('blendedRoas').textContent = spend ? (revenue / spend).toFixed(2) + 'x' : '-';
-  document.getElementById('topCampaign').textContent = workshopCampaigns.length ? ('CPR: ' + formatCurrency(workshopCPR)) : 'No workshop campaign data';
+  document.getElementById('metaSpendSub').textContent = workshopCampaigns.length ? ('Superfood campaign only') : '-';
+  document.getElementById('totalMetaSpend').textContent = totalSpend ? formatCurrency(totalSpend) : '-';
+  document.getElementById('totalMetaSpendSub').textContent = metaRows.length + ' campaigns total';
+  document.getElementById('blendedRoas').textContent = metaLPV ? (Math.round((formFills / metaLPV) * 10000) / 100).toFixed(1) + '%' : '-';
+  document.getElementById('topCampaign').textContent = metaLPV ? (formFills + ' forms / ' + metaLPV + ' views') : 'No data';
 }
 
 function renderBarChart(containerId, entries, formatter) {
