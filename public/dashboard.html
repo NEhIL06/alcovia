@@ -797,26 +797,29 @@ function renderSummary() {
   const workshopOrders = getFilteredWorkshopOrders();
   const metaRows = getFilteredMetaInsights();
 
+  const workshopCheckoutLeads = state.workshopCheckoutLeads || [];
   const workshopViews = workshopFunnel.filter((item) => String(pick(item, ['event_name'], '')).includes('page_view')).length;
   const workshopStarts = workshopFunnel.filter((item) => String(pick(item, ['event_name'], '')).includes('checkout_started')).length;
   const paidOrders = workshopOrders.filter((item) => normalizeStatus(item) === 'paid').length;
   const revenue = workshopOrders.filter((item) => normalizeStatus(item) === 'paid').reduce((sum, item) => sum + getAmountInRupees(item), 0);
-  const spend = metaRows.reduce((sum, item) => sum + parseNumber(pick(item, ['spend','cost'], 0)), 0);
-  const topCampaignEntry = Object.entries(sumBy(metaRows, (item) => pick(item, ['campaign_name','campaign','utm_campaign','ad_name'], 'unattributed'), (item) => parseNumber(pick(item, ['spend','cost'], 0))))
-    .sort((a,b) => b[1] - a[1])[0];
+  const md = state.metaData || {};
+  const workshopCampaigns = metaRows.filter((item) => String(pick(item, ['category'], '')).includes('workshop') && !String(pick(item, ['category'], '')).includes('workshop_old'));
+  const spend = md.summary && md.summary.workshop_spend != null ? md.summary.workshop_spend : workshopCampaigns.reduce((sum, item) => sum + parseNumber(pick(item, ['spend','cost'], 0)), 0);
+  const workshopResults = md.summary && md.summary.workshop_results != null ? md.summary.workshop_results : workshopCampaigns.reduce((sum, item) => sum + parseNumber(pick(item, ['results','landing_page_views'], 0)), 0);
+  const workshopCPR = workshopResults > 0 ? spend / workshopResults : 0;
 
-  document.getElementById('totalLeads').textContent = leads.length;
-  document.getElementById('leadsToday').textContent = leads.filter((item) => isToday(pick(item, ['timestamp']))).length + ' today';
-  document.getElementById('workshopStarts').textContent = workshopStarts;
-  document.getElementById('workshopStartRate').textContent = workshopViews ? Math.round((workshopStarts / workshopViews) * 100) + '% of page views' : (workshopStarts ? 'Live' : '-');
+  document.getElementById('totalLeads').textContent = workshopCheckoutLeads.length || leads.length;
+  document.getElementById('leadsToday').textContent = (workshopCheckoutLeads.length ? workshopCheckoutLeads : leads).filter((item) => isToday(pick(item, ['timestamp']))).length + ' today';
+  document.getElementById('workshopStarts').textContent = workshopViews || workshopResults;
+  document.getElementById('workshopStartRate').textContent = workshopResults ? (workshopCPR ? formatCurrency(workshopCPR) + ' per view' : '-') : (workshopViews ? Math.round((workshopStarts / workshopViews) * 100) + '% checkout rate' : '-');
   document.getElementById('paidRegistrations').textContent = paidOrders;
   document.getElementById('paidRegistrationsSub').textContent = workshopStarts ? Math.round((paidOrders / Math.max(workshopStarts, 1)) * 100) + '% of checkouts' : '-';
   document.getElementById('workshopRevenue').textContent = revenue ? formatCurrency(revenue) : '-';
   document.getElementById('workshopRevenueSub').textContent = paidOrders ? (paidOrders + ' paid orders') : '-';
   document.getElementById('metaSpend').textContent = spend ? formatCurrency(spend) : '-';
-  document.getElementById('metaSpendSub').textContent = metaRows.length ? (metaRows.length + ' Meta rows') : '-';
+  document.getElementById('metaSpendSub').textContent = workshopCampaigns.length ? (workshopResults + ' landing page views') : '-';
   document.getElementById('blendedRoas').textContent = spend ? (revenue / spend).toFixed(2) + 'x' : '-';
-  document.getElementById('topCampaign').textContent = topCampaignEntry ? ('Top spend: ' + topCampaignEntry[0]) : 'No campaign data';
+  document.getElementById('topCampaign').textContent = workshopCampaigns.length ? ('CPR: ' + formatCurrency(workshopCPR)) : 'No workshop campaign data';
 }
 
 function renderBarChart(containerId, entries, formatter) {
