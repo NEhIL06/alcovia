@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/cult-strategy/hero-section";
-import ProblemSection from "@/components/cult-strategy/problem-section";
-import WorkshopGallery from "@/components/cult-strategy/workshop-gallery";
+import SpeakerSection from "@/components/cult-strategy/speaker-section";
 import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
-import TakeawaysSection from "@/components/cult-strategy/takeaways-section";
-import AuthoritySection from "@/components/cult-strategy/authority-section";
-import SocialProofSection from "@/components/cult-strategy/social-proof-section";
-import FaqSection from "@/components/cult-strategy/faq-section";
+import WorkshopGallery from "@/components/cult-strategy/workshop-gallery";
 import ClosingCtaSection from "@/components/cult-strategy/closing-cta-section";
 import MobileFloatingCta from "@/components/cult-strategy/mobile-floating-cta";
 import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracker";
@@ -33,17 +29,9 @@ export default function CultStrategyWorkshopPage() {
     <main className="relative">
       <WorkshopPageTracker />
       <HeroSection />
-      <div className="hidden md:block">
-        <ProblemSection />
-      </div>
+      <SpeakerSection />
       <WorkshopPhases />
       <WorkshopGallery />
-      <div className="hidden md:block">
-        <TakeawaysSection />
-        <AuthoritySection />
-        <SocialProofSection />
-        <FaqSection />
-      </div>
       <ClosingCtaSection />
       <MobileFloatingCta />
       <Footer />

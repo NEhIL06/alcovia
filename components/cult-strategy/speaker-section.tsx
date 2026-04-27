@@ -1,3 +1,4 @@
+import Image from "next/image";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#22C55E";
@@ -24,7 +25,7 @@ export default function SpeakerSection() {
             className="text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)]"
             style={{ color: ACCENT }}
           >
-            The Challenge
+            Meet the Mentor
           </span>
         </div>
 
@@ -36,19 +37,15 @@ export default function SpeakerSection() {
                 style={{ borderColor: `rgba(34,197,94,0.15)` }}
               />
 
-              <div className="absolute inset-3 rounded-xl overflow-hidden bg-[#0d1a0f] flex flex-col items-center justify-center px-5 py-6 text-center gap-4">
-                <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-10 h-10 sm:w-14 sm:h-14 opacity-60">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-                <p className="text-sm sm:text-lg font-[family-name:var(--font-playfair)] italic text-white/70 leading-snug">
-                  &ldquo;Every superfood you eat today started in someone&apos;s notebook.&rdquo;
-                </p>
-                <div className="w-8 h-px" style={{ background: `rgba(34,197,94,0.3)` }} />
-                <p className="text-xs sm:text-sm font-[family-name:var(--font-playfair)] italic text-white/50 leading-snug">
-                  &ldquo;School teaches photosynthesis, not how to build a food company.&rdquo;
-                </p>
+              <div className="absolute inset-3 rounded-xl overflow-hidden">
+                <Image
+                  src="/assets/mentors/akash-zaveri.jpeg"
+                  alt="Akash Zaveri, Co-Founder and COO, Plix"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 320px"
+                />
+                <div className="absolute inset-0 bg-black/15" />
               </div>
 
               <div
@@ -78,7 +75,7 @@ export default function SpeakerSection() {
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
                 style={{ color: ACCENT }}
               >
-                One Day · Complete Loop
+                Co-Founder &amp; COO · Plix
               </span>
             </div>
           </div>
@@ -87,18 +84,22 @@ export default function SpeakerSection() {
             <div className="space-y-3 sm:space-y-5">
               <div>
                 <h3 className="text-2xl sm:text-3xl lg:text-4xl font-[family-name:var(--font-milan)] text-white mb-3">
-                  The Whole Loop
+                  Akash Zaveri
                 </h3>
                 <div className="flex items-center gap-2.5 justify-center lg:justify-start mb-2">
                   <span
                     className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium"
                     style={{ color: ACCENT }}
                   >
-                    Trend to Pitch in One Day
+                    Co-Founder &amp; COO
+                  </span>
+                  <span className="text-white/25">at</span>
+                  <span className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-bold text-white">
+                    Plix
                   </span>
                 </div>
                 <p className="text-sm text-white/50 font-[family-name:var(--font-satoshi)]">
-                  Research, interview, build, and pitch a real superfood brand
+                  Built a 500 Cr+ plant-based brand, acquired by Marico
                 </p>
               </div>
 
@@ -111,23 +112,23 @@ export default function SpeakerSection() {
                 <p>
                   This isn&apos;t a lecture. This is a{" "}
                   <span style={{ color: ACCENT }} className="font-medium">
-                    hands-on sprint where you spot a real food trend, interview actual customers, and pitch your brand like you&apos;re raising money.
+                    masterclass from the founder who built India&apos;s leading plant-based nutrition brand from zero to a Marico acquisition.
                   </span>
                 </p>
                 <p className="hidden sm:block text-white/40">
-                  Your teen will learn the exact process real food entrepreneurs
-                  use to take an idea from a notebook to a funded product,
-                  all in a single high-intensity session.
+                  Business World 30U30. From a single bottle of apple cider
+                  vinegar to a 1000+ person organisation. Your teen learns the
+                  exact playbook from the person who lived it.
                 </p>
               </div>
 
               <div className="hidden sm:flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mt-4">
                 {[
-                  "Trend Spotting",
-                  "Customer Research",
-                  "Brand Building",
-                  "Investor Pitching",
-                  "Food Science",
+                  "BW 30U30",
+                  "Plant-Based D2C",
+                  "Marico Acquired",
+                  "500Cr+ Brand",
+                  "Northeastern Alum",
                 ].map((tag) => (
                   <span
                     key={tag}
