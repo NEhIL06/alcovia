@@ -418,8 +418,70 @@ export async function beginWorkshopCheckout(
   })
 
   // InitiateCheckout and Lead events now fire in workshop-checkout-context.tsx
-  // beginWorkshopCheckout only handles the Razorpay redirect
+  // beginWorkshopCheckout opens Razorpay modal on the same page
 
-  const finalUrl = buildRazorpayUrl(getWorkshopPaymentUrl(), options, contextWithLead)
-  window.location.assign(finalUrl)
+  const rzpKeyId = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "rzp_live_8tsJHaKJ3ORpf1"
+  const { lead } = options
+
+  const loadRazorpay = (): Promise<void> =>
+    new Promise((resolve) => {
+      if ((window as Window & { Razorpay?: unknown }).Razorpay) { resolve(); return }
+      const s = document.createElement("script")
+      s.src = "https://checkout.razorpay.com/v1/checkout.js"
+      s.onload = () => resolve()
+      s.onerror = () => {
+        const finalUrl = buildRazorpayUrl(getWorkshopPaymentUrl(), options, contextWithLead)
+        window.location.assign(finalUrl)
+      }
+      document.head.appendChild(s)
+    })
+
+  await loadRazorpay()
+
+  const RazorpayClass = (window as Window & { Razorpay?: new (opts: Record<string, unknown>) => { open: () => void } }).Razorpay
+  if (!RazorpayClass) {
+    const finalUrl = buildRazorpayUrl(getWorkshopPaymentUrl(), options, contextWithLead)
+    window.location.assign(finalUrl)
+    return
+  }
+
+  const fullPhone = lead ? (lead.parent_phone.startsWith("+") ? lead.parent_phone : `+91${lead.parent_phone.replace(/\D/g, "")}`) : ""
+
+  const rzp = new RazorpayClass({
+    key: rzpKeyId,
+    amount: WORKSHOP_DETAILS.amount * 100,
+    currency: WORKSHOP_DETAILS.currency,
+    name: "Alcovia",
+    description: WORKSHOP_DETAILS.title,
+    prefill: {
+      name: lead?.parent_name || "",
+      contact: fullPhone,
+    },
+    notes: {
+      parent_name: lead?.parent_name || "",
+      parent_phone: fullPhone,
+      student_name: lead?.student_name || "",
+      grade: lead?.grade || "",
+      school: lead?.school || "",
+      cta_source: contextWithLead.cta_source || "unknown",
+      checkout_attempt_id: contextWithLead.checkout_attempt_id,
+      utm_source: contextWithLead.utm_source || "",
+      utm_campaign: contextWithLead.utm_campaign || "",
+      lead_id: options.leadId || "",
+    },
+    theme: { color: "#22C55E" },
+    handler: (response: { razorpay_payment_id?: string; razorpay_order_id?: string; razorpay_signature?: string }) => {
+      const params = new URLSearchParams()
+      if (response.razorpay_payment_id) params.set("razorpay_payment_id", response.razorpay_payment_id)
+      if (response.razorpay_order_id) params.set("razorpay_order_id", response.razorpay_order_id)
+      if (response.razorpay_signature) params.set("razorpay_signature", response.razorpay_signature)
+      window.location.assign(`/workshop/thank-you?${params.toString()}`)
+    },
+    modal: {
+      ondismiss: () => {
+        trackWorkshopEvent("workshop_payment_dismissed", { ctaSource }).catch(() => {})
+      },
+    },
+  })
+  rzp.open()
 }
