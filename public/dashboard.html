@@ -72,6 +72,7 @@ tr:hover td{background:rgba(255,255,255,0.02)}
 .loading{text-align:center;padding:60px;color:var(--muted)}
 .spinner{width:24px;height:24px;border:3px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
 .filters,.global-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
 .filter-input{padding:6px 12px;border-radius:6px;border:1px solid var(--border);background:var(--card);color:var(--text);font-size:0.75rem;outline:none}
 .filter-input:focus{border-color:var(--gold)}
@@ -124,13 +125,41 @@ select.filter-input{cursor:pointer}
     </div>
   </header>
 
-  <div class="summary">
-    <div class="stat-card gold"><div class="stat-label">Form Submissions</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
-    <div class="stat-card orange"><div class="stat-label">Landing Page Views</div><div class="stat-value" id="workshopStarts">-</div><div class="stat-sub" id="workshopStartRate">-</div></div>
-    <div class="stat-card green"><div class="stat-label">Paid Registrations</div><div class="stat-value" id="paidRegistrations">-</div><div class="stat-sub" id="paidRegistrationsSub">-</div></div>
-    <div class="stat-card purple"><div class="stat-label">Workshop Ad Spend</div><div class="stat-value" id="metaSpend">-</div><div class="stat-sub" id="metaSpendSub">-</div></div>
-    <div class="stat-card blue"><div class="stat-label">Total Meta Spend</div><div class="stat-value" id="totalMetaSpend">-</div><div class="stat-sub" id="totalMetaSpendSub">-</div></div>
-    <div class="stat-card red"><div class="stat-label">Form Rate</div><div class="stat-value" id="blendedRoas">-</div><div class="stat-sub" id="topCampaign">-</div></div>
+  <div style="display:flex;flex-direction:column;gap:16px;margin-bottom:24px">
+    <div style="border:1px solid rgba(34,197,94,0.2);border-radius:16px;padding:20px 24px;background:linear-gradient(135deg,rgba(34,197,94,0.04) 0%,rgba(34,197,94,0.01) 100%)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:8px;height:8px;border-radius:50%;background:#22C55E;display:inline-block;animation:pulse 2s infinite"></span>
+          <span style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#22C55E">Workshop</span>
+          <span style="font-size:0.7rem;color:rgba(255,255,255,0.35);font-weight:500">Edible Engineering</span>
+        </div>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.05em">May 2, 2026</span>
+      </div>
+      <div class="summary" style="margin-bottom:0">
+        <div class="stat-card" style="border-color:rgba(34,197,94,0.15)"><div class="stat-label" style="color:#22C55E">Form Submissions</div><div class="stat-value" id="totalLeads">-</div><div class="stat-sub" id="leadsToday">-</div></div>
+        <div class="stat-card" style="border-color:rgba(34,197,94,0.15)"><div class="stat-label" style="color:#22C55E">Landing Page Views</div><div class="stat-value" id="workshopStarts">-</div><div class="stat-sub" id="workshopStartRate">-</div></div>
+        <div class="stat-card" style="border-color:rgba(34,197,94,0.15)"><div class="stat-label" style="color:#22C55E">Paid Registrations</div><div class="stat-value" id="paidRegistrations">-</div><div class="stat-sub" id="paidRegistrationsSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(34,197,94,0.15)"><div class="stat-label" style="color:#22C55E">Workshop Ad Spend</div><div class="stat-value" id="metaSpend">-</div><div class="stat-sub" id="metaSpendSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(34,197,94,0.15)"><div class="stat-label" style="color:#22C55E">Form Rate</div><div class="stat-value" id="blendedRoas">-</div><div class="stat-sub" id="topCampaign">-</div></div>
+      </div>
+    </div>
+    <div style="border:1px solid rgba(234,191,54,0.2);border-radius:16px;padding:20px 24px;background:linear-gradient(135deg,rgba(234,191,54,0.04) 0%,rgba(234,191,54,0.01) 100%)">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px">
+        <div style="display:flex;align-items:center;gap:10px">
+          <span style="width:8px;height:8px;border-radius:50%;background:#EABF36;display:inline-block;animation:pulse 2s infinite"></span>
+          <span style="font-size:0.7rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#EABF36">Programme</span>
+          <span style="font-size:0.7rem;color:rgba(255,255,255,0.35);font-weight:500">Cohort 2026</span>
+        </div>
+        <span style="font-size:0.65rem;color:rgba(255,255,255,0.25);letter-spacing:0.05em">5 Landing Pages Active</span>
+      </div>
+      <div class="summary" style="margin-bottom:0">
+        <div class="stat-card" style="border-color:rgba(234,191,54,0.15)"><div class="stat-label" style="color:#EABF36">Programme Leads</div><div class="stat-value" id="programmeLeads">-</div><div class="stat-sub" id="programmeLeadsSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(234,191,54,0.15)"><div class="stat-label" style="color:#EABF36">Programme Ad Spend</div><div class="stat-value" id="programmeSpend">-</div><div class="stat-sub" id="programmeSpendSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(234,191,54,0.15)"><div class="stat-label" style="color:#EABF36">Cost Per Lead</div><div class="stat-value" id="programmeCPL">-</div><div class="stat-sub" id="programmeCPLSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(234,191,54,0.15)"><div class="stat-label" style="color:#EABF36">Total Meta Spend</div><div class="stat-value" id="totalMetaSpend">-</div><div class="stat-sub" id="totalMetaSpendSub">-</div></div>
+        <div class="stat-card" style="border-color:rgba(234,191,54,0.15)"><div class="stat-label" style="color:#EABF36">Top LP</div><div class="stat-value" id="topLP">-</div><div class="stat-sub" id="topLPSub">-</div></div>
+      </div>
+    </div>
   </div>
 
   <div class="tabs">
@@ -528,7 +557,8 @@ function buildQueryString() {
 }
 
 async function fetchDataset(url) {
-  const response = await fetch(url + buildQueryString(), { cache: 'no-store' });
+  const cacheBust = (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
+  const response = await fetch(url + buildQueryString() + cacheBust, { cache: 'no-store' });
   if (!response.ok) throw new Error('API error');
   const data = await response.json();
   return normalizeRows(data);
@@ -812,6 +842,14 @@ function renderSummary() {
   const formFills = workshopCheckoutLeads.length;
   const metaLPV = workshopResults;
 
+  const programmeCampaigns = metaRows.filter((item) => String(pick(item, ['category'], '')).includes('leads'));
+  const programmeSpend = programmeCampaigns.reduce((sum, item) => sum + parseNumber(pick(item, ['spend','cost'], 0)), 0);
+  const programmeLeadCount = programmeCampaigns.reduce((sum, item) => sum + parseNumber(pick(item, ['results','leads'], 0)), 0);
+  const programmeCPL = programmeLeadCount > 0 ? programmeSpend / programmeLeadCount : 0;
+  const topLPEntry = Object.entries(sumBy(leads, (item) => pick(item, ['landing_page','page_path','cta_url'], '/'), () => 1))
+    .filter(([k]) => k.startsWith('/lp'))
+    .sort((a,b) => b[1] - a[1])[0];
+
   document.getElementById('totalLeads').textContent = formFills;
   document.getElementById('leadsToday').textContent = formFills + ' of ' + metaLPV + ' visitors';
   document.getElementById('workshopStarts').textContent = metaLPV;
@@ -819,11 +857,20 @@ function renderSummary() {
   document.getElementById('paidRegistrations').textContent = paidOrders;
   document.getElementById('paidRegistrationsSub').textContent = formFills ? Math.round((paidOrders / Math.max(formFills, 1)) * 100) + '% of form fills' : '-';
   document.getElementById('metaSpend').textContent = spend ? formatCurrency(spend) : '-';
-  document.getElementById('metaSpendSub').textContent = workshopCampaigns.length ? ('Superfood campaign only') : '-';
+  document.getElementById('metaSpendSub').textContent = workshopCampaigns.length ? ('Superfood campaign') : '-';
+  document.getElementById('blendedRoas').textContent = metaLPV ? (Math.round((formFills / metaLPV) * 10000) / 100).toFixed(1) + '%' : '-';
+  document.getElementById('topCampaign').textContent = metaLPV ? (formFills + ' / ' + metaLPV + ' views') : '-';
+
+  document.getElementById('programmeLeads').textContent = leads.length;
+  document.getElementById('programmeLeadsSub').textContent = leads.filter((item) => isToday(pick(item, ['timestamp']))).length + ' today';
+  document.getElementById('programmeSpend').textContent = programmeSpend ? formatCurrency(programmeSpend) : '-';
+  document.getElementById('programmeSpendSub').textContent = programmeCampaigns.length + ' campaigns';
+  document.getElementById('programmeCPL').textContent = programmeCPL ? formatCurrency(programmeCPL) : '-';
+  document.getElementById('programmeCPLSub').textContent = programmeLeadCount + ' Meta leads';
   document.getElementById('totalMetaSpend').textContent = totalSpend ? formatCurrency(totalSpend) : '-';
   document.getElementById('totalMetaSpendSub').textContent = metaRows.length + ' campaigns total';
-  document.getElementById('blendedRoas').textContent = metaLPV ? (Math.round((formFills / metaLPV) * 10000) / 100).toFixed(1) + '%' : '-';
-  document.getElementById('topCampaign').textContent = metaLPV ? (formFills + ' forms / ' + metaLPV + ' views') : 'No data';
+  document.getElementById('topLP').textContent = topLPEntry ? topLPEntry[0] : '-';
+  document.getElementById('topLPSub').textContent = topLPEntry ? (topLPEntry[1] + ' leads') : '-';
 }
 
 function renderBarChart(containerId, entries, formatter) {

@@ -88,7 +88,10 @@ export async function proxyJsonGet(
       }
     }
 
-    return NextResponse.json(json, { status: response.ok ? 200 : response.status })
+    return NextResponse.json(json, {
+      status: response.ok ? 200 : response.status,
+      headers: { "Cache-Control": "no-cache, no-store, must-revalidate", "CDN-Cache-Control": "no-store" },
+    })
   } catch {
     return NextResponse.json([], { status: 200 })
   }
