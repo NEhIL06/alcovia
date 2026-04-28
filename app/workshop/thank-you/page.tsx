@@ -202,7 +202,7 @@ export default function WorkshopThankYouPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
           >
-            {`Your seat for ${WORKSHOP_DETAILS.title} is confirmed. Keep this page handy while we sync the payment with your backend workflows.`}
+            {`Your seat for ${WORKSHOP_DETAILS.title} is confirmed. Our team will reach out to you via call within the next 24 hours with all the details. You will also receive a confirmation on WhatsApp shortly.`}
           </motion.p>
 
           <motion.div

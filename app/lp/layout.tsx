@@ -18,7 +18,7 @@ export default function LPLayout({
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '26011379345197572');
+          fbq('init', '1606881963979917');
           fbq('track', 'PageView');
         `}
       </Script>

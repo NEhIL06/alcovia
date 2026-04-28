@@ -417,31 +417,8 @@ export async function beginWorkshopCheckout(
     value: WORKSHOP_DETAILS.amount,
   })
 
-  ;(window as Window & { fbq?: (...args: unknown[]) => void }).fbq?.(
-    "track",
-    "InitiateCheckout",
-    {
-      content_category: "Workshop",
-      content_name: WORKSHOP_DETAILS.title,
-      currency: WORKSHOP_DETAILS.currency,
-      value: WORKSHOP_DETAILS.amount,
-    },
-    { eventID: checkoutEventId }
-  )
-
-  fetch("/api/meta-capi", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      client_user_agent: navigator.userAgent,
-      event_id: checkoutEventId,
-      event_name: "InitiateCheckout",
-      fbc: payload.fbc,
-      fbp: payload.fbp,
-      source_url: window.location.href,
-    }),
-    keepalive: true,
-  }).catch(() => {})
+  // InitiateCheckout and Lead events now fire in workshop-checkout-context.tsx
+  // beginWorkshopCheckout only handles the Razorpay redirect
 
   const finalUrl = buildRazorpayUrl(getWorkshopPaymentUrl(), options, contextWithLead)
   window.location.assign(finalUrl)

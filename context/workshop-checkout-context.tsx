@@ -6,6 +6,8 @@ import WorkshopCheckoutForm, { type WorkshopCheckoutFormData } from "@/component
 import {
   beginWorkshopCheckout,
   submitWorkshopCheckoutLead,
+  trackWorkshopEvent,
+  WORKSHOP_DETAILS,
   type WorkshopCtaSource,
 } from "@/lib/workshop-tracking"
 
@@ -27,6 +29,20 @@ export function WorkshopCheckoutProvider({ children }: { children: ReactNode }) 
     setCtaSource(source)
     setError(null)
     setIsOpen(true)
+
+    const eventId = `ic_${crypto.randomUUID()}`
+    ;(window as Window & { fbq?: (...args: unknown[]) => void }).fbq?.(
+      "track", "InitiateCheckout",
+      { content_category: "Workshop", content_name: WORKSHOP_DETAILS.title, currency: "INR", value: WORKSHOP_DETAILS.amount },
+      { eventID: eventId }
+    )
+    trackWorkshopEvent("workshop_initiate_checkout", { ctaSource: source, eventId }).catch(() => {})
+    fetch("/api/meta-capi", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ event_name: "InitiateCheckout", event_id: eventId, source_url: window.location.href, client_user_agent: navigator.userAgent }),
+      keepalive: true,
+    }).catch(() => {})
   }, [])
 
   const close = useCallback(() => {
@@ -41,6 +57,20 @@ export function WorkshopCheckoutProvider({ children }: { children: ReactNode }) 
 
       try {
         const { leadId } = await submitWorkshopCheckoutLead(data, ctaSource)
+
+        const leadEventId = `lead_evt_${crypto.randomUUID()}`
+        ;(window as Window & { fbq?: (...args: unknown[]) => void }).fbq?.(
+          "track", "Lead",
+          { content_category: "Workshop", content_name: WORKSHOP_DETAILS.title, currency: "INR", value: WORKSHOP_DETAILS.amount },
+          { eventID: leadEventId }
+        )
+        fetch("/api/meta-capi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ event_name: "Lead", event_id: leadEventId, source_url: window.location.href, client_user_agent: navigator.userAgent }),
+          keepalive: true,
+        }).catch(() => {})
+
         await beginWorkshopCheckout(ctaSource, { lead: data, leadId })
       } catch {
         setError("Something went wrong saving your details. Please try again.")
