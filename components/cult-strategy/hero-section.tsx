@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       id="cult-hero"
-      className="relative min-h-[100svh] sm:min-h-screen flex items-center overflow-hidden"
+      className="relative overflow-hidden"
     >
       {/* Full-bleed background image */}
       <div className="absolute inset-0 z-0">
@@ -45,7 +45,7 @@ export default function HeroSection() {
         <div className="absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-16 sm:pt-28 sm:pb-20">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 sm:pt-28 sm:pb-14">
         <div className="max-w-xl lg:max-w-2xl">
 
           <div className="flex items-center gap-3 mb-5">

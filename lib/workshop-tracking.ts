@@ -32,6 +32,7 @@ export type WorkshopCtaSource =
   | "mid"
   | "closing"
   | "mobile_floating"
+  | "callback"
   | "unknown"
 
 export interface WorkshopTrackingContext {
