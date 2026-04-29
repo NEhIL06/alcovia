@@ -393,7 +393,7 @@ section {
   to { transform: translateX(-50%); }
 }
 .marquee-track {
-  animation: marquee-scroll 60s linear infinite;
+  animation: marquee-scroll 120s linear infinite;
   will-change: transform;
 }
 .marquee-track:hover {

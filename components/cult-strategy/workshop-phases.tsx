@@ -80,7 +80,7 @@ const testimonials = [
 function TestimonialsCarousel() {
   return (
     <div className="relative w-full overflow-hidden mt-10 sm:mt-14">
-      <div className="flex gap-4 marquee-track" style={{ width: "max-content" }}>
+      <div className="flex gap-4 marquee-track" style={{ width: "max-content", animationDuration: "180s" }}>
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
