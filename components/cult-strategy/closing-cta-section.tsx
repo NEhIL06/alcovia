@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 import BackToTopButton from "@/components/cult-strategy/back-to-top-button";
 
@@ -26,225 +25,8 @@ const eventDetails = [
   },
 ];
 
-interface CallbackForm {
-  first_name: string;
-  last_name: string;
-  email: string;
-  phone: string;
-  message: string;
-}
-
-const EMPTY_CALLBACK: CallbackForm = {
-  first_name: "",
-  last_name: "",
-  email: "",
-  phone: "",
-  message: "",
-};
-
-function CallbackModal({ onClose }: { onClose: () => void }) {
-  const [form, setForm] = useState<CallbackForm>(EMPTY_CALLBACK);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const update = (key: keyof CallbackForm, value: string) =>
-    setForm((prev) => ({ ...prev, [key]: value }));
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.first_name.trim() || !form.email.trim() || !form.phone.replace(/\D/g, "").length) {
-      setError("Please fill in your name, email, and phone number.");
-      return;
-    }
-    setSubmitting(true);
-    setError(null);
-    try {
-      await fetch("/api/workshop-checkout-lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...form,
-          source: "contact_callback",
-          parent_name: `${form.first_name.trim()} ${form.last_name.trim()}`.trim(),
-          parent_phone: form.phone.replace(/\D/g, "").slice(0, 10),
-        }),
-      });
-      setSubmitted(true);
-    } catch {
-      setError("Something went wrong. Please try again or call us directly.");
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
-  const inputClass =
-    "w-full rounded-lg border border-gray-200 bg-gray-50 px-3 py-2.5 text-sm text-[#111827] placeholder:text-[#9ca3af] outline-none transition-colors focus:border-[#22C55E]/60 focus:bg-white";
-
-  return (
-    <div
-      className="fixed inset-0 z-[200] flex items-center justify-center px-4 py-6"
-      role="dialog"
-      aria-modal="true"
-      onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-    >
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
-      <div
-        className="relative w-full max-w-[420px] rounded-2xl border border-gray-200 bg-white shadow-2xl"
-        style={{ boxShadow: `0 30px 80px -20px ${ACCENT_DIM}0.2), 0 0 0 1px rgba(0,0,0,0.04) inset` }}
-      >
-        <button
-          type="button"
-          onClick={onClose}
-          className="absolute top-3 right-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-[#6b7280] hover:bg-gray-200 hover:text-[#111827] transition-colors"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
-            <path d="M18 6L6 18M6 6l12 12" />
-          </svg>
-        </button>
-
-        {submitted ? (
-          <div className="flex flex-col items-center justify-center px-7 py-12 text-center">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center mb-5"
-              style={{ background: `${ACCENT_DIM}0.12)` }}
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={2.5} className="w-7 h-7">
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
-            </div>
-            <h3 className="font-[family-name:var(--font-milan)] text-xl text-[#111827] mb-2">
-              We&apos;ll call you back!
-            </h3>
-            <p className="text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)]">
-              Thanks {form.first_name}. We&apos;ll reach out within 24 hours.
-            </p>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col px-5 pt-6 pb-5 sm:px-7 sm:pt-7 sm:pb-6">
-            <div className="mb-5 text-center">
-              <div className="flex items-center justify-center gap-2 mb-3">
-                <span className="h-px w-6" style={{ background: ACCENT }} />
-                <span className="text-[10px] tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold" style={{ color: ACCENT }}>
-                  Request A Call Back
-                </span>
-                <span className="h-px w-6" style={{ background: ACCENT }} />
-              </div>
-              <h2 className="font-[family-name:var(--font-milan)] text-xl sm:text-2xl text-[#111827] leading-tight">
-                Have questions?
-              </h2>
-              <p className="mt-1.5 text-xs text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
-                Leave your details and we&apos;ll call you back within 24 hours.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              <div className="grid grid-cols-2 gap-2.5">
-                <div>
-                  <label className="block text-[11px] font-medium text-[#6b7280] mb-1">
-                    First Name <span style={{ color: ACCENT }}>*</span>
-                  </label>
-                  <input
-                    type="text"
-                    value={form.first_name}
-                    onChange={(e) => update("first_name", e.target.value)}
-                    placeholder="First name"
-                    className={inputClass}
-                    disabled={submitting}
-                    autoFocus
-                  />
-                </div>
-                <div>
-                  <label className="block text-[11px] font-medium text-[#6b7280] mb-1">
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    value={form.last_name}
-                    onChange={(e) => update("last_name", e.target.value)}
-                    placeholder="Last name"
-                    className={inputClass}
-                    disabled={submitting}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[11px] font-medium text-[#6b7280] mb-1">
-                  Email <span style={{ color: ACCENT }}>*</span>
-                </label>
-                <input
-                  type="email"
-                  value={form.email}
-                  onChange={(e) => update("email", e.target.value)}
-                  placeholder="your@email.com"
-                  className={inputClass}
-                  disabled={submitting}
-                />
-              </div>
-              <div>
-                <label className="block text-[11px] font-medium text-[#6b7280] mb-1">
-                  Phone <span style={{ color: ACCENT }}>*</span>
-                </label>
-                <div className="flex items-center gap-1.5">
-                  <span className="flex items-center rounded-lg border border-gray-200 bg-gray-50 px-2.5 py-2.5 text-sm text-[#6b7280]">
-                    +91
-                  </span>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    value={form.phone}
-                    onChange={(e) => update("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
-                    placeholder="10-digit number"
-                    className={`flex-1 ${inputClass}`}
-                    disabled={submitting}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className="block text-[11px] font-medium text-[#6b7280] mb-1">
-                  Message (optional)
-                </label>
-                <textarea
-                  value={form.message}
-                  onChange={(e) => update("message", e.target.value)}
-                  placeholder="Any questions for us?"
-                  rows={2}
-                  className={`${inputClass} resize-none`}
-                  disabled={submitting}
-                />
-              </div>
-            </div>
-
-            {error && (
-              <p className="mt-3 text-xs text-red-500 text-center" role="alert">{error}</p>
-            )}
-
-            <button
-              type="submit"
-              disabled={submitting}
-              className="mt-5 flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
-              style={{
-                background: "linear-gradient(135deg, #22C55E 0%, #16A34A 100%)",
-                boxShadow: `0 4px 24px ${ACCENT_DIM}0.3)`,
-                fontFamily: "var(--font-monument)",
-              }}
-            >
-              {submitting ? (
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.5} className="h-4 w-4 animate-spin">
-                  <path d="M21 12a9 9 0 11-6.219-8.56" />
-                </svg>
-              ) : "Request a call back"}
-            </button>
-          </form>
-        )}
-      </div>
-    </div>
-  );
-}
 
 export default function ClosingCtaSection() {
-  const [showCallback, setShowCallback] = useState(false);
-
   return (
     <section
       id="cult-cta"
@@ -393,8 +175,8 @@ export default function ClosingCtaSection() {
               </svg>
               8085901818
             </a>
-            <button
-              onClick={() => setShowCallback(true)}
+            <WorkshopCheckoutLink
+              ctaSource="callback"
               className="flex items-center gap-2 text-sm font-semibold transition-colors font-[family-name:var(--font-satoshi)] border rounded-full px-5 py-2"
               style={{ color: ACCENT, borderColor: `${ACCENT_DIM}0.35)`, background: `${ACCENT_DIM}0.06)` }}
             >
@@ -402,7 +184,7 @@ export default function ClosingCtaSection() {
                 <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
               </svg>
               Request A Call Back
-            </button>
+            </WorkshopCheckoutLink>
           </div>
 
           <div className="flex items-center justify-center gap-2">
@@ -430,7 +212,6 @@ export default function ClosingCtaSection() {
         </div>
       </div>
 
-      {showCallback && <CallbackModal onClose={() => setShowCallback(false)} />}
     </section>
   );
 }

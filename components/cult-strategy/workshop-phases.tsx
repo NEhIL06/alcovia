@@ -1,6 +1,8 @@
 "use client";
 
+import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#22C55E";
@@ -79,6 +81,75 @@ const testimonials = [
   },
 ];
 
+function TestimonialsCarousel() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [trackWidth, setTrackWidth] = useState(0);
+
+  useEffect(() => {
+    if (trackRef.current) {
+      setTrackWidth(trackRef.current.scrollWidth / 2);
+    }
+  }, []);
+
+  return (
+    <div className="relative w-full overflow-hidden mt-10 sm:mt-14">
+      <motion.div
+        ref={trackRef}
+        className="flex gap-4"
+        style={{ width: "max-content" }}
+        animate={trackWidth ? { x: [0, -trackWidth] } : undefined}
+        transition={{
+          x: {
+            duration: 60,
+            repeat: Infinity,
+            ease: "linear",
+          },
+        }}
+      >
+        {[...testimonials, ...testimonials].map((item, i) => (
+          <div
+            key={i}
+            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-gray-200 rounded-2xl bg-white overflow-hidden"
+          >
+            <div className="relative h-40">
+              <Image
+                src={item.photo}
+                alt={`${item.name}, Age ${item.age}`}
+                fill
+                className="object-cover object-top"
+                sizes="300px"
+              />
+              <div
+                className="absolute inset-0"
+                style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.45))" }}
+              />
+            </div>
+            <div className="p-4">
+              <span
+                className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
+                style={{ color: `${ACCENT}30` }}
+              >
+                &ldquo;
+              </span>
+              <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
+                {item.quote}
+              </p>
+              <div>
+                <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
+                  {item.name}
+                </span>
+                <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
+                  Age {item.age} &middot; Alcovia Community
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </motion.div>
+    </div>
+  );
+}
+
 export default function WorkshopPhases() {
   return (
     <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#F9F8F5" }}>
@@ -138,25 +209,15 @@ export default function WorkshopPhases() {
                   <div className="relative flex-1 border border-gray-200 rounded-2xl overflow-hidden bg-white transition-all duration-500 hover:border-[#22C55E]/30 hover:shadow-[0_8px_40px_rgba(34,197,94,0.08)]">
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
-                      style={{
-                        background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)`,
-                      }}
+                      style={{ background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)` }}
                     />
-                    <div
-                      className="h-px"
-                      style={{
-                        background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.2), transparent)`,
-                      }}
-                    />
+                    <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.2), transparent)` }} />
 
                     <div className="p-3 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-12">
                       <div className="flex-shrink-0 flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-5">
                         <div
                           className="inline-flex items-center gap-2 rounded-full px-3 py-1 border"
-                          style={{
-                            borderColor: `${ACCENT_DIM}0.25)`,
-                            background: `${ACCENT_DIM}0.06)`,
-                          }}
+                          style={{ borderColor: `${ACCENT_DIM}0.25)`, background: `${ACCENT_DIM}0.06)` }}
                         >
                           <span
                             className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
@@ -181,19 +242,14 @@ export default function WorkshopPhases() {
 
                       <div
                         className="hidden lg:block w-px self-stretch"
-                        style={{
-                          background: `linear-gradient(to bottom, transparent, ${ACCENT_DIM}0.15), transparent)`,
-                        }}
+                        style={{ background: `linear-gradient(to bottom, transparent, ${ACCENT_DIM}0.15), transparent)` }}
                       />
 
                       <div className="flex-1">
                         <div className="flex items-baseline gap-3 mb-1.5">
                           <span
                             className="font-[family-name:var(--font-monument)] font-bold leading-none transition-colors duration-500 group-hover:opacity-40"
-                            style={{
-                              fontSize: "clamp(2.5rem,5vw,4rem)",
-                              color: `${ACCENT_DIM}0.12)`,
-                            }}
+                            style={{ fontSize: "clamp(2.5rem,5vw,4rem)", color: `${ACCENT_DIM}0.12)` }}
                           >
                             {item.number}
                           </span>
@@ -240,63 +296,12 @@ export default function WorkshopPhases() {
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Testimonials – horizontal carousel on mobile, 3-col grid on desktop */}
-        <div className="mt-10 sm:mt-14">
-          <div
-            className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4
-                        sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 sm:-mx-0 sm:px-0 sm:gap-5"
-            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-            {testimonials.map((item) => (
-              <div
-                key={item.name}
-                className="flex-shrink-0 w-[78vw] max-w-[300px] snap-start border border-gray-200 rounded-2xl bg-white overflow-hidden
-                           sm:flex-shrink sm:w-auto sm:max-w-none"
-              >
-                <div className="relative h-40">
-                  <Image
-                    src={item.photo}
-                    alt={`${item.name}, Age ${item.age}`}
-                    fill
-                    className="object-cover object-top"
-                    sizes="(max-width: 640px) 78vw, 33vw"
-                  />
-                  <div
-                    className="absolute inset-0"
-                    style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.45))" }}
-                  />
-                </div>
-                <div className="p-4">
-                  <span
-                    className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-                    style={{ color: `${ACCENT}30` }}
-                  >
-                    &ldquo;
-                  </span>
-                  <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
-                    {item.quote}
-                  </p>
-                  <div>
-                    <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
-                      {item.name}
-                    </span>
-                    <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
-                      Age {item.age} &middot; Alcovia Community
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          {/* Scroll indicator – mobile only */}
-          <div className="flex justify-center gap-1.5 mt-3 sm:hidden">
-            <div className="w-4 h-1.5 rounded-full" style={{ background: ACCENT }} />
-            <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-            <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
-          </div>
-        </div>
+      {/* Testimonials infinite auto-scroll carousel – full bleed */}
+      <TestimonialsCarousel />
 
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Mid CTA */}
         <div className="mt-10 sm:mt-14 text-center">
           <WorkshopCheckoutLink
