@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 const ACCENT = "#22C55E";
 
@@ -43,23 +42,11 @@ const faqs = [
   },
 ];
 
-function FaqItem({
-  faq,
-  index,
-}: {
-  faq: { question: string; answer: string };
-  index: number;
-}) {
+function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <motion.div
-      className="border border-gray-200 rounded-2xl overflow-hidden bg-white transition-colors duration-300 hover:border-[#22C55E]/25"
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6, delay: index * 0.07 }}
-    >
+    <div className="lp-fade-in border border-gray-200 rounded-2xl overflow-hidden bg-white transition-colors duration-300 hover:border-[#22C55E]/25">
       <button
         className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 text-left cursor-pointer"
         onClick={() => setOpen(!open)}
@@ -87,30 +74,21 @@ function FaqItem({
         </span>
       </button>
 
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            key="content"
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-              <div
-                className="h-px mb-3"
-                style={{
-                  background: `linear-gradient(to right, ${ACCENT}20, transparent)`,
-                }}
-              />
-              <p className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-relaxed">
-                {faq.answer}
-              </p>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+      <div
+        className="overflow-hidden transition-all duration-300 ease-out"
+        style={{ maxHeight: open ? "400px" : "0", opacity: open ? 1 : 0 }}
+      >
+        <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+          <div
+            className="h-px mb-3"
+            style={{ background: `linear-gradient(to right, ${ACCENT}20, transparent)` }}
+          />
+          <p className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-relaxed">
+            {faq.answer}
+          </p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -125,32 +103,22 @@ export default function FaqSection() {
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
-          <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
+          <span
+            className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
             style={{ color: ACCENT }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
             FAQ
-          </motion.span>
+          </span>
 
-          <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
+          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3">
             Everything you need{" "}
             <span style={{ color: ACCENT }}>to know</span>
-          </motion.h2>
+          </h2>
         </div>
 
         <div className="space-y-3">
-          {faqs.map((faq, i) => (
-            <FaqItem key={faq.question} faq={faq} index={i} />
+          {faqs.map((faq) => (
+            <FaqItem key={faq.question} faq={faq} />
           ))}
         </div>
       </div>

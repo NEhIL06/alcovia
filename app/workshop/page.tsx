@@ -1,16 +1,18 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/cult-strategy/hero-section";
-import SpeakerSection from "@/components/cult-strategy/speaker-section";
-import HookSection from "@/components/cult-strategy/hook-section";
-import WorkshopGallery from "@/components/cult-strategy/workshop-gallery";
-import WorkshopPhases from "@/components/cult-strategy/workshop-phases";
-import AuthoritySection from "@/components/cult-strategy/authority-section";
-import SocialProofSection from "@/components/cult-strategy/social-proof-section";
-import FaqSection from "@/components/cult-strategy/faq-section";
-import ClosingCtaSection from "@/components/cult-strategy/closing-cta-section";
-import MobileFloatingCta from "@/components/cult-strategy/mobile-floating-cta";
 import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracker";
-import Footer from "@/components/footer";
+
+const SpeakerSection = dynamic(() => import("@/components/cult-strategy/speaker-section"));
+const HookSection = dynamic(() => import("@/components/cult-strategy/hook-section"));
+const WorkshopGallery = dynamic(() => import("@/components/cult-strategy/workshop-gallery"));
+const WorkshopPhases = dynamic(() => import("@/components/cult-strategy/workshop-phases"));
+const AuthoritySection = dynamic(() => import("@/components/cult-strategy/authority-section"));
+const SocialProofSection = dynamic(() => import("@/components/cult-strategy/social-proof-section"));
+const FaqSection = dynamic(() => import("@/components/cult-strategy/faq-section"));
+const ClosingCtaSection = dynamic(() => import("@/components/cult-strategy/closing-cta-section"));
+const MobileFloatingCta = dynamic(() => import("@/components/cult-strategy/mobile-floating-cta"));
+const Footer = dynamic(() => import("@/components/footer"));
 
 export const metadata: Metadata = {
   title: "Superfood Workshop for Teenagers | Turn Your Snack Idea Into a Real Brand | Alcovia",

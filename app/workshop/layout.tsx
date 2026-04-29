@@ -40,12 +40,12 @@ async function sendMetaCAPIPageView() {
   }
 }
 
-export default async function WorkshopLayout({
+export default function WorkshopLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  await sendMetaCAPIPageView()
+  sendMetaCAPIPageView().catch(() => {})
 
   return (
     <WorkshopCheckoutProvider>

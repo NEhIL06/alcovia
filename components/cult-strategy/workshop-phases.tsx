@@ -1,8 +1,4 @@
-"use client";
-
-import { useRef, useEffect, useState } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#22C55E";
@@ -82,30 +78,9 @@ const testimonials = [
 ];
 
 function TestimonialsCarousel() {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const [trackWidth, setTrackWidth] = useState(0);
-
-  useEffect(() => {
-    if (trackRef.current) {
-      setTrackWidth(trackRef.current.scrollWidth / 2);
-    }
-  }, []);
-
   return (
     <div className="relative w-full overflow-hidden mt-10 sm:mt-14">
-      <motion.div
-        ref={trackRef}
-        className="flex gap-4"
-        style={{ width: "max-content" }}
-        animate={trackWidth ? { x: [0, -trackWidth] } : undefined}
-        transition={{
-          x: {
-            duration: 60,
-            repeat: Infinity,
-            ease: "linear",
-          },
-        }}
-      >
+      <div className="flex gap-4 marquee-track" style={{ width: "max-content" }}>
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
@@ -145,7 +120,7 @@ function TestimonialsCarousel() {
             </div>
           </div>
         ))}
-      </motion.div>
+      </div>
     </div>
   );
 }
