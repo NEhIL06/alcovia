@@ -1,3 +1,4 @@
+import type React from "react";
 import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
@@ -80,7 +81,7 @@ const testimonials = [
 function TestimonialsCarousel() {
   return (
     <div className="relative w-full overflow-hidden mt-10 sm:mt-14">
-      <div className="flex gap-4 marquee-track" style={{ width: "max-content", animationDuration: "180s" }}>
+      <div className="flex gap-4 marquee-track" style={{ "--duration": "360s", width: "max-content", animationDuration: "180s" } as React.CSSProperties}>
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
