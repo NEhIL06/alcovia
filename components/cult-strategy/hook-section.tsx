@@ -3,7 +3,7 @@ const ACCENT_DIM = "rgba(34,197,94,";
 
 export default function HookSection() {
   return (
-    <section className="relative py-16 sm:py-24 overflow-hidden" style={{ background: "#F9F8F5" }}>
+    <section className="relative py-8 sm:py-16 overflow-hidden" style={{ background: "#F9F8F5" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div
           style={{

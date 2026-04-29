@@ -41,22 +41,22 @@ export default function HeroSection() {
       <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-8 left-8 w-12 h-12 border-t border-l" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
         <div className="absolute top-8 right-8 w-12 h-12 border-t border-r" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
-        <div className="absolute bottom-8 left-8 w-12 h-12 border-b border-l" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
-        <div className="absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
+        <div className="hidden sm:block absolute bottom-8 left-8 w-12 h-12 border-b border-l" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
+        <div className="hidden sm:block absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
       </div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 sm:pt-28 sm:pb-14">
         <div className="max-w-xl lg:max-w-2xl">
 
           <div className="flex items-center gap-3 mb-5">
-            <span className="h-px w-8" style={{ background: ACCENT }} />
+            <span className="hidden sm:block h-px w-8" style={{ background: ACCENT }} />
             <span
-              className="text-[11px] sm:text-xs tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
+              className="text-[11px] sm:text-xs tracking-[0.1em] sm:tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
               style={{ color: ACCENT }}
             >
               Alcovia Workshop For Teenagers
             </span>
-            <span className="h-px w-8" style={{ background: ACCENT }} />
+            <span className="hidden sm:block h-px w-8" style={{ background: ACCENT }} />
           </div>
 
           <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-5 sm:mb-6">
