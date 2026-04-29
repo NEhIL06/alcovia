@@ -76,7 +76,7 @@ export default function HeroSection() {
             <span className="font-semibold text-white">That someone could be YOU.</span>
           </p>
 
-          <div className="flex flex-col items-start gap-2.5 mb-8 sm:mb-10">
+          <div className="flex flex-col items-center sm:items-start gap-2.5 mb-8 sm:mb-10">
             <WorkshopCheckoutLink
               ctaSource="hero"
               className="group relative inline-flex items-center gap-3 overflow-hidden"
@@ -99,7 +99,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-y-2.5 gap-x-5">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-y-2.5 gap-x-5">
             <div className="flex items-center gap-1.5">
               <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">
                 <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
