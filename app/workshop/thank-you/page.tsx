@@ -86,6 +86,12 @@ export default function WorkshopThankYouPage() {
         fbc: checkoutContext?.fbc,
         fbp: checkoutContext?.fbp,
         source_url: window.location.href,
+        custom_data: {
+          currency: WORKSHOP_DETAILS.currency,
+          value: WORKSHOP_DETAILS.amount,
+          content_name: WORKSHOP_DETAILS.title,
+          content_category: "Workshop",
+        },
       }),
     }).catch(() => {})
 

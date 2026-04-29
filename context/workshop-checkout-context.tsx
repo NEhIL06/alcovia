@@ -40,7 +40,18 @@ export function WorkshopCheckoutProvider({ children }: { children: ReactNode }) 
     fetch("/api/meta-capi", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ event_name: "InitiateCheckout", event_id: eventId, source_url: window.location.href, client_user_agent: navigator.userAgent }),
+      body: JSON.stringify({
+        event_name: "InitiateCheckout",
+        event_id: eventId,
+        source_url: window.location.href,
+        client_user_agent: navigator.userAgent,
+        custom_data: {
+          currency: WORKSHOP_DETAILS.currency,
+          value: WORKSHOP_DETAILS.amount,
+          content_name: WORKSHOP_DETAILS.title,
+          content_category: "Workshop",
+        },
+      }),
       keepalive: true,
     }).catch(() => {})
   }, [])
@@ -67,7 +78,18 @@ export function WorkshopCheckoutProvider({ children }: { children: ReactNode }) 
         fetch("/api/meta-capi", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ event_name: "Lead", event_id: leadEventId, source_url: window.location.href, client_user_agent: navigator.userAgent }),
+          body: JSON.stringify({
+            event_name: "Lead",
+            event_id: leadEventId,
+            source_url: window.location.href,
+            client_user_agent: navigator.userAgent,
+            custom_data: {
+              currency: WORKSHOP_DETAILS.currency,
+              value: WORKSHOP_DETAILS.amount,
+              content_name: WORKSHOP_DETAILS.title,
+              content_category: "Workshop",
+            },
+          }),
           keepalive: true,
         }).catch(() => {})
 

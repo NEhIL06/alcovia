@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json()
-    const { event_name, event_id, phone, email, city, source_url, client_user_agent, fbc, fbp } = body
+    const { event_name, event_id, phone, email, city, source_url, client_user_agent, fbc, fbp, custom_data } = body
 
     const userData: Record<string, unknown> = {}
     if (phone) userData.ph = [hashSha256(phone)]
@@ -39,6 +39,7 @@ export async function POST(req: NextRequest) {
           action_source: "website",
           event_source_url: source_url || undefined,
           user_data: userData,
+          ...(custom_data && typeof custom_data === "object" ? { custom_data } : {}),
         },
       ],
     }

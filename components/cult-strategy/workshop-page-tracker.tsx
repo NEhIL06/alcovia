@@ -44,6 +44,12 @@ export default function WorkshopPageTracker() {
         fbc: document.cookie.match(/(^| )_fbc=([^;]+)/)?.[2],
         fbp: document.cookie.match(/(^| )_fbp=([^;]+)/)?.[2],
         source_url: window.location.href,
+        custom_data: {
+          currency: WORKSHOP_DETAILS.currency,
+          value: WORKSHOP_DETAILS.amount,
+          content_name: WORKSHOP_DETAILS.title,
+          content_category: "Workshop",
+        },
       }),
     }).catch(() => {})
 
