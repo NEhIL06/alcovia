@@ -1,3 +1,6 @@
+"use client";
+
+import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#22C55E";
@@ -60,16 +63,19 @@ const testimonials = [
     quote: "Showed me that building a brand is about understanding people, not just making stuff.",
     name: "Ansh",
     age: "15",
+    photo: "/images/lp/environment.jpg",
   },
   {
     quote: "You actually build and compete. Nothing like school.",
     name: "Aryaana",
     age: "14",
+    photo: "/images/lp/ideas-to-execution.jpg",
   },
   {
     quote: "After the workshop, I started noticing how every brand around me is designed to make me feel something. I can't unsee it now.",
     name: "Aksh",
     age: "16",
+    photo: "/images/workshop/w5.jpeg",
   },
 ];
 
@@ -235,40 +241,60 @@ export default function WorkshopPhases() {
           </div>
         </div>
 
-        {/* Testimonials */}
-        <div className="mt-10 sm:mt-14 grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5">
-          {testimonials.map((item) => (
-            <div
-              key={item.name}
-              className="relative border border-gray-200 rounded-2xl p-4 sm:p-6 bg-white"
-            >
-              <span
-                className="block text-3xl sm:text-5xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-                style={{ color: `${ACCENT}30` }}
+        {/* Testimonials – horizontal carousel on mobile, 3-col grid on desktop */}
+        <div className="mt-10 sm:mt-14">
+          <div
+            className="flex gap-3 overflow-x-auto pb-4 snap-x snap-mandatory -mx-4 px-4
+                        sm:grid sm:grid-cols-3 sm:overflow-visible sm:pb-0 sm:-mx-0 sm:px-0 sm:gap-5"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
+            {testimonials.map((item) => (
+              <div
+                key={item.name}
+                className="flex-shrink-0 w-[78vw] max-w-[300px] snap-start border border-gray-200 rounded-2xl bg-white overflow-hidden
+                           sm:flex-shrink sm:w-auto sm:max-w-none"
               >
-                &ldquo;
-              </span>
-              <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
-                {item.quote}
-              </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-[family-name:var(--font-monument)] font-bold text-white"
-                  style={{ background: ACCENT }}
-                >
-                  {item.name[0]}
+                <div className="relative h-40">
+                  <Image
+                    src={item.photo}
+                    alt={`${item.name}, Age ${item.age}`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 78vw, 33vw"
+                  />
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.45))" }}
+                  />
                 </div>
-                <div>
-                  <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
-                    {item.name}
+                <div className="p-4">
+                  <span
+                    className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
+                    style={{ color: `${ACCENT}30` }}
+                  >
+                    &ldquo;
                   </span>
-                  <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
-                    Age {item.age} &middot; Alcovia Community
-                  </span>
+                  <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
+                    {item.quote}
+                  </p>
+                  <div>
+                    <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
+                      {item.name}
+                    </span>
+                    <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
+                      Age {item.age} &middot; Alcovia Community
+                    </span>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+          {/* Scroll indicator – mobile only */}
+          <div className="flex justify-center gap-1.5 mt-3 sm:hidden">
+            <div className="w-4 h-1.5 rounded-full" style={{ background: ACCENT }} />
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+            <div className="w-1.5 h-1.5 rounded-full bg-gray-300" />
+          </div>
         </div>
 
         {/* Mid CTA */}

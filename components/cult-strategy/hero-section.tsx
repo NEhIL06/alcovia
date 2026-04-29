@@ -8,7 +8,7 @@ export default function HeroSection() {
   return (
     <section
       id="cult-hero"
-      className="relative min-h-[90vh] sm:min-h-screen flex items-center overflow-hidden pt-20 sm:pt-24 pb-14 sm:pb-16"
+      className="relative overflow-hidden pt-20 pb-10 sm:pt-24 sm:pb-14"
       style={{ background: "#F9F8F5" }}
     >
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -25,10 +25,36 @@ export default function HeroSection() {
       </div>
 
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Mobile-only hero image – visible immediately above the text */}
+        <div className="lg:hidden relative w-full h-52 rounded-2xl overflow-hidden mb-5 shadow-md">
+          <Image
+            src="/images/lp/cohort.jpg"
+            alt="Alcovia Workshop – Students learning brand building"
+            fill
+            className="object-cover object-center"
+            priority
+            sizes="100vw"
+          />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(to bottom, transparent 45%, rgba(249,248,245,0.85))" }}
+          />
+          <div className="absolute bottom-3 left-4 flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
+            <span
+              className="text-[11px] tracking-wider font-[family-name:var(--font-satoshi)] font-semibold uppercase"
+              style={{ color: ACCENT }}
+            >
+              Only 17 Spots Left
+            </span>
+          </div>
+        </div>
+
         <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
           <div className="flex-1 text-center lg:text-left">
-            <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
               <span className="h-px w-8" style={{ background: ACCENT }} />
               <span
                 className="text-[11px] sm:text-xs tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
@@ -39,7 +65,7 @@ export default function HeroSection() {
               <span className="h-px w-8" style={{ background: ACCENT }} />
             </div>
 
-            <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-5 sm:mb-6">
+            <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-5">
               <span className="block text-[clamp(2rem,5.5vw,5rem)] text-[#111827]">
                 Turn Your Snack Idea
               </span>
@@ -51,12 +77,12 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="text-base sm:text-lg font-[family-name:var(--font-satoshi)] text-[#6b7280] max-w-lg mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
+            <p className="text-sm sm:text-lg font-[family-name:var(--font-satoshi)] text-[#6b7280] max-w-lg mx-auto lg:mx-0 mb-6 leading-relaxed">
               Chia seeds used to be bird food. Then someone figured out how to sell them for ₹500 a pack.{" "}
               <span className="font-semibold text-[#111827]">That someone could be YOU.</span>
             </p>
 
-            <div className="flex flex-col items-center lg:items-start gap-2.5 mb-8 sm:mb-10">
+            <div className="flex flex-col items-center lg:items-start gap-2 mb-6">
               <WorkshopCheckoutLink
                 ctaSource="hero"
                 className="group relative inline-flex items-center gap-3 overflow-hidden"
@@ -98,8 +124,9 @@ export default function HeroSection() {
                 </svg>
                 <span className="text-xs sm:text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)]">Grades 6 – 10</span>
               </div>
+              {/* Desktop-only spots badge */}
               <div
-                className="inline-flex items-center gap-1.5 border rounded-full px-3.5 py-1.5"
+                className="hidden lg:inline-flex items-center gap-1.5 border rounded-full px-3.5 py-1.5"
                 style={{ borderColor: `${ACCENT_DIM}0.35)`, background: `${ACCENT_DIM}0.08)` }}
               >
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
@@ -110,7 +137,8 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div className="relative w-full sm:w-80 lg:w-[42%] flex-shrink-0">
+          {/* Desktop-only right image */}
+          <div className="hidden lg:block relative w-full lg:w-[42%] flex-shrink-0">
             <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
               <Image
                 src="/images/lp/cohort.jpg"
@@ -118,7 +146,7 @@ export default function HeroSection() {
                 fill
                 className="object-cover"
                 priority
-                sizes="(max-width: 1024px) 20rem, 42vw"
+                sizes="42vw"
               />
               <div
                 className="absolute bottom-4 left-4 right-4 rounded-xl px-4 py-3"
@@ -139,13 +167,8 @@ export default function HeroSection() {
               style={{ background: `${ACCENT_DIM}0.07)`, filter: "blur(30px)" }}
             />
           </div>
-        </div>
-      </div>
 
-      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="cult-scroll-chevron w-5 h-5 text-[#9ca3af]">
-          <path d="M19 9l-7 7-7-7" />
-        </svg>
+        </div>
       </div>
     </section>
   );

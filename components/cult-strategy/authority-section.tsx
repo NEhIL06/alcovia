@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const ACCENT = "#22C55E";
@@ -181,11 +182,8 @@ export default function AuthoritySection() {
                   watched happen in every Alcovia room. It&apos;s worth a Saturday afternoon.
                 </p>
                 <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-[family-name:var(--font-monument)] font-bold text-white"
-                    style={{ background: ACCENT }}
-                  >
-                    S
+                  <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0 border-2" style={{ borderColor: `${ACCENT_DIM}0.3)` }}>
+                    <Image src="/images/team/sahil.png" alt="Sahil Puri" fill className="object-cover" sizes="40px" />
                   </div>
                   <div>
                     <span className="block text-sm font-[family-name:var(--font-satoshi)] font-semibold text-[#111827]">

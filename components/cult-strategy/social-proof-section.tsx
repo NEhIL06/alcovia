@@ -8,7 +8,7 @@ const stats = [
   },
   {
     number: "15+",
-    label: "Industry Operators",
+    label: "Industry Mentors",
     description: "Food founders, investors, and brand builders across our programs",
   },
   {
@@ -20,27 +20,6 @@ const stats = [
     number: "₹500Cr+",
     label: "Superfood Market",
     description: "The booming market we teach you to enter.",
-  },
-];
-
-const testimonials = [
-  {
-    quote:
-      "After the F1 workshop, I started noticing how every brand around me is designed to make me feel something. I can't unsee it now.",
-    name: "Aksh",
-    age: "16",
-  },
-  {
-    quote:
-      "I used to think marketing was just ads. Alcovia showed me it's psychology, strategy, and storytelling all rolled into one. Genuinely changed how I think.",
-    name: "Ansh",
-    age: "15",
-  },
-  {
-    quote:
-      "The best part is you're not just sitting and listening. You're actually building things, competing, and making real decisions. Nothing like school.",
-    name: "Aryaana",
-    age: "14",
   },
 ];
 
@@ -71,7 +50,7 @@ export default function SocialProofSection() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5 mb-6 sm:mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
           {stats.map((stat) => (
             <div
               key={stat.label}
@@ -89,41 +68,6 @@ export default function SocialProofSection() {
               <span className="block text-[10px] sm:text-xs text-[#9ca3af] font-[family-name:var(--font-satoshi)] leading-snug">
                 {stat.description}
               </span>
-            </div>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
-          {testimonials.map((item) => (
-            <div
-              key={item.name}
-              className="lp-fade-in relative border border-gray-200 rounded-2xl p-4 sm:p-6 bg-white"
-            >
-              <span
-                className="block text-3xl sm:text-5xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-                style={{ color: `${ACCENT}30` }}
-              >
-                &ldquo;
-              </span>
-              <p className="text-xs sm:text-base text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-3">
-                {item.quote}
-              </p>
-              <div className="flex items-center gap-3">
-                <div
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-[family-name:var(--font-monument)] font-bold text-white"
-                  style={{ background: ACCENT }}
-                >
-                  {item.name[0]}
-                </div>
-                <div>
-                  <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
-                    {item.name}
-                  </span>
-                  <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
-                    Age {item.age} &middot; Alcovia Community
-                  </span>
-                </div>
-              </div>
             </div>
           ))}
         </div>
