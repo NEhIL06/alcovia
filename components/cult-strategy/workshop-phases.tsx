@@ -81,7 +81,7 @@ const testimonials = [
 function TestimonialsCarousel() {
   return (
     <div className="relative w-full overflow-hidden mt-10 sm:mt-14">
-      <div className="flex gap-4 marquee-track" style={{ "--duration": "360s", width: "max-content", animationDuration: "180s" } as React.CSSProperties}>
+      <div className="flex gap-4 marquee-track" style={{ "--duration": "240s", width: "max-content", animationDuration: "120s" } as React.CSSProperties}>
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
