@@ -2,7 +2,13 @@
 
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from "react"
 
-import WorkshopCheckoutForm, { type WorkshopCheckoutFormData } from "@/components/cult-strategy/workshop-checkout-form"
+import dynamic from "next/dynamic"
+import type { WorkshopCheckoutFormData } from "@/components/cult-strategy/workshop-checkout-form"
+
+const WorkshopCheckoutForm = dynamic(
+  () => import("@/components/cult-strategy/workshop-checkout-form"),
+  { ssr: false }
+)
 import {
   beginWorkshopCheckout,
   submitWorkshopCheckoutLead,

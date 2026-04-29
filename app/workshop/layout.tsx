@@ -48,10 +48,15 @@ export default function WorkshopLayout({
   sendMetaCAPIPageView().catch(() => {})
 
   return (
-    <WorkshopCheckoutProvider>
-      <ScrollFadeInit />
-      <WorkshopNavbar />
-      {children}
-    </WorkshopCheckoutProvider>
+    <>
+      <link rel="preconnect" href="https://checkout.razorpay.com" />
+      <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="anonymous" />
+      <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+      <WorkshopCheckoutProvider>
+        <ScrollFadeInit />
+        <WorkshopNavbar />
+        {children}
+      </WorkshopCheckoutProvider>
+    </>
   )
 }
