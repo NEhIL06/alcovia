@@ -557,8 +557,7 @@ function buildQueryString() {
 }
 
 async function fetchDataset(url) {
-  const cacheBust = (url.includes('?') ? '&' : '?') + '_t=' + Date.now();
-  const response = await fetch(url + buildQueryString() + cacheBust, { cache: 'no-store' });
+  const response = await fetch(url + buildQueryString(), { cache: 'no-store' });
   if (!response.ok) throw new Error('API error');
   const data = await response.json();
   return normalizeRows(data);
@@ -665,11 +664,11 @@ function withinDateRange(item) {
   const date = parseDate(item, ['timestamp','created_at','date','date_start','event_time']);
   if (!date) return true;
   if (startRaw) {
-    const start = new Date(startRaw + 'T00:00:00');
+    const start = new Date(startRaw + 'T00:00:00+05:30');
     if (date < start) return false;
   }
   if (endRaw) {
-    const end = new Date(endRaw + 'T23:59:59');
+    const end = new Date(endRaw + 'T23:59:59+05:30');
     if (date > end) return false;
   }
   return true;
