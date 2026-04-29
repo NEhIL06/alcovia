@@ -1,3 +1,4 @@
+import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#22C55E";
@@ -7,211 +8,145 @@ export default function HeroSection() {
   return (
     <section
       id="cult-hero"
-      className="relative sm:min-h-screen flex items-center justify-center overflow-hidden pt-20 sm:pt-24 lg:pt-28 pb-12 sm:pb-12"
+      className="relative min-h-[90vh] sm:min-h-screen flex items-center overflow-hidden pt-20 sm:pt-24 pb-14 sm:pb-16"
+      style={{ background: "#F9F8F5" }}
     >
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div
           className="absolute inset-0"
           style={{
-            background: `radial-gradient(ellipse 80% 60% at 50% 40%, ${ACCENT_DIM}0.1) 0%, transparent 70%)`,
+            background: `radial-gradient(ellipse 60% 70% at 20% 50%, ${ACCENT_DIM}0.07) 0%, transparent 65%)`,
           }}
         />
-
-        <div className="hidden md:block absolute inset-0 opacity-[0.03]">
-          {Array.from({ length: 16 }).map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-full"
-              style={{
-                left: `${i * 6.25}%`,
-                width: "1px",
-                background: `linear-gradient(180deg, transparent 0%, ${ACCENT} 50%, transparent 100%)`,
-              }}
-            />
-          ))}
-        </div>
-
-        <div
-          className="absolute inset-0 opacity-[0.025]"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-            backgroundRepeat: "repeat",
-            backgroundSize: "128px 128px",
-          }}
-        />
-
-        <div
-          className="cult-scale-x absolute top-0 left-0 right-0 h-[2px]"
-          style={{
-            background: `linear-gradient(to right, transparent 0%, ${ACCENT} 40%, ${ACCENT} 60%, transparent 100%)`,
-          }}
-        />
+        <div className="hidden sm:block absolute top-8 left-8 w-12 h-12 border-t border-l" style={{ borderColor: `${ACCENT_DIM}0.25)` }} />
+        <div className="hidden sm:block absolute top-8 right-8 w-12 h-12 border-t border-r" style={{ borderColor: `${ACCENT_DIM}0.25)` }} />
+        <div className="hidden sm:block absolute bottom-8 left-8 w-12 h-12 border-b border-l" style={{ borderColor: `${ACCENT_DIM}0.25)` }} />
+        <div className="hidden sm:block absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.25)` }} />
       </div>
 
-      <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-        <div
-          className="flex items-center justify-center gap-3 mb-3 sm:mb-8"
-          style={{ animationDelay: "0.3s" }}
-        >
-          <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
-          <span
-            className="text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)]"
-            style={{ color: ACCENT }}
-          >
-            Alcovia Workshop
-          </span>
-          <span className="h-px w-8 sm:w-12" style={{ background: ACCENT }} />
-        </div>
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
 
-        <h1
-          className="font-[family-name:var(--font-milan)] leading-[0.9] tracking-tight mb-4 sm:mb-6"
-        >
-          <span
-            className="block text-[clamp(2.5rem,8vw,7rem)] text-white"
-            style={{ textShadow: "0 0 40px rgba(255,255,255,0.1)" }}
-          >
-            Edible
-          </span>
-          <span
-            className="block text-[clamp(2.5rem,8vw,7rem)]"
-            style={{
-              color: ACCENT,
-              textShadow: `0 0 60px ${ACCENT_DIM}0.4), 0 0 20px ${ACCENT_DIM}0.2)`,
-            }}
-          >
-            Engineering
-          </span>
-        </h1>
-
-        <p
-          className="text-[clamp(0.85rem,2vw,1.4rem)] font-[family-name:var(--font-monument)] uppercase tracking-[0.15em] text-white/80 mb-3 sm:mb-8"
-          style={{ animationDelay: "0.7s" }}
-        >
-          Architecting the Next{" "}
-          <span style={{ color: ACCENT }}>Superfood</span>
-        </p>
-
-        <div
-          className="w-16 sm:w-24 h-px mx-auto mb-3 sm:mb-8"
-          style={{ background: `${ACCENT_DIM}0.4)`, animationDelay: "0.9s" }}
-        />
-
-        <p
-          className="text-base sm:text-lg md:text-xl font-[family-name:var(--font-playfair)] italic text-white/70 max-w-xl mx-auto mb-2"
-          style={{ animationDelay: "1.1s" }}
-        >
-          Every superfood you eat today started in someone&apos;s notebook. Learn to build the next one.
-        </p>
-        <p
-          className="text-xs sm:text-sm text-white/50 font-[family-name:var(--font-satoshi)] max-w-md mx-auto"
-          style={{ animationDelay: "1.2s" }}
-        >
-          Spot a trend. Interview real people. Pitch it like you&apos;re raising money.
-        </p>
-
-        <div
-          className="mt-6 sm:mt-12 flex flex-col items-center gap-3"
-          style={{ animationDelay: "1.4s" }}
-        >
-          <WorkshopCheckoutLink
-            ctaSource="hero"
-            className="group relative inline-flex items-center gap-3 overflow-hidden"
-          >
-            <span
-              className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
-              style={{
-                background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
-                boxShadow: `0 4px 32px ${ACCENT_DIM}0.45), 0 1px 0 rgba(255,255,255,0.15) inset`,
-              }}
-            >
-              Secure My Spot
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth={2}
-                className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5"
+          <div className="flex-1 text-center lg:text-left">
+            <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
+              <span className="h-px w-8" style={{ background: ACCENT }} />
+              <span
+                className="text-[11px] sm:text-xs tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
+                style={{ color: ACCENT }}
               >
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </span>
-          </WorkshopCheckoutLink>
+                Alcovia Workshop For Teenagers
+              </span>
+              <span className="h-px w-8" style={{ background: ACCENT }} />
+            </div>
 
-          <p className="text-xs text-white/35 font-[family-name:var(--font-satoshi)] tracking-wide">
-            ₹3,999 per seat · Inclusive of lunch and materials
-          </p>
-        </div>
+            <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-5 sm:mb-6">
+              <span className="block text-[clamp(2rem,5.5vw,5rem)] text-[#111827]">
+                Turn Your Snack Idea
+              </span>
+              <span
+                className="block text-[clamp(2rem,5.5vw,5rem)]"
+                style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.15)` }}
+              >
+                Into a Real Brand
+              </span>
+            </h1>
 
-        <div
-          className="mt-5 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6"
-          style={{ animationDelay: "1.6s" }}
-        >
-          <div className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-4 h-4">
-              <rect x="3" y="4" width="18" height="18" rx="2" />
-              <path d="M16 2v4M8 2v4M3 10h18" />
-            </svg>
-            <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
-              Fri, May 2nd · 11 AM – 3 PM
-            </span>
+            <p className="text-base sm:text-lg font-[family-name:var(--font-satoshi)] text-[#6b7280] max-w-lg mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
+              Chia seeds used to be bird food. Then someone figured out how to sell them for ₹500 a pack.{" "}
+              <span className="font-semibold text-[#111827]">That someone could be YOU.</span>
+            </p>
+
+            <div className="flex flex-col items-center lg:items-start gap-2.5 mb-8 sm:mb-10">
+              <WorkshopCheckoutLink
+                ctaSource="hero"
+                className="group relative inline-flex items-center gap-3 overflow-hidden"
+              >
+                <span
+                  className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
+                  style={{
+                    background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
+                    boxShadow: `0 6px 32px ${ACCENT_DIM}0.4), 0 1px 0 rgba(255,255,255,0.18) inset`,
+                  }}
+                >
+                  Secure My Spot
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </WorkshopCheckoutLink>
+              <p className="text-xs text-[#9ca3af] font-[family-name:var(--font-satoshi)] tracking-wide">
+                ₹3,999 per seat · Inclusive of lunch and study materials
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center lg:justify-start gap-y-2.5 gap-x-4">
+              <div className="flex items-center gap-1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                <span className="text-xs sm:text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)]">Fri, May 2nd · 11 AM – 3 PM</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" />
+                </svg>
+                <span className="text-xs sm:text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)]">Horizon Center, Gurgaon</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">
+                  <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
+                </svg>
+                <span className="text-xs sm:text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)]">Grades 6 – 10</span>
+              </div>
+              <div
+                className="inline-flex items-center gap-1.5 border rounded-full px-3.5 py-1.5"
+                style={{ borderColor: `${ACCENT_DIM}0.35)`, background: `${ACCENT_DIM}0.08)` }}
+              >
+                <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
+                <span className="text-xs tracking-wider font-[family-name:var(--font-satoshi)] font-semibold" style={{ color: ACCENT }}>
+                  Only 17 Spots Left
+                </span>
+              </div>
+            </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-4 h-4">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-              <circle cx="12" cy="10" r="3" />
-            </svg>
-            <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
-              Horizon Center, Gurgaon
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-4 h-4">
-              <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
-            </svg>
-            <span className="text-xs sm:text-sm text-white/60 font-[family-name:var(--font-satoshi)]">
-              Grades 6 – 10
-            </span>
-          </div>
-
-          <div
-            className="inline-flex items-center gap-2 border rounded-full px-4 py-1.5"
-            style={{ borderColor: `${ACCENT_DIM}0.25)` }}
-          >
-            <span
-              className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: ACCENT }}
+          <div className="relative w-full sm:w-80 lg:w-[42%] flex-shrink-0">
+            <div className="relative aspect-[4/5] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/lp/cohort.jpg"
+                alt="Alcovia Workshop – Students learning brand building"
+                fill
+                className="object-cover"
+                priority
+                sizes="(max-width: 1024px) 20rem, 42vw"
+              />
+              <div
+                className="absolute bottom-4 left-4 right-4 rounded-xl px-4 py-3"
+                style={{ background: "rgba(255,255,255,0.90)", backdropFilter: "blur(8px)" }}
+              >
+                <p className="text-[11px] sm:text-xs font-[family-name:var(--font-satoshi)] text-[#4b5563] leading-snug">
+                  <span className="font-semibold text-[#111827]">Whole Truth · Yoga Bar · Raw Pressery</span>
+                  <br />All started as ideas in someone&apos;s notebook.
+                </p>
+              </div>
+            </div>
+            <div
+              className="absolute -top-8 -right-8 w-40 h-40 rounded-full -z-10"
+              style={{ background: `${ACCENT_DIM}0.1)`, filter: "blur(40px)" }}
             />
-            <span
-              className="text-xs sm:text-sm tracking-wider font-[family-name:var(--font-satoshi)]"
-              style={{ color: ACCENT }}
-            >
-              Limited Spots
-            </span>
+            <div
+              className="absolute -bottom-8 -left-8 w-28 h-28 rounded-full -z-10"
+              style={{ background: `${ACCENT_DIM}0.07)`, filter: "blur(30px)" }}
+            />
           </div>
         </div>
       </div>
 
-      <div
-        className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-10"
-        style={{ animationDelay: "2s" }}
-      >
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={1.5}
-          className="cult-scroll-chevron w-5 h-5 text-white/20"
-        >
+      <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-10">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="cult-scroll-chevron w-5 h-5 text-[#9ca3af]">
           <path d="M19 9l-7 7-7-7" />
         </svg>
       </div>
-
-      <div className="hidden sm:block absolute top-8 left-8 w-12 h-12 border-t border-l" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
-      <div className="hidden sm:block absolute top-8 right-8 w-12 h-12 border-t border-r" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
-      <div className="hidden sm:block absolute bottom-8 left-8 w-12 h-12 border-b border-l" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
-      <div className="hidden sm:block absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.22)` }} />
     </section>
   );
 }

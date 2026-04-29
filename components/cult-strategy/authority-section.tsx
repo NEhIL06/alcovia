@@ -1,8 +1,6 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
-import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#22C55E";
 const ACCENT_DIM = "rgba(34,197,94,";
@@ -14,9 +12,9 @@ const credentials = [
         <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
       </svg>
     ),
-    title: "We Teach What Schools Won't",
+    title: "We teach what school misses",
     description:
-      "Customer research, product strategy, and investor pitching. Subjects school ignores, even though they power every brand you consume.",
+      "How to spot trends, talk to users, design a product, and tell its story. Skills you use whether you become a founder, designer, or scientist.",
   },
   {
     icon: (
@@ -26,9 +24,9 @@ const credentials = [
         <path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
       </svg>
     ),
-    title: "Real Operators, Not Theorists",
+    title: "Learn from operators, not tutors",
     description:
-      "Our mentors have built food brands from scratch, raised funding, and put products on shelves. Not a lecture. The real playbook.",
+      "Mentors come from Flipkart, Meesho, Noise, Red Bull, and top colleges. They bring the actual playbooks they use at work.",
   },
   {
     icon: (
@@ -36,39 +34,25 @@ const credentials = [
         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
       </svg>
     ),
-    title: "High Stakes, Not Passive",
+    title: "You do the work, not just watch",
     description:
-      "You spot trends, interview customers, build a strategy, and pitch for funding. The same way real entrepreneurs compete.",
+      "Not only slides. You will build, taste and test your snack idea. You will even pitch it in teams to real investors on the same day.",
   },
-];
-
-const logos = [
-  "Whole Truth",
-  "Raw Pressery",
-  "Yoga Bar",
-  "True Elements",
-  "Slurrp Farm",
-  "Open Secret",
 ];
 
 export default function AuthoritySection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-      >
-        <CursorParallaxGrid opacity={0.038} depth={13} spotlight />
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#F9F8F5" }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.03) 0%, transparent 70%)",
+          background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${ACCENT_DIM}0.04) 0%, transparent 70%)`,
         }} className="absolute inset-0" />
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-10 sm:mb-14">
           <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
+            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
             style={{ color: ACCENT }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -79,32 +63,29 @@ export default function AuthoritySection() {
           </motion.span>
 
           <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
+            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.1 }}
           >
-            From eating the product{" "}
+            Why parents trust Alcovia{" "}
             <br className="hidden sm:block" />
-            <span style={{ color: ACCENT }}>to building the brand</span>
+            <span style={{ color: ACCENT }}>with their teenager&apos;s Saturdays</span>
           </motion.h2>
 
           <motion.p
-            className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto"
+            className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Alcovia moves teenagers from being consumers of the food brands
-            around them to entrepreneurs who understand how those brands are built.
-            This is a deep dive into trend analysis, customer research,
-            and investor-ready pitching.
+            Alcovia is an offline community in Gurgaon where students in grades 6-12 learn by working
+            on real projects with real mentors.
           </motion.p>
         </div>
 
-        {/* Credential cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-10 sm:mb-14">
           {credentials.map((cred, i) => (
             <motion.div
@@ -119,16 +100,13 @@ export default function AuthoritySection() {
                 ease: [0.22, 1, 0.36, 1],
               }}
             >
-              <div className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-6 bg-[#F7F7F3]/[0.02] overflow-hidden transition-all duration-500 hover:border-[#22C55E]/20 hover:bg-[#F7F7F3]/[0.04] hover:shadow-[0_8px_36px_rgba(34,197,94,0.08)]">
-                {/* Left accent bar */}
+              <div className="relative h-full border border-gray-200 rounded-2xl p-5 sm:p-6 bg-white overflow-hidden transition-all duration-500 hover:border-[#22C55E]/30 hover:shadow-[0_8px_36px_rgba(34,197,94,0.08)]">
                 <div
                   className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                   style={{
                     background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)`,
                   }}
                 />
-
-                {/* Top accent line */}
                 <div
                   className="absolute top-0 left-5 right-5 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                   style={{
@@ -136,9 +114,8 @@ export default function AuthoritySection() {
                   }}
                 />
 
-                {/* Icon circle */}
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.3)]"
+                  className="w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.25)]"
                   style={{
                     background: `${ACCENT_DIM}0.1)`,
                     border: `1px solid ${ACCENT_DIM}0.2)`,
@@ -148,21 +125,19 @@ export default function AuthoritySection() {
                   {cred.icon}
                 </div>
 
-                <h3 className="text-sm sm:text-base font-[family-name:var(--font-monument)] uppercase tracking-wider text-white mb-2 leading-snug">
+                <h3 className="text-sm sm:text-base font-[family-name:var(--font-monument)] uppercase tracking-wider text-[#111827] mb-2 leading-snug">
                   {cred.title}
                 </h3>
 
-                {/* Separator */}
                 <div
                   className="h-px mb-3 w-6 group-hover:w-full transition-all duration-700"
-                  style={{ background: `${ACCENT_DIM}0.2)` }}
+                  style={{ background: `${ACCENT_DIM}0.25)` }}
                 />
 
-                <p className="text-xs sm:text-sm text-white/55 font-[family-name:var(--font-satoshi)] leading-relaxed">
+                <p className="text-xs sm:text-sm text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-relaxed">
                   {cred.description}
                 </p>
 
-                {/* Bottom accent line */}
                 <div
                   className="absolute bottom-0 left-0 w-0 h-[2px] group-hover:w-full transition-all duration-700"
                   style={{
@@ -174,63 +149,55 @@ export default function AuthoritySection() {
           ))}
         </div>
 
-        {/* Logo strip */}
+        {/* Sahil Puri Founder Note */}
         <motion.div
-          className="text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          {/* Divider with label */}
-          <div className="flex items-center gap-4 mb-5">
+          <div className="relative border border-gray-200 rounded-2xl p-6 sm:p-8 lg:p-10 bg-white overflow-hidden">
             <div
-              className="flex-1 h-px"
-              style={{ background: "linear-gradient(to right, transparent, rgba(247,247,243,0.06))" }}
+              className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
+              style={{ background: `linear-gradient(to right, ${ACCENT}, transparent)` }}
             />
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/30 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
-              The brands we study
-            </p>
-            <div
-              className="flex-1 h-px"
-              style={{ background: "linear-gradient(to left, transparent, rgba(247,247,243,0.06))" }}
-            />
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {logos.map((logo) => (
-              <span
-                key={logo}
-                className="text-[10px] sm:text-xs border rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-white/35 font-[family-name:var(--font-satoshi)] tracking-[0.12em] uppercase transition-all duration-300 hover:border-[#22C55E]/25 hover:text-white/60 hover:bg-[#22C55E]/[0.04]"
-                style={{ borderColor: "rgba(247,247,243,0.07)" }}
+            <div className="flex items-start gap-4 sm:gap-6">
+              <div
+                className="flex-shrink-0 text-4xl sm:text-6xl font-[family-name:var(--font-playfair)] leading-none mt-1"
+                style={{ color: `${ACCENT}35` }}
               >
-                {logo}
-              </span>
-            ))}
-          </div>
-        </motion.div>
-
-        <motion.div
-          className="mt-8 sm:mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="flex items-center gap-4 mb-5">
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(247,247,243,0.06))" }} />
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/30 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
-              From our workshops
-            </p>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(247,247,243,0.06))" }} />
-          </div>
-
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
-            {["/images/workshop/w4.jpeg", "/images/workshop/w1.jpeg", "/images/workshop/w5.jpeg"].map((src, i) => (
-              <div key={i} className="relative aspect-[3/4] rounded-xl overflow-hidden border border-white/[0.06]">
-                <Image src={src} alt="Alcovia workshop" fill className="object-cover" sizes="(max-width: 640px) 33vw, 200px" />
+                &ldquo;
               </div>
-            ))}
+              <div className="flex-1">
+                <p className="text-xs sm:text-sm tracking-[0.25em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4" style={{ color: ACCENT }}>
+                  A Note From Alcovia Founder
+                </p>
+                <p className="text-sm sm:text-base lg:text-lg font-[family-name:var(--font-playfair)] italic text-[#374151] leading-relaxed mb-5">
+                  I started Alcovia because I kept meeting teenagers who were sharp, curious, and completely
+                  unchallenged. School was teaching them to memorise. Nobody was teaching them to think.
+                  This workshop puts a 13-year-old in the same room as food entrepreneurs, gives them a real
+                  brief, and asks them to figure it out. Some kids freeze. Most surprise themselves. Either way,
+                  they leave seeing the world differently. That shift – from passive to curious – is what I&apos;ve
+                  watched happen in every Alcovia room. It&apos;s worth a Saturday afternoon.
+                </p>
+                <div className="flex items-center gap-3">
+                  <div
+                    className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-[family-name:var(--font-monument)] font-bold text-white"
+                    style={{ background: ACCENT }}
+                  >
+                    S
+                  </div>
+                  <div>
+                    <span className="block text-sm font-[family-name:var(--font-satoshi)] font-semibold text-[#111827]">
+                      Sahil Puri
+                    </span>
+                    <span className="block text-[11px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
+                      Founder, Alcovia
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>

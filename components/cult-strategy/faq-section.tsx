@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import CursorParallaxGrid from "./cursor-parallax-grid";
 
 const ACCENT = "#22C55E";
 
@@ -55,7 +54,7 @@ function FaqItem({
 
   return (
     <motion.div
-      className="border border-[#F7F7F3]/[0.06] rounded-2xl overflow-hidden bg-[#F7F7F3]/[0.02] transition-colors duration-300 hover:border-[#22C55E]/15"
+      className="border border-gray-200 rounded-2xl overflow-hidden bg-white transition-colors duration-300 hover:border-[#22C55E]/25"
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
@@ -66,14 +65,14 @@ function FaqItem({
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-white/90 leading-snug">
+        <span className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-[#111827] leading-snug">
           {faq.question}
         </span>
         <span
           className="flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300"
           style={{
-            borderColor: open ? `${ACCENT}40` : "rgba(247,247,243,0.1)",
-            color: open ? ACCENT : "rgba(247,247,243,0.4)",
+            borderColor: open ? `${ACCENT}40` : "#e5e7eb",
+            color: open ? ACCENT : "#9ca3af",
           }}
         >
           <svg
@@ -104,7 +103,7 @@ function FaqItem({
                   background: `linear-gradient(to right, ${ACCENT}20, transparent)`,
                 }}
               />
-              <p className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed">
+              <p className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-relaxed">
                 {faq.answer}
               </p>
             </div>
@@ -117,22 +116,17 @@ function FaqItem({
 
 export default function FaqSection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden">
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-      >
-        <CursorParallaxGrid opacity={0.038} depth={12} spotlight />
+    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#F9F8F5" }}>
+      <div className="absolute inset-0 pointer-events-none">
         <div style={{
           background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.03) 0%, transparent 70%)",
         }} className="absolute inset-0" />
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
         <div className="text-center mb-8 sm:mb-12">
           <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
+            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
             style={{ color: ACCENT }}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +137,7 @@ export default function FaqSection() {
           </motion.span>
 
           <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
+            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -154,7 +148,6 @@ export default function FaqSection() {
           </motion.h2>
         </div>
 
-        {/* FAQ accordion */}
         <div className="space-y-3">
           {faqs.map((faq, i) => (
             <FaqItem key={faq.question} faq={faq} index={i} />

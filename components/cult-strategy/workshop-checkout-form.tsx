@@ -38,6 +38,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
   const [localError, setLocalError] = useState<string | null>(null)
   const dialogRef = useRef<HTMLDivElement>(null)
   const firstInputRef = useRef<HTMLInputElement>(null)
+  const partialCapturedRef = useRef(false)
 
   useEffect(() => {
     if (!open) return
@@ -62,6 +63,33 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
       return () => window.clearTimeout(timer)
     }
   }, [open])
+
+  useEffect(() => {
+    if (open) partialCapturedRef.current = false
+  }, [open])
+
+  useEffect(() => {
+    if (!open) {
+      const phone = form.parent_phone.replace(/\D/g, "")
+      if (!partialCapturedRef.current && phone.length === 10 && form.parent_name.trim()) {
+        partialCapturedRef.current = true
+        fetch("/api/workshop-checkout-lead", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            parent_name: form.parent_name.trim(),
+            parent_phone: phone,
+            student_name: form.student_name.trim() || undefined,
+            grade: form.grade || undefined,
+            school: form.school.trim() || undefined,
+            whatsapp_optin: form.whatsapp_optin,
+            partial_capture: true,
+          }),
+          keepalive: true,
+        }).catch(() => {})
+      }
+    }
+  }, [open, form])
 
   useEffect(() => {
     if (!open) {
