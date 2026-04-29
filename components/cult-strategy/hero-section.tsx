@@ -6,6 +6,16 @@ const ACCENT_DIM = "rgba(34,197,94,";
 
 export default function HeroSection() {
   return (
+    <>
+      {/* Explicit preload so the browser fetches the LCP image at highest priority */}
+      <link
+        rel="preload"
+        as="image"
+        href="/_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1080&q=75"
+        imageSrcSet="/_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1920&q=75 1920w"
+        imageSizes="100vw"
+        fetchPriority="high"
+      />
     <section
       id="cult-hero"
       className="relative overflow-hidden"
@@ -138,5 +148,6 @@ export default function HeroSection() {
         </svg>
       </div>
     </section>
+    </>
   );
 }
