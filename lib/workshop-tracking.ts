@@ -448,9 +448,14 @@ export async function beginWorkshopCheckout(
 
   const fullPhone = lead ? (lead.parent_phone.startsWith("+") ? lead.parent_phone : `+91${lead.parent_phone.replace(/\D/g, "")}`) : ""
 
+  // QA test mode: ?qatest=alc2026test on workshop URL → charge ₹1 instead of full price
+  const isQaTestMode = new URLSearchParams(window.location.search).get("qatest") === "alc2026test"
+  const razorpayAmountPaise = isQaTestMode ? 100 : WORKSHOP_DETAILS.amount * 100
+  if (isQaTestMode) console.warn("[QA TEST MODE] Razorpay charge overridden to ₹1.00")
+
   const rzp = new RazorpayClass({
     key: rzpKeyId,
-    amount: WORKSHOP_DETAILS.amount * 100,
+    amount: razorpayAmountPaise,
     currency: WORKSHOP_DETAILS.currency,
     name: "Alcovia",
     description: WORKSHOP_DETAILS.title,
