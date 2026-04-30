@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { X, CheckCircle, Loader2 } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 import { useLenis } from "@/components/smooth-scroll-provider"
+import { useFormProgress } from "@/hooks/use-form-progress"
 
 const GRADE_OPTIONS = [
   "6th", "7th", "8th", "9th", "10th", "11th", "12th",
@@ -103,7 +104,7 @@ function getTrafficSource(): string {
 }
 
 export default function RegistrationModal() {
-  const { isOpen, closeModal, formOpenSource } = useRegistrationModal()
+  const { isOpen, closeModal, formOpenSource, formOpenCtaText } = useRegistrationModal()
   const { lenis } = useLenis()
   const [formData, setFormData] = useState<FormData>({
     student_name: "",
@@ -121,6 +122,27 @@ export default function RegistrationModal() {
   const [error, setError] = useState("")
   const modalRef = useRef<HTMLDivElement>(null)
   const overlayRef = useRef<HTMLDivElement>(null)
+
+  const formProgress = useFormProgress({
+    formId: "registration_modal",
+    active: isOpen,
+    formOpenSource,
+    getSnapshot: () => ({
+      parent_name: formData.parent_name.trim() || undefined,
+      parent_phone: formData.phone.replace(/\D/g, "").slice(0, 10) || undefined,
+      student_name: formData.student_name.trim() || undefined,
+      grade: formData.grade || undefined,
+      school: formData.school.trim() || undefined,
+      person_type: formData.person_type || undefined,
+      city: formData.city || undefined,
+      email: formData.email.trim() || undefined,
+      whatsapp_optin: formData.whatsapp_optin,
+    }),
+  })
+
+  useEffect(() => {
+    if (!isOpen) formProgress.flush()
+  }, [isOpen, formProgress])
 
   // Lock body scroll AND stop Lenis when modal is open
   useEffect(() => {
@@ -196,6 +218,7 @@ export default function RegistrationModal() {
   const handleChange = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setError("")
+    formProgress.notifyChange()
   }
 
   const formatPhone = (raw: string): string => {
@@ -259,7 +282,20 @@ export default function RegistrationModal() {
       })
 
       if (!res.ok) throw new Error("Submission failed")
+      formProgress.flush({ submitted: true })
       setSubmitted(true)
+
+      // GA4 lead conversion event
+      if (typeof window !== "undefined") {
+        const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag
+        if (typeof gtag === "function") {
+          gtag("event", "generate_lead", {
+            cta_text: formOpenCtaText,
+            cta_source: formOpenSource,
+            page_path: window.location.pathname,
+          })
+        }
+      }
 
       // Event ID for deduplication between Pixel and Conversions API
       const eventId = crypto.randomUUID()

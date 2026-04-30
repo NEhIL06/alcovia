@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 
+import { useFormProgress } from "@/hooks/use-form-progress"
+
 const ACCENT = "#22C55E"
 const ACCENT_DIM = "rgba(34,197,94,"
 
@@ -40,6 +42,19 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
   const firstInputRef = useRef<HTMLInputElement>(null)
   const partialCapturedRef = useRef(false)
 
+  const formProgress = useFormProgress({
+    formId: "workshop_checkout",
+    active: open,
+    getSnapshot: () => ({
+      parent_name: form.parent_name.trim() || undefined,
+      parent_phone: form.parent_phone.replace(/\D/g, "").slice(0, 10) || undefined,
+      student_name: form.student_name.trim() || undefined,
+      grade: form.grade || undefined,
+      school: form.school.trim() || undefined,
+      whatsapp_optin: form.whatsapp_optin,
+    }),
+  })
+
   useEffect(() => {
     if (!open) return
     document.body.style.overflow = "hidden"
@@ -63,6 +78,10 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
       return () => window.clearTimeout(timer)
     }
   }, [open])
+
+  useEffect(() => {
+    if (!open) formProgress.flush()
+  }, [open, formProgress])
 
   useEffect(() => {
     if (open) partialCapturedRef.current = false
@@ -105,8 +124,9 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
     <K extends keyof WorkshopCheckoutFormData>(key: K, value: WorkshopCheckoutFormData[K]) => {
       setForm((prev) => ({ ...prev, [key]: value }))
       setLocalError(null)
+      formProgress.notifyChange()
     },
-    []
+    [formProgress]
   )
 
   const validate = (data: WorkshopCheckoutFormData): string | null => {
@@ -126,6 +146,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
       setLocalError(problem)
       return
     }
+    formProgress.flush({ submitted: true })
     onSubmit({
       ...form,
       parent_name: form.parent_name.trim(),
