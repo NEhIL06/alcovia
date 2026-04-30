@@ -3,8 +3,8 @@
 import type React from "react"
 import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
-import PremiumNavbar from "@/components/premium-navbar"
 
+const PremiumNavbar = dynamic(() => import("@/components/premium-navbar"))
 const SmoothScrollProvider = dynamic(() => import("@/components/smooth-scroll-provider"), { ssr: false })
 const PageTransition = dynamic(() => import("@/components/PageTransition"))
 const RegistrationModal = dynamic(() => import("@/components/registration-modal"), { ssr: false })
