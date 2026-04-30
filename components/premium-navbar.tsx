@@ -339,7 +339,7 @@ export default function PremiumNavbar() {
               {scrolled && !isNeuroPage && (
                 <motion.a
                   href={isDefaultPage ? undefined : applyHref}
-                  onClick={isDefaultPage ? (e: React.MouseEvent) => { e.preventDefault(); openModal("navbar_desktop") } : undefined}
+                  onClick={isDefaultPage ? (e: React.MouseEvent) => { e.preventDefault(); openModal("navbar_desktop", applyLabel) } : undefined}
                   target={isDefaultPage ? undefined : "_self"}
                   rel={isDefaultPage ? undefined : "noopener noreferrer"}
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
@@ -369,7 +369,7 @@ export default function PremiumNavbar() {
               {scrolled && !isNeuroPage && (
                 <motion.a
                   href={undefined}
-                  onClick={(e: React.MouseEvent) => { e.preventDefault(); openModal("navbar_mobile") }}
+                  onClick={(e: React.MouseEvent) => { e.preventDefault(); openModal("navbar_mobile", applyLabel) }}
                   initial={{ opacity: 0, scale: 0.8, x: 20 }}
                   animate={{ opacity: 1, scale: 1, x: 0 }}
                   exit={{ opacity: 0, scale: 0.8, x: 20 }}

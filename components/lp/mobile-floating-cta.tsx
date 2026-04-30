@@ -13,7 +13,7 @@ export function MobileFloatingCTA() {
         if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
           (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_mobile_floating" })
         }
-        openModal("lp_mobile_floating")
+        openModal("lp_mobile_floating", "Book a Fit Call")
       }} className="flex items-center justify-center gap-2 w-full rounded-full py-4 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-4 h-4" />

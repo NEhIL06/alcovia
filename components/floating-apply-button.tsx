@@ -30,7 +30,7 @@ export default function FloatingApplyButton() {
                     transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                 >
                     <motion.button
-                        onClick={() => openModal("floating_button")}
+                        onClick={() => openModal("floating_button", "Apply for Cohort 2026")}
                         className="group flex items-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold uppercase tracking-wide shadow-2xl transition-all duration-300 md:px-8 md:py-4 md:text-base"
                         style={{
                             backgroundColor: '#EABF36',

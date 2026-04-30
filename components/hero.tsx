@@ -618,7 +618,7 @@ export default function Hero() {
         createPlaneTakeoff(containerRef.current, rect.left + rect.width / 2, rect.top + rect.height / 2)
 
         setTimeout(() => {
-            openModal("hero_cta")
+            openModal("hero_cta", "Apply Now")
         }, 800)
     }, [openModal])
 

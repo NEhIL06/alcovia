@@ -17,7 +17,7 @@ export function LPNavbar() {
         if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
           (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_navbar" })
         }
-        openModal("lp_navbar")
+        openModal("lp_navbar", "Book a Fit Call")
       }} className="inline-flex items-center gap-1.5 rounded-full px-5 py-2 text-[11px] font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105" style={{ background: GOLD_GRADIENT }}>
         Book a Fit Call
         <ArrowUpRight className="w-3 h-3" />

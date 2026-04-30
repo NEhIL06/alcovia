@@ -14,7 +14,8 @@ export function CTAButton({ children, size = "md" }: { children: React.ReactNode
         if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
           (window as any).fbq("trackCustom", "CTAClick", { content_name: "lp_cta_button" })
         }
-        openModal("lp_cta_button")
+        const text = typeof children === "string" || typeof children === "number" ? String(children) : "lp_cta_button"
+        openModal("lp_cta_button", text)
       }}
       className={`inline-flex items-center gap-2 rounded-full font-bold uppercase tracking-wider text-[#0C0C0C] cursor-pointer transition-all hover:scale-105 hover:shadow-[0_0_30px_rgba(234,191,54,0.3)] ${sizes[size]}`}
       style={{ background: GOLD_GRADIENT }}
