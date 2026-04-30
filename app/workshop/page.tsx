@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import HeroSection from "@/components/cult-strategy/hero-section";
 import WorkshopPageTracker from "@/components/cult-strategy/workshop-page-tracker";
+import LazySection from "@/components/lazy-section";
 
 const SpeakerSection = dynamic(() => import("@/components/cult-strategy/speaker-section"));
 const HookSection = dynamic(() => import("@/components/cult-strategy/hook-section"));
@@ -44,7 +45,9 @@ export default function CultStrategyWorkshopPage() {
       <FaqSection />
       <ClosingCtaSection />
       <MobileFloatingCta />
-      <Footer />
+      <LazySection rootMargin="600px 0px" fallbackMinHeight="600px">
+        <Footer />
+      </LazySection>
     </main>
   );
 }
