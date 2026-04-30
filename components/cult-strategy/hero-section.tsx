@@ -1,4 +1,3 @@
-import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#22C55E";
@@ -22,15 +21,22 @@ export default function HeroSection() {
       id="cult-hero"
       className="relative overflow-hidden"
     >
-      {/* Full-bleed background image */}
+      {/* Full-bleed background image — plain img with explicit fetchPriority
+          because Next.js 16 Image priority prop does not emit fetchpriority
+          on the rendered <img>, which Lighthouse flags as missing priority
+          hint for the LCP element. URLs still go through /_next/image so
+          AVIF/WebP optimization is preserved. */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src="/images/lp/cohort.jpg"
-          alt="Alcovia Workshop – Students learning brand building"
-          fill
-          className="object-cover object-center"
-          priority
+        <img
+          src="/_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1920&q=75"
+          srcSet="/_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=640&q=75 640w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=750&q=75 750w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=828&q=75 828w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1080&q=75 1080w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1200&q=75 1200w, /_next/image?url=%2Fimages%2Flp%2Fcohort.jpg&w=1920&q=75 1920w"
           sizes="100vw"
+          alt="Alcovia Workshop – Students learning brand building"
+          // @ts-expect-error fetchPriority is valid HTML attribute
+          fetchPriority="high"
+          decoding="sync"
+          loading="eager"
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
         {/* Dark overlay – heavier at left/bottom for text, lighter at right for image peek */}
         <div
