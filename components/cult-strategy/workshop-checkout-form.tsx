@@ -124,9 +124,8 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
     <K extends keyof WorkshopCheckoutFormData>(key: K, value: WorkshopCheckoutFormData[K]) => {
       setForm((prev) => ({ ...prev, [key]: value }))
       setLocalError(null)
-      formProgress.notifyChange()
     },
-    [formProgress]
+    []
   )
 
   const validate = (data: WorkshopCheckoutFormData): string | null => {
@@ -246,6 +245,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
                   autoComplete="name"
                   value={form.parent_name}
                   onChange={(event) => updateField("parent_name", event.target.value)}
+                  onBlur={() => formProgress.notifyChange()}
                   placeholder="Full name"
                   className={inputBase}
                   disabled={submitting}
@@ -260,6 +260,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
                   type="text"
                   value={form.student_name}
                   onChange={(event) => updateField("student_name", event.target.value)}
+                  onBlur={() => formProgress.notifyChange()}
                   placeholder="Student's name"
                   className={inputBase}
                   disabled={submitting}
@@ -284,6 +285,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
                   onChange={(event) =>
                     updateField("parent_phone", event.target.value.replace(/\D/g, "").slice(0, 10))
                   }
+                  onBlur={() => formProgress.notifyChange()}
                   placeholder="10-digit number"
                   className={`flex-1 ${inputBase}`}
                   disabled={submitting}
@@ -300,6 +302,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
                   id="wcf-grade"
                   value={form.grade}
                   onChange={(event) => updateField("grade", event.target.value)}
+                  onBlur={() => formProgress.notifyChange()}
                   className={`${inputBase} appearance-none pr-8`}
                   disabled={submitting}
                 >
@@ -322,6 +325,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
                   type="text"
                   value={form.school}
                   onChange={(event) => updateField("school", event.target.value)}
+                  onBlur={() => formProgress.notifyChange()}
                   placeholder="School name"
                   className={inputBase}
                   disabled={submitting}
@@ -334,7 +338,10 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
             <input
               type="checkbox"
               checked={form.whatsapp_optin}
-              onChange={(event) => updateField("whatsapp_optin", event.target.checked)}
+              onChange={(event) => {
+                updateField("whatsapp_optin", event.target.checked)
+                formProgress.notifyChange()
+              }}
               className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 text-[#22C55E] accent-[#22C55E] focus:ring-[#22C55E]/50 flex-shrink-0"
             />
             <span className="text-[10px] text-white/40 leading-relaxed group-hover:text-white/50 transition-colors">
