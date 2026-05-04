@@ -1,20 +1,19 @@
 import type React from "react";
-import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#22C55E";
-const ACCENT_DIM = "rgba(34,197,94,";
+const ACCENT = "#00E5FF";
+const ACCENT_DIM = "rgba(0,229,255,";
 
 const pillars = [
   {
     number: "01",
-    phase: "Pillar 1",
-    title: "Discover the Trend",
-    subtitle: "Read the market before anyone else",
+    phase: "The Blueprint",
+    title: "Decode the Science",
+    subtitle: "From lab to commercial reality",
     description:
-      "Learn how to read consumer data, decode health trends, and identify the next ingredient the market will pay a premium for.",
+      "We decode the actual science driving today's market. Learn how cellular rejuvenation and gene therapies are making the leap from the lab to commercial reality.",
     stat: "3+",
-    statLabel: "food trends decoded live",
+    statLabel: "rejuvenation tech decoded",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -23,13 +22,13 @@ const pillars = [
   },
   {
     number: "02",
-    phase: "Pillar 2",
-    title: "Talk to Real People",
-    subtitle: "Interviewing real people",
+    phase: "The Build",
+    title: "Conceptualize the Startup",
+    subtitle: "Form an executive team",
     description:
-      "Learn structured interviewing, then talk to real people and hear what they actually like (and don't like) about healthy snacks.",
-    stat: "100%",
-    statLabel: "real customer interviews",
+      "Teens form an executive team to conceptualize their own longevity startup. They define their breakthrough, identify their target market, and build a profitable, scalable business model.",
+    stat: "1",
+    statLabel: "longevity startup built",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -40,13 +39,13 @@ const pillars = [
   },
   {
     number: "03",
-    phase: "Pillar 3",
-    title: "Present Your Idea To Investor",
-    subtitle: "Pitch like you are raising money",
+    phase: "The VC Pitch",
+    title: "Face the Investors",
+    subtitle: "Secure simulated seed funding",
     description:
-      "Work in teams to create your own superfood snack brand and present it to real food experts and investors.",
+      "Face off against industry experts acting as Venture Capitalists. Pitch the company, defend financial projections, and negotiate to secure simulated seed funding for your vision.",
     stat: "Live",
-    statLabel: "pitch to real investors",
+    statLabel: "pitch to real VCs",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
@@ -55,23 +54,23 @@ const pillars = [
   },
 ];
 
-const brands = ["Whole Truth", "Yoga Bar", "Raw Pressery", "True Elements", "Slurrp Farm", "Open Secret"];
+const brands = ["Altos Labs", "Calico", "Insilico Medicine", "Retro Biosciences", "Humanity", "Elysium Health"];
 
 const testimonials = [
   {
-    quote: "Showed me that building a brand is about understanding people, not just making stuff.",
+    quote: "Showed me that longevity is not just biology, it's the biggest business opportunity of our generation.",
     name: "Ansh",
     age: "15",
     photo: "/images/lp/environment.jpg",
   },
   {
-    quote: "You actually build and compete. Nothing like school.",
+    quote: "You actually build and defend financial projections. Nothing like school.",
     name: "Aryaana",
     age: "14",
     photo: "/images/lp/ideas-to-execution.jpg",
   },
   {
-    quote: "After the workshop, I started noticing how every brand around me is designed to make me feel something. I can't unsee it now.",
+    quote: "After the workshop, I started looking at health and aging as engineering problems. I can't unsee it now.",
     name: "Aksh",
     age: "16",
     photo: "/images/workshop/w5.jpeg",
@@ -85,36 +84,24 @@ function TestimonialsCarousel() {
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
-            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-gray-200 rounded-2xl bg-white overflow-hidden"
+            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md overflow-hidden p-5"
           >
-            <div className="relative h-40">
-              <Image
-                src={item.photo}
-                alt={`${item.name}, Age ${item.age}`}
-                fill
-                className="object-cover object-top"
-                sizes="300px"
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.45))" }}
-              />
-            </div>
-            <div className="p-4">
-              <span
-                className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-                style={{ color: `${ACCENT}30` }}
-              >
-                &ldquo;
-              </span>
-              <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
-                {item.quote}
-              </p>
+            <span
+              className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
+              style={{ color: `${ACCENT}50` }}
+            >
+              &ldquo;
+            </span>
+            <p className="text-xs sm:text-sm text-white/70 font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
+              {item.quote}
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
               <div>
-                <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
+                <span className="block text-sm text-white font-[family-name:var(--font-satoshi)] font-semibold">
                   {item.name}
                 </span>
-                <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
+                <span className="block text-[10px] text-white/40 font-[family-name:var(--font-satoshi)]">
                   Age {item.age} &middot; Alcovia Community
                 </span>
               </div>
@@ -128,7 +115,7 @@ function TestimonialsCarousel() {
 
 export default function WorkshopPhases() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#F9F8F5" }}>
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#050505" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div
           style={{
@@ -144,16 +131,16 @@ export default function WorkshopPhases() {
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4 font-semibold"
             style={{ color: ACCENT }}
           >
-            The 3 Pillars
+            The Journey
           </span>
 
-          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3">
+          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
             What happens{" "}
             <span style={{ color: ACCENT }}>in the workshop?</span>
           </h2>
 
-          <p className="lp-fade-in text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
-            Three pillars. One day. The complete journey from spotting a food trend to pitching it for real money.
+          <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
+            Three phases. One day. The complete journey from decoding biological breakthroughs to pitching a high-stakes longevity startup.
           </p>
         </div>
 
@@ -182,7 +169,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
 
-                  <div className="relative flex-1 border border-gray-200 rounded-2xl overflow-hidden bg-white transition-all duration-500 hover:border-[#22C55E]/30 hover:shadow-[0_8px_40px_rgba(34,197,94,0.08)]">
+                  <div className="relative flex-1 border border-white/5 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#00E5FF]/30 hover:shadow-[0_8px_40px_rgba(0,229,255,0.08)]">
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                       style={{ background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)` }}
@@ -210,7 +197,7 @@ export default function WorkshopPhases() {
                           >
                             {item.stat}
                           </span>
-                          <span className="text-[9px] sm:text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)] leading-tight max-w-[90px]">
+                          <span className="text-[9px] sm:text-[10px] text-white/50 font-[family-name:var(--font-satoshi)] leading-tight max-w-[90px]">
                             {item.statLabel}
                           </span>
                         </div>
@@ -236,10 +223,10 @@ export default function WorkshopPhases() {
                             {item.subtitle}
                           </span>
                         </div>
-                        <h3 className="text-lg sm:text-xl lg:text-2xl font-[family-name:var(--font-milan)] text-[#111827] mb-3 leading-snug">
+                        <h3 className="text-lg sm:text-xl lg:text-2xl font-[family-name:var(--font-milan)] text-white mb-3 leading-snug">
                           {item.title}
                         </h3>
-                        <p className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-snug max-w-2xl">
+                        <p className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-2xl">
                           {item.description}
                         </p>
                       </div>
@@ -254,18 +241,18 @@ export default function WorkshopPhases() {
         {/* Brands we study */}
         <div className="mt-10 sm:mt-14">
           <div className="flex items-center gap-4 mb-5">
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, #e5e7eb)" }} />
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#9ca3af] font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
-              The brands we study
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.1))" }} />
+            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/50 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
+              The companies we study
             </p>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, #e5e7eb)" }} />
+            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(255,255,255,0.1))" }} />
           </div>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {brands.map((brand) => (
               <span
                 key={brand}
-                className="text-[10px] sm:text-xs border rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-[#6b7280] font-[family-name:var(--font-satoshi)] tracking-[0.12em] uppercase transition-all duration-300 hover:border-[#22C55E]/30 hover:text-[#374151]"
-                style={{ borderColor: "#e5e7eb" }}
+                className="text-[10px] sm:text-xs border rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-white/60 font-[family-name:var(--font-satoshi)] tracking-[0.12em] uppercase transition-all duration-300 hover:border-[#00E5FF]/30 hover:text-white"
+                style={{ borderColor: "rgba(255,255,255,0.1)" }}
               >
                 {brand}
               </span>
@@ -285,9 +272,9 @@ export default function WorkshopPhases() {
             className="group relative inline-flex items-center gap-3 overflow-hidden"
           >
             <span
-              className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
+              className="relative z-10 inline-flex items-center gap-3 text-black font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
               style={{
-                background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
+                background: `linear-gradient(135deg, #00E5FF 0%, #00B8D4 100%)`,
                 boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.15) inset`,
               }}
             >

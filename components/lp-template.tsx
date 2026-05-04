@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { ArrowDown, CheckCircle2, XCircle } from "lucide-react"
+import { ArrowDown, CheckCircle2, XCircle, AlertTriangle } from "lucide-react"
 import { CTAButton } from "@/components/lp/cta-button"
 import { LPNavbar } from "@/components/lp/lp-navbar"
 import { MobileFloatingCTA } from "@/components/lp/mobile-floating-cta"
@@ -32,7 +32,7 @@ function FadeIn({ children, className = "" }: { children: React.ReactNode; class
 }
 
 const PROBLEM_IMAGES = ["/images/lp/false-readiness.jpg", "/images/lp/outdated-guidance.jpg", "/images/lp/weak-environments.jpg"]
-const TRANSFORM_IMAGES = ["/images/lp/ideas-to-execution.jpg", "/images/lp/conviction-alt.jpg", "/images/lp/environment.jpg"]
+const TRANSFORM_IMAGES = ["/images/lp/ideas-to-execution.jpg", "/images/lp/real-resilience.jpg", "/images/lp/environment.jpg"]
 const PILLAR_IMAGES = ["/images/lp/future.jpg", "/images/lp/mentorship.jpg", "/images/lp/cohort.jpg"]
 
 function HeroSection({ hero }: { hero: LPContent["hero"] }) {
@@ -130,17 +130,50 @@ function TransformationSection({ transformation }: { transformation: LPContent["
   )
 }
 
+function DifferentiatorsSection({ differentiators }: { differentiators: NonNullable<LPContent["differentiators"]> }) {
+  return (
+    <section className="relative py-14 md:py-24 px-6 bg-[#061f18]">
+      <div className="max-w-5xl mx-auto">
+        <SectionHeader text={differentiators.heading} highlight="" />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+          {differentiators.items.map((item, i) => (
+            <FadeIn key={i} className="h-full">
+              <div className="bg-white/5 border border-white/10 rounded-xl p-6 md:p-8 hover:border-[#EABF36]/20 transition-colors h-full flex flex-col">
+                <div className="w-8 h-8 rounded-full flex items-center justify-center mb-4" style={{ background: `${GOLD}15`, border: `1px solid ${GOLD}30` }}>
+                  <span className="text-xs font-bold" style={{ color: GOLD }}>{item.number}</span>
+                </div>
+                <h3 className="font-[family-name:var(--font-playfair)] text-lg md:text-xl font-bold text-white mb-2 leading-snug">{item.title}</h3>
+                <p className="text-sm text-white/60 leading-relaxed mt-auto pt-2">{item.body}</p>
+              </div>
+            </FadeIn>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function LogoSection() {
+  return (
+    <section className="relative py-10 md:py-16 px-6 bg-[#08261e]">
+      <div className="max-w-5xl mx-auto">
+        <LogoCarousel />
+      </div>
+    </section>
+  )
+}
+
 function AudienceSection({ audience }: { audience: LPContent["audience"] }) {
   return (
     <section className="relative py-14 md:py-24 px-6 bg-[#08261e]">
       <div className="max-w-5xl mx-auto">
-        <SectionHeader text="Who this is" highlight="for." />
+        <SectionHeader text={audience.heading || "Who this is"} highlight={audience.heading ? "" : "for."} />
         <FadeIn className="mb-8">
           <p className="text-base md:text-lg text-white/60 max-w-2xl mx-auto text-center mb-8">{audience.intro}</p>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+          <div className="bg-white/5 border border-white/10 rounded-xl p-8 mb-6">
             <div className="flex items-center gap-2 mb-6">
               <CheckCircle2 className="w-5 h-5" style={{ color: GOLD }} />
-              <h3 className="text-lg font-bold uppercase tracking-wider" style={{ color: GOLD }}>Built for</h3>
+              <h3 className="text-lg font-bold uppercase tracking-wider" style={{ color: GOLD }}>{audience.forTitle || "Built for"}</h3>
             </div>
             <ul className="space-y-4">
               {audience.forList.map((item, i) => (
@@ -152,15 +185,45 @@ function AudienceSection({ audience }: { audience: LPContent["audience"] }) {
             </ul>
           </div>
         </FadeIn>
-        <FadeIn>
-          <div className="bg-white/5 border border-white/10 rounded-xl p-8">
-            <div className="flex items-center gap-2 mb-4">
-              <XCircle className="w-5 h-5 text-white/30" />
-              <h3 className="text-lg font-bold uppercase tracking-wider text-white/30">Probably not the right fit</h3>
+        {audience.notForList && audience.notForList.length > 0 && (
+          <FadeIn>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8 mb-6">
+              <div className="flex items-center gap-2 mb-4">
+                <XCircle className="w-5 h-5 text-white/30" />
+                <h3 className="text-lg font-bold uppercase tracking-wider text-white/30">{audience.notForTitle || "Probably not the right fit"}</h3>
+              </div>
+              <ul className="space-y-3">
+                {audience.notForList.map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    <span className="w-1.5 h-1.5 rounded-full mt-2 flex-shrink-0 bg-white/20" />
+                    <span className="text-sm text-white/40 leading-relaxed">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-            <p className="text-sm text-white/40 leading-relaxed">{audience.gatekeepingLine}</p>
-          </div>
-        </FadeIn>
+          </FadeIn>
+        )}
+        {!audience.notForList && (
+          <FadeIn>
+            <div className="bg-white/5 border border-white/10 rounded-xl p-8">
+              <div className="flex items-center gap-2 mb-4">
+                <XCircle className="w-5 h-5 text-white/30" />
+                <h3 className="text-lg font-bold uppercase tracking-wider text-white/30">Probably not the right fit</h3>
+              </div>
+              <p className="text-sm text-white/40 leading-relaxed">{audience.gatekeepingLine}</p>
+            </div>
+          </FadeIn>
+        )}
+        {audience.warning && (
+          <FadeIn className="mt-6">
+            <div className="border border-[#EABF36]/30 rounded-xl p-6 md:p-8" style={{ background: `${GOLD}08` }}>
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5" style={{ color: GOLD }} />
+                <p className="text-sm text-white/60 leading-relaxed">{audience.warning}</p>
+              </div>
+            </div>
+          </FadeIn>
+        )}
       </div>
     </section>
   )
@@ -215,7 +278,6 @@ function SocialProofSection({ socialProof }: { socialProof: LPContent["socialPro
             </FadeIn>
           ))}
         </div>
-        <LogoCarousel />
       </div>
     </section>
   )
@@ -342,6 +404,8 @@ export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody
         <ProblemsSection problems={c.problems} />
         <TransformationSection transformation={c.transformation} />
         {shouldShowVideo && <VideoSection />}
+        {c.differentiators && <DifferentiatorsSection differentiators={c.differentiators} />}
+        <LogoSection />
         <AudienceSection audience={c.audience} />
         <PillarsSection authority={c.authority} />
         <SocialProofSection socialProof={c.socialProof} />
