@@ -1,13 +1,13 @@
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#22C55E";
-const ACCENT_DIM = "rgba(34,197,94,";
+const ACCENT = "#00E5FF";
+const ACCENT_DIM = "rgba(0,229,255,";
 
 const CARDS = [
   {
     number: "01",
-    title: "The Trend",
-    description: "Every superfood on shelves today started as an obscure ingredient someone spotted before the crowd. Learn how to read consumer behaviour, decode health trends, and identify what people will pay a premium for next.",
+    title: "Who controls the science?",
+    description: "Ultra-wealthy investors and advanced labs are engineering ways to pause human aging. Learn to separate media hype from the clinical science actually extending human lifespan.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -17,20 +17,18 @@ const CARDS = [
   },
   {
     number: "02",
-    title: "The Customer",
-    description: "Building a food brand is not about recipes. It is about asking a hundred customers what they actually want before you make anything. The best products are built from conversations, not assumptions.",
+    title: "How do you price time?",
+    description: "How do you price a technology that gives someone 20 extra years of life? Uncover the financial architecture and market dynamics behind the longevity bio-economy.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
       </svg>
     ),
   },
   {
     number: "03",
-    title: "The Pitch",
-    description: "Ideas are worthless until someone funds them. Learn how real food entrepreneurs pitch investors, tell a story with data, and convince people to bet money on an idea that only exists on paper.",
+    title: "Staking your claim",
+    description: "Don't just be a passive observer. Discover how founders are turning breakthrough therapies into investable startups, and learn how to secure funding for the industry of tomorrow.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <circle cx="12" cy="12" r="10" />
@@ -60,21 +58,16 @@ export default function ProblemSection() {
             The Hook
           </span>
 
-          <h2 className="lp-fade-in text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight mb-6">
-            A seed is just biology
+          <h2 className="lp-fade-in text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight mb-6 text-white">
+            Defying death is
             <br />
             <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>
-               until it becomes a superfood brand.
+               the new gold rush.
             </span>
           </h2>
 
           <p className="lp-fade-in text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-2xl mx-auto">
-            School teaches you photosynthesis, not{" "}
-            <span className="text-white/90 font-semibold">how to build a food company</span>.
-            We are doing the whole loop in one day: showing teenagers how to go from{" "}
-            <span style={{ color: ACCENT }} className="font-medium">eating the product</span>{" "}
-            to{" "}
-            <span style={{ color: ACCENT }} className="font-medium">building the brand</span>.
+            What was once pure science fiction is rapidly becoming the most lucrative bio-economy in the world. But who controls this technology? How do you price it? And how do you stake your claim in the industry of tomorrow?
           </p>
         </div>
 
@@ -109,7 +102,7 @@ export default function ProblemSection() {
                     <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
                       style={{ background: `${ACCENT_DIM}0.1)`, border: `1px solid ${ACCENT_DIM}0.2)`, color: `${ACCENT_DIM}0.7)` }}
                     >
-                      <div className="group-hover:text-[#22C55E] transition-colors duration-300">
+                      <div className="group-hover:text-[#00E5FF] transition-colors duration-300">
                         {item.icon}
                       </div>
                     </div>

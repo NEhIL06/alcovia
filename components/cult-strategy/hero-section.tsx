@@ -1,7 +1,7 @@
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#22C55E";
-const ACCENT_DIM = "rgba(34,197,94,";
+const ACCENT = "#00E5FF";
+const ACCENT_DIM = "rgba(0,229,255,";
 
 export default function HeroSection() {
   return (
@@ -43,7 +43,7 @@ export default function HeroSection() {
           className="absolute inset-0"
           style={{
             background:
-              "linear-gradient(135deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.65) 45%, rgba(0,0,0,0.45) 100%)",
+              "linear-gradient(135deg, rgba(5,5,5,0.85) 0%, rgba(5,5,5,0.75) 45%, rgba(5,5,5,0.55) 100%)",
           }}
         />
         {/* Bottom fade for smooth section transition */}
@@ -79,19 +79,18 @@ export default function HeroSection() {
 
           <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-5 sm:mb-6">
             <span className="block text-[clamp(2.2rem,6vw,5.5rem)] text-white">
-              Turn Your Snack Idea
+              The 120 year asset
             </span>
             <span
-              className="block text-[clamp(2.2rem,6vw,5.5rem)]"
+              className="block text-[clamp(1.8rem,5vw,4.5rem)]"
               style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.25)` }}
             >
-              Into a Real Brand
+              The business of immortality
             </span>
           </h1>
 
-          <p className="text-sm sm:text-lg font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
-            Chia seeds used to be bird food. Then someone figured out how to sell them for ₹500 a pack.{" "}
-            <span className="font-semibold text-white">That someone could be YOU.</span>
+          <p className="text-sm sm:text-lg font-[family-name:var(--font-satoshi)] text-white/70 max-w-xl mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
+            Aging is no longer a strict biological limit—it’s the defining bio-market of our century. Uncover the frameworks investors use to value life-extending science, and build your own high-stakes longevity startup.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-2.5 mb-8 sm:mb-10">
@@ -100,13 +99,13 @@ export default function HeroSection() {
               className="group relative inline-flex items-center gap-3 overflow-hidden"
             >
               <span
-                className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
+                className="relative z-10 inline-flex items-center gap-3 text-black font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
                 style={{
-                  background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
+                  background: `linear-gradient(135deg, #00E5FF 0%, #00B8D4 100%)`,
                   boxShadow: `0 6px 32px ${ACCENT_DIM}0.5), 0 1px 0 rgba(255,255,255,0.18) inset`,
                 }}
               >
-                Secure My Spot
+                Decode the Future — Secure My Spot
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -122,7 +121,7 @@ export default function HeroSection() {
               <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">
                 <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
               </svg>
-              <span className="text-xs sm:text-sm text-white/65 font-[family-name:var(--font-satoshi)]">Fri, May 2nd · 11 AM – 3 PM</span>
+              <span className="text-xs sm:text-sm text-white/65 font-[family-name:var(--font-satoshi)]">May 23rd · 11 AM – 3 PM</span>
             </div>
             <div className="flex items-center gap-1.5">
               <svg viewBox="0 0 24 24" fill="none" stroke={ACCENT} strokeWidth={1.5} className="w-3.5 h-3.5 flex-shrink-0">

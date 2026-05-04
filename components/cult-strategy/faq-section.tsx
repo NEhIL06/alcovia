@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 
-const ACCENT = "#22C55E";
+const ACCENT = "#00E5FF";
 
 const faqs = [
   {
     question: "Who are the mentors?",
     answer:
-      "Industry operators who have built food brands from scratch, raised funding, and put products on shelves. Mentor details will be announced shortly. These are not school teachers or motivational speakers. These are people who have done it.",
+      "Industry operators who have built biotech startups, researched cellular rejuvenation, and raised funding. Mentor details will be announced shortly. These are not school teachers or motivational speakers. These are people who have done it.",
   },
   {
     question: "What do attendees need to bring?",
     answer:
-      "Just their brains. Everything else, including materials, worksheets, and frameworks, is provided. Come ready to think, challenge, and build.",
+      "Just their sharpest ideas, an entrepreneurial mindset, and a laptop or notebook to build their pitch decks. We provide all the startup frameworks, materials, and guidance needed for the day.",
   },
   {
     question: "Is food provided?",
@@ -23,7 +23,7 @@ const faqs = [
   {
     question: "What age group is this for?",
     answer:
-      "This workshop is designed for Grades 6 to 10 (ages approximately 11 to 16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how real food brands are built from scratch.",
+      "This workshop is designed for Grades 6 to 10 (ages approximately 11 to 16). The content and intensity are calibrated for curious, ambitious teenagers who want to understand how real longevity startups are built from scratch.",
   },
   {
     question: "Where exactly is it?",
@@ -33,7 +33,7 @@ const faqs = [
   {
     question: "What are the timings?",
     answer:
-      "Friday, 2nd May, 11:00 AM to 3:00 PM (4 hours). Unlike a 1-hour lecture, this gives enough depth to actually research trends, interview customers, and pitch a real food brand.",
+      "May 23rd, 11:00 AM to 3:00 PM (4 hours). Unlike a 1-hour lecture, this gives enough depth to actually research breakthroughs, build financial models, and pitch a real longevity startup.",
   },
   {
     question: "Why are seats limited?",
@@ -46,20 +46,20 @@ function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lp-fade-in border border-gray-200 rounded-2xl overflow-hidden bg-white transition-colors duration-300 hover:border-[#22C55E]/25">
+    <div className="lp-fade-in border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-colors duration-300 hover:border-[#00E5FF]/25">
       <button
         className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 text-left cursor-pointer"
         onClick={() => setOpen(!open)}
         aria-expanded={open}
       >
-        <span className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-[#111827] leading-snug">
+        <span className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-white leading-snug">
           {faq.question}
         </span>
         <span
           className="flex-shrink-0 w-7 h-7 rounded-full border flex items-center justify-center transition-all duration-300"
           style={{
-            borderColor: open ? `${ACCENT}40` : "#e5e7eb",
-            color: open ? ACCENT : "#9ca3af",
+            borderColor: open ? `${ACCENT}40` : "rgba(255,255,255,0.1)",
+            color: open ? ACCENT : "rgba(255,255,255,0.5)",
           }}
         >
           <svg
@@ -83,7 +83,7 @@ function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
             className="h-px mb-3"
             style={{ background: `linear-gradient(to right, ${ACCENT}20, transparent)` }}
           />
-          <p className="text-sm sm:text-base text-[#6b7280] font-[family-name:var(--font-satoshi)] leading-relaxed">
+          <p className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed">
             {faq.answer}
           </p>
         </div>
@@ -94,10 +94,10 @@ function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
 
 export default function FaqSection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#F9F8F5" }}>
+    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#050505" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(34,197,94,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,229,255,0.03) 0%, transparent 70%)",
         }} className="absolute inset-0" />
       </div>
 
@@ -110,9 +110,9 @@ export default function FaqSection() {
             FAQ
           </span>
 
-          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-[#111827] mb-3">
+          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
             Everything you need{" "}
-            <span style={{ color: ACCENT }}>to know</span>
+            <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(0,229,255,0.3)` }}>to know</span>
           </h2>
         </div>
 

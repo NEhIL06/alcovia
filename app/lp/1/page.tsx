@@ -4,9 +4,9 @@ import type { LPContent } from "@/lib/lp-content-types"
 const content: LPContent = {
   hero: {
     subtitle: "For parents who know good grades are not enough",
-    headline: "Bright teenagers are not automatically",
+    headline: "Bright teens are not automatically",
     highlight: "real-world ready.",
-    body: "A teenager can be smart, capable, and full of potential \u2014 and still struggle when real-world friction hits. At Alcovia, teenagers build grit, follow-through, and real-world readiness through projects that demand action, not just intention.",
+    body: "A smart teenager can still crumble under pressure, deadlines, and real responsibility. Alcovia builds resilience through startups, simulations, and projects that demand ownership.",
     primaryCta: "Show me how this works",
     secondaryCta: "Limited seats \u2014 check eligibility"
   },
@@ -50,14 +50,48 @@ const content: LPContent = {
     ],
     midCta: "See what real-world readiness looks like"
   },
+  differentiators: {
+    heading: "What Makes Alcovia Different?",
+    items: [
+      {
+        number: "01",
+        title: "3% Selection Rate",
+        body: "Your teen is surrounded by Delhi-NCR\u2019s most driven 11\u201316 year olds"
+      },
+      {
+        number: "02",
+        title: "1:1 Mentorship from Operators, Not Teachers",
+        body: "Direct access to founders and leaders from Flipkart, Meesho, Nothing & more"
+      },
+      {
+        number: "03",
+        title: "Only 2 Saturdays a Month \u2013 Zero School Disruption",
+        body: "Fortnightly 4-hour workshops with lunch included"
+      },
+      {
+        number: "04",
+        title: "Project-First, Never Theory-First",
+        body: "They build products, launch micro-ventures and learn leadership skills"
+      }
+    ]
+  },
   audience: {
-    intro: "Alcovia is for families who feel their teenager has potential but is not being stretched in the right way.",
+    heading: "Who Is This For",
+    intro: "Alcovia is for families who feel their teenager (ages 11\u201316) has potential but is not being challenged in the right way.",
+    forTitle: "Built For Teenagers Who Are:",
     forList: [
-      "bright and capable, but inconsistent in execution",
-      "full of ideas, but not always finishing what they start",
-      "in need of stronger challenge, sharper peers, and more meaningful responsibility"
+      "Bright, but inconsistent \u2013 they ace tests but drop off when things get hard",
+      "Idea-rich, execution-poor \u2013 full of plans but rarely finish them",
+      "Under-challenged \u2013 they need sharper peers, real responsibility, and challenges that build real-world grit"
     ],
-    gatekeepingLine: "This is not just another activity. It is for families who want their teenager to grow stronger in how they think, act, and handle the real world."
+    notForTitle: "Probably Not The Right Fit If:",
+    notForList: [
+      "You want babysitting with a fancy name",
+      "You expect guaranteed outcomes without discomfort",
+      "You\u2019re not ready for them to be pushed, publicly"
+    ],
+    gatekeepingLine: "This is not just another activity. It is for families who want their teenager to grow stronger in how they think, act, and handle the real world.",
+    warning: "Before you apply: This program requires a significant financial commitment (think Pathways or GD Goenka fee). It is a high-touch, selective program with an elite peer group and real-world projects. We only work with families 100% ready to invest in transformation."
   },
   authority: {
     label: "Why Alcovia works",
@@ -93,7 +127,7 @@ const content: LPContent = {
     headlineHighlight: "enough.",
     body: "If your teenager is bright but still not as resilient, proactive, or real-world ready as they could be, Alcovia may be the environment they need.",
     primaryCta: "See what Alcovians do differently",
-    finePrint: "Limited seats- check eligibility"
+    finePrint: "Limited seats \u2014 check eligibility"
   }
 }
 

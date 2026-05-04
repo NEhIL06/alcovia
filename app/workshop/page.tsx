@@ -8,6 +8,7 @@ const SpeakerSection = dynamic(() => import("@/components/cult-strategy/speaker-
 const HookSection = dynamic(() => import("@/components/cult-strategy/hook-section"));
 const WorkshopGallery = dynamic(() => import("@/components/cult-strategy/workshop-gallery"));
 const WorkshopPhases = dynamic(() => import("@/components/cult-strategy/workshop-phases"));
+const TakeawaysSection = dynamic(() => import("@/components/cult-strategy/takeaways-section"));
 const AuthoritySection = dynamic(() => import("@/components/cult-strategy/authority-section"));
 const SocialProofSection = dynamic(() => import("@/components/cult-strategy/social-proof-section"));
 const FaqSection = dynamic(() => import("@/components/cult-strategy/faq-section"));
@@ -16,13 +17,13 @@ const MobileFloatingCta = dynamic(() => import("@/components/cult-strategy/mobil
 const Footer = dynamic(() => import("@/components/footer"));
 
 export const metadata: Metadata = {
-  title: "Superfood Workshop for Teenagers | Turn Your Snack Idea Into a Real Brand | Alcovia",
+  title: "The 120 Year Asset: The Business of Immortality | Alcovia Workshop",
   description:
-    "A hands-on workshop where teenagers spot food trends, interview real customers, and pitch a superfood brand. Grades 6-10. May 2nd, Horizon Center, Gurgaon. Only 17 spots.",
+    "We are teaching teenagers the business and science of radical life extension. Move from passive observers to active founders by pitching high-stakes longevity startups.",
   openGraph: {
-    title: "Turn Your Snack Idea Into a Real Brand – Alcovia Superfood Workshop",
+    title: "The 120 Year Asset: The Business of Immortality | Alcovia",
     description:
-      "Every snack on a shelf started as an idea in a notebook. Learn customer research, product strategy, and investor pitching in one day. May 2nd, Gurgaon.",
+      "Defying death is the new gold rush. Understand the frameworks investors use to value life-extending science and build your own longevity startup.",
     type: "website",
   },
   robots: {
@@ -33,13 +34,14 @@ export const metadata: Metadata = {
 
 export default function CultStrategyWorkshopPage() {
   return (
-    <main className="relative" style={{ background: "#F9F8F5" }}>
+    <main className="relative" style={{ background: "#050505" }}>
       <WorkshopPageTracker />
       <HeroSection />
-      <SpeakerSection />
+      {/* <SpeakerSection /> */}
       <HookSection />
       <WorkshopGallery />
       <WorkshopPhases />
+      <TakeawaysSection />
       <AuthoritySection />
       <SocialProofSection />
       <FaqSection />

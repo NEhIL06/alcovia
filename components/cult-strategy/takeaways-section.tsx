@@ -4,176 +4,102 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#22C55E";
-const ACCENT_DIM = "rgba(34,197,94,";
+const ACCENT = "#00E5FF";
+const ACCENT_DIM = "rgba(0,229,255,";
 
 const takeaways = [
   {
-    number: "01",
-    title: "Trend Analysis Frameworks",
-    subtitle: "Read the market before it moves",
-    description:
-      "Learn how to identify emerging food trends using real consumer data and market signals. Understand why certain ingredients go from obscure to mainstream and how the best food entrepreneurs spot opportunities months before the competition.",
+    title: "Biotech Fundamentals",
+    description: "How to separate media hype from real, investable clinical science. They leave knowing which breakthroughs are lab experiments and which are commercial opportunities.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <circle cx="12" cy="12" r="10" />
-        <path d="M12 8v4l3 3" />
-        <path d="M12 6v.01" />
+        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+        <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+        <line x1="12" y1="22.08" x2="12" y2="12" />
       </svg>
     ),
   },
   {
-    number: "02",
-    title: "Customer Interview Playbook",
-    subtitle: "Build what people actually want",
-    description:
-      "Discover structured techniques for interviewing real customers and extracting honest feedback. Learn why the best products are built from conversations, not assumptions, and how to validate a food concept before spending a single rupee on production.",
+    title: "Market Economics",
+    description: "How to analyze emerging bio-markets and understand the financial architecture behind extending human life — from R&D costs to investor return models.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+        <line x1="12" y1="1" x2="12" y2="23" />
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      </svg>
+    ),
+  },
+  {
+    title: "The Art of the Pitch",
+    description: "Mastering the high-stakes presentation frameworks real founders use to persuade investors and close deals — delivered under live VC pressure.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+        <polyline points="14 2 14 8 20 8" />
+        <line x1="16" y1="13" x2="8" y2="13" />
+        <line x1="16" y1="17" x2="8" y2="17" />
+        <polyline points="10 9 9 9 8 9" />
+      </svg>
+    ),
+  },
+  {
+    title: "A Longevity Startup",
+    description: "They leave with an actual company: a defined breakthrough, a scalable business model, financial projections, and a pitch deck built and defended on the day.",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
         <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-      </svg>
-    ),
-  },
-  {
-    number: "03",
-    title: "Investor-Ready Pitching",
-    subtitle: "From concept to funded brand",
-    description:
-      "Move beyond theory into execution. Learn the exact sequence for pitching a food brand: market sizing, pricing strategy, packaging, distribution, and storytelling with data. Leave with a real framework you can use to pitch any product idea.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
   },
 ];
 
 export default function TakeawaysSection() {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-10 sm:py-16 lg:py-24 overflow-hidden"
-    >
-      {/* Background */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-      >
-        <CursorParallaxGrid opacity={0.038} depth={14} spotlight />
-        <div style={{
-          background: `linear-gradient(180deg, transparent 0%, rgba(34,197,94,0.025) 50%, transparent 100%)`,
-        }} className="absolute inset-0" />
+    <section className="relative py-12 sm:py-20 lg:py-24" style={{ background: "#050505" }}>
+      {/* Background styling for dark theme */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_20%,transparent_100%)]" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div className="max-w-3xl mx-auto text-center mb-10 sm:mb-14">
-          <motion.span
-            className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4"
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 sm:mb-16">
+          <span 
+            className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-3 font-semibold"
             style={{ color: ACCENT }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
           >
-            What You&apos;ll Master
-          </motion.span>
-
-          <motion.h2
-            className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight mb-3"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.1 }}
-          >
-            The Superfood Playbook,{" "}
-            <span style={{ color: ACCENT }}>decoded</span>
-          </motion.h2>
-
-          <motion.p
-            className="text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Not theory. Not slides. Real frameworks used by food entrepreneurs
-            who turned simple ingredients into brands worth crores.
-          </motion.p>
+            The Outcome
+          </span>
+          <h2 className="lp-fade-in text-[clamp(1.75rem,4vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
+            What they <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>leave with</span>
+          </h2>
         </div>
 
-        {/* Takeaway cards */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-3 sm:gap-6">
-          {takeaways.map((item, i) => (
-            <motion.div
-              key={item.number}
-              className="group relative"
-              initial={{ opacity: 0, y: 60 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 0.8,
-                delay: i * 0.15,
-                ease: [0.22, 1, 0.36, 1],
-              }}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
+          {takeaways.map((item, index) => (
+            <div 
+              key={index}
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#00E5FF]/30 transition-all duration-500 overflow-hidden"
             >
-              <div
-                className="relative h-full border border-[#F7F7F3]/[0.06] rounded-2xl p-5 sm:p-8 overflow-hidden transition-all duration-500 hover:border-[#22C55E]/20 hover:shadow-[0_8px_40px_rgba(34,197,94,0.1)]"
-                style={{
-                  background: "rgba(247,247,243,0.02)",
-                }}
-              >
-                {/* Left accent bar */}
-                <div
-                  className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
-                  style={{
-                    background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)`,
-                  }}
-                />
-
-                {/* Top accent — always slightly visible */}
-                <div
-                  className="absolute top-0 left-6 right-6 h-px transition-opacity duration-500 group-hover:opacity-100 opacity-30"
-                  style={{
-                    background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.5), transparent)`,
-                  }}
-                />
-
-                {/* Decorative large number */}
-                <span
-                  className="absolute top-4 right-4 font-[family-name:var(--font-monument)] font-bold leading-none select-none pointer-events-none transition-opacity duration-500 group-hover:opacity-60"
-                  style={{
-                    fontSize: "clamp(3.5rem, 6vw, 5rem)",
-                    color: `${ACCENT_DIM}0.08)`,
-                  }}
-                >
-                  {item.number}
-                </span>
-
-                {/* Icon circle */}
-                <div
-                  className="w-12 h-12 rounded-full flex items-center justify-center mb-5 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.3)]"
-                  style={{
-                    background: `${ACCENT_DIM}0.1)`,
+              {/* Hover gradient background */}
+              <div 
+                className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
+                style={{ background: `linear-gradient(135deg, transparent, ${ACCENT})` }}
+              />
+              
+              <div className="relative z-10 flex flex-col h-full">
+                <div 
+                  className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                  style={{ 
+                    background: `${ACCENT_DIM}0.1)`, 
                     border: `1px solid ${ACCENT_DIM}0.2)`,
-                    color: ACCENT,
+                    color: ACCENT
                   }}
                 >
                   {item.icon}
                 </div>
-
-                {/* Subtitle */}
-                <span
-                  className="block text-[10px] sm:text-xs tracking-[0.2em] uppercase font-[family-name:var(--font-satoshi)] mb-2"
-                  style={{ color: `${ACCENT_DIM}0.65)` }}
-                >
-                  {item.subtitle}
-                </span>
-
-                {/* Title */}
                 <h3 className="text-base sm:text-lg font-[family-name:var(--font-milan)] text-white mb-3 leading-snug">
                   {item.title}
                 </h3>
@@ -197,7 +123,7 @@ export default function TakeawaysSection() {
                   }}
                 />
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

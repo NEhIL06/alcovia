@@ -13,6 +13,12 @@ export interface PillarItem {
   body: string
 }
 
+export interface DifferentiatorItem {
+  number: string
+  title: string
+  body: string
+}
+
 export interface LPContent {
   hero: {
     subtitle: string
@@ -37,9 +43,18 @@ export interface LPContent {
     midCta: string
   }
   audience: {
+    heading?: string
     intro: string
+    forTitle?: string
     forList: string[]
+    notForTitle?: string
+    notForList?: string[]
     gatekeepingLine: string
+    warning?: string
+  }
+  differentiators?: {
+    heading: string
+    items: DifferentiatorItem[]
   }
   authority: {
     label: string

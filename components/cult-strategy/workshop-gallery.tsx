@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const ACCENT = "#22C55E";
+const ACCENT = "#00E5FF";
 
 const images = [
   { src: "/images/lp/cohort.jpg", alt: "Intimate mentoring session" },
@@ -12,17 +12,17 @@ const images = [
 
 export default function WorkshopGallery() {
   return (
-    <section className="relative py-4 sm:py-8 overflow-hidden" style={{ background: "#F9F8F5" }}>
+    <section className="relative py-4 sm:py-8 overflow-hidden" style={{ background: "#050505" }}>
       <div className="px-4 sm:px-6 mb-3">
         <div className="flex items-center gap-3">
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, #e5e7eb)" }} />
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.1))" }} />
           <span
             className="text-[10px] tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
             style={{ color: ACCENT }}
           >
             From Our Workshops
           </span>
-          <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, #e5e7eb)" }} />
+          <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(255,255,255,0.1))" }} />
         </div>
       </div>
 
@@ -31,7 +31,7 @@ export default function WorkshopGallery() {
           {[...images, ...images].map((img, i) => (
             <div
               key={i}
-              className="relative w-[140px] h-[180px] sm:w-[180px] sm:h-[230px] flex-shrink-0 rounded-xl overflow-hidden border border-gray-200"
+              className="relative w-[140px] h-[180px] sm:w-[180px] sm:h-[230px] flex-shrink-0 rounded-xl overflow-hidden border border-white/10"
             >
               <Image
                 src={img.src}
