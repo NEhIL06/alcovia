@@ -29,10 +29,10 @@ const eventDetails = [
 
 const WORKSHOP_URL = "https://alcovia.life/workshop";
 const WA_TEXT = encodeURIComponent(
-  "Join the Alcovia Longevity Startup Workshop for Teenagers! May 23rd in Gurgaon. Build a real biotech brand in 4 hours. Only 17 spots left. " + WORKSHOP_URL
+  "Join the Alcovia Longevity Startup Workshop for Teenagers! May 23rd in Gurgaon. Build a real biotech brand in 4 hours. " + WORKSHOP_URL
 );
 const X_TEXT = encodeURIComponent(
-  "Check out Alcovia's Longevity Startup Workshop for Teenagers! Build a real biotech brand in 4 hours. May 23rd, Gurgaon. Only 17 spots left!"
+  "Check out Alcovia's Longevity Startup Workshop for Teenagers! Build a real biotech brand in 4 hours. May 23rd, Gurgaon."
 );
 
 export default function ClosingCtaSection() {
@@ -81,24 +81,6 @@ export default function ClosingCtaSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="lp-fade-in flex justify-center mb-6 sm:mb-8">
-          <div
-            className="inline-flex items-center gap-2.5 border rounded-full px-4 py-1.5"
-            style={{
-              borderColor: `${ACCENT_DIM}0.3)`,
-              background: `${ACCENT_DIM}0.07)`,
-            }}
-          >
-            <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
-            <span
-              className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
-              style={{ color: ACCENT }}
-            >
-              17 Spots Remaining
-            </span>
-          </div>
-        </div>
-
         <h2 className="lp-fade-in text-[clamp(1.75rem,5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3 sm:mb-4">
           Ready to build your{" "}
           <br />
@@ -106,7 +88,7 @@ export default function ClosingCtaSection() {
         </h2>
 
         <p className="lp-fade-in text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-6 sm:mb-10">
-          17 spots. One Saturday. The skills, mentors, and experience that school doesn&apos;t offer – and most adults wish they&apos;d had earlier. Don&apos;t think about it too long.
+          One Saturday. The skills, mentors, and experience that school doesn&apos;t offer – and most adults wish they&apos;d had earlier. Don&apos;t think about it too long.
         </p>
 
         <div className="lp-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">

@@ -218,6 +218,7 @@ export default function RegistrationModal() {
   const handleChange = (field: keyof FormData, value: string | boolean) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setError("")
+    formProgress.notifyChange()
   }
 
   const formatPhone = (raw: string): string => {
@@ -421,7 +422,6 @@ export default function RegistrationModal() {
                           type="text"
                           value={formData.student_name}
                           onChange={(e) => handleChange("student_name", e.target.value)}
-                          onBlur={() => formProgress.notifyChange()}
                           placeholder="Student's name"
                           className={inputClass}
                         />
@@ -434,7 +434,6 @@ export default function RegistrationModal() {
                           type="text"
                           value={formData.parent_name}
                           onChange={(e) => handleChange("parent_name", e.target.value)}
-                          onBlur={() => formProgress.notifyChange()}
                           placeholder="Parent's name"
                           className={inputClass}
                         />
@@ -454,7 +453,6 @@ export default function RegistrationModal() {
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => handleChange("phone", e.target.value.replace(/\D/g, "").slice(0, 10))}
-                          onBlur={() => formProgress.notifyChange()}
                           placeholder="10-digit number"
                           className={"flex-1 " + inputClass}
                         />
@@ -470,7 +468,6 @@ export default function RegistrationModal() {
                         type="text"
                         value={formData.school}
                         onChange={(e) => handleChange("school", e.target.value)}
-                        onBlur={() => formProgress.notifyChange()}
                         placeholder="School name"
                         className={inputClass}
                       />
@@ -488,10 +485,7 @@ export default function RegistrationModal() {
                             <button
                               key={option}
                               type="button"
-                              onClick={() => {
-                                handleChange("person_type", option)
-                                formProgress.notifyChange()
-                              }}
+                              onClick={() => handleChange("person_type", option)}
                               className={`relative flex items-center gap-2.5 rounded-lg border-2 px-3 py-2.5 text-left transition-all duration-200 ${
                                 isSelected
                                   ? "border-[#EABF36] bg-[#EABF36]/10"
@@ -534,7 +528,6 @@ export default function RegistrationModal() {
                         <select
                           value={formData.grade}
                           onChange={(e) => handleChange("grade", e.target.value)}
-                          onBlur={() => formProgress.notifyChange()}
                           className={selectClass}
                         >
                           <option value="" disabled className="bg-[#0a2e23] text-white/40">Select</option>
@@ -550,7 +543,6 @@ export default function RegistrationModal() {
                         <select
                           value={formData.city}
                           onChange={(e) => handleChange("city", e.target.value)}
-                          onBlur={() => formProgress.notifyChange()}
                           className={selectClass}
                         >
                           <option value="" disabled className="bg-[#0a2e23] text-white/40">Select</option>
@@ -570,7 +562,6 @@ export default function RegistrationModal() {
                         type="email"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
-                        onBlur={() => formProgress.notifyChange()}
                         placeholder="email@example.com"
                         className={inputClass}
                       />
@@ -581,10 +572,7 @@ export default function RegistrationModal() {
                       <input
                         type="checkbox"
                         checked={formData.whatsapp_optin}
-                        onChange={(e) => {
-                          handleChange("whatsapp_optin", e.target.checked)
-                          formProgress.notifyChange()
-                        }}
+                        onChange={(e) => handleChange("whatsapp_optin", e.target.checked)}
                         className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 text-[#EABF36] accent-[#EABF36] focus:ring-[#EABF36]/50 flex-shrink-0"
                       />
                       <span className="text-[10px] text-white/40 leading-relaxed group-hover:text-white/50 transition-colors">

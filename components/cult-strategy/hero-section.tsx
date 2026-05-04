@@ -90,7 +90,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-sm sm:text-lg font-[family-name:var(--font-satoshi)] text-white/70 max-w-xl mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
-            Aging is no longer a strict biological limit—it’s the defining bio-market of our century. Uncover the frameworks investors use to value life-extending science, and build your own high-stakes longevity startup.
+            Ageing is no longer a strict biological limit—it’s the defining bio-market of our century. Uncover the frameworks investors use to value life-extending science, and build your own high-stakes longevity startup.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-2.5 mb-8 sm:mb-10">
@@ -105,7 +105,7 @@ export default function HeroSection() {
                   boxShadow: `0 6px 32px ${ACCENT_DIM}0.5), 0 1px 0 rgba(255,255,255,0.18) inset`,
                 }}
               >
-                Decode the Future — Secure My Spot
+                Decode the Future - Secure My Spot
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>
@@ -134,15 +134,6 @@ export default function HeroSection() {
                 <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
               </svg>
               <span className="text-xs sm:text-sm text-white/65 font-[family-name:var(--font-satoshi)]">Grades 6 – 10</span>
-            </div>
-            <div
-              className="inline-flex items-center gap-1.5 border rounded-full px-3.5 py-1.5"
-              style={{ borderColor: `${ACCENT_DIM}0.45)`, background: `${ACCENT_DIM}0.12)` }}
-            >
-              <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
-              <span className="text-xs tracking-wider font-[family-name:var(--font-satoshi)] font-semibold" style={{ color: ACCENT }}>
-                Only 17 Spots Left
-              </span>
             </div>
           </div>
         </div>
