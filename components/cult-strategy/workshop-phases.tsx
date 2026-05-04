@@ -1,5 +1,4 @@
 import type React from "react";
-import Image from "next/image";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#00E5FF";
@@ -85,36 +84,24 @@ function TestimonialsCarousel() {
         {[...testimonials, ...testimonials].map((item, i) => (
           <div
             key={i}
-            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-gray-200 rounded-2xl bg-white overflow-hidden"
+            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md overflow-hidden p-5"
           >
-            <div className="relative h-40">
-              <Image
-                src={item.photo}
-                alt={`${item.name}, Age ${item.age}`}
-                fill
-                className="object-cover object-top"
-                sizes="300px"
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.45))" }}
-              />
-            </div>
-            <div className="p-4">
-              <span
-                className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-                style={{ color: `${ACCENT}30` }}
-              >
-                &ldquo;
-              </span>
-              <p className="text-xs sm:text-sm text-[#374151] font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
-                {item.quote}
-              </p>
+            <span
+              className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
+              style={{ color: `${ACCENT}50` }}
+            >
+              &ldquo;
+            </span>
+            <p className="text-xs sm:text-sm text-white/70 font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
+              {item.quote}
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
               <div>
-                <span className="block text-sm text-[#111827] font-[family-name:var(--font-satoshi)] font-semibold">
+                <span className="block text-sm text-white font-[family-name:var(--font-satoshi)] font-semibold">
                   {item.name}
                 </span>
-                <span className="block text-[10px] text-[#9ca3af] font-[family-name:var(--font-satoshi)]">
+                <span className="block text-[10px] text-white/40 font-[family-name:var(--font-satoshi)]">
                   Age {item.age} &middot; Alcovia Community
                 </span>
               </div>
