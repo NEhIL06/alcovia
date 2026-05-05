@@ -61,7 +61,7 @@ export default function HeroSection() {
         <div className="hidden sm:block absolute bottom-8 right-8 w-12 h-12 border-b border-r" style={{ borderColor: `${ACCENT_DIM}0.35)` }} />
       </div>
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10 sm:pt-28 sm:pb-14">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-28 sm:pt-44 sm:pb-32">
         <div className="max-w-xl lg:max-w-2xl text-center lg:text-left">
 
           <div className="flex items-center justify-center lg:justify-start gap-3 mb-5">
@@ -87,8 +87,8 @@ export default function HeroSection() {
             </span>
           </h1>
 
-          <p className="text-sm sm:text-lg font-[family-name:var(--font-satoshi)] text-white/70 max-w-xl mx-auto lg:mx-0 mb-7 sm:mb-9 leading-relaxed">
-            Ageing is no longer a strict biological limit—it’s the defining bio-market of our century. Uncover the frameworks investors use to value life-extending science, and build your own high-stakes longevity startup.
+          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-6 sm:mb-8 leading-relaxed">
+            Ageing isn&apos;t a limit—it&apos;s a market. Understand how investors value the business of immortality, and apply those insights to pitch your own longevity startup.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-2.5 mb-8 sm:mb-10">

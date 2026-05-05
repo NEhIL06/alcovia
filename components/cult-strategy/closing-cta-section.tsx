@@ -88,7 +88,7 @@ export default function ClosingCtaSection() {
         </h2>
 
         <p className="lp-fade-in text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-6 sm:mb-10">
-          One Saturday. The skills, mentors, and experience that school doesn&apos;t offer – and most adults wish they&apos;d had earlier. Don&apos;t think about it too long.
+          Capacity is strictly capped to ensure a premium, intensive mentorship experience. Once the boardroom is full, registration permanently closes.
         </p>
 
         <div className="lp-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">

@@ -43,7 +43,7 @@ const pillars = [
     title: "Face the Investors",
     subtitle: "Secure simulated seed funding",
     description:
-      "Face off against industry experts acting as Venture Capitalists. Pitch the company, defend financial projections, and negotiate to secure simulated seed funding for your vision.",
+      "Competing head-to-head, they pitch their longevity startup, highlight their core product offerings to convince people to buy in, and negotiate to secure simulated seed funding.",
     stat: "Live",
     statLabel: "pitch to real VCs",
     icon: (
@@ -54,7 +54,6 @@ const pillars = [
   },
 ];
 
-const brands = ["Altos Labs", "Calico", "Insilico Medicine", "Retro Biosciences", "Humanity", "Elysium Health"];
 
 const testimonials = [
   {
@@ -177,7 +176,8 @@ export default function WorkshopPhases() {
                     <div className="h-px" style={{ background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.2), transparent)` }} />
 
                     <div className="p-3 sm:p-8 lg:p-10 flex flex-col lg:flex-row lg:items-center gap-3 lg:gap-12">
-                      <div className="flex-shrink-0 flex flex-row lg:flex-col items-center lg:items-start gap-4 lg:gap-5">
+                      {/* Top row: phase badge left, stat right */}
+                      <div className="flex-shrink-0 lg:flex-col flex flex-row items-center justify-between lg:justify-start lg:items-start gap-4 lg:gap-5 w-full lg:w-auto">
                         <div
                           className="inline-flex items-center gap-2 rounded-full px-3 py-1 border"
                           style={{ borderColor: `${ACCENT_DIM}0.25)`, background: `${ACCENT_DIM}0.06)` }}
@@ -190,14 +190,14 @@ export default function WorkshopPhases() {
                           </span>
                         </div>
 
-                        <div className="flex flex-col gap-0.5 lg:pl-1">
+                        <div className="flex items-baseline gap-1.5 lg:pl-1">
                           <span
-                            className="text-xl sm:text-2xl font-[family-name:var(--font-monument)] font-bold leading-none"
+                            className="text-xl sm:text-2xl font-[family-name:var(--font-monument)] font-bold leading-none whitespace-nowrap"
                             style={{ color: ACCENT }}
                           >
                             {item.stat}
                           </span>
-                          <span className="text-[9px] sm:text-[10px] text-white/50 font-[family-name:var(--font-satoshi)] leading-tight max-w-[90px]">
+                          <span className="text-[9px] sm:text-[10px] text-white/50 font-[family-name:var(--font-satoshi)] leading-tight">
                             {item.statLabel}
                           </span>
                         </div>
@@ -238,27 +238,6 @@ export default function WorkshopPhases() {
           </div>
         </div>
 
-        {/* Brands we study */}
-        <div className="mt-10 sm:mt-14">
-          <div className="flex items-center gap-4 mb-5">
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.1))" }} />
-            <p className="text-[10px] sm:text-xs tracking-[0.3em] uppercase text-white/50 font-[family-name:var(--font-satoshi)] whitespace-nowrap px-2">
-              The companies we study
-            </p>
-            <div className="flex-1 h-px" style={{ background: "linear-gradient(to left, transparent, rgba(255,255,255,0.1))" }} />
-          </div>
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-            {brands.map((brand) => (
-              <span
-                key={brand}
-                className="text-[10px] sm:text-xs border rounded-full px-4 sm:px-5 py-1.5 sm:py-2 text-white/60 font-[family-name:var(--font-satoshi)] tracking-[0.12em] uppercase transition-all duration-300 hover:border-[#00E5FF]/30 hover:text-white"
-                style={{ borderColor: "rgba(255,255,255,0.1)" }}
-              >
-                {brand}
-              </span>
-            ))}
-          </div>
-        </div>
       </div>
 
       {/* Testimonials infinite auto-scroll carousel – full bleed */}
