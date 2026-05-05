@@ -90,8 +90,7 @@ const content: LPContent = {
       "You expect guaranteed outcomes without discomfort",
       "You\u2019re not ready for them to be pushed, publicly"
     ],
-    gatekeepingLine: "This is not just another activity. It is for families who want their teenager to grow stronger in how they think, act, and handle the real world.",
-    warning: "Before you apply: This program requires a significant financial commitment (think Pathways or GD Goenka fee). It is a high-touch, selective program with an elite peer group and real-world projects. We only work with families 100% ready to invest in transformation."
+    gatekeepingLine: "This is not just another activity. It is for families who want their teenager to grow stronger in how they think, act, and handle the real world."
   },
   authority: {
     label: "Why Alcovia works",

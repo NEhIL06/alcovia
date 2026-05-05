@@ -365,7 +365,7 @@ export default function RegistrationModal() {
           <motion.div
             ref={modalRef}
             className="relative w-full max-w-[420px] my-2 sm:my-4 mx-4 rounded-2xl border border-white/10 bg-[#0a2e23] shadow-2xl flex flex-col"
-            style={{ maxHeight: "calc(100vh - 16px)", maxHeight: "calc(100dvh - 16px)" }}
+            style={{ maxHeight: "calc(100dvh - 16px)" }}
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 30 }}
