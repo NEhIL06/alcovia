@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const ACCENT = "#00E5FF";
+const ACCENT = "#34D399";
 
 export default function SpeakerSection() {
   return (
@@ -9,7 +9,7 @@ export default function SpeakerSection() {
         <div
           style={{
             background:
-              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,229,255,0.04) 0%, transparent 70%)",
+              "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(52,211,153,0.04) 0%, transparent 70%)",
           }}
           className="absolute inset-0"
         />
@@ -30,7 +30,7 @@ export default function SpeakerSection() {
             <div className="relative w-48 h-60 sm:w-72 sm:h-96 lg:w-80 lg:h-[28rem]">
               <div
                 className="absolute inset-0 border rounded-2xl"
-                style={{ borderColor: `rgba(0,229,255,0.2)` }}
+                style={{ borderColor: `rgba(52,211,153,0.2)` }}
               />
               <div className="absolute inset-3 rounded-xl overflow-hidden">
                 <Image
@@ -42,13 +42,13 @@ export default function SpeakerSection() {
                 />
               </div>
 
-              <div className="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-2 border-l-2 rounded-tl-md" style={{ borderColor: `rgba(0,229,255,0.4)` }} />
-              <div className="absolute -top-1.5 -right-1.5 w-5 h-5 border-t-2 border-r-2 rounded-tr-md" style={{ borderColor: `rgba(0,229,255,0.4)` }} />
-              <div className="absolute -bottom-1.5 -left-1.5 w-5 h-5 border-b-2 border-l-2 rounded-bl-md" style={{ borderColor: `rgba(0,229,255,0.4)` }} />
-              <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 border-b-2 border-r-2 rounded-br-md" style={{ borderColor: `rgba(0,229,255,0.4)` }} />
+              <div className="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-2 border-l-2 rounded-tl-md" style={{ borderColor: `rgba(52,211,153,0.4)` }} />
+              <div className="absolute -top-1.5 -right-1.5 w-5 h-5 border-t-2 border-r-2 rounded-tr-md" style={{ borderColor: `rgba(52,211,153,0.4)` }} />
+              <div className="absolute -bottom-1.5 -left-1.5 w-5 h-5 border-b-2 border-l-2 rounded-bl-md" style={{ borderColor: `rgba(52,211,153,0.4)` }} />
+              <div className="absolute -bottom-1.5 -right-1.5 w-5 h-5 border-b-2 border-r-2 rounded-br-md" style={{ borderColor: `rgba(52,211,153,0.4)` }} />
             </div>
 
-            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white/5 backdrop-blur-md border border-[#00E5FF]/25 shadow-sm rounded-full px-4 py-1.5 flex items-center gap-2">
+            <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-white/5 backdrop-blur-md border border-[#34D399]/20 shadow-sm rounded-full px-4 py-1.5 flex items-center gap-2">
               <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: ACCENT }} />
               <span
                 className="text-[10px] sm:text-xs font-[family-name:var(--font-satoshi)] font-medium tracking-wider uppercase whitespace-nowrap"
@@ -82,7 +82,7 @@ export default function SpeakerSection() {
                 </p>
               </div>
 
-              <div className="w-12 h-px mx-auto lg:mx-0" style={{ background: `rgba(0,229,255,0.3)` }} />
+              <div className="w-12 h-px mx-auto lg:mx-0" style={{ background: `rgba(52,211,153,0.3)` }} />
 
               <div className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
                 <p>

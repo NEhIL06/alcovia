@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-const ACCENT = "#22C55E";
+const ACCENT = "#34D399";
 
 interface CursorParallaxGridProps {
     cols?: number;
@@ -41,7 +41,7 @@ export default function CursorParallaxGrid({
             if (spotRef.current) {
                 const sx = 20 + current.current.x * 60;
                 const sy = 20 + current.current.y * 60;
-                spotRef.current.style.background = `radial-gradient(ellipse 30% 25% at ${sx}% ${sy}%, rgba(34,197,94,0.06) 0%, transparent 70%)`;
+                spotRef.current.style.background = `radial-gradient(ellipse 30% 25% at ${sx}% ${sy}%, rgba(52,211,153,0.06) 0%, transparent 70%)`;
             }
             frame.current = requestAnimationFrame(tick);
         };
@@ -121,7 +121,7 @@ export default function CursorParallaxGrid({
                     ref={spotRef}
                     className="absolute inset-0"
                     style={{
-                        background: `radial-gradient(ellipse 30% 25% at 50% 50%, rgba(34,197,94,0.06) 0%, transparent 70%)`,
+                        background: `radial-gradient(ellipse 30% 25% at 50% 50%, rgba(52,211,153,0.06) 0%, transparent 70%)`,
                     }}
                 />
             )}

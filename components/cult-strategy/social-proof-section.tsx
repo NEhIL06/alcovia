@@ -1,25 +1,25 @@
-const ACCENT = "#00E5FF";
+const ACCENT = "#34D399";
 
 const stats = [
   {
     number: "3%",
     label: "Selection Rate",
-    description: "Only the most driven students make the cut",
+    description: "Only the most driven students earn a seat at Alcovia",
   },
   {
     number: "15+",
-    label: "Industry Mentors",
-    description: "Biotech founders, researchers, and VC partners across our programs",
+    label: "Expert Mentors",
+    description: "Real founders, researchers, and operators — not tutors",
   },
   {
-    number: "4hrs",
-    label: "Immersive Workshop",
-    description: "Hands-on biotech business building, not boring lectures",
+    number: "100%",
+    label: "Project-Based",
+    description: "Every Alcovia program is built around doing, not listening",
   },
   {
     number: "$500B+",
-    label: "Longevity Market",
-    description: "The booming market we teach you to enter.",
+    label: "The Market",
+    description: "The booming bio-economy we prepare the next generation to enter",
   },
 ];
 
@@ -30,7 +30,7 @@ export default function SocialProofSection() {
         <div
           style={{
             background:
-              "linear-gradient(180deg, transparent 0%, rgba(0,229,255,0.03) 50%, transparent 100%)",
+              "linear-gradient(180deg, transparent 0%, rgba(52,211,153,0.03) 50%, transparent 100%)",
           }}
           className="absolute inset-0"
         />
@@ -54,7 +54,7 @@ export default function SocialProofSection() {
           {stats.map((stat) => (
             <div
               key={stat.label}
-              className="lp-fade-in group text-center p-3 sm:p-5 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#00E5FF]/30 hover:shadow-[0_4px_20px_rgba(0,229,255,0.07)]"
+              className="lp-fade-in group text-center p-3 sm:p-5 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#34D399]/20 hover:shadow-[0_4px_20px_rgba(52,211,153,0.07)]"
             >
               <span
                 className="block text-2xl sm:text-4xl lg:text-5xl font-[family-name:var(--font-monument)] font-bold mb-1"

@@ -4,8 +4,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#00E5FF";
-const ACCENT_DIM = "rgba(0,229,255,";
+const ACCENT = "#34D399";
+const ACCENT_DIM = "rgba(52,211,153,";
 
 const takeaways = [
   {
@@ -21,7 +21,7 @@ const takeaways = [
   },
   {
     title: "Market Economics",
-    description: "How to analyze emerging bio-markets and understand the financial architecture behind extending human life — from R&D costs to investor return models.",
+    description: "How to analyze emerging bio-markets and understand the financial architecture behind extending human life, from R&D costs to investor return models.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <line x1="12" y1="1" x2="12" y2="23" />
@@ -31,7 +31,7 @@ const takeaways = [
   },
   {
     title: "The Art of the Pitch",
-    description: "Mastering the high-stakes presentation frameworks real founders use to persuade investors and close deals — delivered under live VC pressure.",
+    description: "Mastering the high-stakes presentation frameworks real founders use to persuade investors and close deals, delivered under live pressure.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -39,18 +39,6 @@ const takeaways = [
         <line x1="16" y1="13" x2="8" y2="13" />
         <line x1="16" y1="17" x2="8" y2="17" />
         <polyline points="10 9 9 9 8 9" />
-      </svg>
-    ),
-  },
-  {
-    title: "A Longevity Startup",
-    description: "They leave with an actual company: a defined breakthrough, a scalable business model, financial projections, and a pitch deck built and defended on the day.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-        <circle cx="9" cy="7" r="4" />
-        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
       </svg>
     ),
   },
@@ -81,7 +69,7 @@ export default function TakeawaysSection() {
           {takeaways.map((item, index) => (
             <div 
               key={index}
-              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#00E5FF]/30 transition-all duration-500 overflow-hidden"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#34D399]/20 transition-all duration-500 overflow-hidden"
             >
               {/* Hover gradient background */}
               <div 

@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#22C55E";
-const ACCENT_DIM = "rgba(34,197,94,";
+const ACCENT = "#34D399";
+const ACCENT_DIM = "rgba(52,211,153,";
 
 export default function CtaMidSection() {
   return (
@@ -17,7 +17,7 @@ export default function CtaMidSection() {
       >
         <CursorParallaxGrid opacity={0.05} depth={20} spotlight />
         <div style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(34,197,94,0.07) 0%, transparent 65%)",
+          background: "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(52,211,153,0.06) 0%, transparent 65%)",
         }} className="absolute inset-0" />
       </div>
 
@@ -154,7 +154,7 @@ export default function CtaMidSection() {
                 <span
                   className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-9 sm:px-12 py-4 sm:py-5 rounded-full font-bold transition-all duration-400 group-hover:scale-[1.04]"
                   style={{
-                    background: `linear-gradient(135deg, #22C55E 0%, #16A34A 100%)`,
+                    background: `linear-gradient(135deg, #047857 0%, #065f46 100%)`,
                     boxShadow: `0 4px 28px ${ACCENT_DIM}0.4), 0 1px 0 rgba(255,255,255,0.12) inset`,
                   }}
                 >

@@ -4,8 +4,8 @@ import { useCallback, useEffect, useRef, useState } from "react"
 
 import { useFormProgress } from "@/hooks/use-form-progress"
 
-const ACCENT = "#00E5FF"
-const ACCENT_DIM = "rgba(0,229,255,"
+const ACCENT = "#34D399"
+const ACCENT_DIM = "rgba(52,211,153,"
 
 const GRADE_OPTIONS = ["6th", "7th", "8th", "9th", "10th"]
 
@@ -167,7 +167,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
 
   const displayError = error ?? localError
   const inputBase =
-    "w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#00E5FF]/60 focus:bg-white/[0.07]"
+    "w-full rounded-lg border border-white/10 bg-white/[0.04] px-3 py-2.5 text-sm text-white placeholder:text-white/30 outline-none transition-colors focus:border-[#34D399]/50 focus:bg-white/[0.07]"
 
   return (
     <div
@@ -335,7 +335,7 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
               type="checkbox"
               checked={form.whatsapp_optin}
               onChange={(event) => updateField("whatsapp_optin", event.target.checked)}
-              className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 text-[#00E5FF] accent-[#00E5FF] focus:ring-[#00E5FF]/50 flex-shrink-0"
+              className="mt-0.5 h-3.5 w-3.5 rounded border-white/20 bg-white/5 text-[#34D399] accent-[#34D399] focus:ring-[#34D399]/40 flex-shrink-0"
             />
             <span className="text-[10px] text-white/40 leading-relaxed group-hover:text-white/50 transition-colors">
               I agree to receive promotional messages and updates from Expargent India Private Limited via WhatsApp. You can opt out at any time by replying STOP.
@@ -351,9 +351,9 @@ export default function WorkshopCheckoutForm({ open, submitting, error, onClose,
           <button
             type="submit"
             disabled={submitting}
-            className="mt-5 flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold uppercase tracking-wider text-black transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100"
+            className="mt-5 flex items-center justify-center gap-2 rounded-full py-3.5 text-sm font-semibold uppercase tracking-wider text-white transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:hover:scale-100"
             style={{
-              background: "linear-gradient(135deg, #00E5FF 0%, #00B8D4 100%)",
+              background: "linear-gradient(135deg, #047857 0%, #065f46 100%)",
               boxShadow: `0 4px 24px ${ACCENT_DIM}0.35)`,
               fontFamily: "var(--font-monument)",
             }}

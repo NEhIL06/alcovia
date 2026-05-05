@@ -1,5 +1,5 @@
-const ACCENT = "#00E5FF";
-const ACCENT_DIM = "rgba(0,229,255,";
+const ACCENT = "#34D399";
+const ACCENT_DIM = "rgba(52,211,153,";
 
 export default function HookSection() {
   return (
@@ -18,20 +18,13 @@ export default function HookSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <span
-          className="inline-block text-xs tracking-[0.35em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-5"
-          style={{ color: ACCENT }}
-        >
-          The New Gold Rush
-        </span>
-
         <h2 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight text-white mb-6">
           Defying death is the{" "}
           <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>new gold rush</span>
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-3xl mx-auto">
-          What was once pure science fiction is rapidly becoming the most lucrative bio-economy in the world. Ultra-wealthy investors and labs are actively engineering ways to pause human aging — turning it into a massive commercial opportunity.{" "}
+          What was once pure science fiction is rapidly becoming the most lucrative bio-economy in the world. Ultra-wealthy investors and labs are actively engineering ways to pause human aging, turning it into a massive commercial opportunity.{" "}
           <span className="text-white font-semibold">
             But who controls this technology? How do you price it? And how do you stake your claim in the industry of tomorrow?
           </span>

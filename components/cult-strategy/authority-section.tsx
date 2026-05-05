@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-const ACCENT = "#00E5FF";
-const ACCENT_DIM = "rgba(0,229,255,";
+const ACCENT = "#34D399";
+const ACCENT_DIM = "rgba(52,211,153,";
 
 const credentials = [
   {
@@ -12,7 +12,7 @@ const credentials = [
     ),
     title: "We teach what school misses",
     description:
-      "How to spot trends, value breakthroughs, build financial models, and tell a story. Skills you use whether you become a founder or a scientist.",
+      "How to spot trends, value breakthroughs, and tell a story. Skills you use whether you become a founder or a scientist.",
   },
   {
     icon: (
@@ -71,7 +71,7 @@ export default function AuthoritySection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-5 mb-10 sm:mb-14">
           {credentials.map((cred) => (
             <div key={cred.title} className="lp-fade-in group relative">
-              <div className="relative h-full border border-white/10 rounded-2xl p-5 sm:p-6 bg-white/5 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-[#00E5FF]/30 hover:shadow-[0_8px_36px_rgba(0,229,255,0.08)]">
+              <div className="relative h-full border border-white/10 rounded-2xl p-5 sm:p-6 bg-white/5 backdrop-blur-md overflow-hidden transition-all duration-500 hover:border-[#34D399]/20 hover:shadow-[0_8px_36px_rgba(52,211,153,0.08)]">
                 <div
                   className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                   style={{ background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)` }}
@@ -81,7 +81,7 @@ export default function AuthoritySection() {
                   style={{ background: `linear-gradient(to right, transparent, ${ACCENT_DIM}0.4), transparent)` }}
                 />
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(0,229,255,0.25)]"
+                  className="w-11 h-11 rounded-full flex items-center justify-center mb-4 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.25)]"
                   style={{ background: `${ACCENT_DIM}0.1)`, border: `1px solid ${ACCENT_DIM}0.2)`, color: ACCENT }}
                 >
                   {cred.icon}

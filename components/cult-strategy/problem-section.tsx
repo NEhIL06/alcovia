@@ -1,7 +1,7 @@
 import CursorParallaxGrid from "./cursor-parallax-grid";
 
-const ACCENT = "#00E5FF";
-const ACCENT_DIM = "rgba(0,229,255,";
+const ACCENT = "#34D399";
+const ACCENT_DIM = "rgba(52,211,153,";
 
 const CARDS = [
   {
@@ -102,7 +102,7 @@ export default function ProblemSection() {
                     <div className="flex-shrink-0 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110"
                       style={{ background: `${ACCENT_DIM}0.1)`, border: `1px solid ${ACCENT_DIM}0.2)`, color: `${ACCENT_DIM}0.7)` }}
                     >
-                      <div className="group-hover:text-[#00E5FF] transition-colors duration-300">
+                      <div className="group-hover:text-[#34D399] transition-colors duration-300">
                         {item.icon}
                       </div>
                     </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-const ACCENT = "#00E5FF";
+const ACCENT = "#34D399";
 
 const images = [
   { src: "/images/lp/cohort.jpg", alt: "Intimate mentoring session" },
