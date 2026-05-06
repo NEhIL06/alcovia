@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const ACCENT = "#34D399";
 const ACCENT_DIM = "rgba(52,211,153,";
@@ -100,6 +101,23 @@ export default function AuthoritySection() {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="lp-fade-in flex justify-center mb-10 sm:mb-14">
+          <Link
+            href="/"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(52,211,153,0.2)]"
+            style={{
+              borderColor: `${ACCENT_DIM}0.3)`,
+              color: ACCENT,
+              background: `${ACCENT_DIM}0.06)`,
+            }}
+          >
+            Know more about Alcovia
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </Link>
         </div>
 
         <div className="lp-fade-in relative border border-white/10 rounded-2xl p-6 sm:p-8 lg:p-10 bg-white/5 backdrop-blur-md overflow-hidden">

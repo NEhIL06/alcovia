@@ -93,6 +93,8 @@ function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
 }
 
 export default function FaqSection() {
+  const [open, setOpen] = useState(false);
+
   return (
     <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#050505" }}>
       <div className="absolute inset-0 pointer-events-none">
@@ -102,24 +104,51 @@ export default function FaqSection() {
       </div>
 
       <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
+        <button
+          className="lp-fade-in w-full flex items-center justify-between gap-4 mb-0 group"
+          onClick={() => setOpen(!open)}
+          aria-expanded={open}
+        >
+          <div className="text-left">
+            <span
+              className="inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-2"
+              style={{ color: ACCENT }}
+            >
+              FAQ
+            </span>
+            <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
+              Everything you need{" "}
+              <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(52,211,153,0.25)` }}>to know</span>
+            </h2>
+          </div>
           <span
-            className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
-            style={{ color: ACCENT }}
+            className="flex-shrink-0 w-10 h-10 rounded-full border flex items-center justify-center transition-all duration-300"
+            style={{
+              borderColor: open ? `${ACCENT}40` : "rgba(255,255,255,0.1)",
+              color: open ? ACCENT : "rgba(255,255,255,0.5)",
+            }}
           >
-            FAQ
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth={2}
+              className={`w-4 h-4 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+            >
+              <path d="M19 9l-7 7-7-7" />
+            </svg>
           </span>
+        </button>
 
-          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
-            Everything you need{" "}
-            <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(52,211,153,0.25)` }}>to know</span>
-          </h2>
-        </div>
-
-        <div className="space-y-3">
-          {faqs.map((faq) => (
-            <FaqItem key={faq.question} faq={faq} />
-          ))}
+        <div
+          className="overflow-hidden transition-all duration-500 ease-out"
+          style={{ maxHeight: open ? "9999px" : "0", opacity: open ? 1 : 0 }}
+        >
+          <div className="pt-8 sm:pt-12 space-y-3">
+            {faqs.map((faq) => (
+              <FaqItem key={faq.question} faq={faq} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

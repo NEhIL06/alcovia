@@ -43,7 +43,7 @@ export default function CultStrategyWorkshopPage() {
       <WorkshopPhases />
       <TakeawaysSection />
       <AuthoritySection />
-      <SocialProofSection />
+      {/* <SocialProofSection /> */}
       <FaqSection />
       <ClosingCtaSection />
       <MobileFloatingCta />
