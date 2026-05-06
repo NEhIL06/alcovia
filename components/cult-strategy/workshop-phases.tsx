@@ -111,7 +111,7 @@ function TestimonialsCarousel() {
       onMouseUp={stopDrag}
       onMouseLeave={stopDrag}
     >
-      {testimonials.map((item, i) => (
+      {[...testimonials, ...testimonials, ...testimonials].map((item, i) => (
         <div
           key={i}
           className="w-[260px] sm:w-[300px] flex-shrink-0 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md overflow-hidden p-5"
