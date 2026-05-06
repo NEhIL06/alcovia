@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef, useCallback } from "react"
-import { useRouter, usePathname } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { X, Loader2, CheckCircle } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 
@@ -32,7 +32,6 @@ function getTrafficSource(): string {
 }
 
 export default function ExitIntentPopup() {
-  const router = useRouter()
   const pathname = usePathname()
   const { isOpen: regModalOpen } = useRegistrationModal()
   const [visible, setVisible] = useState(false)
@@ -184,7 +183,7 @@ export default function ExitIntentPopup() {
         }),
       }).catch(() => {})
 
-      setTimeout(() => router.push("/brochure"), 2000)
+      setTimeout(() => close(), 4000)
     } catch {
       setError("Something went wrong. Please try again.")
     } finally {
@@ -225,11 +224,36 @@ export default function ExitIntentPopup() {
           <div className="flex flex-col items-center justify-center px-6 py-10 text-center">
             <CheckCircle className="h-12 w-12 text-[#EABF36] mb-4" />
             <h3 className="font-[family-name:var(--font-playfair)] text-lg font-bold text-white mb-1.5">
-              Opening your brochure...
+              Your brochure is ready!
             </h3>
-            <p className="text-xs text-white/50">
-              Redirecting you now. Our team will also reach out shortly.
+            <p className="text-xs text-white/50 mb-5">
+              We&apos;ll also send it to your WhatsApp &amp; email shortly.
             </p>
+            <div className="flex gap-3 w-full">
+              <a
+                href="/Alcovia_Brochure.pdf"
+                download="Alcovia_Brochure.pdf"
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold uppercase tracking-wider text-[#0C0C0C] transition-all hover:scale-[1.02] active:scale-[0.98]"
+                style={{ background: GOLD_GRADIENT }}
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                </svg>
+                Download PDF
+              </a>
+              <a
+                href="/brochure"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex-1 flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold uppercase tracking-wider text-white border border-white/20 transition-all hover:bg-white/10 hover:scale-[1.02] active:scale-[0.98]"
+              >
+                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                </svg>
+                View Online
+              </a>
+            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit}>
