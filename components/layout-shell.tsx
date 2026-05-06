@@ -10,6 +10,7 @@ const PremiumNavbar = dynamic(() => import("@/components/premium-navbar"))
 const SmoothScrollProvider = dynamic(() => import("@/components/smooth-scroll-provider"), { ssr: false })
 const PageTransition = dynamic(() => import("@/components/PageTransition"))
 const RegistrationModal = dynamic(() => import("@/components/registration-modal"), { ssr: false })
+const ExitIntentPopup = dynamic(() => import("@/components/exit-intent-popup"), { ssr: false })
 
 function LazyRegistrationModal() {
   const { isOpen } = useRegistrationModal()
@@ -29,6 +30,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <>
         {children}
         <LazyRegistrationModal />
+        <ExitIntentPopup />
       </>
     )
   }
@@ -38,6 +40,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
       <>
         {children}
         <LazyRegistrationModal />
+        <ExitIntentPopup />
       </>
     )
   }
@@ -49,6 +52,7 @@ export default function LayoutShell({ children }: { children: React.ReactNode })
         {children}
       </PageTransition>
       <LazyRegistrationModal />
+      <ExitIntentPopup />
     </SmoothScrollProvider>
   )
 }
