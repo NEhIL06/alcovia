@@ -179,7 +179,7 @@ export default function HeroSection() {
           transition={{ delay: 1.5, duration: 0.8 }}
         >
           <a
-            href="https://rzp.io/rzp/neuromarketingalcovia"
+            href="https://rzp.io/rzp/jWixlCh"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3 overflow-hidden"

@@ -120,7 +120,7 @@ export default function AuthoritySection() {
           </Link>
         </div>
 
-        <div className="lp-fade-in relative border border-white/10 rounded-2xl p-6 sm:p-8 lg:p-10 bg-white/5 backdrop-blur-md overflow-hidden">
+        {/* <div className="lp-fade-in relative border border-white/10 rounded-2xl p-6 sm:p-8 lg:p-10 bg-white/5 backdrop-blur-md overflow-hidden">
           <div
             className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
             style={{ background: `linear-gradient(to right, ${ACCENT}, transparent)` }}
@@ -155,7 +155,7 @@ export default function AuthoritySection() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

@@ -119,7 +119,7 @@ export default function ClosingCtaSection() {
           </div>
 
           <a
-            href="https://rzp.io/rzp/neuromarketingalcovia"
+            href="https://rzp.io/rzp/jWixlCh"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative inline-flex items-center gap-3"

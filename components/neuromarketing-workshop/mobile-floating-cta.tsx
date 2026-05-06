@@ -41,7 +41,7 @@ export default function MobileFloatingCta() {
           transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
           <a
-            href="https://rzp.io/rzp/neuromarketingalcovia"
+            href="https://rzp.io/rzp/jWixlCh"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 text-[#08261e] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
