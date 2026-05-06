@@ -174,6 +174,16 @@ export default function ExitIntentPopup() {
         }),
       }).catch(() => {})
 
+      fetch("https://n8n.alcovia.life/webhook/brochure-deliver", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: formatPhone(phone),
+          email: email.trim() || undefined,
+        }),
+      }).catch(() => {})
+
       setTimeout(() => router.push("/brochure"), 2000)
     } catch {
       setError("Something went wrong. Please try again.")
