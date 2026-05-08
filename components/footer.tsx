@@ -129,7 +129,7 @@ export default function Footer() {
             <nav className="flex flex-col space-y-4 lg:space-y-2 items-center md:items-start">
               {[
                 { name: "Cohort 2026", href: "#", onClick: (e: React.MouseEvent) => { e.preventDefault(); openModal("footer_cohort_2026", "Cohort 2026") } },
-                { name: "Edible Engineering", href: "/workshop", onClick: undefined },
+                { name: "Stop Learning to Code", href: "/workshop", onClick: undefined },
                 //{ name: "The Invisible Influence", href: "/neuromarketing-workshop", onClick: undefined },
               ].map((link) => (
                 <FlipLink

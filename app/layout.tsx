@@ -91,6 +91,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <style dangerouslySetInnerHTML={{ __html: `body{background-color:#08261e;color:#F7F7F3;margin:0;overflow-x:hidden;-webkit-font-smoothing:antialiased}` }} />
         <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://connect.facebook.net" />

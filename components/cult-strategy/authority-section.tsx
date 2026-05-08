@@ -13,7 +13,7 @@ const credentials = [
     ),
     title: "We teach what school misses",
     description:
-      "How to spot trends, value breakthroughs, and tell a story. Skills you use whether you become a founder or a scientist.",
+      "How to talk to AI with precision, break problems into systems, and ship working software. Skills that matter whether you become a founder, engineer, or creator.",
   },
   {
     icon: (
@@ -25,7 +25,7 @@ const credentials = [
     ),
     title: "Learn from operators, not tutors",
     description:
-      "Mentors come from real biotech and longevity startups. They bring the actual playbooks they use at work.",
+      "Teens get hands-on guidance from active builders, founders, and operators who use these exact AI tools to ship products today. This is not a coding class. It&apos;s a working session with people who do this for a living.",
   },
   {
     icon: (
@@ -35,7 +35,7 @@ const credentials = [
     ),
     title: "You do the work, not just watch",
     description:
-      "Not only slides. You will conceptualize your longevity startup and pitch it in teams to real investors on the same day.",
+      "Not slides. Every teen picks a build path — a game, a website, or an app — and leaves with something real, working, and theirs. Built in one afternoon using nothing but English.",
   },
 ];
 

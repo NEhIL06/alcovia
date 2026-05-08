@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic"
 import { Suspense } from "react"
-import { AnimatePresence } from "framer-motion"
 import { HeroAnimationProvider } from "@/context/hero-animation-context"
 
 import ScrollProgress from "@/components/scroll-progress"
@@ -37,27 +36,25 @@ const Footer = dynamic(() => import("@/components/footer"), {
 export default function Home() {
   return (
     <HeroAnimationProvider>
-      <AnimatePresence>
-        <MicroInteractions>
-          <ScrollProgress />
+      <MicroInteractions>
+        <ScrollProgress />
 
-          {/* Parallax Background - Moves subtly with cursor */}
-          <ParallaxBackground />
-          <main>
-            <Hero />
-            <Manifesto />
-            <OfferingsHorizontal />
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <ToggleCompare />
-            </Suspense>
-            <StudentSnapshots />
-            <PartnersSection />
-            <SocialFan />
-            <Footer />
-          </main>
+        {/* Parallax Background - Moves subtly with cursor */}
+        <ParallaxBackground />
+        <main>
+          <Hero />
+          <Manifesto />
+          <OfferingsHorizontal />
+          <Suspense fallback={<div className="min-h-screen" />}>
+            <ToggleCompare />
+          </Suspense>
+          <StudentSnapshots />
+          <PartnersSection />
+          <SocialFan />
+          <Footer />
+        </main>
 
-        </MicroInteractions>
-      </AnimatePresence>
+      </MicroInteractions>
     </HeroAnimationProvider>
   )
 }

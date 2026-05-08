@@ -85,7 +85,7 @@ export default function CtaMidSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              &ldquo;Every superfood you eat today started
+              &ldquo;The teens who learn this now don&apos;t grow up to use software.
             </motion.p>
             <motion.p
               className="text-[clamp(1.15rem,2.8vw,1.9rem)] font-[family-name:var(--font-playfair)] italic mb-2 leading-snug"
@@ -95,7 +95,7 @@ export default function CtaMidSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.35 }}
             >
-              in someone&apos;s notebook.&rdquo;
+              They grow up to ship it.&rdquo;
             </motion.p>
 
             {/* Attribution divider */}
@@ -111,7 +111,7 @@ export default function CtaMidSection() {
                 className="text-[10px] sm:text-xs tracking-[0.25em] uppercase font-[family-name:var(--font-satoshi)]"
                 style={{ color: `${ACCENT_DIM}0.55)` }}
               >
-                Edible Engineering
+                AI Workshop for Teens
               </span>
               <div className="h-px w-8" style={{ background: `${ACCENT_DIM}0.3)` }} />
             </motion.div>
@@ -172,7 +172,7 @@ export default function CtaMidSection() {
               </WorkshopCheckoutLink>
 
               <p className="text-[10px] sm:text-xs text-white/35 font-[family-name:var(--font-satoshi)]">
-                Lunch included &middot; May 2nd, 2026 &middot; Horizon Center
+                Lunch included &middot; May 23rd, 2026 &middot; Horizon Center
               </p>
             </motion.div>
           </div>

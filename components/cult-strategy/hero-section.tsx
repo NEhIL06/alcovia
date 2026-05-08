@@ -78,18 +78,18 @@ export default function HeroSection() {
 
           <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-8 sm:mb-9">
             <span className="block text-[clamp(2.2rem,6vw,5.5rem)] text-white">
-              The 120 year asset
+              Stop Learning to Code.
             </span>
             <span
               className="block text-[clamp(1.8rem,5vw,4.5rem)]"
               style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.25)` }}
             >
-              The business of immortality
+              Start Shipping Software.
             </span>
           </h1>
 
           <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-9 sm:mb-11 leading-relaxed">
-            Ageing isn&apos;t a limit, it&apos;s a market. Understand how investors value the business of immortality, and apply those insights to pitch your own longevity startup.
+            AI now writes the code. The real skill is knowing what to build and how to direct it. In one afternoon, teens go from idea to a working game, app, or website using nothing but English.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-3 mb-10 sm:mb-12">
@@ -104,7 +104,7 @@ export default function HeroSection() {
                   boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.18) inset`,
                 }}
               >
-                Decode the Future - Secure My Spot
+                Start Building — Secure My Spot
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

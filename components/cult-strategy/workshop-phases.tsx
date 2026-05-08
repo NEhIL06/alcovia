@@ -10,13 +10,13 @@ const ACCENT_DIM = "rgba(52,211,153,";
 const pillars = [
   {
     number: "01",
-    phase: "The Blueprint",
-    title: "Decode the Science",
-    subtitle: "From lab to commercial reality",
+    phase: "The Prompt",
+    title: "Learn to Talk to AI",
+    subtitle: "Precision over vagueness",
     description:
-      "We decode the actual science driving today's market. Learn how cellular rejuvenation and gene therapies are making the leap from the lab to commercial reality.",
+      "Teens learn how to actually talk to AI — by being specific, giving examples, and setting context. They'll see firsthand why vague prompts produce vague output, and how the right prompt unlocks production-grade code in seconds.",
     stat: "3+",
-    statLabel: "rejuvenation tech decoded",
+    statLabel: "prompts, precision, output",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
@@ -25,13 +25,13 @@ const pillars = [
   },
   {
     number: "02",
-    phase: "The Build",
-    title: "Conceptualize the Startup",
-    subtitle: "Form an executive team",
+    phase: "The Architect",
+    title: "Break the Idea Down",
+    subtitle: "Founder mindset",
     description:
-      "Teens form an executive team to conceptualize their own longevity startup. They define their breakthrough, identify their target market, and build a profitable, scalable business model.",
+      "Real builders don't ask AI for everything in one shot. Teens learn the founder mindset — breaking a big idea into smaller pieces, then into buildable chunks. This is the difference between a teen who wants a 'cool app' and one who can actually ship one.",
     stat: "1",
-    statLabel: "longevity startup built",
+    statLabel: "idea broken into reality",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -42,13 +42,13 @@ const pillars = [
   },
   {
     number: "03",
-    phase: "The Pitch",
-    title: "Face the Investors",
-    subtitle: "Secure simulated seed funding",
+    phase: "The Ship",
+    title: "Launch Something Real",
+    subtitle: "Game, website, or app",
     description:
-      "Competing head-to-head, they pitch their longevity startup, highlight their core product offerings to convince people to buy in, and negotiate to secure simulated seed funding.",
+      "Every teen leaves with something real, working, and theirs. They pick their build path: a game with their own characters and mechanics, a website about something they care about, or a real-world app that fixes a problem in their life.",
     stat: "Live",
-    statLabel: "pitch to real VCs",
+    statLabel: "shipped in one afternoon",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
@@ -169,7 +169,7 @@ export default function WorkshopPhases() {
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
-            Three phases. One day. The complete journey from decoding biological breakthroughs to pitching a high-stakes longevity startup.
+            Three phases. One afternoon. From learning to prompt AI precisely, to breaking down a real idea, to shipping something that works.
           </p>
         </div>
 

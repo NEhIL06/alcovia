@@ -30,10 +30,10 @@ const eventDetails = [
 
 const WORKSHOP_URL = "https://alcovia.life/workshop";
 const WA_TEXT = encodeURIComponent(
-  "Join the Alcovia Longevity Startup Workshop for Teenagers! May 23rd in Gurgaon. Build a real biotech brand in 4 hours. " + WORKSHOP_URL
+  "Join the Alcovia AI Workshop for Teenagers! May 23rd in Gurgaon. Go from idea to working game, app, or website in one afternoon. " + WORKSHOP_URL
 );
 const X_TEXT = encodeURIComponent(
-  "Check out Alcovia's Longevity Startup Workshop for Teenagers! Build a real biotech brand in 4 hours. May 23rd, Gurgaon."
+  "Check out Alcovia's AI Workshop for Teenagers! Build a real game, app, or website in one afternoon using AI. May 23rd, Gurgaon."
 );
 
 export default function ClosingCtaSection() {
@@ -89,7 +89,7 @@ export default function ClosingCtaSection() {
         </h2>
 
         <p className="lp-fade-in text-sm sm:text-base lg:text-lg text-white/60 font-[family-name:var(--font-satoshi)] max-w-xl mx-auto mb-6 sm:mb-10">
-          Capacity is strictly capped to ensure a premium, intensive mentorship experience. Once the boardroom is full, registration permanently closes.
+          Seats are strictly capped to keep this hands-on and high-touch. Once every laptop is claimed, registration permanently closes.
         </p>
 
         <div className="lp-fade-in flex flex-wrap items-center justify-center gap-2 sm:gap-3 mb-8 sm:mb-12">

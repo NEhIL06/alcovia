@@ -1,3 +1,10 @@
+import bundleAnalyzer from '@next/bundle-analyzer'
+
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+  openAnalyzer: false,
+})
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {
@@ -22,9 +29,6 @@ const nextConfig = {
     removeConsole: process.env.NODE_ENV === 'production',
   },
 
-  experimental: {
-    optimizeCss: true,
-  },
 
   async rewrites() {
     return [
@@ -59,4 +63,4 @@ const nextConfig = {
   },
 }
 
-export default nextConfig
+export default withBundleAnalyzer(nextConfig)
