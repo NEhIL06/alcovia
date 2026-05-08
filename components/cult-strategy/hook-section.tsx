@@ -24,7 +24,7 @@ export default function HookSection() {
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-3xl mx-auto">
-          Every app on your phone, every game you play, every site you scroll on — are built by people who learned to give a machine clear instructions. That moat just disappeared. AI now writes the code. The new edge isn&apos;t typing syntax, it&apos;s knowing what to build, how to break it down, and how to talk to AI like an architect.{" "}
+          Every app on your phone, every game you play, every site you scroll on - are built by people who learned to give a machine clear instructions. That moat just disappeared. AI now writes the code. The new edge isn&apos;t typing syntax, it&apos;s knowing what to build, how to break it down, and how to talk to AI like an architect.{" "}
           <span className="text-white font-semibold">
             The teens who learn this now don&apos;t grow up to use software. They grow up to ship it.
           </span>

@@ -35,7 +35,7 @@ const credentials = [
     ),
     title: "You do the work, not just watch",
     description:
-      "Not slides. Every teen picks a build path — a game, a website, or an app — and leaves with something real, working, and theirs. Built in one afternoon using nothing but English.",
+      "Not slides. Every teen picks a build path - a game, a website, or an app - and leaves with something real, working, and theirs. Built in one afternoon using nothing but English.",
   },
 ];
 

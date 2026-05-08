@@ -9,7 +9,7 @@ const stats = [
   {
     number: "15+",
     label: "Expert Mentors",
-    description: "Real founders, researchers, and operators — not tutors",
+    description: "Real founders, researchers, and operators - not tutors",
   },
   {
     number: "100%",

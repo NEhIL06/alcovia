@@ -14,7 +14,7 @@ const pillars = [
     title: "Learn to Talk to AI",
     subtitle: "Precision over vagueness",
     description:
-      "Teens learn how to actually talk to AI — by being specific, giving examples, and setting context. They'll see firsthand why vague prompts produce vague output, and how the right prompt unlocks production-grade code in seconds.",
+      "Teens learn how to actually talk to AI - by being specific, giving examples, and setting context. They'll see firsthand why vague prompts produce vague output, and how the right prompt unlocks production-grade code in seconds.",
     stat: "3+",
     statLabel: "prompts, precision, output",
     icon: (
@@ -29,7 +29,7 @@ const pillars = [
     title: "Break the Idea Down",
     subtitle: "Founder mindset",
     description:
-      "Real builders don't ask AI for everything in one shot. Teens learn the founder mindset — breaking a big idea into smaller pieces, then into buildable chunks. This is the difference between a teen who wants a 'cool app' and one who can actually ship one.",
+      "Real builders don't ask AI for everything in one shot. Teens learn the founder mindset - breaking a big idea into smaller pieces, then into buildable chunks. This is the difference between a teen who wants a 'cool app' and one who can actually ship one.",
     stat: "1",
     statLabel: "idea broken into reality",
     icon: (

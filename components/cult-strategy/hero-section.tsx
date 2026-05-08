@@ -1,13 +1,13 @@
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#34D399";        // mint-emerald — readable on dark backgrounds
-const ACCENT_DEEP = "#047857";   // deep emerald — fills, buttons, backgrounds
+const ACCENT = "#34D399";        // mint-emerald - readable on dark backgrounds
+const ACCENT_DEEP = "#047857";   // deep emerald - fills, buttons, backgrounds
 const ACCENT_DIM = "rgba(52,211,153,";
 
 export default function HeroSection() {
   return (
     <>
-    {/* Manual preload with fetchPriority=high — Next.js Image priority prop
+    {/* Manual preload with fetchPriority=high - Next.js Image priority prop
         does not emit fetchpriority on the SSR preload, so LCP image gets
         deprioritized. Lighthouse lcp-discovery-insight confirmed this. */}
     <link
@@ -21,7 +21,7 @@ export default function HeroSection() {
       id="cult-hero"
       className="relative overflow-hidden"
     >
-      {/* Full-bleed background image — plain img with explicit fetchPriority
+      {/* Full-bleed background image - plain img with explicit fetchPriority
           because Next.js 16 Image priority prop does not emit fetchpriority
           on the rendered <img>, which Lighthouse flags as missing priority
           hint for the LCP element. URLs still go through /_next/image so
@@ -104,7 +104,7 @@ export default function HeroSection() {
                   boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.18) inset`,
                 }}
               >
-                Start Building — Secure My Spot
+                Start Building - Secure My Spot
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-1.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
                 </svg>

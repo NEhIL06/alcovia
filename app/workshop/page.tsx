@@ -17,13 +17,13 @@ const MobileFloatingCta = dynamic(() => import("@/components/cult-strategy/mobil
 const Footer = dynamic(() => import("@/components/footer"));
 
 export const metadata: Metadata = {
-  title: "The 120 Year Asset: The Business of Immortality | Alcovia Workshop",
+  title: "Stop Learning to Code. Start Shipping Software. | Alcovia Workshop",
   description:
-    "We are teaching teenagers the business and science of radical life extension. Move from passive observers to active founders by pitching high-stakes longevity startups.",
+    "AI now writes the code. In one afternoon, teens go from idea to a working game, app, or website using nothing but English. May 23rd · Horizon Center · Grades 6–10.",
   openGraph: {
-    title: "The 120 Year Asset: The Business of Immortality | Alcovia",
+    title: "Stop Learning to Code. Start Shipping Software. | Alcovia",
     description:
-      "Defying death is the new gold rush. Understand the frameworks investors use to value life-extending science and build your own longevity startup.",
+      "The teens who learn this now don't grow up to use software. They grow up to ship it. One afternoon. Real builds. May 23rd, Gurgaon.",
     type: "website",
   },
   robots: {
@@ -38,6 +38,7 @@ export default function CultStrategyWorkshopPage() {
       <WorkshopPageTracker />
       <HeroSection />
       {/* <SpeakerSection /> */}
+      
       <HookSection />
       <WorkshopGallery />
       <WorkshopPhases />
