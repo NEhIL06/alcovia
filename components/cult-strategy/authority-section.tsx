@@ -64,7 +64,7 @@ export default function AuthoritySection() {
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
-            Alcovia is an offline community in Gurgaon where students in grades 6-12 learn by working
+            Alcovia is an offline community in Gurgaon where students in grades 6-10 learn by working
             on real projects with real mentors.
           </p>
         </div>
