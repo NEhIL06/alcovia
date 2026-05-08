@@ -5,7 +5,7 @@ const ACCENT_DIM = "rgba(52,211,153,";
 const takeaways = [
   {
     title: "AI-Native Communication",
-    description: "How to prompt with the precision real engineers and founders use - turning fuzzy ideas into clean, executable instructions.",
+    description: "How to prompt with the precision real engineers and founders use turning fuzzy ideas into clean, executable instructions.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
         <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
