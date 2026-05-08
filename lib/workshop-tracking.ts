@@ -16,10 +16,10 @@ export interface WorkshopCheckoutLeadInput {
 }
 
 export const WORKSHOP_DETAILS = {
-  slug: "edible-engineering-workshop",
-  title: "Edible Engineering: Architecting the Next Superfood",
-  dateIso: "2026-05-02",
-  dateLabel: "May 2nd, 2026",
+  slug: "claude-code-for-teenagers",
+  title: "Claude Code for Teenagers",
+  dateIso: "2026-05-23",
+  dateLabel: "May 23rd, 2026",
   locationLabel: "Horizon Center, Gurgaon",
   amount: 3999,
   currency: "INR",

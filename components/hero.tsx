@@ -133,10 +133,10 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
                     <div className="flex justify-between items-end gap-2">
                         <div className="flex-1 min-w-0">
                             <span className="block text-[9px] font-bold uppercase text-[#22C55E]">WORKSHOP</span>
-                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">EDIBLE ENGINEERING: ARCHITECTING THE NEXT SUPERFOOD</h4>
+                            <h4 className="text-[10px] font-black uppercase leading-tight text-[#0C0C0C] mt-1">CLAUDE CODE FOR TEENAGERS</h4>
                         </div>
                         <div className="flex flex-col items-end flex-shrink-0">
-                            <span className="text-xl font-black text-[#0C0C0C] leading-none">02</span>
+                            <span className="text-xl font-black text-[#0C0C0C] leading-none">23</span>
                             <span className="text-[8px] font-bold uppercase text-[#0C0C0C]/60">MAY</span>
                         </div>
                     </div>

@@ -71,25 +71,25 @@ export default function HeroSection() {
               className="text-[11px] sm:text-xs tracking-[0.1em] sm:tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
               style={{ color: ACCENT }}
             >
-              Alcovia Workshop For Teenagers
+              Alcovia · Claude Code for Teenagers
             </span>
             <span className="hidden lg:block h-px w-8" style={{ background: ACCENT }} />
           </div>
 
           <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-8 sm:mb-9">
             <span className="block text-[clamp(2.2rem,6vw,5.5rem)] text-white">
-              Stop Learning to Code.
+              Claude Code
             </span>
             <span
               className="block text-[clamp(1.8rem,5vw,4.5rem)]"
               style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.25)` }}
             >
-              Start Shipping Software.
+              for Teenagers
             </span>
           </h1>
 
           <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-9 sm:mb-11 leading-relaxed">
-            AI now writes the code. The real skill is knowing what to build and how to direct it. In one afternoon, teens go from idea to a working game, app, or website using nothing but English.
+            Claude Code lets teens build real apps, games, and websites by directing AI in plain English — no syntax memorisation, no setup hell. One afternoon. One working product. Grades 6–10.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-3 mb-10 sm:mb-12">

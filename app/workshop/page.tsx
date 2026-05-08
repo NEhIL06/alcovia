@@ -17,13 +17,13 @@ const MobileFloatingCta = dynamic(() => import("@/components/cult-strategy/mobil
 const Footer = dynamic(() => import("@/components/footer"));
 
 export const metadata: Metadata = {
-  title: "Stop Learning to Code. Start Shipping Software. | Alcovia Workshop",
+  title: "Claude Code for Teenagers | Alcovia Workshop",
   description:
-    "AI now writes the code. In one afternoon, teens go from idea to a working game, app, or website using nothing but English. May 23rd · Horizon Center · Grades 6–10.",
+    "Learn to build real apps with Claude Code in one afternoon. Teens go from idea to a working game, app, or website using AI. May 23rd · Horizon Center · Grades 6–10.",
   openGraph: {
-    title: "Stop Learning to Code. Start Shipping Software. | Alcovia",
+    title: "Claude Code for Teenagers | Alcovia",
     description:
-      "The teens who learn this now don't grow up to use software. They grow up to ship it. One afternoon. Real builds. May 23rd, Gurgaon.",
+      "The teens who learn Claude Code now don't grow up to use software. They grow up to ship it. One afternoon. Real builds. May 23rd, Gurgaon.",
     type: "website",
   },
   robots: {
