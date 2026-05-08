@@ -206,8 +206,7 @@ export default function OfferingsHorizontal() {
                         fill
                         className={`object-cover transition-opacity duration-500 ${['01', '02', '04'].includes(item.id) ? 'scale-110' : ''}`}
                         sizes="(max-width: 1280px) 50vw, 30vw"
-                        priority={index < 3}
-                        loading={index < 3 ? "eager" : "lazy"}
+                        loading="lazy"
                       />
                     </div>
                   </div>
@@ -285,8 +284,7 @@ export default function OfferingsHorizontal() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                   sizes="100vw"
-                  priority={item.id === '01' || item.id === '02'}
-                  loading={(item.id === '01' || item.id === '02') ? "eager" : "lazy"}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B2E] via-transparent to-transparent opacity-90" />
                 <div className="absolute bottom-4 left-4 right-4">
@@ -337,8 +335,7 @@ export default function OfferingsHorizontal() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                   sizes="(max-width: 1280px) 50vw, 33vw"
-                  priority={item.id === '01' || item.id === '02'}
-                  loading={(item.id === '01' || item.id === '02') ? "eager" : "lazy"}
+                  loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0D3B2E] via-transparent to-transparent opacity-80" />
                 <div className="absolute top-4 right-4">

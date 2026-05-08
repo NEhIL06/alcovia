@@ -48,7 +48,7 @@ const StarTransition = ({ isExiting }: { isExiting: boolean }) => {
                     alt="alcovia-logo"
                     width={380}
                     height={240}
-                    priority
+                    loading="eager"
                 />
             </motion.div>
         </motion.div>

@@ -195,7 +195,7 @@ export default function SocialFan() {
                                         quality={90}
                                         sizes={isMobile ? "130px" : "320px"}
                                         className="object-cover transition-transform duration-700 ease-out hover:scale-105"
-                                        priority={index === 1}
+                                        loading="lazy"
                                     />
 
                                     {/* Gradient overlay */}

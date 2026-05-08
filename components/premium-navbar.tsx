@@ -205,7 +205,9 @@ export default function PremiumNavbar() {
     }
 
     window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll()
+    if (window.scrollY > 0) {
+      handleScroll()
+    }
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
