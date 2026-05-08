@@ -60,19 +60,19 @@ const pillars = [
 
 const testimonials = [
   {
-    quote: "Showed me that longevity is not just biology, it's the biggest business opportunity of our generation.",
+    quote: "I never knew an IPL owner thinks more like a banker than a cricket fan. The boardroom session completely changed how I watch the game.",
     name: "Ansh",
     age: "15",
     photo: "/images/lp/environment.jpg",
   },
   {
-    quote: "You actually build and defend financial projections. Nothing like school.",
+    quote: "We actually built an F1 team budget and had to defend every number. Nothing in school has ever felt that real.",
     name: "Aryaana",
     age: "14",
     photo: "/images/lp/ideas-to-execution.jpg",
   },
   {
-    quote: "After the workshop, I started looking at health and ageing as engineering problems. I can't unsee it now.",
+    quote: "I came in thinking aviation meant flying. Left knowing about slot trading, terminal ops, cargo revenue. There are so many ways to run an airport.",
     name: "Aksh",
     age: "16",
     photo: "/images/workshop/w5.jpeg",
