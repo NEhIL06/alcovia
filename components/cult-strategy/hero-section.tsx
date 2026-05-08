@@ -89,7 +89,7 @@ export default function HeroSection() {
           </h1>
 
           <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-9 sm:mb-11 leading-relaxed">
-            Claude Code lets teens build real apps, games, and websites by directing AI in plain English — no syntax memorisation, no setup hell. One afternoon. One working product. Grades 6–10.
+            Claude Code lets teens build real apps, games, and websites by directing AI in plain English - no syntax memorisation, no setup hell. One afternoon. One working product. Grades 6–10.
           </p>
 
           <div className="flex flex-col items-center lg:items-start gap-3 mb-10 sm:mb-12">
