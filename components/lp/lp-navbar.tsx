@@ -11,7 +11,7 @@ export function LPNavbar() {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-4 py-1 bg-[#08261e]/80 backdrop-blur-lg border-b border-white/5">
       <a href="/" className="flex items-center -my-5">
-        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" loading="eager" />
+        <Image src="/alcovia_logo_dark.png" alt="Alcovia" width={160} height={133} className="object-contain h-[100px] w-auto" priority sizes="160px" />
       </a>
       <button onClick={() => {
         if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {

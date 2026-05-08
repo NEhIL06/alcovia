@@ -1,11 +1,19 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { motion, useInView } from "framer-motion"
 
 export default function StudentSnapshots() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const isInView = useInView(containerRef, { once: true, margin: "-100px" })
+
+  useEffect(() => {
+    if (!isInView || !videoRef.current) return
+    const video = videoRef.current
+    if (video.preload !== "auto") video.preload = "auto"
+    void video.play().catch(() => {})
+  }, [isInView])
 
   return (
     <section ref={containerRef} className="relative z-10 w-full bg-[#08261e]">
@@ -16,19 +24,15 @@ export default function StudentSnapshots() {
         animate={isInView ? { opacity: 1, scale: 1 } : {}}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
       >
-        {/* Video Placeholder - Replace src with actual video */}
         <video
+          ref={videoRef}
           className="w-full h-full object-cover"
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
-        >
-          {/* Add your video source here */}
-          <source src="/videos/download.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          preload="none"
+          src="/videos/download.mp4"
+        />
 
         {/* Optional Overlay for text/branding */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent pointer-events-none" />

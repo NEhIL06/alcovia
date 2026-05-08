@@ -320,14 +320,6 @@ function LPFooter() {
   )
 }
 
-function VideoSection() {
-  return (
-    <section className="relative w-full bg-[#061f18]">
-      <video className="w-full aspect-[21/9] md:aspect-[21/9] object-cover" autoPlay muted loop playsInline preload="none" />
-    </section>
-  )
-}
-
 export interface LPTemplateProps {
   heroSubtitle?: string
   heroHeadline?: string
@@ -336,7 +328,6 @@ export interface LPTemplateProps {
   primaryCta?: string
   secondaryCta?: string
   content?: LPContent
-  showVideo?: boolean
 }
 
 const DEFAULT_CONTENT: LPContent = {
@@ -387,12 +378,11 @@ const DEFAULT_CONTENT: LPContent = {
   },
 }
 
-export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody, primaryCta, secondaryCta, content, showVideo }: LPTemplateProps) {
+export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody, primaryCta, secondaryCta, content }: LPTemplateProps) {
   const c: LPContent = content || DEFAULT_CONTENT
   const hero = content
     ? c.hero
     : { subtitle: heroSubtitle || "", headline: heroHeadline || "", highlight: heroHighlight || "", body: heroBody || "", primaryCta: primaryCta || "", secondaryCta: secondaryCta || "" }
-  const shouldShowVideo = showVideo ?? !content
 
   return (
     <>
@@ -403,7 +393,6 @@ export function LPTemplate({ heroSubtitle, heroHeadline, heroHighlight, heroBody
         <HeroSection hero={hero} />
         <ProblemsSection problems={c.problems} />
         <TransformationSection transformation={c.transformation} />
-        {shouldShowVideo && <VideoSection />}
         {c.differentiators && <DifferentiatorsSection differentiators={c.differentiators} />}
         <LogoSection />
         <AudienceSection audience={c.audience} />

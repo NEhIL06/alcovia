@@ -273,7 +273,8 @@ export default function PremiumNavbar() {
                       alt="ALCOVIA"
                       width={86}
                       height={71}
-                      className="object-contain transition-all duration-300"
+                      sizes="86px"
+                      className="object-contain transition-transform duration-300"
                       style={{
                         opacity: navMode === "light" ? 1 : 0,
                         transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
@@ -286,13 +287,14 @@ export default function PremiumNavbar() {
                       alt="ALCOVIA"
                       width={86}
                       height={71}
-                      className="object-contain transition-all duration-300"
+                      sizes="86px"
+                      className="object-contain transition-transform duration-300"
                       style={{
                         opacity: navMode === "dark" ? 1 : 0,
                         transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
                         position: "absolute",
                       }}
-                      priority
+                      loading="lazy"
                     />
                   </div>
                 ) : (
@@ -302,7 +304,8 @@ export default function PremiumNavbar() {
                       alt="ALCOVIA"
                       width={120}
                       height={100}
-                      className="absolute bottom-2 object-contain transition-all duration-300"
+                      sizes="120px"
+                      className="absolute bottom-2 object-contain transition-transform duration-300"
                       style={{
                         opacity: navMode === "light" ? 1 : 0,
                         transform: navMode === "light" ? "scale(1)" : "scale(0.85)",
@@ -314,12 +317,13 @@ export default function PremiumNavbar() {
                       alt="ALCOVIA"
                       width={120}
                       height={100}
-                      className="absolute bottom-2 object-contain transition-all duration-300"
+                      sizes="120px"
+                      className="absolute bottom-2 object-contain transition-transform duration-300"
                       style={{
                         opacity: navMode === "dark" ? 1 : 0,
                         transform: navMode === "dark" ? "scale(1)" : "scale(0.85)",
                       }}
-                      priority
+                      loading="lazy"
                     />
                   </div>
                 )}

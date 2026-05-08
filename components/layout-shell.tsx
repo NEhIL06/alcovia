@@ -5,10 +5,10 @@ import { usePathname } from "next/navigation"
 import dynamic from "next/dynamic"
 
 import { useRegistrationModal } from "@/context/registration-modal-context"
+import PremiumNavbar from "@/components/premium-navbar"
+import SmoothScrollProvider from "@/components/smooth-scroll-provider"
+import PageTransition from "@/components/PageTransition"
 
-const PremiumNavbar = dynamic(() => import("@/components/premium-navbar"))
-const SmoothScrollProvider = dynamic(() => import("@/components/smooth-scroll-provider"), { ssr: false })
-const PageTransition = dynamic(() => import("@/components/PageTransition"))
 const RegistrationModal = dynamic(() => import("@/components/registration-modal"), { ssr: false })
 const ExitIntentPopup = dynamic(() => import("@/components/exit-intent-popup"), { ssr: false })
 

@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import Script from "next/script"
 import { Playfair_Display, Oswald, Inter, Space_Grotesk } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { SessionProvider } from "@/context/session-context"
@@ -8,7 +7,6 @@ import { RegistrationModalProvider } from "@/context/registration-modal-context"
 import LayoutShell from "@/components/layout-shell"
 import DeferredScripts from "@/components/deferred-scripts"
 
-const GTM_ID = "G-T46NRQ65FV"
 const FB_PIXEL_ID = "1606881963979917"
 
 import "./globals.css"
@@ -19,7 +17,7 @@ const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
   display: "swap",
-  preload: false,
+  preload: true,
 })
 
 const oswald = Oswald({
@@ -92,14 +90,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="preconnect" href="https://res.cloudinary.com" crossOrigin="" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
+        <link rel="dns-prefetch" href="https://scripts.clarity.ms" />
+        <link rel="dns-prefetch" href="https://www.facebook.com" />
+        <link rel="dns-prefetch" href="https://mpc-prod-28-1053047382554.us-central1.run.app" />
+      </head>
       <body className={`${playfair.variable} ${milan.variable} ${oswald.variable} ${inter.variable} ${spaceGrotesk.variable} font-sans antialiased overflow-x-hidden bg-[#08261e] text-[#F7F7F3]`}>
-        <Script id="ga4" strategy="afterInteractive" src={`https://www.googletagmanager.com/gtag/js?id=${GTM_ID}`} />
-        <Script id="ga4-init" strategy="afterInteractive">
-          {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}window.gtag=gtag;gtag('js',new Date());gtag('config','${GTM_ID}');`}
-        </Script>
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${FB_PIXEL_ID}');fbq('track','PageView');`}
-        </Script>
         <noscript>
           <img
             height="1"
