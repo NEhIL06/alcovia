@@ -88,18 +88,7 @@ const MobileTagline = memo(({ isRevealed, scrollProgress }: { isRevealed: boolea
     )
 })
 
-const BrainVisual = memo(() => (
-    <div className="w-full h-full relative overflow-hidden bg-[#051a14]">
-        <Image
-            src="/images/brain-neuro.gif"
-            alt="Neural activity"
-            fill
-            className="object-cover"
-            style={{ filter: "hue-rotate(260deg) saturate(1.4) brightness(1.1)" }}
-            unoptimized
-        />
-    </div>
-))
+
 
 const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
     <motion.div
@@ -118,8 +107,8 @@ const WorkshopWidget = memo(({ isRevealed }: { isRevealed: boolean }) => (
                 </div>
                 <div className="flex-1 relative overflow-hidden bg-[#0a1a0f] flex items-center justify-center">
                     <Image
-                        src="/images/superfood-beets.gif"
-                        alt="Superfood preparation"
+                        src="/images/clawd.gif"
+                        alt="claude code for teenagers"
                         fill
                         className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
