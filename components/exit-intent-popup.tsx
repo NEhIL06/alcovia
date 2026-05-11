@@ -111,7 +111,7 @@ export default function ExitIntentPopup() {
     const searchParams = new URLSearchParams(window.location.search)
     const payload = {
       parent_name: name.trim(),
-      student_name: "",
+      student_name: name.trim(),
       phone: formatPhone(phone),
       school: "",
       grade: "",
