@@ -80,11 +80,25 @@ export default function ExitIntentPopup() {
       if (e.clientY <= 0) showPopup()
     }
 
+    let inactivityTimer: ReturnType<typeof setTimeout>
+    const resetInactivity = () => {
+      clearTimeout(inactivityTimer)
+      if (readyRef.current) {
+        inactivityTimer = setTimeout(showPopup, 45000)
+      }
+    }
+
     document.addEventListener("mouseout", handleMouseLeave)
+    document.addEventListener("touchstart", resetInactivity, { passive: true })
+    document.addEventListener("scroll", resetInactivity, { passive: true })
+    resetInactivity()
 
     return () => {
       clearTimeout(armTimer)
+      clearTimeout(inactivityTimer)
       document.removeEventListener("mouseout", handleMouseLeave)
+      document.removeEventListener("touchstart", resetInactivity)
+      document.removeEventListener("scroll", resetInactivity)
     }
   }, [showPopup, skipPages])
 
