@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#34D399";
+const ACCENT = "#D4A853";
 
 export default function MobileFloatingCta() {
   const [visible, setVisible] = useState(false);
@@ -44,7 +44,7 @@ export default function MobileFloatingCta() {
         className="pointer-events-auto inline-flex items-center gap-3 text-black font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm px-8 py-4 rounded-full font-semibold w-full max-w-md justify-center"
         style={{
           background: ACCENT,
-          boxShadow: `0 4px 24px rgba(52,211,153,0.45)`,
+          boxShadow: `0 4px 24px rgba(212,168,83,0.45)`,
         }}
       >
         Build My Audience - Secure My Spot

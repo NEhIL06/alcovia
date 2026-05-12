@@ -2,7 +2,12 @@ import Link from "next/link"
 import Image from "next/image"
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link"
 
-export default function WorkshopNavbar() {
+export default function WorkshopNavbar({ theme = "green" }: { theme?: "green" | "gold" }) {
+  const btnClass =
+    theme === "gold"
+      ? "group inline-flex items-center gap-2 rounded-full bg-[#B8860B] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#92670A] transition-all shadow-lg shadow-[#D4A853]/20 hover:shadow-[#D4A853]/35 cursor-pointer"
+      : "group inline-flex items-center gap-2 rounded-full bg-[#047857] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#065f46] transition-all shadow-lg shadow-[#34D399]/20 hover:shadow-[#34D399]/35 cursor-pointer"
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0B] border-b border-white/5">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 h-16 sm:h-20 lg:h-24 flex items-center justify-between">
@@ -17,10 +22,7 @@ export default function WorkshopNavbar() {
             className="h-10 sm:h-14 lg:h-16 w-auto"
           />
         </Link>
-        <WorkshopCheckoutLink
-          ctaSource="navbar"
-          className="group inline-flex items-center gap-2 rounded-full bg-[#047857] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#065f46] transition-all shadow-lg shadow-[#34D399]/20 hover:shadow-[#34D399]/35 cursor-pointer"
-        >
+        <WorkshopCheckoutLink ctaSource="navbar" className={btnClass}>
           Register
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5 transition-transform group-hover:translate-x-1"

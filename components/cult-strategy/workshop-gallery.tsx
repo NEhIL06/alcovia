@@ -1,7 +1,5 @@
 import Image from "next/image";
 
-const ACCENT = "#34D399";
-
 const images = [
   { src: "/images/lp/cohort.jpg", alt: "Intimate mentoring session" },
   { src: "/images/lp/environment.jpg", alt: "Teens collaborating on ideas" },
@@ -10,15 +8,15 @@ const images = [
   { src: "/images/workshop/w2.jpeg", alt: "Group discussion with mentor" },
 ];
 
-export default function WorkshopGallery() {
+export default function WorkshopGallery({ accentColor = "#34D399", background = "#050505" }: { accentColor?: string; background?: string }) {
   return (
-    <section className="relative py-4 sm:py-8 overflow-hidden" style={{ background: "#050505" }}>
+    <section className="relative py-4 sm:py-8 overflow-hidden" style={{ background }}>
       <div className="px-4 sm:px-6 mb-3">
         <div className="flex items-center gap-3">
           <div className="flex-1 h-px" style={{ background: "linear-gradient(to right, transparent, rgba(255,255,255,0.1))" }} />
           <span
             className="text-[10px] tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
-            style={{ color: ACCENT }}
+            style={{ color: accentColor }}
           >
             From Our Workshops
           </span>

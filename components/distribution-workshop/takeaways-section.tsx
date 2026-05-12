@@ -1,5 +1,5 @@
-const ACCENT = "#34D399";
-const ACCENT_DIM = "rgba(52,211,153,";
+const ACCENT = "#D4A853";
+const ACCENT_DIM = "rgba(212,168,83,";
 
 const takeaways = [
   {
@@ -37,7 +37,7 @@ const takeaways = [
 
 export default function TakeawaysSection() {
   return (
-    <section className="relative py-12 sm:py-20 lg:py-24" style={{ background: "#050505" }}>
+    <section className="relative py-12 sm:py-20 lg:py-24" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_20%,transparent_100%)]" />
       </div>
@@ -59,7 +59,7 @@ export default function TakeawaysSection() {
           {takeaways.map((item, index) => (
             <div
               key={index}
-              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#34D399]/20 transition-all duration-500 overflow-hidden"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#D4A853]/20 transition-all duration-500 overflow-hidden"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"

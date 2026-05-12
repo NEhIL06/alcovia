@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-const ACCENT = "#34D399";
-const ACCENT_DIM = "rgba(52,211,153,";
+const ACCENT = "#D4A853";
+const ACCENT_DIM = "rgba(212,168,83,";
 
 export default function AuthoritySection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div style={{
           background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${ACCENT_DIM}0.04) 0%, transparent 70%)`,
@@ -54,7 +54,7 @@ export default function AuthoritySection() {
         <div className="lp-fade-in flex justify-center mt-10 sm:mt-14">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(52,211,153,0.2)]"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(212,168,83,0.2)]"
             style={{
               borderColor: `${ACCENT_DIM}0.3)`,
               color: ACCENT,

@@ -3,9 +3,9 @@
 import { useRef, useState, type MouseEvent } from "react";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#34D399";
-const ACCENT_DEEP = "#047857";
-const ACCENT_DIM = "rgba(52,211,153,";
+const ACCENT = "#D4A853";
+const ACCENT_DEEP = "#B8860B";
+const ACCENT_DIM = "rgba(212,168,83,";
 
 const pillars = [
   {
@@ -117,7 +117,7 @@ function TestimonialsCarousel() {
                 {item.name}
               </span>
               <span className="block text-[10px] text-white/40 font-[family-name:var(--font-satoshi)]">
-                Age {item.age} &middot; Alcovia Community
+                Alcovia Community
               </span>
             </div>
           </div>
@@ -129,7 +129,7 @@ function TestimonialsCarousel() {
 
 export default function WorkshopPhases() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#050505" }}>
+    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div
           style={{
@@ -172,7 +172,7 @@ export default function WorkshopPhases() {
                 <div className="flex gap-4 lg:gap-6 items-start">
                   <div className="hidden lg:flex flex-col items-center flex-shrink-0 pt-6">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(52,211,153,0.35)] z-10"
+                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(212,168,83,0.35)] z-10"
                       style={{
                         borderColor: `${ACCENT_DIM}0.35)`,
                         background: `${ACCENT_DIM}0.08)`,
@@ -183,7 +183,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
 
-                  <div className="relative flex-1 border border-white/5 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#34D399]/20 hover:shadow-[0_8px_40px_rgba(52,211,153,0.08)]">
+                  <div className="relative flex-1 border border-white/5 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#D4A853]/20 hover:shadow-[0_8px_40px_rgba(212,168,83,0.08)]">
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                       style={{ background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)` }}
@@ -246,7 +246,7 @@ export default function WorkshopPhases() {
             <span
               className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
               style={{
-                background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #065f46 100%)`,
+                background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #92670A 100%)`,
                 boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.15) inset`,
               }}
             >

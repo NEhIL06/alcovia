@@ -1,8 +1,8 @@
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#34D399";
-const ACCENT_DEEP = "#047857";
-const ACCENT_DIM = "rgba(52,211,153,";
+const ACCENT = "#D4A853";
+const ACCENT_DEEP = "#B8860B";
+const ACCENT_DIM = "rgba(212,168,83,";
 
 export default function HeroSection() {
   return (
@@ -30,13 +30,13 @@ export default function HeroSection() {
             className="absolute inset-0"
             style={{
               background:
-                "linear-gradient(135deg, rgba(5,5,5,0.88) 0%, rgba(5,5,5,0.78) 45%, rgba(5,5,5,0.58) 100%)",
+                "linear-gradient(135deg, rgba(11,22,41,0.92) 0%, rgba(11,22,41,0.82) 45%, rgba(11,22,41,0.65) 100%)",
             }}
           />
           <div
             className="absolute bottom-0 left-0 right-0 h-24"
             style={{
-              background: "linear-gradient(to bottom, transparent, rgba(0,0,0,0.4))",
+              background: "linear-gradient(to bottom, transparent, rgba(11,22,41,0.6))",
             }}
           />
         </div>
@@ -86,7 +86,7 @@ export default function HeroSection() {
                 <span
                   className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
                   style={{
-                    background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #065f46 100%)`,
+                    background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #92670A 100%)`,
                     boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.18) inset`,
                   }}
                 >

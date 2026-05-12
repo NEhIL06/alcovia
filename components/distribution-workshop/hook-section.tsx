@@ -1,9 +1,9 @@
-const ACCENT = "#34D399";
-const ACCENT_DIM = "rgba(52,211,153,";
+const ACCENT = "#D4A853";
+const ACCENT_DIM = "rgba(212,168,83,";
 
 export default function HookSection() {
   return (
-    <section className="relative py-8 sm:py-16 overflow-hidden" style={{ background: "#050505" }}>
+    <section className="relative py-8 sm:py-16 overflow-hidden" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div
           style={{

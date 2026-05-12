@@ -32,11 +32,11 @@ export const metadata: Metadata = {
 
 export default function DistributionWorkshopPage() {
   return (
-    <main className="relative" style={{ background: "#050505" }}>
+    <main className="relative" style={{ background: "#0B1629" }}>
       <WorkshopPageTracker />
       <HeroSection />
       <HookSection />
-      <WorkshopGallery />
+      <WorkshopGallery accentColor="#D4A853" background="#0B1629" />
       <WorkshopPhases />
       <TakeawaysSection />
       <AuthoritySection />

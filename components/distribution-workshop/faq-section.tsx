@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-const ACCENT = "#34D399";
+const ACCENT = "#D4A853";
 
 const faqs = [
   {
@@ -41,7 +41,7 @@ function FaqItem({ faq }: { faq: { question: string; answer: string } }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="lp-fade-in border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-colors duration-300 hover:border-[#34D399]/20">
+    <div className="lp-fade-in border border-white/10 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-colors duration-300 hover:border-[#D4A853]/20">
       <button
         className="w-full flex items-center justify-between gap-4 p-4 sm:p-6 text-left cursor-pointer"
         onClick={() => setOpen(!open)}
@@ -91,10 +91,10 @@ export default function FaqSection() {
   const [open, setOpen] = useState(false);
 
   return (
-    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#050505" }}>
+    <section className="relative py-10 sm:py-16 lg:py-20 overflow-hidden" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div style={{
-          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(52,211,153,0.03) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse 60% 50% at 50% 50%, rgba(212,168,83,0.03) 0%, transparent 70%)",
         }} className="absolute inset-0" />
       </div>
 
@@ -113,7 +113,7 @@ export default function FaqSection() {
             </span>
             <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
               Everything you need{" "}
-              <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(52,211,153,0.25)` }}>to know</span>
+              <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(212,168,83,0.25)` }}>to know</span>
             </h2>
           </div>
           <span
