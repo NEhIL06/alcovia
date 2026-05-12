@@ -25,7 +25,7 @@ const pillars = [
     phase: "The Playbook",
     title: "The Playbook",
     description:
-      "Real creators don&apos;t post randomly. Teens learn the system behind every account that grew - picking a niche sharp enough to compound, designing a content rhythm, building a series, and engineering a feed people return to. This is the difference between &ldquo;posting&rdquo; and building.",
+      "Real creators don't post randomly. Teens learn the system behind every account that grew - picking a niche sharp enough to compound, designing a content rhythm, building a series, and engineering a feed people return to. This is the difference between \"posting\" and building.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" />
