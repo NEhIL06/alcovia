@@ -1,7 +1,15 @@
 import Link from "next/link";
 
-const ACCENT = "#D4A853";
-const ACCENT_DIM = "rgba(212,168,83,";
+const ACCENT = "#EABF36";
+const ACCENT_DIM = "rgba(234,191,54,";
+
+const GOLD_TEXT_STYLE = {
+  backgroundImage: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+  color: "transparent" as const,
+};
 
 export default function AuthoritySection() {
   return (
@@ -16,14 +24,14 @@ export default function AuthoritySection() {
         <div className="text-center mb-10 sm:mb-14">
           <span
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
-            style={{ color: ACCENT }}
+            style={GOLD_TEXT_STYLE}
           >
             The Mentors
           </span>
 
           <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
             Not a lecture.{" "}
-            <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>A working session.</span>
+            <span style={GOLD_TEXT_STYLE}>A working session.</span>
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
@@ -54,7 +62,7 @@ export default function AuthoritySection() {
         <div className="lp-fade-in flex justify-center mt-10 sm:mt-14">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(212,168,83,0.2)]"
+            className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(234,191,54,0.2)]"
             style={{
               borderColor: `${ACCENT_DIM}0.3)`,
               color: ACCENT,

@@ -36,7 +36,7 @@ export default function DistributionWorkshopPage() {
       <WorkshopPageTracker />
       <HeroSection />
       <HookSection />
-      <WorkshopGallery accentColor="#D4A853" background="#0B1629" />
+      <WorkshopGallery accentColor="#EABF36" background="#0B1629" />
       <WorkshopPhases />
       <TakeawaysSection />
       <AuthoritySection />

@@ -3,9 +3,17 @@
 import { useRef, useState, type MouseEvent } from "react";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#D4A853";
-const ACCENT_DEEP = "#B8860B";
-const ACCENT_DIM = "rgba(212,168,83,";
+const ACCENT = "#EABF36";
+const ACCENT_DEEP = "#B38728";
+const ACCENT_DIM = "rgba(234,191,54,";
+
+const GOLD_TEXT_STYLE = {
+  backgroundImage: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+  color: "transparent" as const,
+};
 
 const pillars = [
   {
@@ -50,17 +58,14 @@ const testimonials = [
   {
     quote: "I never knew an IPL owner thinks more like a banker than a cricket fan. The boardroom session completely changed how I watch the game.",
     name: "Ansh",
-    age: "15",
   },
   {
     quote: "We actually built an F1 team budget and had to defend every number. Nothing in school has ever felt that real.",
     name: "Aryaana",
-    age: "14",
   },
   {
     quote: "I came in thinking aviation meant flying. Left knowing about slot trading, terminal ops, cargo revenue. There are so many ways to run an airport.",
     name: "Aksh",
-    age: "16",
   },
 ];
 
@@ -143,14 +148,14 @@ export default function WorkshopPhases() {
         <div className="text-center mb-6 sm:mb-14">
           <span
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-4 font-semibold"
-            style={{ color: ACCENT }}
+            style={GOLD_TEXT_STYLE}
           >
             The Journey
           </span>
 
           <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
             What happens{" "}
-            <span style={{ color: ACCENT }}>in the workshop?</span>
+            <span style={GOLD_TEXT_STYLE}>in the workshop?</span>
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
@@ -172,7 +177,7 @@ export default function WorkshopPhases() {
                 <div className="flex gap-4 lg:gap-6 items-start">
                   <div className="hidden lg:flex flex-col items-center flex-shrink-0 pt-6">
                     <div
-                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(212,168,83,0.35)] z-10"
+                      className="w-9 h-9 rounded-full flex items-center justify-center border-2 transition-all duration-500 group-hover:shadow-[0_0_16px_rgba(234,191,54,0.35)] z-10"
                       style={{
                         borderColor: `${ACCENT_DIM}0.35)`,
                         background: `${ACCENT_DIM}0.08)`,
@@ -183,7 +188,7 @@ export default function WorkshopPhases() {
                     </div>
                   </div>
 
-                  <div className="relative flex-1 border border-white/5 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#D4A853]/20 hover:shadow-[0_8px_40px_rgba(212,168,83,0.08)]">
+                  <div className="relative flex-1 border border-white/5 rounded-2xl overflow-hidden bg-white/5 backdrop-blur-md transition-all duration-500 hover:border-[#EABF36]/20 hover:shadow-[0_8px_40px_rgba(234,191,54,0.08)]">
                     <div
                       className="absolute top-0 left-0 bottom-0 w-[3px] rounded-l-2xl scale-y-0 group-hover:scale-y-100 transition-all duration-500 origin-center"
                       style={{ background: `linear-gradient(180deg, transparent, ${ACCENT}, transparent)` }}
@@ -198,7 +203,7 @@ export default function WorkshopPhases() {
                         >
                           <span
                             className="text-[10px] tracking-[0.2em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
-                            style={{ color: ACCENT }}
+                            style={GOLD_TEXT_STYLE}
                           >
                             {item.phase}
                           </span>
@@ -244,10 +249,10 @@ export default function WorkshopPhases() {
             className="group relative inline-flex items-center gap-3 overflow-hidden"
           >
             <span
-              className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
+              className="relative z-10 inline-flex items-center gap-3 text-[#0B1629] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
               style={{
-                background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #92670A 100%)`,
-                boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.15) inset`,
+                background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+                boxShadow: `0 6px 32px ${ACCENT_DIM}0.4), 0 1px 0 rgba(255,255,255,0.25) inset`,
               }}
             >
               Secure My Spot

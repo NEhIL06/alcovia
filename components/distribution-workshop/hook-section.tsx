@@ -1,5 +1,12 @@
-const ACCENT = "#D4A853";
-const ACCENT_DIM = "rgba(212,168,83,";
+const ACCENT_DIM = "rgba(234,191,54,";
+
+const GOLD_TEXT_STYLE = {
+  backgroundImage: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+  color: "transparent" as const,
+};
 
 export default function HookSection() {
   return (
@@ -20,7 +27,7 @@ export default function HookSection() {
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight text-white mb-6">
           You scrolled past 47 reels today.{" "}
-          <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>You&apos;ll remember two.</span>
+          <span style={GOLD_TEXT_STYLE}>You&apos;ll remember two.</span>
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-3xl mx-auto mb-6">
@@ -34,7 +41,7 @@ export default function HookSection() {
           <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed mb-4">
             Those few are the ones getting paid before they finish school. The skill isn&apos;t &ldquo;going viral&rdquo; - it&apos;s understanding the playbook.
           </p>
-          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] leading-relaxed font-semibold" style={{ color: ACCENT }}>
+          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] leading-relaxed font-semibold" style={GOLD_TEXT_STYLE}>
             The teens who learn it now don&apos;t grow up to use the feed. They grow up to own it.
           </p>
         </div>

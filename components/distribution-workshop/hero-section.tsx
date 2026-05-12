@@ -1,8 +1,16 @@
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
-const ACCENT = "#D4A853";
-const ACCENT_DEEP = "#B8860B";
-const ACCENT_DIM = "rgba(212,168,83,";
+const ACCENT = "#EABF36";
+const ACCENT_DEEP = "#B38728";
+const ACCENT_DIM = "rgba(234,191,54,";
+
+const GOLD_TEXT_STYLE = {
+  backgroundImage: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+  color: "transparent" as const,
+};
 
 export default function HeroSection() {
   return (
@@ -55,7 +63,7 @@ export default function HeroSection() {
               <span className="hidden lg:block h-px w-8" style={{ background: ACCENT }} />
               <span
                 className="text-[11px] sm:text-xs tracking-[0.1em] sm:tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold"
-                style={{ color: ACCENT }}
+                style={GOLD_TEXT_STYLE}
               >
                 Alcovia · The Distribution Monopoly
               </span>
@@ -68,7 +76,7 @@ export default function HeroSection() {
               </span>
               <span
                 className="block text-[clamp(1.8rem,5vw,4.5rem)]"
-                style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.25)` }}
+                style={GOLD_TEXT_STYLE}
               >
                 Monopoly
               </span>
@@ -84,10 +92,10 @@ export default function HeroSection() {
                 className="group relative inline-flex items-center gap-3 overflow-hidden"
               >
                 <span
-                  className="relative z-10 inline-flex items-center gap-3 text-white font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
+                  className="relative z-10 inline-flex items-center gap-3 text-[#0B1629] font-[family-name:var(--font-monument)] uppercase tracking-wider text-sm sm:text-base px-10 sm:px-14 py-4 sm:py-5 rounded-full font-bold transition-all duration-300 group-hover:scale-[1.04]"
                   style={{
-                    background: `linear-gradient(135deg, ${ACCENT_DEEP} 0%, #92670A 100%)`,
-                    boxShadow: `0 6px 32px ${ACCENT_DIM}0.35), 0 1px 0 rgba(255,255,255,0.18) inset`,
+                    background: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+                    boxShadow: `0 6px 32px ${ACCENT_DIM}0.4), 0 1px 0 rgba(255,255,255,0.25) inset`,
                   }}
                 >
                   Build My Audience - Secure My Spot

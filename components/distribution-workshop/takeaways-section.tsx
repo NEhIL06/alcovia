@@ -1,5 +1,13 @@
-const ACCENT = "#D4A853";
-const ACCENT_DIM = "rgba(212,168,83,";
+const ACCENT = "#EABF36";
+const ACCENT_DIM = "rgba(234,191,54,";
+
+const GOLD_TEXT_STYLE = {
+  backgroundImage: "linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%)",
+  WebkitBackgroundClip: "text" as const,
+  WebkitTextFillColor: "transparent" as const,
+  backgroundClip: "text" as const,
+  color: "transparent" as const,
+};
 
 const takeaways = [
   {
@@ -46,12 +54,12 @@ export default function TakeawaysSection() {
         <div className="text-center mb-10 sm:mb-16">
           <span
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] mb-3 font-semibold"
-            style={{ color: ACCENT }}
+            style={GOLD_TEXT_STYLE}
           >
             The Outcome
           </span>
           <h2 className="lp-fade-in text-[clamp(1.75rem,4vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
-            What they <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>master</span>
+            What they <span style={GOLD_TEXT_STYLE}>master</span>
           </h2>
         </div>
 
@@ -59,7 +67,7 @@ export default function TakeawaysSection() {
           {takeaways.map((item, index) => (
             <div
               key={index}
-              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#D4A853]/20 transition-all duration-500 overflow-hidden"
+              className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 hover:border-[#EABF36]/20 transition-all duration-500 overflow-hidden"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity duration-500"
