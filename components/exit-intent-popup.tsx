@@ -52,6 +52,20 @@ export default function ExitIntentPopup() {
     if (typeof sessionStorage !== "undefined" && sessionStorage.getItem(SESSION_KEY)) return
     shownRef.current = true
     if (typeof sessionStorage !== "undefined") sessionStorage.setItem(SESSION_KEY, "1")
+    if (typeof window !== "undefined") {
+      const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag
+      if (typeof gtag === "function") {
+        gtag("event", "brochure_popup_shown", {
+          event_category: "engagement",
+          page_path: window.location.pathname,
+        })
+      }
+      if (typeof (window as any).fbq === "function") {
+        ;(window as any).fbq("trackCustom", "BrochurePopupShown", {
+          page_path: window.location.pathname,
+        })
+      }
+    }
     setVisible(true)
     requestAnimationFrame(() => requestAnimationFrame(() => setAnimateIn(true)))
   }, [skipPages, regModalOpen])
@@ -205,7 +219,7 @@ export default function ExitIntentPopup() {
       <div className="fixed inset-0 bg-black/75 backdrop-blur-sm" />
 
       <div
-        className="relative w-full max-w-[380px] mx-4 rounded-2xl border border-white/10 bg-[#0a2e23] shadow-2xl overflow-hidden"
+        className="relative w-full max-w-[460px] mx-4 rounded-2xl border border-white/10 bg-[#0a2e23] shadow-2xl overflow-hidden"
         style={{
           transform: animateIn ? "translateY(0) scale(1)" : "translateY(20px) scale(0.95)",
           opacity: animateIn ? 1 : 0,
@@ -214,11 +228,23 @@ export default function ExitIntentPopup() {
       >
         <button
           onClick={close}
-          className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-white/10 text-white/60 transition-colors hover:bg-white/20 hover:text-white"
+          className="absolute top-3 right-3 z-10 flex h-7 w-7 items-center justify-center rounded-full bg-black/40 text-white transition-colors hover:bg-black/60"
           aria-label="Close"
         >
           <X className="h-3.5 w-3.5" />
         </button>
+
+        {!submitted && (
+          <div className="w-full overflow-hidden rounded-t-2xl bg-white">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/brochure-popup-flipbook.png"
+              alt="Alcovia Brochure Preview"
+              className="w-full object-cover object-center"
+              style={{ maxHeight: "210px" }}
+            />
+          </div>
+        )}
 
         {submitted ? (
           <div className="flex flex-col items-center justify-center px-6 py-10 text-center">
@@ -259,11 +285,6 @@ export default function ExitIntentPopup() {
           <form onSubmit={handleSubmit}>
             <div className="px-5 pt-5 pb-3 sm:px-6 sm:pt-6">
               <div className="mb-4 text-center">
-                <div className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#EABF36]/10 mb-3">
-                  <svg className="h-5 w-5 text-[#EABF36]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                  </svg>
-                </div>
                 <h2 className="font-[family-name:var(--font-playfair)] text-lg font-bold text-white mb-0.5">
                   Download Our Free Brochure
                 </h2>
