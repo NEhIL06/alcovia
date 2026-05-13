@@ -30,16 +30,16 @@ export default function HookSection() {
           <span style={GOLD_TEXT_STYLE}>You&apos;ll remember two.</span>
         </h2>
 
-        <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-3xl mx-auto mb-6">
-          That&apos;s the whole game - and the teens who understand the mechanics behind it are building audiences, brand deals, and businesses while their classmates are still arguing about screen time. The gap between &ldquo;consumer&rdquo; and &ldquo;creator&rdquo; just disappeared. School isn&apos;t teaching this. The algorithm doesn&apos;t care.
+        <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] font-semibold text-white/85 leading-relaxed max-w-3xl mx-auto mb-6">
+          The teens who grasp this are building audiences and businesses while their classmates are still arguing about screen time. The line between &ldquo;consumer&rdquo; and &ldquo;creator&rdquo; is gone. Education is oblivious. The algorithm doesn&apos;t care.
         </p>
 
         <div className="max-w-3xl mx-auto border border-white/8 rounded-2xl p-6 sm:p-8 bg-white/5 backdrop-blur-sm">
-          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed mb-4">
-            Every reel that stopped your thumb today was engineered. Every account you follow built a system of hooks, rhythm, niches, monetisation - designed to win the scroll. Most teens grow up consuming this system. A small few learn to operate it.
+          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-white/80 leading-relaxed mb-4">
+            Social media success is engineered - systems of hooks, rhythm, niches, and monetisation designed to win the scroll. Most teens grow up consuming this system. Those who learn its playbook can operate it.
           </p>
-          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed mb-4">
-            Those few are the ones getting paid before they finish school. The skill isn&apos;t &ldquo;going viral&rdquo; - it&apos;s understanding the playbook.
+          <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-medium text-white/80 leading-relaxed mb-4">
+            That&apos;s how they get paid young - not by hoping to &ldquo;go viral,&rdquo; but by understanding the playbook and running it.
           </p>
           <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] leading-relaxed font-semibold" style={GOLD_TEXT_STYLE}>
             The teens who learn it now don&apos;t grow up to use the feed. They grow up to own it.

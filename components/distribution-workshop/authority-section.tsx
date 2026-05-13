@@ -21,7 +21,7 @@ export default function AuthoritySection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 sm:mb-14">
+        <div className="text-center mb-6 sm:mb-8">
           <span
             className="lp-fade-in inline-block text-xs sm:text-sm tracking-[0.3em] uppercase font-[family-name:var(--font-satoshi)] font-semibold mb-4"
             style={GOLD_TEXT_STYLE}
@@ -37,26 +37,6 @@ export default function AuthoritySection() {
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
             Alcovia is an offline community in Gurgaon where students in Grades 6–10 learn by working on real projects with real mentors.
           </p>
-        </div>
-
-        <div className="lp-fade-in relative border border-white/10 rounded-2xl p-6 sm:p-10 bg-white/5 backdrop-blur-md overflow-hidden">
-          <div
-            className="absolute top-0 left-0 right-0 h-[2px] rounded-t-2xl"
-            style={{ background: `linear-gradient(to right, ${ACCENT}, transparent)` }}
-          />
-          <div className="flex items-start gap-4 sm:gap-6">
-            <div
-              className="flex-shrink-0 text-4xl sm:text-6xl font-[family-name:var(--font-playfair)] leading-none mt-1"
-              style={{ color: `${ACCENT}65` }}
-            >
-              &ldquo;
-            </div>
-            <div className="flex-1">
-              <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/80 leading-relaxed">
-                Teens get hands-on guidance directly from active creators and operators - people who built audiences from zero, run monetised channels today, and know exactly what&apos;s working in 2026. This isn&apos;t a marketing lecture. It&apos;s a working session with the people doing it for a living.
-              </p>
-            </div>
-          </div>
         </div>
 
         <div className="lp-fade-in flex justify-center mt-10 sm:mt-14">

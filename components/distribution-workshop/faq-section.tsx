@@ -21,7 +21,7 @@ const faqs = [
   {
     question: "What does my teen actually leave with?",
     answer:
-      "Every participant leaves with three concrete deliverables: a chosen niche they can own, a content pillar map (the backbone of their content strategy), and three fully scripted reel concepts ready to film. Not theory - actual infrastructure to start publishing the same week.",
+      "Every participant leaves with two concrete deliverables: a chosen niche they can own and three fully scripted reel concepts ready to film. Not theory - actual infrastructure to start publishing the same week.",
   },
   {
     question: "Do they need any followers or equipment beforehand?",

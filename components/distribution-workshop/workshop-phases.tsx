@@ -33,7 +33,7 @@ const pillars = [
     phase: "The Playbook",
     title: "The Playbook",
     description:
-      "Real creators don't post randomly. Teens learn the system behind every account that grew - picking a niche sharp enough to compound, designing a content rhythm, building a series, and engineering a feed people return to. This is the difference between \"posting\" and building.",
+      "Successful creators don't post randomly; they build. Teens learn the system: pick a compounding niche, design a content rhythm, build a series, and engineer a feed people return to. This is the difference between \"posting\" and building.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18M9 21V9" />
@@ -45,7 +45,7 @@ const pillars = [
     phase: "The Ship",
     title: "The Ship",
     description:
-      "Every teen leaves with real audience infrastructure - a chosen niche, a content pillar map, and three scripted reel concepts. Not theory. A live creator engine, set up before they walk out the door.",
+      "Teens leave with a live creator engine: a chosen niche, a content pillar map, and three scripted reel concepts. Real audience infrastructure, not theory - set up and ready to use before they walk out the door.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-5 h-5">
         <path d="M22 10v6M2 10l10-5 10 5-10 5z" /><path d="M6 12v5c3 3 9 3 12 0v-5" />
