@@ -85,7 +85,7 @@ export default function TakeawaysSection() {
                 >
                   {item.icon}
                 </div>
-                <h3 className="text-base sm:text-lg font-[family-name:var(--font-milan)] text-white mb-3 leading-snug">
+                <h3 className="text-base sm:text-lg font-[family-name:var(--font-milan)] text-white mb-3 leading-snug font-bold">
                   {item.title}
                 </h3>
 
