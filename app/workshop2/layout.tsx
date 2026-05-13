@@ -14,7 +14,7 @@ export default function Workshop2Layout({
   return (
     <WorkshopCheckoutProvider>
       <ScrollFadeInit />
-      <WorkshopNavbar theme="gold" />
+      <WorkshopNavbar theme="gold" opacity50 />
       {children}
     </WorkshopCheckoutProvider>
   )

@@ -71,18 +71,18 @@ export default function HeroSection() {
             </div>
 
             <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-8 sm:mb-9">
-              <span className="block text-[clamp(2.2rem,6vw,5.5rem)] text-white">
+              <span className="block text-[clamp(3rem,6vw,5.5rem)] text-white">
                 The Distribution
               </span>
               <span
-                className="block text-[clamp(1.8rem,5vw,4.5rem)]"
+                className="block text-[clamp(2.6rem,5vw,4.5rem)]"
                 style={GOLD_TEXT_STYLE}
               >
                 Monopoly
               </span>
             </h1>
 
-            <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] text-white/70 max-w-lg mx-auto lg:mx-0 mb-9 sm:mb-11 leading-relaxed">
+            <p className="text-sm sm:text-base font-[family-name:var(--font-satoshi)] font-semibold text-white/90 max-w-lg mx-auto lg:mx-0 mb-9 sm:mb-11 leading-relaxed">
               Attention is the new currency - and the teens building audiences bigger than TV channels figured this out before they turned 18. In one afternoon, teens learn the actual playbook behind hooks, niches, rhythm, and monetisation, directly from creators doing it today.
             </p>
 

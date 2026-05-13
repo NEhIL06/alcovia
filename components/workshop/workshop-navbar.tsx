@@ -2,14 +2,14 @@ import Link from "next/link"
 import Image from "next/image"
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link"
 
-export default function WorkshopNavbar({ theme = "green" }: { theme?: "green" | "gold" }) {
+export default function WorkshopNavbar({ theme = "green", opacity50 = false }: { theme?: "green" | "gold"; opacity50?: boolean }) {
   const btnClass =
     theme === "gold"
       ? "group inline-flex items-center gap-2 rounded-full px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-[#0B1629] transition-all shadow-lg shadow-[#EABF36]/30 hover:shadow-[#EABF36]/50 hover:scale-[1.03] cursor-pointer"
       : "group inline-flex items-center gap-2 rounded-full bg-[#047857] px-5 sm:px-7 lg:px-8 py-2.5 sm:py-3 lg:py-3.5 text-sm sm:text-base font-semibold text-white hover:bg-[#065f46] transition-all shadow-lg shadow-[#34D399]/20 hover:shadow-[#34D399]/35 cursor-pointer"
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#0B0B0B] border-b border-white/5">
+    <header className={`fixed top-0 left-0 right-0 z-50 border-b border-white/5 ${opacity50 ? "bg-[#0B0B0B]/50 backdrop-blur-sm" : "bg-[#0B0B0B]"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10 h-16 sm:h-20 lg:h-24 flex items-center justify-between">
         <Link href="/" prefetch={false} className="flex items-center" aria-label="Alcovia home">
           <Image

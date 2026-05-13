@@ -13,7 +13,7 @@ const GOLD_TEXT_STYLE = {
 
 export default function AuthoritySection() {
   return (
-    <section className="relative py-10 sm:py-16 lg:py-24 overflow-hidden" style={{ background: "#0B1629" }}>
+    <section className="relative py-8 sm:py-12 overflow-hidden" style={{ background: "#0B1629" }}>
       <div className="absolute inset-0 pointer-events-none">
         <div style={{
           background: `radial-gradient(ellipse 60% 50% at 50% 50%, ${ACCENT_DIM}0.04) 0%, transparent 70%)`,
@@ -39,7 +39,7 @@ export default function AuthoritySection() {
           </p>
         </div>
 
-        <div className="lp-fade-in flex justify-center mt-10 sm:mt-14">
+        <div className="lp-fade-in flex justify-center mt-6 sm:mt-8">
           <Link
             href="/"
             className="group inline-flex items-center gap-2 px-6 py-3 rounded-full border font-[family-name:var(--font-satoshi)] text-sm font-semibold transition-all duration-300 hover:shadow-[0_0_24px_rgba(234,191,54,0.2)]"
