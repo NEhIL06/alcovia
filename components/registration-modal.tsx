@@ -6,6 +6,7 @@ import { X, CheckCircle, Loader2 } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
 import { useLenis } from "@/components/smooth-scroll-provider"
 import { useFormProgress } from "@/hooks/use-form-progress"
+import { getStoredUtm } from "@/lib/utm"
 
 const GRADE_OPTIONS = [
   "6th", "7th", "8th", "9th", "10th", "11th", "12th",
@@ -253,6 +254,7 @@ export default function RegistrationModal() {
     setError("")
 
     const searchParams = new URLSearchParams(window.location.search)
+    const stored = getStoredUtm()
     const payload = {
       student_name: formData.student_name.trim(),
       parent_name: formData.parent_name.trim(),
@@ -263,14 +265,14 @@ export default function RegistrationModal() {
       city: formData.city,
       email: formData.email.trim() || undefined,
       whatsapp_optin: formData.whatsapp_optin,
-      ad_id: getAdIdFromUrl() || undefined,
-      traffic_source: getTrafficSource(),
-      referrer_raw: document.referrer || "direct",
-      landing_page: window.location.pathname,
-      utm_source: searchParams.get("utm_source") || undefined,
-      utm_medium: searchParams.get("utm_medium") || undefined,
-      utm_campaign: searchParams.get("utm_campaign") || undefined,
-      utm_content: searchParams.get("utm_content") || undefined,
+      ad_id: getAdIdFromUrl() || stored.ad_id || undefined,
+      traffic_source: getTrafficSource() === "internal" ? (stored.traffic_source || "internal") : getTrafficSource(),
+      referrer_raw: document.referrer || stored.referrer_raw || "direct",
+      landing_page: stored.landing_page || window.location.pathname,
+      utm_source: searchParams.get("utm_source") || stored.utm_source || undefined,
+      utm_medium: searchParams.get("utm_medium") || stored.utm_medium || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || stored.utm_campaign || undefined,
+      utm_content: searchParams.get("utm_content") || stored.utm_content || undefined,
       form_open_source: formOpenSource,
     }
 

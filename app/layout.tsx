@@ -6,6 +6,7 @@ import { SessionProvider } from "@/context/session-context"
 import { RegistrationModalProvider } from "@/context/registration-modal-context"
 import LayoutShell from "@/components/layout-shell"
 import DeferredScripts from "@/components/deferred-scripts"
+import UtmPersist from "@/components/utm-persist"
 
 const FB_PIXEL_ID = "1606881963979917"
 
@@ -117,6 +118,7 @@ export default function RootLayout({
             </LayoutShell>
           </RegistrationModalProvider>
         </SessionProvider>
+        <UtmPersist />
         <DeferredScripts />
       </body>
     </html>

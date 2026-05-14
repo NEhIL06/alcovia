@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { usePathname } from "next/navigation"
 import { X, Loader2, CheckCircle } from "lucide-react"
 import { useRegistrationModal } from "@/context/registration-modal-context"
+import { getStoredUtm } from "@/lib/utm"
 
 const WEBHOOK_URL = "https://n8n.alcovia.life/webhook/lead-form"
 const SESSION_KEY = "alcovia_exit_popup_shown"
@@ -123,6 +124,7 @@ export default function ExitIntentPopup() {
     setError("")
 
     const searchParams = new URLSearchParams(window.location.search)
+    const stored = getStoredUtm()
     const payload = {
       parent_name: name.trim(),
       student_name: name.trim(),
@@ -133,14 +135,14 @@ export default function ExitIntentPopup() {
       city: "",
       email: email.trim() || undefined,
       whatsapp_optin: true,
-      ad_id: searchParams.get("ad_id") || undefined,
-      traffic_source: getTrafficSource(),
-      referrer_raw: document.referrer || "direct",
-      landing_page: window.location.pathname,
-      utm_source: searchParams.get("utm_source") || undefined,
-      utm_medium: searchParams.get("utm_medium") || undefined,
-      utm_campaign: searchParams.get("utm_campaign") || undefined,
-      utm_content: searchParams.get("utm_content") || undefined,
+      ad_id: searchParams.get("ad_id") || stored.ad_id || undefined,
+      traffic_source: getTrafficSource() === "internal" ? (stored.traffic_source || "internal") : getTrafficSource(),
+      referrer_raw: document.referrer || stored.referrer_raw || "direct",
+      landing_page: stored.landing_page || window.location.pathname,
+      utm_source: searchParams.get("utm_source") || stored.utm_source || undefined,
+      utm_medium: searchParams.get("utm_medium") || stored.utm_medium || undefined,
+      utm_campaign: searchParams.get("utm_campaign") || stored.utm_campaign || undefined,
+      utm_content: searchParams.get("utm_content") || stored.utm_content || undefined,
       form_open_source: "exit_intent_brochure",
     }
 
