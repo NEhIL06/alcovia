@@ -166,6 +166,12 @@ export default function ExitIntentPopup() {
 
       const eventId = crypto.randomUUID()
       if (typeof (window as any).fbq === "function") {
+        const phoneDigits = formatPhone(phone).replace("+", "")
+        ;(window as any).fbq("init", "1606881963979917", {
+          em: email.trim().toLowerCase() || undefined,
+          ph: phoneDigits || undefined,
+          fn: name.trim().toLowerCase().split(" ")[0] || undefined,
+        })
         ;(window as any).fbq("track", "Lead", {
           content_name: "Brochure Download",
           content_category: "exit_intent_brochure",
@@ -180,6 +186,7 @@ export default function ExitIntentPopup() {
           event_id: eventId,
           phone: formatPhone(phone),
           email: email.trim() || undefined,
+          fn: name.trim() || undefined,
           source_url: window.location.href,
           client_user_agent: navigator.userAgent,
           fbc: getCookie("_fbc"),

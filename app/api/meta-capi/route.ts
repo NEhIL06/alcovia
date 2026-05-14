@@ -15,11 +15,12 @@ export async function POST(req: NextRequest) {
 
   try {
     const body = await req.json()
-    const { event_name, event_id, phone, email, city, source_url, client_user_agent, fbc, fbp, custom_data } = body
+    const { event_name, event_id, phone, email, fn, city, source_url, client_user_agent, fbc, fbp, custom_data } = body
 
     const userData: Record<string, unknown> = {}
     if (phone) userData.ph = [hashSha256(phone)]
     if (email) userData.em = [hashSha256(email)]
+    if (fn) userData.fn = [hashSha256(fn.split(" ")[0])]
     if (city) userData.ct = [hashSha256(city)]
     if (client_user_agent) userData.client_user_agent = client_user_agent
     if (fbc) userData.fbc = fbc

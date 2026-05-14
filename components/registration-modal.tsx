@@ -300,9 +300,15 @@ export default function RegistrationModal() {
       // Event ID for deduplication between Pixel and Conversions API
       const eventId = crypto.randomUUID()
 
-      // Fire Meta Pixel Lead event (client-side)
+      // Fire Meta Pixel Lead event with Advanced Matching (client-side)
       if (typeof window !== "undefined" && typeof (window as any).fbq === "function") {
-        (window as any).fbq("track", "Lead", {
+        const phoneDigits = formatPhone(formData.phone).replace("+", "")
+        ;(window as any).fbq("init", "1606881963979917", {
+          em: formData.email.trim().toLowerCase() || undefined,
+          ph: phoneDigits || undefined,
+          fn: formData.parentName.trim().toLowerCase().split(" ")[0] || undefined,
+        })
+        ;(window as any).fbq("track", "Lead", {
           content_name: "Alcovia Registration",
           content_category: "lead_form",
         }, { eventID: eventId })
@@ -317,6 +323,7 @@ export default function RegistrationModal() {
           event_id: eventId,
           phone: formatPhone(formData.phone),
           email: formData.email.trim() || undefined,
+          fn: formData.parentName.trim() || undefined,
           city: formData.city,
           source_url: window.location.href,
           client_user_agent: navigator.userAgent,
