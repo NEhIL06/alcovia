@@ -244,7 +244,7 @@ export default function ExitIntentPopup() {
         </button>
 
         {!submitted && (
-          <div className="w-full overflow-hidden rounded-t-2xl bg-white">
+          <div className="w-full overflow-hidden rounded-t-2xl bg-[#0a2235]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brochure-popup-flipbook.png"
