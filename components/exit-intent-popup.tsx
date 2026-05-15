@@ -249,8 +249,7 @@ export default function ExitIntentPopup() {
             <img
               src="/brochure-popup-flipbook.png"
               alt="Alcovia Brochure Preview"
-              className="h-full object-cover"
-              style={{ width: "110%", marginLeft: "-5%", objectPosition: "center 35%" }}
+              className="w-full h-full object-cover"
             />
           </div>
         )}
