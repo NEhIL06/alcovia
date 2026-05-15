@@ -244,13 +244,13 @@ export default function ExitIntentPopup() {
         </button>
 
         {!submitted && (
-          <div className="w-full overflow-hidden rounded-t-2xl bg-[#0a2235]">
+          <div className="w-full overflow-hidden rounded-t-2xl bg-[#0a2235]" style={{ height: "180px" }}>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/brochure-popup-flipbook.png"
               alt="Alcovia Brochure Preview"
-              className="w-full object-contain"
-              style={{ maxHeight: "210px" }}
+              className="h-full object-cover"
+              style={{ width: "110%", marginLeft: "-5%", objectPosition: "center 35%" }}
             />
           </div>
         )}
@@ -295,7 +295,7 @@ export default function ExitIntentPopup() {
             <div className="px-5 pt-5 pb-3 sm:px-6 sm:pt-6">
               <div className="mb-4 text-center">
                 <h2 className="font-[family-name:var(--font-playfair)] text-lg font-bold text-white mb-0.5">
-                  Download Our Free Brochure
+                  Download Our Brochure
                 </h2>
                 <p className="text-[11px] text-white/40">
                   Learn about India's first ambition-building programme for teens
@@ -370,7 +370,7 @@ export default function ExitIntentPopup() {
                     <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>
-                    Get Free Brochure
+                    Get Brochure
                   </>
                 )}
               </button>
