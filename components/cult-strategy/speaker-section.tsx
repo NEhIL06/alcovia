@@ -90,7 +90,7 @@ export default function SpeakerSection() {
 
               <div className="w-12 h-px mx-auto lg:mx-0" style={{ background: `rgba(52,211,153,0.3)` }} />
 
-              <div className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-left">
+              <div className="text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] leading-snug max-w-lg mx-auto lg:mx-0 space-y-2 text-center lg:text-left">
                 <p>
                   This isn&apos;t a lecture. This is a{" "}
                   <span style={{ color: ACCENT }} className="font-medium">

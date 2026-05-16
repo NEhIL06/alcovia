@@ -133,7 +133,7 @@ export default function WorkshopPhases() {
             The Journey
           </span>
 
-          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
+          <h2 className="lp-fade-in text-[clamp(2rem,5vw,3.75rem)] font-[family-name:var(--font-milan)] leading-[1.15] text-white mb-3">
             What happens{" "}
             <span style={{ color: ACCENT }}>in the workshop?</span>
           </h2>

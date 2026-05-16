@@ -116,7 +116,7 @@ export default function FaqSection() {
             >
               FAQ
             </span>
-            <h2 className="text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
+            <h2 className="text-[clamp(2rem,5vw,3.75rem)] font-[family-name:var(--font-milan)] leading-[1.15] text-white">
               Everything you need{" "}
               <span style={{ color: ACCENT, textShadow: `0 0 30px rgba(52,211,153,0.25)` }}>to know</span>
             </h2>

@@ -18,7 +18,7 @@ export default function HookSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight text-white mb-6">
+        <h2 className="text-[clamp(2.25rem,5.5vw,4rem)] font-[family-name:var(--font-milan)] leading-[1.1] tracking-tight text-white mb-6">
           Your Kid Doesn&apos;t Need to Learn Coding.{" "}
           <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>AI Writes the Code Now.</span>
         </h2>

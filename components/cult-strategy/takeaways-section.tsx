@@ -55,7 +55,7 @@ export default function TakeawaysSection() {
           >
             The Outcome
           </span>
-          <h2 className="lp-fade-in text-[clamp(1.75rem,4vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight text-white">
+          <h2 className="lp-fade-in text-[clamp(2.25rem,5.5vw,4rem)] font-[family-name:var(--font-milan)] leading-[1.15] text-white">
             What they <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>leave with</span>
           </h2>
         </div>

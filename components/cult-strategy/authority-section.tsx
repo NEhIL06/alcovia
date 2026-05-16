@@ -57,7 +57,7 @@ export default function AuthoritySection() {
             Why Alcovia
           </span>
 
-          <h2 className="lp-fade-in text-[clamp(1.5rem,4vw,3rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3">
+          <h2 className="lp-fade-in text-[clamp(2rem,5vw,3.75rem)] font-[family-name:var(--font-milan)] leading-[1.15] text-white mb-3">
             Why parents trust Alcovia{" "}
             <br className="hidden sm:block" />
             <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>with their teenager&apos;s Saturdays</span>

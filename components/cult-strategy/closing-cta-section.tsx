@@ -82,7 +82,7 @@ export default function ClosingCtaSection() {
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="lp-fade-in text-[clamp(1.75rem,5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-tight text-white mb-3 sm:mb-4">
+        <h2 className="lp-fade-in text-[clamp(2.25rem,5.5vw,4rem)] font-[family-name:var(--font-milan)] leading-[1.15] text-white mb-3 sm:mb-4">
           Ready to build your{" "}
           <br />
           <span style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.3)` }}>future?</span>
