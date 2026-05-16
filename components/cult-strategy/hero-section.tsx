@@ -77,11 +77,11 @@ export default function HeroSection() {
           </div>
 
           <h1 className="font-[family-name:var(--font-milan)] leading-[0.93] tracking-tight mb-8 sm:mb-9">
-            <span className="block text-[clamp(2.2rem,6vw,5.5rem)] text-white">
+            <span className="block text-[clamp(3rem,8vw,6.5rem)] text-white">
               Claude AI
             </span>
             <span
-              className="block text-[clamp(1.8rem,5vw,4.5rem)]"
+              className="block text-[clamp(2.4rem,6.5vw,5.5rem)]"
               style={{ color: ACCENT, textShadow: `0 0 40px ${ACCENT_DIM}0.25)` }}
             >
               For Teenagers
