@@ -25,11 +25,11 @@ const pillars = [
   },
   {
     number: "02",
-    phase: "The Architect",
+    phase: "The Approach",
     title: "Break the Idea Down",
     subtitle: "Founder mindset",
     description:
-      "Real builders don't ask AI for everything in one shot. Teens learn the founder mindset - breaking a big idea into smaller pieces, then into buildable chunks. This is the difference between a teen who wants a 'cool app' and one who can actually ship one.",
+      "Teens learn the founder mindset of breaking a big idea into smaller pieces, then into buildable chunks. This is the difference between a teen who wants to build a 'cool app' vs the one who actually builds it.",
     stat: "1",
     statLabel: "idea broken into reality",
     icon: (
@@ -42,7 +42,7 @@ const pillars = [
   },
   {
     number: "03",
-    phase: "The Ship",
+    phase: "The Build",
     title: "Launch Something Real",
     subtitle: "Game, website, or app",
     description:
@@ -169,7 +169,7 @@ export default function WorkshopPhases() {
           </h2>
 
           <p className="lp-fade-in text-sm sm:text-base text-white/60 font-[family-name:var(--font-satoshi)] max-w-2xl mx-auto">
-            Three phases. One afternoon. From learning to prompt AI precisely, to breaking down a real idea, to shipping something that works.
+            Three phases. From learning to prompt AI precisely, to breaking down a real idea, to shipping something that works.
           </p>
         </div>
 

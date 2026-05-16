@@ -19,15 +19,12 @@ export default function HookSection() {
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 className="text-[clamp(1.75rem,4.5vw,3.5rem)] font-[family-name:var(--font-milan)] leading-[0.95] tracking-tight text-white mb-6">
-          Coding used to take years.{" "}
-          <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>That barrier is gone.</span>
+          Your Kid Doesn&apos;t Need to Learn Coding.{" "}
+          <span style={{ color: ACCENT, textShadow: `0 0 30px ${ACCENT_DIM}0.3)` }}>AI Writes the Code Now.</span>
         </h2>
 
         <p className="text-base sm:text-lg lg:text-xl font-[family-name:var(--font-satoshi)] text-white/60 leading-relaxed max-w-3xl mx-auto">
-          Every app on your phone, every game you play, every site you scroll on - are built by people who learned to give a machine clear instructions. That moat just disappeared. AI now writes the code. The new edge isn&apos;t typing syntax, it&apos;s knowing what to build, how to break it down, and how to talk to AI like an architect.{" "}
-          <span className="text-white font-semibold">
-            The teens who learn this now don&apos;t grow up to use software. They grow up to ship it.
-          </span>
+          Until now, building an app meant learning how to code first. Today, kids can direct AI with precision and launch real apps, games, and websites just by talking in plain english. This workshop teaches your teenager exactly that.
         </p>
       </div>
     </section>

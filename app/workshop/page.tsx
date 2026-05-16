@@ -17,13 +17,13 @@ const MobileFloatingCta = dynamic(() => import("@/components/cult-strategy/mobil
 const Footer = dynamic(() => import("@/components/footer"));
 
 export const metadata: Metadata = {
-  title: "Claude Code for Teenagers | Alcovia Workshop",
+  title: "Claude AI for Teenagers | Alcovia Workshop",
   description:
-    "Learn to build real apps with Claude Code in one afternoon. Teens go from idea to a working game, app, or website using AI. May 23rd · Horizon Center · Grades 6–10.",
+    "The most practical Claude AI workshop where teens turn their ideas into working games, apps & websites in one afternoon. May 23rd · Horizon Center · Grades 6–10.",
   openGraph: {
-    title: "Claude Code for Teenagers | Alcovia",
+    title: "Claude AI for Teenagers | Alcovia",
     description:
-      "The teens who learn Claude Code now don't grow up to use software. They grow up to ship it. One afternoon. Real builds. May 23rd, Gurgaon.",
+      "The most practical Claude AI workshop where teens turn their ideas into working games, apps & websites in one afternoon. May 23rd, Gurgaon.",
     type: "website",
   },
   robots: {
@@ -37,7 +37,7 @@ export default function CultStrategyWorkshopPage() {
     <main className="relative" style={{ background: "#050505" }}>
       <WorkshopPageTracker />
       <HeroSection />
-      {/* <SpeakerSection /> */}
+      <SpeakerSection />
       
       <HookSection />
       <WorkshopGallery />

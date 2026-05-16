@@ -15,7 +15,7 @@ const takeaways = [
     ),
   },
   {
-    title: "Architect Thinking",
+    title: "Founder Mindset",
     description: "How to break any problem into systems, modules, and steps. The same mental model behind every piece of software ever built.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
@@ -25,7 +25,7 @@ const takeaways = [
     ),
   },
   {
-    title: "Ship-It Mindset",
+    title: "Build & Launch Methodology",
     description: "How to take an idea from a blank screen to a working product in hours, not months - and the confidence that comes from doing it once.",
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
