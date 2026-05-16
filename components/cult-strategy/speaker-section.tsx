@@ -40,6 +40,12 @@ export default function SpeakerSection() {
                   className="object-cover object-top"
                   sizes="(max-width: 640px) 192px, (max-width: 1024px) 288px, 320px"
                 />
+                <div
+                  className="absolute inset-0"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent 50%, #050505 100%)",
+                  }}
+                />
               </div>
 
               <div className="absolute -top-1.5 -left-1.5 w-5 h-5 border-t-2 border-l-2 rounded-tl-md" style={{ borderColor: `rgba(52,211,153,0.4)` }} />

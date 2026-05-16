@@ -1,6 +1,3 @@
-"use client";
-
-import { useRef, useState, type MouseEvent } from "react";
 import WorkshopCheckoutLink from "@/components/cult-strategy/workshop-checkout-link";
 
 const ACCENT = "#34D399";
@@ -80,64 +77,37 @@ const testimonials = [
 ];
 
 function TestimonialsCarousel() {
-  const scrollRef = useRef<HTMLDivElement>(null);
-  const [dragging, setDragging] = useState(false);
-  const dragStartX = useRef(0);
-  const dragScrollLeft = useRef(0);
-
-  function onMouseDown(e: MouseEvent<HTMLDivElement>) {
-    if (!scrollRef.current) return;
-    setDragging(true);
-    dragStartX.current = e.pageX - scrollRef.current.offsetLeft;
-    dragScrollLeft.current = scrollRef.current.scrollLeft;
-  }
-
-  function onMouseMove(e: MouseEvent<HTMLDivElement>) {
-    if (!dragging || !scrollRef.current) return;
-    e.preventDefault();
-    const x = e.pageX - scrollRef.current.offsetLeft;
-    scrollRef.current.scrollLeft = dragScrollLeft.current - (x - dragStartX.current);
-  }
-
-  function stopDrag() { setDragging(false); }
-
   return (
-    <div
-      ref={scrollRef}
-      className="mt-10 sm:mt-14 flex gap-4 overflow-x-auto px-4 sm:px-8 pb-2 select-none"
-      style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" as never, cursor: dragging ? "grabbing" : "grab" }}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onMouseUp={stopDrag}
-      onMouseLeave={stopDrag}
-    >
-      {[...testimonials, ...testimonials, ...testimonials].map((item, i) => (
-        <div
-          key={i}
-          className="w-[260px] sm:w-[300px] flex-shrink-0 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md overflow-hidden p-5"
-        >
-          <span
-            className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
-            style={{ color: `${ACCENT}50` }}
+    <div className="mt-10 sm:mt-14 overflow-hidden">
+      <div className="flex gap-4 marquee-track" style={{ width: "max-content" }}>
+        {[...testimonials, ...testimonials, ...testimonials, ...testimonials].map((item, i) => (
+          <div
+            key={i}
+            className="w-[260px] sm:w-[300px] flex-shrink-0 border border-white/10 rounded-2xl bg-white/5 backdrop-blur-md overflow-hidden p-5"
           >
-            &ldquo;
-          </span>
-          <p className="text-xs sm:text-sm text-white/70 font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
-            {item.quote}
-          </p>
-          <div className="flex items-center gap-2.5">
-            <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
-            <div>
-              <span className="block text-sm text-white font-[family-name:var(--font-satoshi)] font-semibold">
-                {item.name}
-              </span>
-              <span className="block text-[10px] text-white/40 font-[family-name:var(--font-satoshi)]">
-                Age {item.age} &middot; Alcovia Community
-              </span>
+            <span
+              className="block text-3xl font-[family-name:var(--font-playfair)] leading-none mb-2"
+              style={{ color: `${ACCENT}50` }}
+            >
+              &ldquo;
+            </span>
+            <p className="text-xs sm:text-sm text-white/70 font-[family-name:var(--font-playfair)] italic leading-snug mb-4">
+              {item.quote}
+            </p>
+            <div className="flex items-center gap-2.5">
+              <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: ACCENT }} />
+              <div>
+                <span className="block text-sm text-white font-[family-name:var(--font-satoshi)] font-semibold">
+                  {item.name}
+                </span>
+                <span className="block text-[10px] text-white/40 font-[family-name:var(--font-satoshi)]">
+                  Age {item.age} &middot; Alcovia Community
+                </span>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

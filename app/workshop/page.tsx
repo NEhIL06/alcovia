@@ -37,9 +37,8 @@ export default function CultStrategyWorkshopPage() {
     <main className="relative" style={{ background: "#050505" }}>
       <WorkshopPageTracker />
       <HeroSection />
-      <SpeakerSection />
-      
       <HookSection />
+      <SpeakerSection />
       <WorkshopGallery />
       <WorkshopPhases />
       <TakeawaysSection />
